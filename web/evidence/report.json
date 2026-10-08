@@ -2,7 +2,7 @@
   "version": "1.4.0-rc1",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-08T05:07:41.727082+00:00",
+  "compiled_at_utc": "2026-10-08T05:14:57.745885+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -137,7 +137,7 @@
     },
     "parity-report.json": {
       "url": "parity-report.json",
-      "sha256": "f8b869c7b5b176dfb94c4fc53027fb843a63cb06f83cdb1094b4450b8db54a9f"
+      "sha256": "48ff7be23d9b516cc2cbd6a9f707e30d6f4f4933695f29ea73a8cb4813321392"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
@@ -146,8 +146,12 @@
     "build-manifest.json": {
       "url": "build-manifest.json",
       "sha256": "7c98b721216e1ae3926f509ac86f9595c587ca0908967c4c286b1183eff1bba5"
+    },
+    "traceability-public.json": {
+      "url": "traceability-public.json",
+      "sha256": "f011830f92e913f7cb508840b9b9d9c50bd3d9b293f7946265016d4965f4d2dd"
     }
   },
   "historical_evidence_notice": "Outros relatórios herdados de 1.3 permanecem no histórico; não integram a aprovação desta versão.",
-  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD"
 }

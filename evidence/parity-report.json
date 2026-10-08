@@ -83,7 +83,7 @@
       "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
     }
   },
-  "executed_at": "2026-10-08T05:07:33.281Z",
+  "executed_at": "2026-10-08T05:14:49.885Z",
   "normalization": [
     "Somente horário de execução e sufixos aleatórios de contexto, participante e decisão são desconsiderados.",
     "Linhas SPARQL e topologia do grafo são comparadas como conjuntos ordenados canonicamente, preservando duplicatas.",
@@ -93,7 +93,7 @@
     "Identidades CHECK são recalculadas a partir do predicado normalizado; estado, condições e valores observados permanecem comparados."
   ],
   "native_sha256": "bb37804595864b00a26ca0215d3bdeab86eedd48ace2d3dc602cffec7170a007",
-  "browser_sha256": "c568bd53c08124a351dea8ad8813e4a47d41c7372373b8befbe724fc9a312aff",
+  "browser_sha256": "ffbd08d6df0d17cfe9ad72b31d0258cc327086b97ae06a0ac754662b46b5613c",
   "cases": {
     "principal": {
       "equal": true,
