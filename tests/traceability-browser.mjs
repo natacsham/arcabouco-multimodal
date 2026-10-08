@@ -33,6 +33,32 @@ report.test_sha256=crypto.createHash('sha256').update(await fs.readFile(fileURLT
 const browser=await chromium.launch({headless:true,executablePath:process.env.AMADO_CHROMIUM||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1243/chrome-win64/chrome.exe')});
 report.browser=browser.version();
 const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'});
+// Observe real worker messages only inside the test, without changing the engine.
+await context.addInitScript(()=>{
+  window.__traceProbe={operations:[],generated:null,resizeListeners:new Set()};
+  const addListener=window.addEventListener,removeListener=window.removeEventListener;
+  window.addEventListener=function(type,listener,...options){
+    if(type==='resize')window.__traceProbe.resizeListeners.add(listener);
+    return addListener.call(this,type,listener,...options);
+  };
+  window.removeEventListener=function(type,listener,...options){
+    if(type==='resize')window.__traceProbe.resizeListeners.delete(listener);
+    return removeListener.call(this,type,listener,...options);
+  };
+  const NativeWorker=window.Worker;
+  window.Worker=class extends NativeWorker {
+    constructor(...args){
+      super(...args);this.traceOperations=new Map();
+      this.addEventListener('message',event=>{
+        if(event.data.type==='result'&&this.traceOperations.get(event.data.id)==='generate')window.__traceProbe.generated=event.data.data;
+      });
+    }
+    postMessage(data,...rest){
+      window.__traceProbe.operations.push(data.operation);this.traceOperations.set(data.id,data.operation);
+      return super.postMessage(data,...rest);
+    }
+  };
+});
 let failBundle=false;
 const requests=[];
 await context.route('**/*',route=>{
@@ -88,6 +114,7 @@ try{
   for(const view of ['index.html','guiado.html']){
     await page.goto(base+'amado/'+view);await idle(page);
     check(view+'_ready',await page.locator('#health').getAttribute('data-state')==='ready');
+    const resizeBaseline=await page.evaluate(()=>window.__traceProbe.resizeListeners.size);
     await page.locator('#reported-step input[value="yes"]').check();
     await page.locator('#confirm-reported').click();await idle(page);
     await page.locator('#mapping-confirmed').check();
@@ -103,6 +130,24 @@ try{
     check(view+'_documentary_status_not_overstated',(await page.locator('.explanation').innerText()).includes('registro'));
     const use=choice.locator('[data-explanation-reading="application"]');
     await use.locator(':scope > summary').click();
+    const graph=choice.locator('[data-explanation-reading="graph"]');
+    const operationsBefore=await page.evaluate(()=>JSON.stringify(window.__traceProbe.operations));
+    await graph.locator(':scope > summary').focus();await page.keyboard.press('Enter');
+    check(view+'_graph_keyboard_open',await graph.getAttribute('open')!==null);
+    const graphFocus=graph.locator('[data-graph-focus]');
+    const nextFocus=await graphFocus.locator('option').evaluateAll(options=>options.find(option=>option.value!==option.parentElement.value)?.value);
+    assert(nextFocus,'A configuration graph must allow inspection of a related register');
+    await graphFocus.selectOption(nextFocus);
+    check(view+'_graph_only_recorded_relations',await graph.evaluate(el=>{
+      const data=window.__traceProbe.generated.explanation.graph;
+      const rendered=[...el.querySelectorAll('[data-graph-source]')];
+      const nodes=[...el.querySelectorAll('[data-graph-node-id]')];
+      return rendered.length>0&&nodes.length>0&&rendered.every(row=>data.edges.some(edge=>edge.source===row.dataset.graphSource&&edge.target===row.dataset.graphTarget&&edge.kind===row.dataset.graphKind&&edge.label===row.dataset.graphLabel))&&nodes.every(row=>data.nodes.some(node=>node.id===row.dataset.graphNodeId));
+    }));
+    const graphNode=graph.locator('[data-graph-node-id]').first();
+    await graphNode.locator(':scope > summary').focus();await page.keyboard.press('Enter');
+    check(view+'_graph_details_at_node',await graphNode.getAttribute('open')!==null);
+    check(view+'_graph_no_new_execution',await page.evaluate(()=>JSON.stringify(window.__traceProbe.operations))===operationsBefore);
     const content=await page.locator('.explanation').first().textContent();displayed.push(content);
     check(view+'_two_readings_present',content.includes('Como este conhecimento foi construído')&&content.includes('Por que foi usado aqui'));
     const focus=await use.locator(':scope > summary').evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth}));
@@ -123,6 +168,7 @@ try{
     await page.locator('[data-font-reset]').click();await page.setViewportSize({width:1280,height:900});
     await page.locator('#clear-case').click();await idle(page);
     check(view+'_clear_discards_decision',!await page.locator('#saida').isVisible());
+    check(view+'_graph_listeners_released_on_clear',await page.evaluate(()=>window.__traceProbe.resizeListeners.size)===resizeBaseline);
   }
   // Random instance suffixes are not displayed in ordinary explanatory content.
   await fs.writeFile(path.join(artifacts,'explanation-view-comparison.json'),JSON.stringify(displayed));

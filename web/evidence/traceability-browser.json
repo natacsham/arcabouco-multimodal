@@ -2,7 +2,7 @@
   "version": "1.4.0-rc1",
   "type": "SYNTHETIC_TECHNICAL_BROWSER_CHECK",
   "execution_target": "LOCAL_SUBPATH",
-  "executed_at": "2026-10-08T04:36:51.487Z",
+  "executed_at": "2026-10-08T05:03:25.367Z",
   "checks": {
     "served_manifest_matches_current_build": true,
     "home_pilot_derived_choice_loaded": true,
@@ -19,6 +19,10 @@
     "index.html_keyboard_choice": true,
     "index.html_construction_visible": true,
     "index.html_documentary_status_not_overstated": true,
+    "index.html_graph_keyboard_open": true,
+    "index.html_graph_only_recorded_relations": true,
+    "index.html_graph_details_at_node": true,
+    "index.html_graph_no_new_execution": true,
     "index.html_two_readings_present": true,
     "index.html_focusable_disclosures": true,
     "index.html_sampled_contrast": true,
@@ -28,12 +32,17 @@
     "index.html_text_200": true,
     "index.html_320_200": true,
     "index.html_clear_discards_decision": true,
+    "index.html_graph_listeners_released_on_clear": true,
     "guiado.html_ready": true,
     "guiado.html_generation_no_error": true,
     "guiado.html_explicit_partial_coverage": true,
     "guiado.html_keyboard_choice": true,
     "guiado.html_construction_visible": true,
     "guiado.html_documentary_status_not_overstated": true,
+    "guiado.html_graph_keyboard_open": true,
+    "guiado.html_graph_only_recorded_relations": true,
+    "guiado.html_graph_details_at_node": true,
+    "guiado.html_graph_no_new_execution": true,
     "guiado.html_two_readings_present": true,
     "guiado.html_focusable_disclosures": true,
     "guiado.html_sampled_contrast": true,
@@ -43,6 +52,7 @@
     "guiado.html_text_200": true,
     "guiado.html_320_200": true,
     "guiado.html_clear_discards_decision": true,
+    "guiado.html_graph_listeners_released_on_clear": true,
     "same_explanation_in_both_views": true,
     "novel_condition_change_affects_choice": true,
     "all_eight_queries_returned": true,
@@ -258,8 +268,8 @@
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
-      "explanation.js": "297d0f4086cd57df2ee4eb9138588a9662d0aabd3fd69dffd4aa59659e1af35b",
-      "explanation.css": "e430056ffbf3cbbc0cf94458888807990df78e350c20db2091a380bec7602186",
+      "explanation.js": "320ac8da992c11fe352740585cb25781d2df7f0b9b2c5271b749acb4413fef04",
+      "explanation.css": "033b902338cf3aaf18dd7eec4e2612feaab45d2e45d6c791858207eafd9fb5b7",
       "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
       "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
     },
@@ -278,7 +288,7 @@
       "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
     }
   },
-  "test_sha256": "6ca474bcc4a267e677a81c252419fcd202bb98d7dcb776a3a935357130663025",
+  "test_sha256": "a1ddfbaffc27d0392c8141a719af6cc276860227d523aa914c9d8493d7bca110",
   "browser": "154.0.8037.98",
   "contrast": {
     "index.html": [
@@ -296,25 +306,25 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
-        "ratio": 7.1033501023516665,
+        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "Registro em foco",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -332,19 +342,19 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Como este conhecimento foi construído",
+        "text": "Leitura textual",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
-        "ratio": 10.723331613570922,
+        "text": "Grafo local desta escolha",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
+        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
         "ratio": 10.723331613570922,
         "minimum": 4.5
       },
@@ -362,31 +372,13 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Contribuição registrada",
-        "ratio": 12.0623549832488,
+        "text": "Descrição completa",
+        "ratio": 10.723331613570922,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "Fonte",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Localização",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Papel desta contribuição",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Natureza do registro",
+        "text": "função oferecida pelo padrão",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -410,20 +402,8 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Contribuição registradaO registro descreve a representação descri",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "O registro descreve a representação descritiva colaborativa de el",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
-        "ratio": 12.0623549832488,
+        "text": "Organizar relações históricas e reduzir competição entre formatos",
+        "ratio": 10.723331613570922,
         "minimum": 4.5
       },
       {
@@ -484,25 +464,25 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
-        "ratio": 7.1033501023516665,
+        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "Registro em foco",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -520,19 +500,19 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Como este conhecimento foi construído",
+        "text": "Leitura textual",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
-        "ratio": 10.77794504543097,
+        "text": "Grafo local desta escolha",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
+        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
         "ratio": 10.77794504543097,
         "minimum": 4.5
       },
@@ -550,31 +530,13 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Contribuição registrada",
-        "ratio": 12.0623549832488,
+        "text": "Descrição completa",
+        "ratio": 10.77794504543097,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "Fonte",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Localização",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Papel desta contribuição",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Natureza do registro",
+        "text": "função oferecida pelo padrão",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -598,20 +560,8 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Contribuição registradaO registro descreve a representação descri",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "O registro descreve a representação descritiva colaborativa de el",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
-        "ratio": 12.0623549832488,
+        "text": "Organizar relações históricas e reduzir competição entre formatos",
+        "ratio": 10.77794504543097,
         "minimum": 4.5
       },
       {
@@ -672,25 +622,25 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
-        "ratio": 7.1033501023516665,
+        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "Registro em foco",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -708,19 +658,19 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Como este conhecimento foi construído",
+        "text": "Leitura textual",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
-        "ratio": 10.881409692860425,
+        "text": "Grafo local desta escolha",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
+        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
         "ratio": 10.881409692860425,
         "minimum": 4.5
       },
@@ -738,31 +688,13 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Contribuição registrada",
-        "ratio": 12.0623549832488,
+        "text": "Descrição completa",
+        "ratio": 10.881409692860425,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "Fonte",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Localização",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Papel desta contribuição",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Natureza do registro",
+        "text": "função oferecida pelo padrão",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -786,20 +718,8 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Contribuição registradaO registro descreve a representação descri",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "O registro descreve a representação descritiva colaborativa de el",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
-        "ratio": 12.0623549832488,
+        "text": "Organizar relações históricas e reduzir competição entre formatos",
+        "ratio": 10.881409692860425,
         "minimum": 4.5
       },
       {
@@ -860,25 +780,25 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
-        "ratio": 7.1033501023516665,
+        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "Conferência: Conferida no registro da base",
+        "text": "Registro em foco",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -896,19 +816,19 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Como este conhecimento foi construído",
+        "text": "Leitura textual",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
+        "text": "Grafo local desta escolha",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
+        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -926,31 +846,13 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Contribuição registrada",
+        "text": "Descrição completa",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "Fonte",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Localização",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Papel desta contribuição",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation strong",
-        "text": "Natureza do registro",
+        "text": "função oferecida pelo padrão",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -974,19 +876,7 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Contribuição registradaO registro descreve a representação descri",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "O registro descreve a representação descritiva colaborativa de el",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation li",
-        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+        "text": "Organizar relações históricas e reduzir competição entre formatos",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },

@@ -1,6 +1,6 @@
 {
   "scope": "TRACKED_PUBLIC_FILES_AND_BROWSER_BUNDLE",
-  "tracked_file_count": 553,
+  "tracked_file_count": 554,
   "browser_bundle_entries": 212,
   "rdf_files": {
     "ontology/mado-combined.ttl": {
@@ -114,7 +114,7 @@
     "tests/test_execution_evidence.py": "16af9ebc78e8535c01c8287f574c37a67b33a54dc2e56bb599565393f1271c02",
     "tests/test_ontology.py": "dd19ef23af10cde718cd777c1070f8de2da96104de88091af5d43ac737a90f03",
     "tests/test_publish_evidence.py": "1fe5e721ef3a8acd21d2ae61f39854523f148a504566f34548d63bbff356dea6",
-    "tests/traceability-browser.mjs": "6ca474bcc4a267e677a81c252419fcd202bb98d7dcb776a3a935357130663025",
+    "tests/traceability-browser.mjs": "a1ddfbaffc27d0392c8141a719af6cc276860227d523aa914c9d8493d7bca110",
     "vendor/html5rdf-1.2.1.dist-info/AUTHORS.rst": "c12e916bee25921ddb3ef632ab0574bc0cde055f89b14c82251efad68f1b7b7c",
     "vendor/html5rdf-1.2.1.dist-info/INSTALLER": "ceebae7b8927a3227e5303cf5e0f1f7b34bb542ad7250ac03fbcde36ec2f1508",
     "vendor/html5rdf-1.2.1.dist-info/LICENSE": "16a39991619e92f18680932da2a9199fdf7d95df3ecaedc52ea06218aabafd6f",
@@ -517,7 +517,7 @@
     "web/amado/guided.css": "339c66c48dcb8c9aabd4320084f0d2de81222c3988e05bc5cd4b9f6f59fa1e6f",
     "web/amado/guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
     "web/amado/index.html": "9f3aadfb6bf307f2114ef83f69aa5b5105591afab1d6d935ac87063ad418acad",
-    "web/amado/manifest.json": "15e2fe22908c8461db56af58af39671723370e0d4ad9852122b5c336247b9f75",
+    "web/amado/manifest.json": "7c98b721216e1ae3926f509ac86f9595c587ca0908967c4c286b1183eff1bba5",
     "web/amado/runtime/licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
     "web/amado/runtime/licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
     "web/amado/runtime/licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
@@ -541,8 +541,8 @@
     "web/downloads/main.shacl.ttl": "8c1d4efb4048827871f790b0d82165075af664f3e0fe878e34a727cd5925747b",
     "web/downloads/main.ttl": "39bc30a533e8773a3893001482ef5506d4baa5b72fad200a1dd93a1a5772f3d4",
     "web/explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
-    "web/explanation.css": "e430056ffbf3cbbc0cf94458888807990df78e350c20db2091a380bec7602186",
-    "web/explanation.js": "297d0f4086cd57df2ee4eb9138588a9662d0aabd3fd69dffd4aa59659e1af35b",
+    "web/explanation.css": "033b902338cf3aaf18dd7eec4e2612feaab45d2e45d6c791858207eafd9fb5b7",
+    "web/explanation.js": "320ac8da992c11fe352740585cb25781d2df7f0b9b2c5271b749acb4413fef04",
     "web/index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
     "web/ontologia/index.html": "43c7037f08becaaaa5d6846f5b14e9a5807a80dc48dc369c2cf49860ecf3f768",
     "web/shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
