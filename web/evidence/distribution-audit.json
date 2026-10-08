@@ -1,6 +1,6 @@
 {
   "scope": "TRACKED_PUBLIC_FILES_AND_BROWSER_BUNDLE",
-  "tracked_file_count": 551,
+  "tracked_file_count": 553,
   "browser_bundle_entries": 212,
   "rdf_files": {
     "ontology/mado-combined.ttl": {

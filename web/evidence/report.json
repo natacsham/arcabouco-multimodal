@@ -2,7 +2,7 @@
   "version": "1.4.0-rc1",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-08T04:43:57.980379+00:00",
+  "compiled_at_utc": "2026-10-08T04:52:23.751687+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -127,17 +127,21 @@
     },
     "parity-report.json": {
       "url": "parity-report.json",
-      "sha256": "1e8d198edbb13adfcf5f42ba6f1bfabcf0ec77889e37471465a1d2cb23dc9543"
+      "sha256": "e36d3bce4a17f18fc4721d221e514ca6481aeed099c8b0968db7449628e00b10"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "7fd00aad678c3590b84c62a6bc99047e090824c800510e1bb5898a24340bb1ca"
+      "sha256": "9cb2b379cbba4bf644ded48980ae19800381f835cc693338c758340b6150ae01"
     },
     "build-manifest.json": {
       "url": "build-manifest.json",
       "sha256": "15e2fe22908c8461db56af58af39671723370e0d4ad9852122b5c336247b9f75"
+    },
+    "traceability-public.json": {
+      "url": "traceability-public.json",
+      "sha256": "d696b8c66a3938c9e45cae96984a1d77b275283ab08147dd945d81cc8adf2649"
     }
   },
   "historical_evidence_notice": "Outros relatórios herdados de 1.3 permanecem no histórico; não integram a aprovação desta versão.",
-  "public_smoke_status": "PENDING_FOR_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD"
 }
