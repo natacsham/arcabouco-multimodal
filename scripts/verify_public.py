@@ -179,7 +179,8 @@ def runtime_check(shapes):
         "all_eight_queries_executed": set(query_counts) == {f"CQ-{i:03d}" for i in range(1, 9)},
         "persisted_runtime_graph": False,
     })
-    check["passed"] = check["passed"] and check["decision_status"] == "GERADA" and check["runtime_configurations"] > 0 and check["runtime_criterion_applications"] > 0 and check["all_eight_queries_executed"]
+    check["coverage_not_claimed_complete"] = check["decision_status"] in {"GERADA", "GERADA_PARCIAL"}
+    check["passed"] = check["passed"] and check["coverage_not_claimed_complete"] and check["runtime_configurations"] > 0 and check["runtime_criterion_applications"] > 0 and check["all_eight_queries_executed"]
     return check
 
 

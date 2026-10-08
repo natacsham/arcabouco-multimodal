@@ -352,3 +352,58 @@ mado:DecisaoComArticulacaoShape a sh:NodeShape ;
       }
     """
   ] .
+
+# A contribuição qualifica uma ligação já documentada; não cria uma prova de suficiência.
+mado:ContribuicaoNaArticulacaoShape a sh:NodeShape ;
+  sh:targetClass mado:ContribuicaoNaArticulacao ;
+  sh:targetObjectsOf mado:possuiContribuicao ;
+  sh:targetObjectsOf mado:aplicacaoMobilizaContribuicao ;
+  sh:class mado:ContribuicaoNaArticulacao ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:contribuicaoNaArticulacao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ArticulacaoDocumentada ] ;
+  sh:property [ sh:path mado:contribuicaoParaConhecimento ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path mado:contribuicaoDoTrecho ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:TrechoDocumental ] ;
+  sh:property [ sh:path (mado:contribuicaoDoTrecho mado:trechoDeFonte) ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path mado:afirmacaoDaContribuicao ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:papelDaContribuicao ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:naturezaDaContribuicao ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:justificativaDaContribuicao ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:estadoDeConferenciaDaContribuicao ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("CONFERIDA_NO_DOCUMENTO" "CONFERIDA_NO_REGISTRO" "PENDENTE") ] ;
+  sh:property [ sh:path mado:responsavelPelaConferencia ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:dataDaConferencia ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:pattern "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" ] ;
+  sh:sparql [
+    sh:message "A contribuição deve preservar o produto da articulação, o trecho registrado e sua fonte, sem atribuição global indiscriminada."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:contribuicaoNaArticulacao ?art ; mado:contribuicaoParaConhecimento ?k ; mado:contribuicaoDoTrecho ?t .
+        ?t mado:trechoDeFonte ?f .
+        FILTER(NOT EXISTS { ?art mado:produzConhecimento ?k ; mado:possuiContribuicao $this ; mado:articulacaoSustentadaPorTrecho ?t }
+          || NOT EXISTS { ?k mado:sustentadoPorTrecho ?t ; mado:derivadoDe ?f })
+      }
+    """
+  ] .
+
+mado:ArticulacaoComContribuicoesShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:possuiContribuicao ;
+  sh:property [ sh:path mado:explicacaoDaOperacaoAnalitica ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:compreensaoAcrescentada ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:autoriaDaArticulacao ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] ;
+  sh:property [ sh:path mado:origemDaReconstrucao ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "\\S" ] .
+
+mado:AplicacaoComContribuicaoShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:aplicacaoMobilizaContribuicao ;
+  sh:class mado:AplicacaoDeCriterio ;
+  sh:sparql [
+    sh:message "Uma aplicação só pode mobilizar contribuição conferida de seu próprio conhecimento e de articulação efetivamente mobilizada na configuração."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?contribuicao WHERE {
+        $this mado:aplicacaoMobilizaContribuicao ?contribuicao ; mado:aplicacaoNaConfiguracao ?cfg .
+        ?contribuicao mado:contribuicaoParaConhecimento ?k ; mado:contribuicaoNaArticulacao ?art ; mado:estadoDeConferenciaDaContribuicao ?estado .
+        FILTER(?estado NOT IN ("CONFERIDA_NO_DOCUMENTO", "CONFERIDA_NO_REGISTRO")
+          || NOT EXISTS { $this mado:conhecimentoDaAplicacao ?k }
+          || NOT EXISTS { ?cfg mado:configuracaoMobilizaArticulacao ?art . ?art mado:habilitadaParaDecisao true })
+      }
+    """
+  ] .

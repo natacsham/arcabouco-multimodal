@@ -9,9 +9,9 @@
 skos:broader a owl:ObjectProperty .
 
 <https://w3id.org/mado> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/1.3.0-rc1> ;
-  owl:versionInfo "1.3.0-rc1" ;
-  owl:priorVersion <https://w3id.org/mado/1.2.0-RC4> ;
+  owl:versionIRI <https://w3id.org/mado/1.4.0-rc1> ;
+  owl:versionInfo "1.4.0-rc1" ;
+  owl:priorVersion <https://w3id.org/mado/1.3.0-rc1> ;
   dcterms:creator "Natacsha Ordones Raposo de Melo" ;
   rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
   rdfs:comment "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .
@@ -54,6 +54,10 @@ mado:ArticulacaoDocumentada a owl:Class ;
 mado:AplicacaoDeCriterio a owl:Class ;
   rdfs:label "Aplicação situada de critério"@pt-BR ;
   rdfs:comment "Associação de um único critério a uma única configuração, com os conhecimentos que fundamentam seu emprego, as origens documentais pertinentes e a justificativa situada. Preserva o pareamento; a presença de conhecimentos e critérios na mesma configuração, por si só, não afirma que todos fundamentam todos."@pt-BR .
+
+mado:ContribuicaoNaArticulacao a owl:Class ;
+  rdfs:label "Contribuição na articulação"@pt-BR ;
+  rdfs:comment "Registro qualificado da parcela que um trecho oferece a um conhecimento produzido ou refinado em uma articulação específica. A fonte é obtida pelo trecho, não por uma lista independente. A conferência do registro legado não equivale à conferência do documento original nem à validação integral da síntese."@pt-BR .
 
 # Definições editoriais não acrescentam relações de aplicabilidade ao conhecimento.
 mado:Fonte rdfs:comment "Registro documental ou artefato efetivamente utilizado como sustentação de conhecimento ou resultado. Uma referência apenas citada não se torna automaticamente fonte analisada."@pt-BR .
@@ -244,3 +248,28 @@ mado:estadoDeCuradoria a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocu
 mado:habilitadaParaDecisao a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range xsd:boolean .
 mado:condicaoDaArticulacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
 mado:limiteDaArticulacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
+
+# Fundamentação documental 1.4: registro do trabalho analítico, não inferência criadora de conhecimento.
+mado:contribuicaoNaArticulacao a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range mado:ArticulacaoDocumentada .
+mado:contribuicaoParaConhecimento a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:contribuicaoDoTrecho a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range mado:TrechoDocumental .
+mado:possuiContribuicao a owl:ObjectProperty ; owl:inverseOf mado:contribuicaoNaArticulacao ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:ContribuicaoNaArticulacao .
+mado:aplicacaoMobilizaContribuicao a owl:ObjectProperty ; rdfs:domain mado:AplicacaoDeCriterio ; rdfs:range mado:ContribuicaoNaArticulacao .
+mado:afirmacaoDaContribuicao a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range rdf:langString .
+mado:papelDaContribuicao a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range xsd:string .
+mado:naturezaDaContribuicao a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range xsd:string .
+mado:justificativaDaContribuicao a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range rdf:langString .
+mado:estadoDeConferenciaDaContribuicao a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range xsd:string .
+mado:responsavelPelaConferencia a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range xsd:string .
+mado:dataDaConferencia a owl:DatatypeProperty ; rdfs:domain mado:ContribuicaoNaArticulacao ; rdfs:range xsd:string ; rdfs:comment "Data civil no formato YYYY-MM-DD; não declara horário não registrado."@pt-BR .
+mado:explicacaoDaOperacaoAnalitica a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
+mado:compreensaoAcrescentada a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
+mado:autoriaDaArticulacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
+mado:origemDaReconstrucao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
+mado:estadoDeRevisaoDaFundamentacao a owl:DatatypeProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range xsd:string .
+mado:pendenciaDeFundamentacao a owl:DatatypeProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range rdf:langString .
+
+# Descritores dos exemplos já presentes no grafo público, agora declarados no TBox canônico.
+mado:impedimentosVerificados a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range xsd:boolean .
+mado:premissaDoExemplo a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .
+mado:operacaoDoRecurso a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .

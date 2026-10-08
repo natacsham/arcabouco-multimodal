@@ -28,6 +28,12 @@ limpeza, mensagens de erro e interrupção de fala continuam disponíveis.
 
 ## Verificação
 
+Na **1.4.0-rc1**, ambas as apresentações usam também `explanation.js`, com as leituras de construção e aplicação derivadas do mesmo retorno do motor. A comparação mostra os apoios acrescentados por articulação, inclusive quando a configuração já era selecionada sem essa expansão. Os testes atuais são `tests/traceability-browser.mjs` e `tests/compare_browser.mjs`; seus resultados são vinculados no índice `web/evidence/report.json`. Consultar [verificação e limites](verificacao.md).
+
+## Histórico: criação da visão guiada na 1.3
+
+Os testes, commits e declarações de preservação abaixo descrevem a apresentação **1.3**, no repositório de origem. Não demonstram que o motor ou a base permaneceram inalterados na evolução 1.4, nem constituem seus resultados atuais.
+
 `tests/guided.mjs` verifica o novo percurso e a equivalência do conteúdo com a visão
 atual. `tests/site-presentation.mjs` cobre apresentação e navegação do site.
 `tests/browser.mjs` mantém a regressão da visão atual. Os relatórios identificam
@@ -37,7 +43,7 @@ prova de aprendizagem ou declaração de conformidade integral de acessibilidade
 Nenhuma classe, relação, critério, conhecimento ou regra de decisão foi alterado
 para criar esta apresentação. A versão da tese permanece separada.
 
-## Revisão editorial e de leitura
+## Histórico: revisão editorial e de leitura da 1.3
 
 A revisão aprovada em 7 de outubro de 2026 mantém os dois percursos e ajusta a
 tipografia de ambos. O tamanho original usa a preferência-base do navegador

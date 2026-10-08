@@ -1,4 +1,14 @@
-# Revisão 1.3.0-rc1
+# Revisão 1.4.0-rc1 — fundamentação examinável
+
+O repositório independente parte do conteúdo público de `natacsham/MADO`, commit `d660b773ed08038a7a543205575a16fc22d2c1c2`. A importação é o commit raiz deste novo histórico; não altera a origem nem a tese.
+
+Esta evolução acrescenta `ContribuicaoNaArticulacao`, corrige a atribuição direta não sustentada de F07 a K43 e distingue trajetória, construção analítica e aplicação. O executor registra correspondências, entradas utilizadas, verificações, exclusões e cobertura parcial em `execution_evidence`, sem armazenar casos.
+
+Não foram acrescentados novos padrões de recomendação. A apresentação compartilha a mesma projeção do motor e conserva contribuições parciais ou pendentes. A inspeção dos registros existentes não deve ser apresentada como leitura de todos os documentos originais.
+
+Consulte [fundamentação documental](fundamentacao-documental.md), [explicação pública](explicacao-publica.md) e [verificação](verificacao.md). Os resultados efetivos da versão são os vinculados em `web/evidence/report.json`.
+
+## Histórico preservado: revisão 1.3.0-rc1
 
 Esta revisão sucede a versão usada na tese. Ela não substitui retroativamente seus arquivos, telas ou avaliações. A primeira referência técnica inspecionada para esta evolução foi o pacote local RC4-UI3-DEMO-FIX2; a prova anterior de execução no navegador não incluía todas as suas correções.
 

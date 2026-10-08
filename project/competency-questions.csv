@@ -1,9 +1,9 @@
 id,question,query,expected_evidence,limit
 QC1,Como o contexto e suas lacunas são representados?,queries/CQ-001.rq,Conceitos confirmados e perguntas de informação ausente,Não compreende livremente qualquer narrativa
 QC2,Quais conhecimentos correspondem às condições e por quê?,queries/CQ-002.rq,Correspondências mais relatório de autorização do motor,Recuperado não significa automaticamente aplicável
-QC3,Quais fontes e articulações sustentam o conhecimento?,queries/CQ-003.rq,Fontes IDs de trechos e localizações,Texto protegido não redistribuído
+QC3,O que cada contribuição acrescenta e como o conhecimento foi construído?,queries/CQ-003.rq,Contribuição trecho fonte operação compreensão resultante e estado de conferência,Conferência em registro não equivale a consulta do documento original
 QC4,Qual fundamento exato sustenta o critério nesta configuração?,queries/CQ-004.rq,AplicacaoDeCriterio e tuplas exatas sem produto cartesiano,Apoio reconstruído não é decisão histórica explicitada
 QC5,Quais precedentes e limites foram recuperados?,queries/CQ-005.rq,Decisões anteriores com fontes e limites,Precedente não garante resultado novo
 QC6,Qual decisão foi composta para o contexto?,queries/CQ-006.rq,Configurações com função recurso condição e alternativa,Reutiliza padrões registrados
-QC7,Qual é o caminho rastreável da orientação?,queries/CQ-007.rq,Grafo e de/para com relações verificáveis,Explicação não implica eficácia educacional
+QC7,Que verificações justificam cada escolha ou exclusão no contexto?,queries/CQ-007.rq,Aplicações exatas com execution_evidence e projeção única para texto tabela e grafo,Condição apenas documentada não equivale a teste executado
 QC8,Quando é preciso suspender ou pedir informação?,queries/CQ-008.rq,Lacunas do contexto atual e estado da decisão,Insuficiência tem cobertura delimitada

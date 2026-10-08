@@ -1,9 +1,9 @@
-project: MADO
-version: 1.3.0-rc1
+project: Arcabouco Multimodal
+version: 1.4.0-rc1
 instrument: AMADO
 author: Natacsha Ordones Raposo de Melo
 research: Arcabouço Multimodal para Acessibilidade Digital
-purpose: Representar e empregar conhecimento multimodal articulado em decisões rastreáveis para condições contempladas pela base.
+purpose: Permitir examinar a contribuição documental para a articulação do conhecimento e as verificações efetivas de seu emprego em decisões existentes.
 status: release-candidate
 previous_frozen_version: MADO 1.2.0-RC4 / tese V21
 core_classes:
@@ -13,7 +13,11 @@ core_classes:
   - ContextoDeInteracaoDigital
   - DecisaoDeAcessibilidadeMultimodal
   - Resultado
-new_auxiliary_element: AplicacaoDeCriterio
+public_origin_repository: https://github.com/natacsham/MADO
+public_origin_commit: d660b773ed08038a7a543205575a16fc22d2c1c2
+repository: https://github.com/natacsham/arcabouco-multimodal
+public_site: https://natacsham.github.io/arcabouco-multimodal/
+new_auxiliary_element: ContribuicaoNaArticulacao
 formalization: OWL 2 DL
 integrity: SHACL
 retrieval: SPARQL
@@ -27,3 +31,6 @@ limits:
   - Prior human evaluation does not evaluate this revision
   - Public source locators do not replace access to original documents
   - Accessibility checks do not establish full conformance
+  - Recorded contribution review is distinct from checking the original document
+  - Documentary support and successful execution checks do not guarantee applicability
+  - Textual alternatives are not automatically evaluated or recomposed

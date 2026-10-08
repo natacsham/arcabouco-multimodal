@@ -64,6 +64,7 @@ html[data-contrast=high] .site-header, html[data-contrast=high] .reading-bar {
 }
 @media (max-width: 25rem) {
   .site-header .wrap, .reading-bar .wrap { padding-inline: 1rem; }
+  .site-header .brand { flex: 0 0 100%; width: 100%; min-width: 0; flex-wrap: wrap; overflow-wrap: normal; }
   .site-header .nav { width: 100%; gap: .25rem .8rem; }
   .site-header .nav a { font-size: 1rem; }
 }

@@ -27,6 +27,7 @@ def build():
     downloads = WEB / "downloads"
     downloads.mkdir(exist_ok=True)
     paths = [
+        ROOT / "execution_trace.py",
         ROOT / "data/knowledge-base.json",
         ROOT / "data/interface-vocabulary.json",
         ROOT / "ontology/mado-combined.ttl",
@@ -60,7 +61,8 @@ def build():
         if p.is_file()
     }
     manifest = {
-        "version": "1.3.0-rc1",
+        "version": "1.4.0-rc1",
+        "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
         "instrument": "AMADO",
         "public_projection": True,
         "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
@@ -81,7 +83,7 @@ def build():
         },
         "site_assets_sha256": {
             name: sha(WEB / name)
-            for name in ("index.html", "ontologia/index.html", "site.css", "shell.css", "site.js", "sitemap.xml")
+            for name in ("index.html", "ontologia/index.html", "site.css", "shell.css", "site.js", "sitemap.xml", "explanation.js", "explanation.css", "explanation-pilot.js", "assets/explanation-pilot.json")
         },
         "files": {
             p.relative_to(ROOT).as_posix(): sha(p)

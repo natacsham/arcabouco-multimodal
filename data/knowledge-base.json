@@ -1,8 +1,348 @@
 {
+  "contributions": [
+    {
+      "id": "C-K38-01",
+      "articulation_id": "ART-TRF-04",
+      "knowledge_id": "K38",
+      "excerpt_id": "TD-EV13",
+      "statement": "O registro descreve a representação descritiva colaborativa de elementos da web, preservando a informação relevante quando o conteúdo é adaptado ao leitor de tela.",
+      "contribution_role": "PRESERVACAO_DE_SIGNIFICADO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Contribui com a preservação do conteúdo e a mediação; não contém, isoladamente, a estrutura completa de unidade revisável, autoria e publicação proposta em K38.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K38-02",
+      "articulation_id": "ART-TRF-04",
+      "knowledge_id": "K38",
+      "excerpt_id": "TD-EV34",
+      "statement": "O registro da persona Marcia relaciona texto, imagem, vídeo e elementos interativos à organização do conteúdo e à mediação docente.",
+      "contribution_role": "ORGANIZACAO_ENTRE_FORMATOS",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Apoia relacionar formatos a funções de organização. A proposição de uma unidade persistente e revisável é reconstrução posterior, não citação da persona.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K38-03",
+      "articulation_id": "ART-TRF-04",
+      "knowledge_id": "K38",
+      "excerpt_id": "TD-EV29",
+      "statement": "O registro de redesenho de mensagens reúne rótulos, instruções, identificação de erros, confirmação e feedback acessível.",
+      "contribution_role": "REVISAO_E_CONFIRMACAO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Oferece precedente de revisão e confirmação numa tarefa de mensagens; sua transferência para autoria de recurso digital exige justificar a equivalência funcional, não copiar a interface.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K38-04",
+      "articulation_id": "ART-TRF-04",
+      "knowledge_id": "K38",
+      "excerpt_id": "TD-EV42",
+      "statement": "O registro situa a persona Camila em um fluxo do SIGAA e relaciona necessidades a requisitos funcionais antes do redesenho.",
+      "contribution_role": "CONTEXTUALIZACAO_DA_TAREFA",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Contribui com a exigência de tarefa concreta. Não demonstra resultado de aprendizagem nem fundamenta sozinho autoria e publicação de conteúdo.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K43-01",
+      "articulation_id": "ART-REF-03",
+      "knowledge_id": "K43",
+      "excerpt_id": "TD-EV34",
+      "statement": "A organização entre formatos integra a descrição preservada da persona Marcia.",
+      "contribution_role": "ORGANIZACAO_ENTRE_FORMATOS",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Sustenta a parcela de K43 relativa à relação entre formatos; a atribuição de funções específicas continua sendo uma operação analítica situada.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K43-02",
+      "articulation_id": "ART-REF-03",
+      "knowledge_id": "K43",
+      "excerpt_id": "TD-EV36",
+      "statement": "A descrição preservada de Lidiane alerta que a multiplicidade de formatos pode competir pela atenção e precisa de organização.",
+      "contribution_role": "LIMITE_DA_MULTIPLICIDADE",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Apoia não equiparar mais formatos a melhor interação. O registro é uma síntese de persona; não foi conferido nesta revisão como trecho literal do PDF.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K43-03",
+      "articulation_id": "ART-REF-03",
+      "knowledge_id": "K43",
+      "excerpt_id": "TD-RC3-REF-09",
+      "statement": "A extração preservada do estudo posterior solicita maior detalhamento das tecnologias assistivas, das tarefas e da ligação com critérios.",
+      "contribution_role": "CONDICAO_DE_APLICACAO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Contribui com a necessidade de contextualizar o emprego dos formatos. Não constitui prova empírica de que uma ordem modal específica reduz sobrecarga.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K43-04",
+      "articulation_id": "ART-REF-03",
+      "knowledge_id": "K43",
+      "excerpt_id": "TD-RC3-REF-10",
+      "statement": "A extração relaciona características, objetivos e necessidades da persona a requisitos de um fluxo concreto do SIGAA.",
+      "contribution_role": "CONTEXTO_FUNCIONAL",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Apoia a transferência pela função na tarefa, não pelo diagnóstico. A explicação de coordenação modal em K43 é síntese registrada, não formulação literal atribuída ao artigo.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K35-01",
+      "articulation_id": "ART-TRF-01",
+      "knowledge_id": "K35",
+      "excerpt_id": "TD-EV34",
+      "statement": "A síntese de Marcia preserva o papel da mediação docente na organização das formas de apresentar conteúdo.",
+      "contribution_role": "MEDIACAO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Oferece fundamento parcial para considerar quem participa. Não confirma a distribuição específica de papéis do novo cenário.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K35-02",
+      "articulation_id": "ART-TRF-01",
+      "knowledge_id": "K35",
+      "excerpt_id": "TD-EV42",
+      "statement": "O registro situa necessidades da persona e requisitos no fluxo de uma atividade.",
+      "contribution_role": "CONTEXTO_FUNCIONAL",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "A tarefa situada limita a transferência. A distribuição de autoria entre estudante, professora e colegas continua sendo proposta contextual da pesquisa.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K36-01",
+      "articulation_id": "ART-TRF-02",
+      "knowledge_id": "K36",
+      "excerpt_id": "TD-EV27",
+      "statement": "O redesenho descrito no registro inclui legendas e acesso à audiodescrição para mídia.",
+      "contribution_role": "ACESSO_A_MIDIA",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Sustenta cuidados de acesso ao vídeo. Não fundamenta por si só duração curta, pergunta inicial ou seleção por contraste temporal.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K36-02",
+      "articulation_id": "ART-TRF-02",
+      "knowledge_id": "K36",
+      "excerpt_id": "TD-EV28",
+      "statement": "A tabela preservada relaciona recursos de legenda e audiodescrição a critérios de acessibilidade.",
+      "contribution_role": "CRITERIOS_PARA_MIDIA",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Documenta uma associação de projeto com critérios; não é avaliação de eficácia de um vídeo na nova atividade.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K37-01",
+      "articulation_id": "ART-TRF-03",
+      "knowledge_id": "K37",
+      "excerpt_id": "TD-EV30",
+      "statement": "A tabela preservada associa formulários, anexos e formas alternativas de comunicação a critérios e perfis funcionais.",
+      "contribution_role": "ACESSO_E_FEEDBACK_GERAL",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Contribuição apenas contextual: não documenta jogo, ordenação de eventos, relação causal ou consolidação da aprendizagem.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K37-02",
+      "articulation_id": "ART-TRF-03",
+      "knowledge_id": "K37",
+      "excerpt_id": "TD-EV36",
+      "statement": "O registro de Lidiane aponta competição entre formatos como um problema de organização.",
+      "contribution_role": "LIMITE_DA_MULTIPLICIDADE",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Fornece um cuidado ao propor interatividade, não evidência da adequação da mecânica de jogo descrita em K37.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K39-01",
+      "articulation_id": "ART-REF-01",
+      "knowledge_id": "K39",
+      "excerpt_id": "TD-RC3-REF-01",
+      "statement": "A extração relaciona seleção de canais às necessidades da pessoa e à tecnologia disponível.",
+      "contribution_role": "SELECAO_SITUADA",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Apoia não selecionar canais apenas pelo nome de uma deficiência. A compatibilidade concreta ainda depende da tarefa e das informações confirmadas.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K39-02",
+      "articulation_id": "ART-REF-01",
+      "knowledge_id": "K39",
+      "excerpt_id": "TD-RC3-REF-03",
+      "statement": "A extração registra dificuldades de interação por toque com diferentes experiências anteriores de uso.",
+      "contribution_role": "EXPERIENCIA_DE_USO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Acrescenta proficiência à análise, sem transformar experiência anterior em garantia de desempenho.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K39-03",
+      "articulation_id": "ART-REF-01",
+      "knowledge_id": "K39",
+      "excerpt_id": "TD-RC3-REF-07",
+      "statement": "A extração relaciona movimentos disponíveis, visão e dispositivos na composição de uma entrada alternativa.",
+      "contribution_role": "CAPACIDADE_E_RECURSOS",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Contribui com compatibilidade entre exigência da ação e condições observadas; não autoriza generalização clínica.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K40-01",
+      "articulation_id": "ART-REF-02",
+      "knowledge_id": "K40",
+      "excerpt_id": "TD-EV02",
+      "statement": "O registro de mobilidade identifica uma interrupção quando a pessoa precisava recuperar a última informação de orientação.",
+      "contribution_role": "RECUPERABILIDADE",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Sustenta permitir retomada da mensagem. O intervalo observado não é transferido como valor universal.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K40-02",
+      "articulation_id": "ART-REF-02",
+      "knowledge_id": "K40",
+      "excerpt_id": "TD-RC3-REF-05",
+      "statement": "A extração preserva sugestões de repetição da mensagem e de retorno háptico quando o ruído interfere no áudio.",
+      "contribution_role": "COMPLEMENTACAO_AUDIO_HAPTICO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Registra sugestões de participantes, não eficácia demonstrada de toda combinação áudio-háptica.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K41-01",
+      "articulation_id": "ART-REF-05",
+      "knowledge_id": "K41",
+      "excerpt_id": "TD-RC3-REF-04",
+      "statement": "A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.",
+      "contribution_role": "AMBIENTE_E_APOIO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Limita a entrada alternativa pela infraestrutura e pelo aprendizado da ação; não se confunde com incapacidade geral.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K41-02",
+      "articulation_id": "ART-REF-05",
+      "knowledge_id": "K41",
+      "excerpt_id": "TD-RC3-REF-07",
+      "statement": "O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.",
+      "contribution_role": "VIABILIDADE_DA_ACAO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Apoia testar ação e compatibilidade concretas. Não demonstra que todo acionador ou voz atenderá outra pessoa.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K42-01",
+      "articulation_id": "ART-REF-03",
+      "knowledge_id": "K42",
+      "excerpt_id": "TD-EV12",
+      "statement": "O registro da WABlind distingue a síntese pelo leitor de tela da compreensão de elementos insuficientemente representados.",
+      "contribution_role": "PRESERVACAO_DE_SIGNIFICADO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Contribui com a necessidade de representação adequada, não apenas conversão técnica para áudio.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K42-02",
+      "articulation_id": "ART-REF-03",
+      "knowledge_id": "K42",
+      "excerpt_id": "TD-ORI-0014",
+      "statement": "O item preservado na extração de critérios requer que informação, estrutura e relações possam ser recuperadas programaticamente ou em texto.",
+      "contribution_role": "ESTRUTURA_PERCEPTIVEL",
+      "nature": "PARAFRASE_DE_ITEM_NORMATIVO_EXTRAIDO",
+      "justification": "Conferência no registro de extração, não na versão original da norma. Apoia preservar relações essenciais, sem impor uma tradução única para todo conteúdo.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K44-01",
+      "articulation_id": "ART-REF-02",
+      "knowledge_id": "K44",
+      "excerpt_id": "TD-EV02",
+      "statement": "O registro de mobilidade documenta a necessidade de recuperar informação anterior para continuar a tarefa.",
+      "contribution_role": "CONTINUIDADE",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Apoia recuperabilidade de feedback quando necessário à ação; não determina a duração adequada em outros contextos.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K44-02",
+      "articulation_id": "ART-REF-02",
+      "knowledge_id": "K44",
+      "excerpt_id": "TD-RC3-REF-05",
+      "statement": "A extração relaciona repetição e alternativa háptica a limitações da orientação auditiva.",
+      "contribution_role": "FEEDBACK_PERCEPTIVEL",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Sustenta uma possibilidade de complemento, condicionada à capacidade de distinguir o sinal e ao significado acordado.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    },
+    {
+      "id": "C-K45-01",
+      "articulation_id": "ART-REF-04",
+      "knowledge_id": "K45",
+      "excerpt_id": "TD-RC3-REF-10",
+      "statement": "A extração situa características, objetivos e requisitos no fluxo de uso da persona.",
+      "contribution_role": "CONTEXTUALIZACAO",
+      "nature": "PARAFRASE_DE_REGISTRO",
+      "justification": "Fundamento parcial para situar a participação. Não confirma isoladamente interesse intenso, autoria, regras de turno ou benefício de engajamento.",
+      "verification_status": "CONFERIDA_NO_REGISTRO",
+      "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
+      "review_date": "2026-10-08"
+    }
+  ],
   "metadata": {
-    "title": "Base pública MADO 1.3.0-rc1",
-    "version": "1.3.0-rc1",
-    "generated_at": "2026-09-06",
+    "title": "Base pública do Arcabouço Multimodal — fundamentação 1.4.0-rc1",
+    "version": "1.4.0-rc1",
+    "generated_at": "2026-10-08",
     "note": "Projeção pública posterior à tese; texto original dos trechos não redistribuído.",
     "migration_note": "Derivação técnica FIX2: explicita premissas dos três exemplos sintéticos, responsabilidades e recursos atuais/propostos. Conhecimentos, critérios, articulações, entrevista e estudos preservados.",
     "execution_scope": "TRANSFERENCIA_SITUADA_COM_REFERENCIAS_E_CONFIGURACAO_RASTREAVEL_SEM_LLM",
@@ -15,8 +355,8 @@
     "active_decision_pattern_count": 11,
     "criterion_origin_count": 416,
     "resource_state_model": "DISPONIVEL_CONFIRMADO|PROPOSTO_A_PREPARAR|NAO_CONFIRMADO|IMPEDIDO",
-    "interface_version": "AMADO-web-1.3.0-rc1",
-    "derived_from_version": "1.2.0-RC4-DEMO-FIX2",
+    "interface_version": "AMADO-web-1.4.0-rc1",
+    "derived_from_version": "1.3.0-rc1",
     "public_projection": true
   },
   "studies": [
@@ -9405,6 +9745,8 @@
     },
     {
       "id": "K35",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Conferir a distribuição específica de autoria e papéis com a autora e os registros da elicitação; os trechos conferidos sustentam mediação e contexto, não todos os papéis."],
       "estudo_id": null,
       "enunciado": "Em uma produção digital colaborativa, preservar o protagonismo exige distribuir funções complementares: a pessoa apoiada mantém autoria sobre o conhecimento; a professora enquadra o objetivo, o tempo e a acessibilidade; e os colegas pesquisam, organizam e testam a compreensão sem substituir essa autoria.",
       "articulacao": "Articula a curadoria multimodal das Personas, a necessidade de contextualizar tarefa e ferramentas, o interesse pessoal observado na elicitação e o princípio de não decidir por diagnóstico. O resultado transforma participação oral em autoria compartilhada com responsabilidades explícitas.",
@@ -9471,6 +9813,8 @@
     },
     {
       "id": "K36",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Sustentar separadamente duração curta, pergunta inicial e escolha por processo ou contraste; os registros conferidos cobrem sobretudo acesso à mídia."],
       "estudo_id": null,
       "enunciado": "Vídeo acrescenta valor a um recurso de aprendizagem quando representa mudança, processo, contraste temporal ou perspectiva que fala e imagem estática não expressem suficientemente; deve ser curto, introduzido por uma pergunta e acompanhado de controles, legendas, audiodescrição ou alternativa textual conforme o conteúdo.",
       "articulacao": "Combina a organização funcional de formatos das Personas, os conhecimentos sobre representação acessível e alternativas audiovisuais e o critério situado de relacionar recurso, interesse e objetivo. A modalidade é selecionada por função, não por novidade.",
@@ -9536,6 +9880,8 @@
     },
     {
       "id": "K37",
+      "foundation_review_status": "PENDENTE",
+      "pending_foundation_items": ["Não foi recuperado fundamento específico para mecânicas de jogo, consolidação de relações históricas ou efeitos de aprendizagem. Preservar como proposta projetual pendente."],
       "estudo_id": null,
       "enunciado": "Um jogo ou atividade interativa curta pode consolidar relações históricas quando exige ordenar eventos, associar causa e consequência ou comparar interpretações, distribui papéis entre os participantes e oferece feedback explicativo; não deve funcionar apenas como recompensa ou competição.",
       "articulacao": "Articula organização cognitiva, interatividade com função, interesse pessoal e revisão da configuração. O jogo converte uma relação histórica em ação verificável e usa o feedback para revelar compreensão e orientar retomada.",
@@ -9607,6 +9953,8 @@
     },
     {
       "id": "K38",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["A unidade revisável com autoria e publicação é síntese analítica, não formulação literal dos documentos.","F07 e registros da elicitação permanecem vínculos legados a conferir; não foram reconfirmados nesta revisão."],
       "estudo_id": null,
       "enunciado": "Um recurso digital multimodal revisável deve organizar cada unidade de conteúdo com uma ideia central, sua representação principal, alternativas que preservem significado, indicação de autoria e fonte, e um ponto de verificação antes da publicação.",
       "articulacao": "Combina representação acessível, organização contra sobrecarga, comunicação multiformato, contextualização de tarefa e necessidade de observar e revisar. O produto persistente permite retomar a fala sem depender de memória ou de um único momento de apresentação.",
@@ -9687,6 +10035,8 @@
     },
     {
       "id": "K39",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Conferência realizada nos registros de extração; original e transferibilidade entre tarefas ainda precisam de revisão."],
       "estudo_id": null,
       "enunciado": "A seleção de modalidades deve considerar conjuntamente a tarefa, as condições funcionais observadas, a proficiência com o recurso, o ambiente e a tecnologia disponível.",
       "articulacao": "O esquema de recomendação condiciona canais a necessidades e tecnologia; o estudo ACAT/MPD mostra que movimento disponível, visão, dispositivo e desempenho alteram a configuração; o RotaColab mostra que experiência prévia com TalkBack não elimina dificuldades de operação. A articulação impede que diagnóstico ou modalidade isolada determine a decisão.",
@@ -9754,6 +10104,8 @@
     },
     {
       "id": "K40",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Distinguir dificuldade observada de sugestões dos participantes; não há eficácia universal comprovada da combinação."],
       "estudo_id": null,
       "enunciado": "Informação auditiva usada para orientar uma ação precisa poder ser repetida; em ambiente ruidoso, um retorno háptico distinguível pode complementar o áudio sem substituir seu conteúdo.",
       "articulacao": "As rupturas do RotaColab distinguem periodicidade de recuperabilidade e mostram que ruído, vibração e possibilidade de repetir a mensagem cumprem funções diferentes e complementares.",
@@ -9814,6 +10166,8 @@
     },
     {
       "id": "K41",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Conferir original e critérios de desempenho; os registros de uma configuração não asseguram viabilidade para outro contexto."],
       "estudo_id": null,
       "enunciado": "Uma entrada alternativa somente apoia a tarefa quando o gesto ou movimento exigido é viável, o dispositivo e o sistema são compatíveis, o desempenho é suficiente e o usuário recebe confirmação perceptível.",
       "articulacao": "O estudo ACAT/MPD articula movimento residual, baixa visão, webcam, dispositivo de pressão e teclado em tela; o RotaColab mostra falhas quando gesto, touchscreen, rede ou retorno não correspondem às condições reais.",
@@ -9873,6 +10227,8 @@
     },
     {
       "id": "K42",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Conferir versões originais dos itens normativos; alternativa equivalente exige avaliação do significado na tarefa."],
       "estudo_id": null,
       "enunciado": "Imagem, desenho e vídeo somente ampliam o acesso quando cada modo tem função explícita e o significado essencial permanece disponível por estrutura, descrição, legenda, audiodescrição ou alternativa equivalente.",
       "articulacao": "Conhecimentos sobre curadoria de conteúdo, competição entre formatos e alternativas perceptivas foram cruzados com as origens normativas de texto alternativo, legenda, audiodescrição e estrutura programática.",
@@ -9951,12 +10307,13 @@
     },
     {
       "id": "K43",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["F07 removida do suporte direto: nenhum trecho de F07 integra o conjunto documental de K43. Eventual vínculo depende de extração específica a conferir.","Ordem modal, controle e redução de sobrecarga são interpretação articulada; não foram demonstrados causalmente pelos registros conferidos."],
       "estudo_id": null,
       "enunciado": "Combinar mais modalidades não é suficiente: os modos devem ter papéis distintos, ordem compreensível e controle para evitar competição, sobrecarga e perda de continuidade.",
-      "articulacao": "Resultados das personas e dos estudos educacionais mostram que disponibilidade de formatos pode coexistir com confusão; a contextualização funcional e a validação das personas exigem tarefa, tecnologia assistiva e critérios explícitos.",
+      "articulacao": "Registros das personas e do estudo educacional posterior relacionam organização dos formatos, contextualização da tarefa, tecnologias assistivas e critérios. A coordenação e o controle propostos em K43 são síntese analítica; não se presume um trecho da avaliação F07 como seu suporte direto.",
       "fonte_ids": [
         "F06",
-        "F07",
         "F08"
       ],
       "trecho_ids": [
@@ -10012,6 +10369,8 @@
     },
     {
       "id": "K44",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["As propostas de feedback fora da tarefa de mobilidade dependem de justificação situada e conferência das origens normativas."],
       "estudo_id": null,
       "enunciado": "Feedback e mensagens de estado devem ser perceptíveis, não interromper indevidamente o foco e permanecer ou poder ser recuperados quando orientam a continuidade da tarefa.",
       "articulacao": "As rupturas temporárias do RotaColab foram articuladas aos itens normativos sobre mensagens de status e feedback perceptível para transformar um requisito geral em condição operacional de continuidade.",
@@ -10070,6 +10429,8 @@
     },
     {
       "id": "K45",
+      "foundation_review_status": "PARCIAL",
+      "pending_foundation_items": ["Interesse, autoria, turnos e engajamento não são confirmados integralmente pelo trecho de contextualização; revisar sua origem na elicitação."],
       "estudo_id": null,
       "enunciado": "Interesse e conhecimento aprofundado podem sustentar autoria e engajamento quando são ligados a uma tarefa com objetivo explícito, papéis negociados, transições previsíveis e possibilidade de revisão.",
       "articulacao": "A elicitação situa o conhecimento e as formas de expressão do estudante; os estudos com personas e critérios acrescentam contextualização de tarefa e limites. A articulação transforma hiperfoco ou diagnóstico em condições funcionais observáveis, sem generalizar o caso.",
@@ -27775,6 +28136,10 @@
     },
     {
       "id": "ART-TRF-01",
+      "operation_explanation": "Relaciona registros de mediação e contextualização com a proposta de distribuir autoria, condução e colaboração no novo caso. Os papéis do cenário não são atribuídos retrospectivamente aos estudos.",
+      "added_understanding": "Proposta situada de distribuição de responsabilidades; a adequação dos papéis e seu efeito permanecem sujeitos à revisão humana.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Autoria colaborativa situada",
       "tipo_articulacao": "COMPLEMENTA",
       "conteudo_entrada_ids": [
@@ -27843,6 +28208,10 @@
     },
     {
       "id": "ART-TRF-02",
+      "operation_explanation": "Transfere cuidados de acesso à mídia para uma proposta de vídeo com função na tarefa. A seleção por processo ou contraste e a pergunta inicial são escolhas de projeto, não resultados dos trechos de acessibilidade.",
+      "added_understanding": "Distinguir disponibilizar vídeo de justificar seu emprego; os requisitos de acesso possuem apoio parcial nos registros e os detalhes didáticos ainda exigem sustentação própria.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Vídeo selecionado por função e acessibilidade",
       "tipo_articulacao": "CONDICIONA",
       "conteudo_entrada_ids": [
@@ -27909,6 +28278,10 @@
     },
     {
       "id": "ART-TRF-03",
+      "operation_explanation": "Relaciona precedentes gerais de acessibilidade e feedback a uma proposta de jogo. Não foi localizada nos registros conferidos sustentação específica para as mecânicas de ordenar eventos ou comparar causas.",
+      "added_understanding": "Hipótese de projeto de interatividade orientada à tarefa, não conhecimento empírico validado sobre aprendizagem com jogos.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Jogo como consolidação e feedback",
       "tipo_articulacao": "OPERACIONALIZA",
       "conteudo_entrada_ids": [
@@ -27976,6 +28349,10 @@
     },
     {
       "id": "ART-TRF-04",
+      "operation_explanation": "Combina preservação do significado por descrição colaborativa, organização entre formatos, revisão e confirmação em mensagens e contextualização por tarefa. A estrutura de unidade de conteúdo revisável é síntese analítica posterior.",
+      "added_understanding": "Uma proposta de organização persistente e revisável que conserva expressão e relações; autoria, publicação e eficácia educacional não decorrem automaticamente dos estudos de origem.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Produto multimodal persistente e revisável",
       "tipo_articulacao": "COMPLEMENTA",
       "conteudo_entrada_ids": [
@@ -28094,6 +28471,10 @@
     },
     {
       "id": "ART-REF-01",
+      "operation_explanation": "Complementa seleção de canais por necessidade e tecnologia com registros de experiência de uso, condições funcionais e contextualização da tarefa.",
+      "added_understanding": "A escolha de modalidade é delimitada por tarefas e condições observadas, sem depender exclusivamente do diagnóstico ou de uma preferência geral.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Tarefa, condição funcional, proficiência, ambiente e tecnologia condicionam a modalidade",
       "tipo_articulacao": "COMPLEMENTA_E_CONDICIONA",
       "conteudo_entrada_ids": [
@@ -28156,6 +28537,10 @@
     },
     {
       "id": "ART-REF-02",
+      "operation_explanation": "Relaciona a interrupção na retomada de orientação auditiva com sugestões de repetição e de complemento háptico; separa a observação da dificuldade da proposta de solução.",
+      "added_understanding": "Recuperabilidade e perceptibilidade são condições para orientar a continuidade da tarefa. A proposta não demonstra eficácia universal de retorno háptico.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Rupturas de áudio, ambiente e feedback operacionalizam recuperabilidade",
       "tipo_articulacao": "REFINA_E_OPERACIONALIZA",
       "conteudo_entrada_ids": [
@@ -28212,6 +28597,10 @@
     },
     {
       "id": "ART-REF-03",
+      "operation_explanation": "Complementa registros de representação acessível, organização de formatos nas personas e contextualização por tarefa. Diferencia o princípio de preservar significado (K42) do cuidado com coordenação e competição entre formatos (K43).",
+      "added_understanding": "Mais formatos não bastam: cada alternativa precisa preservar informação essencial e ter emprego situado. A ordem concreta das configurações continua sendo uma decisão de projeto a verificar.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Alternativas perceptivas preservam significado de mídias com função definida",
       "tipo_articulacao": "COMPLEMENTA_E_OPERACIONALIZA",
       "conteudo_entrada_ids": [
@@ -28263,7 +28652,10 @@
         "TD-RC3-REF-09",
         "TD-ORI-0001",
         "TD-ORI-0090",
-        "TD-ORI-0148"
+        "TD-ORI-0148",
+        "TD-EV36",
+        "TD-RC3-REF-10",
+        "TD-ORI-0014"
       ],
       "perspectiva_ids": [
         "P02"
@@ -28282,6 +28674,10 @@
     },
     {
       "id": "ART-REF-04",
+      "operation_explanation": "Relaciona contextualização da persona e mediação com a proposta de preservar autoria e participação no caso reconstruído. A contribuição documental conferida cobre contexto, não toda a caracterização individual.",
+      "added_understanding": "Atribuir função e responsabilidade de forma situada; interesse, transições e protagonismo não devem ser inferidos de diagnóstico nem considerados confirmados por uma única fonte.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Potencialidade, expressão e participação estruturada orientam autoria no caso",
       "tipo_articulacao": "CONTEXTUALIZA_E_REUTILIZA",
       "conteudo_entrada_ids": [
@@ -28337,6 +28733,10 @@
     },
     {
       "id": "ART-REF-05",
+      "operation_explanation": "Combina limitações de infraestrutura e necessidade de apoio com registros de movimentos e dispositivos efetivamente empregados em entrada alternativa.",
+      "added_understanding": "Compatibilidade funcional deve ser examinada por ação, recurso e contexto; a existência de uma tecnologia assistiva não basta para autorizar sua transferência.",
+      "authorship": "Articulação preservada como registro da pesquisa; explicitação desta revisão realizada por assistência computacional, sem alegar nova aprovação da autora.",
+      "reconstruction_origin": "Conferência de registros preservados da RC4 em 2026-10-08; documentos originais não disponíveis nos caminhos consultados. Não se atribui esta formulação retrospectivamente às publicações.",
       "rotulo": "Condições de movimento, dispositivo e feedback condicionam a entrada alternativa",
       "tipo_articulacao": "COMPLEMENTA_E_CONDICIONA",
       "conteudo_entrada_ids": [

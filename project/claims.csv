@@ -5,3 +5,5 @@ A3,Uma combinação não cadastrada pode reutilizar padrões existentes,QC2 QC6 
 A4,Articulações podem acrescentar função à orientação,QC2 QC6,evidence/regression-report.json,Comparação técnica controlada e não ganho de aprendizagem
 A5,Ausência de suporte pode suspender a decisão,QC1 QC8,evidence/regression-report.json,Não exclui toda possível informação ausente
 A6,Esta revisão é tecnicamente verificável,QC1 QC2 QC3 QC4 QC5 QC6 QC7 QC8,evidence/reasoner-report.json e evidence/technical-report.json,Verificação não é avaliação humana da revisão
+A7,Contribuições identificam entradas operação e compreensão resultante,QC3 QC7,tests/test_contributions.py e data/knowledge-base.json,Apoios parciais e conferidos apenas no registro não são provas integrais
+A8,A explicação distingue o verificado do pendente e do não executado,QC2 QC4 QC7 QC8,tests/test_execution_evidence.py e evidence/traceability-browser.json,As verificações limitam-se a condições formalizadas

@@ -1,16 +1,16 @@
-# MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital
+# Arcabouço Multimodal para Acessibilidade Digital
 
 **Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Melo.**
 
-Nesta pesquisa, construí a **MADO (Multimodal Accessibility Decision Ontology)** para representar conhecimentos sobre acessibilidade e interação multimodal, as relações entre eles e as condições em que podem orientar uma decisão. O **AMADO** é o instrumento que permite consultar essa representação e acompanhar a fundamentação de uma orientação.
+O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão deste projeto: 1.3.0-rc1 — candidata, posterior à versão da tese.** A tese V21 e a MADO 1.2.0-RC4 permanecem preservadas. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
+**Versão deste projeto: 1.4.0-rc1 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
 
 ## Qual problema esta pesquisa enfrenta?
 
 Conhecimentos úteis ficam distribuídos entre normas, publicações, estudos, artefatos, personas e resultados. Encontrar esses documentos não basta para decidir **como combinar formas de interação para uma pessoa, uma tarefa e determinadas condições**.
 
-Investiguei a articulação desses conhecimentos: o que pode ser relacionado, o que essa relação permite compreender, em quais condições é pertinente e até onde pode ser empregado em uma nova decisão.
+O foco da pesquisa é a articulação desses conhecimentos: o que pode ser relacionado, o que essa relação permite compreender, em quais condições é pertinente e até onde pode ser empregado em uma nova decisão.
 
 | Elemento | Papel no projeto |
 | --- | --- |
@@ -30,11 +30,13 @@ Investiguei a articulação desses conhecimentos: o que pode ser relacionado, o 
 - [Execute e reproduza as verificações](docs/reproduzir.md).
 - [Confira as licenças dos componentes de terceiros](THIRD_PARTY.md).
 
-A página pública reúne [**Entenda a MADO**](https://natacsham.github.io/MADO/), [**Explore a ontologia**](https://natacsham.github.io/MADO/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/MADO/amado/). A publicação é condicionada ao sucesso das verificações no fluxo do GitHub Pages.
+O endereço previsto reúne [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). A publicação é condicionada ao sucesso das verificações no fluxo do GitHub Pages.
+
+Cada escolha pode ser examinada por duas leituras: **como seu conhecimento foi construído** e **por que ele foi empregado naquele caso**. Ambas usam os mesmos registros, distinguindo contribuição da fonte, operação de articulação, conhecimento, aplicação do critério e limite. Contribuição não detalhada permanece como lacuna, sem justificativa inventada. [Contrato da explicação pública](docs/explicacao-publica.md).
 
 ## O que é conhecimento multimodal articulado?
 
-Não é apenas um conjunto de citações nem um resumo de um artigo. Na pesquisa, construí essa compreensão ao relacionar conteúdos e registrar convergências, complementações, condições, refinamentos e limites.
+Não é apenas um conjunto de citações nem um resumo de um artigo. É a compreensão produzida ao relacionar conteúdos e registrar convergências, complementações, condições, refinamentos e limites.
 
 Um exemplo é relacionar a necessidade de **retomar uma explicação**, a **preservação do significado entre formatos** e a **organização da atenção**. Essa articulação pode fundamentar uma configuração em que a fala preserva a expressão da pessoa, o texto mantém pontos recuperáveis e a imagem representa relações, cada qual com função e condições explícitas.
 
@@ -82,7 +84,7 @@ Consistência lógica, integridade dos dados, respostas às consultas, comportam
 
 Referência simples sugerida:
 
-> MELO, Natacsha Ordones Raposo de. MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital: ontologia e instrumento AMADO. Versão 1.3.0-rc1. Repositório do projeto.
+> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.4.0-rc1. Repositório do projeto.
 
 Não há DOI exigido para consultar ou compreender este trabalho. Referências bibliográficas, autores de terceiros e perspectivas participantes conservam sua própria atribuição.
 

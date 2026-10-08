@@ -26,7 +26,7 @@ class EngineTests(unittest.TestCase):
         self.engine.start_context("CTX-TRANSFERENCIA-RECURSO-DIGITAL-01")
 
     def test_main_seven_grounded_configurations(self):
-        self.assertEqual(self.main["decision"]["status"], "GERADA")
+        self.assertEqual(self.main["decision"]["status"], "GERADA_PARCIAL")
         self.assertEqual(len(self.main["decision"]["configuracao_modal"]), 7)
         self.assertTrue(
             all(

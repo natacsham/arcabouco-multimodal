@@ -123,8 +123,8 @@ def main():
     }
     assert before == digest(), "A synthetic test must not enrich the base to pass."
     checks = {
-        "four_examples_generate": all(
-            results[n]["decision"]["status"] == "GERADA"
+        "four_examples_compose_with_declared_coverage": all(
+            results[n]["decision"]["status"] in {"GERADA", "GERADA_PARCIAL"}
             for n in ("principal", "leitor_tela", "mobilidade_ruido", "comunicacao")
         ),
         "game_block_removes_configuration": "PAD-JOGO-CONSOLIDACAO-FEEDBACK"
@@ -149,7 +149,7 @@ def main():
         json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     report = {
-        "version": "1.3.0-rc1",
+        "version": "1.4.0-rc1",
         "type": "SYNTHETIC_TECHNICAL_REGRESSION_NOT_HUMAN_EVALUATION",
         "checks": checks,
         "cases": summary,

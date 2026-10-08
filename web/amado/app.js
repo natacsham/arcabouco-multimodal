@@ -1,4 +1,5 @@
 import { request, restart } from './client.mjs';
+import { renderExplanation } from '../explanation.js';
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 let catalog = null;
@@ -398,162 +399,70 @@ const TRACE_STEPS = [
   {kind: "configuration", label: "Configuração multimodal", description: "Uma parte concreta da orientação: qual modo usar, para quê, com qual recurso, por quem e em quais condições. As configurações selecionadas compõem a decisão e explicitam alternativas e acompanhamento; cada cartão pode tratar de um modo dessa combinação."},
   {kind: "source", label: "Fonte", description: "O documento ou registro que sustenta o conhecimento ou a origem de um critério. Permite conferir o fundamento; sua presença não comprova que a orientação já foi aplicada com sucesso."},
 ];
-const originalTraceOrder = $("#trace-reading-order").textContent;
 const originalDeparaOrder = $("#depara-reading-order").textContent;
 
 function renderRationaleGuide() {
   $("#free-rationale-terms").innerHTML = TRACE_STEPS.map((step) => `<li data-trace-kind="${step.kind}"><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.description)}</p></li>`).join("");
 }
 
-function traceDetailPresenter(result, graph) {
-  const byId = new Map((graph.nodes || []).map((node) => [node.id, node]));
-  const knowledge = new Map((result.traceability?.knowledge || []).map((row) => [row.id, row]));
-  const criteria = new Map((result.traceability?.criteria || []).map((row) => [row.id, row]));
-  const articulations = new Map((result.articulations_used || []).map((row) => [row.id, row]));
-  const concepts = new Map(Object.values(catalog?.concepts || {}).flat().map((row) => [row.id, row]));
-  const sources = new Map([...knowledge.values()].flatMap((row) => row.fontes || []).map((row) => [row.id, row]));
-  const excerpts = new Map([...knowledge.values()].flatMap((row) => row.trechos || []).map((row) => [row.id, row]));
-  const origins = new Map();
-  for (const criterion of criteria.values()) {
-    for (const origin of criterion.origens_detalhadas || []) {
-      const entry = origins.get(origin.id) || {...origin, criteria: []};
-      entry.criteria.push(criterion);
-      origins.set(origin.id, entry);
-    }
-  }
-  const configurations = result.decision?.configuracao_modal || [];
-  // Same explicit ID contract as build_decision_graph; never match by mode label.
-  const configurationById = new Map(configurations.map((item, index) => [`CFG-${result.decision.id}-${String(index + 1).padStart(2, "0")}`, item]));
-  const text = (value) => Array.isArray(value) ? value.filter(Boolean).join("; ") : value;
-  const field = (label, value, absent = "Não informado neste retorno.") => `<div class="trace-field"><strong>${escapeHtml(label)}</strong><p>${escapeHtml(text(value) || absent)}</p></div>`;
-  const name = (id) => {
-    const label = knowledge.get(id)?.enunciado || criteria.get(id)?.enunciado || articulations.get(id)?.rotulo || sources.get(id)?.titulo || concepts.get(id)?.label || byId.get(id)?.label;
-    return label ? `${id} — ${label}` : `${id} — descrição não incluída neste retorno`;
-  };
-  const refs = (ids) => (ids || []).map(name);
-  const originContent = (origin) => origin
-    ? `${field("Critério ao qual este registro está ligado", origin.criteria.map((row) => `${row.id} — ${row.enunciado}`))}<div class="trace-field"><strong>Texto do item documental registrado na base</strong><p class="trace-origin-text">${escapeHtml(documentText(origin))}</p></div>${field("Fonte", origin.fonte_id ? name(origin.fonte_id) : null)}${field("Identificador do trecho", origin.trecho_id)}${field("Página, seção ou item na fonte", origin.localizacao_publica || origin.localizacao || origin.pagina || origin.secao, "Localização não fornecida neste retorno. O ID do trecho não substitui a página ou a seção da fonte.")}`
-    : field("Conteúdo documental", null, "O grafo retornou o identificador, mas não incluiu o texto desta origem. Não foi preenchido por suposição.");
-  const configurationContent = (item) => `${field("Função desta modalidade", item.funcao)}${field("Como usar", item.acao)}${field("Responsável indicado", item.responsavel)}<div class="trace-field"><strong>Recursos e disponibilidade</strong><p>${(item.resource_options || []).map(renderResourceOption).join("; ") || "Recursos não detalhados neste retorno."}</p></div>${field("Aplicar quando", item.conditions)}${field("Alternativa", item.alternative)}${field("Como acompanhar", item.monitoring)}${field("Limite", item.limit)}`;
-  const articulationContent = (row) => `${field("Relação documentada", row.rotulo)}${field("Conhecimentos de entrada", refs(row.conhecimento_entrada_ids))}${field("Conhecimentos resultantes declarados nesta articulação", refs(row.conhecimento_resultante_ids))}${field("Condição", row.condicao)}${field("Limite", row.limite)}${field("Fontes", refs(row.fonte_ids))}${field("Trechos indicados pela articulação", (row.trecho_ids || []).map((id) => `${id} — ${documentText(excerpts.get(id))}`))}${field("Origem e nível de confirmação na base", [row.origem_relacao, row.nivel_confirmacao])}`;
-  const record = (node) => {
-    let body;
-    if (node.kind === "criterion_origin") body = originContent(origins.get(node.id));
-    else if (node.kind === "context" && result.context?.id === node.id) body = `${field("Descrição confirmada nesta execução", result.context.texto_curto)}${field("Objetivo", result.context.objetivo)}${field("Dificuldades", result.context.barreiras)}${field("Restrições", result.context.restricoes)}`;
-    else if (node.kind === "knowledge" && knowledge.has(node.id)) {
-      const row = knowledge.get(node.id);
-      body = `${field("Conhecimento registrado", row.enunciado)}${field("Como o conhecimento foi articulado", row.articulacao)}${field("Correspondências registradas com o caso", (row.matched_by || []).flatMap((match) => match.labels || []), "Nenhuma correspondência direta descrita neste retorno; confira sua mobilização por configuração.")}${field("Trechos recuperados", (row.trechos || []).map((excerpt) => `${excerpt.id} — ${documentText(excerpt)}`))}${field("Fontes do conhecimento", (row.fontes || []).map((source) => `${source.id} — ${source.titulo}`))}${field("Limite de aplicação", row.limite)}`;
-    } else if (node.kind === "articulation" && articulations.has(node.id)) body = articulationContent(articulations.get(node.id));
-    else if (node.kind === "criterion" && criteria.has(node.id)) {
-      const row = criteria.get(node.id);
-      body = `${field("Enunciado do critério", row.enunciado)}${(row.situated_support || []).map((support) => field(`Uso na configuração ${support.component_id}`, support.justification)).join("")}${field("Origens documentais usadas", row.origens_documentais)}`;
-    } else if (node.kind === "configuration" && configurationById.has(node.id)) body = configurationContent(configurationById.get(node.id));
-    else if (node.kind === "function") body = `${field("O que precisa ser garantido", node.label)}${field("Como aparece nesta orientação", configurations.filter((item) => (item.function_ids || []).includes(node.id)).map((item) => `${item.modo}: ${item.funcao}`), "Nenhuma configuração com esta função foi detalhada no retorno.")}`;
-    else if (node.kind === "source") body = `${field("Documento ou registro", sources.get(node.id)?.titulo || node.label)}${field("Itens de origem ligados a esta fonte", [...origins.values()].filter((origin) => origin.fonte_id === node.id).map((origin) => `${origin.id}: ${origin.texto}`), "Nenhum item de origem desta fonte foi detalhado nesta resposta.")}${field("Localização no documento", null, "Página, seção e versão não foram fornecidas neste retorno.")}`;
-    else body = field("Descrição retornada", node.label);
-    return `<div class="trace-record-body">${body}</div>`;
-  };
-  const walkthrough = () => configurations.length ? `<section class="trace-config-walkthrough" aria-labelledby="trace-choices-title"><div class="title-row"><h3 id="trace-choices-title">Por que estas escolhas?</h3><button id="collapse-trace-blocks" class="secondary" type="button">Recolher estes blocos</button></div><p>Abra uma escolha por vez para ver o motivo e os fundamentos usados neste caso.</p><div class="trace-config-cards">${configurations.map((item) => {
-    const supports = [...criteria.values()].flatMap((criterion) => (criterion.situated_support || []).filter((support) => support.component_id === item.component_id).map((support) => ({criterion, support})));
-    return `<details class="trace-config-card"><summary><span class="trace-choice-title">${escapeHtml(item.modo)}</span><span class="trace-choice-function">${escapeHtml(item.funcao)}</span></summary><div class="trace-choice-body">${field("Por que foi indicada", item.functional_meaning)}${configurationContent(item)}<details class="trace-choice-evidence"><summary>Conferir os fundamentos desta escolha</summary>${field("Condições consideradas nesta escolha", refs(item.condition_ids))}${field("Conhecimentos mobilizados", refs(item.knowledge_ids))}<div class="trace-field"><strong>Como os conhecimentos se complementam</strong>${(item.articulation_ids || []).map((id) => { const row = articulations.get(id); return row ? `<p><strong>${escapeHtml(name(id))}</strong></p>${field("Conhecimentos resultantes declarados e usados nesta escolha", refs((row.conhecimento_resultante_ids || []).filter((kid) => (item.knowledge_ids || []).includes(kid))))}${field("Condição da relação", row.condicao)}${field("Limite da relação", row.limite)}` : field("Articulação", name(id)); }).join("") || '<p>Nenhuma articulação foi indicada para esta configuração.</p>'}</div><div class="trace-field"><strong>Por que os critérios foram usados aqui</strong>${supports.length ? supports.map(({criterion, support}) => `<section class="trace-situated-support"><p><strong>${escapeHtml(criterion.id)} — ${escapeHtml(criterion.enunciado)}</strong></p>${field("Justificativa registrada para esta configuração", support.justification)}${field("Conhecimentos que sustentam este uso", refs(support.knowledge_ids))}<details><summary>Consultar os textos de origem de ${escapeHtml(criterion.id)}</summary>${(support.origin_ids || []).map((id) => `<div class="trace-origin-record"><p><strong>${escapeHtml(id)}</strong></p>${originContent(origins.get(id))}</div>`).join("") || '<p>Não foram retornadas origens para este uso.</p>'}</details></section>`).join("") : '<p>Não foi retornada justificativa situada por critério para esta configuração.</p>'}</div><small>Configuração da base: ${escapeHtml(item.component_id)}</small></details></div></details>`;
-  }).join("")}</div></section>` : '<p>Nenhuma configuração foi detalhada nesta execução; não há uma explicação por escolha a apresentar.</p>';
-  return {record, walkthrough, originContent};
-}
-
-function renderFreeTraceGraph(graph, result = {}) {
-  const nodes = graph.nodes || [];
-  const edges = graph.edges || [];
-  const byId = new Map(nodes.map((node) => [node.id, node]));
-  const presenter = traceDetailPresenter(result, graph);
-  const position = (kind) => { const index = TRACE_STEPS.findIndex((step) => step.kind === kind); return index < 0 ? TRACE_STEPS.length : index; };
-  const groups = [...TRACE_STEPS];
-  if (nodes.some((node) => !TRACE_STEPS.some((step) => step.kind === node.kind))) {
-    groups.push({kind: "other", label: "Outros registros retornados", description: "Tipo ainda sem definição neste guia. O registro é preservado para conferência."});
-  }
-  $("#trace-reading-order").textContent = `Ordem de leitura: ${TRACE_STEPS.map((step) => step.label).join(" → ")}.`;
-  const meanings = {
-    context: "Quem participa, o que precisa fazer e em quais condições.",
-    function: "O que a orientação precisa garantir para essa tarefa.",
-    articulation: "Uma relação registrada que complementa, refina ou limita conhecimentos.",
-    knowledge: "Uma compreensão construída na pesquisa que sustenta a escolha.",
-    criterion: "Um direcionamento ou cuidado que orienta a escolha dos modos e recursos.",
-    criterion_origin: "O texto documental que fundamenta o critério.",
-    configuration: "O modo escolhido, sua função, o recurso, o responsável e as condições de uso.",
-    source: "O documento ou registro de onde vem o fundamento.",
-    other: "Um registro adicional retornado nesta execução.",
-  };
-  // Explanations of the existing query/composer, not new inference rules.
-  // Provenance is deliberately not described as a step that creates a decision.
-  const connections = {
-    context: ["Contexto → função", "A tarefa, as dificuldades e as necessidades delimitam o que precisa ser garantido, conforme os mapeamentos registrados na base."],
-    function: ["Função → busca de articulações", "A função requerida permite buscar relações que acrescentem esse apoio aos conhecimentos recuperados diretamente."],
-    articulation: ["Articulação → conhecimento complementar", "A relação habilitada permite recuperar seu conhecimento resultante, já registrado. O agente não cria esse conhecimento durante a consulta."],
-    knowledge: ["Conhecimento → critério", "O uso de um critério precisa de conhecimento recuperado, justificativa e origem documental, ligados à mesma configuração."],
-    criterion: ["Critério → escolha fundamentada", "Direciona o uso dos modos e recursos. O próximo cartão permite conferir de onde veio esse direcionamento."],
-    criterion_origin: ["Origem → conferência do critério", "Mostra o texto que fundamenta o critério. É uma conferência da procedência, não uma etapa que gera a configuração."],
-    configuration: ["Configurações → orientação", "As escolhas que atendem às condições do caso e possuem fundamentos compõem a orientação multimodal."],
-    source: ["Fonte → sustentação dos fundamentos", "Permite conferir os documentos dos conhecimentos e critérios. A fonte já existia; não é produzida pela orientação."],
-    other: ["Registro adicional → conferência", "O retorno preserva este registro, mas não há uma explicação específica de sua ligação neste guia."],
-  };
-  $("#free-trace-overview").hidden = false;
-  $("#free-trace-overview").innerHTML = `<section class="trace-overview" aria-labelledby="trace-overview-title"><h3 id="trace-overview-title">Caminho da orientação</h3><p>As <strong>setas explicam as relações</strong>. A ordem guia a leitura; origem e fonte permitem conferir os fundamentos, não são etapas de criação da resposta. Abra os registros no próprio cartão.</p><ol class="trace-sequence">${groups.map((step, index) => {
-    const items = nodes.filter((node) => step.kind === "other" ? position(node.kind) === TRACE_STEPS.length : node.kind === step.kind);
-    const [connection, explanation] = connections[step.kind];
-    return `<li class="trace-step" data-trace-kind="${step.kind}"><div class="trace-step-heading"><span class="trace-step-number">${index + 1}</span><strong>${escapeHtml(step.label)}</strong></div><p class="trace-step-meaning">${escapeHtml(meanings[step.kind])}</p><p class="trace-step-connection"><strong>${escapeHtml(connection)}</strong> ${escapeHtml(explanation)}</p><details class="trace-step-records"><summary>${items.length} ${items.length === 1 ? "registro" : "registros"} · Conferir ${escapeHtml(step.label.toLocaleLowerCase("pt-BR"))}</summary><div class="trace-step-records-body">${items.length ? `<ul>${items.map((node) => `<li><details class="trace-record"><summary>${escapeHtml(node.kind === "context" ? "Caso confirmado nesta execução" : node.label)}</summary><small>Identificador: ${escapeHtml(node.id)}</small>${presenter.record(node)}</details></li>`).join("")}</ul>` : '<p class="field-help">Nenhum registro deste tipo foi retornado nesta execução.</p>'}</div></details></li>`;
-  }).join("")}</ol></section>`;
-  const groupedArticulations = edges.some((edge) => edge.label === "produz/refina" && byId.get(edge.source)?.kind === "articulation");
-  $("#free-trace-explanation").innerHTML = presenter.walkthrough();
-  $("#free-trace-explanation").hidden = false;
-  $("#collapse-trace-blocks")?.addEventListener("click", () => {
-    if (activeTab !== "free") return;
-    $("#trace-details").querySelectorAll("details").forEach((detail) => { detail.open = false; });
-    $("#collapse-trace-blocks").focus();
-    $("#free-reading-status").textContent = "Escolhas e registros recolhidos.";
-  });
-  // Records live in the overview cards. Do not repeat a library below them.
-  $("#trace-graph").innerHTML = "";
-  const endpoint = (id) => {
-    const node = byId.get(id);
-    const label = node?.kind === "context" ? "Caso confirmado nesta execução" : node?.label;
-    return label ? `${escapeHtml(label)}<br><small>${escapeHtml(id)}</small>` : `${escapeHtml(id)} <small>(registro sem rótulo no retorno)</small>`;
-  };
-  // A stable copy keeps every returned relation and its direction intact.
-  const orderedEdges = edges.map((edge, index) => ({edge, index})).sort((a, b) => position(byId.get(a.edge.source)?.kind) - position(byId.get(b.edge.source)?.kind) || a.index - b.index);
-  $("#trace-table").innerHTML = orderedEdges.length ? `<details class="foundation trace-relations"><summary>Consultar as ligações técnicas <span class="trace-summary-meta">${orderedEdges.length} ligações entre os registros</span></summary>${groupedArticulations ? '<p class="trace-relation-note"><strong>Sobre estas ligações:</strong> alguns registros aparecem juntos porque foram usados na mesma escolha. Isso não significa que um tenha dado origem ao outro. Para conferir essa origem, abra os registros no cartão Articulação confirmada. Na tabela, essas ligações mantêm o nome técnico “produz/refina”.</p>' : ''}<div class="table-scroll rationale-relations"><table><caption>Ligações retornadas pela consulta — agrupadas pelo elemento de origem</caption><thead><tr><th scope="col">Origem</th><th scope="col">Relação registrada</th><th scope="col">Destino</th></tr></thead><tbody>${orderedEdges.map(({edge}) => `<tr><td>${endpoint(edge.source)}</td><td>${escapeHtml(edge.label)}</td><td>${endpoint(edge.target)}</td></tr>`).join("")}</tbody></table></div></details>` : '<p>Nenhuma ligação foi retornada nesta execução. A lista acima explica os conceitos, mas não representa uma cadeia comprovada para este caso.</p>';
-}
-
 function renderTraceGraph(graph, result = {}) {
-  if (activeTab === "free") { renderFreeTraceGraph(graph, result); return; }
-  $("#trace-reading-order").textContent = originalTraceOrder;
+  // Both modes and views read the same explanatory projection. Legacy graph
+  // groupings are not substituted for missing evidence in the new contract.
+  $("#trace-reading-order").textContent = "Abra uma escolha: confira como seu conhecimento foi construído e por que foi empregado neste caso.";
   $("#free-trace-overview").hidden = true;
-  $("#free-trace-overview").innerHTML = "";
+  $("#free-trace-overview").replaceChildren();
   $("#free-trace-explanation").hidden = true;
-  $("#free-trace-explanation").innerHTML = "";
-  const kindLabels = {context: "Contexto", function: "Função exigida", articulation: "Articulação", knowledge: "Conhecimento", criterion: "Critério", criterion_origin: "Origem do critério", configuration: "Configuração", source: "Fonte"};
-  $("#trace-graph").innerHTML = `<div class="semantic-graph">${graph.nodes.map((node) => `<article class="graph-node ${node.kind}"><small>${kindLabels[node.kind]}</small><span>${escapeHtml(node.label)}</span></article>`).join("")}</div>`;
-  $("#trace-table").innerHTML = `<table><caption>Relações usadas na orientação</caption><thead><tr><th>Origem</th><th>Relação</th><th>Destino</th></tr></thead><tbody>${graph.edges.map((edge) => `<tr><td>${escapeHtml(edge.source)}</td><td>${escapeHtml(edge.label)}</td><td>${escapeHtml(edge.target)}</td></tr>`).join("")}</tbody></table>`;
+  $("#free-trace-explanation").replaceChildren();
+  $("#trace-table").replaceChildren();
+  renderExplanation($("#trace-graph"), result);
 }
 
 function renderComparison(result) {
   const comparison = result.articulation_comparison || {};
   const isolated = comparison.isolated || {};
   const articulated = comparison.articulated || {};
-  $("#isolated-comparison").innerHTML = `<p><strong>${(isolated.knowledge_ids || []).length}</strong> conhecimentos caracterizam o caso, mas cobrem <strong>${(isolated.covered_function_ids || []).length}</strong> funções por configurações completas.</p><p>${(isolated.remaining_function_ids || []).length ? `${escapeHtml(isolated.remaining_function_ids.length)} funções ainda ficam sem cobertura operacional.` : "As funções foram cobertas."}</p>`;
-  $("#articulated-comparison").innerHTML = `<p><strong>${(comparison.added_knowledge_ids || []).length}</strong> conhecimentos foram acrescentados por <strong>${(comparison.articulation_ids || []).length}</strong> relações documentadas.</p><p>A configuração passa a usar: ${escapeHtml((articulated.modalities || []).join(", ") || "nenhuma modalidade")}. Foram construídos ${(articulated.component_ids || []).length} componentes aplicáveis.</p>`;
+  const configs = result.explanation?.configurations || [];
+  const entities = result.execution_evidence?.entities || {};
+  const labels = new Map((result.explanation?.graph?.nodes || []).map(row => [row.id, row.label]));
+  const label = id => {
+    const row = entities[id] || {};
+    return row.title || row.label || row.rotulo || row.enunciado || labels.get(id) || 'Descrição não incluída neste retorno';
+  };
+  const deltas = comparison.evidence_delta;
+  const details = Array.isArray(deltas) ? (deltas.length ? deltas.map(delta => {
+    const config = configs.find(row => row.component_id === delta.component_id);
+    const supports = config?.application?.supports || [];
+    const groups = new Map();
+    for (const pair of delta.added_support_pairs || []) {
+      const key = JSON.stringify([pair.criterion_id, pair.knowledge_id]);
+      if (!groups.has(key)) groups.set(key, { ...pair, origin_ids: [] });
+      if (!groups.get(key).origin_ids.includes(pair.origin_id)) groups.get(key).origin_ids.push(pair.origin_id);
+    }
+    const supportRows = [...groups.values()].map(pair => {
+      const support = supports.find(row => row.criterion_id === pair.criterion_id && (row.knowledge_ids || []).includes(pair.knowledge_id));
+      const origins = pair.origin_ids.map(id => {
+        const origin = support?.origins?.find(row => row.id === id) || entities[id] || {};
+        return [origin.fonte_id ? label(origin.fonte_id) : 'Fonte não detalhada', origin.localizacao_publica || origin.location || 'Localização não detalhada', origin.aviso_publicacao].filter(Boolean).join(' — ');
+      });
+      return `<li><p><strong>Critério:</strong> ${escapeHtml(support?.criterion_statement || label(pair.criterion_id))}</p><p><strong>Apoio acrescentado:</strong> ${escapeHtml(label(pair.knowledge_id))}</p>${support?.justification ? `<p><strong>Justificativa registrada:</strong> ${escapeHtml(support.justification)}</p>` : ''}<p><strong>Origem do critério:</strong></p><ul>${origins.map(value => `<li>${escapeHtml(value)}</li>`).join('')}</ul><details><summary>Identificadores deste apoio</summary><p>${escapeHtml([pair.criterion_id, pair.knowledge_id, ...pair.origin_ids].join(' · '))}</p></details></li>`;
+    }).join('');
+    const witnesses = (delta.retrieval_witnesses || []).map(row => `<li><p><strong>Conhecimento de partida:</strong> ${escapeHtml(label(row.input_knowledge_id))}</p><p><strong>Articulação percorrida:</strong> ${escapeHtml(label(row.articulation_id))}</p><p><strong>Conhecimento recuperado:</strong> ${escapeHtml(label(row.knowledge_id))}</p>${row.required_function_id ? `<p><strong>Função requerida:</strong> ${escapeHtml(label(row.required_function_id))}</p>` : ''}<details><summary>Identificadores da correspondência</summary><p>${escapeHtml([row.input_knowledge_id, row.articulation_id, row.knowledge_id, ...(row.check_ids || [])].filter(Boolean).join(' · '))}</p></details></li>`).join('');
+    return `<details data-comparison-component="${escapeHtml(delta.component_id)}"><summary>${escapeHtml(config?.title || label(delta.configuration_id))}</summary><p><strong>${delta.configuration_added ? 'Escolha acrescentada pela recuperação articulada.' : 'Escolha já presente na recuperação isolada, com fundamento adicional.'}</strong></p>${supportRows ? `<ul>${supportRows}</ul>` : '<p>Não foram retornados apoios adicionais de critério para esta escolha.</p>'}${witnesses ? `<details><summary>Como o apoio adicional foi recuperado</summary><ul>${witnesses}</ul></details>` : '<p>O retorno não detalhou uma correspondência de recuperação para este acréscimo.</p>'}${delta.interpretation ? `<p>${escapeHtml(delta.interpretation)}</p>` : ''}</details>`;
+  }).join('') : '<p>Esta execução não registrou acréscimo de escolha ou de apoio de critério em relação à recuperação isolada.</p>') : '<p>A comparação desta execução não retornou diferenças detalhadas de fundamento. Os totais não substituem essa evidência.</p>';
+  $("#isolated-comparison").innerHTML = `<p><strong>${(isolated.knowledge_ids || []).length}</strong> conhecimentos foram recuperados. Os padrões selecionados oferecem <strong>${(isolated.covered_function_ids || []).length}</strong> funções; a correspondência com os requisitos do contexto é conferida separadamente.</p><p>${(isolated.remaining_function_ids || []).length ? `${escapeHtml(isolated.remaining_function_ids.length)} funções requeridas ainda ficam sem cobertura declarada.` : 'Não restam funções requeridas sem cobertura declarada nesta comparação.'} Isso não comprova eficácia observada.</p>`;
+  $("#articulated-comparison").innerHTML = `<p><strong>${(comparison.added_knowledge_ids || []).length}</strong> conhecimentos foram acrescentados por <strong>${(comparison.articulation_ids || []).length}</strong> relações documentadas.</p><p>As configurações selecionadas apresentam: ${escapeHtml((articulated.modalities || []).join(", ") || 'nenhuma modalidade')}. Foram selecionadas ${(articulated.component_ids || []).length} configurações, com condições e limites próprios.</p><details data-articulation-delta><summary>O que a articulação acrescentou a cada escolha</summary><p>A comparação distingue uma configuração nova de um apoio adicional para uma configuração já presente. Não demonstra resultado de uma aplicação.</p>${details}</details>`;
 }
 
 function renderDePara(rows) {
   const target = $("#depara-table");
-  $("#depara-reading-order").textContent = activeTab === "free"
-    ? "Leia as colunas na ordem: condição do caso → o que ela significa → o que precisa ser garantido → como foi configurado → alternativa e limite. A fundamentação está em Ver o caminho completo da orientação."
-    : originalDeparaOrder;
+  $("#depara-reading-order").textContent = "Condição do caso → interpretação registrada no padrão → função oferecida → configuração → alternativa e limite. Os requisitos confirmados e as verificações estão no percurso de fundamentação; uma função oferecida não cria um requisito do contexto.";
   if (!rows?.length) {
     target.innerHTML = activeTab === "free"
       ? "<p>Esta execução não retornou uma matriz de transformação das condições. Isso, isoladamente, não informa o motivo: confira o estado da decisão, as lacunas e o caminho da orientação.</p>"
-      : "<p>O de/para não foi produzido porque a decisão foi suspensa ou não se trata do cenário de transferência.</p>";
+      : "<p>Não foi retornada uma transformação estruturada para este caso. Confira o estado da orientação e as lacunas; nenhuma transformação foi presumida.</p>";
     return;
   }
-  target.innerHTML = `<div class="table-scroll"><table><caption>Transformações usadas na orientação</caption><thead><tr><th>Condição</th><th>O que ela significa</th><th>O que precisa ser garantido</th><th>Como foi configurado</th><th>Alternativa e limite</th></tr></thead><tbody>${rows.map((row) => `<tr><td>${escapeHtml(row.condicoes.join("; "))}</td><td>${escapeHtml(row.abstracao_funcional)}</td><td>${escapeHtml(row.implicacao_decisoria)}</td><td>${row.configuracao_multimodal.map((item) => `<strong>${escapeHtml(item.modo)}</strong>: ${escapeHtml(item.funcao)} <small>(${escapeHtml(item.responsavel)})</small>`).join("<br>")}</td><td>${escapeHtml(row.alternativa)}<br><small>${escapeHtml(row.condicao_limite)}</small></td></tr>`).join("")}</tbody></table></div>`;
+  target.innerHTML = `<div class="table-scroll"><table><caption>Condições consideradas e funções oferecidas na orientação</caption><thead><tr><th>Condição</th><th>Interpretação registrada no padrão</th><th>Função oferecida</th><th>Como foi configurado</th><th>Alternativa e limite</th></tr></thead><tbody>${rows.map((row) => `<tr><td>${escapeHtml(row.condicoes.join("; "))}</td><td>${escapeHtml(row.abstracao_funcional)}</td><td>${escapeHtml(row.implicacao_decisoria)}</td><td>${row.configuracao_multimodal.map((item) => `<strong>${escapeHtml(item.modo)}</strong>: ${escapeHtml(item.funcao)} <small>(${escapeHtml(item.responsavel)})</small>`).join("<br>")}</td><td>${escapeHtml(row.alternativa)}<br><small>${escapeHtml(row.condicao_limite)}</small></td></tr>`).join("")}</tbody></table></div>`;
 }
 
 function renderPracticalSummary(decision) {
@@ -613,7 +522,8 @@ function renderDecision(result) {
   }
   $("#saida").hidden = false;
   setDecisionExpanded(true);
-  $("#decision-status").textContent = decision.status === "GERADA" ? "Orientação construída" : "Decisão suspensa";
+  const partial = decision.status === "GERADA_PARCIAL";
+  $("#decision-status").textContent = decision.status === "GERADA" ? "Orientação construída" : partial ? "Orientação parcial — há funções que ainda não foram cobertas" : "Decisão suspensa";
   $("#decision-status").classList.toggle("suspended", decision.status !== "GERADA");
   renderPracticalSummary(decision);
   $("#orientation-details").open = false;
@@ -630,7 +540,7 @@ function renderDecision(result) {
   list("#missing", decision.informacoes_ausentes);
   $("#missing-box").hidden = !decision.informacoes_ausentes.length;
   $("#limit").textContent = decision.limite;
-  $("#technical-summary").textContent = `A execução usou ${result.traceability.knowledge.length} conhecimentos, ${result.traceability.criteria.length} critérios, ${result.articulations_used.length} articulações confirmadas e respondeu ${Object.keys(result.query_summary).length} questões de competência.`;
+  $("#technical-summary").textContent = `A execução usou ${result.traceability.knowledge.length} conhecimentos, ${result.traceability.criteria.length} critérios, ${result.articulations_used.length} relações habilitadas na base e executou ${Object.keys(result.query_summary).length} consultas de competência. Esses números não comprovam eficácia nem independência entre as fontes.`;
   renderCriteria(result.traceability.criteria);
   renderKnowledge(result.traceability.knowledge);
   $("#rejected").innerHTML = result.traceability.rejected_candidates.length ? `<ul>${result.traceability.rejected_candidates.map((row) => `<li><strong>${escapeHtml(row.label)}</strong>: ${escapeHtml(row.reasons.join("; "))}</li>`).join("")}</ul>` : "<p>Nenhuma possibilidade foi excluída.</p>";
@@ -660,7 +570,7 @@ async function generate(container, free, statusTarget) {
   if (free) renderMissingQuestions(currentCase.questions || []);
   const result = await api("/api/generate", {method: "POST", body: "{}"});
   renderDecision(result);
-  $(statusTarget).textContent = result.decision.status === "GERADA" ? "Orientação pronta." : "A decisão foi suspensa; confira as informações ausentes.";
+  $(statusTarget).textContent = result.decision.status === "GERADA" ? "Orientação pronta." : result.decision.status === "GERADA_PARCIAL" ? "Orientação parcial disponível. Confira as funções não cobertas e os limites." : "A decisão foi suspensa; confira as informações ausentes.";
 }
 
 $("#confirm-reported").addEventListener("click", () => runBusy('#reported-status', async () => {

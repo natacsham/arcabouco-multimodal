@@ -1,0 +1,1064 @@
+{
+  "version": "1.4.0-rc1",
+  "type": "SYNTHETIC_TECHNICAL_BROWSER_CHECK",
+  "execution_target": "LOCAL_SUBPATH",
+  "executed_at": "2026-10-08T04:36:51.487Z",
+  "checks": {
+    "served_manifest_matches_current_build": true,
+    "home_pilot_derived_choice_loaded": true,
+    "pilot_source_matches_base": true,
+    "pilot_has_confirmed_or_pending_contributions": true,
+    "technical_documentation_loads": true,
+    "download_main.ttl": true,
+    "download_mado-public.ttl": true,
+    "download_mado.owl": true,
+    "download_main.shacl.ttl": true,
+    "index.html_ready": true,
+    "index.html_generation_no_error": true,
+    "index.html_explicit_partial_coverage": true,
+    "index.html_keyboard_choice": true,
+    "index.html_construction_visible": true,
+    "index.html_documentary_status_not_overstated": true,
+    "index.html_two_readings_present": true,
+    "index.html_focusable_disclosures": true,
+    "index.html_sampled_contrast": true,
+    "index.html_high_contrast": true,
+    "index.html_desktop": true,
+    "index.html_320": true,
+    "index.html_text_200": true,
+    "index.html_320_200": true,
+    "index.html_clear_discards_decision": true,
+    "guiado.html_ready": true,
+    "guiado.html_generation_no_error": true,
+    "guiado.html_explicit_partial_coverage": true,
+    "guiado.html_keyboard_choice": true,
+    "guiado.html_construction_visible": true,
+    "guiado.html_documentary_status_not_overstated": true,
+    "guiado.html_two_readings_present": true,
+    "guiado.html_focusable_disclosures": true,
+    "guiado.html_sampled_contrast": true,
+    "guiado.html_high_contrast": true,
+    "guiado.html_desktop": true,
+    "guiado.html_320": true,
+    "guiado.html_text_200": true,
+    "guiado.html_320_200": true,
+    "guiado.html_clear_discards_decision": true,
+    "same_explanation_in_both_views": true,
+    "novel_condition_change_affects_choice": true,
+    "all_eight_queries_returned": true,
+    "checks_have_four_state_vocabulary": true,
+    "same_table_and_graph_projection": true,
+    "failed_load_does_not_generate": true,
+    "load_failure_recovers": true,
+    "insufficient_narrative_suspends": true,
+    "reload_does_not_restore_case": true,
+    "no_browser_case_storage": true,
+    "no_case_transmission": true,
+    "no_javascript_errors": true
+  },
+  "errors": [],
+  "external_requests": [],
+  "methods": [
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET"
+  ],
+  "limitations": [
+    "NVDA e VoiceOver não testados.",
+    "Não representa avaliação humana ou conformidade WCAG integral.",
+    "Tempos de laboratório; sem garantia de desempenho em dispositivos móveis."
+  ],
+  "build": {
+    "version": "1.4.0-rc1",
+    "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
+    "instrument": "AMADO",
+    "public_projection": true,
+    "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
+    "core_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
+    "bridge_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+    "base_zip_sha256": "10662ab67590701418b0fb72f4253737b1c614aeb5dfa57865ae022ea8f3f84d",
+    "pyodide_version": "314.0.7",
+    "runtime": {
+      "pyodide-lock.json": {
+        "bytes": 119077,
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+      },
+      "pyodide.asm.mjs": {
+        "bytes": 1250344,
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+      },
+      "pyodide.asm.wasm": {
+        "bytes": 9598218,
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+      },
+      "pyodide.mjs": {
+        "bytes": 17931,
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+      },
+      "python_stdlib.zip": {
+        "bytes": 2545637,
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+      }
+    },
+    "license_notices": {
+      "licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+      "licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "licenses/MUSL-COPYRIGHT.txt": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "licenses/PYODIDE-MPL-2.0.txt": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "licenses/PYODIDE-STACKFRAME-LICENSE.txt": "899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420",
+      "licenses/PYTHON-3.14.2-LICENSE.txt": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "licenses/PYTHON-3.14.2-THIRD-PARTY.rst": "c695d550b135e53e38807e76496d1db17d22c40e461d1f3f354c86188d3305dd",
+      "licenses/README.md": "f6104c41292b57ff6d35edb7008ac8a87bbd66bdff6f9d20c16e94939a98df68"
+    },
+    "case_history": false,
+    "llm": false,
+    "frontend_sha256": {
+      "index.html": "9f3aadfb6bf307f2114ef83f69aa5b5105591afab1d6d935ac87063ad418acad",
+      "app.js": "073d7d7796e70d0e040df43d78efbde1a47eca43c870b2f463b1e823b0248f5c",
+      "styles.css": "aa9e6edcf5c40dc0fd3dcb2e9e53a1c5be560825cabbc911aae8a7d1d1596424",
+      "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+      "guiado.html": "a20158ccc0bb2902747b8cb16cd8bf21d03bc0cc68bbff9cc0bf8fc7d6dce5ca",
+      "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+      "guided.css": "339c66c48dcb8c9aabd4320084f0d2de81222c3988e05bc5cd4b9f6f59fa1e6f",
+      "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564"
+    },
+    "site_assets_sha256": {
+      "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
+      "ontologia/index.html": "43c7037f08becaaaa5d6846f5b14e9a5807a80dc48dc369c2cf49860ecf3f768",
+      "site.css": "b2f8e4240650eaf41c1292fa48993597eb382a0c49d26588b69df5aa7deb1fc8",
+      "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
+      "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
+      "explanation.js": "297d0f4086cd57df2ee4eb9138588a9662d0aabd3fd69dffd4aa59659e1af35b",
+      "explanation.css": "e430056ffbf3cbbc0cf94458888807990df78e350c20db2091a380bec7602186",
+      "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
+      "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
+    },
+    "files": {
+      "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
+      "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
+      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+      "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+      "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
+      "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
+      "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+      "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+      "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+      "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+    }
+  },
+  "test_sha256": "6ca474bcc4a267e677a81c252419fcd202bb98d7dcb776a3a935357130663025",
+  "browser": "154.0.8037.98",
+  "contrast": {
+    "index.html": [
+      {
+        "selector": ".explanation p",
+        "text": "Percurso das verificações registradas, com construção documental ",
+        "ratio": 11.600435029658607,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Essa cobertura é declarada pelos padrões selecionados, não observ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Ver o percurso desta execução",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Como este conhecimento foi construído",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.723331613570922,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.723331613570922,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.723331613570922,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "A orientação não cobre todas as funções requeridas.",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Contribuição registrada",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fonte",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Localização",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Papel desta contribuição",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Natureza do registro",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Caracterizar capacidades, barreiras, tarefa e condições antes de ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Selecionar formas de interação pela tarefa e pelas condições func",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Preservar significado por alternativas perceptivas e operacionais",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Contribuição registradaO registro descreve a representação descri",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "O registro descreve a representação descritiva colaborativa de el",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A−",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A+",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Texto original",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Alto contraste",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Limpar caso e reiniciar",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Caso da pesquisa — adaptação pública",
+        "ratio": 7.6658037122968254,
+        "minimum": 4.5
+      },
+      {
+        "selector": "h1",
+        "text": "Compreender o caso e construir uma orientação",
+        "ratio": 13.054290705015273,
+        "minimum": 3
+      }
+    ],
+    "index.html_high": [
+      {
+        "selector": ".explanation p",
+        "text": "Percurso das verificações registradas, com construção documental ",
+        "ratio": 11.600435029658607,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Essa cobertura é declarada pelos padrões selecionados, não observ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Ver o percurso desta execução",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Como este conhecimento foi construído",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.77794504543097,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.77794504543097,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.77794504543097,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "A orientação não cobre todas as funções requeridas.",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Contribuição registrada",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fonte",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Localização",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Papel desta contribuição",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Natureza do registro",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Caracterizar capacidades, barreiras, tarefa e condições antes de ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Selecionar formas de interação pela tarefa e pelas condições func",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Preservar significado por alternativas perceptivas e operacionais",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Contribuição registradaO registro descreve a representação descri",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "O registro descreve a representação descritiva colaborativa de el",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A−",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A+",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Texto original",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Alto contraste",
+        "ratio": 12.303564830665552,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Limpar caso e reiniciar",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Caso da pesquisa — adaptação pública",
+        "ratio": 11.010302524036664,
+        "minimum": 4.5
+      },
+      {
+        "selector": "h1",
+        "text": "Compreender o caso e construir uma orientação",
+        "ratio": 21,
+        "minimum": 3
+      }
+    ],
+    "guiado.html": [
+      {
+        "selector": ".explanation p",
+        "text": "Percurso das verificações registradas, com construção documental ",
+        "ratio": 11.600435029658607,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Essa cobertura é declarada pelos padrões selecionados, não observ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Ver o percurso desta execução",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Como este conhecimento foi construído",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.881409692860425,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.881409692860425,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 10.881409692860425,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "A orientação não cobre todas as funções requeridas.",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Contribuição registrada",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fonte",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Localização",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Papel desta contribuição",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Natureza do registro",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Caracterizar capacidades, barreiras, tarefa e condições antes de ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Selecionar formas de interação pela tarefa e pelas condições func",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Preservar significado por alternativas perceptivas e operacionais",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Contribuição registradaO registro descreve a representação descri",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "O registro descreve a representação descritiva colaborativa de el",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A−",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A+",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Texto original",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Alto contraste",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Limpar caso e reiniciar",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Parar leitura",
+        "ratio": 10.035826404345082,
+        "minimum": 4.5
+      },
+      {
+        "selector": "h1",
+        "text": "Uma orientação, passo a passo.",
+        "ratio": 10.703896890077,
+        "minimum": 3
+      }
+    ],
+    "guiado.html_high": [
+      {
+        "selector": ".explanation p",
+        "text": "Percurso das verificações registradas, com construção documental ",
+        "ratio": 11.600435029658607,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Essa cobertura é declarada pelos padrões selecionados, não observ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Estas relações foram registradas antes da consulta. O AMADO não p",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Texto original não redistribuído. Consulte a fonte e a localizaçã",
+        "ratio": 7.1033501023516665,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Conferência: Conferida no registro da base",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Ver o percurso desta execução",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Como este conhecimento foi construído",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation summary",
+        "text": "Identificadores para conferência",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "A orientação não cobre todas as funções requeridas.",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Contribuição registrada",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fonte",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Localização",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Papel desta contribuição",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Natureza do registro",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Caracterizar capacidades, barreiras, tarefa e condições antes de ",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Selecionar formas de interação pela tarefa e pelas condições func",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Preservar significado por alternativas perceptivas e operacionais",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Contribuição registradaO registro descreve a representação descri",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "O registro descreve a representação descritiva colaborativa de el",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A−",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "A+",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Texto original",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Alto contraste",
+        "ratio": 12.303564830665552,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Limpar caso e reiniciar",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "selector": "button",
+        "text": "Parar leitura",
+        "ratio": 10.906734824597649,
+        "minimum": 4.5
+      },
+      {
+        "selector": "h1",
+        "text": "Uma orientação, passo a passo.",
+        "ratio": 21,
+        "minimum": 3
+      }
+    ]
+  },
+  "layout": {
+    "index.html_desktop": {
+      "viewport": 1280,
+      "width": 1280
+    },
+    "index.html_320": {
+      "viewport": 320,
+      "width": 320
+    },
+    "index.html_320_200": {
+      "viewport": 320,
+      "width": 320
+    },
+    "guiado.html_desktop": {
+      "viewport": 1280,
+      "width": 1280
+    },
+    "guiado.html_320": {
+      "viewport": 320,
+      "width": 320
+    },
+    "guiado.html_320_200": {
+      "viewport": 320,
+      "width": 320
+    }
+  },
+  "completed": true
+}

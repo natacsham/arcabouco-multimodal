@@ -6,11 +6,11 @@
   <meta name="description" content="Documentação técnica da MADO: classes, relações, OWL, SHACL, consultas SPARQL, arquivos para o Protégé e relatórios de verificação.">
   <meta name="author" content="Natacsha Ordones Raposo de Melo">
   <title>Documentação técnica da MADO</title>
-  <link rel="canonical" href="https://natacsham.github.io/MADO/ontologia/">
+  <link rel="canonical" href="https://natacsham.github.io/arcabouco-multimodal/ontologia/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:site_name" content="MADO">
-  <meta property="og:url" content="https://natacsham.github.io/MADO/ontologia/">
+  <meta property="og:site_name" content="Arcabouço Multimodal">
+  <meta property="og:url" content="https://natacsham.github.io/arcabouco-multimodal/ontologia/">
   <meta property="og:title" content="Documentação técnica da MADO">
   <meta property="og:description" content="Consulte o núcleo do modelo, os vínculos de fundamentação, os arquivos e as verificações da MADO.">
   <meta name="twitter:card" content="summary">
@@ -22,26 +22,26 @@
     "@graph": [
       {
         "@type": "CreativeWork",
-        "@id": "https://natacsham.github.io/MADO/ontologia/#mado",
-        "url": "https://natacsham.github.io/MADO/ontologia/",
+        "@id": "https://natacsham.github.io/arcabouco-multimodal/ontologia/#mado",
+        "url": "https://natacsham.github.io/arcabouco-multimodal/ontologia/",
         "name": "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital",
         "description": "Representação semântica de conhecimentos, articulações, critérios, contextos e decisões de acessibilidade multimodal.",
         "genre": "Ontologia",
         "inLanguage": "pt-BR",
-        "version": "1.3.0-rc1",
-        "author": { "@id": "https://natacsham.github.io/MADO/ontologia/#autoria" },
-        "isPartOf": { "@id": "https://natacsham.github.io/MADO/#site" }
+        "version": "1.4.0-rc1",
+        "author": { "@id": "https://natacsham.github.io/arcabouco-multimodal/ontologia/#autoria" },
+        "isPartOf": { "@id": "https://natacsham.github.io/arcabouco-multimodal/#site" }
       },
       {
         "@type": "Person",
-        "@id": "https://natacsham.github.io/MADO/ontologia/#autoria",
+        "@id": "https://natacsham.github.io/arcabouco-multimodal/ontologia/#autoria",
         "name": "Natacsha Ordones Raposo de Melo"
       },
       {
         "@type": "WebSite",
-        "@id": "https://natacsham.github.io/MADO/#site",
-        "url": "https://natacsham.github.io/MADO/",
-        "name": "MADO",
+        "@id": "https://natacsham.github.io/arcabouco-multimodal/#site",
+        "url": "https://natacsham.github.io/arcabouco-multimodal/",
+        "name": "Arcabouço Multimodal para Acessibilidade Digital",
         "inLanguage": "pt-BR"
       }
     ]
@@ -52,7 +52,7 @@
 </head>
 <body class="technical-page">
   <a class="skip" href="#conteudo">Ir para o conteúdo principal</a>
-  <header id="inicio" class="site-header" tabindex="-1"><div class="wrap header-inner"><a class="brand" href="../" aria-label="MADO, início"><span class="brand-mark" aria-hidden="true">M</span>MADO</a><nav class="nav" aria-label="Navegação principal"><a href="../">Entenda a MADO</a><a href="./" aria-current="page">Documentação técnica</a><a href="../amado/">Experimente o AMADO</a></nav></div></header>
+  <header id="inicio" class="site-header" tabindex="-1"><div class="wrap header-inner"><a class="brand" href="../" aria-label="Arcabouço Multimodal, início"><span class="brand-mark" aria-hidden="true">A</span>Arcabouço Multimodal</a><nav class="nav" aria-label="Navegação principal"><a href="../">A pesquisa</a><a href="./" aria-current="page">Documentação técnica</a><a href="../amado/">Experimente o AMADO</a></nav></div></header>
   <div class="reading-bar" data-site-accessibility hidden>
     <div class="wrap reading-inner">
       <strong>Ajustes de leitura</strong>
@@ -67,11 +67,11 @@
   </div>
   <main id="conteudo" tabindex="-1">
     <div class="wrap">
-      <nav class="breadcrumb" aria-label="Localização"><ol><li><a href="../">MADO</a></li><li aria-current="page">Documentação técnica</li></ol></nav>
+      <nav class="breadcrumb" aria-label="Localização"><ol><li><a href="../">A pesquisa</a></li><li aria-current="page">Documentação técnica</li></ol></nav>
       <div class="page-title">
         <h1>Documentação técnica da MADO</h1>
         <p class="lead">Consulte os conceitos, as relações, os arquivos e as verificações da MADO (<span lang="en">Multimodal Accessibility Decision Ontology</span>), a estrutura de conhecimento consultada pelo AMADO.</p>
-        <span class="version">MADO 1.3.0-rc1 · versão candidata</span>
+        <span class="version">MADO 1.4.0-rc1 · versão candidata</span>
         <nav aria-label="Nesta página"><ul class="link-list"><li><a href="#modelo">Modelo</a></li><li><a href="#camadas">Implementação</a></li><li><a href="#arquivos">Arquivos e verificações</a></li><li><a href="#autoria">Autoria</a></li></ul></nav>
       </div>
     </div>
@@ -105,8 +105,8 @@
     <section class="section" id="camadas" aria-labelledby="camadas-titulo"><div class="wrap">
       <div class="section-head"><h2 id="camadas-titulo">Da descrição do caso à orientação multimodal</h2><p>A pessoa informa e confirma o contexto. O motor do AMADO consulta a base estruturada pela MADO, verifica os fundamentos e compõe a orientação ou informa insuficiência.</p></div>
       <details class="curation-note">
-        <summary>Antes da consulta: como o conhecimento foi preparado</summary>
-        <p>A análise de fontes, estudos, artefatos, personas e resultados produziu conhecimentos articulados, critérios e condições de aplicação. A curadoria registra origem, confirmação e limites, definindo quais relações podem orientar a composição. Os padrões de composição também foram definidos antes do uso. O clique não cria as articulações nem incorpora o caso à base.</p>
+        <summary>Como o conhecimento foi construído antes da consulta</summary>
+        <p>A análise de fontes, estudos, artefatos, personas e resultados produziu conhecimentos articulados, critérios e condições de aplicação. A curadoria registra origem, confirmação e limites, definindo quais relações podem orientar a composição. Os padrões de composição também foram definidos antes do uso. O clique não cria as articulações nem incorpora o caso à base.</p><p>Para conferir esse trabalho, é necessário distinguir a contribuição de cada fonte, a operação que relaciona os conteúdos, o conhecimento resultante e seus limites. Uma ligação entre documentos, por si só, não explica essa transformação. No AMADO, cada escolha permite examinar a construção registrada e o motivo de seu uso no caso.</p>
       </details>
       <figure class="uml-sequence" aria-labelledby="sequencia-titulo">
         <figcaption id="sequencia-titulo"><strong>Diagrama de sequência UML</strong><span>Fluxo de consulta e composição, de cima para baixo.</span></figcaption>
@@ -146,8 +146,8 @@
             <g class="uml-alt">
               <rect x="310" y="438" width="861" height="141" class="uml-frame"/>
               <path d="M310 462 H345 L357 450 V438" class="uml-frame-tab"/><text x="320" y="455" class="uml-frame-label">alt</text>
-              <text x="374" y="456" class="uml-guard">[condições e fundamentos suficientes]</text>
-              <text x="577" y="482" class="uml-result-label">6a. Compor e retornar orientação</text><path class="uml-reply" d="M754 492 H395"/>
+              <text x="374" y="456" class="uml-guard">[sustentação para compor uma orientação]</text>
+              <text x="577" y="482" class="uml-result-label">6a. Retornar orientação e lacunas, se houver</text><path class="uml-reply" d="M754 492 H395"/>
               <path d="M310 507 H1171" class="uml-divider"/>
               <text x="374" y="528" class="uml-guard">[dados ou fundamentos insuficientes]</text>
               <text x="577" y="554" class="uml-result-label">6b. Retornar suspensão e lacunas</text><path class="uml-reply" d="M754 564 H395"/>
@@ -163,7 +163,7 @@
           <li><strong>Organizar as informações.</strong> Interface → motor → interface: os dados são relacionados aos conceitos representados; o motor devolve o contexto organizado. Não interpreta qualquer narrativa.</li>
           <li><strong>Conferir e confirmar.</strong> Interface → pessoa → interface: a pessoa revisa, corrige ou complementa o contexto, confirma e solicita a orientação.</li>
           <li><strong>Consultar a base.</strong> Interface → motor → base: o motor executa consultas SPARQL. Base → motor: conhecimentos, articulações, critérios e fontes recuperados.</li>
-          <li><strong>Verificar e compor.</strong> O motor confere autorização de uso, condições, restrições e apoios dos critérios. Havendo sustentação, compõe configurações com modalidade, função, recurso, responsável, alternativa e limites; sem dados ou fundamentos suficientes, suspende.</li>
+          <li><strong>Verificar e compor.</strong> O motor confere autorização de uso, condições, restrições e apoios dos critérios. Havendo sustentação, compõe configurações com modalidade, função, recurso, responsável, alternativa e limites. Se alguma função requerida permanecer sem cobertura, informa uma orientação parcial. Sem sustentação para compor, suspende.</li>
           <li><strong>Apresentar o resultado.</strong> Motor → interface → pessoa: orientação fundamentada ou suspensão com as lacunas e os limites identificados.</li>
         </ol>
         <p class="micro">O diagrama representa o fluxo lógico de interação, não tempos de execução. <a href="https://www.omg.org/spec/UML/2.5.1">Referência da notação UML</a>.</p>
@@ -177,7 +177,7 @@
         <div><dt>Composição no AMADO</dt><dd>Motor Python no navegador, sem LLM. Verifica condições e combina padrões documentados; a interface apresenta a decisão e seus fundamentos.</dd></div>
       </dl>
       </details>
-      <p class="micro"><a href="https://github.com/natacsham/MADO/tree/main/queries">Consultar as questões em SPARQL</a> · <a href="https://github.com/natacsham/MADO/blob/main/docs/reproduzir.md">Reproduzir a execução</a></p>
+      <p class="micro"><a href="https://github.com/natacsham/arcabouco-multimodal/tree/main/queries">Consultar as questões em SPARQL</a> · <a href="https://github.com/natacsham/arcabouco-multimodal/blob/main/docs/reproduzir.md">Reproduzir a execução</a></p>
     </div></section>
 
     <section class="section white" id="arquivos" aria-labelledby="arquivos-titulo"><div class="wrap split">
@@ -198,7 +198,7 @@
     <section class="section" id="autoria" aria-labelledby="autoria-titulo"><div class="wrap reading">
       <h2 id="autoria-titulo">Autoria e disponibilização</h2>
       <p><strong>Natacsha Ordones Raposo de Melo</strong><br>Projeto de pesquisa de doutorado <em>Arcabouço Multimodal para Acessibilidade Digital</em>.</p>
-      <details><summary>Referência e condições de uso</summary><p>MELO, Natacsha Ordones Raposo de. <em>MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital: ontologia e instrumento AMADO.</em> Versão 1.3.0-rc1. Repositório do projeto.</p><p>Ao citar uma execução, registre a versão e o relatório. Não há licença aberta de reutilização concedida nesta etapa; fontes e dependências conservam suas atribuições e condições próprias.</p></details>
+      <details><summary>Referência e condições de uso</summary><p>MELO, Natacsha Ordones Raposo de. <em>MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital: ontologia e instrumento AMADO.</em> Versão 1.4.0-rc1. Repositório do projeto.</p><p>Ao citar uma execução, registre a versão e o relatório. Não há licença aberta de reutilização concedida nesta etapa; fontes e dependências conservam suas atribuições e condições próprias.</p></details>
       <details><summary>Privacidade no AMADO</summary><p>O caso fica na memória da página e é descartado ao limpar, atualizar, fechar ou trocar de aba do instrumento. Não exige cadastro e não é incorporado automaticamente à base.</p><p>Evite dados identificáveis. A hospedagem pode manter registros técnicos de acesso, mas o AMADO não envia o conteúdo do caso. Incorporar conhecimento exige curadoria documentada em outra versão.</p></details>
     </div></section>
   </main>

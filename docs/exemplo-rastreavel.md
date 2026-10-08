@@ -10,6 +10,8 @@ O problema funcional não é “esta pessoa tem determinado diagnóstico”. É:
 
 ## 2. O que articulei entre os conhecimentos
 
+Na 1.4.0-rc1, abra também o piloto na Home: ele apresenta contribuições derivadas dos registros da base, com estado de conferência e limites. As novas contribuições distinguem a informação da fonte da síntese analítica. F07 não é mantida como fonte direta de K43 sem um trecho correspondente. [Conferência documental e pendências](fundamentacao-documental.md).
+
 Na base, registrei em `ART-REF-03` a relação entre conhecimentos de estudos e referências sobre alternativas perceptivas e função das mídias. Esse registro contém:
 
 - Conhecimentos de entrada: `K10`, `K17`, `K19`, `K26`, `K27` e `K29`.

@@ -20,6 +20,7 @@
 - **ArticulacaoDocumentada:** explicita entradas, produto, tipo de relação, fontes, confirmação, condições e limites da articulação.
 - **ConfiguracaoModalDaDecisao:** liga função, modo, recurso, responsável, condições, alternativa e fundamentação.
 - **AplicacaoDeCriterio:** preserva, para uma configuração e um critério específicos, os conhecimentos de apoio, origens e justificativa correspondentes.
+- **ContribuicaoNaArticulacao:** liga uma contribuição individual ao trecho localizado, à operação de articulação e ao conhecimento produzido ou refinado. Registra conteúdo próprio, justificativa, papel e grau de conferência; a fonte é recuperada pelo trecho.
 
 Estratégia, Evidência e Recomendação não são retomadas como classes centrais autônomas. A palavra “orientação” nomeia a apresentação da decisão no AMADO, não uma segunda ontologia.
 
@@ -32,6 +33,10 @@ Por exemplo, se uma configuração possui K17, K38 e K43 e aplica CA02, isso nã
 O elemento auxiliar torna essa associação examinável. Ele não transforma justificativa documental em prova automática da qualidade de uma decisão.
 
 ## Qual camada faz o quê?
+
+Na 1.4.0-rc1, `execution_evidence` registra em memória as correspondências e verificações efetivamente executadas. `execution_trace.py` deriva uma única projeção para as duas leituras, o de/para e o grafo. A função requerida pelo contexto é independente da função oferecida pelo padrão: a segunda não cria retrospectivamente a primeira.
+
+As verificações distinguem **satisfeita**, **não satisfeita**, **pendente** e **não executada**. Condições escritas em prosa não são promovidas a testes computacionais. A cobertura parcial e as alternativas apenas descritas permanecem explícitas.
 
 | Camada | Responsabilidade | O que não faz sozinha |
 | --- | --- | --- |

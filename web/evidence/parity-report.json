@@ -1,19 +1,103 @@
 {
   "type": "SYNTHETIC_NATIVE_BROWSER_PARITY_NOT_HUMAN_EVALUATION",
-  "executed_at": "2026-10-07T04:44:15.311Z",
+  "build": {
+    "version": "1.4.0-rc1",
+    "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
+    "instrument": "AMADO",
+    "public_projection": true,
+    "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
+    "core_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
+    "bridge_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+    "base_zip_sha256": "10662ab67590701418b0fb72f4253737b1c614aeb5dfa57865ae022ea8f3f84d",
+    "pyodide_version": "314.0.7",
+    "runtime": {
+      "pyodide-lock.json": {
+        "bytes": 119077,
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+      },
+      "pyodide.asm.mjs": {
+        "bytes": 1250344,
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+      },
+      "pyodide.asm.wasm": {
+        "bytes": 9598218,
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+      },
+      "pyodide.mjs": {
+        "bytes": 17931,
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+      },
+      "python_stdlib.zip": {
+        "bytes": 2545637,
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+      }
+    },
+    "license_notices": {
+      "licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+      "licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "licenses/MUSL-COPYRIGHT.txt": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "licenses/PYODIDE-MPL-2.0.txt": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "licenses/PYODIDE-STACKFRAME-LICENSE.txt": "899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420",
+      "licenses/PYTHON-3.14.2-LICENSE.txt": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "licenses/PYTHON-3.14.2-THIRD-PARTY.rst": "c695d550b135e53e38807e76496d1db17d22c40e461d1f3f354c86188d3305dd",
+      "licenses/README.md": "f6104c41292b57ff6d35edb7008ac8a87bbd66bdff6f9d20c16e94939a98df68"
+    },
+    "case_history": false,
+    "llm": false,
+    "frontend_sha256": {
+      "index.html": "9f3aadfb6bf307f2114ef83f69aa5b5105591afab1d6d935ac87063ad418acad",
+      "app.js": "073d7d7796e70d0e040df43d78efbde1a47eca43c870b2f463b1e823b0248f5c",
+      "styles.css": "aa9e6edcf5c40dc0fd3dcb2e9e53a1c5be560825cabbc911aae8a7d1d1596424",
+      "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+      "guiado.html": "a20158ccc0bb2902747b8cb16cd8bf21d03bc0cc68bbff9cc0bf8fc7d6dce5ca",
+      "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+      "guided.css": "339c66c48dcb8c9aabd4320084f0d2de81222c3988e05bc5cd4b9f6f59fa1e6f",
+      "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564"
+    },
+    "site_assets_sha256": {
+      "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
+      "ontologia/index.html": "43c7037f08becaaaa5d6846f5b14e9a5807a80dc48dc369c2cf49860ecf3f768",
+      "site.css": "b2f8e4240650eaf41c1292fa48993597eb382a0c49d26588b69df5aa7deb1fc8",
+      "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
+      "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
+      "explanation.js": "297d0f4086cd57df2ee4eb9138588a9662d0aabd3fd69dffd4aa59659e1af35b",
+      "explanation.css": "e430056ffbf3cbbc0cf94458888807990df78e350c20db2091a380bec7602186",
+      "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
+      "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
+    },
+    "files": {
+      "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
+      "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
+      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+      "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+      "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
+      "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
+      "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+      "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+      "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+      "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+    }
+  },
+  "executed_at": "2026-10-08T04:43:27.790Z",
   "normalization": [
     "Somente horário de execução e sufixos aleatórios de contexto, participante e decisão são desconsiderados.",
     "Linhas SPARQL e topologia do grafo são comparadas como conjuntos ordenados canonicamente, preservando duplicatas.",
     "A ordem interna de GROUP_CONCAT é normalizada apenas nos campos declarados pelas consultas.",
     "Listas de identificadores, articulações, trajetória e correspondências de recuperação são relações sem ordem e são normalizadas.",
-    "A ordem das configurações, passos práticos e demais listas é preservada."
+    "A ordem das configurações, passos práticos e demais listas é preservada.",
+    "Identidades CHECK são recalculadas a partir do predicado normalizado; estado, condições e valores observados permanecem comparados."
   ],
-  "native_sha256": "70f95c81750b9de0f9deeb0141d5d8046e8eee72f65ba34dc4b24965f4c3fcd7",
-  "browser_sha256": "27a9fd3f2dd2041dc31ba7465dc2c5306998cc90db718941ec2b5afc6f9a3fcf",
+  "native_sha256": "bb37804595864b00a26ca0215d3bdeab86eedd48ace2d3dc602cffec7170a007",
+  "browser_sha256": "9a1ab09f31787a2e5d5dfad1f5532e61062c2ebd5bd8dc46b72ee02326e4a094",
   "cases": {
     "principal": {
       "equal": true,
-      "status": "GERADA",
+      "status": "GERADA_PARCIAL",
       "configurations": [
         "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
         "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
@@ -24,22 +108,22 @@
         "PAD-REVISAO-CONFIRMACAO"
       ],
       "query_rows": {
-        "CQ-001": 96,
-        "CQ-002": 28,
+        "CQ-001": 99,
+        "CQ-002": 1068,
         "CQ-003": 236,
         "CQ-004": 273,
         "CQ-005": 3,
         "CQ-006": 7,
         "CQ-007": 7,
-        "CQ-008": 1
+        "CQ-008": 4
       },
-      "native_canonical_sha256": "ea5334c8bc8869d507e024cb9d63a11248cdd7c8f19cf5a11b585ca3c17d4438",
-      "browser_canonical_sha256": "ea5334c8bc8869d507e024cb9d63a11248cdd7c8f19cf5a11b585ca3c17d4438",
+      "native_canonical_sha256": "ef8191c50cabd9e3f5dfc12374f39d4f9719cebe6a37bd7aa8ae1c88c71c9937",
+      "browser_canonical_sha256": "ef8191c50cabd9e3f5dfc12374f39d4f9719cebe6a37bd7aa8ae1c88c71c9937",
       "differences": []
     },
     "principal_sem_jogo": {
       "equal": true,
-      "status": "GERADA",
+      "status": "GERADA_PARCIAL",
       "configurations": [
         "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
         "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
@@ -49,17 +133,17 @@
         "PAD-REVISAO-CONFIRMACAO"
       ],
       "query_rows": {
-        "CQ-001": 97,
-        "CQ-002": 28,
+        "CQ-001": 100,
+        "CQ-002": 1068,
         "CQ-003": 214,
         "CQ-004": 246,
         "CQ-005": 3,
         "CQ-006": 6,
         "CQ-007": 6,
-        "CQ-008": 1
+        "CQ-008": 4
       },
-      "native_canonical_sha256": "b95833aacc90e262dd7e11537f3192bd4243819b30fdcff2849481f98e73a5ff",
-      "browser_canonical_sha256": "b95833aacc90e262dd7e11537f3192bd4243819b30fdcff2849481f98e73a5ff",
+      "native_canonical_sha256": "d2640aa999153fc63a02d850dfc852cd281ab45979b881c03de2ecfef46bb3af",
+      "browser_canonical_sha256": "d2640aa999153fc63a02d850dfc852cd281ab45979b881c03de2ecfef46bb3af",
       "differences": []
     },
     "leitor_tela": {
@@ -70,7 +154,7 @@
       ],
       "query_rows": {
         "CQ-001": 33,
-        "CQ-002": 4,
+        "CQ-002": 27,
         "CQ-003": 11,
         "CQ-004": 30,
         "CQ-005": 2,
@@ -78,29 +162,29 @@
         "CQ-007": 1,
         "CQ-008": 1
       },
-      "native_canonical_sha256": "daea2a77f2ae2418cba051e7bbad8701ff8d43ce285c040a8d90cac8a11a0ad9",
-      "browser_canonical_sha256": "daea2a77f2ae2418cba051e7bbad8701ff8d43ce285c040a8d90cac8a11a0ad9",
+      "native_canonical_sha256": "a3e86568f1fd47e7af475ee3d72d767b3b56cddf4dbbdf7308bcf1b308f1f15e",
+      "browser_canonical_sha256": "a3e86568f1fd47e7af475ee3d72d767b3b56cddf4dbbdf7308bcf1b308f1f15e",
       "differences": []
     },
     "mobilidade_ruido": {
       "equal": true,
-      "status": "GERADA",
+      "status": "GERADA_PARCIAL",
       "configurations": [
         "PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
         "PAD-RETORNO-HAPTICO-RUIDO"
       ],
       "query_rows": {
-        "CQ-001": 27,
-        "CQ-002": 7,
+        "CQ-001": 28,
+        "CQ-002": 14,
         "CQ-003": 23,
         "CQ-004": 48,
         "CQ-005": 2,
         "CQ-006": 2,
         "CQ-007": 2,
-        "CQ-008": 1
+        "CQ-008": 2
       },
-      "native_canonical_sha256": "ed00f355594915b77006928df0585510cab7182ef552e7f63d9d9fb6ca557fcb",
-      "browser_canonical_sha256": "ed00f355594915b77006928df0585510cab7182ef552e7f63d9d9fb6ca557fcb",
+      "native_canonical_sha256": "37a316b539fbf1514932fe38699c641805a96c5c5687b1419979a5256ad48379",
+      "browser_canonical_sha256": "37a316b539fbf1514932fe38699c641805a96c5c5687b1419979a5256ad48379",
       "differences": []
     },
     "comunicacao": {
@@ -111,7 +195,7 @@
       ],
       "query_rows": {
         "CQ-001": 40,
-        "CQ-002": 6,
+        "CQ-002": 16,
         "CQ-003": 9,
         "CQ-004": 24,
         "CQ-005": 1,
@@ -119,8 +203,8 @@
         "CQ-007": 1,
         "CQ-008": 2
       },
-      "native_canonical_sha256": "bdbd5e1b71dfe5724798fe57e29ee298acf53fe6ff09f6dccafa65afaf05c2d9",
-      "browser_canonical_sha256": "bdbd5e1b71dfe5724798fe57e29ee298acf53fe6ff09f6dccafa65afaf05c2d9",
+      "native_canonical_sha256": "335e88abec986152b152c815de03906706e2c57b5cee403becfbae36285650cb",
+      "browser_canonical_sha256": "335e88abec986152b152c815de03906706e2c57b5cee403becfbae36285650cb",
       "differences": []
     },
     "diagnostico_isolado": {
@@ -137,8 +221,8 @@
         "CQ-007": 0,
         "CQ-008": 5
       },
-      "native_canonical_sha256": "14a5e57e0d42401f7644585e4b15312d02c9b1e50b7801505245ce709e6b3555",
-      "browser_canonical_sha256": "14a5e57e0d42401f7644585e4b15312d02c9b1e50b7801505245ce709e6b3555",
+      "native_canonical_sha256": "c94564810532b6a6ff31f53bc577f2962b2a1ace715577269682d317d0cc9dd0",
+      "browser_canonical_sha256": "c94564810532b6a6ff31f53bc577f2962b2a1ace715577269682d317d0cc9dd0",
       "differences": []
     },
     "sem_confirmacao": {
@@ -146,17 +230,17 @@
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "configurations": [],
       "query_rows": {
-        "CQ-001": 107,
-        "CQ-002": 28,
+        "CQ-001": 120,
+        "CQ-002": 1068,
         "CQ-003": 0,
         "CQ-004": 0,
         "CQ-005": 0,
         "CQ-006": 0,
         "CQ-007": 0,
-        "CQ-008": 12
+        "CQ-008": 25
       },
-      "native_canonical_sha256": "a8f928974f9da794489df8ee80828d442d1e407d2de80b515a56366fa42a7968",
-      "browser_canonical_sha256": "a8f928974f9da794489df8ee80828d442d1e407d2de80b515a56366fa42a7968",
+      "native_canonical_sha256": "fb2ce05f1e2d19584ccbf974f45e55f58599ed3ee6b689b9dab30839bee99039",
+      "browser_canonical_sha256": "fb2ce05f1e2d19584ccbf974f45e55f58599ed3ee6b689b9dab30839bee99039",
       "differences": []
     },
     "combinacao_nao_cadastrada": {
@@ -168,7 +252,7 @@
       ],
       "query_rows": {
         "CQ-001": 53,
-        "CQ-002": 8,
+        "CQ-002": 45,
         "CQ-003": 20,
         "CQ-004": 54,
         "CQ-005": 2,
@@ -176,37 +260,40 @@
         "CQ-007": 2,
         "CQ-008": 2
       },
-      "native_canonical_sha256": "b6b72c581f7dc12a17846effb343bad9a4e148ea9283a60b641de8080a5cd8c1",
-      "browser_canonical_sha256": "b6b72c581f7dc12a17846effb343bad9a4e148ea9283a60b641de8080a5cd8c1",
+      "native_canonical_sha256": "3e474fb50d76bf45c51b922f54c10f88a2aa3021d018033c93faaeebd0bdd02f",
+      "browser_canonical_sha256": "3e474fb50d76bf45c51b922f54c10f88a2aa3021d018033c93faaeebd0bdd02f",
       "differences": []
     },
     "combinacao_sem_voz": {
       "equal": true,
-      "status": "GERADA",
+      "status": "GERADA_PARCIAL",
       "configurations": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
       "query_rows": {
-        "CQ-001": 55,
-        "CQ-002": 8,
+        "CQ-001": 57,
+        "CQ-002": 45,
         "CQ-003": 11,
         "CQ-004": 30,
         "CQ-005": 2,
         "CQ-006": 1,
         "CQ-007": 1,
-        "CQ-008": 4
+        "CQ-008": 6
       },
-      "native_canonical_sha256": "5a95d3e10ccd5e37047f59301c6255bc52ec5a365a7d5445c98fa4ff5a52c279",
-      "browser_canonical_sha256": "5a95d3e10ccd5e37047f59301c6255bc52ec5a365a7d5445c98fa4ff5a52c279",
+      "native_canonical_sha256": "05fe7e3e76d3e438ddb8f040ea67b1d8b6fb12882804b2dd803f05c01adf93de",
+      "browser_canonical_sha256": "05fe7e3e76d3e438ddb8f040ea67b1d8b6fb12882804b2dd803f05c01adf93de",
       "differences": []
     }
   },
   "missing_in_browser": [],
   "unexpected_in_browser": [],
+  "test_sha256": "cfecb9c5d227aaf51e0fe43d6ce06f7effc4b81b7727ef64061a9632ac0f04d6",
   "comparator_self_checks": {
     "rejects_changed_configuration_order": true,
     "rejects_changed_modal_function": true,
-    "accepts_unordered_knowledge_ids": true
+    "accepts_unordered_knowledge_ids": true,
+    "rejects_changed_check_outcome": true,
+    "rejects_changed_check_observation": true
   },
   "passed": true
 }

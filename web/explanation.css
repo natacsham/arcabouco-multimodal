@@ -1,0 +1,40 @@
+/* Shared, data-driven reading blocks. No layout or interaction dependency. */
+.explanation{--ex-ink:var(--ink,#193b40);--ex-line:var(--line,#8eaab1);--ex-paper:var(--white,#fff);--ex-soft:var(--soft,#e8f3f0);--ex-accent:var(--teal,#075c60);color:var(--ex-ink);font-size:1rem;line-height:1.65;overflow-wrap:anywhere}
+.explanation :is(p,ul,ol){max-width:none}
+.explanation :is(h3,h4){font-size:1.1rem;line-height:1.4;margin:1.25rem 0 .7rem}
+.explanation details{background:var(--ex-paper);border:1px solid var(--ex-line);border-radius:.65rem;margin:1rem 0;padding:0 1rem;min-width:0}
+.explanation summary{padding:1rem .2rem;cursor:pointer;min-height:2.75rem;font-weight:700}
+.explanation details[open]>summary{border-bottom:1px solid var(--ex-line);margin-bottom:.8rem}
+.explanation summary:focus-visible,.explanation-table-scroll:focus-visible{outline:3px solid var(--focus,#7030a0);outline-offset:4px}
+.explanation-choice>summary :is(.explanation-title,.explanation-purpose,.explanation-modalities,.explanation-state){display:block;margin:.25rem 0}
+.explanation-title{font-weight:750;font-size:1.1rem}
+.explanation-purpose{font-weight:400}
+.explanation-modalities{font-weight:650;color:var(--ex-accent)}
+.explanation-choice-body{padding:0 .2rem .5rem}
+.explanation-reading{border-inline-start:4px solid var(--ex-accent)!important}
+.explanation-reading-body{padding:.1rem .2rem .5rem}
+.explanation-records{list-style:none;padding:0}
+.explanation-records>li{border-bottom:1px solid var(--ex-line);padding:.75rem 0 1rem;margin:0}
+.explanation-records>li:last-child{border-bottom:0}
+.explanation-field{margin:.7rem 0}
+.explanation-field>strong{display:block}
+.explanation-field ul{margin:.2rem 0;padding-left:1.3rem}
+.explanation-field ul li:only-child{list-style:none;margin-left:-1.3rem}
+.explanation-state{font-size:.95rem;font-weight:600}
+.explanation-gap{border-inline-start:4px solid #805800;background:#fff8e8;color:#493300;padding:.65rem .8rem;margin:.65rem 0}
+.explanation-note{font-size:.95rem;color:var(--muted,#405d61)}
+.explanation-identifiers{font-size:.875rem;background:var(--ex-soft)!important}
+.explanation-identifiers summary{font-weight:500;padding:.65rem .2rem}
+.explanation code{overflow-wrap:anywhere;white-space:normal}
+.explanation-table-scroll{overflow:auto;max-width:100%;margin:.75rem 0}
+.explanation table{width:100%;border-collapse:collapse;font-size:1rem}
+.explanation :is(th,td){text-align:left;vertical-align:top;padding:.7rem;border:1px solid var(--ex-line);min-width:9rem}
+.explanation th{background:var(--ex-soft)}
+.explanation caption{text-align:left;padding:.5rem 0;font-weight:600}
+.explanation-stages li{margin:.8rem 0}
+.explanation-stages p{margin:.2rem 0}
+.pilot-details{margin-top:1.3rem}
+.pilot-details>summary{font-size:1.0625rem}
+@media(max-width:36rem){.explanation details{padding-inline:.65rem}.explanation-choice-body,.explanation-reading-body{padding-inline:0}.explanation-gap{padding-inline:.55rem}}
+@media(forced-colors:active){.explanation{--ex-ink:CanvasText;--ex-line:CanvasText;--ex-paper:Canvas;--ex-soft:Canvas;--ex-accent:LinkText}.explanation-gap{border-color:CanvasText;background:Canvas;color:CanvasText}.explanation-note{color:CanvasText}.explanation summary:focus-visible,.explanation-table-scroll:focus-visible{outline-color:Highlight}}
+@media print{.explanation details{break-inside:avoid}.explanation-table-scroll{overflow:visible}.explanation :is(th,td){min-width:0}}

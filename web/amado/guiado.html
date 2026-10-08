@@ -7,29 +7,30 @@
   <meta name="description" content="Explore como o AMADO consulta a ontologia MADO e constrói uma orientação multimodal com fundamentos rastreáveis, no seu navegador.">
   <meta name="referrer" content="no-referrer">
   <meta name="author" content="Natacsha Ordones Raposo de Melo">
-  <link rel="canonical" href="https://natacsham.github.io/MADO/amado/">
+  <link rel="canonical" href="https://natacsham.github.io/arcabouco-multimodal/amado/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:site_name" content="MADO">
+  <meta property="og:site_name" content="Arcabouço Multimodal">
   <meta property="og:title" content="AMADO — orientações multimodais fundamentadas">
   <meta property="og:description" content="Organize um caso, consulte conhecimentos representados na MADO e confira os fundamentos de uma orientação multimodal.">
-  <meta property="og:url" content="https://natacsham.github.io/MADO/amado/">
+  <meta property="og:url" content="https://natacsham.github.io/arcabouco-multimodal/amado/">
   <meta name="twitter:card" content="summary">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebPage","@id":"https://natacsham.github.io/MADO/amado/#page","url":"https://natacsham.github.io/MADO/amado/","name":"AMADO — orientações multimodais fundamentadas","description":"Instrumento que consulta a ontologia MADO e compõe orientações dentro dos conhecimentos e padrões representados na base.","inLanguage":"pt-BR","isPartOf":{"@id":"https://natacsham.github.io/MADO/#site"},"author":{"@type":"Person","name":"Natacsha Ordones Raposo de Melo"}}
+  {"@context":"https://schema.org","@type":"WebPage","@id":"https://natacsham.github.io/arcabouco-multimodal/amado/#page","url":"https://natacsham.github.io/arcabouco-multimodal/amado/","name":"AMADO — orientações multimodais fundamentadas","description":"Instrumento que consulta a ontologia MADO e compõe orientações dentro dos conhecimentos e padrões representados na base.","inLanguage":"pt-BR","isPartOf":{"@id":"https://natacsham.github.io/arcabouco-multimodal/#site"},"author":{"@type":"Person","name":"Natacsha Ordones Raposo de Melo"}}
   </script>
   <link rel="stylesheet" href="./styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes">
   <link rel="stylesheet" href="../shell.css">
   <link rel="stylesheet" href="./views.css">
+  <link rel="stylesheet" href="../explanation.css">
   <link rel="stylesheet" href="./guided.css">
 </head>
 <body class="guided-view">
   <a class="skip" href="#main">Ir para o conteúdo</a>
   <header id="inicio" class="site-header" tabindex="-1">
     <div class="wrap header-inner">
-      <a class="brand" href="../" aria-label="MADO, início"><span class="brand-mark" aria-hidden="true">M</span>MADO</a>
+      <a class="brand" href="../" aria-label="Arcabouço Multimodal, início"><span class="brand-mark" aria-hidden="true">A</span>Arcabouço Multimodal</a>
       <nav class="nav" aria-label="Navegação principal">
-        <a href="../">Entenda a MADO</a>
+        <a href="../">A pesquisa</a>
         <a href="../ontologia/">Documentação técnica</a>
         <a href="./" aria-current="page">Experimente o AMADO</a>
       </nav>
@@ -61,7 +62,7 @@
       <details class="guide-help"><summary>Sobre seus dados e o uso desta visão</summary><p>O caso fica apenas neste navegador. Atualizar, fechar, limpar ou trocar de caso descarta as informações. Não informe nomes nem dados identificáveis. Esta visão usa a mesma base e o mesmo motor da visão atual; muda apenas a organização da leitura.</p><p>O AMADO reconhece conceitos já representados. Não interpreta qualquer narrativa nem garante resultados de aprendizagem.</p></details>
       <p id="health" class="status" data-state="loading" role="status" aria-atomic="true">Carregando o ambiente de execução…</p>
       <p id="runtime-error" role="alert"></p>
-      <div class="actions"><button id="clear-case" class="secondary" type="button">Limpar caso e reiniciar</button><a href="../">Entender a MADO e o AMADO</a></div>
+      <div class="actions"><button id="clear-case" class="secondary" type="button">Limpar caso e reiniciar</button><a href="../">Entender a pesquisa, a MADO e o AMADO</a></div>
     </section>
 
     <nav id="guide-progress" class="guide-progress" aria-label="Etapas da orientação" hidden>
@@ -223,7 +224,7 @@
         <p id="depara-reading-order">Condição → significado funcional → articulação → conhecimento → critério → configuração multimodal.</p>
         <div id="depara-table"></div>
       </details>
-      <details id="trace-details" class="foundation"><summary>Conferir conhecimentos, critérios e fontes</summary>
+      <details id="trace-details" class="foundation"><summary>Como o conhecimento fundamenta cada escolha</summary>
         <p id="trace-reading-order">Contexto → função exigida → articulação confirmada → conhecimento → critério → configuração → fonte.</p>
         <div id="free-trace-overview" hidden></div>
         <div id="free-trace-explanation" class="rationale-guide" hidden></div>
@@ -247,8 +248,8 @@
   </main>
   <footer>
     Texto, teclado, contraste e ampliação estão disponíveis. A leitura em voz alta usa somente uma voz local quando disponível. O ditado remoto está desativado nesta versão; nenhum áudio é gravado pelo AMADO. O provedor da página pode manter registros técnicos de acesso, não o conteúdo do caso.
-    <p><a class="back-top" href="#inicio" data-site-top>↑ Voltar ao topo</a> · <a href="../">Início da MADO</a></p>
-    <small class="version-note">Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Melo · MADO 1.3.0-rc1 — versão candidata</small>
+    <p><a class="back-top" href="#inicio" data-site-top>↑ Voltar ao topo</a> · <a href="../">Início da pesquisa</a></p>
+    <small class="version-note">Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Melo · MADO 1.4.0-rc1 — versão candidata</small>
   </footer>
   <noscript><p>O AMADO precisa de JavaScript e WebAssembly para executar as consultas. Você ainda pode <a href="../">ler a explicação da pesquisa</a>.</p></noscript>
   <script type="module" src="./app.js"></script>

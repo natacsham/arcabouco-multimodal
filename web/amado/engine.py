@@ -3,6 +3,7 @@
 from __future__ import annotations
 import copy
 import html
+import hashlib
 import json
 import re
 import sys
@@ -11,6 +12,7 @@ import uuid
 import warnings
 from datetime import datetime, timezone
 from pathlib import Path
+from execution_trace import ExecutionEvidence, build_explanation
 
 ROOT = Path(__file__).resolve().parent
 for dependency_path in (ROOT / "vendor",):
@@ -26,8 +28,8 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.3.0-rc1"
-UI_VERSION = "AMADO-web-1.3.0-rc1"
+VERSION = "1.4.0-rc1"
+UI_VERSION = "AMADO-web-1.4.0-rc1"
 PRACTICAL_COPY = {
     "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE": {
         "group": "start",
@@ -185,7 +187,29 @@ class DecisionEngine:
             if row.get("active_in_rc4", row.get("active_in_rc3"))
         ]
         self.current = None
+        self._evidence = None
+        self._record_checks = False
         self.start_context("CTX-TRANSFERENCIA-RECURSO-DIGITAL-01")
+
+    def _check(self, stage, subject, rule, outcome, message, **details):
+        if self._evidence is not None and self._record_checks:
+            return self._evidence.check(stage, subject, rule, outcome, message, **details)
+        return None
+
+    def _task_path(self, start, end):
+        """Return an actual shortest skos:broader witness, not a guessed hierarchy."""
+        queue = [[start]]
+        seen = set()
+        while queue:
+            path = queue.pop(0)
+            if path[-1] == end:
+                return path
+            if path[-1] in seen:
+                continue
+            seen.add(path[-1])
+            for parent in sorted(self.graph.objects(MADO[path[-1]], SKOS.broader), key=str):
+                queue.append(path + [local_id(parent)])
+        return []
 
     def label(self, identifier):
         public = self.ui_vocab.get("concepts", {}).get(identifier, {})
@@ -353,6 +377,8 @@ class DecisionEngine:
     def start_context(self, template_id):
         if template_id not in self.contexts:
             raise ValueError("Cenário não localizado na base.")
+        self._evidence = None
+        self._record_checks = False
         context = copy.deepcopy(self.contexts[template_id])
         context["id"] = f"CTX-CASO-{uuid.uuid4().hex[:10].upper()}"
         context["template_id"] = template_id
@@ -383,6 +409,8 @@ class DecisionEngine:
         return self.current_payload()
 
     def _invalidate_result(self):
+        self._evidence = None
+        self._record_checks = False
         self.current["last_result"] = None
 
     def clear(self):
@@ -1152,6 +1180,28 @@ class DecisionEngine:
                     "Articulação sem confirmação e curadoria habilitadas."
                 ]
             self.knowledge_authorization[kid] = state
+            witness = {
+                "knowledge_id": kid, "mode": str(row[2]), "articulation_id": aid,
+                "input_knowledge_id": local_id(row[8]),
+                "context_task_id": local_id(row[9]), "knowledge_task_id": local_id(row[10]),
+                "context_concept_id": local_id(row[11]) if row[11] else "",
+                "match_predicate": local_id(row[12]),
+                "required_function_id": local_id(row[6]) if row[6] else "",
+                "task_path": self._task_path(local_id(row[9]), local_id(row[10])),
+                "authorization": state,
+            }
+            witness["id"] = "WIT-" + hashlib.sha256(json.dumps(witness, sort_keys=True).encode()).hexdigest()[:16]
+            check_id = self._check(
+                "retrieval", kid, "cq2_concrete_witness", "PASS",
+                "Correspondência retornada pela consulta; a autorização é verificada separadamente.",
+                operator="TASK_PATH_AND_FUNCTIONAL_MATCH", witness_id=witness["id"],
+            )
+            witness["check_ids"] = [check_id] if check_id else []
+            if self._evidence is not None and self._record_checks:
+                witness["check_ids"] += self._evidence.checks_for(kid, "knowledge")
+                if aid:
+                    witness["check_ids"] += self._evidence.checks_for(aid, "articulation")
+                self._evidence.data["retrieval"].append(witness)
             audit = {
                 "knowledge_id": kid,
                 "articulation_id": aid,
@@ -1211,12 +1261,13 @@ class DecisionEngine:
                     direct_criteria.append(criterion_id)
         criterion_ids = unique(criterion_ids)
         direct_criteria = unique(direct_criteria)
-        retrieval = []
+        retrieval_by_key = {}
         for row in rows:
             knowledge_id = local_id(row[0])
             if knowledge_id not in self.knowledge:
                 continue
-            retrieval.append(
+            key = tuple(str(row[i] or "") for i in (0, 2, 3, 4, 5, 6))
+            value = retrieval_by_key.setdefault(key,
                 {
                     "knowledge_id": knowledge_id,
                     "mode": str(row[2]),
@@ -1224,9 +1275,12 @@ class DecisionEngine:
                     "articulation_type": str(row[4]) if row[4] else "",
                     "confirmation_level": str(row[5]) if row[5] else "",
                     "added_function_id": local_id(row[6]) if row[6] else "",
-                    "correspondences": str(row[7]) if row[7] else "",
+                    "correspondences": [],
                 }
             )
+            if row[7] and str(row[7]) not in value["correspondences"]:
+                value["correspondences"].append(str(row[7]))
+        retrieval = [{**value, "correspondences": " | ".join(value["correspondences"])} for value in retrieval_by_key.values()]
         return {
             "direct_knowledge_ids": direct_ids,
             "articulated_knowledge_ids": articulated_ids,
@@ -1254,11 +1308,16 @@ class DecisionEngine:
             "DOCUMENTADA_E_RECONSTRUIDA",
             "DOCUMENTADA_E_INFORMADA_PELA_AUTORA",
         }
-        return (
+        authorized = (
             row.get("habilitada_para_decisao") is True
             and row.get("estado_curadoria") in allowed_curation
             and row.get("nivel_confirmacao") in allowed_confirmation
         )
+        self._check("articulation", identifier, "curation_and_confirmation", "PASS" if authorized else "FAIL",
+                    "Conferência de habilitação, curadoria e origem da relação.", operator="ALL",
+                    enabled=row.get("habilitada_para_decisao"), curation=row.get("estado_curadoria"),
+                    confirmation=row.get("nivel_confirmacao"))
+        return authorized
 
     def authorize_knowledge(self, identifier, context):
         """Selection gate, distinct from candidate retrieval; never uses diagnosis/name IDs."""
@@ -1279,12 +1338,19 @@ class DecisionEngine:
                 local_id(v)
                 for v in self.graph.transitive_objects(MADO[task], SKOS.broader)
             )
+        self._check("knowledge", identifier, "task_compatibility", "PASS" if not tasks or tasks & task_closure else "FAIL",
+                    "Compatibilidade da tarefa com sua hierarquia declarada.", operator="ANY_OR_UNCONSTRAINED",
+                    expected_ids=sorted(tasks), observed_ids=sorted(task_closure), matched_ids=sorted(tasks & task_closure))
         if tasks and not tasks.intersection(task_closure):
             reasons.append(
                 "A tarefa do conhecimento não corresponde à tarefa informada."
             )
         impediments = set(knowledge.get("condicoes_impeditivas_ids", [])) & present
         required = set(knowledge.get("condicoes_necessarias_ids", []))
+        self._check("knowledge", identifier, "no_structured_impediment", "FAIL" if impediments or required & blocked else "PASS",
+                    "Verificação de condições impeditivas e recursos necessários impedidos.", operator="NONE",
+                    expected_ids=sorted(set(knowledge.get("condicoes_impeditivas_ids", [])) | required),
+                    observed_ids=sorted(present | blocked), matched_ids=sorted(impediments | (required & blocked)))
         if impediments:
             reasons.append(
                 "Condição impeditiva presente: "
@@ -1299,9 +1365,21 @@ class DecisionEngine:
             reasons.append("Conhecimento ainda pendente de fundamentação.")
         if not knowledge.get("fonte_ids") or not knowledge.get("trecho_ids"):
             reasons.append("Conhecimento sem fonte e localização documental.")
+        self._check("knowledge", identifier, "documentary_presence", "PASS" if knowledge.get("fonte_ids") and knowledge.get("trecho_ids") else "FAIL",
+                    "Presença de referências documentais; não verifica integralmente a correção da conclusão.",
+                    operator="PRESENCE", source_ids=knowledge.get("fonte_ids", []), excerpt_ids=knowledge.get("trecho_ids", []))
+        self._check("knowledge", identifier, "foundation_operational_state",
+                    "FAIL" if knowledge.get("classificacao_operacional") == "PENDENTE_DE_FUNDAMENTACAO" else "PASS",
+                    "Estado operacional permitido pelo catálogo.", operator="NOT_EQUAL",
+                    observed=knowledge.get("classificacao_operacional"), forbidden="PENDENTE_DE_FUNDAMENTACAO")
         if reasons:
             return "EXCLUIDO", reasons
         missing = required - present
+        conditional_missing = bool(missing) and knowledge.get("classificacao_operacional") == "CONDICIONAL" and all(
+            self.concepts.get(v, {}).get("tipo") == "recurso_disponivel" or v.startswith("REC-") for v in missing)
+        self._check("knowledge", identifier, "required_conditions", "PENDING" if conditional_missing else ("FAIL" if missing else "PASS"),
+                    "Condições necessárias estruturadas do conhecimento.", operator="ALL",
+                    expected_ids=sorted(required), observed_ids=sorted(present), matched_ids=sorted(required & present), missing_ids=sorted(missing))
         if missing:
             if knowledge.get("classificacao_operacional") == "CONDICIONAL" and all(
                 self.concepts.get(v, {}).get("tipo") == "recurso_disponivel"
@@ -1331,6 +1409,9 @@ class DecisionEngine:
             and "PAPEL-ESTUDANTE" in available_roles
         ):
             missing_roles.remove("PAPEL-PESSOA-APOIADA")
+        self._check("component", component["id"], "required_roles", "FAIL" if missing_roles else "PASS",
+                    "Papéis participantes exigidos pelo padrão.", operator="ALL_WITH_STUDENT_AS_SUPPORTED_PERSON",
+                    expected_ids=component.get("required_role_ids", []), observed_ids=sorted(available_roles), missing_ids=sorted(missing_roles))
         if missing_roles:
             reasons.append(
                 "papel participante ausente: "
@@ -1367,8 +1448,21 @@ class DecisionEngine:
                     "recurso nuclear ainda não confirmado: "
                     + ", ".join(self.labels(sorted(unknown_core_resources)))
                 )
-        for group in resource_groups:
+        self._check("component", component["id"], "core_resources",
+                    "FAIL" if blocked_core_resources or (unknown_core_resources and resource_gate != "CONDICIONAL_A_CONFIRMACAO") else
+                    ("PENDING" if unknown_core_resources else "PASS"),
+                    "Disponibilidade dos recursos nucleares.", operator="ALL",
+                    expected_ids=sorted(required_resources), observed_ids=sorted(available_resources),
+                    matched_ids=sorted(required_resources & available_resources), blocked_ids=sorted(blocked_core_resources),
+                    missing_ids=sorted(unknown_core_resources))
+        for group_index, group in enumerate(resource_groups, 1):
             options = set(group)
+            group_pending = bool(options and not options & available_resources and not options <= blocked_resources
+                                 and component.get("role") == "condicional" and component.get("alternative"))
+            self._check("component", component["id"], f"resource_option_group_{group_index}",
+                        "PASS" if options & available_resources else ("PENDING" if group_pending else "FAIL"),
+                        "Ao menos um recurso deste grupo deve estar disponível.", operator="ANY",
+                        expected_ids=sorted(options), observed_ids=sorted(available_resources), matched_ids=sorted(options & available_resources))
             if options & available_resources:
                 matches.append(
                     {
@@ -1401,6 +1495,9 @@ class DecisionEngine:
                     + ", ".join(self.labels(sorted(options)))
                 )
         proposed_outputs = set(component.get("proposed_resource_ids", []))
+        self._check("component", component["id"], "proposed_outputs_not_blocked", "FAIL" if proposed_outputs & blocked_resources else "PASS",
+                    "Adaptações a preparar não podem estar impedidas.", operator="NONE",
+                    expected_ids=sorted(proposed_outputs), observed_ids=sorted(blocked_resources), matched_ids=sorted(proposed_outputs & blocked_resources))
         if proposed_outputs & blocked_resources:
             reasons.append(
                 "adaptação necessária explicitamente impedida: "
@@ -1411,8 +1508,24 @@ class DecisionEngine:
             and resource_gate == "CONFIRMADO_DISPONIVEL"
         ):
             resource_gate = "REQUER_PREPARACAO"
+        if component["id"] == "PAD-VIDEO-PROCESSO":
+            # This authored pattern explicitly promises captions and visual description.
+            # Reject a contradictory instruction; do not invent a new media alternative.
+            conflicting_access = blocked_resources & {"REC-LEGENDAS", "REC-AUDIODESCRICAO"}
+            self._check("component", component["id"], "video_instruction_resource_consistency",
+                        "FAIL" if conflicting_access else "PASS",
+                        "A instrução registrada não pode exigir legenda ou audiodescrição explicitamente impedida.",
+                        operator="NONE", expected_ids=["REC-LEGENDAS", "REC-AUDIODESCRICAO"],
+                        observed_ids=sorted(blocked_resources), matched_ids=sorted(conflicting_access))
+            if conflicting_access:
+                reasons.append("a instrução deste padrão de vídeo exige recurso de acessibilidade impedido; sua alternativa textual não foi replanejada")
         for field, identifiers in component.get("requires_all", {}).items():
-            if self.intersects(context, field, identifiers):
+            matched = self.intersects(context, field, identifiers)
+            self._check("component", component["id"], f"required_field_{field}", "PASS" if matched else "FAIL",
+                        "Cada campo é obrigatório; os conceitos dentro do campo são opções alternativas.", operator="ANY_IN_FIELD",
+                        field=field, expected_ids=identifiers, observed_ids=context.get(field, []),
+                        matched_ids=sorted(set(context.get(field, [])) & set(identifiers)))
+            if matched:
                 values = sorted(set(context.get(field, [])) & set(identifiers))
                 matches.append(
                     {"field": field, "ids": values, "labels": self.labels(values)}
@@ -1441,6 +1554,11 @@ class DecisionEngine:
                 reasons.append(
                     f"grupo funcional {group_index} sem condição contextual compatível"
                 )
+            self._check("component", component["id"], f"functional_group_{group_index}", "PASS" if group_match else "FAIL",
+                        "Pelo menos uma condição deste grupo deve corresponder ao contexto.", operator="ANY_CLAUSE",
+                        clauses=[{"field": c["field"], "expected_ids": c["ids"], "observed_ids": context.get(c["field"], []),
+                                  "matched_ids": sorted(set(c["ids"]) & set(context.get(c["field"], [])))} for c in clauses],
+                        matched_ids=unique(v for c in clauses for v in c["ids"] if v in context.get(c["field"], [])))
         component_knowledge = [
             kid
             for kid in component["knowledge_ids"]
@@ -1460,6 +1578,9 @@ class DecisionEngine:
             reasons.append(
                 "nenhum conhecimento do componente foi recuperado pela consulta semântica"
             )
+        self._check("component", component["id"], "retrieved_knowledge", "PASS" if component_knowledge else "FAIL",
+                    "Conhecimento recuperado e autorizado que pertence a este padrão.", operator="ANY",
+                    expected_ids=component["knowledge_ids"], observed_ids=authorized_knowledge, matched_ids=component_knowledge)
         component_criteria = []
         for support in component.get("criterion_support", []):
             cid = support.get("criterion_id")
@@ -1479,10 +1600,17 @@ class DecisionEngine:
                 and str(support.get("justification", "")).strip()
             ):
                 component_criteria.append(cid)
+            self._check("component", component["id"], "criterion_support_" + cid,
+                        "PASS" if cid in component_criteria else "FAIL",
+                        "Ligação situada entre critério, conhecimento autorizado, origem válida e justificativa registrada.",
+                        operator="ALL", criterion_id=cid, knowledge_ids=sorted(common), origin_ids=origins,
+                        authorized=cid in authorized_criteria, justification_present=bool(str(support.get("justification", "")).strip()))
         if not component_criteria:
             reasons.append(
                 "nenhum critério com conhecimento e origem documental situados foi recuperado"
             )
+        self._check("component", component["id"], "any_situated_criterion", "PASS" if component_criteria else "FAIL",
+                    "Ao menos um critério com suporte situado é exigido; nem todo critério candidato foi usado.", operator="ANY", matched_ids=component_criteria)
         maturity = {
             "funcao": bool(str(component.get("function", "")).strip()),
             "responsavel": bool(component.get("responsible_role_id")),
@@ -1495,6 +1623,8 @@ class DecisionEngine:
             ),
         }
         for gate, passed in maturity.items():
+            self._check("component", component["id"], "documented_field_" + gate, "PASS" if passed else "FAIL",
+                        "Conferência da presença de um campo documental, não da eficácia do seu conteúdo.", operator="PRESENCE", field=gate)
             if not passed:
                 reasons.append(f"porta de maturidade ausente: {gate}")
         return (
@@ -1680,7 +1810,7 @@ class DecisionEngine:
 
     def build_practical_summary(self, configurations, status, context=None):
         """Projeta a mesma decisão em linguagem simples, sem selecionar conteúdo novo."""
-        if status != "GERADA" or not configurations:
+        if status not in {"GERADA", "GERADA_PARCIAL"} or not configurations:
             return {
                 "titulo": "Ainda não é possível orientar este caso",
                 "texto": "Faltam informações ou conhecimentos verificados para construir uma orientação segura.",
@@ -1711,7 +1841,18 @@ class DecisionEngine:
         }
         selected_ids = set(by_id)
         if selected_ids & interview_ids:
-            headline = "Construa o recurso em partes curtas: use fala e áudio para preservar a autoria; texto para organizar e retomar; imagem e desenho para representar relações. Vídeo e jogo entram somente quando cumprirem uma função necessária, com acessibilidade, feedback e alternativa."
+            clauses = []
+            if "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE" in selected_ids:
+                clauses.append("texto para organizar e retomar")
+            if "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO" in selected_ids:
+                clauses.append("fala e áudio para preservar a autoria")
+            if "PAD-REPRESENTACAO-VISUAL-EXPLICADA" in selected_ids:
+                clauses.append("imagem e desenho para representar relações")
+            headline = "Construa o recurso em partes curtas: " + "; ".join(clauses) + "."
+            optional_modes = [label for identifier, label in (
+                ("PAD-VIDEO-PROCESSO", "vídeo"), ("PAD-JOGO-CONSOLIDACAO-FEEDBACK", "jogo")) if identifier in selected_ids]
+            if optional_modes:
+                headline += " Considere " + " e ".join(optional_modes) + " somente quando cumprir uma função necessária, com acessibilidade, feedback e alternativa."
         else:
             headline = PRACTICAL_HEADLINES.get(
                 primary_id,
@@ -1865,95 +2006,12 @@ class DecisionEngine:
             "derivacao": "PROJECAO_DA_MESMA_DECISAO_SEM_NOVO_CONTEUDO",
         }
 
-    def build_de_para(self, selected, retrieval):
-        rows = []
-        active_articulations = set(retrieval.get("articulation_ids", []))
-        for index, item in enumerate(selected, 1):
-            conditions = unique(
-                (
-                    identifier
-                    for match in item.get("matches", [])
-                    for identifier in match.get("ids", [])
-                )
-            )
-            knowledge_ids = item.get("selected_knowledge_ids", [])
-            used_articulations = [
-                aid
-                for aid in active_articulations
-                if set(self.articulations[aid].get("conhecimento_resultante_ids", []))
-                & set(knowledge_ids)
-            ]
-            support_rows = self.selected_support(
-                item, knowledge_ids, item.get("selected_criterion_ids", [])
-            )
-            criterion_ids = unique((row["criterion_id"] for row in support_rows))
-            origin_ids = unique(
-                (
-                    oid
-                    for row in support_rows
-                    for oid in row.get("selected_origin_ids", [])
-                )
-            )
-            trajectory_ids = unique(
-                (
-                    entity_id
-                    for aid in used_articulations
-                    for field in (
-                        "estudo_ids",
-                        "artefato_ids",
-                        "persona_ids",
-                        "fonte_ids",
-                    )
-                    for entity_id in self.articulations[aid].get(field, [])
-                )
-            )
-            rows.append(
-                {
-                    "id": f"DEPARA-RC4-{index:02d}",
-                    "condicao_ids": conditions,
-                    "condicoes": self.labels(conditions),
-                    "abstracao_funcional": item.get("functional_meaning", ""),
-                    "conhecimento_ids": knowledge_ids,
-                    "articulacao_ids": used_articulations,
-                    "articulacoes": [
-                        self.articulations[identifier].get("rotulo", identifier)
-                        for identifier in used_articulations
-                    ],
-                    "trajetoria": [
-                        {"id": identifier, "titulo": self.entity_title(identifier)}
-                        for identifier in trajectory_ids
-                    ],
-                    "criterio_ids": criterion_ids,
-                    "origem_criterio_ids": origin_ids,
-                    "implicacao_decisoria": item.get("function", ""),
-                    "componente_ids": [item["id"]],
-                    "configuracao_multimodal": [
-                        {
-                            "modo": self.label(item.get("mode_id")),
-                            "funcao": item.get("function", ""),
-                            "responsavel": self.label(item.get("responsible_role_id")),
-                            "recursos": self.labels(
-                                item.get(
-                                    "configured_resource_ids",
-                                    item.get(
-                                        "selected_resource_ids",
-                                        item.get("resource_ids", []),
-                                    ),
-                                )
-                            ),
-                            "estado_recurso": item.get(
-                                "resource_gate", "CONFIRMADO_DISPONIVEL"
-                            ),
-                        }
-                    ],
-                    "alternativa": item.get("alternative", ""),
-                    "condicao_limite": " ".join(
-                        unique(item.get("conditions", []) + [item.get("limit", "")])
-                    ),
-                    "acompanhamento": item.get("monitoring", ""),
-                }
-            )
-        return rows
+    def build_de_para(self, selected=None, retrieval=None):
+        """Compatibility accessor: explanations are built once from execution evidence."""
+        result = self.current.get("last_result") or {}
+        if result.get("explanation"):
+            return copy.deepcopy(result["explanation"]["de_para"])
+        raise RuntimeError("Execute a decisão antes de solicitar sua explicação.")
 
     def build_decision_graph(self, result):
         graph = self.build_context_graph()
@@ -2111,6 +2169,12 @@ class DecisionEngine:
                 )
                 for kid in support["selected_knowledge_ids"]:
                     graph.add((application, MADO.conhecimentoDaAplicacao, MADO[kid]))
+                for contribution in self.data.get("contributions", []):
+                    kid, aid = contribution.get("knowledge_id"), contribution.get("articulation_id")
+                    if (kid in support["selected_knowledge_ids"]
+                            and aid in item.get("articulation_ids", [])
+                            and kid in self.articulations.get(aid, {}).get("conhecimento_resultante_ids", [])):
+                        graph.add((application, MADO.aplicacaoMobilizaContribuicao, MADO[contribution["id"]]))
                 for oid in support["selected_origin_ids"]:
                     graph.add((application, MADO.origemDaAplicacao, MADO[oid]))
             for value in item.get("conditions", []):
@@ -2224,147 +2288,8 @@ class DecisionEngine:
         return (summary, results)
 
     def trace_graph_payload(self, result):
-        nodes, edges, seen = ([], [], set())
-
-        def ids(value):
-            return [
-                local_id(item.strip())
-                for item in str(value or "").split("|")
-                if item.strip()
-            ]
-
-        def add_node(identifier, label, kind):
-            if identifier and identifier not in seen:
-                seen.add(identifier)
-                nodes.append({"id": identifier, "label": label, "kind": kind})
-
-        for row in result.get("query_results", {}).get("CQ-007", []):
-            context_id = local_id(row.get("contexto"))
-            configuration_id = local_id(row.get("configuracao"))
-            add_node(context_id, "Contexto de transferência", "context")
-            add_node(
-                configuration_id,
-                f"Configuração: {row.get('modalidade', '')}",
-                "configuration",
-            )
-            articulation_ids = ids(row.get("articulacoes"))
-            knowledge_ids = ids(row.get("conhecimentos"))
-            function_ids = ids(row.get("funcoesDecisorias"))
-            criterion_ids = ids(row.get("criterios"))
-            origin_ids = ids(row.get("origensCriterios"))
-            for function_id in function_ids:
-                add_node(function_id, self.label(function_id), "function")
-                edges.extend(
-                    [
-                        {
-                            "source": context_id,
-                            "target": function_id,
-                            "label": "exige função",
-                        },
-                        {
-                            "source": function_id,
-                            "target": configuration_id,
-                            "label": "é cumprida por",
-                        },
-                    ]
-                )
-            for articulation_id in articulation_ids:
-                add_node(
-                    articulation_id,
-                    self.articulations.get(articulation_id, {}).get(
-                        "rotulo", articulation_id
-                    ),
-                    "articulation",
-                )
-                for knowledge_id in knowledge_ids:
-                    if knowledge_id in self.articulations.get(articulation_id, {}).get(
-                        "conhecimento_resultante_ids", []
-                    ):
-                        edges.append(
-                            {
-                                "source": articulation_id,
-                                "target": knowledge_id,
-                                "label": "produz/refina",
-                            }
-                        )
-            for knowledge_id in knowledge_ids:
-                add_node(
-                    knowledge_id,
-                    f"{knowledge_id}: {self.knowledge.get(knowledge_id, {}).get('enunciado', knowledge_id)}",
-                    "knowledge",
-                )
-                edges.append(
-                    {
-                        "source": knowledge_id,
-                        "target": configuration_id,
-                        "label": "sustenta configuração",
-                    }
-                )
-            for criterion_id in criterion_ids:
-                add_node(
-                    criterion_id,
-                    f"{criterion_id}: {self.criteria.get(criterion_id, {}).get('enunciado', criterion_id)}",
-                    "criterion",
-                )
-                edges.append(
-                    {
-                        "source": criterion_id,
-                        "target": configuration_id,
-                        "label": "orienta configuração",
-                    }
-                )
-            for origin_id in origin_ids:
-                add_node(
-                    origin_id, f"Origem documental {origin_id}", "criterion_origin"
-                )
-                for criterion_id in criterion_ids:
-                    if (
-                        self.criterion_origins.get(origin_id, {}).get("criterio_id")
-                        == criterion_id
-                    ):
-                        edges.append(
-                            {
-                                "source": origin_id,
-                                "target": criterion_id,
-                                "label": "origina critério",
-                            }
-                        )
-            for source_id in ids(row.get("fontesOrigem")):
-                add_node(
-                    source_id,
-                    self.sources.get(source_id, {}).get("titulo", source_id),
-                    "source",
-                )
-                for origin_id in origin_ids:
-                    if (
-                        self.criterion_origins.get(origin_id, {}).get("fonte_id")
-                        == source_id
-                    ):
-                        edges.append(
-                            {
-                                "source": source_id,
-                                "target": origin_id,
-                                "label": "registra origem",
-                            }
-                        )
-            for source_id in ids(row.get("fontes")):
-                add_node(
-                    source_id,
-                    self.sources.get(source_id, {}).get("titulo", source_id),
-                    "source",
-                )
-                for knowledge_id in knowledge_ids:
-                    if source_id in self.knowledge.get(knowledge_id, {}).get(
-                        "fonte_ids", []
-                    ):
-                        edges.append(
-                            {
-                                "source": knowledge_id,
-                                "target": source_id,
-                                "label": "rastreado em",
-                            }
-                        )
-        return {"nodes": nodes, "edges": unique(edges)}
+        """Compatibility accessor; do not infer causal edges from grouped query rows."""
+        return copy.deepcopy(result["explanation"]["graph"])
 
     def trace_svg(self, graph_payload):
         colors = {
@@ -2376,6 +2301,8 @@ class DecisionEngine:
             "criterion_origin": "#65502c",
             "configuration": "#2f5f8f",
             "source": "#354f85",
+            "excerpt": "#465963",
+            "contribution": "#764e20",
         }
         groups = [
             "context",
@@ -2386,13 +2313,15 @@ class DecisionEngine:
             "criterion_origin",
             "configuration",
             "source",
+            "excerpt",
+            "contribution",
         ]
         grouped = {
             kind: [node for node in graph_payload["nodes"] if node["kind"] == kind]
             for kind in groups
         }
         positions = {}
-        width = 1650
+        width = 35 + len(groups) * 230
         max_rows = max([len(grouped[kind]) for kind in groups] + [1])
         height = max(420, 90 + max_rows * 92)
         for column, kind in enumerate(groups):
@@ -2418,8 +2347,114 @@ class DecisionEngine:
         parts.append("</svg>")
         return "".join(parts)
 
+    def _finish_execution_evidence(self, result):
+        """Freeze checks and documentary references before making display projections."""
+        evidence = self._evidence.data
+        evidence["status"] = result["decision"]["status"]
+        evidence["hashes"] = {
+            "engine_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "base_sha256": hashlib.sha256(DATA_JSON.read_bytes()).hexdigest(),
+            "ontology_sha256": hashlib.sha256(ONTOLOGY.read_bytes()).hexdigest(),
+            "cq2_sha256": hashlib.sha256(self.queries["CQ-002"].encode()).hexdigest(),
+        }
+        entities = evidence["entities"]
+        catalogs = [self.knowledge, self.articulations, self.criteria, self.criterion_origins,
+                    self.excerpts, self.sources, self.concepts, self.studies, self.artifacts, self.personas]
+
+        def include(identifier):
+            if not identifier or identifier in entities:
+                return
+            original = next((c[identifier] for c in catalogs if identifier in c), {})
+            row = copy.deepcopy(original)
+            row["id"] = identifier
+            row["title"] = original.get("titulo") or original.get("enunciado") or original.get("rotulo") or original.get("nome") or self.label(identifier)
+            entities[identifier] = row
+
+        entities[evidence["context_id"]] = {"id": evidence["context_id"], "title": "Contexto confirmado desta execução"}
+        for field in self.context_fields:
+            for identifier in self.current["context"].get(field, []):
+                include(identifier)
+        selected_map = {c["component_id"]: c for c in evidence["components"]}
+        used_knowledge = result["decision"]["knowledge_ids"]
+        construction = {kid: [aid for aid, a in self.articulations.items() if kid in a.get("conhecimento_resultante_ids", [])]
+                        for kid in used_knowledge}
+        evidence["knowledge_construction"] = construction
+        for kid in used_knowledge:
+            include(kid)
+            knowledge = self.knowledge[kid]
+            for tid in knowledge.get("trecho_ids", []):
+                include(tid)
+                include(self.excerpts.get(tid, {}).get("fonte_id"))
+            for sid in knowledge.get("fonte_ids", []):
+                include(sid)
+            pending = knowledge.get("pending_foundation_items", [])
+            if pending or knowledge.get("foundation_review_status"):
+                evidence["documentary_conditions"].append({"subject_id": kid, "outcome": "NOT_EXECUTED",
+                    "text": "Revisão documental: " + str(knowledge.get("foundation_review_status", "não informada")),
+                    "pending_foundation_items": pending,
+                    "interpretation": "Fidelidade a um registro não confirma integralmente a fundamentação da conclusão."})
+        for aid in unique(a for ids in construction.values() for a in ids):
+            include(aid)
+            art = self.articulations[aid]
+            for field in ("conhecimento_entrada_ids", "fonte_ids", "estudo_ids", "artefato_ids", "persona_ids", "trecho_ids"):
+                for identifier in art.get(field, []):
+                    include(identifier)
+            evidence["documentary_conditions"].append({"subject_id": aid, "outcome": "NOT_EXECUTED",
+                "text": art.get("condicao", ""), "limit": art.get("limite", ""),
+                "interpretation": "Condição documental livre; não foi avaliada como regra nesta execução."})
+        evidence["contributions"] = []
+        for contribution in self.data.get("contributions", []):
+            kid, aid = contribution.get("knowledge_id"), contribution.get("articulation_id")
+            if aid not in construction.get(kid, []):
+                continue
+            row = copy.deepcopy(contribution)
+            tid = row.get("excerpt_id")
+            excerpt = self.excerpts.get(tid, {})
+            sid = excerpt.get("fonte_id")
+            include(tid)
+            include(sid)
+            location = excerpt.get("localizacao_publica") or excerpt.get("localizacao") or "; ".join(
+                str(excerpt[k]) for k in ("pagina", "secao") if excerpt.get(k))
+            row["excerpt"] = {"id": tid, "location": location,
+                              "publication_notice": excerpt.get("aviso_publicacao", ""), "publication_state": excerpt.get("estado_publicacao", "")}
+            row["source"] = {"id": sid, "title": self.sources.get(sid, {}).get("titulo", sid)} if sid else None
+            evidence["contributions"].append(row)
+        for index, cfg in enumerate(result["decision"]["configuracao_modal"], 1):
+            component = selected_map[cfg["component_id"]]
+            component["configuration"] = {**copy.deepcopy(cfg), "id": f"CFG-{result['decision']['id']}-{index:02d}"}
+            for fid in cfg.get("function_ids", []):
+                include(fid)
+            for condition in cfg.get("conditions", []):
+                check_id = self._check("documentary", cfg["component_id"], "documentary_condition", "NOT_EXECUTED",
+                                       "Condição textual preservada para julgamento; não executada pelo motor.", text=condition)
+                evidence["documentary_conditions"].append({"subject_id": cfg["component_id"], "text": condition,
+                                                           "outcome": "NOT_EXECUTED", "check_ids": [check_id]})
+            for n, support in enumerate(cfg.get("criterion_support", []), 1):
+                cid = support["criterion_id"]
+                include(cid)
+                origins = []
+                for oid in support["selected_origin_ids"]:
+                    origin = self.criterion_origins[oid]
+                    for identifier in (oid, origin.get("fonte_id"), origin.get("trecho_id")):
+                        include(identifier)
+                    origins.append(copy.deepcopy(origin))
+                evidence["supports"].append({"id": f"SUP-{cfg['component_id']}-{n:02d}",
+                    "component_id": cfg["component_id"], "criterion_id": cid,
+                    "criterion_statement": self.criteria[cid]["enunciado"],
+                    "knowledge_ids": support["selected_knowledge_ids"], "origins": origins,
+                    "justification": support.get("justification", ""),
+                    "check_ids": [r["id"] for r in evidence["checks"] if r["subject_id"] == cfg["component_id"] and r["rule_id"] == "criterion_support_" + cid]})
+        for witness in evidence["retrieval"]:
+            for field in ("knowledge_id", "input_knowledge_id", "articulation_id", "context_concept_id", "required_function_id", "context_task_id", "knowledge_task_id"):
+                include(witness.get(field))
+        result["execution_evidence"] = copy.deepcopy(evidence)
+        result["explanation"] = build_explanation(result["execution_evidence"])
+        result["de_para"] = result["explanation"]["de_para"]
+
     def generate(self):
         context = self.current["context"]
+        self._evidence = ExecutionEvidence(VERSION, context["id"])
+        self._record_checks = True
         questions = self.missing_questions()
         if not self.current.get("mapping_confirmed"):
             questions = [
@@ -2428,12 +2463,24 @@ class DecisionEngine:
                     "question": "Confirme se a organização representa corretamente o contexto.",
                 }
             ] + questions
+        self._check("context", context["id"], "context_confirmation", "PASS" if self.current.get("mapping_confirmed") else "FAIL",
+                    "Confirmação explícita da organização do contexto.", operator="IS_TRUE", observed=self.current.get("mapping_confirmed"))
+        self._check("context", context["id"], "minimum_context", "FAIL" if questions else "PASS",
+                    "Conferência dos campos mínimos antes de avaliar configurações.", operator="NO_MISSING_FIELDS",
+                    missing_fields=[r["field"] for r in questions])
         context_graph = self.build_context_graph()
         retrieval = self.retrieve_transfer_candidates(context_graph)
 
-        def select_components(knowledge_ids, criterion_ids):
+        def select_components(knowledge_ids, criterion_ids, record=False):
+            self._record_checks = record
             selected_rows, rejected_rows = ([], [])
             if questions:
+                if record:
+                    self._evidence.data["components"] = [
+                        {"component_id": c["id"], "title": c["label"], "selection": "NOT_EVALUATED",
+                         "check_ids": self._evidence.checks_for(context["id"], "context"),
+                         "reasons": ["Contexto incompleto ou não confirmado; este padrão não foi avaliado."]}
+                        for c in self.components]
                 return (selected_rows, rejected_rows)
             for component in self.components:
                 (
@@ -2446,6 +2493,13 @@ class DecisionEngine:
                 ) = self.evaluate_component(
                     component, context, knowledge_ids, criterion_ids
                 )
+                if record:
+                    self._evidence.data["components"].append({
+                        "component_id": component["id"], "title": component["label"],
+                        "selection": ("CONDITIONAL" if resource_gate == "CONDICIONAL_A_CONFIRMACAO" else "SELECTED") if eligible else "REJECTED",
+                        "availability_status": resource_gate, "matches": copy.deepcopy(matches),
+                        "check_ids": self._evidence.checks_for(component["id"], "component"), "reasons": reasons,
+                    })
                 if eligible:
                     resource_options = [
                         {
@@ -2504,11 +2558,12 @@ class DecisionEngine:
             return (selected_rows, rejected_rows)
 
         selected, rejected = select_components(
-            retrieval["knowledge_ids"], retrieval["criterion_ids"]
+            retrieval["knowledge_ids"], retrieval["criterion_ids"], record=True
         )
         isolated_selected, _ = select_components(
             retrieval["direct_knowledge_ids"], retrieval["direct_criterion_ids"]
         )
+        self._record_checks = True
         primary = [item for item in selected if item.get("role") == "principal"]
         status = (
             "GERADA"
@@ -2517,6 +2572,12 @@ class DecisionEngine:
         )
         if not primary:
             selected = []
+            for row in self._evidence.data["components"]:
+                if row["selection"] in {"SELECTED", "CONDITIONAL"}:
+                    row["selection"] = "REJECTED"
+                    row["reasons"].append("Não há configuração principal; o conjunto não foi emitido.")
+                    row["check_ids"].append(self._check("component", row["component_id"], "principal_required", "FAIL",
+                                                         "Um conjunto sem configuração principal é suspenso.", operator="ANY_PRIMARY"))
         if not primary and (not questions):
             questions = [
                 {
@@ -2524,6 +2585,21 @@ class DecisionEngine:
                     "question": "A base não possui configuração principal verificada para esta combinação; registre a lacuna antes de decidir.",
                 }
             ]
+        offered_functions = unique(f for item in selected for f in item.get("function_ids", []))
+        required_functions = unique(context.get("funcoes_requeridas_ids", []))
+        remaining_functions = [f for f in required_functions if f not in offered_functions]
+        if primary and remaining_functions:
+            status = "GERADA_PARCIAL"
+        self._evidence.data["functions"] = {
+            "required": required_functions, "offered": offered_functions,
+            "verified": [f for f in required_functions if f in offered_functions],
+            "remaining": remaining_functions,
+            "interpretation": "Interseção declarada de requisitos e funções dos padrões; não comprova eficácia em uso.",
+        }
+        self._check("coverage", context["id"], "required_functions_coverage", "PENDING" if remaining_functions else ("PASS" if required_functions else "NOT_EXECUTED"),
+                    "Funções requeridas comparadas às oferecidas pelos padrões selecionados.", operator="SET_COVERAGE",
+                    expected_ids=required_functions, observed_ids=offered_functions,
+                    matched_ids=[f for f in required_functions if f in offered_functions], missing_ids=remaining_functions)
         selected_knowledge_ids = unique(
             (kid for item in selected for kid in item.get("selected_knowledge_ids", []))
         )
@@ -2543,7 +2619,7 @@ class DecisionEngine:
             )
         )
         decision_id = f"D-GERADA-{uuid.uuid4().hex[:10].upper()}"
-        if status == "GERADA":
+        if status in {"GERADA", "GERADA_PARCIAL"}:
             orientation = self.compose_transfer_orientation(selected, context)
             justification = f"A consulta recuperou {len(retrieval['direct_knowledge_ids'])} conhecimentos diretamente e acrescentou {len(retrieval['articulated_knowledge_ids'])} por relações documentadas e habilitadas. Esses conhecimentos fundamentaram {len(selected_criterion_ids)} critérios e {len(selected)} componentes da configuração."
         else:
@@ -2651,6 +2727,7 @@ class DecisionEngine:
             for identifier in context.get("necessidades", [])
             if identifier not in matched_needs
         ]
+        coverage_notes += ["Função requerida ainda sem cobertura: " + self.label(f) for f in remaining_functions]
         component_map = {}
         for item in selected:
             for kid in item.get("selected_knowledge_ids", []):
@@ -2874,7 +2951,7 @@ class DecisionEngine:
             for value in comparison["articulated"]["alternatives"]
             if value not in isolated_alternatives
         ]
-        de_para = self.build_de_para(selected, retrieval)
+        de_para = []  # Populated exclusively from the recorded execution below.
         articulations_used = [
             self.articulations[identifier] for identifier in selected_articulation_ids
         ]
@@ -2914,10 +2991,34 @@ class DecisionEngine:
         result["traceability"]["conditional_knowledge"] = retrieval[
             "conditional_knowledge"
         ]
+        self._finish_execution_evidence(result)
+        isolated_by_id = {item["id"]: item for item in isolated_selected}
+        comparison["added_configuration_ids"] = [
+            c["id"] for c in result["explanation"]["configurations"]
+            if c["component_id"] in comparison["added_component_ids"]]
+        comparison["evidence_delta"] = []
+        for item in selected:
+            previous = isolated_by_id.get(item["id"], {})
+            def support_tuples(supports):
+                return {(s["criterion_id"], k, o) for s in supports
+                        for k in s["selected_knowledge_ids"] for o in s["selected_origin_ids"]}
+            added_pairs = support_tuples(item.get("selected_support", [])) - support_tuples(previous.get("selected_support", []))
+            if not added_pairs and item["id"] in isolated_by_id:
+                continue
+            explanation_config = next(c for c in result["explanation"]["configurations"] if c["component_id"] == item["id"])
+            comparison["evidence_delta"].append({
+                "component_id": item["id"], "configuration_id": explanation_config["id"],
+                "configuration_added": item["id"] not in isolated_by_id,
+                "added_support_pairs": [{"criterion_id": c, "knowledge_id": k, "origin_id": o}
+                                        for c, k, o in sorted(added_pairs)],
+                "retrieval_witnesses": [w for w in explanation_config["application"]["retrieval_witnesses"]
+                                        if w["mode"] == "POR_ARTICULACAO" and any(k == w["knowledge_id"] for _, k, _ in added_pairs)],
+                "interpretation": "Diferença de escolha e suporte nesta execução determinística, não evidência de eficácia em uso.",
+            })
         result["query_summary"], result["query_results"] = self.run_runtime_queries(
             session_graph, context["id"], decision_id
         )
-        result["trace_graph"] = self.trace_graph_payload(result)
+        result["trace_graph"] = result["explanation"]["graph"]
         result["relevance_delta"] = {
             "added_configuration_count": len(comparison["added_component_ids"]),
             "added_component_ids": comparison["added_component_ids"],
@@ -2928,8 +3029,9 @@ class DecisionEngine:
                 for item in configuration
                 if item["contribution_status"].startswith("CONDICIONAL_")
             ],
-            "de_para_rows": len(de_para),
+            "de_para_rows": len(result["de_para"]),
             "interpretation": "A novidade é demonstrada pelo encadeamento entre condições, articulações, funções e configurações, não por trocar palavras de uma prática anterior.",
         }
         self.current["last_result"] = result
+        self._record_checks = False
         return result

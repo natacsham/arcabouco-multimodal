@@ -1,6 +1,8 @@
 PREFIX mado: <https://w3id.org/mado#>
 SELECT ?papel ?conhecimento ?enunciado ?articulacao ?tipoArticulacao ?nivelConfirmacao
-       ?trecho ?conteudo ?fonte ?tituloFonte ?perspectiva ?estadoPublicacao ?localizacao WHERE {
+       ?trecho ?conteudo ?fonte ?tituloFonte ?perspectiva ?estadoPublicacao ?localizacao
+       ?contribuicao ?afirmacao ?papelContribuicao ?naturezaContribuicao ?estadoConferencia
+       ?justificativaContribuicao ?operacaoAnalitica ?compreensaoAcrescentada ?autoria ?origemReconstrucao WHERE {
   VALUES ?decisao { mado:D-TESTE-RC4-TRANSFERENCIA }
   {
     ?decisao mado:sustentadaPor ?conhecimento .
@@ -27,6 +29,22 @@ SELECT ?papel ?conhecimento ?enunciado ?articulacao ?tipoArticulacao ?nivelConfi
     ?articulacao mado:produzConhecimento ?conhecimento ;
                  mado:tipoDeArticulacao ?tipoArticulacao ;
                  mado:nivelDeConfirmacao ?nivelConfirmacao .
+    OPTIONAL {
+      ?articulacao mado:explicacaoDaOperacaoAnalitica ?operacaoAnalitica ;
+                   mado:compreensaoAcrescentada ?compreensaoAcrescentada ;
+                   mado:autoriaDaArticulacao ?autoria ; mado:origemDaReconstrucao ?origemReconstrucao .
+    }
+    OPTIONAL {
+      ?contribuicao a mado:ContribuicaoNaArticulacao ;
+                   mado:contribuicaoNaArticulacao ?articulacao ;
+                   mado:contribuicaoParaConhecimento ?conhecimento ;
+                   mado:contribuicaoDoTrecho ?trecho ;
+                   mado:afirmacaoDaContribuicao ?afirmacao ;
+                   mado:papelDaContribuicao ?papelContribuicao ;
+                   mado:naturezaDaContribuicao ?naturezaContribuicao ;
+                   mado:estadoDeConferenciaDaContribuicao ?estadoConferencia ;
+                   mado:justificativaDaContribuicao ?justificativaContribuicao .
+    }
   }
 }
-ORDER BY ?papel ?conhecimento ?articulacao ?trecho
+ORDER BY ?papel ?conhecimento ?articulacao ?trecho ?contribuicao

@@ -1,6 +1,6 @@
 # Uma combinação que não estava cadastrada como cenário completo
 
-Este é um teste técnico sintético da **1.3.0-rc1**, não um novo caso observado com participante. Foi executado diretamente com conceitos controlados, para separar a capacidade de composição da interpretação de uma narrativa.
+Este teste técnico sintético foi introduzido na **1.3.0-rc1** e é reexecutado na **1.4.0-rc1**. Não é um novo caso observado com participante. A entrada usa conceitos controlados, para separar a capacidade de composição da interpretação de uma narrativa. O relatório atual registra também verificações e cobertura parcial; a descrição das alternativas não significa que foram automaticamente avaliadas.
 
 ## Entrada e controle
 

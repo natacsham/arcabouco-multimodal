@@ -19,7 +19,7 @@ PROTECTED = (M.conteudoDoTrecho, M.textoItemOriginal, M.textoDoItemOriginal)
 def main():
     tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
     tracked = [name for name in tracked if name]
-    findings, rdf_files, zip_entries = [], {}, []
+    findings, rdf_files, zip_entries, distribution_hashes = [], {}, [], {}
 
     def inspect(name, contents):
         suffix = Path(name).suffix
@@ -46,6 +46,8 @@ def main():
         if name == "ontology/data.ttl" or name.startswith(("evidence/private/", "sessions/", "exports/", "curation/")):
             findings.append({"file": name, "reason": "PRIVATE_OR_LEGACY_PATH"})
         contents = (ROOT / name).read_bytes()
+        if not name.startswith(("evidence/", "web/evidence/")):
+            distribution_hashes[name] = hashlib.sha256(contents).hexdigest()
         if not name.startswith(("vendor/", "web/amado/runtime/")):
             inspect(name, contents)
         if name == "web/amado/assets/base.zip":
@@ -61,6 +63,8 @@ def main():
         "scope": "TRACKED_PUBLIC_FILES_AND_BROWSER_BUNDLE",
         "tracked_file_count": len(tracked), "browser_bundle_entries": len(zip_entries),
         "rdf_files": rdf_files, "findings": findings, "passed": not findings,
+        "distribution_sha256": distribution_hashes,
+        "freshness_scope": "All tracked non-report files; evidence reports are scanned for private material but excluded from this hash map to avoid self-reference.",
         "limits": ["Structural and pattern checks do not replace documentary rights review or guarantee absence of every identifying inference."],
     }
     (ROOT / "evidence/distribution-audit.json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")

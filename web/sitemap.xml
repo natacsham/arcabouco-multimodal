@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://natacsham.github.io/MADO/</loc>
+    <loc>https://natacsham.github.io/arcabouco-multimodal/</loc>
   </url>
   <url>
-    <loc>https://natacsham.github.io/MADO/ontologia/</loc>
+    <loc>https://natacsham.github.io/arcabouco-multimodal/ontologia/</loc>
   </url>
   <url>
-    <loc>https://natacsham.github.io/MADO/amado/</loc>
+    <loc>https://natacsham.github.io/arcabouco-multimodal/amado/</loc>
   </url>
   <url>
-    <loc>https://natacsham.github.io/MADO/amado/guiado.html</loc>
+    <loc>https://natacsham.github.io/arcabouco-multimodal/amado/guiado.html</loc>
   </url>
 </urlset>

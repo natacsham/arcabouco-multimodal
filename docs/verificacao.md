@@ -1,6 +1,10 @@
 # Verificação, evidências e limites
 
-**Versão alvo: MADO 1.3.0-rc1.** Consulte os relatórios gerados em `evidence/` para os resultados efetivos. Este documento explica como interpretá-los; não replica números de versões anteriores como resultados atuais.
+**Versão alvo: MADO 1.4.0-rc1.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios herdados de 1.3 não comprovam esta evolução.
+
+Além das verificações anteriores, `tests/test_contributions.py` examina a contribuição documental e `tests/test_execution_evidence.py` testa a fidelidade da explicação ao que o motor executou. `tests/traceability-browser.mjs` executa as duas apresentações e os mesmos casos estruturados no navegador. `evidence/parity-report.json` compara o conteúdo produzido em Python local e Pyodide.
+
+A conferência documental pode permanecer **no registro preservado**, **parcial** ou **pendente**. Nem consistência OWL nem sucesso na consulta elevam esse estado. Esta entrega não substitui a conferência do documento original indisponível.
 
 ## Perguntas diferentes exigem evidências diferentes
 
@@ -57,7 +61,9 @@ Examine SHACL e consultas separadamente: um reasoner opera sob semântica OWL e 
 
 Guarde versão, hash, ferramenta, entrada e resultado ao reproduzir uma execução. Sem esses elementos, resultados de versões diferentes podem ser confundidos.
 
-## Ajustes da apresentação pública — 07/10/2026
+## Histórico da apresentação 1.3 — 07/10/2026
+
+As medições e relatórios abaixo pertencem à origem preservada; não são testes desta versão. O índice atual acima separa a nova evidência.
 
 A página inicial foi simplificada; foram acrescentados ajustes de leitura, retorno ao topo, navegação entre AMADO e MADO e metadados de descoberta. Essa revisão não modifica o motor, a base, as consultas ou os arquivos da ontologia. A identidade desses artefatos é conferida pelos hashes do manifesto.
 

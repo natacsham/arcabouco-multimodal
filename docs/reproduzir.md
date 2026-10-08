@@ -18,9 +18,7 @@ O caso não é salvo. Recarregar ou fechar a aba descarta a entrada e a orienta�
 
 ```text
 python -m pip install -r requirements.txt
-python scripts/verify_public.py
-python scripts/run_regression.py
-python scripts/build_web.py
+python scripts/build_traceability_rdf.py
 ```
 
 `verify_public.py` executa os testes Python e SHACL, confere o hash da verificação formal registrada e informa falhas. Essa conferência de hash não é uma nova execução do HermiT.
@@ -33,12 +31,35 @@ python scripts/verify_reasoner.py --robot CAMINHO/robot.jar --java CAMINHO/java
 
 Consulte `--help` para opções. O relatório inclui ferramenta, comandos, hash e resultados. Os caminhos privados são separados da evidência pública. Não é necessário instalar o Protégé para reproduzir os testes; `ontology/mado.owl` também pode ser aberto nele para inspeção.
 
+Após atualizar o relatório formal:
+
+```text
+python scripts/verify_public.py
+python scripts/run_regression.py
+python scripts/build_pilot.py
+python scripts/build_web.py
+python scripts/check_bundle.py
+```
+
+O piloto é uma projeção de uma execução técnica preparada, não uma sessão humana. Seu conteúdo não é escrito separadamente da base. A revisão documental continua necessária: o gerador não transforma registros pendentes em fontes conferidas.
+
 ## Navegador
 
-Os testes usam Playwright e um navegador Chromium. `tests/browser.mjs` contém o percurso de teclado, exemplos, alterações, descarte e reflow. Os relatórios informam o navegador utilizado e o alcance da inspeção. NVDA e VoiceOver continuam pendentes; esses testes não certificam conformidade integral.
+Os testes usam Playwright e Chromium. Configure `AMADO_NODE_MODULES` com a pasta que contém Playwright e `AMADO_CHROMIUM` com o executável do navegador. Execute:
+
+```text
+node tests/traceability-browser.mjs
+node tests/compare_browser.mjs
+python scripts/audit_distribution.py
+python scripts/publish_traceability.py
+```
+
+O primeiro teste entrega os arquivos sob o caminho `/arcabouco-multimodal/`, executa Python real no navegador e verifica as duas apresentações, disclosure por teclado, contraste amostral, ampliação, reflow, falhas e descarte. A comparação seguinte verifica a semântica nativa/navegador, não apenas o número de configurações. NVDA e VoiceOver continuam pendentes; estes testes não certificam conformidade integral.
+
+`TRACE_PUBLIC_URL=https://natacsham.github.io/arcabouco-multimodal/` direciona os mesmos testes ao endereço publicado. Esse resultado é separado em `traceability-public.json`.
 
 ## Reconstrução dos dados públicos
 
-O repositório já contém a projeção pública. `scripts/prepare_public_data.py` permite reconstruí-la a partir da base documental autorizada que utilizei na pesquisa; essa base privada não é necessária para executar a demonstração. O script não altera a origem. Citações não autorizadas, avaliações individuais e caminhos locais não fazem parte da distribuição pública.
+O repositório já contém a projeção pública. Na 1.4, use `scripts/build_traceability_rdf.py`: os registros curados em `data/knowledge-base.json` e o esquema Turtle alimentam o RDF e a apresentação. `scripts/prepare_public_data.py` pertence ao processo de projeção 1.3 e não deve ser executado para substituir esta base curada. Citações não autorizadas, avaliações individuais e caminhos locais não fazem parte da distribuição pública.
 
 Não promova um resultado do AMADO automaticamente a conhecimento da ontologia. Uma incorporação exige revisão da fonte, contexto, resultado observado, limites e decisão de curadoria em outra versão.
