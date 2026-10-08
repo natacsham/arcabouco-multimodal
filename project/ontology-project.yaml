@@ -1,0 +1,29 @@
+project: MADO
+version: 1.3.0-rc1
+instrument: AMADO
+author: Natacsha Ordones Raposo de Melo
+research: Arcabouço Multimodal para Acessibilidade Digital
+purpose: Representar e empregar conhecimento multimodal articulado em decisões rastreáveis para condições contempladas pela base.
+status: release-candidate
+previous_frozen_version: MADO 1.2.0-RC4 / tese V21
+core_classes:
+  - Fonte
+  - ConhecimentoMultimodalArticulado
+  - CriterioDeDecisaoMultimodal
+  - ContextoDeInteracaoDigital
+  - DecisaoDeAcessibilidadeMultimodal
+  - Resultado
+new_auxiliary_element: AplicacaoDeCriterio
+formalization: OWL 2 DL
+integrity: SHACL
+retrieval: SPARQL
+composition: Deterministic Python with explicit curated patterns
+public_runtime: Pyodide 314.0.7 in isolated browser worker
+storage: Current case in RAM only; no case history or evaluation collection
+license: No open reuse license granted to original research material
+limits:
+  - Not unrestricted narrative understanding or autonomous knowledge creation
+  - No educational effectiveness or universal applicability claim
+  - Prior human evaluation does not evaluate this revision
+  - Public source locators do not replace access to original documents
+  - Accessibility checks do not establish full conformance

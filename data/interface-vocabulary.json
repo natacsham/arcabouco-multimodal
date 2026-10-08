@@ -1,0 +1,1312 @@
+{
+  "groups": {
+    "TAREFA": "Atividade",
+    "CARACTERISTICA_PESSOA": "Pessoa e participação",
+    "BARREIRA": "Dificuldade observada",
+    "NECESSIDADE": "O que precisa ser apoiado",
+    "AMBIENTE": "Onde ocorre",
+    "MODALIDADE": "Formas de interação",
+    "RECURSO_DIGITAL": "Recurso digital envolvido",
+    "RECURSO_DISPONIVEL": "Recursos disponíveis"
+  },
+  "concepts": {
+    "TAR-MICROEXPLICACAO-CURRICULAR": {
+      "label": "Preparar e realizar uma explicação curta ligada ao conteúdo da aula",
+      "description": "O estudante explica uma parte do conteúdo com apoio combinado de fala, palavras-chave, imagens ou desenho.",
+      "aliases": [
+        "explicação curta",
+        "apresentação curta",
+        "explicar para a turma",
+        "explicação curricular"
+      ],
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "TAR-ORGANIZAR-PARTICIPACAO-MULTIMODAL": {
+      "label": "Organizar a participação usando mais de uma forma de expressão",
+      "description": "Combinar formas de interação para preservar a contribuição da pessoa e tornar a sequência compreensível.",
+      "aliases": [
+        "organizar participação",
+        "participação multimodal",
+        "combinar formas de expressão"
+      ],
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "TAR-EXPLICAR-CONTEUDO-HISTORIA": {
+      "label": "Explicar um conteúdo de História para a turma",
+      "aliases": [
+        "história",
+        "explicar história",
+        "conteúdo de história"
+      ],
+      "scope": "CASO_ENTREVISTA",
+      "category_label": "Específico do caso da entrevista",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "TAR-AUTENTICAR-SELECIONAR-DESTINO-A098E60": {
+      "label": "Entrar no aplicativo e escolher para onde ir",
+      "description": "Acessar o aplicativo, identificar as opções e selecionar um destino.",
+      "aliases": [
+        "entrar no aplicativo",
+        "escolher destino",
+        "selecionar destino"
+      ],
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "TAR-SEGUIR-ROTA-3D861F4": {
+      "label": "Acompanhar as orientações durante um deslocamento",
+      "aliases": [
+        "seguir rota",
+        "deslocamento",
+        "caminho",
+        "orientação durante o trajeto"
+      ],
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "TAR-OPERAR-COMUNICAR-SE-NO-ACAT-3FBCF86": {
+      "label": "Usar uma tecnologia assistiva para controlar o computador e se comunicar",
+      "description": "Tecnologia de apoio que permite controlar o computador por formas alternativas de entrada.",
+      "aliases": [
+        "acat",
+        "controlar computador",
+        "comunicação assistiva"
+      ],
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD": {
+      "label": "Realizar uma atividade no ambiente virtual de aprendizagem",
+      "aliases": [
+        "ava",
+        "sigaa",
+        "ambiente virtual",
+        "plataforma de aprendizagem"
+      ],
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "BAR-EFEMERIDADE-DO-FEEDBACK-AUDITIVO-611AFB8": {
+      "label": "A mensagem em áudio desaparece antes que a pessoa possa ouvi-la novamente",
+      "description": "O áudio é passageiro e não oferece repetição ou consulta sob demanda.",
+      "aliases": [
+        "áudio passa rápido",
+        "não consegue repetir o áudio",
+        "mensagem de áudio desaparece"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "BAR-AUDIO-PODE-PERDER-EFETIVIDADE-COM-RUIDO-04E2CCE": {
+      "label": "O ruído do ambiente dificulta ouvir as orientações",
+      "aliases": [
+        "ambiente ruidoso",
+        "barulho",
+        "ruído",
+        "não consegue ouvir"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "BAR-CONTRIBUICAO-EXTENSA-SEM-SEQUENCIA": {
+      "label": "A contribuição oral é extensa e precisa de uma sequência clara",
+      "aliases": [
+        "fala extensa",
+        "fala longa",
+        "sem sequência",
+        "contribuição extensa"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "BAR-PARTICIPACAO-EXTENSA-SEM-DELIMITACAO": {
+      "label": "A participação precisa de tempo e transições combinados",
+      "aliases": [
+        "sem limite de tempo",
+        "participação extensa",
+        "delimitar participação"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "BAR-CANAL-EXCLUSIVAMENTE-TEXTUAL-587ACB3": {
+      "label": "A comunicação depende apenas de texto",
+      "aliases": [
+        "somente texto",
+        "só texto",
+        "canal textual"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33": {
+      "label": "Há conteúdo visual sem descrição adequada",
+      "aliases": [
+        "imagem sem descrição",
+        "visual sem alternativa",
+        "conteúdo visual inacessível"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "BAR-DIGITACAO-SELECAO-CONVENCIONAL-DIFICIL-30CB86A": {
+      "label": "Digitar ou selecionar pelos meios convencionais é difícil",
+      "aliases": [
+        "dificuldade para digitar",
+        "não consegue usar teclado",
+        "seleção difícil"
+      ],
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "AMB-CONTEXTO-DIGITAL-DE-APRENDIZAGEM-42D27F5": {
+      "label": "Atividade digital de aprendizagem",
+      "aliases": [
+        "aprendizagem digital",
+        "atividade digital",
+        "aula com recurso digital"
+      ],
+      "category_label": "Outros ambientes",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "AMB-CONTEXTO-DIGITAL-DE-APRENDIZAGEM-SIGAA-8C300D7": {
+      "label": "Ambiente virtual de aprendizagem, como o SIGAA",
+      "aliases": [
+        "sigaa",
+        "ava",
+        "ambiente virtual de aprendizagem"
+      ],
+      "category_label": "Outros ambientes",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "AMB-SALA-DE-AULA": {
+      "label": "Sala de aula",
+      "aliases": [
+        "sala de aula",
+        "turma",
+        "aula"
+      ],
+      "category_label": "Outros ambientes",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "REC-MPD-SENSOR-ACAT-WEBCAM-7A85EC2": {
+      "label": "Tecnologia assistiva para controlar o computador por movimentos captados por sensor ou câmera",
+      "description": "Inclui recursos de entrada alternativa; o nome técnico ACAT fica disponível apenas nos detalhes.",
+      "aliases": [
+        "acat",
+        "sensor",
+        "webcam",
+        "movimento para controlar computador"
+      ],
+      "category_label": "Outros recursos disponíveis",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "REC-COMPUTADOR-DATASHOW": {
+      "label": "Computador e projetor operados pela professora",
+      "aliases": [
+        "computador",
+        "projetor",
+        "data show",
+        "datashow"
+      ],
+      "category_label": "Outros recursos disponíveis",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "REC-PALAVRAS-CHAVE-LINHA-DO-TEMPO": {
+      "label": "Palavras-chave ou linha do tempo para organizar a explicação",
+      "aliases": [
+        "palavras-chave",
+        "linha do tempo",
+        "roteiro curto"
+      ],
+      "scope": "CASO_ENTREVISTA",
+      "category_label": "Específico do caso da entrevista",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "REC-DESENHO-QUADRO-PAPEL": {
+      "label": "Desenho no quadro ou em papel",
+      "aliases": [
+        "desenho",
+        "quadro",
+        "papel"
+      ],
+      "category_label": "Outros recursos disponíveis",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "REC-LEITOR-DE-TELA": {
+      "label": "Leitor de tela",
+      "description": "Lê estrutura, rótulos, texto e estados quando o conteúdo foi implementado adequadamente.",
+      "aliases": [
+        "leitor de tela",
+        "talkback",
+        "nvda",
+        "jaws"
+      ],
+      "category_label": "Tecnologias assistivas",
+      "scope": "GERAL",
+      "order": 36,
+      "show_in_interface": true
+    },
+    "REC-SMARTPHONE-AUDIO-HAPTICO": {
+      "label": "Celular com orientação por áudio e vibração",
+      "aliases": [
+        "smartphone",
+        "celular",
+        "áudio e vibração"
+      ],
+      "category_label": "Outros recursos disponíveis",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "CAR-PESSOA-CEGA-LEITOR-TELA": {
+      "label": "Pessoa cega que utiliza leitor de tela",
+      "aliases": [
+        "pessoa cega que utiliza leitor de tela",
+        "pessoa cega usuária de leitor de tela"
+      ],
+      "category_label": "Outras condições funcionais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": "Requer menção explícita ao uso de leitor de tela; cegueira, isoladamente, não comprova esse uso."
+    },
+    "CAR-FALA-ESPONTANEA-EXTENSA": {
+      "label": "Participa por meio de falas espontâneas e extensas",
+      "aliases": [
+        "fala espontânea",
+        "fala extensa",
+        "fala longa",
+        "contribuições orais"
+      ],
+      "category_label": "Outras condições funcionais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "CAR-EXPRESSAO-POR-DESENHO-IMAGEM": {
+      "label": "Também se expressa por desenhos e imagens",
+      "aliases": [
+        "desenha",
+        "desenho",
+        "usa imagens",
+        "por imagens"
+      ],
+      "category_label": "Outras condições funcionais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "CAR-INTERESSE-HISTORIA": {
+      "label": "Tem forte interesse e conhecimento em História",
+      "aliases": [
+        "interesse em história",
+        "conhecimento em história",
+        "gosta de história"
+      ],
+      "scope": "CASO_ENTREVISTA",
+      "category_label": "Específico do caso da entrevista",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "NEC-PRESERVAR-PROTAGONISMO": {
+      "label": "Preservar o protagonismo e o conhecimento da pessoa",
+      "aliases": [
+        "protagonismo",
+        "preservar participação",
+        "valorizar conhecimento"
+      ],
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "NEC-ORGANIZAR-DELIMITAR-PARTICIPACAO": {
+      "label": "Organizar a participação sem impedir a expressão",
+      "aliases": [
+        "organizar participação",
+        "delimitar participação",
+        "sem impedir expressão"
+      ],
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "NEC-APOIAR-COMPREENSAO-TURMA": {
+      "label": "Apoiar a compreensão e a participação da turma",
+      "aliases": [
+        "compreensão da turma",
+        "envolver a turma",
+        "participação da turma"
+      ],
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-FALA": {
+      "label": "Fala",
+      "aliases": [
+        "fala",
+        "explicação oral"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-TEXTO": {
+      "label": "Texto",
+      "aliases": [
+        "texto",
+        "palavras-chave",
+        "legenda"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-IMAGEM": {
+      "label": "Imagem",
+      "aliases": [
+        "imagem",
+        "visual",
+        "fotografia"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-DESENHO": {
+      "label": "Desenho",
+      "aliases": [
+        "desenho",
+        "desenhar"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-AUDIO": {
+      "label": "Áudio",
+      "aliases": [
+        "áudio",
+        "som",
+        "voz sintetizada"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-HAPTICO": {
+      "label": "Vibração ou retorno tátil",
+      "aliases": [
+        "vibração",
+        "háptico",
+        "tátil"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-VOZ": {
+      "label": "Comando ou entrada por voz",
+      "aliases": [
+        "comando de voz",
+        "ditado",
+        "entrada por voz"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "MOD-TECLADO": {
+      "label": "Teclado",
+      "aliases": [
+        "teclado",
+        "digitação"
+      ],
+      "category_label": "Formas de interação",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true,
+      "description": ""
+    },
+    "CAR-FALA-PERSISTENTE-REPETITIVA": {
+      "label": "Insiste ou repete contribuições quando busca manter a fala",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outras condições funcionais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "CAR-REAGE-DEFENSIVAMENTE-A-CONTRADICAO": {
+      "label": "Pode reagir de forma defensiva quando é contrariado",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outras condições funcionais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "CAR-EXPERIENCIA-APRESENTAR-PUBLICOS": {
+      "label": "Possui experiência apresentando conteúdo em diferentes espaços e para diferentes públicos",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outras condições funcionais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "BAR-REPETICAO-PREJUDICA-VINCULO": {
+      "label": "A insistência e a repetição podem desgastar o vínculo com professor e colegas",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "BAR-TRANSICAO-E-CONTRADICAO-DIFICIL": {
+      "label": "Transições de fala e contrapontos podem gerar tensão e interromper a interação",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outras dificuldades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "NEC-PRESERVAR-VINCULO-SOCIAL": {
+      "label": "Preservar o vínculo com professor e colegas durante a participação",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "NEC-NEGOCIAR-TURNOS-TRANSICOES": {
+      "label": "Combinar turnos, transições e formas respeitosas de encerrar ou retomar a contribuição",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "NEC-ALINHAR-IMAGENS-PREVIAMENTE": {
+      "label": "Alinhar previamente quais imagens apoiam cada parte da explicação",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "NEC-SINALIZAR-AUSENCIA-IMAGEM": {
+      "label": "Sinalizar quando não houver imagem e manter a explicação por outra forma",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros apoios",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "AMB-LABORATORIO-INFORMATICA": {
+      "label": "Laboratório de informática",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros ambientes",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "AMB-AUDITORIO": {
+      "label": "Auditório",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros ambientes",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "RED-APRESENTACAO-DIGITAL": {
+      "label": "Apresentação digital",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros recursos digitais",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "RED-IMAGEM-DIGITAL": {
+      "label": "Imagem digital selecionada para apoiar a explicação",
+      "aliases": [],
+      "description": "",
+      "scope": "CASO_ENTREVISTA",
+      "category_label": "Específico do caso da entrevista",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "REC-SINAL-TRANSICAO": {
+      "label": "Sinal combinado para transição, pausa ou retomada",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros recursos disponíveis",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "REC-INDICADOR-SEM-IMAGEM": {
+      "label": "Marcador que indica que a explicação continuará sem imagem",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outros recursos disponíveis",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "TAR-APRESENTAR-CONTEUDO-DIFERENTES-ESPACOS": {
+      "label": "Apresentar conteúdo em sala, laboratório ou auditório",
+      "aliases": [],
+      "description": "",
+      "category_label": "Outras atividades",
+      "scope": "GERAL",
+      "order": 900,
+      "show_in_interface": true
+    },
+    "TAR-ORGANIZAR-CONTEUDO-DIGITAL": {
+      "label": "Organizar um conteúdo digital",
+      "description": "Criar uma sequência que possa ser retomada e revisada.",
+      "aliases": [
+        "organizar conteúdo",
+        "estruturar conteúdo digital"
+      ],
+      "category_label": "Criar e organizar",
+      "scope": "GERAL",
+      "order": 1,
+      "show_in_interface": true
+    },
+    "TAR-PRODUZIR-CONTEUDO-MULTIMODAL": {
+      "label": "Produzir conteúdo usando formas complementares",
+      "description": "Combinar formas de expressão porque cada uma cumpre uma função.",
+      "aliases": [
+        "produzir conteúdo multimodal",
+        "criar conteúdo com texto imagem áudio vídeo"
+      ],
+      "category_label": "Criar e organizar",
+      "scope": "GERAL",
+      "order": 2,
+      "show_in_interface": true
+    },
+    "TAR-COMUNICAR-E-EXPRESSAR": {
+      "label": "Comunicar ou expressar conhecimento",
+      "description": "Produzir uma contribuição que outras pessoas possam compreender.",
+      "aliases": [
+        "comunicar",
+        "expressar conhecimento",
+        "explicar"
+      ],
+      "category_label": "Comunicar e participar",
+      "scope": "GERAL",
+      "order": 3,
+      "show_in_interface": true
+    },
+    "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL": {
+      "label": "Acessar e compreender conteúdo digital",
+      "description": "Localizar, perceber e compreender o conteúdo e suas relações.",
+      "aliases": [
+        "acessar conteúdo",
+        "compreender conteúdo digital",
+        "ler página"
+      ],
+      "category_label": "Acessar e compreender",
+      "scope": "GERAL",
+      "order": 4,
+      "show_in_interface": true
+    },
+    "TAR-NAVEGAR-E-ORIENTAR-SE": {
+      "label": "Navegar ou acompanhar orientações",
+      "description": "Manter orientação e executar ações durante um percurso ou navegação.",
+      "aliases": [
+        "navegar",
+        "seguir rota",
+        "orientar-se",
+        "acompanhar orientação"
+      ],
+      "category_label": "Navegar e operar",
+      "scope": "GERAL",
+      "order": 5,
+      "show_in_interface": true
+    },
+    "TAR-OPERAR-SISTEMA": {
+      "label": "Operar um sistema ou recurso",
+      "description": "Executar entradas, escolhas e confirmações no sistema.",
+      "aliases": [
+        "operar sistema",
+        "usar aplicativo",
+        "controlar computador"
+      ],
+      "category_label": "Navegar e operar",
+      "scope": "GERAL",
+      "order": 6,
+      "show_in_interface": true
+    },
+    "TAR-REVISAR-E-CONFIRMAR": {
+      "label": "Revisar e confirmar conteúdo ou ação",
+      "description": "Retomar a informação antes de concluir ou enviar.",
+      "aliases": [
+        "revisar",
+        "confirmar",
+        "repetir mensagem",
+        "corrigir"
+      ],
+      "category_label": "Revisar e confirmar",
+      "scope": "GERAL",
+      "order": 7,
+      "show_in_interface": true
+    },
+    "CAR-INTERESSE-CONHECIMENTO-TEMA": {
+      "label": "Demonstra interesse intenso e conhecimento aprofundado sobre um tema",
+      "description": "Registra uma potencialidade observável; não funciona como diagnóstico.",
+      "aliases": [
+        "interesse intenso",
+        "conhecimento aprofundado",
+        "tema específico",
+        "hiperfoco"
+      ],
+      "category_label": "Interesses, conhecimentos e potencialidades",
+      "scope": "GERAL",
+      "order": 8,
+      "show_in_interface": true
+    },
+    "CAR-EXPRESSAO-ORAL-AUTORAL": {
+      "label": "Desenvolve e expressa conhecimento principalmente pela fala",
+      "description": "Indica a forma pela qual a pessoa constrói e comunica sua contribuição.",
+      "aliases": [
+        "se expressa pela fala",
+        "explicação oral",
+        "fala para explicar"
+      ],
+      "category_label": "Comunicação e expressão",
+      "scope": "GERAL",
+      "order": 9,
+      "show_in_interface": true
+    },
+    "CAR-EXPRESSAO-VISUAL-AUTORAL": {
+      "label": "Usa imagem ou desenho para explicar e organizar ideias",
+      "description": "A representação visual precisa ter função e significado explícitos.",
+      "aliases": [
+        "se expressa por imagens",
+        "usa desenho",
+        "desenha para explicar"
+      ],
+      "category_label": "Comunicação e expressão",
+      "scope": "GERAL",
+      "order": 10,
+      "show_in_interface": true
+    },
+    "CAR-NECESSITA-ESTRUTURA-TRANSICAO": {
+      "label": "Beneficia-se de sequência, transições e fechamento explícitos",
+      "description": "Descreve uma condição funcional situada, não uma classe clínica.",
+      "aliases": [
+        "precisa de sequência",
+        "transição difícil",
+        "retomada",
+        "fechamento"
+      ],
+      "category_label": "Atenção e organização",
+      "scope": "GERAL",
+      "order": 11,
+      "show_in_interface": true
+    },
+    "CAR-OPERACAO-NAO-CONVENCIONAL": {
+      "label": "Precisa de uma forma alternativa para operar o recurso",
+      "description": "A alternativa deve ser testada com o movimento, dispositivo e tarefa reais.",
+      "aliases": [
+        "não consegue usar teclado",
+        "movimento limitado",
+        "entrada alternativa"
+      ],
+      "category_label": "Operação e controle",
+      "scope": "GERAL",
+      "order": 12,
+      "show_in_interface": true
+    },
+    "CAR-EXPERIENCIA-DIGITAL-VARIAVEL": {
+      "label": "A experiência com o recurso digital pode variar",
+      "description": "Experiência com uma tecnologia semelhante não garante domínio da configuração atual.",
+      "aliases": [
+        "pouca experiência digital",
+        "não conhece o gesto",
+        "dificuldade com touchscreen"
+      ],
+      "category_label": "Experiência e proficiência digital",
+      "scope": "GERAL",
+      "order": 13,
+      "show_in_interface": true
+    },
+    "BAR-INFORMACAO-EM-UM-SO-MODO": {
+      "label": "Informação importante depende de uma única forma de acesso",
+      "description": "Pode impedir percepção, compreensão ou expressão quando esse modo falha.",
+      "aliases": [
+        "somente imagem",
+        "somente áudio",
+        "só texto",
+        "um único modo"
+      ],
+      "category_label": "Percepção e acesso",
+      "scope": "GERAL",
+      "order": 14,
+      "show_in_interface": true
+    },
+    "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE": {
+      "label": "O conteúdo não fica organizado para retomar e revisar",
+      "description": "A sequência ou o estado desaparece antes da conclusão da tarefa.",
+      "aliases": [
+        "conteúdo sem estrutura",
+        "não consegue retomar",
+        "informação passageira"
+      ],
+      "category_label": "Atenção e organização",
+      "scope": "GERAL",
+      "order": 15,
+      "show_in_interface": true
+    },
+    "BAR-RECURSO-INCOMPATIVEL-CAPACIDADE": {
+      "label": "O recurso exige uma forma de perceber ou operar que não está disponível",
+      "description": "Exige verificar capacidade funcional, tecnologia e ambiente.",
+      "aliases": [
+        "recurso incompatível",
+        "não consegue operar",
+        "não percebe o recurso"
+      ],
+      "category_label": "Operação e controle",
+      "scope": "GERAL",
+      "order": 16,
+      "show_in_interface": true
+    },
+    "NEC-FUNCAO-EXPLICITA-POR-MODALIDADE": {
+      "label": "Definir para que serve cada forma de interação",
+      "description": "Evita acrescentar modos apenas por variedade.",
+      "aliases": [
+        "função de cada modalidade",
+        "para que serve o vídeo",
+        "para que serve a imagem"
+      ],
+      "category_label": "Combinação multimodal",
+      "scope": "GERAL",
+      "order": 17,
+      "show_in_interface": true
+    },
+    "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE": {
+      "label": "Manter uma alternativa que preserve a mesma função",
+      "description": "A alternativa deve preservar o significado ou a ação necessária à tarefa.",
+      "aliases": [
+        "alternativa equivalente",
+        "outra forma de acesso",
+        "plano alternativo"
+      ],
+      "category_label": "Alternativas e continuidade",
+      "scope": "GERAL",
+      "order": 18,
+      "show_in_interface": true
+    },
+    "NEC-REVISAO-E-CONFIRMACAO": {
+      "label": "Permitir revisar, repetir e confirmar",
+      "description": "A pessoa precisa controlar a continuidade da tarefa.",
+      "aliases": [
+        "revisar",
+        "repetir",
+        "confirmar",
+        "nova tentativa"
+      ],
+      "category_label": "Feedback e controle",
+      "scope": "GERAL",
+      "order": 19,
+      "show_in_interface": true
+    },
+    "RED-APRESENTACAO": {
+      "label": "Apresentação digital",
+      "description": "Material digital organizado em telas ou blocos.",
+      "aliases": [
+        "apresentação",
+        "slides",
+        "powerpoint"
+      ],
+      "category_label": "Conteúdo e produção",
+      "scope": "GERAL",
+      "order": 20,
+      "show_in_interface": true
+    },
+    "RED-PAGINA-WEB": {
+      "label": "Página ou conteúdo na web",
+      "description": "Página, notícia, enciclopédia ou material disponível na web.",
+      "aliases": [
+        "site",
+        "página web",
+        "conteúdo web"
+      ],
+      "category_label": "Web e aprendizagem",
+      "scope": "GERAL",
+      "order": 21,
+      "show_in_interface": true
+    },
+    "RED-AVA": {
+      "label": "Ambiente virtual de aprendizagem",
+      "description": "Sistema usado para acessar conteúdo, atividades e comunicação.",
+      "aliases": [
+        "ava",
+        "sigaa",
+        "moodle",
+        "plataforma de aprendizagem"
+      ],
+      "category_label": "Web e aprendizagem",
+      "scope": "GERAL",
+      "order": 22,
+      "show_in_interface": true
+    },
+    "RED-FORMULARIO": {
+      "label": "Formulário digital",
+      "description": "Fluxo de entrada, revisão, validação e envio de dados.",
+      "aliases": [
+        "formulário",
+        "cadastro",
+        "questionário"
+      ],
+      "category_label": "Web e aprendizagem",
+      "scope": "GERAL",
+      "order": 23,
+      "show_in_interface": true
+    },
+    "RED-MENSAGENS": {
+      "label": "Mensagens ou comunicação digital",
+      "description": "Canal para produzir, enviar e compreender mensagens.",
+      "aliases": [
+        "mensagens",
+        "chat",
+        "comunicação digital"
+      ],
+      "category_label": "Comunicação",
+      "scope": "GERAL",
+      "order": 24,
+      "show_in_interface": true
+    },
+    "RED-MAPA": {
+      "label": "Mapa ou representação espacial digital",
+      "description": "Representação espacial que precisa preservar orientação por formas compatíveis.",
+      "aliases": [
+        "mapa",
+        "mapa digital",
+        "rota"
+      ],
+      "category_label": "Orientação e espaço",
+      "scope": "GERAL",
+      "order": 25,
+      "show_in_interface": true
+    },
+    "RED-VIDEO": {
+      "label": "Vídeo",
+      "description": "Usar quando movimento, processo, contraste ou perspectiva acrescentar informação.",
+      "aliases": [
+        "vídeo",
+        "filme",
+        "animação"
+      ],
+      "category_label": "Mídias",
+      "scope": "GERAL",
+      "order": 26,
+      "show_in_interface": true
+    },
+    "RED-AUDIO": {
+      "label": "Áudio",
+      "description": "Pode apoiar expressão ou acesso quando houver controle e alternativa adequada.",
+      "aliases": [
+        "áudio",
+        "gravação",
+        "podcast"
+      ],
+      "category_label": "Mídias",
+      "scope": "GERAL",
+      "order": 27,
+      "show_in_interface": true
+    },
+    "RED-JOGO": {
+      "label": "Jogo ou atividade interativa",
+      "description": "Usar quando a interação consolidar relações e oferecer feedback explicativo.",
+      "aliases": [
+        "jogo",
+        "quiz",
+        "atividade interativa"
+      ],
+      "category_label": "Mídias",
+      "scope": "GERAL",
+      "order": 28,
+      "show_in_interface": true
+    },
+    "RED-EDITOR-CONTEUDO": {
+      "label": "Editor para criar conteúdo",
+      "description": "Ferramenta para organizar e revisar texto, imagem, áudio ou vídeo.",
+      "aliases": [
+        "editor",
+        "criar conteúdo",
+        "editar apresentação"
+      ],
+      "category_label": "Conteúdo e produção",
+      "scope": "GERAL",
+      "order": 29,
+      "show_in_interface": true
+    },
+    "REC-COMPUTADOR": {
+      "label": "Computador",
+      "description": "",
+      "aliases": [
+        "computador",
+        "notebook"
+      ],
+      "category_label": "Dispositivos",
+      "scope": "GERAL",
+      "order": 30,
+      "show_in_interface": true
+    },
+    "REC-SMARTPHONE": {
+      "label": "Celular ou smartphone",
+      "description": "",
+      "aliases": [
+        "celular",
+        "smartphone"
+      ],
+      "category_label": "Dispositivos",
+      "scope": "GERAL",
+      "order": 31,
+      "show_in_interface": true
+    },
+    "REC-PROJETOR": {
+      "label": "Projetor",
+      "description": "",
+      "aliases": [
+        "projetor",
+        "datashow",
+        "data show"
+      ],
+      "category_label": "Dispositivos",
+      "scope": "GERAL",
+      "order": 32,
+      "show_in_interface": true
+    },
+    "REC-CAMERA": {
+      "label": "Câmera",
+      "description": "",
+      "aliases": [
+        "câmera",
+        "fotografar",
+        "gravar vídeo"
+      ],
+      "category_label": "Captura e expressão",
+      "scope": "GERAL",
+      "order": 33,
+      "show_in_interface": true
+    },
+    "REC-MICROFONE": {
+      "label": "Microfone",
+      "description": "",
+      "aliases": [
+        "microfone",
+        "gravar áudio"
+      ],
+      "category_label": "Captura e expressão",
+      "scope": "GERAL",
+      "order": 34,
+      "show_in_interface": true
+    },
+    "REC-FONES": {
+      "label": "Fones de ouvido",
+      "description": "",
+      "aliases": [
+        "fones",
+        "headset",
+        "fone de ouvido"
+      ],
+      "category_label": "Áudio",
+      "scope": "GERAL",
+      "order": 35,
+      "show_in_interface": true
+    },
+    "REC-ENTRADA-VOZ": {
+      "label": "Entrada ou controle por voz",
+      "description": "Precisa permitir revisão, correção e alternativa quando o reconhecimento falhar.",
+      "aliases": [
+        "entrada por voz",
+        "comando de voz",
+        "ditado"
+      ],
+      "category_label": "Entrada alternativa",
+      "scope": "GERAL",
+      "order": 37,
+      "show_in_interface": true
+    },
+    "REC-TTS": {
+      "label": "Leitura de texto em voz",
+      "description": "Transforma texto disponível em saída falada; não corrige estrutura ou descrição ausentes.",
+      "aliases": [
+        "texto para fala",
+        "tts",
+        "ler em voz alta"
+      ],
+      "category_label": "Áudio",
+      "scope": "GERAL",
+      "order": 38,
+      "show_in_interface": true
+    },
+    "REC-TECLADO": {
+      "label": "Teclado",
+      "description": "Teclado operável; não representa automaticamente acionadores ou outras entradas alternativas.",
+      "aliases": [
+        "teclado",
+        "digitação"
+      ],
+      "category_label": "Entrada alternativa",
+      "scope": "GERAL",
+      "order": 39,
+      "show_in_interface": true
+    },
+    "REC-AJUSTE-VISUAL": {
+      "label": "Ajustes de foco, contraste e ampliação",
+      "description": "",
+      "aliases": [
+        "contraste",
+        "ampliação",
+        "zoom",
+        "foco visível"
+      ],
+      "category_label": "Apresentação visual",
+      "scope": "GERAL",
+      "order": 40,
+      "show_in_interface": true
+    },
+    "REC-LEGENDAS": {
+      "label": "Legendas",
+      "description": "Preservam o conteúdo sonoro relevante quando sincronizadas e revisadas.",
+      "aliases": [
+        "legenda",
+        "legendas sincronizadas"
+      ],
+      "category_label": "Alternativas de mídia",
+      "scope": "GERAL",
+      "order": 41,
+      "show_in_interface": true
+    },
+    "REC-AUDIODESCRICAO": {
+      "label": "Audiodescrição",
+      "description": "Comunica informação visual essencial que não está no áudio principal.",
+      "aliases": [
+        "audiodescrição",
+        "descrição em áudio"
+      ],
+      "category_label": "Alternativas de mídia",
+      "scope": "GERAL",
+      "order": 42,
+      "show_in_interface": true
+    },
+    "REC-DESCRICAO-TEXTUAL": {
+      "label": "Descrição textual",
+      "description": "Deve registrar o significado relevante à tarefa, não apenas a aparência.",
+      "aliases": [
+        "descrição textual",
+        "texto alternativo",
+        "descrição de imagem"
+      ],
+      "category_label": "Alternativas de mídia",
+      "scope": "GERAL",
+      "order": 43,
+      "show_in_interface": true
+    },
+    "REC-FEEDBACK-ACESSIVEL": {
+      "label": "Retorno perceptível sobre ação, erro ou estado",
+      "description": "Precisa ser percebido, recuperado e não retirar o foco indevidamente.",
+      "aliases": [
+        "feedback",
+        "mensagem de status",
+        "confirmação",
+        "erro"
+      ],
+      "category_label": "Feedback e controle",
+      "scope": "GERAL",
+      "order": 44,
+      "show_in_interface": true
+    },
+    "REC-AJUDA-CONTEXTUAL": {
+      "label": "Ajuda ligada à tarefa atual",
+      "description": "",
+      "aliases": [
+        "ajuda contextual",
+        "instrução no momento",
+        "dica"
+      ],
+      "category_label": "Ajuda e orientação",
+      "scope": "GERAL",
+      "order": 45,
+      "show_in_interface": true
+    },
+    "REC-SENSORES": {
+      "label": "Sensor ou acionador",
+      "description": "",
+      "aliases": [
+        "sensor",
+        "acionador",
+        "webcam",
+        "movimento"
+      ],
+      "category_label": "Entrada alternativa",
+      "scope": "GERAL",
+      "order": 46,
+      "show_in_interface": true
+    },
+    "REC-VIBRACAO": {
+      "label": "Vibração ou retorno tátil",
+      "description": "Sinaliza evento ou mudança; não substitui sozinho conteúdo verbal complexo.",
+      "aliases": [
+        "vibração",
+        "háptico",
+        "retorno tátil"
+      ],
+      "category_label": "Feedback e controle",
+      "scope": "GERAL",
+      "order": 47,
+      "show_in_interface": true
+    },
+    "RED-APLICATIVO-ORIENTACAO": {
+      "label": "Aplicativo de orientação durante deslocamento",
+      "description": "Aplicativo que apresenta instruções de orientação; não pressupõe mapa, GPS, internet ou produto específico.",
+      "aliases": [],
+      "category_label": "Aplicativos",
+      "scope": "GERAL",
+      "order": 60,
+      "show_in_interface": true
+    },
+    "CAR-DIGITACAO-PROLONGADA-CANSATIVA": {
+      "label": "Digitação prolongada causa cansaço nesta tarefa",
+      "description": "Premissa do exemplo sintético: digitar mensagens longas causa cansaço, mas o teclado continua operável para correções curtas. Não expressa diagnóstico.",
+      "aliases": [],
+      "category_label": "Condições funcionais da tarefa",
+      "scope": "GERAL",
+      "order": 61,
+      "show_in_interface": true
+    },
+    "CAR-FALA-LEITURA-OPERAVEIS": {
+      "label": "Fala e leitura de texto operáveis nesta tarefa",
+      "description": "Premissa sintética: a pessoa pode falar e revisar o texto reconhecido; não é deduzida de uma deficiência nem generalizada.",
+      "aliases": [],
+      "category_label": "Condições funcionais da tarefa",
+      "scope": "GERAL",
+      "order": 62,
+      "show_in_interface": true
+    },
+    "PAPEL-RESPONSAVEL-ADAPTACAO": {
+      "label": "Responsável pela adaptação do recurso",
+      "description": "Pessoa com autorização e meios para editar o conteúdo ou configurar o canal; não se confunde com a pessoa que utiliza e avalia a adaptação.",
+      "aliases": [],
+      "category_label": "Responsabilidades",
+      "scope": "GERAL",
+      "order": 63,
+      "show_in_interface": true
+    },
+    "REC-SAIDA-AUDIO": {
+      "label": "Saída de áudio operante",
+      "description": "Capacidade técnica de reproduzir áudio; não comprova percepção contínua em ruído nem orientação já acessível.",
+      "aliases": [],
+      "category_label": "Meios técnicos disponíveis",
+      "scope": "GERAL",
+      "order": 64,
+      "show_in_interface": true
+    },
+    "REC-CONFIGURACAO-CANAL": {
+      "label": "Meio autorizado para configurar o canal de mensagens",
+      "description": "Acesso técnico e autorização do responsável para configurar o canal. Não significa que a comunicação multiformato já esteja implementada.",
+      "aliases": [],
+      "category_label": "Meios técnicos disponíveis",
+      "scope": "GERAL",
+      "order": 65,
+      "show_in_interface": true
+    }
+  }
+}

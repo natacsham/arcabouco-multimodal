@@ -1,0 +1,581 @@
+{
+  "scope": "Visão guiada comparada à apresentação original, sem alteração ou nova validação da ontologia.",
+  "execution_target": "LOCAL_SUBPATH",
+  "checks": {
+    "served_index_html_matches": true,
+    "served_guiado_html_matches": true,
+    "served_app_js_matches": true,
+    "served_guided_js_matches": true,
+    "served_guided_css_matches": true,
+    "served_views_css_matches": true,
+    "served_styles_css_matches": true,
+    "served_client_mjs_matches": true,
+    "served_worker_mjs_matches": true,
+    "runtime_ready": true,
+    "no_duplicate_ids": true,
+    "two_real_tabs_only": true,
+    "stage_one_only": true,
+    "keyboard_skip_first": true,
+    "keyboard_skip_focus": true,
+    "cannot_skip_confirmation": true,
+    "missing_selection_error_visible": true,
+    "error_does_not_unlock_review": true,
+    "review_is_unconfirmed": true,
+    "obsolete_navigation_message_cleared": true,
+    "review_focus": true,
+    "generation_requires_confirmation": true,
+    "principal_seven_configurations": true,
+    "result_focus": true,
+    "same_content_modes_resources_as_original": true,
+    "practical_disclosures_closed": true,
+    "modes_function_resources_visible_when_closed": true,
+    "configuration_keyboard_opens": true,
+    "configuration_focus_visible": true,
+    "configuration_keyboard_closes": true,
+    "expand_all": true,
+    "collapse_all_preserves_content": true,
+    "measured_text_contrast": true,
+    "measured_high_contrast": true,
+    "result_reflow_320": true,
+    "text_reaches_200": true,
+    "result_reflow_320_text_200": true,
+    "forced_colors_reflow": true,
+    "forced_colors_and_reduced_motion": true,
+    "back_preserves_confirmation": true,
+    "forward_preserves_result": true,
+    "reconfirm_report_invalidates_previous_result": true,
+    "reconfirm_cannot_reopen_stale_result": true,
+    "reconfirmed_report_requires_new_generation": true,
+    "editing_invalidates_old_result": true,
+    "example_requires_review": true,
+    "synchronous_preserved_organization_advances": true,
+    "screen_reader_example_constructed": true,
+    "changed_narrative_invalidates_review": true,
+    "incomplete_narrative_reports_missing": true,
+    "incomplete_narrative_suspends": true,
+    "stop_available_at_every_stage": true,
+    "clear_discards_and_resets": true,
+    "load_failure_is_visible": true,
+    "clear_recovers_failed_runtime": true,
+    "no_storage": true,
+    "no_external_or_case_upload": true,
+    "no_javascript_errors": true,
+    "manifest_not_changed_during_run": true,
+    "served_manifest_matches": true
+  },
+  "errors": [],
+  "external_requests": [],
+  "request_methods": [
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET"
+  ],
+  "timings": {
+    "load_ms": 8064,
+    "principal_generation_ms": 23682
+  },
+  "started_at_utc": "2026-10-07T12:48:35.735Z",
+  "limitations": [
+    "Não é declaração de conformidade WCAG.",
+    "NVDA, VoiceOver e síntese audível não avaliados.",
+    "Casos sintéticos; não representa sessão humana.",
+    "Não repete a regressão semântica completa do motor."
+  ],
+  "build": {
+    "version": "1.3.0-rc1",
+    "instrument": "AMADO",
+    "public_projection": true,
+    "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
+    "core_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+    "bridge_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+    "base_zip_sha256": "1e1a6a21ce8510aef5d92a0292da79b36094ebe6be60d302a8d40857082e4a7c",
+    "pyodide_version": "314.0.7",
+    "runtime": {
+      "pyodide-lock.json": {
+        "bytes": 119077,
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+      },
+      "pyodide.asm.mjs": {
+        "bytes": 1250344,
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+      },
+      "pyodide.asm.wasm": {
+        "bytes": 9598218,
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+      },
+      "pyodide.mjs": {
+        "bytes": 17931,
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+      },
+      "python_stdlib.zip": {
+        "bytes": 2545637,
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+      }
+    },
+    "license_notices": {
+      "licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+      "licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "licenses/MUSL-COPYRIGHT.txt": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "licenses/PYODIDE-MPL-2.0.txt": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "licenses/PYODIDE-STACKFRAME-LICENSE.txt": "899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420",
+      "licenses/PYTHON-3.14.2-LICENSE.txt": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "licenses/PYTHON-3.14.2-THIRD-PARTY.rst": "c695d550b135e53e38807e76496d1db17d22c40e461d1f3f354c86188d3305dd",
+      "licenses/README.md": "f6104c41292b57ff6d35edb7008ac8a87bbd66bdff6f9d20c16e94939a98df68"
+    },
+    "case_history": false,
+    "llm": false,
+    "frontend_sha256": {
+      "index.html": "97bb67aef40da6d4bdb3751e0bb27a9cc432a86c22363516f06ab5dd9583196a",
+      "app.js": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+      "styles.css": "87fe813835b3e19b5c5cacca65d64b5f08a791832a0f6c7a55db261b8a74fcda",
+      "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+      "guiado.html": "05a4a8e588391a3070bc45a383b9138dc9f93e5a2aa0750c34876bde8780e6d0",
+      "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+      "guided.css": "db2a9e441c7e5345f44d82ec7021521db4ea2776a94e262529980fd205047b67",
+      "views.css": "f96607c67d4d40b74810742e70afb916eed34c7ce0f342e595dc2626a69809f7"
+    },
+    "site_assets_sha256": {
+      "index.html": "be176aeafbab4ce94fb2d69952e48847ff954629c0913607ec5d5ddc5f0ff28e",
+      "ontologia/index.html": "adb569235adf0ce2968136233a6a0a1d055157c221abd6dacf134ed6ea047026",
+      "site.css": "97ed27484857d21725cf027cdba39afbd8263d8273a00c6bd5bdd8fe5249562b",
+      "shell.css": "dfd44f2fffc278012355f282b4b9859ff38813482d0e88d8566394d588bdc9f1",
+      "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "sitemap.xml": "7ae4a147c35e006a700f3231d4a479240929b18e2513ccac229e8f1122ebe9be"
+    },
+    "files": {
+      "data/knowledge-base.json": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc",
+      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "ontology/mado-combined.ttl": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+      "queries/CQ-002.rq": "10e779fe05eb4c898411586c007b2f58cc0f791b06c78947d7df72a17a099c0f",
+      "queries/CQ-003.rq": "62d09e51cbd70719bf9953b563092ebba125ccd9abc0c17d1d410432acbe712f",
+      "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+      "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+      "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+      "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+    }
+  },
+  "source_sha256": {
+    "index.html": "97bb67aef40da6d4bdb3751e0bb27a9cc432a86c22363516f06ab5dd9583196a",
+    "guiado.html": "05a4a8e588391a3070bc45a383b9138dc9f93e5a2aa0750c34876bde8780e6d0",
+    "app.js": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+    "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+    "guided.css": "db2a9e441c7e5345f44d82ec7021521db4ea2776a94e262529980fd205047b67",
+    "views.css": "f96607c67d4d40b74810742e70afb916eed34c7ce0f342e595dc2626a69809f7",
+    "styles.css": "87fe813835b3e19b5c5cacca65d64b5f08a791832a0f6c7a55db261b8a74fcda",
+    "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+    "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f"
+  },
+  "browser": "154.0.8037.98",
+  "comparison": {
+    "scope": "Síntese, títulos e conteúdo dos blocos, modos, funções, recursos e estados, orientação detalhada, condições, alternativas, acompanhamento, critérios e conhecimentos; apenas wrappers e prefixos numéricos da apresentação são desconsiderados.",
+    "original_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+    "guided_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+    "configurations": 7,
+    "steps": 5
+  },
+  "configuration_focus": {
+    "style": "solid",
+    "width": "4px",
+    "color": "rgb(112, 48, 160)",
+    "visible": true
+  },
+  "contrast_default": [
+    {
+      "selector": "h1",
+      "text": "Uma orientação, passo a passo.",
+      "ratio": 10.703896890077,
+      "minimum": 3
+    },
+    {
+      "selector": "h2",
+      "text": "O que fazer neste contexto",
+      "ratio": 11.632780427465335,
+      "minimum": 3
+    },
+    {
+      "selector": "p",
+      "text": "Texto: 100%",
+      "ratio": 6.260978003635952,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Ao mudar de visão, o caso aberto é descartado.",
+      "ratio": 6.588460518464797,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "APOIO À DECISÃO",
+      "ratio": 6.128104698398003,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Comece pelo caso, confira as informações e explore as formas de i",
+      "ratio": 10.703896890077,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A−",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A+",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Texto original",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Alto contraste",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "Sobre seus dados e o uso desta visão",
+      "ratio": 8.484683825527089,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: or",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preser",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mud",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: organizar unidades curtas, autoria, sequência e pontos de",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: preservar a voz da pessoa em trechos curtos, identificáve",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: mostrar uma mudança, processo ou contraste difícil de exp",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: consolidar relações e tornar dúvidas observáveis sem tran",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Editor de apresentação, página ou painel multimídia Dis",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Di",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Reprodutor de vídeo com controles e alternativas de ace",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    }
+  ],
+  "contrast_high": [
+    {
+      "selector": "h1",
+      "text": "Uma orientação, passo a passo.",
+      "ratio": 21,
+      "minimum": 3
+    },
+    {
+      "selector": "h2",
+      "text": "O que fazer neste contexto",
+      "ratio": 21,
+      "minimum": 3
+    },
+    {
+      "selector": "p",
+      "text": "Texto: 100%",
+      "ratio": 14.735800377717528,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Ao mudar de visão, o caso aberto é descartado.",
+      "ratio": 7.160206731566718,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "APOIO À DECISÃO",
+      "ratio": 12.032825928765776,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Comece pelo caso, confira as informações e explore as formas de i",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A−",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A+",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Texto original",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Alto contraste",
+      "ratio": 12.303564830665552,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "Sobre seus dados e o uso desta visão",
+      "ratio": 9.220984184771348,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: or",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preser",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mud",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: organizar unidades curtas, autoria, sequência e pontos de",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: preservar a voz da pessoa em trechos curtos, identificáve",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: mostrar uma mudança, processo ou contraste difícil de exp",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: consolidar relações e tornar dúvidas observáveis sem tran",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Editor de apresentação, página ou painel multimídia Dis",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Di",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Reprodutor de vídeo com controles e alternativas de ace",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    }
+  ],
+  "layout": {
+    "result_reflow_320": {
+      "viewport": 320,
+      "width": 320
+    },
+    "result_reflow_320_text_200": {
+      "viewport": 320,
+      "width": 320
+    },
+    "forced_colors_reflow": {
+      "viewport": 320,
+      "width": 320
+    }
+  },
+  "completed": true,
+  "finished_at_utc": "2026-10-07T12:50:40.264Z"
+}

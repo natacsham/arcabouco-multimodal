@@ -1,0 +1,77 @@
+/* Shared navigation and reading controls. No application styles are imported. */
+.site-header, .reading-bar {
+  --shell-ink: #193b40;
+  --shell-muted: #405d61;
+  --shell-accent: #075c60;
+  --shell-line: #b9cecb;
+  --shell-soft: #e8f3f0;
+  --shell-white: #fff;
+  --shell-focus: #7030a0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  color: var(--shell-ink);
+  overflow-wrap: anywhere;
+}
+.site-header { background: var(--shell-white); border-bottom: 1px solid var(--shell-line); }
+.site-header .wrap, .reading-bar .wrap {
+  width: 100%; max-width: 90rem; margin: 0 auto;
+  padding-inline: clamp(1rem, 2.2vw, 2rem);
+}
+.site-header .header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; padding-block: 1.1rem;
+}
+.site-header .brand {
+  display: inline-flex; align-items: center; gap: .7rem;
+  text-decoration: none; color: var(--shell-ink);
+  font-size: 1.35rem; font-weight: 780; letter-spacing: .02em;
+}
+.site-header .brand-mark {
+  width: 2.15rem; height: 2.15rem; flex: 0 0 2.15rem;
+  border: 2px solid var(--shell-accent); border-radius: .6rem;
+  display: grid; place-items: center; background: var(--shell-soft); font-size: 1.05rem;
+}
+.site-header .nav { display: flex; align-items: center; flex-wrap: wrap; gap: .25rem 1rem; }
+.site-header .nav a {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  padding: .5rem .2rem; color: var(--shell-accent); font-size: 1rem;
+  font-weight: 600; text-underline-offset: .2em; text-decoration-thickness: .08em;
+}
+.site-header .nav a:hover { text-decoration-thickness: .15em; }
+.site-header .nav a[aria-current=page] { color: var(--shell-ink); text-decoration-thickness: .18em; }
+.reading-bar { background: var(--shell-soft); border-bottom: 1px solid var(--shell-line); }
+.reading-bar .reading-inner {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .65rem 1rem;
+  padding-block: .7rem; font-size: .9rem;
+}
+.reading-bar .reading-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; }
+.reading-bar .reading-actions button {
+  font: inherit; font-size: 1rem; font-weight: 650; line-height: 1.4;
+  min-width: 2.75rem; min-height: 2.75rem; padding: .55rem .75rem;
+  border: 1px solid var(--shell-accent); border-radius: .45rem;
+  background: var(--shell-white); color: var(--shell-ink); cursor: pointer;
+}
+.reading-bar .reading-actions button:hover { background: #f7faf9; }
+.reading-bar .reading-actions button[aria-pressed=true] { background: var(--shell-accent); color: var(--shell-white); }
+.reading-bar .reading-actions button[aria-disabled=true] { border-style: dashed; cursor: default; }
+.reading-bar .reading-status { min-width: 6.5em; margin: 0; color: var(--shell-muted); }
+.site-header a:focus-visible, .reading-bar button:focus-visible {
+  outline: 3px solid var(--shell-focus); outline-offset: 4px; border-radius: .15rem;
+}
+html[data-contrast=high] .site-header, html[data-contrast=high] .reading-bar {
+  --shell-ink: #000; --shell-muted: #202020; --shell-accent: #003a4b;
+  --shell-line: #333; --shell-soft: #edf5f6; --shell-focus: #702000;
+}
+@media (max-width: 25rem) {
+  .site-header .wrap, .reading-bar .wrap { padding-inline: 1rem; }
+  .site-header .nav { width: 100%; gap: .25rem .8rem; }
+  .site-header .nav a { font-size: 1rem; }
+}
+@media (forced-colors: active) {
+  .site-header, .reading-bar { border-color: CanvasText; }
+  .site-header a { color: LinkText; }
+  .reading-bar .reading-actions button { border-color: ButtonText; color: ButtonText; background: ButtonFace; }
+  .reading-bar .reading-actions button[aria-pressed=true] { background: Highlight; color: HighlightText; }
+  .site-header a:focus-visible, .reading-bar button:focus-visible { outline-color: Highlight; }
+}
+@media print { .site-header, .reading-bar { display: none; } }

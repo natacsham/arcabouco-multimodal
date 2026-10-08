@@ -1,0 +1,32 @@
+PREFIX mado: <https://w3id.org/mado#>
+SELECT ?papel ?conhecimento ?enunciado ?articulacao ?tipoArticulacao ?nivelConfirmacao
+       ?trecho ?conteudo ?fonte ?tituloFonte ?perspectiva ?estadoPublicacao ?localizacao WHERE {
+  VALUES ?decisao { mado:D-TESTE-RC4-TRANSFERENCIA }
+  {
+    ?decisao mado:sustentadaPor ?conhecimento .
+    FILTER NOT EXISTS { ?decisao mado:sustentadaCondicionalmentePor ?conhecimento }
+    BIND("sustentacao_principal" AS ?papel)
+  } UNION {
+    ?decisao mado:sustentadaCondicionalmentePor ?conhecimento .
+    BIND("sustentacao_condicional" AS ?papel)
+  } UNION {
+    ?decisao mado:atendeRequisitoDeExpressao ?conhecimento .
+    BIND("requisito_de_expressao" AS ?papel)
+  }
+  ?decisao mado:possuiConfiguracaoModal ?configuracao .
+  ?configuracao mado:configuracaoSustentadaPorConhecimento ?conhecimento .
+  ?conhecimento mado:enunciado ?enunciado ; mado:derivadoDe ?fonte ; mado:sustentadoPorTrecho ?trecho .
+  ?trecho mado:trechoDeFonte ?fonte .
+  OPTIONAL { ?trecho mado:conteudoDoTrecho ?conteudo }
+  OPTIONAL { ?trecho mado:estadoDePublicacaoDoTrecho ?estadoPublicacao }
+  OPTIONAL { ?trecho mado:localizacaoDocumental ?localizacao }
+  OPTIONAL { ?fonte mado:titulo ?tituloFonte }
+  OPTIONAL { ?conhecimento mado:articuladoSobPerspectiva ?perspectiva }
+  OPTIONAL {
+    ?configuracao mado:configuracaoMobilizaArticulacao ?articulacao .
+    ?articulacao mado:produzConhecimento ?conhecimento ;
+                 mado:tipoDeArticulacao ?tipoArticulacao ;
+                 mado:nivelDeConfirmacao ?nivelConfirmacao .
+  }
+}
+ORDER BY ?papel ?conhecimento ?articulacao ?trecho

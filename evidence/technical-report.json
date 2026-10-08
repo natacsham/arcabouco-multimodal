@@ -1,0 +1,1295 @@
+{
+  "checked_at_utc": "2026-10-07T04:32:09.995075+00:00",
+  "scope": "PUBLIC_RELEASE_PYTHON_RDF_SHACL_AND_RUNTIME_QUERIES",
+  "limits": [
+    "Technical verification does not establish expert approval, educational outcomes or generalization.",
+    "Unittest checks are not browser/manual accessibility verification.",
+    "A query returning rows does not by itself establish semantic adequacy; exact support and exclusions have separate regression assertions.",
+    "No visitor data, generated decision text or runtime RDF is retained by this report."
+  ],
+  "versions": {
+    "python": "3.12.10",
+    "platform": "Windows",
+    "rdflib": "7.1.4",
+    "pyshacl": "0.30.1",
+    "ontology": "1.3.0-rc1",
+    "executor": "AMADO-web-1.3.0-rc1"
+  },
+  "source_sha256": {
+    "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+    "data/knowledge-base.json": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc",
+    "engine.py": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+    "ontology/mado-combined.ttl": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+    "ontology/mado.owl": "700dfc224f827a5870c8cf4f914aee60786edd4e24793c68373eab71c0197aad",
+    "ontology/main.ttl": "302414ee27e8c1f4d1b9b07600631f7ad5608a67b2e35b5fda7b945b35eb466c",
+    "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
+    "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+    "queries/CQ-002.rq": "10e779fe05eb4c898411586c007b2f58cc0f791b06c78947d7df72a17a099c0f",
+    "queries/CQ-003.rq": "62d09e51cbd70719bf9953b563092ebba125ccd9abc0c17d1d410432acbe712f",
+    "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+    "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+    "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+    "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+    "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+    "scripts/verify_public.py": "027e067d5358668ce9b671609fbb5888aa992f80ee401e46ed50cdd51479124e",
+    "scripts/verify_reasoner.py": "1ffc9243f17d9bd5fa732e4bb4d6e319b5bd06b000f3bd13fe9d9c30fd7d1f0e",
+    "shapes/main.shacl.ttl": "fe0a65314330efbe0bae523977fb1a1383518ccb67654c29eafc42497157811f",
+    "tests/test_engine.py": "c810979758eee7667fc4b88e1e406540ea71455e99d54f61c3c22f5036109a01",
+    "tests/test_ontology.py": "dd19ef23af10cde718cd777c1070f8de2da96104de88091af5d43ac737a90f03"
+  },
+  "checks": {
+    "unittest": {
+      "passed": true,
+      "discovery": "tests/test_*.py",
+      "tests_run": 56,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "output": "test_all_queries_executed (test_engine.EngineTests.test_all_queries_executed) ... ok\ntest_articulation_edges_not_cartesian (test_engine.EngineTests.test_articulation_edges_not_cartesian) ... ok\ntest_blocked_knowledge (test_engine.EngineTests.test_blocked_knowledge) ... ok\ntest_clear_erases_input (test_engine.EngineTests.test_clear_erases_input) ... ok\ntest_context_preserves_documented_perspective (test_engine.EngineTests.test_context_preserves_documented_perspective) ... ok\ntest_cq4_exact_pairs (test_engine.EngineTests.test_cq4_exact_pairs) ... ok\ntest_curated_articulation_allowlist (test_engine.EngineTests.test_curated_articulation_allowlist) ... ok\ntest_edit_invalidates_previous_decision (test_engine.EngineTests.test_edit_invalidates_previous_decision) ... ok\ntest_failed_update_is_transactional (test_engine.EngineTests.test_failed_update_is_transactional) ... ok\ntest_false_string_cannot_confirm (test_engine.EngineTests.test_false_string_cannot_confirm) ... ok\ntest_free_context_not_attributed_to_specialist (test_engine.EngineTests.test_free_context_not_attributed_to_specialist) ... ok\ntest_main_seven_grounded_configurations (test_engine.EngineTests.test_main_seven_grounded_configurations) ... ok\ntest_missing_resource_is_conditional_not_available (test_engine.EngineTests.test_missing_resource_is_conditional_not_available) ... ok\ntest_narrative_not_free_interpretation (test_engine.EngineTests.test_narrative_not_free_interpretation) ... ok\ntest_no_history_or_write_methods (test_engine.EngineTests.test_no_history_or_write_methods) ... ok\ntest_reported_correction_is_available_only_in_current_case (test_engine.EngineTests.test_reported_correction_is_available_only_in_current_case) ... ok\ntest_resource_cannot_be_blocked_and_available (test_engine.EngineTests.test_resource_cannot_be_blocked_and_available) ... ok\ntest_all_local_classes_have_definitions (test_ontology.OntologyContractTests.test_all_local_classes_have_definitions) ... ok\ntest_application_cannot_belong_to_two_configurations (test_ontology.OntologyContractTests.test_application_cannot_belong_to_two_configurations) ... ok\ntest_application_domains_ranges_and_inverse (test_ontology.OntologyContractTests.test_application_domains_ranges_and_inverse) ... ok\ntest_application_without_knowledge_fails (test_ontology.OntologyContractTests.test_application_without_knowledge_fails) ... ok\ntest_application_without_origin_fails (test_ontology.OntologyContractTests.test_application_without_origin_fails) ... ok\ntest_application_without_type_still_fails (test_ontology.OntologyContractTests.test_application_without_type_still_fails) ... ok\ntest_blank_application_justification_fails (test_ontology.OntologyContractTests.test_blank_application_justification_fails) ... ok\ntest_configuration_may_have_additional_noncriterion_knowledge (test_ontology.OntologyContractTests.test_configuration_may_have_additional_noncriterion_knowledge) ... ok\ntest_configuration_without_all_knowledge_fails (test_ontology.OntologyContractTests.test_configuration_without_all_knowledge_fails) ... ok\ntest_configuration_without_applications_fails (test_ontology.OntologyContractTests.test_configuration_without_applications_fails) ... ok\ntest_confirmed_articulation_is_valid (test_ontology.OntologyContractTests.test_confirmed_articulation_is_valid) ... ok\ntest_cq4_returns_only_exact_application_pairs (test_ontology.OntologyContractTests.test_cq4_returns_only_exact_application_pairs) ... ok\ntest_decision_without_any_configuration_fails (test_ontology.OntologyContractTests.test_decision_without_any_configuration_fails) ... ok\ntest_document_locator_must_match_string_datatype_contract (test_ontology.OntologyContractTests.test_document_locator_must_match_string_datatype_contract) ... ok\ntest_expression_requirement_not_imposed_without_k33 (test_ontology.OntologyContractTests.test_expression_requirement_not_imposed_without_k33) ... ok\ntest_historical_decision_is_not_forced_to_have_new_configuration (test_ontology.OntologyContractTests.test_historical_decision_is_not_forced_to_have_new_configuration) ... ok\ntest_missing_excerpt_content_without_explicit_restriction_fails (test_ontology.OntologyContractTests.test_missing_excerpt_content_without_explicit_restriction_fails) ... ok\ntest_missing_status_cannot_bypass_generated_requirements (test_ontology.OntologyContractTests.test_missing_status_cannot_bypass_generated_requirements) ... ok\ntest_positive_complete_graph (test_ontology.OntologyContractTests.test_positive_complete_graph) ... ok\ntest_preparation_state_is_valid (test_ontology.OntologyContractTests.test_preparation_state_is_valid) ... ok\ntest_projection_cannot_contain_an_unapplied_criterion (test_ontology.OntologyContractTests.test_projection_cannot_contain_an_unapplied_criterion) ... ok\ntest_projection_cannot_contain_an_unapplied_origin (test_ontology.OntologyContractTests.test_projection_cannot_contain_an_unapplied_origin) ... ok\ntest_restricted_excerpt_with_reference_and_location_is_valid (test_ontology.OntologyContractTests.test_restricted_excerpt_with_reference_and_location_is_valid) ... ok\ntest_restricted_excerpt_without_locator_fails (test_ontology.OntologyContractTests.test_restricted_excerpt_without_locator_fails) ... ok\ntest_restricted_excerpt_without_source_fails (test_ontology.OntologyContractTests.test_restricted_excerpt_without_source_fails) ... ok\ntest_restricted_marker_cannot_coexist_with_original_excerpt (test_ontology.OntologyContractTests.test_restricted_marker_cannot_coexist_with_original_excerpt) ... ok\ntest_restricted_result_preserves_record_without_inventing_outcome (test_ontology.OntologyContractTests.test_restricted_result_preserves_record_without_inventing_outcome) ... ok\ntest_restricted_result_without_locator_fails (test_ontology.OntologyContractTests.test_restricted_result_without_locator_fails) ... ok\ntest_result_without_outcome_or_explicit_restriction_fails (test_ontology.OntologyContractTests.test_result_without_outcome_or_explicit_restriction_fails) ... ok\ntest_selected_k33_requires_its_own_expression_link (test_ontology.OntologyContractTests.test_selected_k33_requires_its_own_expression_link) ... ok\ntest_selected_k33_with_exact_expression_link_passes (test_ontology.OntologyContractTests.test_selected_k33_with_exact_expression_link_passes) ... ok\ntest_selected_k33_without_expression_link_fails (test_ontology.OntologyContractTests.test_selected_k33_without_expression_link_fails) ... ok\ntest_six_core_classes_remain_disjoint (test_ontology.OntologyContractTests.test_six_core_classes_remain_disjoint) ... ok\ntest_suspended_decision_does_not_require_invented_support (test_ontology.OntologyContractTests.test_suspended_decision_does_not_require_invented_support) ... ok\ntest_suspended_decision_must_not_present_configuration (test_ontology.OntologyContractTests.test_suspended_decision_must_not_present_configuration) ... ok\ntest_undeclared_resource_state_fails (test_ontology.OntologyContractTests.test_undeclared_resource_state_fails) ... ok\ntest_unknown_confirmation_cannot_enable_articulation (test_ontology.OntologyContractTests.test_unknown_confirmation_cannot_enable_articulation) ... ok\ntest_unknown_curation_cannot_enable_articulation (test_ontology.OntologyContractTests.test_unknown_curation_cannot_enable_articulation) ... ok\ntest_valid_configuration_does_not_hide_invalid_use_of_same_criterion (test_ontology.OntologyContractTests.test_valid_configuration_does_not_hide_invalid_use_of_same_criterion) ... ok\n\n----------------------------------------------------------------------\nRan 56 tests in 27.611s\n\nOK\n",
+      "elapsed_seconds": 27.89
+    },
+    "public_base_shacl": {
+      "passed": true,
+      "conforms_with_documentary_warnings_allowed": true,
+      "inference": "none",
+      "data_triples": 13457,
+      "shape_triples": 449,
+      "violations": 0,
+      "warnings": 65,
+      "infos": 0,
+      "findings": [
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA22",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA23",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA24",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA25",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA26",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA27",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA28",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA29",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA30",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA31",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA32",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA33",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA34",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA35",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA37",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA38",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA40",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA41",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA42",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA43",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA44",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA45",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA46",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA47",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA48",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA49",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA50",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA51",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA52",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA53",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA54",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA55",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA56",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA57",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA58",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA59",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA60",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA61",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA62",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA63",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA64",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA65",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA66",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA67",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA68",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA69",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA70",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA71",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA72",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA73",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA74",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA75",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA76",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA77",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA78",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA79",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA80",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA81",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA82",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA83",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA84",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA85",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA86",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA87",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA88",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        }
+      ],
+      "elapsed_seconds": 7.594
+    },
+    "runtime_main_decision_shacl_and_queries": {
+      "passed": true,
+      "conforms_with_documentary_warnings_allowed": true,
+      "inference": "none",
+      "data_triples": 14227,
+      "shape_triples": 449,
+      "violations": 0,
+      "warnings": 65,
+      "infos": 0,
+      "findings": [
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA22",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA23",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA24",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA25",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA26",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA27",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA28",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA29",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA30",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA31",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA32",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA33",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA34",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA35",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA37",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA38",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA40",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA41",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA42",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA43",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA44",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA45",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA46",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA47",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA48",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA49",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA50",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA51",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA52",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA53",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA54",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA55",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA56",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA57",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA58",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA59",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA60",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA61",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA62",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA63",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA64",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA65",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA66",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA67",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA68",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA69",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA70",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA71",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA72",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA73",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA74",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA75",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA76",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA77",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA78",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA79",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA80",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA81",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA82",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA83",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA84",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA85",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA86",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA87",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        },
+        {
+          "severity": "http://www.w3.org/ns/shacl#Warning",
+          "focus": "https://w3id.org/mado#CA88",
+          "path": "",
+          "constraint": "http://www.w3.org/ns/shacl#SPARQLConstraintComponent",
+          "messages": [
+            "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."
+          ]
+        }
+      ],
+      "context": "CTX-CASO-92FF1A4134",
+      "decision_status": "GERADA",
+      "runtime_triples": 770,
+      "runtime_configurations": 7,
+      "runtime_criterion_applications": 20,
+      "query_rows": {
+        "CQ-001": 96,
+        "CQ-002": 28,
+        "CQ-003": 236,
+        "CQ-004": 273,
+        "CQ-005": 3,
+        "CQ-006": 7,
+        "CQ-007": 7,
+        "CQ-008": 1
+      },
+      "all_eight_queries_executed": true,
+      "persisted_runtime_graph": false,
+      "elapsed_seconds": 41.0
+    },
+    "reasoner_prior_evidence": {
+      "passed": true,
+      "report": "evidence/reasoner-report.json",
+      "report_sha256": "b8a0e44906a362506172561497189dd8e8427037f395a59cf56eec1036a57e6e",
+      "input_sha256": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "matches_current_combined_graph": true,
+      "checked_at_utc": "2026-10-07T03:37:48.340059+00:00",
+      "profile_passed": true,
+      "consistency_passed": true,
+      "path_redaction_applied": true,
+      "java_version": "openjdk version \"11.0.25\" 2024-10-15\nOpenJDK Runtime Environment Temurin-11.0.25+9 (build 11.0.25+9)\nOpenJDK 64-Bit Server VM Temurin-11.0.25+9 (build 11.0.25+9, mixed mode)",
+      "robot_version": "ROBOT version 1.9.10",
+      "reasoner_rerun": false,
+      "policy": "A changed graph requires a fresh successful reasoner report; this check never treats an older result as approval of different bytes.",
+      "elapsed_seconds": 0.015
+    },
+    "source_unchanged_during_check": {
+      "passed": true,
+      "changed_files": []
+    }
+  },
+  "graph_counts": {
+    "triples": 13457,
+    "classes": 22,
+    "object_properties": 101,
+    "data_properties": 60
+  },
+  "passed": true,
+  "elapsed_seconds": 77.25
+}

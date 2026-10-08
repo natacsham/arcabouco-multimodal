@@ -1,0 +1,12 @@
+PREFIX mado: <https://w3id.org/mado#>
+SELECT DISTINCT ?decisaoAnterior ?enunciado ?status ?resultado ?resultadoDescrito ?limite WHERE {
+  VALUES (?atual ?contextoAtual) { (mado:D-TESTE-RC4-TRANSFERENCIA mado:CTX-TRANSFERENCIA-RECURSO-DIGITAL-01) }
+  ?atual mado:sustentadaPor ?conhecimento .
+  ?decisaoAnterior a mado:DecisaoDeAcessibilidadeMultimodal ;
+      mado:sustentadaPor ?conhecimento ; mado:enunciado ?enunciado ; mado:statusDoRegistro ?status .
+  FILTER(?decisaoAnterior != ?atual)
+  FILTER NOT EXISTS { ?decisaoAnterior mado:incompativelCom ?contextoAtual }
+  OPTIONAL { ?decisaoAnterior mado:produziuResultado ?resultado . ?resultado mado:enunciado ?resultadoDescrito }
+  OPTIONAL { ?decisaoAnterior mado:limite ?limite }
+}
+ORDER BY ?decisaoAnterior ?resultado

@@ -1,0 +1,7 @@
+id,claim,questions,evidence,limit
+A1,Conhecimentos recuperados são filtrados antes de uso,QC2 QC4,evidence/technical-report.json,Somente condições formalizadas
+A2,Fundamentação do critério é específica à configuração,QC3 QC4 QC7,tests/test_engine.py e tests/test_ontology.py,Relações não confirmadas não se tornam verdade pela consulta
+A3,Uma combinação não cadastrada pode reutilizar padrões existentes,QC2 QC6 QC7,evidence/regression-report.json,Arranjo de conceitos existentes e não interpretação universal
+A4,Articulações podem acrescentar função à orientação,QC2 QC6,evidence/regression-report.json,Comparação técnica controlada e não ganho de aprendizagem
+A5,Ausência de suporte pode suspender a decisão,QC1 QC8,evidence/regression-report.json,Não exclui toda possível informação ausente
+A6,Esta revisão é tecnicamente verificável,QC1 QC2 QC3 QC4 QC5 QC6 QC7 QC8,evidence/reasoner-report.json e evidence/technical-report.json,Verificação não é avaliação humana da revisão

@@ -1,0 +1,7 @@
+PREFIX mado: <https://w3id.org/mado#>
+SELECT ?criterio ?status ?observacao WHERE {
+  ?criterio a mado:CriterioDeDecisaoMultimodal ; mado:statusDaRelacao ?status .
+  OPTIONAL { ?criterio mado:observacao ?observacao }
+  FILTER(CONTAINS(STR(?status), "AUSENT") || CONTAINS(STR(?status), "SEM_JUSTIFICATIVA") || BOUND(?observacao))
+}
+ORDER BY ?criterio

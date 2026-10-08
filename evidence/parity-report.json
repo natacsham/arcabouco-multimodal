@@ -1,0 +1,212 @@
+{
+  "type": "SYNTHETIC_NATIVE_BROWSER_PARITY_NOT_HUMAN_EVALUATION",
+  "executed_at": "2026-10-07T04:44:15.311Z",
+  "normalization": [
+    "Somente horário de execução e sufixos aleatórios de contexto, participante e decisão são desconsiderados.",
+    "Linhas SPARQL e topologia do grafo são comparadas como conjuntos ordenados canonicamente, preservando duplicatas.",
+    "A ordem interna de GROUP_CONCAT é normalizada apenas nos campos declarados pelas consultas.",
+    "Listas de identificadores, articulações, trajetória e correspondências de recuperação são relações sem ordem e são normalizadas.",
+    "A ordem das configurações, passos práticos e demais listas é preservada."
+  ],
+  "native_sha256": "70f95c81750b9de0f9deeb0141d5d8046e8eee72f65ba34dc4b24965f4c3fcd7",
+  "browser_sha256": "27a9fd3f2dd2041dc31ba7465dc2c5306998cc90db718941ec2b5afc6f9a3fcf",
+  "cases": {
+    "principal": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+        "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
+        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
+        "PAD-VIDEO-PROCESSO",
+        "PAD-JOGO-CONSOLIDACAO-FEEDBACK",
+        "PAD-PAPEIS-TURNOS-AUTORIA",
+        "PAD-REVISAO-CONFIRMACAO"
+      ],
+      "query_rows": {
+        "CQ-001": 96,
+        "CQ-002": 28,
+        "CQ-003": 236,
+        "CQ-004": 273,
+        "CQ-005": 3,
+        "CQ-006": 7,
+        "CQ-007": 7,
+        "CQ-008": 1
+      },
+      "native_canonical_sha256": "ea5334c8bc8869d507e024cb9d63a11248cdd7c8f19cf5a11b585ca3c17d4438",
+      "browser_canonical_sha256": "ea5334c8bc8869d507e024cb9d63a11248cdd7c8f19cf5a11b585ca3c17d4438",
+      "differences": []
+    },
+    "principal_sem_jogo": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+        "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
+        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
+        "PAD-VIDEO-PROCESSO",
+        "PAD-PAPEIS-TURNOS-AUTORIA",
+        "PAD-REVISAO-CONFIRMACAO"
+      ],
+      "query_rows": {
+        "CQ-001": 97,
+        "CQ-002": 28,
+        "CQ-003": 214,
+        "CQ-004": 246,
+        "CQ-005": 3,
+        "CQ-006": 6,
+        "CQ-007": 6,
+        "CQ-008": 1
+      },
+      "native_canonical_sha256": "b95833aacc90e262dd7e11537f3192bd4243819b30fdcff2849481f98e73a5ff",
+      "browser_canonical_sha256": "b95833aacc90e262dd7e11537f3192bd4243819b30fdcff2849481f98e73a5ff",
+      "differences": []
+    },
+    "leitor_tela": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE"
+      ],
+      "query_rows": {
+        "CQ-001": 33,
+        "CQ-002": 4,
+        "CQ-003": 11,
+        "CQ-004": 30,
+        "CQ-005": 2,
+        "CQ-006": 1,
+        "CQ-007": 1,
+        "CQ-008": 1
+      },
+      "native_canonical_sha256": "daea2a77f2ae2418cba051e7bbad8701ff8d43ce285c040a8d90cac8a11a0ad9",
+      "browser_canonical_sha256": "daea2a77f2ae2418cba051e7bbad8701ff8d43ce285c040a8d90cac8a11a0ad9",
+      "differences": []
+    },
+    "mobilidade_ruido": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
+        "PAD-RETORNO-HAPTICO-RUIDO"
+      ],
+      "query_rows": {
+        "CQ-001": 27,
+        "CQ-002": 7,
+        "CQ-003": 23,
+        "CQ-004": 48,
+        "CQ-005": 2,
+        "CQ-006": 2,
+        "CQ-007": 2,
+        "CQ-008": 1
+      },
+      "native_canonical_sha256": "ed00f355594915b77006928df0585510cab7182ef552e7f63d9d9fb6ca557fcb",
+      "browser_canonical_sha256": "ed00f355594915b77006928df0585510cab7182ef552e7f63d9d9fb6ca557fcb",
+      "differences": []
+    },
+    "comunicacao": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-COMUNICACAO-MULTIFORMATO"
+      ],
+      "query_rows": {
+        "CQ-001": 40,
+        "CQ-002": 6,
+        "CQ-003": 9,
+        "CQ-004": 24,
+        "CQ-005": 1,
+        "CQ-006": 1,
+        "CQ-007": 1,
+        "CQ-008": 2
+      },
+      "native_canonical_sha256": "bdbd5e1b71dfe5724798fe57e29ee298acf53fe6ff09f6dccafa65afaf05c2d9",
+      "browser_canonical_sha256": "bdbd5e1b71dfe5724798fe57e29ee298acf53fe6ff09f6dccafa65afaf05c2d9",
+      "differences": []
+    },
+    "diagnostico_isolado": {
+      "equal": true,
+      "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
+      "configurations": [],
+      "query_rows": {
+        "CQ-001": 8,
+        "CQ-002": 0,
+        "CQ-003": 0,
+        "CQ-004": 0,
+        "CQ-005": 0,
+        "CQ-006": 0,
+        "CQ-007": 0,
+        "CQ-008": 5
+      },
+      "native_canonical_sha256": "14a5e57e0d42401f7644585e4b15312d02c9b1e50b7801505245ce709e6b3555",
+      "browser_canonical_sha256": "14a5e57e0d42401f7644585e4b15312d02c9b1e50b7801505245ce709e6b3555",
+      "differences": []
+    },
+    "sem_confirmacao": {
+      "equal": true,
+      "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
+      "configurations": [],
+      "query_rows": {
+        "CQ-001": 107,
+        "CQ-002": 28,
+        "CQ-003": 0,
+        "CQ-004": 0,
+        "CQ-005": 0,
+        "CQ-006": 0,
+        "CQ-007": 0,
+        "CQ-008": 12
+      },
+      "native_canonical_sha256": "a8f928974f9da794489df8ee80828d442d1e407d2de80b515a56366fa42a7968",
+      "browser_canonical_sha256": "a8f928974f9da794489df8ee80828d442d1e407d2de80b515a56366fa42a7968",
+      "differences": []
+    },
+    "combinacao_nao_cadastrada": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE",
+        "PAD-COMUNICACAO-MULTIFORMATO"
+      ],
+      "query_rows": {
+        "CQ-001": 53,
+        "CQ-002": 8,
+        "CQ-003": 20,
+        "CQ-004": 54,
+        "CQ-005": 2,
+        "CQ-006": 2,
+        "CQ-007": 2,
+        "CQ-008": 2
+      },
+      "native_canonical_sha256": "b6b72c581f7dc12a17846effb343bad9a4e148ea9283a60b641de8080a5cd8c1",
+      "browser_canonical_sha256": "b6b72c581f7dc12a17846effb343bad9a4e148ea9283a60b641de8080a5cd8c1",
+      "differences": []
+    },
+    "combinacao_sem_voz": {
+      "equal": true,
+      "status": "GERADA",
+      "configurations": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE"
+      ],
+      "query_rows": {
+        "CQ-001": 55,
+        "CQ-002": 8,
+        "CQ-003": 11,
+        "CQ-004": 30,
+        "CQ-005": 2,
+        "CQ-006": 1,
+        "CQ-007": 1,
+        "CQ-008": 4
+      },
+      "native_canonical_sha256": "5a95d3e10ccd5e37047f59301c6255bc52ec5a365a7d5445c98fa4ff5a52c279",
+      "browser_canonical_sha256": "5a95d3e10ccd5e37047f59301c6255bc52ec5a365a7d5445c98fa4ff5a52c279",
+      "differences": []
+    }
+  },
+  "missing_in_browser": [],
+  "unexpected_in_browser": [],
+  "comparator_self_checks": {
+    "rejects_changed_configuration_order": true,
+    "rejects_changed_modal_function": true,
+    "accepts_unordered_knowledge_ids": true
+  },
+  "passed": true
+}

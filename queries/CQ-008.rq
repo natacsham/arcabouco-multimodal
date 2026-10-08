@@ -1,0 +1,7 @@
+PREFIX mado: <https://w3id.org/mado#>
+SELECT ?statusContexto ?informacaoAusente ?statusDecisao ?rationale WHERE {
+  VALUES (?ctx ?decisao) { (mado:CTX-TESTE-RC2-DIAGNOSTICO-ISOLADO mado:D-TESTE-RC2-SUSPENSA) }
+  ?ctx mado:statusDoRegistro ?statusContexto ; mado:informacaoAusente ?informacaoAusente .
+  ?decisao mado:statusDecisao ?statusDecisao ; mado:rationale ?rationale .
+}
+ORDER BY ?informacaoAusente

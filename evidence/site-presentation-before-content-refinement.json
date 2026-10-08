@@ -1,0 +1,1833 @@
+{
+  "scope": "Conteúdo, navegação, SEO técnico e apresentação acessível; não revalida motor ou ontologia.",
+  "execution_target": "LOCAL_SUBPATH",
+  "browser": "154.0.8037.98",
+  "started_at_utc": "2026-10-07T05:03:10.119Z",
+  "checks": {
+    "site_assets_match_manifest": true,
+    "served_site_assets_match": true,
+    "home_http_200": true,
+    "home_served_source_matches": true,
+    "home_semantic_document": true,
+    "home_seo": true,
+    "home_jsonld_schema": true,
+    "home_author_metadata": true,
+    "home_shared_navigation": true,
+    "home_single_current_navigation": true,
+    "home_shared_shell_loaded": true,
+    "home_no_positive_tabindex": true,
+    "home_skip_link_first": true,
+    "home_skip_link_focus": true,
+    "home_toolbar_present": true,
+    "home_native_named_buttons": true,
+    "home_keyboard_visible_focus": true,
+    "home_preserved_font_base": true,
+    "home_keyboard_text_enlargement": true,
+    "home_text_200_percent": true,
+    "home_text_200_reflow": true,
+    "home_font_reset": true,
+    "home_font_not_below_100": true,
+    "home_status_semantics": true,
+    "home_contrast_default": true,
+    "home_contrast_keyboard_toggle": true,
+    "home_contrast_high": true,
+    "home_top_link_focus": true,
+    "home_no_unexplained_identifiers": true,
+    "home_authorship_and_acronym": true,
+    "home_authorial_voice": true,
+    "home_hover_keeps_content_geometry": true,
+    "home_subtle_hover_not_focusable": true,
+    "home_hover_respects_reduced_motion": true,
+    "home_reflow_320": true,
+    "home_mobile_text_200_reflow": true,
+    "home_forced_colors_reflow": true,
+    "home_forced_colors_and_reduced_motion": true,
+    "home_no_persistent_storage": true,
+    "home_preferences_not_restored": true,
+    "ontology_http_200": true,
+    "ontology_served_source_matches": true,
+    "ontology_semantic_document": true,
+    "ontology_seo": true,
+    "ontology_jsonld_schema": true,
+    "ontology_author_metadata": true,
+    "ontology_shared_navigation": true,
+    "ontology_single_current_navigation": true,
+    "ontology_shared_shell_loaded": true,
+    "ontology_no_positive_tabindex": true,
+    "ontology_skip_link_first": true,
+    "ontology_skip_link_focus": true,
+    "ontology_toolbar_present": true,
+    "ontology_native_named_buttons": true,
+    "ontology_keyboard_visible_focus": true,
+    "ontology_preserved_font_base": true,
+    "ontology_keyboard_text_enlargement": true,
+    "ontology_text_200_percent": true,
+    "ontology_text_200_reflow": true,
+    "ontology_font_reset": true,
+    "ontology_font_not_below_100": true,
+    "ontology_status_semantics": true,
+    "ontology_contrast_default": true,
+    "ontology_contrast_keyboard_toggle": true,
+    "ontology_contrast_high": true,
+    "ontology_top_link_focus": true,
+    "ontology_authorship_and_acronym": true,
+    "ontology_authorial_voice": true,
+    "ontology_hover_keeps_content_geometry": true,
+    "ontology_subtle_hover_not_focusable": true,
+    "ontology_hover_respects_reduced_motion": true,
+    "ontology_reflow_320": true,
+    "ontology_mobile_text_200_reflow": true,
+    "ontology_forced_colors_reflow": true,
+    "ontology_forced_colors_and_reduced_motion": true,
+    "ontology_no_persistent_storage": true,
+    "ontology_preferences_not_restored": true,
+    "amado_http_200": true,
+    "amado_served_source_matches": true,
+    "amado_semantic_document": true,
+    "amado_seo": true,
+    "amado_jsonld_schema": true,
+    "amado_author_metadata": true,
+    "amado_shared_navigation": true,
+    "amado_single_current_navigation": true,
+    "amado_shared_shell_loaded": true,
+    "amado_no_positive_tabindex": true,
+    "amado_skip_link_first": true,
+    "amado_skip_link_focus": true,
+    "amado_toolbar_present": true,
+    "amado_native_named_buttons": true,
+    "amado_keyboard_visible_focus": true,
+    "amado_preserved_font_base": true,
+    "amado_keyboard_text_enlargement": true,
+    "amado_text_200_percent": true,
+    "amado_text_200_reflow": true,
+    "amado_font_reset": true,
+    "amado_font_not_below_100": true,
+    "amado_status_semantics": true,
+    "amado_contrast_default": true,
+    "amado_contrast_keyboard_toggle": true,
+    "amado_contrast_high": true,
+    "amado_top_link_focus": true,
+    "amado_home_navigation": true,
+    "amado_home_subpath": true,
+    "amado_top_link": true,
+    "amado_top_focus": true,
+    "amado_contrast_sample": true,
+    "amado_reflow_320": true,
+    "amado_mobile_text_200_reflow": true,
+    "amado_forced_colors_reflow": true,
+    "amado_forced_colors_and_reduced_motion": true,
+    "amado_no_persistent_storage": true,
+    "amado_preferences_not_restored": true,
+    "distinct_page_titles": true,
+    "sitemap_three_pages": true,
+    "no_external_requests_or_case_post": true,
+    "no_javascript_errors": true
+  },
+  "pages": {
+    "home": {
+      "metadata": {
+        "title": "MADO — Ontologia para Acessibilidade e Interação Multimodal",
+        "lang": "pt-BR",
+        "author": "Natacsha Ordones Raposo de Melo",
+        "description": "Conheça a MADO, ontologia da pesquisa de doutorado de Natacsha Ordones Raposo de Melo sobre acessibilidade digital, conhecimento articulado e interação multimodal.",
+        "canonical": "https://natacsham.github.io/MADO/",
+        "og_title": "MADO — Ontologia para Acessibilidade e Interação Multimodal",
+        "og_url": "https://natacsham.github.io/MADO/",
+        "jsonld": [
+          {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://natacsham.github.io/MADO/#site",
+                "url": "https://natacsham.github.io/MADO/",
+                "name": "MADO",
+                "description": "Projeto de pesquisa de doutorado sobre representação do conhecimento, interação multimodal e acessibilidade digital.",
+                "inLanguage": "pt-BR",
+                "author": {
+                  "@id": "https://natacsham.github.io/MADO/ontologia/#autoria"
+                },
+                "about": {
+                  "@id": "https://natacsham.github.io/MADO/ontologia/#mado"
+                }
+              },
+              {
+                "@type": "Person",
+                "@id": "https://natacsham.github.io/MADO/ontologia/#autoria",
+                "name": "Natacsha Ordones Raposo de Melo"
+              },
+              {
+                "@type": "CreativeWork",
+                "@id": "https://natacsham.github.io/MADO/ontologia/#mado",
+                "url": "https://natacsham.github.io/MADO/ontologia/",
+                "name": "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital",
+                "genre": "Ontologia",
+                "inLanguage": "pt-BR",
+                "description": "Representação semântica de conhecimentos, articulações, critérios, contextos e decisões de acessibilidade multimodal.",
+                "author": {
+                  "@id": "https://natacsham.github.io/MADO/ontologia/#autoria"
+                }
+              }
+            ]
+          }
+        ],
+        "h1_count": 1,
+        "main_count": 1
+      },
+      "focus": {
+        "outline_style": "solid",
+        "outline_width": "3px",
+        "outline_color": "rgb(112, 48, 160)",
+        "visible": true,
+        "in_view": true
+      },
+      "font_base": 16,
+      "font_200": {
+        "style": "32px",
+        "pixels": 32
+      },
+      "contrast_default": [
+        {
+          "selector": "h1",
+          "text": "Conhecimento que se conecta. Decisões que se explicam.",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 11.48622523335119,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Encontrar informação não é o mesmo que saber como empregá-la.",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Preservar a expressão. Permitir a retomada.",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 11.48622523335119,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Multimodal é explicar a relação entre os modos.",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 3
+        },
+        {
+          "selector": "p",
+          "text": "Texto: 100%",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            232,
+            243,
+            240
+          ],
+          "ratio": 6.260978003635952,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Interação multimodal · Acessibilidade digital",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 7.382234754894216,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Nesta pesquisa, construí a MADO (Multimodal Accessibility Decisio",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 6.7640754479756104,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Sem cadastro e sem histórico",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Quando não há conhecimento suficiente",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "O que esta demonstração não comprova",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "a.button",
+          "text": "Experimentar o AMADO",
+          "foreground": "rgb(255, 255, 255)",
+          "background": [
+            7,
+            92,
+            96
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": "a.button",
+          "text": "Entender por um exemplo",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": "a.button",
+          "text": "Abrir o AMADO",
+          "foreground": "rgb(255, 255, 255)",
+          "background": [
+            7,
+            92,
+            96
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A−",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A+",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "Texto original",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Entenda a MADO",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "A ontologia",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Experimente o AMADO",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".site-footer p",
+          "text": "Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Me",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.1033501023516665,
+          "minimum": 4.5
+        },
+        {
+          "selector": "[data-reading-status]",
+          "text": "Texto: 100%",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            232,
+            243,
+            240
+          ],
+          "ratio": 6.260978003635952,
+          "minimum": 4.5
+        }
+      ],
+      "contrast_high": [
+        {
+          "selector": "h1",
+          "text": "Conhecimento que se conecta. Decisões que se explicam.",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Encontrar informação não é o mesmo que saber como empregá-la.",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Preservar a expressão. Permitir a retomada.",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Multimodal é explicar a relação entre os modos.",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "p",
+          "text": "Texto: 100%",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            237,
+            245,
+            246
+          ],
+          "ratio": 14.735800377717528,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Interação multimodal · Acessibilidade digital",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Nesta pesquisa, construí a MADO (Multimodal Accessibility Decisio",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 16.29325535858735,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Sem cadastro e sem histórico",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Quando não há conhecimento suficiente",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "O que esta demonstração não comprova",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "a.button",
+          "text": "Experimentar o AMADO",
+          "foreground": "rgb(255, 255, 255)",
+          "background": [
+            0,
+            58,
+            75
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": "a.button",
+          "text": "Entender por um exemplo",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": "a.button",
+          "text": "Abrir o AMADO",
+          "foreground": "rgb(255, 255, 255)",
+          "background": [
+            0,
+            58,
+            75
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A−",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A+",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "Texto original",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Entenda a MADO",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "A ontologia",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Experimente o AMADO",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".site-footer p",
+          "text": "Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Me",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 16.29325535858735,
+          "minimum": 4.5
+        },
+        {
+          "selector": "[data-reading-status]",
+          "text": "Texto: 100%",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            237,
+            245,
+            246
+          ],
+          "ratio": 14.735800377717528,
+          "minimum": 4.5
+        }
+      ],
+      "technical_terms_visible": [],
+      "hover": {
+        "before": {
+          "width": 371.203125,
+          "height": 235.28125,
+          "transform": "none",
+          "border": "rgb(185, 206, 203)",
+          "shadow": "none",
+          "transition": "0.18s, 0.18s, 0.18s",
+          "tabindex": null
+        },
+        "hovered": {
+          "width": 371.203125,
+          "height": 235.28125,
+          "transform": "matrix(1, 0, 0, 1, 0, -3)",
+          "border": "rgb(7, 92, 96)",
+          "shadow": "rgba(21, 63, 57, 0.094) 0px 9.6px 19.2px 0px",
+          "transition": "0.18s, 0.18s, 0.18s",
+          "tabindex": null
+        },
+        "reduced": {
+          "width": 371.203125,
+          "height": 235.28125,
+          "transform": "none",
+          "border": "rgb(7, 92, 96)",
+          "shadow": "rgba(21, 63, 57, 0.094) 0px 9.6px 19.2px 0px",
+          "transition": "0s",
+          "tabindex": null
+        }
+      }
+    },
+    "ontology": {
+      "metadata": {
+        "title": "Modelo da MADO — Conhecimento Multimodal Articulado",
+        "lang": "pt-BR",
+        "author": "Natacsha Ordones Raposo de Melo",
+        "description": "Explore classes, relações e um exemplo rastreável da ontologia MADO. Consulte o modelo, os arquivos técnicos e os limites da verificação da pesquisa.",
+        "canonical": "https://natacsham.github.io/MADO/ontologia/",
+        "og_title": "Modelo da MADO — Conhecimento Multimodal Articulado",
+        "og_url": "https://natacsham.github.io/MADO/ontologia/",
+        "jsonld": [
+          {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "CreativeWork",
+                "@id": "https://natacsham.github.io/MADO/ontologia/#mado",
+                "url": "https://natacsham.github.io/MADO/ontologia/",
+                "name": "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital",
+                "description": "Representação semântica de conhecimentos, articulações, critérios, contextos e decisões de acessibilidade multimodal.",
+                "genre": "Ontologia",
+                "inLanguage": "pt-BR",
+                "version": "1.3.0-rc1",
+                "author": {
+                  "@id": "https://natacsham.github.io/MADO/ontologia/#autoria"
+                },
+                "isPartOf": {
+                  "@id": "https://natacsham.github.io/MADO/#site"
+                }
+              },
+              {
+                "@type": "Person",
+                "@id": "https://natacsham.github.io/MADO/ontologia/#autoria",
+                "name": "Natacsha Ordones Raposo de Melo"
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://natacsham.github.io/MADO/#site",
+                "url": "https://natacsham.github.io/MADO/",
+                "name": "MADO",
+                "inLanguage": "pt-BR"
+              }
+            ]
+          }
+        ],
+        "h1_count": 1,
+        "main_count": 1
+      },
+      "focus": {
+        "outline_style": "solid",
+        "outline_width": "3px",
+        "outline_color": "rgb(112, 48, 160)",
+        "visible": true,
+        "in_view": true
+      },
+      "font_base": 16,
+      "font_200": {
+        "style": "32px",
+        "pixels": 32
+      },
+      "contrast_default": [
+        {
+          "selector": "h1",
+          "text": "O que está por trás de uma orientação?",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 11.48622523335119,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Seis conceitos centrais",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Do significado preservado à organização do conteúdo",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 11.48622523335119,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Representar, consultar e compor são operações diferentes.",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 3
+        },
+        {
+          "selector": "p",
+          "text": "Texto: 100%",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            232,
+            243,
+            240
+          ],
+          "ratio": 6.260978003635952,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Representação e fundamentação",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 7.382234754894216,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Na MADO (Multimodal Accessibility Decision Ontology), representei",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            247,
+            250,
+            249
+          ],
+          "ratio": 6.7640754479756104,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Como a estrutura preserva a fundamentação?",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "O AMADO usa inteligência artificial generativa?",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Por que uma decisão pode ficar suspensa?",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A−",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A+",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "Texto original",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Entenda a MADO",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "A ontologia",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Experimente o AMADO",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".site-footer p",
+          "text": "Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Me",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.1033501023516665,
+          "minimum": 4.5
+        },
+        {
+          "selector": "[data-reading-status]",
+          "text": "Texto: 100%",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            232,
+            243,
+            240
+          ],
+          "ratio": 6.260978003635952,
+          "minimum": 4.5
+        }
+      ],
+      "contrast_high": [
+        {
+          "selector": "h1",
+          "text": "O que está por trás de uma orientação?",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Seis conceitos centrais",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Do significado preservado à organização do conteúdo",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "h2",
+          "text": "Representar, consultar e compor são operações diferentes.",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "p",
+          "text": "Texto: 100%",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            237,
+            245,
+            246
+          ],
+          "ratio": 14.735800377717528,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Representação e fundamentação",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Na MADO (Multimodal Accessibility Decision Ontology), representei",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 16.29325535858735,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Como a estrutura preserva a fundamentação?",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "O AMADO usa inteligência artificial generativa?",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "Por que uma decisão pode ficar suspensa?",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A−",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A+",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "Texto original",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Entenda a MADO",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "A ontologia",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Experimente o AMADO",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".site-footer p",
+          "text": "Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Me",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 16.29325535858735,
+          "minimum": 4.5
+        },
+        {
+          "selector": "[data-reading-status]",
+          "text": "Texto: 100%",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            237,
+            245,
+            246
+          ],
+          "ratio": 14.735800377717528,
+          "minimum": 4.5
+        }
+      ],
+      "hover": {
+        "before": {
+          "width": 568,
+          "height": 167.765625,
+          "transform": "none",
+          "border": "rgb(185, 206, 203)",
+          "shadow": "none",
+          "transition": "0.18s, 0.18s, 0.18s",
+          "tabindex": null
+        },
+        "hovered": {
+          "width": 568,
+          "height": 167.765625,
+          "transform": "matrix(1, 0, 0, 1, 0, -3)",
+          "border": "rgb(7, 92, 96)",
+          "shadow": "rgba(21, 63, 57, 0.094) 0px 9.6px 19.2px 0px",
+          "transition": "0.18s, 0.18s, 0.18s",
+          "tabindex": null
+        },
+        "reduced": {
+          "width": 568,
+          "height": 167.765625,
+          "transform": "none",
+          "border": "rgb(7, 92, 96)",
+          "shadow": "rgba(21, 63, 57, 0.094) 0px 9.6px 19.2px 0px",
+          "transition": "0s",
+          "tabindex": null
+        }
+      }
+    },
+    "amado": {
+      "metadata": {
+        "title": "AMADO — orientações multimodais",
+        "lang": "pt-BR",
+        "author": "Natacsha Ordones Raposo de Melo",
+        "description": "Explore como o AMADO consulta a ontologia MADO e constrói uma orientação multimodal com fundamentos rastreáveis, no seu navegador.",
+        "canonical": "https://natacsham.github.io/MADO/amado/",
+        "og_title": "AMADO — orientações multimodais fundamentadas",
+        "og_url": "https://natacsham.github.io/MADO/amado/",
+        "jsonld": [
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": "https://natacsham.github.io/MADO/amado/#page",
+            "url": "https://natacsham.github.io/MADO/amado/",
+            "name": "AMADO — orientações multimodais fundamentadas",
+            "description": "Instrumento que consulta a ontologia MADO e compõe orientações dentro dos conhecimentos e padrões representados na base.",
+            "inLanguage": "pt-BR",
+            "isPartOf": {
+              "@id": "https://natacsham.github.io/MADO/#site"
+            },
+            "author": {
+              "@type": "Person",
+              "name": "Natacsha Ordones Raposo de Melo"
+            }
+          }
+        ],
+        "h1_count": 1,
+        "main_count": 1
+      },
+      "focus": {
+        "outline_style": "solid",
+        "outline_width": "3px",
+        "outline_color": "rgb(112, 48, 160)",
+        "visible": true,
+        "in_view": true
+      },
+      "font_base": 18,
+      "font_200": {
+        "style": "36px",
+        "pixels": 36
+      },
+      "contrast_default": [
+        {
+          "selector": "h1",
+          "text": "Compreender o caso e construir uma orientação",
+          "foreground": "rgb(20, 47, 55)",
+          "background": [
+            243,
+            247,
+            248
+          ],
+          "ratio": 13.054290705015273,
+          "minimum": 3
+        },
+        {
+          "selector": "p",
+          "text": "Texto: 100%",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            232,
+            243,
+            240
+          ],
+          "ratio": 6.260978003635952,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "APOIO À DECISÃO",
+          "foreground": "rgb(12, 101, 121)",
+          "background": [
+            243,
+            247,
+            248
+          ],
+          "ratio": 6.174903529196453,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Confira como o caso foi compreendido, confirme a organização das ",
+          "foreground": "rgb(20, 47, 55)",
+          "background": [
+            243,
+            247,
+            248
+          ],
+          "ratio": 13.054290705015273,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "1Um caso da pesquisaAdaptação didática pública, não transcrição d",
+          "foreground": "rgb(20, 47, 55)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.079618687682288,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "2Uma nova situação construída a partir desse casoA pessoa é a mes",
+          "foreground": "rgb(20, 47, 55)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 14.079618687682288,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A−",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A+",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "Texto original",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Entenda a MADO",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "A ontologia",
+          "foreground": "rgb(7, 92, 96)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 7.752515241008432,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Experimente o AMADO",
+          "foreground": "rgb(25, 59, 64)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.0623549832488,
+          "minimum": 4.5
+        },
+        {
+          "selector": "[data-reading-status]",
+          "text": "Texto: 100%",
+          "foreground": "rgb(64, 93, 97)",
+          "background": [
+            232,
+            243,
+            240
+          ],
+          "ratio": 6.260978003635952,
+          "minimum": 4.5
+        }
+      ],
+      "contrast_high": [
+        {
+          "selector": "h1",
+          "text": "Compreender o caso e construir uma orientação",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 3
+        },
+        {
+          "selector": "p",
+          "text": "Texto: 100%",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            237,
+            245,
+            246
+          ],
+          "ratio": 14.735800377717528,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "APOIO À DECISÃO",
+          "foreground": "rgb(0, 60, 74)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.032825928765776,
+          "minimum": 4.5
+        },
+        {
+          "selector": "p",
+          "text": "Confira como o caso foi compreendido, confirme a organização das ",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "1Um caso da pesquisaAdaptação didática pública, não transcrição d",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "summary",
+          "text": "2Uma nova situação construída a partir desse casoA pessoa é a mes",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A−",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "A+",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "button:not([disabled])",
+          "text": "Texto original",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Entenda a MADO",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "A ontologia",
+          "foreground": "rgb(0, 58, 75)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 12.303564830665552,
+          "minimum": 4.5
+        },
+        {
+          "selector": ".nav a",
+          "text": "Experimente o AMADO",
+          "foreground": "rgb(0, 0, 0)",
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "ratio": 21,
+          "minimum": 4.5
+        },
+        {
+          "selector": "[data-reading-status]",
+          "text": "Texto: 100%",
+          "foreground": "rgb(32, 32, 32)",
+          "background": [
+            237,
+            245,
+            246
+          ],
+          "ratio": 14.735800377717528,
+          "minimum": 4.5
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "external_requests": [],
+  "request_methods": [
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET"
+  ],
+  "limitations": [
+    "Não é declaração de conformidade WCAG.",
+    "NVDA, VoiceOver e fala audível não avaliados.",
+    "Metadados corretos não garantem indexação nem posição em buscas.",
+    "Contraste medido em amostra de elementos e estados; não cobre todos os pixels.",
+    "Casos e resultados semânticos permanecem vinculados aos relatórios de execução próprios."
+  ],
+  "build": {
+    "version": "1.3.0-rc1",
+    "instrument": "AMADO",
+    "public_projection": true,
+    "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
+    "core_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+    "bridge_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+    "base_zip_sha256": "1e1a6a21ce8510aef5d92a0292da79b36094ebe6be60d302a8d40857082e4a7c",
+    "pyodide_version": "314.0.7",
+    "runtime": {
+      "pyodide-lock.json": {
+        "bytes": 119077,
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+      },
+      "pyodide.asm.mjs": {
+        "bytes": 1250344,
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+      },
+      "pyodide.asm.wasm": {
+        "bytes": 9598218,
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+      },
+      "pyodide.mjs": {
+        "bytes": 17931,
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+      },
+      "python_stdlib.zip": {
+        "bytes": 2545637,
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+      }
+    },
+    "license_notices": {
+      "licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+      "licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "licenses/MUSL-COPYRIGHT.txt": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "licenses/PYODIDE-MPL-2.0.txt": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "licenses/PYODIDE-STACKFRAME-LICENSE.txt": "899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420",
+      "licenses/PYTHON-3.14.2-LICENSE.txt": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "licenses/PYTHON-3.14.2-THIRD-PARTY.rst": "c695d550b135e53e38807e76496d1db17d22c40e461d1f3f354c86188d3305dd",
+      "licenses/README.md": "f6104c41292b57ff6d35edb7008ac8a87bbd66bdff6f9d20c16e94939a98df68"
+    },
+    "case_history": false,
+    "llm": false,
+    "frontend_sha256": {
+      "index.html": "8e386c7c145169f6256025e1cf4e6e16e37279a675cf11c570c6227181a8fe42",
+      "app.js": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+      "styles.css": "87fe813835b3e19b5c5cacca65d64b5f08a791832a0f6c7a55db261b8a74fcda",
+      "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc"
+    },
+    "site_assets_sha256": {
+      "index.html": "77f764c9d3645d2b2bbac4c66f3a724a7e43032c5aa664524ca5d190fb8cae91",
+      "ontologia/index.html": "3f14b9135c335c44d9a1b8fb2f87b095fcf7dc936917291aea89bb2169090c5d",
+      "site.css": "55d4e00dd8151e50c7641c1384a177ffee94c0187e765a6e54824e16706b8695",
+      "shell.css": "dfd44f2fffc278012355f282b4b9859ff38813482d0e88d8566394d588bdc9f1",
+      "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "sitemap.xml": "80ed64ee489aef0a28147242f94999be3c6af1832ec725dce2cd3455289a0428"
+    },
+    "files": {
+      "data/knowledge-base.json": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc",
+      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "ontology/mado-combined.ttl": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+      "queries/CQ-002.rq": "10e779fe05eb4c898411586c007b2f58cc0f791b06c78947d7df72a17a099c0f",
+      "queries/CQ-003.rq": "62d09e51cbd70719bf9953b563092ebba125ccd9abc0c17d1d410432acbe712f",
+      "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+      "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+      "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+      "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+    }
+  },
+  "source_sha256": {
+    "index.html": "77f764c9d3645d2b2bbac4c66f3a724a7e43032c5aa664524ca5d190fb8cae91",
+    "ontologia/index.html": "3f14b9135c335c44d9a1b8fb2f87b095fcf7dc936917291aea89bb2169090c5d",
+    "site.css": "55d4e00dd8151e50c7641c1384a177ffee94c0187e765a6e54824e16706b8695",
+    "shell.css": "dfd44f2fffc278012355f282b4b9859ff38813482d0e88d8566394d588bdc9f1",
+    "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+    "amado/index.html": "8e386c7c145169f6256025e1cf4e6e16e37279a675cf11c570c6227181a8fe42",
+    "amado/styles.css": "87fe813835b3e19b5c5cacca65d64b5f08a791832a0f6c7a55db261b8a74fcda",
+    "amado/app.js": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+    "sitemap.xml": "80ed64ee489aef0a28147242f94999be3c6af1832ec725dce2cd3455289a0428"
+  },
+  "site_assets_sha256": {
+    "index.html": "77f764c9d3645d2b2bbac4c66f3a724a7e43032c5aa664524ca5d190fb8cae91",
+    "ontologia/index.html": "3f14b9135c335c44d9a1b8fb2f87b095fcf7dc936917291aea89bb2169090c5d",
+    "site.css": "55d4e00dd8151e50c7641c1384a177ffee94c0187e765a6e54824e16706b8695",
+    "shell.css": "dfd44f2fffc278012355f282b4b9859ff38813482d0e88d8566394d588bdc9f1",
+    "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+    "sitemap.xml": "80ed64ee489aef0a28147242f94999be3c6af1832ec725dce2cd3455289a0428"
+  },
+  "served_site_assets_sha256": {
+    "index.html": "77f764c9d3645d2b2bbac4c66f3a724a7e43032c5aa664524ca5d190fb8cae91",
+    "ontologia/index.html": "3f14b9135c335c44d9a1b8fb2f87b095fcf7dc936917291aea89bb2169090c5d",
+    "site.css": "55d4e00dd8151e50c7641c1384a177ffee94c0187e765a6e54824e16706b8695",
+    "shell.css": "dfd44f2fffc278012355f282b4b9859ff38813482d0e88d8566394d588bdc9f1",
+    "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+    "sitemap.xml": "80ed64ee489aef0a28147242f94999be3c6af1832ec725dce2cd3455289a0428"
+  },
+  "layout_dimensions": {
+    "home_text_200_reflow": {
+      "viewport": 1280,
+      "scroll": 1280
+    },
+    "home_reflow_320": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "home_mobile_text_200_reflow": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "home_forced_colors_reflow": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "ontology_text_200_reflow": {
+      "viewport": 1280,
+      "scroll": 1280
+    },
+    "ontology_reflow_320": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "ontology_mobile_text_200_reflow": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "ontology_forced_colors_reflow": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "amado_text_200_reflow": {
+      "viewport": 1280,
+      "scroll": 1280
+    },
+    "amado_reflow_320": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "amado_mobile_text_200_reflow": {
+      "viewport": 320,
+      "scroll": 320
+    },
+    "amado_forced_colors_reflow": {
+      "viewport": 320,
+      "scroll": 320
+    }
+  },
+  "sitemap_urls": [
+    "https://natacsham.github.io/MADO/",
+    "https://natacsham.github.io/MADO/ontologia/",
+    "https://natacsham.github.io/MADO/amado/"
+  ],
+  "robots": {
+    "status": "NOT_ASSERTED",
+    "reason": "robots.txt deve estar na raiz da origem; o projeto está em /MADO/. Submissão do sitemap ao mecanismo de busca é uma etapa externa."
+  },
+  "completed": true,
+  "finished_at_utc": "2026-10-07T05:03:35.347Z"
+}

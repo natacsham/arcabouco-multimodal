@@ -1,0 +1,57 @@
+{
+  "scope": "TRACKED_PUBLIC_FILES_AND_BROWSER_BUNDLE",
+  "tracked_file_count": 537,
+  "browser_bundle_entries": 211,
+  "rdf_files": {
+    "ontology/mado-combined.ttl": {
+      "sha256": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "triples": 13457,
+      "withheld_content_literals": 0
+    },
+    "ontology/mado.owl": {
+      "sha256": "700dfc224f827a5870c8cf4f914aee60786edd4e24793c68373eab71c0197aad",
+      "triples": 13457,
+      "withheld_content_literals": 0
+    },
+    "ontology/main.ttl": {
+      "sha256": "302414ee27e8c1f4d1b9b07600631f7ad5608a67b2e35b5fda7b945b35eb466c",
+      "triples": 574,
+      "withheld_content_literals": 0
+    },
+    "shapes/main.shacl.ttl": {
+      "sha256": "fe0a65314330efbe0bae523977fb1a1383518ccb67654c29eafc42497157811f",
+      "triples": 447,
+      "withheld_content_literals": 0
+    },
+    "web/amado/assets/base.zip:ontology/mado-combined.ttl": {
+      "sha256": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "triples": 13457,
+      "withheld_content_literals": 0
+    },
+    "web/downloads/mado-public.ttl": {
+      "sha256": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "triples": 13457,
+      "withheld_content_literals": 0
+    },
+    "web/downloads/mado.owl": {
+      "sha256": "700dfc224f827a5870c8cf4f914aee60786edd4e24793c68373eab71c0197aad",
+      "triples": 13457,
+      "withheld_content_literals": 0
+    },
+    "web/downloads/main.shacl.ttl": {
+      "sha256": "fe0a65314330efbe0bae523977fb1a1383518ccb67654c29eafc42497157811f",
+      "triples": 447,
+      "withheld_content_literals": 0
+    },
+    "web/downloads/main.ttl": {
+      "sha256": "302414ee27e8c1f4d1b9b07600631f7ad5608a67b2e35b5fda7b945b35eb466c",
+      "triples": 574,
+      "withheld_content_literals": 0
+    }
+  },
+  "findings": [],
+  "passed": true,
+  "limits": [
+    "Structural and pattern checks do not replace documentary rights review or guarantee absence of every identifying inference."
+  ]
+}

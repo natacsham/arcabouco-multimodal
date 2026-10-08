@@ -1,0 +1,246 @@
+@prefix mado: <https://w3id.org/mado#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+skos:broader a owl:ObjectProperty .
+
+<https://w3id.org/mado> a owl:Ontology ;
+  owl:versionIRI <https://w3id.org/mado/1.3.0-rc1> ;
+  owl:versionInfo "1.3.0-rc1" ;
+  owl:priorVersion <https://w3id.org/mado/1.2.0-RC4> ;
+  dcterms:creator "Natacsha Ordones Raposo de Melo" ;
+  rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
+  rdfs:comment "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .
+
+dcterms:creator a owl:AnnotationProperty .
+
+# Declarações locais mínimas dos termos SKOS usados, mantendo a ontologia autocontida para validação de perfil.
+skos:Concept a owl:Class .
+skos:ConceptScheme a owl:Class .
+skos:prefLabel a owl:AnnotationProperty .
+skos:inScheme a owl:ObjectProperty ; rdfs:domain skos:Concept ; rdfs:range skos:ConceptScheme .
+
+mado:Fonte a owl:Class ; rdfs:label "Fonte"@pt-BR .
+mado:ConhecimentoMultimodalArticulado a owl:Class ; rdfs:label "Conhecimento multimodal articulado"@pt-BR .
+mado:CriterioDeDecisaoMultimodal a owl:Class ; rdfs:label "Critério de decisão multimodal"@pt-BR .
+mado:ContextoDeInteracaoDigital a owl:Class ; rdfs:label "Contexto de interação digital"@pt-BR .
+mado:DecisaoDeAcessibilidadeMultimodal a owl:Class ; rdfs:label "Decisão de acessibilidade multimodal"@pt-BR .
+mado:Resultado a owl:Class ; rdfs:label "Resultado"@pt-BR .
+mado:Estudo a owl:Class ; rdfs:label "Estudo"@pt-BR .
+mado:Artefato a owl:Class ; rdfs:label "Artefato"@pt-BR .
+mado:TrechoDocumental a owl:Class ; rdfs:label "Trecho documental"@pt-BR .
+mado:Perspectiva a owl:Class ; rdfs:label "Perspectiva"@pt-BR .
+mado:ReferenciaBibliografica a owl:Class ; rdfs:label "Referência bibliográfica citada"@pt-BR .
+mado:RelacaoDeOrigemDoCriterio a owl:Class ; rdfs:label "Relação de origem do critério"@pt-BR .
+mado:Retroalimentacao a owl:Class ; rdfs:label "Retroalimentação entre ciclos"@pt-BR .
+mado:RegistroDeAvaliacao a owl:Class ;
+  rdfs:label "Registro de avaliação"@pt-BR ;
+  rdfs:comment "Julgamento registrado sobre uma decisão; permanece candidato à curadoria e não integra automaticamente a base consultável."@pt-BR .
+mado:Persona a owl:Class ; rdfs:label "Persona"@pt-BR .
+mado:ValidacaoDePersona a owl:Class ; rdfs:label "Validação de persona"@pt-BR .
+mado:ParticipacaoNoContexto a owl:Class ;
+  rdfs:label "Participação no contexto"@pt-BR ;
+  rdfs:comment "Registro situado de um papel, suas características relevantes, tarefas, modalidades e recursos operados; não representa identidade pessoal."@pt-BR .
+mado:ConfiguracaoModalDaDecisao a owl:Class ;
+  rdfs:label "Configuração modal da decisão"@pt-BR ;
+  rdfs:comment "Associação explícita entre modalidade, função, recurso, papel modal e participante responsável em uma decisão."@pt-BR .
+mado:ArticulacaoDocumentada a owl:Class ;
+  rdfs:label "Articulação documentada"@pt-BR ;
+  rdfs:comment "Registro auxiliar que explicita como conteúdos anteriores se complementam, refinam, condicionam ou operacionalizam um conhecimento, com origem, confirmação, condição e limite."@pt-BR .
+mado:AplicacaoDeCriterio a owl:Class ;
+  rdfs:label "Aplicação situada de critério"@pt-BR ;
+  rdfs:comment "Associação de um único critério a uma única configuração, com os conhecimentos que fundamentam seu emprego, as origens documentais pertinentes e a justificativa situada. Preserva o pareamento; a presença de conhecimentos e critérios na mesma configuração, por si só, não afirma que todos fundamentam todos."@pt-BR .
+
+# Definições editoriais não acrescentam relações de aplicabilidade ao conhecimento.
+mado:Fonte rdfs:comment "Registro documental ou artefato efetivamente utilizado como sustentação de conhecimento ou resultado. Uma referência apenas citada não se torna automaticamente fonte analisada."@pt-BR .
+mado:ConhecimentoMultimodalArticulado rdfs:comment "Compreensão explicitada pela relação entre contribuições de fontes e estudos, sob uma perspectiva e com condições e limites de emprego. É produzido na pesquisa e registrado na base; não é uma síntese criada pelo reasoner durante a consulta."@pt-BR .
+mado:CriterioDeDecisaoMultimodal rdfs:comment "Direcionamento empregado para julgar modos e recursos em uma tarefa. Sua aplicação exige fundamento e origem documentados; não é a decisão, não esgota os critérios de acessibilidade e não é necessariamente multimodal em isolamento."@pt-BR .
+mado:ContextoDeInteracaoDigital rdfs:comment "Caracterização situada de objetivo, tarefa, condições funcionais, participantes, barreiras, necessidades, ambiente, modos, recursos, restrições e lacunas. Contém somente informações documentadas ou confirmadas; não é diagnóstico clínico."@pt-BR .
+mado:DecisaoDeAcessibilidadeMultimodal rdfs:comment "Emprego situado de conhecimentos e critérios para definir configurações de interação, condições, alternativas e acompanhamento em um contexto. A proposta de decisão e seu resultado esperado não comprovam efeito observado."@pt-BR .
+mado:Resultado rdfs:comment "Observação documentada decorrente de aplicação ou avaliação. Distingue-se de resultadoEsperado, que descreve o que acompanhar em uma decisão ainda não aplicada."@pt-BR .
+mado:Estudo rdfs:comment "Ciclo de investigação com problema, procedimento e conhecimento produzido; pode possuir várias publicações e artefatos. Não equivale ao nome de uma ferramenta."@pt-BR .
+mado:Artefato rdfs:comment "Objeto construído, empregado ou avaliado em um estudo, como ferramenta, persona ou catálogo. É distinto do estudo que o originou e de sua publicação."@pt-BR .
+mado:TrechoDocumental rdfs:comment "Unidade de conteúdo vinculada a uma fonte, com localização e natureza do registro quando disponíveis. Citação literal, paráfrase e reconstrução analítica não são equivalentes."@pt-BR .
+mado:Perspectiva rdfs:comment "Ponto de vista situado a partir do qual uma condição ou interpretação é descrita. Distingue-se da pessoa, do papel desempenhado e do ambiente."@pt-BR .
+mado:ReferenciaBibliografica rdfs:comment "Referência citada em um documento; sua presença não comprova análise direta do texto nem autoriza ligação operacional ao conhecimento."@pt-BR .
+mado:RelacaoDeOrigemDoCriterio rdfs:comment "Vínculo entre critério consolidado e item de uma fonte, preservando o trecho que documenta essa origem. Origem documental não substitui a justificativa de aplicação ao caso."@pt-BR .
+mado:Retroalimentacao rdfs:comment "Registro de reutilização ou refinamento entre ciclos. Não implica promoção automática de uma orientação ou avaliação à base executável."@pt-BR .
+mado:Persona rdfs:comment "Artefato representacional que sintetiza características e condições de interação provenientes dos estudos. Não identifica uma pessoa real nem determina capacidades por diagnóstico."@pt-BR .
+mado:ValidacaoDePersona rdfs:comment "Registro de avaliação de uma persona e das necessidades de revisão identificadas; não equivale à validação integral da ontologia."@pt-BR .
+
+[] a owl:AllDisjointClasses ; owl:members (
+  mado:Fonte mado:ConhecimentoMultimodalArticulado mado:CriterioDeDecisaoMultimodal
+  mado:ContextoDeInteracaoDigital mado:DecisaoDeAcessibilidadeMultimodal mado:Resultado
+) .
+
+mado:derivadoDe a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range mado:Fonte .
+mado:sustentadoPorTrecho a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range mado:TrechoDocumental .
+mado:articuladoSobPerspectiva a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range mado:Perspectiva .
+mado:fundamentadoPor a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:respondeA a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ContextoDeInteracaoDigital .
+mado:sustentadaPor a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:sustentadaCondicionalmentePor a owl:ObjectProperty ; rdfs:subPropertyOf mado:sustentadaPor ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:atendeRequisitoDeExpressao a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:aplicaCriterio a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:CriterioDeDecisaoMultimodal .
+mado:aplicaCriterioCondicional a owl:ObjectProperty ; rdfs:subPropertyOf mado:aplicaCriterio ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:CriterioDeDecisaoMultimodal .
+mado:produziuResultado a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:Resultado .
+mado:registradoEm a owl:ObjectProperty ; rdfs:domain mado:Resultado ; rdfs:range mado:Fonte .
+
+mado:temTarefa a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:consideraCaracteristicaRelevanteDaPessoa a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:envolveRecursoDigital a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:apresentaBarreira a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:apresentaNecessidade a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:ocorreEmAmbiente a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:temModalidadeDisponivel a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:temRecursoDisponivel a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:temRecursoProposto a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept ; rdfs:label "tem recurso proposto a preparar"@pt-BR ; rdfs:comment "Recurso ou adaptação proposto que ainda não está disponível. Não satisfaz silenciosamente requisito de recurso disponível."@pt-BR .
+mado:temRecursoImpedido a owl:ObjectProperty ;
+  rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept ;
+  rdfs:label "tem recurso explicitamente impedido"@pt-BR ;
+  rdfs:comment "Distingue impedimento confirmado de ausência de informação sobre disponibilidade."@pt-BR .
+mado:descritoSobPerspectiva a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range mado:Perspectiva .
+mado:temParticipacao a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range mado:ParticipacaoNoContexto .
+mado:participacaoEmContexto a owl:ObjectProperty, owl:FunctionalProperty ; owl:inverseOf mado:temParticipacao ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range mado:ContextoDeInteracaoDigital .
+mado:temPapelNoContexto a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range skos:Concept .
+mado:temCaracteristicaRelevante a owl:ObjectProperty ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range skos:Concept .
+mado:realizaTarefa a owl:ObjectProperty ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range skos:Concept .
+mado:participanteUtilizaModalidade a owl:ObjectProperty ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range skos:Concept .
+mado:operaRecurso a owl:ObjectProperty ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range skos:Concept .
+
+mado:aplicavelATarefa a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelACaracteristicaRelevanteDaPessoa a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelARecursoDigital a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelABarreira a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelANecessidade a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelAAmbiente a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelAModalidade a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:aplicavelARecursoDisponivel a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:requerElementoDoContexto a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:impedidoPorElementoDoContexto a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+
+mado:criterioAplicavelATarefa a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:criterioAplicavelABarreira a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:criterioAplicavelANecessidade a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:criterioAplicavelAModalidade a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:criterioAplicavelARecurso a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:criterioRequerElementoDoContexto a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:criterioImpedidoPorElementoDoContexto a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range skos:Concept .
+mado:articulaModalidade a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range skos:Concept .
+mado:empregaRecurso a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range skos:Concept .
+mado:consideraRecursoCondicional a owl:ObjectProperty ;
+  rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range skos:Concept ;
+  rdfs:label "considera recurso condicional"@pt-BR .
+mado:possuiConfiguracaoModal a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ConfiguracaoModalDaDecisao .
+mado:configuracaoDeDecisao a owl:ObjectProperty, owl:FunctionalProperty ; owl:inverseOf mado:possuiConfiguracaoModal ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range mado:DecisaoDeAcessibilidadeMultimodal .
+mado:configuraModalidade a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range skos:Concept .
+mado:configuraRecurso a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range skos:Concept .
+mado:executadaPorPapel a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range skos:Concept .
+mado:temPapelModal a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range skos:Concept .
+mado:configuracaoConsideraCondicao a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range skos:Concept .
+mado:configuracaoSustentadaPorConhecimento a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:configuracaoAplicaCriterio a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range mado:CriterioDeDecisaoMultimodal .
+mado:configuracaoMobilizaArticulacao a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range mado:ArticulacaoDocumentada .
+mado:configuracaoUsaOrigemDoCriterio a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range mado:RelacaoDeOrigemDoCriterio .
+mado:possuiAplicacaoDeCriterio a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range mado:AplicacaoDeCriterio ; rdfs:label "possui aplicação situada de critério"@pt-BR .
+mado:aplicacaoNaConfiguracao a owl:ObjectProperty, owl:FunctionalProperty ; owl:inverseOf mado:possuiAplicacaoDeCriterio ; rdfs:domain mado:AplicacaoDeCriterio ; rdfs:range mado:ConfiguracaoModalDaDecisao ; rdfs:label "aplicação na configuração"@pt-BR .
+mado:criterioAplicado a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain mado:AplicacaoDeCriterio ; rdfs:range mado:CriterioDeDecisaoMultimodal ; rdfs:label "critério aplicado"@pt-BR .
+mado:conhecimentoDaAplicacao a owl:ObjectProperty ; rdfs:domain mado:AplicacaoDeCriterio ; rdfs:range mado:ConhecimentoMultimodalArticulado ; rdfs:label "conhecimento que fundamenta esta aplicação"@pt-BR .
+mado:origemDaAplicacao a owl:ObjectProperty ; rdfs:domain mado:AplicacaoDeCriterio ; rdfs:range mado:RelacaoDeOrigemDoCriterio ; rdfs:label "origem documental desta aplicação"@pt-BR .
+mado:justificativaDaAplicacao a owl:DatatypeProperty ; rdfs:domain mado:AplicacaoDeCriterio ; rdfs:range rdf:langString ; rdfs:label "justificativa situada da aplicação"@pt-BR .
+mado:incompativelCom a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ContextoDeInteracaoDigital ; rdfs:label "incompatível com"@pt-BR .
+mado:baseadoEmContexto a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range mado:ContextoDeInteracaoDigital .
+mado:requerFuncaoDecisoria a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range skos:Concept .
+mado:contribuiParaFuncaoDecisoria a owl:ObjectProperty ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range skos:Concept .
+mado:cumpreFuncaoDecisoria a owl:ObjectProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range skos:Concept .
+mado:mobilizaArticulacao a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:ArticulacaoDocumentada .
+
+mado:articulaEntrada a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range owl:Thing .
+mado:articulaConhecimentoDeEntrada a owl:ObjectProperty ; rdfs:subPropertyOf mado:articulaEntrada ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:produzConhecimento a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:envolveEstudo a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:Estudo .
+mado:envolveArtefato a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:Artefato .
+mado:envolvePersona a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:Persona .
+mado:articulacaoDerivadaDe a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:Fonte .
+mado:articulacaoSustentadaPorTrecho a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:TrechoDocumental .
+mado:articulacaoSobPerspectiva a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range mado:Perspectiva .
+mado:articulacaoAcrescentaFuncao a owl:ObjectProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range skos:Concept .
+
+mado:possuiTrecho a owl:ObjectProperty ; rdfs:domain mado:Fonte ; rdfs:range mado:TrechoDocumental .
+mado:trechoDeFonte a owl:ObjectProperty ; owl:inverseOf mado:possuiTrecho ; rdfs:domain mado:TrechoDocumental ; rdfs:range mado:Fonte .
+mado:expressaPerspectiva a owl:ObjectProperty ; rdfs:domain mado:TrechoDocumental ; rdfs:range mado:Perspectiva .
+mado:registradoPor a owl:ObjectProperty ; rdfs:range mado:Fonte .
+mado:integraEstudo a owl:ObjectProperty ; rdfs:range mado:Estudo .
+mado:produzArtefato a owl:ObjectProperty ; rdfs:domain mado:Estudo ; rdfs:range mado:Artefato .
+mado:fonteDoEstudo a owl:ObjectProperty ; rdfs:domain mado:Estudo ; rdfs:range mado:Fonte .
+mado:possuiOrigem a owl:ObjectProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range mado:RelacaoDeOrigemDoCriterio .
+mado:origemEmFonte a owl:ObjectProperty ; rdfs:domain mado:RelacaoDeOrigemDoCriterio ; rdfs:range mado:Fonte .
+mado:origemSustentadaPorTrecho a owl:ObjectProperty ; rdfs:domain mado:RelacaoDeOrigemDoCriterio ; rdfs:range mado:TrechoDocumental .
+mado:caracteristicaSustentadaPorTrecho a owl:ObjectProperty ; rdfs:domain skos:Concept ; rdfs:range mado:TrechoDocumental .
+mado:caracteristicaDerivadaDeFonte a owl:ObjectProperty ; rdfs:domain skos:Concept ; rdfs:range mado:Fonte .
+mado:articulouConhecimento a owl:ObjectProperty ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:avaliouDecisao a owl:ObjectProperty ; rdfs:range mado:DecisaoDeAcessibilidadeMultimodal .
+mado:avaliaDecisao a owl:ObjectProperty ; rdfs:domain mado:RegistroDeAvaliacao ; rdfs:range mado:DecisaoDeAcessibilidadeMultimodal .
+mado:candidataAReusoDe a owl:ObjectProperty ; rdfs:domain mado:RegistroDeAvaliacao ; rdfs:range mado:DecisaoDeAcessibilidadeMultimodal .
+mado:revisaDecisao a owl:ObjectProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range mado:DecisaoDeAcessibilidadeMultimodal .
+
+mado:identificador a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:range xsd:string .
+mado:titulo a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:enunciado a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:articulacao a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:descricaoDoContexto a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .
+mado:objetivo a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .
+mado:restricao a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:informacaoAusente a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .
+mado:rationale a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:expressaoOperacional a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:condicaoDeAplicacao a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:alternativa a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:indicadorDeAcompanhamento a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:resultadoEsperado a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:estatutoDoResultadoEsperado a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range xsd:string .
+mado:limite a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:conteudoDoTrecho a owl:DatatypeProperty ; rdfs:domain mado:TrechoDocumental ; rdfs:range rdf:langString .
+mado:estadoDePublicacaoDoTrecho a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "estado de publicação do trecho"@pt-BR ; rdfs:comment "Controla a distribuição de texto documental de trechos ou origens. TEXTO_NAO_REDISTRIBUIDO preserva a referência e a localização sem reproduzir o conteúdo; não confirma análise nem amplia autorização de uso."@pt-BR .
+mado:estadoDePublicacaoDoRegistro a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "estado de publicação do registro"@pt-BR ; rdfs:comment "Indica omissão explícita do texto de um resultado na distribuição pública. Não substitui o resultado observado nem permite inventar seu enunciado."@pt-BR .
+mado:localizacaoDocumental a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "localização documental"@pt-BR ; rdfs:comment "Página, seção, item ou localização no registro-fonte que permite conferir o trecho ou origem; não é um substituto para o conteúdo original."@pt-BR .
+mado:natureza a owl:DatatypeProperty ; rdfs:range xsd:string .
+mado:statusDoRegistro a owl:DatatypeProperty ; rdfs:range xsd:string .
+mado:statusDecisao a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range xsd:string .
+mado:statusConfirmacao a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range xsd:string .
+mado:statusDaRelacao a owl:DatatypeProperty ; rdfs:range xsd:string .
+mado:classificacaoOperacional a owl:DatatypeProperty ; rdfs:range xsd:string .
+mado:origemDaEstruturacaoSemantica a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:funcaoDecisoria a owl:DatatypeProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range rdf:langString .
+mado:justificativaDeFundamentacao a owl:DatatypeProperty ; rdfs:domain mado:CriterioDeDecisaoMultimodal ; rdfs:range rdf:langString .
+mado:justificativaDeCorrespondencia a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range rdf:langString .
+mado:geradaEmSessao a owl:DatatypeProperty ; rdfs:domain mado:DecisaoDeAcessibilidadeMultimodal ; rdfs:range xsd:string .
+mado:observacao a owl:DatatypeProperty ; rdfs:range rdf:langString .
+mado:categoriaDaCaracteristica a owl:DatatypeProperty ; rdfs:domain skos:Concept ; rdfs:range xsd:string .
+mado:objetivoDaParticipacao a owl:DatatypeProperty ; rdfs:domain mado:ParticipacaoNoContexto ; rdfs:range rdf:langString .
+mado:origemDoRegistro a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:label "origem do registro"@pt-BR .
+mado:julgamento a owl:DatatypeProperty ; rdfs:domain mado:RegistroDeAvaliacao ; rdfs:range xsd:string .
+mado:statusCuradoria a owl:DatatypeProperty ; rdfs:domain mado:RegistroDeAvaliacao ; rdfs:range xsd:string .
+mado:justificativaDaAvaliacao a owl:DatatypeProperty ; rdfs:domain mado:RegistroDeAvaliacao ; rdfs:range rdf:langString .
+mado:temFuncaoModal a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:temAcaoOperacional a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:condicaoDaConfiguracao a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:alternativaDaConfiguracao a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:acompanhamentoDaConfiguracao a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:limiteDaConfiguracao a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:significadoFuncional a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range rdf:langString .
+mado:estadoDeDisponibilidadeDaConfiguracao a owl:DatatypeProperty ; rdfs:domain mado:ConfiguracaoModalDaDecisao ; rdfs:range xsd:string .
+mado:efeitoPossivelNaTarefa a owl:DatatypeProperty ; rdfs:domain skos:Concept ; rdfs:range rdf:langString .
+mado:condicaoDeUsoDaCaracteristica a owl:DatatypeProperty ; rdfs:domain skos:Concept ; rdfs:range rdf:langString .
+mado:contraindicacao a owl:DatatypeProperty ; rdfs:domain skos:Concept ; rdfs:range rdf:langString .
+mado:tipoDeArticulacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range xsd:string .
+mado:origemDaRelacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range xsd:string .
+mado:nivelDeConfirmacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range xsd:string .
+mado:estadoDeCuradoria a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range xsd:string .
+mado:habilitadaParaDecisao a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range xsd:boolean .
+mado:condicaoDaArticulacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .
+mado:limiteDaArticulacao a owl:DatatypeProperty ; rdfs:domain mado:ArticulacaoDocumentada ; rdfs:range rdf:langString .

@@ -1,0 +1,42 @@
+PREFIX mado: <https://w3id.org/mado#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?campo ?participacao ?papel ?valor ?categoria ?status WHERE {
+  VALUES ?ctx { mado:CTX-TRANSFERENCIA-RECURSO-DIGITAL-01 }
+  {
+    VALUES (?prop ?campo) {
+      (mado:temTarefa "tarefa")
+      (mado:consideraCaracteristicaRelevanteDaPessoa "caracteristica_da_pessoa")
+      (mado:envolveRecursoDigital "recurso_digital")
+      (mado:apresentaBarreira "barreira")
+      (mado:apresentaNecessidade "necessidade")
+      (mado:ocorreEmAmbiente "ambiente")
+      (mado:temModalidadeDisponivel "modalidade_disponivel")
+      (mado:temRecursoDisponivel "recurso_disponivel")
+      (mado:temRecursoImpedido "recurso_impedido")
+      (mado:requerFuncaoDecisoria "funcao_requerida")
+    }
+    ?ctx ?prop ?item . ?item skos:prefLabel ?valor .
+    OPTIONAL { ?item mado:categoriaDaCaracteristica ?categoria }
+    OPTIONAL { ?item mado:statusDoRegistro ?status }
+  }
+  UNION {
+    ?ctx mado:temParticipacao ?participacao .
+    ?participacao mado:temPapelNoContexto/skos:prefLabel ?papel .
+    OPTIONAL { ?participacao mado:objetivoDaParticipacao ?valor }
+    OPTIONAL { ?participacao mado:origemDoRegistro ?status }
+    BIND("participacao_e_papel" AS ?campo)
+  }
+  UNION {
+    ?ctx mado:temParticipacao ?participacao .
+    ?participacao mado:temPapelNoContexto/skos:prefLabel ?papel ;
+                  mado:temCaracteristicaRelevante ?caracteristica .
+    ?caracteristica skos:prefLabel ?valor .
+    OPTIONAL { ?caracteristica mado:categoriaDaCaracteristica ?categoria }
+    OPTIONAL { ?participacao mado:origemDoRegistro ?status }
+    BIND("caracteristica_por_participante" AS ?campo)
+  }
+  UNION { ?ctx mado:objetivo ?valor . BIND("objetivo" AS ?campo) }
+  UNION { ?ctx mado:restricao ?valor . BIND("restricao" AS ?campo) }
+  UNION { ?ctx mado:informacaoAusente ?valor . BIND("informacao_ausente" AS ?campo) }
+}
+ORDER BY ?campo ?papel ?valor

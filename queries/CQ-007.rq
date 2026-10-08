@@ -1,0 +1,73 @@
+PREFIX mado: <https://w3id.org/mado#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?contexto ?configuracao ?modalidade ?abstracao ?estadoDisponibilidade ?alternativa ?limite ?acompanhamento ?resultadoEsperado ?estatutoResultado
+       ?condicoes ?funcoesDecisorias ?articulacoes ?tiposArticulacao ?niveisConfirmacao
+       ?conhecimentos ?criterios ?origensCriterios ?fontesOrigem
+       ?estudos ?artefatos ?personas ?trechos ?fontes
+WHERE {
+  VALUES ?decisao { mado:D-TESTE-RC4-TRANSFERENCIA }
+  ?decisao mado:respondeA ?contexto ;
+           mado:possuiConfiguracaoModal ?configuracao ;
+           mado:resultadoEsperado ?resultadoEsperado ;
+           mado:estatutoDoResultadoEsperado ?estatutoResultado .
+  ?configuracao mado:configuraModalidade/skos:prefLabel ?modalidade ;
+                mado:significadoFuncional ?abstracao ;
+                mado:estadoDeDisponibilidadeDaConfiguracao ?estadoDisponibilidade ;
+                mado:alternativaDaConfiguracao ?alternativa ;
+                mado:limiteDaConfiguracao ?limite ;
+                mado:acompanhamentoDaConfiguracao ?acompanhamento .
+  {
+    SELECT ?configuracao
+           (GROUP_CONCAT(DISTINCT STR(?condicao); separator=" | ") AS ?condicoes)
+           (GROUP_CONCAT(DISTINCT STR(?funcao); separator=" | ") AS ?funcoesDecisorias)
+    WHERE {
+      ?configuracao mado:configuracaoConsideraCondicao ?condicao ;
+                    mado:cumpreFuncaoDecisoria ?funcao .
+    }
+    GROUP BY ?configuracao
+  }
+  {
+    SELECT ?configuracao
+           (GROUP_CONCAT(DISTINCT STR(?conhecimento); separator=" | ") AS ?conhecimentos)
+           (GROUP_CONCAT(DISTINCT STR(?trecho); separator=" | ") AS ?trechos)
+           (GROUP_CONCAT(DISTINCT STR(?fonte); separator=" | ") AS ?fontes)
+    WHERE {
+      ?configuracao mado:configuracaoSustentadaPorConhecimento ?conhecimento .
+      ?conhecimento mado:sustentadoPorTrecho ?trecho ; mado:derivadoDe ?fonte .
+      ?trecho mado:trechoDeFonte ?fonte .
+    }
+    GROUP BY ?configuracao
+  }
+  {
+    SELECT ?configuracao
+           (GROUP_CONCAT(DISTINCT STR(?criterio); separator=" | ") AS ?criterios)
+           (GROUP_CONCAT(DISTINCT STR(?origem); separator=" | ") AS ?origensCriterios)
+           (GROUP_CONCAT(DISTINCT STR(?fonteOrigemItem); separator=" | ") AS ?fontesOrigem)
+    WHERE {
+      ?configuracao mado:configuracaoAplicaCriterio ?criterio ;
+                    mado:configuracaoUsaOrigemDoCriterio ?origem .
+      ?criterio mado:possuiOrigem ?origem .
+      ?origem mado:origemEmFonte ?fonteOrigemItem ;
+              mado:origemSustentadaPorTrecho ?trechoOrigem .
+    }
+    GROUP BY ?configuracao
+  }
+  {
+    SELECT ?configuracao
+           (GROUP_CONCAT(DISTINCT STR(?articulacao); separator=" | ") AS ?articulacoes)
+           (GROUP_CONCAT(DISTINCT STR(?tipo); separator=" | ") AS ?tiposArticulacao)
+           (GROUP_CONCAT(DISTINCT STR(?nivel); separator=" | ") AS ?niveisConfirmacao)
+           (GROUP_CONCAT(DISTINCT STR(?estudo); separator=" | ") AS ?estudos)
+           (GROUP_CONCAT(DISTINCT STR(?artefato); separator=" | ") AS ?artefatos)
+           (GROUP_CONCAT(DISTINCT STR(?persona); separator=" | ") AS ?personas)
+    WHERE {
+      ?configuracao mado:configuracaoMobilizaArticulacao ?articulacao .
+      ?articulacao mado:tipoDeArticulacao ?tipo ; mado:nivelDeConfirmacao ?nivel .
+      OPTIONAL { ?articulacao mado:envolveEstudo ?estudo }
+      OPTIONAL { ?articulacao mado:envolveArtefato ?artefato }
+      OPTIONAL { ?articulacao mado:envolvePersona ?persona }
+    }
+    GROUP BY ?configuracao
+  }
+}
+ORDER BY ?configuracao

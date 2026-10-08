@@ -1,0 +1,354 @@
+@prefix mado: <https://w3id.org/mado#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+mado:ConhecimentoShape a sh:NodeShape ;
+  sh:targetClass mado:ConhecimentoMultimodalArticulado ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:enunciado ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:derivadoDe ; sh:minCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path mado:sustentadoPorTrecho ; sh:minCount 1 ; sh:class mado:TrechoDocumental ] ;
+  sh:property [ sh:path mado:articuladoSobPerspectiva ; sh:minCount 1 ; sh:class mado:Perspectiva ] ;
+  sh:property [ sh:path mado:classificacaoOperacional ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+mado:ContextoShape a sh:NodeShape ;
+  sh:targetClass mado:ContextoDeInteracaoDigital ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:descricaoDoContexto ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:descritoSobPerspectiva ; sh:minCount 1 ; sh:class mado:Perspectiva ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Um recurso não pode estar simultaneamente disponível e explicitamente impedido no mesmo contexto."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?recurso WHERE {
+        $this mado:temRecursoDisponivel ?recurso ; mado:temRecursoImpedido ?recurso .
+      }
+    """
+  ] .
+
+mado:ContextoNovoShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:statusConfirmacao ;
+  sh:property [ sh:path mado:temTarefa ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:temParticipacao ; sh:minCount 1 ; sh:class mado:ParticipacaoNoContexto ] ;
+  sh:or (
+    [ sh:property [ sh:path mado:apresentaBarreira ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path mado:apresentaNecessidade ; sh:minCount 1 ] ]
+  ) .
+
+mado:ParticipacaoNoContextoShape a sh:NodeShape ;
+  sh:targetClass mado:ParticipacaoNoContexto ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:participacaoEmContexto ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+  sh:property [ sh:path mado:temPapelNoContexto ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:origemDoRegistro ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+mado:DecisaoMinimaShape a sh:NodeShape ;
+  sh:targetClass mado:DecisaoDeAcessibilidadeMultimodal ;
+  sh:targetSubjectsOf mado:statusDecisao ;
+  sh:class mado:DecisaoDeAcessibilidadeMultimodal ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:enunciado ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:rationale ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:statusDecisao ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mado:respondeA ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+  sh:property [ sh:path mado:sustentadaPor ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:sparql [
+    sh:message "Uma decisão não suspensa, inclusive histórica, precisa de conhecimento de sustentação."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:statusDecisao ?status .
+        FILTER(!STRSTARTS(STR(?status), "SUSPENSA"))
+        FILTER NOT EXISTS { $this mado:sustentadaPor ?conhecimento }
+      }
+    """
+  ] .
+
+mado:DecisaoCandidataShape a sh:NodeShape ;
+  sh:targetClass mado:DecisaoDeAcessibilidadeMultimodal ;
+  sh:targetSubjectsOf mado:statusDecisao ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Decisão candidata deve aplicar ao menos um critério principal; decisões históricas reconstruídas são exceção documentada."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:statusDecisao ?status .
+        FILTER(?status != "DECISAO_HISTORICA_RECONSTRUIDA" && !STRSTARTS(?status, "SUSPENSA"))
+        FILTER NOT EXISTS {
+          $this mado:aplicaCriterio ?criterio .
+          FILTER NOT EXISTS { $this mado:aplicaCriterioCondicional ?criterio }
+        }
+      }
+    """
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Decisão candidata deve explicitar alternativa, condição, limite, acompanhamento e resultado esperado."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:statusDecisao ?status .
+        FILTER(?status != "DECISAO_HISTORICA_RECONSTRUIDA" && !STRSTARTS(?status, "SUSPENSA"))
+        FILTER(
+          NOT EXISTS { $this mado:alternativa ?a } ||
+          NOT EXISTS { $this mado:condicaoDeAplicacao ?c } ||
+          NOT EXISTS { $this mado:limite ?l } ||
+          NOT EXISTS { $this mado:indicadorDeAcompanhamento ?i } ||
+          NOT EXISTS { $this mado:resultadoEsperado ?e } ||
+          NOT EXISTS { $this mado:estatutoDoResultadoEsperado ?s }
+        )
+      }
+    """
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Quando K33 é empregado, a decisão deve explicitar que atende a esse requisito de expressão. K33 não é obrigatório em outros contextos."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:statusDecisao ?status ; mado:sustentadaPor mado:K33 .
+        FILTER(?status != "DECISAO_HISTORICA_RECONSTRUIDA" && !STRSTARTS(STR(?status), "SUSPENSA"))
+        FILTER NOT EXISTS { $this mado:atendeRequisitoDeExpressao mado:K33 }
+      }
+    """
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Uma decisão não histórica e não suspensa deve ter ao menos uma configuração; retirar todas não pode evitar a validação."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:statusDecisao ?status .
+        FILTER(?status != "DECISAO_HISTORICA_RECONSTRUIDA" && !STRSTARTS(STR(?status), "SUSPENSA"))
+        FILTER NOT EXISTS { $this mado:possuiConfiguracaoModal ?configuracao }
+      }
+    """
+  ] .
+
+mado:DecisaoSuspensaShape a sh:NodeShape ;
+  sh:targetClass mado:DecisaoDeAcessibilidadeMultimodal ;
+  sh:sparql [
+    sh:message "A suspensão deve explicar a insuficiência e não apresentar configurações como orientação autorizada."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:statusDecisao ?status .
+        FILTER(STRSTARTS(STR(?status), "SUSPENSA"))
+        FILTER(EXISTS { $this mado:possuiConfiguracaoModal ?cfg }
+          || NOT EXISTS { $this mado:rationale ?motivo . FILTER(STRLEN(STR(?motivo)) > 0) })
+      }
+    """
+  ] .
+
+mado:ResultadoShape a sh:NodeShape ;
+  sh:targetClass mado:Resultado ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:xone (
+    [ sh:property [ sh:path mado:enunciado ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ;
+      sh:not [ sh:property [ sh:path mado:estadoDePublicacaoDoRegistro ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ] ] ]
+    [ sh:property [ sh:path mado:estadoDePublicacaoDoRegistro ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ; sh:maxCount 1 ] ;
+      sh:property [ sh:path mado:enunciado ; sh:maxCount 0 ] ;
+      sh:property [ sh:path mado:localizacaoDocumental ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ]
+  ) ;
+  sh:property [ sh:path mado:registradoEm ; sh:minCount 1 ; sh:class mado:Fonte ] .
+
+mado:TrechoDocumentalShape a sh:NodeShape ;
+  sh:targetClass mado:TrechoDocumental ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:xone (
+    [ sh:property [ sh:path mado:conteudoDoTrecho ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ;
+      sh:not [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ] ] ]
+    [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ; sh:maxCount 1 ] ;
+      sh:property [ sh:path mado:conteudoDoTrecho ; sh:maxCount 0 ] ;
+      sh:property [ sh:path mado:localizacaoDocumental ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ]
+  ) ;
+  sh:property [ sh:path mado:trechoDeFonte ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] .
+
+mado:MetadadosDePublicacaoShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:estadoDePublicacaoDoTrecho, mado:estadoDePublicacaoDoRegistro, mado:localizacaoDocumental ;
+  sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mado:estadoDePublicacaoDoRegistro ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path mado:localizacaoDocumental ; sh:datatype xsd:string ; sh:minLength 1 ; sh:pattern "\\S" ] .
+
+mado:QualidadeCriterioShape a sh:NodeShape ;
+  sh:targetClass mado:CriterioDeDecisaoMultimodal ;
+  sh:severity sh:Warning ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:severity sh:Warning ;
+    sh:message "Critério possui relação indicada sem justificativa explícita; a lacuna deve permanecer visível."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE { $this mado:statusDaRelacao "RELACAO_SEM_JUSTIFICATIVA_EXPLICITA" . }
+    """
+  ] .
+
+mado:ConfiguracaoModalShape a sh:NodeShape ;
+  sh:targetClass mado:ConfiguracaoModalDaDecisao ;
+  sh:targetObjectsOf mado:possuiConfiguracaoModal ;
+  sh:class mado:ConfiguracaoModalDaDecisao ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:configuracaoDeDecisao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:DecisaoDeAcessibilidadeMultimodal ] ;
+  sh:property [ sh:path mado:configuraModalidade ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:executadaPorPapel ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:temPapelModal ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:temFuncaoModal ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:temAcaoOperacional ; sh:minCount 1 ] .
+
+mado:ConfiguracaoMaduraShape a sh:NodeShape ;
+  sh:targetClass mado:ConfiguracaoModalDaDecisao ;
+  sh:targetObjectsOf mado:possuiConfiguracaoModal ;
+  sh:property [ sh:path mado:configuracaoConsideraCondicao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:configuracaoSustentadaPorConhecimento ; sh:minCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path mado:configuracaoAplicaCriterio ; sh:minCount 1 ; sh:class mado:CriterioDeDecisaoMultimodal ] ;
+  sh:property [ sh:path mado:configuracaoUsaOrigemDoCriterio ; sh:minCount 1 ; sh:class mado:RelacaoDeOrigemDoCriterio ] ;
+  sh:property [ sh:path mado:possuiAplicacaoDeCriterio ; sh:minCount 1 ; sh:class mado:AplicacaoDeCriterio ] ;
+  sh:property [ sh:path mado:cumpreFuncaoDecisoria ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:condicaoDaConfiguracao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:alternativaDaConfiguracao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:acompanhamentoDaConfiguracao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:limiteDaConfiguracao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:significadoFuncional ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:estadoDeDisponibilidadeDaConfiguracao ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("CONFIRMADO_DISPONIVEL" "CONDICIONAL_A_CONFIRMACAO" "REQUER_PREPARACAO") ] ;
+  sh:or (
+    [ sh:property [ sh:path mado:configuraRecurso ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path mado:alternativaDaConfiguracao ; sh:minCount 1 ] ]
+  ) ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Cada critério e origem projetados na configuração precisam de aplicação situada nessa configuração, não em outra."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?value WHERE {
+        {
+          $this mado:configuracaoAplicaCriterio ?value .
+          FILTER NOT EXISTS {
+            $this mado:possuiAplicacaoDeCriterio ?app .
+            ?app mado:aplicacaoNaConfiguracao $this ; mado:criterioAplicado ?value .
+          }
+        } UNION {
+          $this mado:configuracaoUsaOrigemDoCriterio ?value .
+          FILTER NOT EXISTS {
+            $this mado:possuiAplicacaoDeCriterio ?app .
+            ?app mado:aplicacaoNaConfiguracao $this ; mado:origemDaAplicacao ?value .
+          }
+        }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Configuração e decisão devem manter as duas direções de sua relação."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?decisao WHERE {
+        $this mado:configuracaoDeDecisao ?decisao .
+        FILTER NOT EXISTS { ?decisao mado:possuiConfiguracaoModal $this }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "A aplicação deve indicar a mesma configuração que a contém."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?app WHERE {
+        $this mado:possuiAplicacaoDeCriterio ?app .
+        FILTER NOT EXISTS { ?app mado:aplicacaoNaConfiguracao $this }
+      }
+    """
+  ] .
+
+mado:AplicacaoDeCriterioShape a sh:NodeShape ;
+  sh:targetClass mado:AplicacaoDeCriterio ;
+  sh:targetObjectsOf mado:possuiAplicacaoDeCriterio ;
+  sh:targetSubjectsOf mado:aplicacaoNaConfiguracao, mado:criterioAplicado, mado:conhecimentoDaAplicacao, mado:origemDaAplicacao, mado:justificativaDaAplicacao ;
+  sh:class mado:AplicacaoDeCriterio ;
+  sh:property [ sh:path mado:aplicacaoNaConfiguracao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConfiguracaoModalDaDecisao ] ;
+  sh:property [ sh:path mado:criterioAplicado ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:CriterioDeDecisaoMultimodal ] ;
+  sh:property [ sh:path mado:conhecimentoDaAplicacao ; sh:minCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path mado:origemDaAplicacao ; sh:minCount 1 ; sh:class mado:RelacaoDeOrigemDoCriterio ] ;
+  sh:property [ sh:path mado:justificativaDaAplicacao ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ;
+  sh:sparql [
+    sh:message "Toda origem da aplicação deve pertencer ao seu critério e ter um trecho verificável."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?origem WHERE {
+        $this mado:criterioAplicado ?criterio ; mado:origemDaAplicacao ?origem .
+        FILTER NOT EXISTS { ?criterio mado:possuiOrigem ?origem . ?origem mado:origemSustentadaPorTrecho ?trecho }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "A aplicação pertence a uma única configuração, que deve conter a relação inversa."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?cfg WHERE {
+        $this mado:aplicacaoNaConfiguracao ?cfg .
+        FILTER NOT EXISTS { ?cfg mado:possuiAplicacaoDeCriterio $this }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Conhecimento, critério e origem da aplicação precisam estar projetados na sua própria configuração."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?value WHERE {
+        $this mado:aplicacaoNaConfiguracao ?cfg .
+        { $this mado:conhecimentoDaAplicacao ?value . FILTER NOT EXISTS { ?cfg mado:configuracaoSustentadaPorConhecimento ?value } }
+        UNION
+        { $this mado:criterioAplicado ?value . FILTER NOT EXISTS { ?cfg mado:configuracaoAplicaCriterio ?value } }
+        UNION
+        { $this mado:origemDaAplicacao ?value . FILTER NOT EXISTS { ?cfg mado:configuracaoUsaOrigemDoCriterio ?value } }
+      }
+    """
+  ] .
+
+mado:OrigemDoCriterioShape a sh:NodeShape ;
+  sh:targetClass mado:RelacaoDeOrigemDoCriterio ;
+  sh:property [ sh:path mado:origemEmFonte ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path mado:origemSustentadaPorTrecho ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:TrechoDocumental ] .
+
+mado:ArticulacaoDocumentadaShape a sh:NodeShape ;
+  sh:targetClass mado:ArticulacaoDocumentada ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:tipoDeArticulacao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:articulaConhecimentoDeEntrada ; sh:minCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path mado:produzConhecimento ; sh:minCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path mado:articulacaoDerivadaDe ; sh:minCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path mado:articulacaoSustentadaPorTrecho ; sh:minCount 1 ; sh:class mado:TrechoDocumental ] ;
+  sh:property [ sh:path mado:origemDaRelacao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:nivelDeConfirmacao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:estadoDeCuradoria ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:habilitadaParaDecisao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:condicaoDaArticulacao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:limiteDaArticulacao ; sh:minCount 1 ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Articulação habilitada exige nível de confirmação e estado de curadoria explicitamente admitidos; desconhecido não equivale a confirmado."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+      SELECT $this WHERE {
+        $this mado:habilitadaParaDecisao true ;
+              mado:nivelDeConfirmacao ?nivel ;
+              mado:estadoDeCuradoria ?estado .
+        FILTER(?nivel NOT IN ("DOCUMENTADA_DIRETAMENTE", "DOCUMENTADA_E_INFORMADA_PELA_AUTORA", "DOCUMENTADA_E_RECONSTRUIDA", "INFORMADA_PELA_AUTORA", "RECONSTRUIDA_A_PARTIR_DAS_PUBLICACOES")
+          || ?estado NOT IN ("APROVADA_PARA_CONSULTA", "APROVADA_PARA_CONSULTA_RC3", "APROVADA_PARA_O_CASO_RC3", "APROVADA_PARA_TESTE_RC2"))
+      }
+    """
+  ] .
+
+mado:DecisaoComArticulacaoShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:mobilizaArticulacao ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Decisão não pode mobilizar articulação desabilitada ou não confirmada."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?articulacao WHERE {
+        $this mado:mobilizaArticulacao ?articulacao .
+        FILTER NOT EXISTS { ?articulacao mado:habilitadaParaDecisao true }
+      }
+    """
+  ] .

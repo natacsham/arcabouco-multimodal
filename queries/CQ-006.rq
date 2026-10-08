@@ -1,0 +1,39 @@
+PREFIX mado: <https://w3id.org/mado#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?decisao ?status ?orientacao ?configuracao ?papelModal ?modalidade ?funcaoModal
+       ?papelResponsavel ?significadoFuncional ?estadoDisponibilidade ?condicoes ?alternativa ?acompanhamento ?limite
+       ?funcoesDecisorias ?recursos ?conhecimentos ?criterios ?origensCriterios
+WHERE {
+  VALUES ?decisao { mado:D-TESTE-RC4-TRANSFERENCIA }
+  ?decisao mado:statusDecisao ?status ;
+           mado:enunciado ?orientacao ;
+           mado:possuiConfiguracaoModal ?configuracao .
+  ?configuracao mado:configuraModalidade/skos:prefLabel ?modalidade ;
+                mado:temPapelModal/skos:prefLabel ?papelModal ;
+                mado:executadaPorPapel/skos:prefLabel ?papelResponsavel ;
+                mado:temFuncaoModal ?funcaoModal ;
+                mado:significadoFuncional ?significadoFuncional ;
+                mado:estadoDeDisponibilidadeDaConfiguracao ?estadoDisponibilidade ;
+                mado:alternativaDaConfiguracao ?alternativa ;
+                mado:acompanhamentoDaConfiguracao ?acompanhamento ;
+                mado:limiteDaConfiguracao ?limite .
+  {
+    SELECT ?configuracao
+           (GROUP_CONCAT(DISTINCT STR(?condicao); separator=" | ") AS ?condicoes)
+           (GROUP_CONCAT(DISTINCT STR(?funcao); separator=" | ") AS ?funcoesDecisorias)
+           (GROUP_CONCAT(DISTINCT STR(?recurso); separator=" | ") AS ?recursos)
+           (GROUP_CONCAT(DISTINCT STR(?conhecimento); separator=" | ") AS ?conhecimentos)
+           (GROUP_CONCAT(DISTINCT STR(?criterio); separator=" | ") AS ?criterios)
+           (GROUP_CONCAT(DISTINCT STR(?origem); separator=" | ") AS ?origensCriterios)
+    WHERE {
+      ?configuracao mado:configuracaoConsideraCondicao ?condicao ;
+                    mado:cumpreFuncaoDecisoria ?funcao ;
+                    mado:configuracaoSustentadaPorConhecimento ?conhecimento ;
+                    mado:configuracaoAplicaCriterio ?criterio ;
+                    mado:configuracaoUsaOrigemDoCriterio ?origem .
+      OPTIONAL { ?configuracao mado:configuraRecurso ?recurso }
+    }
+    GROUP BY ?configuracao
+  }
+}
+ORDER BY ?papelModal ?modalidade

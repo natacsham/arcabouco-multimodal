@@ -1,0 +1,21 @@
+PREFIX mado: <https://w3id.org/mado#>
+SELECT ?papel ?configuracao ?criterio ?enunciado ?conhecimentoFundamento ?origem ?fonteOrigem ?trechoOrigem ?articulacao ?funcaoAcrescentada ?justificativa ?aplicacao WHERE {
+  VALUES ?decisao { mado:D-TESTE-RC4-TRANSFERENCIA }
+  ?decisao mado:possuiConfiguracaoModal ?configuracao .
+  ?configuracao mado:possuiAplicacaoDeCriterio ?aplicacao ;
+                mado:temPapelModal ?papel .
+  ?aplicacao a mado:AplicacaoDeCriterio ;
+             mado:aplicacaoNaConfiguracao ?configuracao ;
+             mado:criterioAplicado ?criterio ;
+             mado:conhecimentoDaAplicacao ?conhecimentoFundamento ;
+             mado:origemDaAplicacao ?origem ;
+             mado:justificativaDaAplicacao ?justificativa .
+  ?criterio mado:enunciado ?enunciado ; mado:possuiOrigem ?origem .
+  ?origem mado:origemEmFonte ?fonteOrigem ; mado:origemSustentadaPorTrecho ?trechoOrigem .
+  OPTIONAL {
+    ?configuracao mado:configuracaoMobilizaArticulacao ?articulacao .
+    ?articulacao mado:produzConhecimento ?conhecimentoFundamento ;
+                 mado:articulacaoAcrescentaFuncao ?funcaoAcrescentada .
+  }
+}
+ORDER BY ?configuracao ?aplicacao ?criterio ?conhecimentoFundamento ?origem

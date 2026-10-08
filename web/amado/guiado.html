@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AMADO — orientação passo a passo</title>
+  <meta name="description" content="Explore como o AMADO consulta a ontologia MADO e constrói uma orientação multimodal com fundamentos rastreáveis, no seu navegador.">
+  <meta name="referrer" content="no-referrer">
+  <meta name="author" content="Natacsha Ordones Raposo de Melo">
+  <link rel="canonical" href="https://natacsham.github.io/MADO/amado/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="MADO">
+  <meta property="og:title" content="AMADO — orientações multimodais fundamentadas">
+  <meta property="og:description" content="Organize um caso, consulte conhecimentos representados na MADO e confira os fundamentos de uma orientação multimodal.">
+  <meta property="og:url" content="https://natacsham.github.io/MADO/amado/">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","@id":"https://natacsham.github.io/MADO/amado/#page","url":"https://natacsham.github.io/MADO/amado/","name":"AMADO — orientações multimodais fundamentadas","description":"Instrumento que consulta a ontologia MADO e compõe orientações dentro dos conhecimentos e padrões representados na base.","inLanguage":"pt-BR","isPartOf":{"@id":"https://natacsham.github.io/MADO/#site"},"author":{"@type":"Person","name":"Natacsha Ordones Raposo de Melo"}}
+  </script>
+  <link rel="stylesheet" href="./styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes">
+  <link rel="stylesheet" href="../shell.css">
+  <link rel="stylesheet" href="./views.css">
+  <link rel="stylesheet" href="./guided.css">
+</head>
+<body class="guided-view">
+  <a class="skip" href="#main">Ir para o conteúdo</a>
+  <header id="inicio" class="site-header" tabindex="-1">
+    <div class="wrap header-inner">
+      <a class="brand" href="../" aria-label="MADO, início"><span class="brand-mark" aria-hidden="true">M</span>MADO</a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="../">Entenda a MADO</a>
+        <a href="../ontologia/">Documentação técnica</a>
+        <a href="./" aria-current="page">Experimente o AMADO</a>
+      </nav>
+    </div>
+  </header>
+  <div class="reading-bar" data-site-accessibility hidden>
+    <div class="wrap reading-inner">
+      <strong>Ajustes de leitura</strong>
+      <div class="reading-actions" role="group" aria-label="Ajustes de leitura">
+        <button type="button" data-font-decrease aria-label="Diminuir texto" aria-disabled="true">A−</button>
+        <button id="font-button" type="button" data-font-increase aria-label="Aumentar texto">A+</button>
+        <button type="button" data-font-reset>Texto original</button>
+        <button id="contrast-button" type="button" data-site-contrast aria-pressed="false">Alto contraste</button>
+      </div>
+      <p class="reading-status" data-reading-status role="status" aria-atomic="true">Texto: 100%</p>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <nav class="view-switch" aria-label="Apresentação do AMADO">
+      <a href="./">Visão atual</a>
+      <a href="./guiado.html" aria-current="page">Visão guiada <span>Nova</span></a>
+      <p>Ao mudar de visão, o caso aberto é descartado.</p>
+    </nav>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">APOIO À DECISÃO</p>
+      <h1 id="page-title">Uma orientação, passo a passo.</h1>
+      <p class="guide-lead">Comece pelo caso, confira as informações e explore as formas de interação sugeridas. Abra os detalhes quando quiser entender os fundamentos.</p>
+      <details class="guide-help"><summary>Sobre seus dados e o uso desta visão</summary><p>O caso fica apenas neste navegador. Atualizar, fechar, limpar ou trocar de caso descarta as informações. Não informe nomes nem dados identificáveis. Esta visão usa a mesma base e o mesmo motor da visão atual; muda apenas a organização da leitura.</p><p>O AMADO reconhece conceitos já representados. Não interpreta qualquer narrativa nem garante resultados de aprendizagem.</p></details>
+      <p id="health" class="status" data-state="loading" role="status" aria-atomic="true">Carregando o ambiente de execução…</p>
+      <p id="runtime-error" role="alert"></p>
+      <div class="actions"><button id="clear-case" class="secondary" type="button">Limpar caso e reiniciar</button><a href="../">Entender a MADO e o AMADO</a></div>
+    </section>
+
+    <nav id="guide-progress" class="guide-progress" aria-label="Etapas da orientação" hidden>
+      <ol>
+        <li><button type="button" data-guide-step="1" aria-current="step"><span class="guide-number" aria-hidden="true">1</span><span><strong>Começar pelo caso</strong><small>Descreva ou escolha um exemplo</small></span></button></li>
+        <li><button type="button" data-guide-step="2" aria-disabled="true"><span class="guide-number" aria-hidden="true">2</span><span><strong>Conferir as informações</strong><small>Revise antes de continuar</small></span></button></li>
+        <li><button type="button" data-guide-step="3" aria-disabled="true"><span class="guide-number" aria-hidden="true">3</span><span><strong>Explorar a orientação</strong><small>Ações, condições e fundamentos</small></span></button></li>
+      </ol>
+    </nav>
+    <p id="guide-status" class="guide-status" role="status" aria-atomic="true"></p>
+    <div class="tabs" role="tablist" aria-label="Forma de uso">
+      <button id="known-tab" type="button" role="tab" aria-selected="true" aria-controls="known-panel">Partir do caso da pesquisa</button>
+      <button id="free-tab" type="button" role="tab" aria-selected="false" aria-controls="free-panel" tabindex="-1">Descrever ou escolher outro caso</button>
+    </div>
+
+    <div id="free-reading-tools" class="reading-tools" hidden>
+      <button id="collapse-free-details" class="secondary" type="button">Recolher detalhes</button>
+      <span id="free-reading-status" role="status"></span>
+    </div>
+
+    <section id="known-panel" role="tabpanel" aria-labelledby="known-tab">
+      <details id="reported-step" class="card step-card" open>
+        <summary><span class="step-number">1</span><span><strong>Um caso da pesquisa</strong><small>Adaptação didática pública, não transcrição de entrevista nem nova avaliação humana.</small></span></summary>
+        <div class="step-content">
+          <p id="reported-text" class="lead"></p>
+          <details class="guide-help"><summary>Ver o caso organizado por assunto</summary><div id="reported-summary" class="summary-grid"></div></details>
+          <fieldset>
+            <legend>Como você quer explorar este exemplo?</legend>
+            <label><input type="radio" name="reported-confirmation" value="yes"> Li a adaptação e quero manter o exemplo</label>
+            <label><input type="radio" name="reported-confirmation" value="no"> Quero anotar uma diferença para esta exploração</label>
+          </fieldset>
+          <label for="reported-correction">O que seria diferente no caso que você quer explorar?</label>
+          <div class="input-with-action"><textarea id="reported-correction" rows="3"></textarea><button class="dictate secondary" type="button" data-target="reported-correction">Ditar</button></div>
+          <p class="dictation-status" aria-live="polite"></p>
+          <div class="actions"><button id="confirm-reported" type="button">Conferir e continuar</button><span id="reported-status" role="status"></span></div>
+        </div>
+      </details>
+
+      <details id="organized-step" class="card step-card">
+        <summary><span class="step-number">2</span><span><strong>Uma nova situação construída a partir desse caso</strong><small>A pessoa é a mesma, mas a tarefa é diferente: construir coletivamente um recurso digital de História.</small></span></summary>
+        <div class="step-content">
+          <p class="notice"><strong>O que mudou:</strong> em vez de repetir a apresentação oral do exemplo, esta situação propõe uma produção digital com professora e colegas. A tarefa foi formulada na pesquisa, não criada automaticamente pelo agente. A orientação será construída após a confirmação das condições.</p>
+          <p id="organized-text" class="lead"></p>
+          <div id="context-summary" class="summary-grid"></div>
+          <aside id="known-assumptions" class="notice example-assumptions" hidden><h2>Premissas do exemplo sintético</h2><p>Condições usadas para preparar o exemplo; não são observações de uso. Confira sua pertinência para o caso.</p><ul></ul></aside>
+          <label class="confirmation"><input id="mapping-confirmed" type="checkbox"> Esta nova situação é coerente com as características da pessoa e apresenta corretamente a nova atividade, o objetivo, as dificuldades e os recursos disponíveis.</label>
+          <details class="foundation">
+            <summary>Corrigir ou completar a organização</summary>
+            <label for="context-description">Descrição confirmada do caso</label>
+            <div class="input-with-action"><textarea id="context-description" rows="4"></textarea><button class="dictate secondary" type="button" data-target="context-description">Ditar</button></div>
+            <label for="objective">O que se espera alcançar?</label>
+            <div class="input-with-action"><textarea id="objective" rows="2"></textarea><button class="dictate secondary" type="button" data-target="objective">Ditar</button></div>
+            <label for="operation">Como a pessoa opera o aplicativo ou conteúdo?</label>
+            <textarea id="operation" rows="3" aria-describedby="operation-help"></textarea>
+            <p id="operation-help" class="field-help">Descreva quem opera e como. Deixe em branco se isso ainda não foi informado; o agente não atribui um papel por suposição.</p>
+            <p class="field-help">Dispositivos e apoios disponíveis podem ser usados agora. Recursos propostos ainda precisam ser preparados e confirmados; não contam como disponíveis.</p>
+            <div id="controlled-fields"></div>
+            <label class="confirmation"><input id="impediments-verified" type="checkbox"> Verifiquei os impedimentos de uso dos dispositivos e apoios. Se nenhum estiver marcado, confirmo que nenhum impedimento foi identificado.</label>
+            <label for="restrictions">Condições ou restrições importantes <span class="optional">(uma por linha)</span></label>
+            <textarea id="restrictions" rows="3"></textarea>
+          </details>
+          <p id="known-resource-review" class="notice" role="status" hidden></p>
+          <div class="actions"><button id="generate-known" type="button">Construir orientação multimodal</button><span id="known-status" role="status"></span></div>
+        </div>
+      </details>
+    </section>
+
+    <section id="free-panel" role="tabpanel" aria-labelledby="free-tab" hidden>
+      <details id="prepared-scenarios" class="card technical case-examples" open>
+        <summary>Começar com um exemplo</summary>
+        <p>Escolha um exemplo para conhecer o percurso. São casos sintéticos, não relatos de participantes. As informações serão carregadas para sua revisão; nada será confirmado automaticamente.</p>
+        <label for="template-select">Escolha um caso</label><select id="template-select"></select>
+      </details>
+
+      <details id="free-narrative-block" class="card macro-block" open>
+        <summary><h2>Conte o caso do seu jeito</h2></summary>
+        <div class="macro-content">
+        <p class="eyebrow">OU ESCREVA SUA SITUAÇÃO</p>
+        <details id="free-rationale-guide" class="foundation rationale-guide">
+          <summary>Como a MADO chega à orientação — entenda cada elemento</summary>
+          <p>Você descreve e confirma o caso. O AMADO consulta o conhecimento representado na MADO, verifica condições e seleciona configurações multimodais já estruturadas na base. A orientação combina as configurações compatíveis; não é uma resposta criada por uma IA de texto.</p>
+          <p>As articulações foram construídas e documentadas na pesquisa. O agente as consulta; não cria novas relações entre fontes durante a execução. Quando falta sustentação, a decisão pode ser suspensa.</p>
+          <p><strong>Como ler:</strong> a lista abaixo e o caminho da orientação usam a mesma ordem. São elementos conectados, não oito etapas automáticas em sequência. As fontes sustentam o conhecimento e os critérios; não são produzidas no final.</p>
+          <ol id="free-rationale-terms" class="rationale-terms"></ol>
+          <p class="field-help">Esta explicação pertence à demonstração de outros casos. Ela não modifica a orientação nem constitui uma nova avaliação pela especialista.</p>
+        </details>
+        <p>Conte quem participa, o que precisa fazer e onde está a dificuldade. O AMADO organiza o que reconhece na base e mostra o que falta; você confere antes de gerar a orientação.</p>
+        <label for="free-narrative">Descrição do caso</label>
+        <div class="input-with-action"><textarea id="free-narrative" rows="7" placeholder="Conte o que a pessoa quer fazer, qual dificuldade encontra e quais recursos tem disponíveis."></textarea><button class="dictate secondary" type="button" data-target="free-narrative">Ditar</button></div>
+        <p class="dictation-status" aria-live="polite"></p>
+        <div class="actions"><button id="organize-narrative" type="button">Organizar as informações</button><span id="narrative-status" role="status"></span></div>
+        </div>
+      </details>
+
+      <details id="free-interpretation" class="card macro-block" hidden open>
+        <summary><h2>Confira o que foi identificado</h2></summary>
+        <div class="macro-content">
+        <p class="notice">A organização é uma hipótese local para confirmação. Ela não diagnostica a pessoa nem completa o que não foi informado.</p>
+        <div id="free-summary" class="summary-grid"></div>
+        <aside id="free-assumptions" class="notice example-assumptions" hidden><h3>Premissas do exemplo sintético</h3><p>Condições usadas para preparar o exemplo; não são observações de uso. Confira sua pertinência para o caso.</p><ul></ul></aside>
+        <p class="field-help">A síntese acompanha suas correções. As funções indicam o que a orientação precisa garantir. São requisitos estruturados para conferência; não são transcrição literal nem interpretação automática completa.</p>
+        <div id="free-missing" class="warning" hidden><h3>O que ainda precisa ser informado</h3><ul></ul></div>
+        <label class="confirmation"><input id="free-confirmed" type="checkbox"> A organização representa corretamente o caso descrito.</label>
+        <details class="foundation"><summary>Corrigir ou completar a organização</summary>
+          <label for="free-objective">O que se espera alcançar?</label>
+          <textarea id="free-objective" rows="3"></textarea>
+          <label for="free-operation">Como a pessoa opera o aplicativo ou conteúdo?</label>
+          <textarea id="free-operation" rows="3" aria-describedby="free-operation-help"></textarea>
+          <p id="free-operation-help" class="field-help">Descreva quem opera e como. Deixe em branco se isso ainda não foi informado; o agente não atribui um papel por suposição.</p>
+          <p class="field-help">Dispositivos e apoios disponíveis podem ser usados agora. Recursos propostos ainda precisam ser preparados e confirmados; não contam como disponíveis.</p>
+          <div id="free-controlled-fields"></div>
+          <label class="confirmation"><input id="free-impediments-verified" type="checkbox"> Verifiquei os impedimentos de uso dos dispositivos e apoios. Se nenhum estiver marcado, confirmo que nenhum impedimento foi identificado.</label>
+          <label for="free-restrictions">Condições ou restrições importantes <span class="optional">(uma por linha)</span></label>
+          <textarea id="free-restrictions" rows="3"></textarea>
+        </details>
+        <p id="free-resource-review" class="notice" role="status" hidden></p>
+        <div class="actions"><button id="generate-free" type="button">Construir orientação multimodal</button><span id="free-status" role="status"></span></div>
+        </div>
+      </details>
+
+    </section>
+
+    <section id="saida" class="card" hidden aria-labelledby="decision-title">
+      <p class="eyebrow">ORIENTAÇÃO MULTIMODAL</p>
+      <div class="title-row"><h2 id="decision-title" tabindex="-1">O que fazer neste contexto</h2><div><button id="speak-button" class="secondary" type="button">Ouvir resumo</button><button id="stop-speech" class="quiet" type="button">Parar leitura</button><button id="toggle-decision-content" class="secondary" type="button" aria-expanded="true" aria-controls="decision-content" hidden>Recolher orientação</button></div></div>
+      <p id="speech-status" role="status"></p>
+      <div id="decision-content">
+      <div id="decision-status" class="decision-status" role="status"></div>
+      <section id="practical-summary" class="practical-summary" aria-labelledby="practical-title">
+        <h3 id="practical-title">Sugestão para este caso</h3>
+        <p id="practical-headline" class="practical-headline"></p>
+        <p class="guide-result-help">Cada bloco mostra uma forma de apoiar a atividade. Confira sua função e a situação dos recursos. Abra para ver como combinar os modos, as condições e as alternativas.</p><div class="guide-expand-tools"><button type="button" id="guide-expand" class="secondary">Abrir todos os blocos</button><button type="button" id="guide-collapse" class="secondary">Recolher todos os blocos</button></div><div id="practical-steps" class="practical-steps"></div>
+        <aside class="expected-result" aria-labelledby="expected-title">
+          <h4 id="expected-title">O que observar depois da aplicação</h4>
+          <p id="expected-result"></p>
+          <p id="expected-result-note" class="expected-note"></p>
+        </aside>
+      </section>
+
+      <details id="orientation-details" class="foundation detailed-orientation">
+        <summary>Consultar a orientação completa</summary>
+        <div class="detail-actions"><button id="speak-detailed-button" class="secondary" type="button">Ouvir versão detalhada</button></div>
+        <p id="orientation" class="orientation"></p>
+        <p id="rationale"></p>
+
+        <h3>Como combinar as formas de interação</h3>
+        <div id="modal-configuration" class="mode-cards"></div>
+        <div class="result-grid">
+          <article><h3>Recursos confirmados</h3><ul id="resources"></ul></article>
+          <article><h3>Recursos a confirmar</h3><ul id="conditional-resources"></ul></article>
+          <article><h3>Condições</h3><ul id="conditions"></ul></article>
+          <article><h3>Alternativas</h3><ul id="alternatives"></ul></article>
+          <article><h3>Como acompanhar</h3><ul id="monitoring"></ul></article>
+        </div>
+      </details>
+      <div id="missing-box" class="warning"><h3>Informações e ligações a conferir</h3><ul id="missing"></ul></div>
+
+      <details id="depara-details" class="foundation"><summary>Por que estas escolhas fazem sentido para o caso?</summary>
+        <p id="depara-reading-order">Condição → significado funcional → articulação → conhecimento → critério → configuração multimodal.</p>
+        <div id="depara-table"></div>
+      </details>
+      <details id="trace-details" class="foundation"><summary>Conferir conhecimentos, critérios e fontes</summary>
+        <p id="trace-reading-order">Contexto → função exigida → articulação confirmada → conhecimento → critério → configuração → fonte.</p>
+        <div id="free-trace-overview" hidden></div>
+        <div id="free-trace-explanation" class="rationale-guide" hidden></div>
+        <div class="graph-scroll"><div id="trace-graph"></div></div>
+        <div id="trace-table"></div>
+      </details>
+      <details class="technical"><summary>Aprofundar a análise técnica</summary>
+        <p id="technical-summary"></p>
+        <h3>Efeito da articulação do conhecimento</h3>
+        <div class="delta-grid">
+          <article><h4>Se os conhecimentos fossem usados isoladamente</h4><div id="isolated-comparison"></div></article>
+          <article class="added"><h4>O que as articulações acrescentaram</h4><div id="articulated-comparison"></div></article>
+        </div>
+        <h3>Critérios empregados</h3><div id="criteria" class="trace-grid"></div>
+        <h3>Conhecimentos, trechos e fontes</h3><div id="knowledge" class="trace-list"></div>
+        <h3>Possibilidades não utilizadas</h3><div id="rejected"></div>
+      </details>
+      <p class="limit"><strong>Limite:</strong> <span id="limit"></span></p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Texto, teclado, contraste e ampliação estão disponíveis. A leitura em voz alta usa somente uma voz local quando disponível. O ditado remoto está desativado nesta versão; nenhum áudio é gravado pelo AMADO. O provedor da página pode manter registros técnicos de acesso, não o conteúdo do caso.
+    <p><a class="back-top" href="#inicio" data-site-top>↑ Voltar ao topo</a> · <a href="../">Início da MADO</a></p>
+    <small class="version-note">Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Melo · MADO 1.3.0-rc1 — versão candidata</small>
+  </footer>
+  <noscript><p>O AMADO precisa de JavaScript e WebAssembly para executar as consultas. Você ainda pode <a href="../">ler a explicação da pesquisa</a>.</p></noscript>
+  <script type="module" src="./app.js"></script>
+  <script type="module" src="./guided.js"></script>
+  <script defer src="../site.js"></script>
+</body>
+</html>

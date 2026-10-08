@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+evidence/private/
+tmp/
+exports/
+curation/
+.DS_Store
+tests/.artifacts/
+vendor/bin/
+# Legacy input copied for local provenance only; never publish this file.
+ontology/data.ttl

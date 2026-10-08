@@ -1,0 +1,380 @@
+{
+  "version": "1.3.0-rc1",
+  "type": "SYNTHETIC_TECHNICAL_REGRESSION_NOT_HUMAN_EVALUATION",
+  "checks": {
+    "four_examples_generate": true,
+    "game_block_removes_configuration": true,
+    "diagnosis_alone_suspends": true,
+    "unconfirmed_suspends": true,
+    "novel_combination_composes_two_functions": true,
+    "removing_voice_changes_decision": true,
+    "base_unchanged": true
+  },
+  "cases": {
+    "principal": {
+      "status": "GERADA",
+      "components": [
+        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+        "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
+        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
+        "PAD-VIDEO-PROCESSO",
+        "PAD-JOGO-CONSOLIDACAO-FEEDBACK",
+        "PAD-PAPEIS-TURNOS-AUTORIA",
+        "PAD-REVISAO-CONFIRMACAO"
+      ],
+      "seconds": 19.273,
+      "query_rows": {
+        "CQ-001": 96,
+        "CQ-002": 28,
+        "CQ-003": 236,
+        "CQ-004": 273,
+        "CQ-005": 3,
+        "CQ-006": 7,
+        "CQ-007": 7,
+        "CQ-008": 1
+      }
+    },
+    "principal_sem_jogo": {
+      "status": "GERADA",
+      "components": [
+        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+        "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
+        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
+        "PAD-VIDEO-PROCESSO",
+        "PAD-PAPEIS-TURNOS-AUTORIA",
+        "PAD-REVISAO-CONFIRMACAO"
+      ],
+      "seconds": 22.04,
+      "query_rows": {
+        "CQ-001": 97,
+        "CQ-002": 28,
+        "CQ-003": 214,
+        "CQ-004": 246,
+        "CQ-005": 3,
+        "CQ-006": 6,
+        "CQ-007": 6,
+        "CQ-008": 1
+      }
+    },
+    "leitor_tela": {
+      "status": "GERADA",
+      "components": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE"
+      ],
+      "seconds": 12.332,
+      "query_rows": {
+        "CQ-001": 33,
+        "CQ-002": 4,
+        "CQ-003": 11,
+        "CQ-004": 30,
+        "CQ-005": 2,
+        "CQ-006": 1,
+        "CQ-007": 1,
+        "CQ-008": 1
+      }
+    },
+    "mobilidade_ruido": {
+      "status": "GERADA",
+      "components": [
+        "PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
+        "PAD-RETORNO-HAPTICO-RUIDO"
+      ],
+      "seconds": 12.599,
+      "query_rows": {
+        "CQ-001": 27,
+        "CQ-002": 7,
+        "CQ-003": 23,
+        "CQ-004": 48,
+        "CQ-005": 2,
+        "CQ-006": 2,
+        "CQ-007": 2,
+        "CQ-008": 1
+      }
+    },
+    "comunicacao": {
+      "status": "GERADA",
+      "components": [
+        "PAD-COMUNICACAO-MULTIFORMATO"
+      ],
+      "seconds": 12.694,
+      "query_rows": {
+        "CQ-001": 40,
+        "CQ-002": 6,
+        "CQ-003": 9,
+        "CQ-004": 24,
+        "CQ-005": 1,
+        "CQ-006": 1,
+        "CQ-007": 1,
+        "CQ-008": 2
+      }
+    },
+    "diagnostico_isolado": {
+      "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
+      "components": [],
+      "seconds": 10.372,
+      "query_rows": {
+        "CQ-001": 8,
+        "CQ-002": 0,
+        "CQ-003": 0,
+        "CQ-004": 0,
+        "CQ-005": 0,
+        "CQ-006": 0,
+        "CQ-007": 0,
+        "CQ-008": 5
+      }
+    },
+    "sem_confirmacao": {
+      "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
+      "components": [],
+      "seconds": 13.533,
+      "query_rows": {
+        "CQ-001": 107,
+        "CQ-002": 28,
+        "CQ-003": 0,
+        "CQ-004": 0,
+        "CQ-005": 0,
+        "CQ-006": 0,
+        "CQ-007": 0,
+        "CQ-008": 12
+      }
+    },
+    "combinacao_nao_cadastrada": {
+      "status": "GERADA",
+      "components": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE",
+        "PAD-COMUNICACAO-MULTIFORMATO"
+      ],
+      "knowledge": [
+        "K10",
+        "K42",
+        "K41"
+      ],
+      "comparison": {
+        "isolated": {
+          "knowledge_ids": [
+            "K10",
+            "K18",
+            "K27",
+            "K29"
+          ],
+          "component_ids": [
+            "PAD-CONTEUDO-WEB-EQUIVALENTE"
+          ],
+          "covered_function_ids": [
+            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+            "FUN-MANTER-INFORMACAO-RECUPERAVEL"
+          ],
+          "covered_functions": [
+            "Preservar o significado entre formas de representação",
+            "Manter informação persistente e recuperável"
+          ],
+          "remaining_function_ids": [
+            "FUN-SELECIONAR-MODO-POR-CONDICAO",
+            "FUN-FEEDBACK-PERCEPTIVEL"
+          ],
+          "modalities": [
+            "Texto"
+          ],
+          "alternatives": [
+            "Disponibilizar uma versão textual estruturada ou explicação em áudio com a mesma informação e navegação equivalente."
+          ]
+        },
+        "articulated": {
+          "knowledge_ids": [
+            "K10",
+            "K18",
+            "K27",
+            "K29",
+            "K41",
+            "K42",
+            "K43"
+          ],
+          "component_ids": [
+            "PAD-CONTEUDO-WEB-EQUIVALENTE",
+            "PAD-COMUNICACAO-MULTIFORMATO"
+          ],
+          "covered_function_ids": [
+            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+            "FUN-MANTER-INFORMACAO-RECUPERAVEL",
+            "FUN-SELECIONAR-MODO-POR-CONDICAO",
+            "FUN-FEEDBACK-PERCEPTIVEL"
+          ],
+          "covered_functions": [
+            "Preservar o significado entre formas de representação",
+            "Manter informação persistente e recuperável",
+            "Selecionar formas de interação pela tarefa e pelas condições funcionais",
+            "Oferecer feedback perceptível, persistente e compatível"
+          ],
+          "remaining_function_ids": [],
+          "modalities": [
+            "Texto",
+            "Comando ou entrada por voz"
+          ],
+          "alternatives": [
+            "Disponibilizar uma versão textual estruturada ou explicação em áudio com a mesma informação e navegação equivalente.",
+            "Manter teclado, acionador ou apoio humano para registrar a mensagem, sempre com revisão e confirmação pela pessoa."
+          ]
+        },
+        "added_knowledge_ids": [
+          "K41",
+          "K42",
+          "K43"
+        ],
+        "articulation_ids": [
+          "ART-REF-05",
+          "ART-REF-03"
+        ],
+        "interpretation": "A comparação mede cobertura funcional e rastreabilidade. Ela não afirma superioridade pedagógica nem eficácia universal.",
+        "added_component_ids": [
+          "PAD-COMUNICACAO-MULTIFORMATO"
+        ],
+        "added_function_ids": [
+          "FUN-SELECIONAR-MODO-POR-CONDICAO",
+          "FUN-FEEDBACK-PERCEPTIVEL"
+        ],
+        "added_modalities": [
+          "Comando ou entrada por voz"
+        ],
+        "added_alternatives": [
+          "Manter teclado, acionador ou apoio humano para registrar a mensagem, sempre com revisão e confirmação pela pessoa."
+        ]
+      },
+      "input": {
+        "tarefas": [
+          "TAR-ACESSAR-CONTEUDO-WEB-E80BA3E",
+          "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+          "TAR-REVISAR-E-CONFIRMAR",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+          "TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA",
+          "TAR-COMUNICAR-E-EXPRESSAR",
+          "TAR-OPERAR-SISTEMA"
+        ],
+        "caracteristicas_pessoa": [
+          "CAR-INTERACAO-NAO-VISUAL",
+          "CAR-USA-LEITOR-TELA",
+          "CAR-DIGITACAO-PROLONGADA-CANSATIVA",
+          "CAR-FALA-LEITURA-OPERAVEIS"
+        ],
+        "recursos_digitais": [
+          "RED-CONTEUDO-WEB",
+          "RED-PAGINA-WEB",
+          "RED-CANAL-COMUNICACAO-AVA",
+          "RED-MENSAGENS",
+          "RED-AVA"
+        ],
+        "barreiras": [
+          "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+          "BAR-INFORMACAO-EM-UM-SO-MODO",
+          "BAR-CANAL-EXCLUSIVAMENTE-TEXTUAL-587ACB3",
+          "BAR-RECURSO-INCOMPATIVEL-CAPACIDADE"
+        ],
+        "necessidades": [
+          "NEC-ACESSO-EQUIVALENTE",
+          "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE",
+          "NEC-FUNCAO-EXPLICITA-POR-MODALIDADE",
+          "NEC-COMUNICACAO-MULTIFORMATO",
+          "NEC-ENTRADA-ALTERNATIVA",
+          "NEC-REVISAO-E-CONFIRMACAO"
+        ],
+        "ambientes": [
+          "AMB-CONTEUDO-EDUCACIONAL-NA-WEB-D1FE594",
+          "AMB-CONTEXTO-DIGITAL-DE-APRENDIZAGEM-42D27F5"
+        ],
+        "modalidades_disponiveis": [
+          "MOD-TEXTO",
+          "MOD-AUDIO",
+          "MOD-TECLADO",
+          "MOD-VOZ"
+        ],
+        "recursos_disponiveis": [
+          "REC-COMPUTADOR",
+          "REC-TECLADO",
+          "REC-LEITOR-DE-TELA",
+          "REC-SAIDA-AUDIO",
+          "REC-EDITOR-MULTIMIDIA",
+          "REC-ENTRADA-VOZ",
+          "REC-TTS",
+          "REC-CONFIGURACAO-CANAL"
+        ],
+        "recursos_impedidos": [],
+        "recursos_propostos": [
+          "REC-DESCRICAO-TEXTUAL",
+          "REC-FEEDBACK-ACESSIVEL",
+          "REC-CANAL-TEXTO-AUDIO"
+        ],
+        "funcoes_requeridas_ids": [
+          "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+          "FUN-MANTER-INFORMACAO-RECUPERAVEL",
+          "FUN-SELECIONAR-MODO-POR-CONDICAO",
+          "FUN-FEEDBACK-PERCEPTIVEL"
+        ],
+        "objetivo": "Compreender uma página e revisar mensagens sobre seu conteúdo.",
+        "descricao_do_contexto": "Caso sintético não cadastrado: acesso ao conteúdo de uma página e comunicação no mesmo fluxo, com teclado, leitor de tela, voz e revisão. Combinação técnica de condições; não é observação empírica.",
+        "mapping_confirmed": true,
+        "transfer_confirmed": true,
+        "impedimentos_verificados": true,
+        "participations": [
+          {
+            "papel_id": "PAPEL-PESSOA-APOIADA",
+            "caracteristica_ids": [
+              "CAR-INTERACAO-NAO-VISUAL",
+              "CAR-USA-LEITOR-TELA",
+              "CAR-DIGITACAO-PROLONGADA-CANSATIVA",
+              "CAR-FALA-LEITURA-OPERAVEIS"
+            ],
+            "tarefa_ids": [
+              "TAR-ACESSAR-CONTEUDO-WEB-E80BA3E",
+              "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+              "TAR-REVISAR-E-CONFIRMAR",
+              "TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA",
+              "TAR-COMUNICAR-E-EXPRESSAR",
+              "TAR-OPERAR-SISTEMA"
+            ],
+            "modalidade_ids": [
+              "MOD-TEXTO",
+              "MOD-AUDIO",
+              "MOD-TECLADO",
+              "MOD-VOZ"
+            ],
+            "recurso_operado_ids": [
+              "REC-COMPUTADOR",
+              "REC-TECLADO",
+              "REC-LEITOR-DE-TELA",
+              "REC-SAIDA-AUDIO",
+              "REC-ENTRADA-VOZ",
+              "REC-TTS"
+            ]
+          },
+          {
+            "papel_id": "PAPEL-RESPONSAVEL-ADAPTACAO",
+            "caracteristica_ids": [],
+            "tarefa_ids": [
+              "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+              "TAR-OPERAR-SISTEMA"
+            ],
+            "modalidade_ids": [
+              "MOD-TEXTO",
+              "MOD-TECLADO"
+            ],
+            "recurso_operado_ids": [
+              "REC-COMPUTADOR",
+              "REC-TECLADO",
+              "REC-EDITOR-MULTIMIDIA",
+              "REC-CONFIGURACAO-CANAL"
+            ]
+          }
+        ]
+      }
+    },
+    "combinacao_sem_voz": {
+      "status": "GERADA",
+      "components": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE"
+      ]
+    }
+  },
+  "base_sha256": {
+    "interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+    "knowledge-base.json": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc"
+  }
+}

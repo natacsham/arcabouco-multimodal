@@ -1,0 +1,3496 @@
+{
+  "scope": "Visão guiada comparada à apresentação original, sem alteração ou nova validação da ontologia.",
+  "execution_target": "LOCAL_SUBPATH",
+  "checks": {
+    "served_index_html_matches": true,
+    "served_guiado_html_matches": true,
+    "served_app_js_matches": true,
+    "served_guided_js_matches": true,
+    "served_guided_css_matches": true,
+    "served_views_css_matches": true,
+    "served_styles_css_matches": true,
+    "served_client_mjs_matches": true,
+    "served_worker_mjs_matches": true,
+    "runtime_ready": true,
+    "initial_functional_labels_at_least_16": true,
+    "no_duplicate_ids": true,
+    "two_real_tabs_only": true,
+    "stage_one_only": true,
+    "keyboard_skip_first": true,
+    "keyboard_skip_focus": true,
+    "cannot_skip_confirmation": true,
+    "missing_selection_error_visible": true,
+    "error_does_not_unlock_review": true,
+    "review_is_unconfirmed": true,
+    "obsolete_navigation_message_cleared": true,
+    "review_focus": true,
+    "review_typographic_hierarchy": true,
+    "generation_requires_confirmation": true,
+    "principal_seven_configurations": true,
+    "result_focus": true,
+    "same_content_modes_resources_as_original": true,
+    "decision_content_matches_pre_editorial_baseline": true,
+    "practical_disclosures_closed": true,
+    "modes_function_resources_visible_when_closed": true,
+    "configuration_keyboard_opens": true,
+    "configuration_focus_visible": true,
+    "configuration_keyboard_closes": true,
+    "expand_all": true,
+    "collapse_all_preserves_content": true,
+    "measured_text_contrast": true,
+    "measured_high_contrast": true,
+    "result_desktop_text_200": true,
+    "desktop_fixed_viewport_fonts_double": true,
+    "result_reflow_320": true,
+    "text_reaches_200": true,
+    "mobile_fixed_viewport_fonts_double": true,
+    "result_reflow_320_text_200": true,
+    "forced_colors_reflow": true,
+    "forced_colors_and_reduced_motion": true,
+    "back_preserves_confirmation": true,
+    "forward_preserves_result": true,
+    "reconfirm_report_invalidates_previous_result": true,
+    "reconfirm_cannot_reopen_stale_result": true,
+    "reconfirmed_report_requires_new_generation": true,
+    "editing_invalidates_old_result": true,
+    "example_requires_review": true,
+    "synchronous_preserved_organization_advances": true,
+    "screen_reader_example_constructed": true,
+    "changed_narrative_invalidates_review": true,
+    "incomplete_narrative_reports_missing": true,
+    "incomplete_narrative_suspends": true,
+    "stop_available_at_every_stage": true,
+    "clear_discards_and_resets": true,
+    "load_failure_is_visible": true,
+    "clear_recovers_failed_runtime": true,
+    "no_storage": true,
+    "no_external_or_case_upload": true,
+    "no_javascript_errors": true,
+    "manifest_not_changed_during_run": true,
+    "served_manifest_matches": true,
+    "editorial_preserves_semantic_and_runtime_files": true
+  },
+  "errors": [],
+  "external_requests": [],
+  "request_methods": [
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET"
+  ],
+  "timings": {
+    "load_ms": 10726,
+    "principal_generation_ms": 26013
+  },
+  "started_at_utc": "2026-10-08T01:36:42.401Z",
+  "limitations": [
+    "Não é declaração de conformidade WCAG.",
+    "NVDA, VoiceOver e síntese audível não avaliados.",
+    "Casos sintéticos; não representa sessão humana.",
+    "Não repete a regressão semântica completa do motor."
+  ],
+  "build": {
+    "version": "1.3.0-rc1",
+    "instrument": "AMADO",
+    "public_projection": true,
+    "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
+    "core_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+    "bridge_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+    "base_zip_sha256": "1e1a6a21ce8510aef5d92a0292da79b36094ebe6be60d302a8d40857082e4a7c",
+    "pyodide_version": "314.0.7",
+    "runtime": {
+      "pyodide-lock.json": {
+        "bytes": 119077,
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+      },
+      "pyodide.asm.mjs": {
+        "bytes": 1250344,
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+      },
+      "pyodide.asm.wasm": {
+        "bytes": 9598218,
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+      },
+      "pyodide.mjs": {
+        "bytes": 17931,
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+      },
+      "python_stdlib.zip": {
+        "bytes": 2545637,
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+      }
+    },
+    "license_notices": {
+      "licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+      "licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "licenses/MUSL-COPYRIGHT.txt": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "licenses/PYODIDE-MPL-2.0.txt": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "licenses/PYODIDE-STACKFRAME-LICENSE.txt": "899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420",
+      "licenses/PYTHON-3.14.2-LICENSE.txt": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "licenses/PYTHON-3.14.2-THIRD-PARTY.rst": "c695d550b135e53e38807e76496d1db17d22c40e461d1f3f354c86188d3305dd",
+      "licenses/README.md": "f6104c41292b57ff6d35edb7008ac8a87bbd66bdff6f9d20c16e94939a98df68"
+    },
+    "case_history": false,
+    "llm": false,
+    "frontend_sha256": {
+      "index.html": "97bb67aef40da6d4bdb3751e0bb27a9cc432a86c22363516f06ab5dd9583196a",
+      "app.js": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+      "styles.css": "aa9e6edcf5c40dc0fd3dcb2e9e53a1c5be560825cabbc911aae8a7d1d1596424",
+      "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+      "guiado.html": "05a4a8e588391a3070bc45a383b9138dc9f93e5a2aa0750c34876bde8780e6d0",
+      "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+      "guided.css": "339c66c48dcb8c9aabd4320084f0d2de81222c3988e05bc5cd4b9f6f59fa1e6f",
+      "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564"
+    },
+    "site_assets_sha256": {
+      "index.html": "00a235c55c47441b8dbb17c14895f85788fd6271bcce21e410560a48a2abc8f9",
+      "ontologia/index.html": "77181477aee9bfb1c48d4319463737ef955158866a9d6138b3a9103dccf6b59f",
+      "site.css": "2a8dfc7f159d040844dfa4d68355608c56a98d1baa78f17988d16da4f00e56c3",
+      "shell.css": "19f4323d1fb7b9b842114eb41187e96e9f835467f215d57a568105b8449e7e44",
+      "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "sitemap.xml": "7ae4a147c35e006a700f3231d4a479240929b18e2513ccac229e8f1122ebe9be"
+    },
+    "files": {
+      "data/knowledge-base.json": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc",
+      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "ontology/mado-combined.ttl": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+      "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+      "queries/CQ-002.rq": "10e779fe05eb4c898411586c007b2f58cc0f791b06c78947d7df72a17a099c0f",
+      "queries/CQ-003.rq": "62d09e51cbd70719bf9953b563092ebba125ccd9abc0c17d1d410432acbe712f",
+      "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+      "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+      "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+      "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+    }
+  },
+  "source_sha256": {
+    "index.html": "97bb67aef40da6d4bdb3751e0bb27a9cc432a86c22363516f06ab5dd9583196a",
+    "guiado.html": "05a4a8e588391a3070bc45a383b9138dc9f93e5a2aa0750c34876bde8780e6d0",
+    "app.js": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+    "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+    "guided.css": "339c66c48dcb8c9aabd4320084f0d2de81222c3988e05bc5cd4b9f6f59fa1e6f",
+    "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+    "styles.css": "aa9e6edcf5c40dc0fd3dcb2e9e53a1c5be560825cabbc911aae8a7d1d1596424",
+    "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+    "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f"
+  },
+  "browser": "154.0.8037.98",
+  "core_invariants": {
+    "baseline_commit": "9445c51",
+    "count": 23,
+    "all_unchanged": true,
+    "files": [
+      {
+        "file": "data/interface-vocabulary.json",
+        "baseline_sha256": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+        "current_sha256": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+        "unchanged": true
+      },
+      {
+        "file": "data/knowledge-base.json",
+        "baseline_sha256": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc",
+        "current_sha256": "8e2e8f9e6e40c331fcf6960f7ddac60e6b772c4d2692a70688b40ed1acfe94fc",
+        "unchanged": true
+      },
+      {
+        "file": "engine.py",
+        "baseline_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+        "current_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+        "unchanged": true
+      },
+      {
+        "file": "ontology/mado-combined.ttl",
+        "baseline_sha256": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+        "current_sha256": "8b3c9b47c1dffb962cd7cfba753b0d32f601235dd5d3c83a1e76bc0bcecbbecd",
+        "unchanged": true
+      },
+      {
+        "file": "ontology/mado.owl",
+        "baseline_sha256": "700dfc224f827a5870c8cf4f914aee60786edd4e24793c68373eab71c0197aad",
+        "current_sha256": "700dfc224f827a5870c8cf4f914aee60786edd4e24793c68373eab71c0197aad",
+        "unchanged": true
+      },
+      {
+        "file": "ontology/main.ttl",
+        "baseline_sha256": "302414ee27e8c1f4d1b9b07600631f7ad5608a67b2e35b5fda7b945b35eb466c",
+        "current_sha256": "302414ee27e8c1f4d1b9b07600631f7ad5608a67b2e35b5fda7b945b35eb466c",
+        "unchanged": true
+      },
+      {
+        "file": "queries/AUD-001.rq",
+        "baseline_sha256": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
+        "current_sha256": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-001.rq",
+        "baseline_sha256": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+        "current_sha256": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-002.rq",
+        "baseline_sha256": "10e779fe05eb4c898411586c007b2f58cc0f791b06c78947d7df72a17a099c0f",
+        "current_sha256": "10e779fe05eb4c898411586c007b2f58cc0f791b06c78947d7df72a17a099c0f",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-003.rq",
+        "baseline_sha256": "62d09e51cbd70719bf9953b563092ebba125ccd9abc0c17d1d410432acbe712f",
+        "current_sha256": "62d09e51cbd70719bf9953b563092ebba125ccd9abc0c17d1d410432acbe712f",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-004.rq",
+        "baseline_sha256": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+        "current_sha256": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-005.rq",
+        "baseline_sha256": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+        "current_sha256": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-006.rq",
+        "baseline_sha256": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+        "current_sha256": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-007.rq",
+        "baseline_sha256": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+        "current_sha256": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+        "unchanged": true
+      },
+      {
+        "file": "queries/CQ-008.rq",
+        "baseline_sha256": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+        "current_sha256": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+        "unchanged": true
+      },
+      {
+        "file": "shapes/main.shacl.ttl",
+        "baseline_sha256": "fe0a65314330efbe0bae523977fb1a1383518ccb67654c29eafc42497157811f",
+        "current_sha256": "fe0a65314330efbe0bae523977fb1a1383518ccb67654c29eafc42497157811f",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/app.js",
+        "baseline_sha256": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+        "current_sha256": "cba7dbe6f8951b1f6f77d71f221b768c89cea2d511ff3831dc9cd0c9f0c1c951",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/assets/base.zip",
+        "baseline_sha256": "1e1a6a21ce8510aef5d92a0292da79b36094ebe6be60d302a8d40857082e4a7c",
+        "current_sha256": "1e1a6a21ce8510aef5d92a0292da79b36094ebe6be60d302a8d40857082e4a7c",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/bridge.py",
+        "baseline_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+        "current_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/client.mjs",
+        "baseline_sha256": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+        "current_sha256": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/engine.py",
+        "baseline_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+        "current_sha256": "b62471e937dfd7dc1e1052741995b68d12c1ce3a67ee7c892fe6c2f7e7cc4cea",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/guided.js",
+        "baseline_sha256": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+        "current_sha256": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
+        "unchanged": true
+      },
+      {
+        "file": "web/amado/worker.mjs",
+        "baseline_sha256": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+        "current_sha256": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+        "unchanged": true
+      }
+    ]
+  },
+  "historical_baseline": {
+    "git_reference": "9445c51:evidence/guided-report.json",
+    "sha256": "885a23599a438e19b173209ac654f8c6556807b9d3b2d8ad2ff401582544e0f8",
+    "completed": true,
+    "prior_checks_passed": 46,
+    "prior_scope": "Delta de layout da visão guiada: somente espaçamento móvel em guided.css; motor e comportamento preservados por comparação de hashes.",
+    "comparison": {
+      "scope": "Síntese, títulos e conteúdo dos blocos, modos, funções, recursos e estados, orientação detalhada, condições, alternativas, acompanhamento, critérios e conhecimentos; apenas wrappers e prefixos numéricos da apresentação são desconsiderados.",
+      "original_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+      "guided_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+      "configurations": 7,
+      "steps": 5
+    },
+    "warning": "Historical evidence; its checks are not counted as executed by the current run."
+  },
+  "typography": {
+    "initial_desktop": {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "root": 16,
+      "body": 16,
+      "headings": {
+        "h1": [
+          {
+            "text": "Uma orientação, passo a passo.",
+            "pixels": 32,
+            "line_height": "40px"
+          }
+        ],
+        "h2": [],
+        "h3": []
+      },
+      "functional": [
+        {
+          "key": "main label:0",
+          "text": "Li a adaptação e quero manter o exemplo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main label:1",
+          "text": "Quero anotar uma diferença para esta exploração",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main label:2",
+          "text": "O que seria diferente no caso que você quer explorar?",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main legend:0",
+          "text": "Como você quer explorar este exemplo?",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:0",
+          "text": "Limpar caso e reiniciar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:1",
+          "text": "Parar leitura",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:2",
+          "text": "1Começar pelo casoDescreva ou escolha um exemplo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:3",
+          "text": "2Conferir as informaçõesRevise antes de continuar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:4",
+          "text": "3Explorar a orientaçãoAções, condições e fundamentos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:5",
+          "text": "Partir do caso da pesquisa",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:6",
+          "text": "Descrever ou escolher outro caso",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:8",
+          "text": "Ditado indisponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:9",
+          "text": "Conferir e continuar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:0",
+          "text": "Sobre seus dados e o uso desta visão",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:1",
+          "text": "1Um caso da pesquisaAdaptação didática pública, não transcrição de entrevista nem nov",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:2",
+          "text": "Ver o caso organizado por assunto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main textarea:0",
+          "text": "",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#health:0",
+          "text": "AMADO pronto: base carregada no navegador (13457 triplas). A construção pode levar al",
+          "pixels": 16,
+          "line_height": "25.6px"
+        }
+      ]
+    },
+    "review_desktop": {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "root": 16,
+      "body": 16,
+      "headings": {
+        "h1": [
+          {
+            "text": "Uma orientação, passo a passo.",
+            "pixels": 32,
+            "line_height": "40px"
+          }
+        ],
+        "h2": [],
+        "h3": [
+          {
+            "text": "Características relevantes da pessoa",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Participantes e responsabilidades",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Atividade",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Objetivo",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Dificuldade observada",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "O que precisa ser apoiado",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "O que a orientação precisa garantir (requisitos a conferir)",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Formas de interação",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Aplicativo ou conteúdo utilizado",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Como o aplicativo ou conteúdo é operado",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Dispositivos e apoios disponíveis",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Recursos propostos (a preparar)",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Recursos que não podem ser usados",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Condições ou restrições importantes",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Onde ocorre",
+            "pixels": 18,
+            "line_height": "22.5px"
+          }
+        ]
+      },
+      "functional": [
+        {
+          "key": "main label:3",
+          "text": "Esta nova situação é coerente com as características da pessoa e apresenta corretamen",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:0",
+          "text": "Limpar caso e reiniciar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:1",
+          "text": "Parar leitura",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:2",
+          "text": "1Começar pelo casoDescreva ou escolha um exemplo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:3",
+          "text": "2Conferir as informaçõesRevise antes de continuar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:4",
+          "text": "3Explorar a orientaçãoAções, condições e fundamentos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:12",
+          "text": "Construir orientação multimodal",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:0",
+          "text": "Sobre seus dados e o uso desta visão",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:3",
+          "text": "2Uma nova situação construída a partir desse casoA pessoa é a mesma, mas a tarefa é d",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:4",
+          "text": "Corrigir ou completar a organização",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .confirmation:0",
+          "text": "Esta nova situação é coerente com as características da pessoa e apresenta corretamen",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#health:0",
+          "text": "AMADO pronto: base carregada no navegador (13457 triplas). A construção pode levar al",
+          "pixels": 16,
+          "line_height": "25.6px"
+        }
+      ]
+    },
+    "result_desktop": {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "root": 16,
+      "body": 16,
+      "headings": {
+        "h1": [
+          {
+            "text": "Uma orientação, passo a passo.",
+            "pixels": 32,
+            "line_height": "40px"
+          }
+        ],
+        "h2": [
+          {
+            "text": "O que fazer neste contexto",
+            "pixels": 24,
+            "line_height": "30px"
+          }
+        ],
+        "h3": [
+          {
+            "text": "Sugestão para este caso",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Informações e ligações a conferir",
+            "pixels": 18,
+            "line_height": "22.5px"
+          }
+        ]
+      },
+      "functional": [
+        {
+          "key": "main button:0",
+          "text": "Limpar caso e reiniciar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:1",
+          "text": "Parar leitura",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:2",
+          "text": "1Começar pelo casoDescreva ou escolha um exemplo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:3",
+          "text": "2Conferir as informaçõesRevise antes de continuar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:4",
+          "text": "3Explorar a orientaçãoAções, condições e fundamentos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:16",
+          "text": "Ouvir resumo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:18",
+          "text": "Abrir todos os blocos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:19",
+          "text": "Recolher todos os blocos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:0",
+          "text": "Sobre seus dados e o uso desta visão",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:21",
+          "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: organizar unidades cur",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:23",
+          "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preservar a voz da pessoa ",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:25",
+          "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mudança, processo ou co",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:27",
+          "text": "4. Jogo como possibilidade funcionalInteração em jogo digitalFunção: consolidar relaç",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:29",
+          "text": "5. Revisar e confirmar antes de concluirTextoFunção: permitir revisão do conteúdo, da",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:31",
+          "text": "Consultar a orientação completa",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:39",
+          "text": "Por que estas escolhas fazem sentido para o caso?",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:40",
+          "text": "Conferir conhecimentos, critérios e fontes",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:41",
+          "text": "Aprofundar a análise técnica",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:0",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:1",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:2",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:3",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:4",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:5",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:6",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:7",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:8",
+          "text": "Disponibilidade não informada",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:9",
+          "text": "Opcional; Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:10",
+          "text": "Opcional; Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:11",
+          "text": "Disponibilidade não informada",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:12",
+          "text": "Opcional; Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:13",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:14",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:0",
+          "text": "Texto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:1",
+          "text": "Fala",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:2",
+          "text": "Áudio",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:3",
+          "text": "Imagem",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:4",
+          "text": "Vídeo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:5",
+          "text": "Interação em jogo digital",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:6",
+          "text": "Texto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:0",
+          "text": "Função: organizar unidades curtas, autoria, sequência e pontos de revisão coordenar m",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:1",
+          "text": "Função: preservar a voz da pessoa em trechos curtos, identificáveis e revisáveis repr",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:2",
+          "text": "Função: mostrar uma mudança, processo ou contraste difícil de expressar apenas por fa",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:3",
+          "text": "Função: consolidar relações e tornar dúvidas observáveis sem transformar acerto em ob",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:4",
+          "text": "Função: permitir revisão do conteúdo, das alternativas e dos papéis antes de concluir",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:0",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Quadro de p",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:1",
+          "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Disponível; Câmera Dis",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:2",
+          "text": "Recursos: Reprodutor de vídeo com controles e alternativas de acesso Disponibilidade ",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:3",
+          "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade não informada; Reto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:4",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Retorno per",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-title:0",
+          "text": "1. Organizar conteúdo, participação e retomada",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:1",
+          "text": "2. Combinar voz, texto, imagem e desenho",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:2",
+          "text": "3. Vídeo como possibilidade funcional",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:3",
+          "text": "4. Jogo como possibilidade funcional",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:4",
+          "text": "5. Revisar e confirmar antes de concluir",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-result-help:0",
+          "text": "Cada bloco mostra uma forma de apoiar a atividade. Confira sua função e a situação do",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .limit:0",
+          "text": "Limite: Decisão válida somente para o contexto, as relações confirmadas e a cobertura",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#health:0",
+          "text": "AMADO pronto: base carregada no navegador (13457 triplas). A construção pode levar al",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#expected-result:0",
+          "text": "Pedir a outro participante que retome a sequência e identifique a ideia central de ca",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#expected-result-note:0",
+          "text": "Esses são sinais para acompanhamento, não uma garantia de aprendizagem ou de eficácia",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#practical-headline:0",
+          "text": "Construa o recurso em partes curtas: use fala e áudio para preservar a autoria; texto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        }
+      ]
+    },
+    "result_desktop_200": {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "root": 32,
+      "body": 32,
+      "headings": {
+        "h1": [
+          {
+            "text": "Uma orientação, passo a passo.",
+            "pixels": 64,
+            "line_height": "80px"
+          }
+        ],
+        "h2": [
+          {
+            "text": "O que fazer neste contexto",
+            "pixels": 48,
+            "line_height": "60px"
+          }
+        ],
+        "h3": [
+          {
+            "text": "Sugestão para este caso",
+            "pixels": 36,
+            "line_height": "45px"
+          },
+          {
+            "text": "Informações e ligações a conferir",
+            "pixels": 36,
+            "line_height": "45px"
+          }
+        ]
+      },
+      "functional": [
+        {
+          "key": "main button:0",
+          "text": "Limpar caso e reiniciar",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:1",
+          "text": "Parar leitura",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:2",
+          "text": "1Começar pelo casoDescreva ou escolha um exemplo",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:3",
+          "text": "2Conferir as informaçõesRevise antes de continuar",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:4",
+          "text": "3Explorar a orientaçãoAções, condições e fundamentos",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:16",
+          "text": "Ouvir resumo",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:18",
+          "text": "Abrir todos os blocos",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:19",
+          "text": "Recolher todos os blocos",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:0",
+          "text": "Sobre seus dados e o uso desta visão",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:21",
+          "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: organizar unidades cur",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:23",
+          "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preservar a voz da pessoa ",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:25",
+          "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mudança, processo ou co",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:27",
+          "text": "4. Jogo como possibilidade funcionalInteração em jogo digitalFunção: consolidar relaç",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:29",
+          "text": "5. Revisar e confirmar antes de concluirTextoFunção: permitir revisão do conteúdo, da",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:31",
+          "text": "Consultar a orientação completa",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:39",
+          "text": "Por que estas escolhas fazem sentido para o caso?",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:40",
+          "text": "Conferir conhecimentos, critérios e fontes",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:41",
+          "text": "Aprofundar a análise técnica",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:0",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:1",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:2",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:3",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:4",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:5",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:6",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:7",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:8",
+          "text": "Disponibilidade não informada",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:9",
+          "text": "Opcional; Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:10",
+          "text": "Opcional; Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:11",
+          "text": "Disponibilidade não informada",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:12",
+          "text": "Opcional; Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:13",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:14",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:0",
+          "text": "Texto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:1",
+          "text": "Fala",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:2",
+          "text": "Áudio",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:3",
+          "text": "Imagem",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:4",
+          "text": "Vídeo",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:5",
+          "text": "Interação em jogo digital",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:6",
+          "text": "Texto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:0",
+          "text": "Função: organizar unidades curtas, autoria, sequência e pontos de revisão coordenar m",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:1",
+          "text": "Função: preservar a voz da pessoa em trechos curtos, identificáveis e revisáveis repr",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:2",
+          "text": "Função: mostrar uma mudança, processo ou contraste difícil de expressar apenas por fa",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:3",
+          "text": "Função: consolidar relações e tornar dúvidas observáveis sem transformar acerto em ob",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:4",
+          "text": "Função: permitir revisão do conteúdo, das alternativas e dos papéis antes de concluir",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:0",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Quadro de p",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:1",
+          "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Disponível; Câmera Dis",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:2",
+          "text": "Recursos: Reprodutor de vídeo com controles e alternativas de acesso Disponibilidade ",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:3",
+          "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade não informada; Reto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:4",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Retorno per",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-title:0",
+          "text": "1. Organizar conteúdo, participação e retomada",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:1",
+          "text": "2. Combinar voz, texto, imagem e desenho",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:2",
+          "text": "3. Vídeo como possibilidade funcional",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:3",
+          "text": "4. Jogo como possibilidade funcional",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:4",
+          "text": "5. Revisar e confirmar antes de concluir",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-result-help:0",
+          "text": "Cada bloco mostra uma forma de apoiar a atividade. Confira sua função e a situação do",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .limit:0",
+          "text": "Limite: Decisão válida somente para o contexto, as relações confirmadas e a cobertura",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#health:0",
+          "text": "AMADO pronto: base carregada no navegador (13457 triplas). A construção pode levar al",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#expected-result:0",
+          "text": "Pedir a outro participante que retome a sequência e identifique a ideia central de ca",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#expected-result-note:0",
+          "text": "Esses são sinais para acompanhamento, não uma garantia de aprendizagem ou de eficácia",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#practical-headline:0",
+          "text": "Construa o recurso em partes curtas: use fala e áudio para preservar a autoria; texto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        }
+      ]
+    },
+    "desktop_ratios": [
+      {
+        "key": "root",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "body",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "h1:0",
+        "before": 32,
+        "after": 64,
+        "ratio": 2
+      },
+      {
+        "key": "h2:0",
+        "before": 24,
+        "after": 48,
+        "ratio": 2
+      },
+      {
+        "key": "h3:0",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "h3:1",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main button:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:16",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:18",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:19",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:21",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:23",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:25",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:27",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:29",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:31",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:39",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:40",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:41",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:5",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:6",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:7",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:8",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:9",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:10",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:11",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:12",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:13",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:14",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:5",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:6",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:0",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:1",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:2",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:3",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:4",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-result-help:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .limit:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#health:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#expected-result:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#expected-result-note:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#practical-headline:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      }
+    ],
+    "result_mobile": {
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "root": 16,
+      "body": 16,
+      "headings": {
+        "h1": [
+          {
+            "text": "Uma orientação, passo a passo.",
+            "pixels": 28,
+            "line_height": "35px"
+          }
+        ],
+        "h2": [
+          {
+            "text": "O que fazer neste contexto",
+            "pixels": 24,
+            "line_height": "30px"
+          }
+        ],
+        "h3": [
+          {
+            "text": "Sugestão para este caso",
+            "pixels": 18,
+            "line_height": "22.5px"
+          },
+          {
+            "text": "Informações e ligações a conferir",
+            "pixels": 18,
+            "line_height": "22.5px"
+          }
+        ]
+      },
+      "functional": [
+        {
+          "key": "main button:0",
+          "text": "Limpar caso e reiniciar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:1",
+          "text": "Parar leitura",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:2",
+          "text": "1Começar pelo casoDescreva ou escolha um exemplo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:3",
+          "text": "2Conferir as informaçõesRevise antes de continuar",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:4",
+          "text": "3Explorar a orientaçãoAções, condições e fundamentos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:16",
+          "text": "Ouvir resumo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:18",
+          "text": "Abrir todos os blocos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main button:19",
+          "text": "Recolher todos os blocos",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:0",
+          "text": "Sobre seus dados e o uso desta visão",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:21",
+          "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: organizar unidades cur",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:23",
+          "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preservar a voz da pessoa ",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:25",
+          "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mudança, processo ou co",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:27",
+          "text": "4. Jogo como possibilidade funcionalInteração em jogo digitalFunção: consolidar relaç",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:29",
+          "text": "5. Revisar e confirmar antes de concluirTextoFunção: permitir revisão do conteúdo, da",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:31",
+          "text": "Consultar a orientação completa",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:39",
+          "text": "Por que estas escolhas fazem sentido para o caso?",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:40",
+          "text": "Conferir conhecimentos, critérios e fontes",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main summary:41",
+          "text": "Aprofundar a análise técnica",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:0",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:1",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:2",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:3",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:4",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:5",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:6",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:7",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:8",
+          "text": "Disponibilidade não informada",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:9",
+          "text": "Opcional; Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:10",
+          "text": "Opcional; Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:11",
+          "text": "Disponibilidade não informada",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:12",
+          "text": "Opcional; Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:13",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .resource-state:14",
+          "text": "Disponível",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:0",
+          "text": "Texto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:1",
+          "text": "Fala",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:2",
+          "text": "Áudio",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:3",
+          "text": "Imagem",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:4",
+          "text": "Vídeo",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:5",
+          "text": "Interação em jogo digital",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .mode-pill:6",
+          "text": "Texto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:0",
+          "text": "Função: organizar unidades curtas, autoria, sequência e pontos de revisão coordenar m",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:1",
+          "text": "Função: preservar a voz da pessoa em trechos curtos, identificáveis e revisáveis repr",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:2",
+          "text": "Função: mostrar uma mudança, processo ou contraste difícil de expressar apenas por fa",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:3",
+          "text": "Função: consolidar relações e tornar dúvidas observáveis sem transformar acerto em ob",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-purpose:4",
+          "text": "Função: permitir revisão do conteúdo, das alternativas e dos papéis antes de concluir",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:0",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Quadro de p",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:1",
+          "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Disponível; Câmera Dis",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:2",
+          "text": "Recursos: Reprodutor de vídeo com controles e alternativas de acesso Disponibilidade ",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:3",
+          "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade não informada; Reto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-availability:4",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Retorno per",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .guide-config-title:0",
+          "text": "1. Organizar conteúdo, participação e retomada",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:1",
+          "text": "2. Combinar voz, texto, imagem e desenho",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:2",
+          "text": "3. Vídeo como possibilidade funcional",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:3",
+          "text": "4. Jogo como possibilidade funcional",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-config-title:4",
+          "text": "5. Revisar e confirmar antes de concluir",
+          "pixels": 18,
+          "line_height": "28.8px"
+        },
+        {
+          "key": "main .guide-result-help:0",
+          "text": "Cada bloco mostra uma forma de apoiar a atividade. Confira sua função e a situação do",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "main .limit:0",
+          "text": "Limite: Decisão válida somente para o contexto, as relações confirmadas e a cobertura",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#health:0",
+          "text": "AMADO pronto: base carregada no navegador (13457 triplas). A construção pode levar al",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#expected-result:0",
+          "text": "Pedir a outro participante que retome a sequência e identifique a ideia central de ca",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#expected-result-note:0",
+          "text": "Esses são sinais para acompanhamento, não uma garantia de aprendizagem ou de eficácia",
+          "pixels": 16,
+          "line_height": "25.6px"
+        },
+        {
+          "key": "#practical-headline:0",
+          "text": "Construa o recurso em partes curtas: use fala e áudio para preservar a autoria; texto",
+          "pixels": 16,
+          "line_height": "25.6px"
+        }
+      ]
+    },
+    "result_mobile_200": {
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "root": 32,
+      "body": 32,
+      "headings": {
+        "h1": [
+          {
+            "text": "Uma orientação, passo a passo.",
+            "pixels": 56,
+            "line_height": "70px"
+          }
+        ],
+        "h2": [
+          {
+            "text": "O que fazer neste contexto",
+            "pixels": 48,
+            "line_height": "60px"
+          }
+        ],
+        "h3": [
+          {
+            "text": "Sugestão para este caso",
+            "pixels": 36,
+            "line_height": "45px"
+          },
+          {
+            "text": "Informações e ligações a conferir",
+            "pixels": 36,
+            "line_height": "45px"
+          }
+        ]
+      },
+      "functional": [
+        {
+          "key": "main button:0",
+          "text": "Limpar caso e reiniciar",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:1",
+          "text": "Parar leitura",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:2",
+          "text": "1Começar pelo casoDescreva ou escolha um exemplo",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:3",
+          "text": "2Conferir as informaçõesRevise antes de continuar",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:4",
+          "text": "3Explorar a orientaçãoAções, condições e fundamentos",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:16",
+          "text": "Ouvir resumo",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:18",
+          "text": "Abrir todos os blocos",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main button:19",
+          "text": "Recolher todos os blocos",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:0",
+          "text": "Sobre seus dados e o uso desta visão",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:21",
+          "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: organizar unidades cur",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:23",
+          "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preservar a voz da pessoa ",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:25",
+          "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mudança, processo ou co",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:27",
+          "text": "4. Jogo como possibilidade funcionalInteração em jogo digitalFunção: consolidar relaç",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:29",
+          "text": "5. Revisar e confirmar antes de concluirTextoFunção: permitir revisão do conteúdo, da",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:31",
+          "text": "Consultar a orientação completa",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:39",
+          "text": "Por que estas escolhas fazem sentido para o caso?",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:40",
+          "text": "Conferir conhecimentos, critérios e fontes",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main summary:41",
+          "text": "Aprofundar a análise técnica",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:0",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:1",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:2",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:3",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:4",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:5",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:6",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:7",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:8",
+          "text": "Disponibilidade não informada",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:9",
+          "text": "Opcional; Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:10",
+          "text": "Opcional; Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:11",
+          "text": "Disponibilidade não informada",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:12",
+          "text": "Opcional; Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:13",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .resource-state:14",
+          "text": "Disponível",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:0",
+          "text": "Texto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:1",
+          "text": "Fala",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:2",
+          "text": "Áudio",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:3",
+          "text": "Imagem",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:4",
+          "text": "Vídeo",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:5",
+          "text": "Interação em jogo digital",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .mode-pill:6",
+          "text": "Texto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:0",
+          "text": "Função: organizar unidades curtas, autoria, sequência e pontos de revisão coordenar m",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:1",
+          "text": "Função: preservar a voz da pessoa em trechos curtos, identificáveis e revisáveis repr",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:2",
+          "text": "Função: mostrar uma mudança, processo ou contraste difícil de expressar apenas por fa",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:3",
+          "text": "Função: consolidar relações e tornar dúvidas observáveis sem transformar acerto em ob",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-purpose:4",
+          "text": "Função: permitir revisão do conteúdo, das alternativas e dos papéis antes de concluir",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:0",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Quadro de p",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:1",
+          "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Disponível; Câmera Dis",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:2",
+          "text": "Recursos: Reprodutor de vídeo com controles e alternativas de acesso Disponibilidade ",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:3",
+          "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade não informada; Reto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-availability:4",
+          "text": "Recursos: Editor de apresentação, página ou painel multimídia Disponível; Retorno per",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .guide-config-title:0",
+          "text": "1. Organizar conteúdo, participação e retomada",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:1",
+          "text": "2. Combinar voz, texto, imagem e desenho",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:2",
+          "text": "3. Vídeo como possibilidade funcional",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:3",
+          "text": "4. Jogo como possibilidade funcional",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-config-title:4",
+          "text": "5. Revisar e confirmar antes de concluir",
+          "pixels": 36,
+          "line_height": "57.6px"
+        },
+        {
+          "key": "main .guide-result-help:0",
+          "text": "Cada bloco mostra uma forma de apoiar a atividade. Confira sua função e a situação do",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "main .limit:0",
+          "text": "Limite: Decisão válida somente para o contexto, as relações confirmadas e a cobertura",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#health:0",
+          "text": "AMADO pronto: base carregada no navegador (13457 triplas). A construção pode levar al",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#expected-result:0",
+          "text": "Pedir a outro participante que retome a sequência e identifique a ideia central de ca",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#expected-result-note:0",
+          "text": "Esses são sinais para acompanhamento, não uma garantia de aprendizagem ou de eficácia",
+          "pixels": 32,
+          "line_height": "51.2px"
+        },
+        {
+          "key": "#practical-headline:0",
+          "text": "Construa o recurso em partes curtas: use fala e áudio para preservar a autoria; texto",
+          "pixels": 32,
+          "line_height": "51.2px"
+        }
+      ]
+    },
+    "mobile_ratios": [
+      {
+        "key": "root",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "body",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "h1:0",
+        "before": 28,
+        "after": 56,
+        "ratio": 2
+      },
+      {
+        "key": "h2:0",
+        "before": 24,
+        "after": 48,
+        "ratio": 2
+      },
+      {
+        "key": "h3:0",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "h3:1",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main button:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:16",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:18",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main button:19",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:21",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:23",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:25",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:27",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:29",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:31",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:39",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:40",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main summary:41",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:5",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:6",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:7",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:8",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:9",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:10",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:11",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:12",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:13",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .resource-state:14",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:5",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .mode-pill:6",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-purpose:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:1",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:2",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:3",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-availability:4",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:0",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:1",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:2",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:3",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-config-title:4",
+        "before": 18,
+        "after": 36,
+        "ratio": 2
+      },
+      {
+        "key": "main .guide-result-help:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "main .limit:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#health:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#expected-result:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#expected-result-note:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      },
+      {
+        "key": "#practical-headline:0",
+        "before": 16,
+        "after": 32,
+        "ratio": 2
+      }
+    ]
+  },
+  "comparison": {
+    "scope": "Síntese, títulos e conteúdo dos blocos, modos, funções, recursos e estados, orientação detalhada, condições, alternativas, acompanhamento, critérios e conhecimentos; apenas wrappers e prefixos numéricos da apresentação são desconsiderados.",
+    "original_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+    "guided_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+    "configurations": 7,
+    "steps": 5
+  },
+  "configuration_focus": {
+    "style": "solid",
+    "width": "4px",
+    "color": "rgb(112, 48, 160)",
+    "visible": true
+  },
+  "contrast_default": [
+    {
+      "selector": "h1",
+      "text": "Uma orientação, passo a passo.",
+      "ratio": 10.703896890077,
+      "minimum": 3
+    },
+    {
+      "selector": "h2",
+      "text": "O que fazer neste contexto",
+      "ratio": 11.632780427465335,
+      "minimum": 3
+    },
+    {
+      "selector": "p",
+      "text": "Texto: 100%",
+      "ratio": 6.260978003635952,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Ao mudar de visão, o caso aberto é descartado.",
+      "ratio": 6.588460518464797,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "APOIO À DECISÃO",
+      "ratio": 6.128104698398003,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Comece pelo caso, confira as informações e explore as formas de i",
+      "ratio": 10.703896890077,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A−",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A+",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Texto original",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Alto contraste",
+      "ratio": 12.0623549832488,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "Sobre seus dados e o uso desta visão",
+      "ratio": 8.484683825527089,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: or",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preser",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mud",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: organizar unidades curtas, autoria, sequência e pontos de",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: preservar a voz da pessoa em trechos curtos, identificáve",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: mostrar uma mudança, processo ou contraste difícil de exp",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: consolidar relações e tornar dúvidas observáveis sem tran",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Editor de apresentação, página ou painel multimídia Dis",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Di",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Reprodutor de vídeo com controles e alternativas de ace",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    }
+  ],
+  "contrast_high": [
+    {
+      "selector": "h1",
+      "text": "Uma orientação, passo a passo.",
+      "ratio": 21,
+      "minimum": 3
+    },
+    {
+      "selector": "h2",
+      "text": "O que fazer neste contexto",
+      "ratio": 21,
+      "minimum": 3
+    },
+    {
+      "selector": "p",
+      "text": "Texto: 100%",
+      "ratio": 14.735800377717528,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Ao mudar de visão, o caso aberto é descartado.",
+      "ratio": 7.160206731566718,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "APOIO À DECISÃO",
+      "ratio": 12.032825928765776,
+      "minimum": 4.5
+    },
+    {
+      "selector": "p",
+      "text": "Comece pelo caso, confira as informações e explore as formas de i",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A−",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "A+",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Texto original",
+      "ratio": 21,
+      "minimum": 4.5
+    },
+    {
+      "selector": "button",
+      "text": "Alto contraste",
+      "ratio": 12.303564830665552,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "Sobre seus dados e o uso desta visão",
+      "ratio": 9.220984184771348,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "1. Organizar conteúdo, participação e retomadaTextoFalaFunção: or",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "2. Combinar voz, texto, imagem e desenhoÁudioImagemFunção: preser",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": "summary",
+      "text": "3. Vídeo como possibilidade funcionalVídeoFunção: mostrar uma mud",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: organizar unidades curtas, autoria, sequência e pontos de",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: preservar a voz da pessoa em trechos curtos, identificáve",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: mostrar uma mudança, processo ou contraste difícil de exp",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-purpose",
+      "text": "Função: consolidar relações e tornar dúvidas observáveis sem tran",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Editor de apresentação, página ou painel multimídia Dis",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Microfone Disponível; Celular com câmera e microfone Di",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Reprodutor de vídeo com controles e alternativas de ace",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".guide-config-availability",
+      "text": "Recursos: Plataforma configurável de jogo ou quiz Disponibilidade",
+      "ratio": 11.632780427465335,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    },
+    {
+      "selector": ".resource-state",
+      "text": "Disponível",
+      "ratio": 8.252351991655035,
+      "minimum": 4.5
+    }
+  ],
+  "layout": {
+    "result_desktop_text_200": {
+      "viewport": 1280,
+      "width": 1280
+    },
+    "result_reflow_320": {
+      "viewport": 320,
+      "width": 320
+    },
+    "result_reflow_320_text_200": {
+      "viewport": 320,
+      "width": 320
+    },
+    "forced_colors_reflow": {
+      "viewport": 320,
+      "width": 320
+    }
+  },
+  "change_verification": {
+    "baseline": {
+      "git_reference": "9445c51:evidence/guided-report.json",
+      "sha256": "885a23599a438e19b173209ac654f8c6556807b9d3b2d8ad2ff401582544e0f8",
+      "completed": true,
+      "prior_checks_passed": 46,
+      "prior_scope": "Delta de layout da visão guiada: somente espaçamento móvel em guided.css; motor e comportamento preservados por comparação de hashes.",
+      "comparison": {
+        "scope": "Síntese, títulos e conteúdo dos blocos, modos, funções, recursos e estados, orientação detalhada, condições, alternativas, acompanhamento, critérios e conhecimentos; apenas wrappers e prefixos numéricos da apresentação são desconsiderados.",
+        "original_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+        "guided_sha256": "2c28f14f24b73cd11b3fce19e414d1deb33e134383677b15fe27c8a7a382d6c4",
+        "configurations": 7,
+        "steps": 5
+      },
+      "warning": "Historical evidence; its checks are not counted as executed by the current run."
+    },
+    "change": "Revisão editorial e tipográfica; comportamento guiado e conteúdo decisório preservados.",
+    "scope": "Reexecutados confirmação, sete configurações e equivalência do conteúdo com a outra apresentação e o baseline, navegação por etapas, teclado, invalidação, outro exemplo, narrativa incompleta, limpeza, falha de carregamento e recuperação; medidas tipográficas efetivas, ampliação a 200% no mesmo viewport e reflow a 320px. Não é nova validação OWL nem avaliação humana.",
+    "unchanged_semantic_and_runtime_files": true
+  },
+  "completed": true,
+  "finished_at_utc": "2026-10-08T01:38:36.682Z"
+}

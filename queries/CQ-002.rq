@@ -1,0 +1,91 @@
+PREFIX mado: <https://w3id.org/mado#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?conhecimento ?enunciado ?modoRecuperacao ?articulacao ?tipoArticulacao
+       ?nivelConfirmacao ?funcaoAcrescentada
+       (GROUP_CONCAT(DISTINCT ?correspondencia; separator=" | ") AS ?correspondencias)
+WHERE {
+  VALUES ?ctx { mado:CTX-TRANSFERENCIA-RECURSO-DIGITAL-01 }
+  {
+    {
+      SELECT DISTINCT ?ctx ?conhecimento ?enunciado ?correspondencia WHERE {
+        VALUES ?ctx { mado:CTX-TRANSFERENCIA-RECURSO-DIGITAL-01 }
+        ?conhecimento a mado:ConhecimentoMultimodalArticulado ; mado:enunciado ?enunciado .
+        {
+          ?ctx mado:temTarefa ?tarefaContexto .
+          ?tarefaContexto skos:broader* ?x .
+          ?conhecimento mado:aplicavelATarefa ?x .
+          BIND("tarefa_igual_ou_mais_geral" AS ?correspondencia)
+        } UNION {
+          ?ctx mado:temParticipacao/mado:temCaracteristicaRelevante ?x .
+          ?conhecimento mado:aplicavelACaracteristicaRelevanteDaPessoa ?x .
+          BIND("caracteristica_funcional_situada" AS ?correspondencia)
+        } UNION {
+          ?ctx mado:apresentaBarreira ?x . ?conhecimento mado:aplicavelABarreira ?x .
+          BIND("barreira" AS ?correspondencia)
+        } UNION {
+          ?ctx mado:apresentaNecessidade ?x . ?conhecimento mado:aplicavelANecessidade ?x .
+          BIND("necessidade" AS ?correspondencia)
+        } UNION {
+          ?ctx mado:envolveRecursoDigital ?x . ?conhecimento mado:aplicavelARecursoDigital ?x .
+          BIND("recurso_digital" AS ?correspondencia)
+        } UNION {
+          ?ctx mado:ocorreEmAmbiente ?x . ?conhecimento mado:aplicavelAAmbiente ?x .
+          BIND("ambiente" AS ?correspondencia)
+        }
+        FILTER EXISTS {
+          ?ctx mado:temTarefa ?tarefaDoContexto .
+          ?tarefaDoContexto skos:broader* ?tarefaDoConhecimento .
+          ?conhecimento mado:aplicavelATarefa ?tarefaDoConhecimento
+        }
+        FILTER(
+          EXISTS { ?ctx mado:temParticipacao/mado:temCaracteristicaRelevante ?c . ?conhecimento mado:aplicavelACaracteristicaRelevanteDaPessoa ?c }
+          || EXISTS { ?ctx mado:apresentaBarreira ?b . ?conhecimento mado:aplicavelABarreira ?b }
+          || EXISTS { ?ctx mado:apresentaNecessidade ?n . ?conhecimento mado:aplicavelANecessidade ?n }
+          || EXISTS { ?conhecimento mado:classificacaoOperacional "PRINCIPIO_GERAL" }
+        )
+        FILTER NOT EXISTS {
+          ?conhecimento mado:impedidoPorElementoDoContexto ?impedimento .
+          { ?ctx mado:apresentaBarreira ?impedimento } UNION { ?ctx mado:apresentaNecessidade ?impedimento }
+        }
+      }
+    }
+    FILTER NOT EXISTS { ?conhecimento mado:statusDaRelacao "PRODUTO_DE_ARTICULACAO_RC2" }
+    FILTER NOT EXISTS { ?conhecimento mado:statusDaRelacao "PRODUTO_DE_ARTICULACAO_RC3" }
+    BIND("DIRETA" AS ?modoRecuperacao)
+  }
+  UNION
+  {
+    ?articulacao a mado:ArticulacaoDocumentada ;
+                 mado:habilitadaParaDecisao true ;
+                 mado:articulaConhecimentoDeEntrada ?entrada ;
+                 mado:produzConhecimento ?conhecimento ;
+                 mado:tipoDeArticulacao ?tipoArticulacao ;
+                 mado:nivelDeConfirmacao ?nivelConfirmacao ;
+                 mado:articulacaoAcrescentaFuncao ?funcaoAcrescentada .
+    ?conhecimento mado:enunciado ?enunciado .
+    ?ctx mado:requerFuncaoDecisoria ?funcaoAcrescentada .
+    {
+      SELECT DISTINCT ?entrada WHERE {
+        VALUES ?ctx { mado:CTX-TRANSFERENCIA-RECURSO-DIGITAL-01 }
+        ?entrada a mado:ConhecimentoMultimodalArticulado .
+        FILTER EXISTS {
+          ?ctx mado:temTarefa ?tarefaDoContexto .
+          ?tarefaDoContexto skos:broader* ?tarefaDoConhecimento .
+          ?entrada mado:aplicavelATarefa ?tarefaDoConhecimento
+        }
+        FILTER(
+          EXISTS { ?ctx mado:temParticipacao/mado:temCaracteristicaRelevante ?c . ?entrada mado:aplicavelACaracteristicaRelevanteDaPessoa ?c }
+          || EXISTS { ?ctx mado:apresentaBarreira ?b . ?entrada mado:aplicavelABarreira ?b }
+          || EXISTS { ?ctx mado:apresentaNecessidade ?n . ?entrada mado:aplicavelANecessidade ?n }
+          || EXISTS { ?entrada mado:classificacaoOperacional "PRINCIPIO_GERAL" }
+        )
+      }
+    }
+    FILTER(?nivelConfirmacao != "NAO_CONFIRMADA")
+    FILTER(?nivelConfirmacao != "BLOQUEADA")
+    BIND(CONCAT("articulacao:", STRAFTER(STR(?articulacao), "#")) AS ?correspondencia)
+    BIND("POR_ARTICULACAO" AS ?modoRecuperacao)
+  }
+}
+GROUP BY ?conhecimento ?enunciado ?modoRecuperacao ?articulacao ?tipoArticulacao ?nivelConfirmacao ?funcaoAcrescentada
+ORDER BY ?modoRecuperacao ?conhecimento ?articulacao

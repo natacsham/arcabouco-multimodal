@@ -1,0 +1,8 @@
+/* Page links, not ARIA tabs: each view owns a temporary, independent case. */
+.view-switch { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.view-switch a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; padding: .55rem 1rem; border: 1px solid #6d8e92; border-radius: 2rem; color: #18494e; background: #fff; font-weight: 700; text-underline-offset: .2em; }
+.view-switch a[aria-current="page"] { background: #164f53; color: #fff; border-color: #164f53; text-decoration: none; }
+.view-switch a > span { font-size: .875rem; font-weight: 600; }
+.view-switch p { flex: 1 1 18rem; margin: 0; padding-inline: .5rem; font-size: .88rem; color: #405c64; }
+.view-switch a:hover { text-decoration: underline; }
+@media (forced-colors: active) { .view-switch a { color: LinkText; background: Canvas; border-color: LinkText; } .view-switch a[aria-current="page"] { color: HighlightText; background: Highlight; border-color: Highlight; } }
