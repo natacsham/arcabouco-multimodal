@@ -33,7 +33,7 @@ def digest(path):
 
 
 def write_json(path, data):
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def relative_fingerprints(result):
@@ -155,11 +155,13 @@ def main():
     checks.append(report["preserved_files_unchanged"])
     # Stable sorted N-Triples is also valid Turtle and avoids blank-node churn.
     combined = "\n".join(sorted(extended.graph.serialize(format="nt").splitlines())) + "\n"
-    (output / "combined.ttl").write_text(combined, encoding="utf-8")
+    (output / "combined.ttl").write_text(combined, encoding="utf-8", newline="\n")
     extended.graph.serialize(output / "combined.owl", format="xml")
     reasoner_file = output / "reasoner-report.json"
     if reasoner_file.is_file():
         logical = json.loads(reasoner_file.read_text(encoding="utf-8"))
+        # Normalize line endings only; preserve measured values and timestamps.
+        write_json(reasoner_file, logical)
         matches = logical.get("input_sha256") == digest(output / "combined.ttl")
         report["reasoner"] = {"report": "evidence/reasoner-report.json", "matches_current_graph": matches,
                               "profile_passed": logical.get("profile_passed"),

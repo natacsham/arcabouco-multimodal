@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-alpha1",
-  "checked_at_utc": "2026-10-10T04:20:11.121133+00:00",
+  "checked_at_utc": "2026-10-10T04:22:18.546919+00:00",
   "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
   "shacl": {
     "base": {
@@ -610,7 +610,7 @@
     "matches_current_graph": true,
     "profile_passed": true,
     "consistency_passed": true,
-    "checked_at_utc": "2026-10-10T04:15:23.215244+00:00"
+    "checked_at_utc": "2026-10-10T04:21:53.756429+00:00"
   },
   "passed": true
 }
