@@ -1,0 +1,10 @@
+PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+PREFIX mado: <https://w3id.org/mado#>
+SELECT ?application ?capability ?criterion ?knowledge ?articulation ?contribution ?status ?statement ?excerpt ?source ?locator
+WHERE {
+  ?application a v2:GroundingApplication ; v2:capability ?capability ; v2:criterion ?criterion ;
+    v2:knowledge ?knowledge ; v2:articulation ?articulation .
+  ?articulation v2:produces ?knowledge .
+  ?contribution v2:inArticulation ?articulation ; v2:status ?status ; v2:statement ?statement ; v2:excerpt ?excerpt .
+  ?excerpt mado:trechoDeFonte ?source ; mado:localizacaoDocumental ?locator .
+} ORDER BY ?application ?contribution

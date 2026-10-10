@@ -1,0 +1,84 @@
+@prefix v2: <https://w3id.org/mado/experimental/v2#> .
+@prefix mado: <https://w3id.org/mado#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+v2:TaskShape a sh:NodeShape ; sh:targetClass v2:Task ;
+  sh:property [ sh:path v2:requiresFunction ; sh:minCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:inputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:outputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:sparql [ sh:message "Funções da tarefa precisam ter ordens distintas." ; sh:select """
+    PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+    SELECT $this WHERE { $this v2:requiresFunction ?a, ?b .
+      ?a v2:order ?n . ?b v2:order ?n . FILTER (?a != ?b) }
+  """ ] .
+v2:FunctionShape a sh:NodeShape ; sh:targetClass v2:Function ;
+  sh:property [ sh:path v2:order ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+# An ungrounded capability is a documented candidate, not a malformed graph.
+# The compositor must exclude it; the extension test relies on that boundary.
+v2:CapabilityShape a sh:NodeShape ; sh:targetClass v2:Capability ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:provides ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:mode ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Mode ] ;
+  sh:property [ sh:path v2:inputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:outputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:requiresResource ; sh:minCount 1 ; sh:class v2:Resource ] ;
+  sh:property [ sh:path v2:requiresFact ; sh:minCount 1 ; sh:class v2:ContextFact ] ;
+  sh:property [ sh:path v2:action ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:limitation ; sh:minCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+
+v2:SourceShape a sh:NodeShape ; sh:targetClass mado:Fonte ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:url ; sh:minCount 1 ; sh:datatype xsd:string ; sh:pattern "^https://" ] .
+v2:ExcerptShape a sh:NodeShape ; sh:targetClass mado:TrechoDocumental ;
+  sh:property [ sh:path mado:trechoDeFonte ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path mado:localizacaoDocumental ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+v2:ContributionShape a sh:NodeShape ; sh:targetClass v2:Contribution ;
+  sh:property [ sh:path v2:inArticulation ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:ArticulationSupport ] ;
+  sh:property [ sh:path v2:excerpt ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:TrechoDocumental ] ;
+  sh:property [ sh:path v2:statement ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("PRIMARY_CHECKED" "LEGACY_RECORD_ONLY" "PENDING") ] .
+v2:KnowledgeShape a sh:NodeShape ; sh:targetClass mado:ConhecimentoMultimodalArticulado ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:epistemicStatus ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ("DESIGN_SYNTHESIS_NOT_EMPIRICAL" "PARTIAL_LEGACY" "PENDING") ] .
+v2:ArticulationShape a sh:NodeShape ; sh:targetClass v2:ArticulationSupport ;
+  sh:property [ sh:path v2:produces ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path v2:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("CURATED_FOR_PILOT" "PENDING") ] ;
+  sh:property [ sh:path v2:operation ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:addedUnderstanding ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:sparql [ sh:message "Articulação habilitada precisa de contribuição primária conferida, não só registro legado." ; sh:select """
+    PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+    SELECT $this WHERE {
+      $this v2:status "CURATED_FOR_PILOT" .
+      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status "PRIMARY_CHECKED" }
+    }
+  """ ] .
+v2:CriterionShape a sh:NodeShape ; sh:targetClass mado:CriterioDeDecisaoMultimodal ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path v2:locator ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:justification ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+
+v2:SupportShape a sh:NodeShape ; sh:targetClass v2:GroundingApplication, v2:RelationRule ;
+  sh:property [ sh:path v2:knowledge ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path v2:criterion ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:CriterioDeDecisaoMultimodal ] ;
+  sh:property [ sh:path v2:articulation ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:ArticulationSupport ] ;
+  sh:property [ sh:path v2:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("CURATED_FOR_PILOT" "PENDING") ] ;
+  sh:sparql [ sh:message "O conhecimento do vínculo deve ser o produzido pela articulação indicada." ; sh:select """
+    PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+    SELECT $this WHERE { $this v2:knowledge ?k ; v2:articulation ?a .
+      FILTER NOT EXISTS { ?a v2:produces ?k } }
+  """ ] .
+v2:GroundingShape a sh:NodeShape ; sh:targetClass v2:GroundingApplication ;
+  sh:property [ sh:path v2:capability ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Capability ] ;
+  sh:property [ sh:path v2:justification ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+v2:RelationShape a sh:NodeShape ; sh:targetClass v2:RelationRule ;
+  sh:property [ sh:path v2:fromFunction ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:toFunction ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:sharedType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:relationKind ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path v2:requiresFact ; sh:minCount 1 ; sh:class v2:ContextFact ] ;
+  sh:property [ sh:path v2:explanation ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .

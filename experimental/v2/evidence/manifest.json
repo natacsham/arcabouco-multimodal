@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0-alpha1",
+  "files": {
+    "base.ttl": "ae8737a35d8cd99a115e66c41f36060026775425164141c4343d38e7379ba353",
+    "cli.py": "b9a2a07830ecc2e76f932a74b34860dff812cd1eea027ce13ea82564e33e3ae7",
+    "composer.py": "b2beebb30a442f914564206863b226682e53f4101cb09becd9d921b167a761c3",
+    "docs/decisoes-de-modelagem.md": "6cae924b9fb7c25534ec3f4312cabc266edfae9ac021c7291c35be7aa8652059",
+    "docs/fundamentacao.md": "1034d3953a083f4e6582a697bd2f5df5e60d887454955581f63dbb29122eafd6",
+    "docs/resultados.md": "7d0e2de315f8d29039168d42f5b10965cdd1a9a718502637311c0677665a8713",
+    "evidence/combined.owl": "d2fae502721fb81e3fde97b3c0981d485d0c3c6eea88d2cec08af8ea03f06293",
+    "evidence/combined.ttl": "5a91df8b3a3083a8fd378be0a0e727a42fb30ed155d6f110086c2bfa2c5e81d5",
+    "evidence/novel-case-trace.json": "97cf068978f0bae929f363fa95d6b65689e354458e2a0f6fbd680d722a6f7c4c",
+    "evidence/reasoner-report.json": "b75f9d347efe0ad13b47ee7a3d44cbf4df95ce1015bdafb0bbe393eda58c50bb",
+    "evidence/verification.json": "efe0b0ec92d09f3f65fb28ae1fafaf85c9fd65fbc7480a4816114c262789b8bd",
+    "examples/keyboard-audio.json": "74afbb218b07b26dd3cf2ffb1e8a18dc74943bb673217a944615536af849c693",
+    "examples/speech-visual.json": "5571f550610de8e7c4bf96216824c1edbdae6f9e5f2f4322b838f9bc330540ec",
+    "extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
+    "project/claims.csv": "c261b2ca5da2a77b1593f448b746008df79b4961a8eab8f56eef411c622c5d04",
+    "project/competency-questions.csv": "7b0e64db1c229ad983b6dea2bcd705b291cde25161835423b140c65bfd4cae86",
+    "project/decision-log.csv": "d9928f2791af6b68e942ef7c78aea1a42d59ff0c2938d6fbdcaca8fc7bdb6234",
+    "project/ontology-project.yaml": "c80e9d6f5737353ef630940be6288b3c71820bf6f7d5730b8f015245a5aa7de4",
+    "queries/grounding.rq": "d7a2f64669fdf109a0ef3a8554f0d1d9ccf68d31ad213bc356682d5b439795cb",
+    "queries/relations.rq": "3080740d09d1aebce4caccaa83a2eb934b4346111507f3d4d2512ae46c811bca",
+    "README.md": "195302dacfad0fce6cf596d7496ca5aed9133eb83722f4194a878b84e6db57b1",
+    "schema.ttl": "f9c2c54d31307a8e5063aff47c0e20662f7a67c935880eedec7f8425caaef98b",
+    "shapes.ttl": "c3b236e27c46735d8518ccf3ad5c82884ccfa2f0784c775e6aed2d934f1d2133",
+    "tests/test_composition.py": "6bf68d64b3c20a065dfce865ca68947b94a22cc6185d1a60c7768e6f78f13340",
+    "verify.py": "6ec1e417d1806db5cfcfd1b287beac54e708dd905ec3f7a95cf727c05609f3ca"
+  }
+}

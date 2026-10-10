@@ -1,0 +1,20 @@
+@prefix v2: <https://w3id.org/mado/experimental/v2#> .
+@prefix mado: <https://w3id.org/mado#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# An explicit curated knowledge increment. No scenario, capability, complete
+# solution, compatibility rule or action text is added by this extension.
+v2:KAudioReview a mado:ConhecimentoMultimodalArticulado ;
+  rdfs:label "Um rascunho textual pode ser revisado por fala sintetizada quando essa saída e sua correção forem operáveis"@pt ;
+  v2:epistemicStatus "DESIGN_SYNTHESIS_NOT_EMPIRICAL" .
+v2:ArtAudioReview a v2:ArticulationSupport ; v2:produces v2:KAudioReview ; v2:status "CURATED_FOR_PILOT" ;
+  v2:operation "Relacionar saída de texto por síntese de fala, independência da escolha de entrada e necessidade de revisão/correção antes da conclusão." ;
+  v2:addedUnderstanding "A falta de revisão visual não impede automaticamente a tarefa: leitura em voz pode cumprir a revisão do mesmo rascunho, se conteúdo, percepção, controles e correção estiverem assegurados. É uma proposta condicionada, não prova de equivalência de compreensão." .
+v2:CAudioMMI a v2:Contribution ; v2:inArticulation v2:ArtAudioReview ; v2:excerpt v2:ExcerptMMI ;
+  v2:statement "A descrição MMI inclui síntese de fala como saída e distingue a seleção de entrada da seleção de saída." ; v2:status "PRIMARY_CHECKED" .
+v2:CAudioReview a v2:Contribution ; v2:inArticulation v2:ArtAudioReview ; v2:excerpt v2:ExcerptReview ;
+  v2:statement "A opção de conferir e corrigir antes de concluir especifica a função de revisão; o documento não determina que ela precise ser visual." ; v2:status "PRIMARY_CHECKED" .
+v2:GroundAudioReview a v2:GroundingApplication ; v2:capability v2:ReviewSpeech ;
+  v2:knowledge v2:KAudioReview ; v2:criterion v2:CriterionReview ; v2:articulation v2:ArtAudioReview ;
+  v2:status "CURATED_FOR_PILOT" ;
+  v2:justification "A saída falada é admitida para revisar o mesmo rascunho somente quando escuta, ambiente, reprodução e correção foram confirmados. Não se conclui acessibilidade de qualquer mídia por mera leitura literal." .

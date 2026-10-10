@@ -1,0 +1,7 @@
+{
+  "id": "synthetic-speech-visual",
+  "task": "TaskCreateReviewedText",
+  "confirmed": true,
+  "resources": {"Microphone": true, "SpeechRecognition": true, "EditableText": true, "Display": true, "Keyboard": false, "TextToSpeech": false, "AudioOutput": false},
+  "facts": {"ContentAvailable": true, "CanUseSpeech": true, "SpeechInputUsable": true, "CanUseKeyboard": false, "CanReviewVisualText": true, "CanReviewSpeech": false, "AudioUsable": false, "CanControlPlayback": false, "CanCorrect": true, "ControlsCompletion": true}
+}

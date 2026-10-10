@@ -1,0 +1,9 @@
+id;data;decisao;razao;estado
+V2-001;2026-10-10;Isolar evolução em experimental/v2 e branch própria;Preservar versão pública tese e alterações de interface preexistentes;IMPLEMENTADO
+V2-002;2026-10-10;Priorizar produzir e revisar contribuição digital;Verificar mecanismo com recorte controlado antes de ampliar domínios;IMPLEMENTADO
+V2-003;2026-10-10;Modelar capacidades atômicas e relações entre funções;Evitar pares completos preparados por cenário;IMPLEMENTADO
+V2-004;2026-10-10;Fundamentar alternativas e coordenação com CARE e MMI;Não reduzir multimodalidade à contagem de mídias;SÍNTESE_ASSISTIDA_A_REVISAR
+V2-005;2026-10-10;Não chamar produção seguida de revisão de complementaridade CARE;Relação temporal não basta para essa classificação;IMPLEMENTADO
+V2-006;2026-10-10;Exigir contribuição primária localizada além de registro legado;Não promover pendências da base anterior a evidência original;IMPLEMENTADO
+V2-007;2026-10-10;Fazer ablação do fundamento da revisão por áudio;Medir alteração da composição com capacidades e motor fixos;IMPLEMENTADO
+V2-008;2026-10-10;Não conectar piloto à interface atual nesta entrega;Mudança operacional exige integração e testes de uso próprios;PRESERVADO

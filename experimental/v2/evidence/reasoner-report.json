@@ -1,0 +1,84 @@
+{
+  "checked_at_utc": "2026-10-10T04:15:23.215244+00:00",
+  "input": "experimental\\v2\\evidence\\combined.ttl",
+  "input_sha256": "5a91df8b3a3083a8fd378be0a0e727a42fb30ed155d6f110086c2bfa2c5e81d5",
+  "input_snapshot": "tmp\\reasoner\\20261010T041523Z-82c32c2b\\input.ttl",
+  "robot_sha256": "16a73c074f3df359a7338a84b4e0788785fe06117f931bb9796e9619ea776105",
+  "scope": "OWL_2_DL_PROFILE_AND_HERMIT_CONSISTENCY",
+  "limit": "Does not establish applicability, correctness of source interpretation, accessibility, or human/educational outcomes.",
+  "intermediate_directory": "tmp\\reasoner\\20261010T041523Z-82c32c2b",
+  "java": {
+    "started_at_utc": "2026-10-10T04:15:23.474424+00:00",
+    "command": [
+      "<JAVA>",
+      "-version"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "openjdk version \"11.0.25\" 2024-10-15\nOpenJDK Runtime Environment Temurin-11.0.25+9 (build 11.0.25+9)\nOpenJDK 64-Bit Server VM Temurin-11.0.25+9 (build 11.0.25+9, mixed mode)\n"
+  },
+  "robot": {
+    "started_at_utc": "2026-10-10T04:15:23.626177+00:00",
+    "command": [
+      "<JAVA>",
+      "-jar",
+      "<ROBOT>",
+      "--version"
+    ],
+    "exit_code": 0,
+    "stdout": "ROBOT version 1.9.10\n",
+    "stderr": ""
+  },
+  "profile": {
+    "started_at_utc": "2026-10-10T04:15:24.839968+00:00",
+    "command": [
+      "<JAVA>",
+      "-jar",
+      "<ROBOT>",
+      "validate-profile",
+      "--profile",
+      "DL",
+      "--input",
+      "tmp\\reasoner\\20261010T041523Z-82c32c2b\\input.ttl",
+      "--output",
+      "tmp\\reasoner\\20261010T041523Z-82c32c2b\\owl2-dl-profile.txt"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "result": "OWL 2 DL Profile Report: [Ontology and imports closure in profile]\n"
+  },
+  "hermit": {
+    "started_at_utc": "2026-10-10T04:15:27.239613+00:00",
+    "command": [
+      "<JAVA>",
+      "-jar",
+      "<ROBOT>",
+      "reason",
+      "--reasoner",
+      "HermiT",
+      "--input",
+      "tmp\\reasoner\\20261010T041523Z-82c32c2b\\input.ttl",
+      "--axiom-generators",
+      "ClassAssertion",
+      "--include-indirect",
+      "true",
+      "--output",
+      "tmp\\reasoner\\20261010T041523Z-82c32c2b\\hermit-inferred.owl"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "output_sha256": "d3905b082318d71cadf125577de1c8b8d5fbe2a2309d480d70d7ac731d69f311"
+  },
+  "profile_passed": true,
+  "consistency_passed": true,
+  "input_unchanged_during_check": true,
+  "passed": true,
+  "path_redaction": {
+    "applied": true,
+    "policy": "Local executable paths are <JAVA>/<ROBOT>; project paths are relative. Hashes, dates, exit codes and measured results are unchanged.",
+    "private_original": "evidence/private/ (excluded from version control)"
+  },
+  "private_original_sha256": "a42faa53e4e5ae39e1a3bf7754149562cb32c66836ce3324c5fcc92ca8f9747f"
+}

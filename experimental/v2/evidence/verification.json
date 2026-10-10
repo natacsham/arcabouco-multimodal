@@ -1,0 +1,616 @@
+{
+  "version": "2.0.0-alpha1",
+  "checked_at_utc": "2026-10-10T04:20:11.121133+00:00",
+  "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
+  "shacl": {
+    "base": {
+      "conforms": true,
+      "report": "Validation Report\nConforms: True\n",
+      "triples": 364
+    },
+    "extended": {
+      "conforms": true,
+      "report": "Validation Report\nConforms: True\n",
+      "triples": 389
+    }
+  },
+  "queries": {
+    "base/grounding": {
+      "expected_rows": 9,
+      "actual_rows": 9,
+      "passed": true,
+      "rows": [
+        [
+          "https://w3id.org/mado/experimental/v2#GroundKeyboard",
+          "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputCARE",
+          "PRIMARY_CHECKED",
+          "CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.",
+          "https://w3id.org/mado/experimental/v2#ExcerptCARE",
+          "https://w3id.org/mado/experimental/v2#SourceCARE",
+          "pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundKeyboard",
+          "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputKeyboard",
+          "PRIMARY_CHECKED",
+          "Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada.",
+          "https://w3id.org/mado/experimental/v2#ExcerptKeyboard",
+          "https://w3id.org/mado/experimental/v2#SourceKeyboard",
+          "Success Criterion e Intent: funcionalidade operável por interface de teclado"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundKeyboard",
+          "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputLegacy",
+          "LEGACY_RECORD_ONLY",
+          "K41 ressalta viabilidade e compatibilidade da entrada. O estado parcial do registro não é promovido a conferência do original.",
+          "https://w3id.org/mado/experimental/v2#ExcerptLegacy",
+          "https://w3id.org/mado/experimental/v2#SourceLegacy",
+          "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundSpeech",
+          "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputCARE",
+          "PRIMARY_CHECKED",
+          "CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.",
+          "https://w3id.org/mado/experimental/v2#ExcerptCARE",
+          "https://w3id.org/mado/experimental/v2#SourceCARE",
+          "pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundSpeech",
+          "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputKeyboard",
+          "PRIMARY_CHECKED",
+          "Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada.",
+          "https://w3id.org/mado/experimental/v2#ExcerptKeyboard",
+          "https://w3id.org/mado/experimental/v2#SourceKeyboard",
+          "Success Criterion e Intent: funcionalidade operável por interface de teclado"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundSpeech",
+          "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputLegacy",
+          "LEGACY_RECORD_ONLY",
+          "K41 ressalta viabilidade e compatibilidade da entrada. O estado parcial do registro não é promovido a conferência do original.",
+          "https://w3id.org/mado/experimental/v2#ExcerptLegacy",
+          "https://w3id.org/mado/experimental/v2#SourceLegacy",
+          "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundTextReview",
+          "https://w3id.org/mado/experimental/v2#ReviewText",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#ArtReview",
+          "https://w3id.org/mado/experimental/v2#CReviewLegacy",
+          "LEGACY_RECORD_ONLY",
+          "K44 relaciona retorno perceptível e continuidade. Isso é apoio contextual legado, não prova de desempenho do novo fluxo.",
+          "https://w3id.org/mado/experimental/v2#ExcerptLegacy",
+          "https://w3id.org/mado/experimental/v2#SourceLegacy",
+          "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundTextReview",
+          "https://w3id.org/mado/experimental/v2#ReviewText",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#ArtReview",
+          "https://w3id.org/mado/experimental/v2#CReviewMMI",
+          "PRIMARY_CHECKED",
+          "Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.",
+          "https://w3id.org/mado/experimental/v2#ExcerptMMI",
+          "https://w3id.org/mado/experimental/v2#SourceMMI",
+          "Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundTextReview",
+          "https://w3id.org/mado/experimental/v2#ReviewText",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#ArtReview",
+          "https://w3id.org/mado/experimental/v2#CReviewWCAG",
+          "PRIMARY_CHECKED",
+          "A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória.",
+          "https://w3id.org/mado/experimental/v2#ExcerptReview",
+          "https://w3id.org/mado/experimental/v2#SourceReview",
+          "Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação"
+        ]
+      ]
+    },
+    "base/relations": {
+      "expected_rows": 1,
+      "actual_rows": 1,
+      "passed": true,
+      "rows": [
+        [
+          "https://w3id.org/mado/experimental/v2#ProductionThenReview",
+          "https://w3id.org/mado/experimental/v2#Expression",
+          "https://w3id.org/mado/experimental/v2#Review",
+          "https://w3id.org/mado/experimental/v2#TextDraft",
+          "SEQUENTIAL_REVIEW",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "A primeira etapa produz o rascunho; a segunda torna esse mesmo conteúdo conferível antes da conclusão. A forma de entrada e a forma de revisão podem diferir, desde que ambas sejam operáveis e exista correção."
+        ]
+      ]
+    },
+    "extended/grounding": {
+      "expected_rows": 11,
+      "actual_rows": 11,
+      "passed": true,
+      "rows": [
+        [
+          "https://w3id.org/mado/experimental/v2#GroundAudioReview",
+          "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KAudioReview",
+          "https://w3id.org/mado/experimental/v2#ArtAudioReview",
+          "https://w3id.org/mado/experimental/v2#CAudioMMI",
+          "PRIMARY_CHECKED",
+          "A descrição MMI inclui síntese de fala como saída e distingue a seleção de entrada da seleção de saída.",
+          "https://w3id.org/mado/experimental/v2#ExcerptMMI",
+          "https://w3id.org/mado/experimental/v2#SourceMMI",
+          "Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundAudioReview",
+          "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KAudioReview",
+          "https://w3id.org/mado/experimental/v2#ArtAudioReview",
+          "https://w3id.org/mado/experimental/v2#CAudioReview",
+          "PRIMARY_CHECKED",
+          "A opção de conferir e corrigir antes de concluir especifica a função de revisão; o documento não determina que ela precise ser visual.",
+          "https://w3id.org/mado/experimental/v2#ExcerptReview",
+          "https://w3id.org/mado/experimental/v2#SourceReview",
+          "Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundKeyboard",
+          "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputCARE",
+          "PRIMARY_CHECKED",
+          "CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.",
+          "https://w3id.org/mado/experimental/v2#ExcerptCARE",
+          "https://w3id.org/mado/experimental/v2#SourceCARE",
+          "pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundKeyboard",
+          "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputKeyboard",
+          "PRIMARY_CHECKED",
+          "Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada.",
+          "https://w3id.org/mado/experimental/v2#ExcerptKeyboard",
+          "https://w3id.org/mado/experimental/v2#SourceKeyboard",
+          "Success Criterion e Intent: funcionalidade operável por interface de teclado"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundKeyboard",
+          "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputLegacy",
+          "LEGACY_RECORD_ONLY",
+          "K41 ressalta viabilidade e compatibilidade da entrada. O estado parcial do registro não é promovido a conferência do original.",
+          "https://w3id.org/mado/experimental/v2#ExcerptLegacy",
+          "https://w3id.org/mado/experimental/v2#SourceLegacy",
+          "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundSpeech",
+          "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputCARE",
+          "PRIMARY_CHECKED",
+          "CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.",
+          "https://w3id.org/mado/experimental/v2#ExcerptCARE",
+          "https://w3id.org/mado/experimental/v2#SourceCARE",
+          "pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundSpeech",
+          "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputKeyboard",
+          "PRIMARY_CHECKED",
+          "Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada.",
+          "https://w3id.org/mado/experimental/v2#ExcerptKeyboard",
+          "https://w3id.org/mado/experimental/v2#SourceKeyboard",
+          "Success Criterion e Intent: funcionalidade operável por interface de teclado"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundSpeech",
+          "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+          "https://w3id.org/mado/experimental/v2#CriterionInput",
+          "https://w3id.org/mado/experimental/v2#KInput",
+          "https://w3id.org/mado/experimental/v2#ArtInput",
+          "https://w3id.org/mado/experimental/v2#CInputLegacy",
+          "LEGACY_RECORD_ONLY",
+          "K41 ressalta viabilidade e compatibilidade da entrada. O estado parcial do registro não é promovido a conferência do original.",
+          "https://w3id.org/mado/experimental/v2#ExcerptLegacy",
+          "https://w3id.org/mado/experimental/v2#SourceLegacy",
+          "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundTextReview",
+          "https://w3id.org/mado/experimental/v2#ReviewText",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#ArtReview",
+          "https://w3id.org/mado/experimental/v2#CReviewLegacy",
+          "LEGACY_RECORD_ONLY",
+          "K44 relaciona retorno perceptível e continuidade. Isso é apoio contextual legado, não prova de desempenho do novo fluxo.",
+          "https://w3id.org/mado/experimental/v2#ExcerptLegacy",
+          "https://w3id.org/mado/experimental/v2#SourceLegacy",
+          "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundTextReview",
+          "https://w3id.org/mado/experimental/v2#ReviewText",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#ArtReview",
+          "https://w3id.org/mado/experimental/v2#CReviewMMI",
+          "PRIMARY_CHECKED",
+          "Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.",
+          "https://w3id.org/mado/experimental/v2#ExcerptMMI",
+          "https://w3id.org/mado/experimental/v2#SourceMMI",
+          "Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces"
+        ],
+        [
+          "https://w3id.org/mado/experimental/v2#GroundTextReview",
+          "https://w3id.org/mado/experimental/v2#ReviewText",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#ArtReview",
+          "https://w3id.org/mado/experimental/v2#CReviewWCAG",
+          "PRIMARY_CHECKED",
+          "A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória.",
+          "https://w3id.org/mado/experimental/v2#ExcerptReview",
+          "https://w3id.org/mado/experimental/v2#SourceReview",
+          "Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação"
+        ]
+      ]
+    },
+    "extended/relations": {
+      "expected_rows": 1,
+      "actual_rows": 1,
+      "passed": true,
+      "rows": [
+        [
+          "https://w3id.org/mado/experimental/v2#ProductionThenReview",
+          "https://w3id.org/mado/experimental/v2#Expression",
+          "https://w3id.org/mado/experimental/v2#Review",
+          "https://w3id.org/mado/experimental/v2#TextDraft",
+          "SEQUENTIAL_REVIEW",
+          "https://w3id.org/mado/experimental/v2#KReview",
+          "https://w3id.org/mado/experimental/v2#CriterionReview",
+          "A primeira etapa produz o rascunho; a segunda torna esse mesmo conteúdo conferível antes da conclusão. A forma de entrada e a forma de revisão podem diferir, desde que ambas sejam operáveis e exista correção."
+        ]
+      ]
+    }
+  },
+  "negative_shacl": {
+    "missing_source": {
+      "rejected": true,
+      "report": "Validation Report\nConforms: False\nResults (1):\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: [ sh:class mado:Fonte ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path mado:trechoDeFonte ]\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ExcerptMMI>\n\tResult Path: mado:trechoDeFonte\n\tMessage: Less than 1 values on <https://w3id.org/mado/experimental/v2#ExcerptMMI>->mado:trechoDeFonte\n"
+    },
+    "missing_locator": {
+      "rejected": true,
+      "report": "Validation Report\nConforms: False\nResults (1):\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: [ sh:datatype xsd:string ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:minLength Literal(\"1\", datatype=xsd:integer) ; sh:path mado:localizacaoDocumental ]\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ExcerptMMI>\n\tResult Path: mado:localizacaoDocumental\n\tMessage: Less than 1 values on <https://w3id.org/mado/experimental/v2#ExcerptMMI>->mado:localizacaoDocumental\n"
+    },
+    "wrong_knowledge": {
+      "rejected": true,
+      "report": "Validation Report\nConforms: False\nResults (1):\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:SupportShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#GroundAudioReview>\n\tValue Node: <https://w3id.org/mado/experimental/v2#GroundAudioReview>\n\tSource Constraint: [ sh:message Literal(\"O conhecimento do vínculo deve ser o produzido pela articulação indicada.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE { $this v2:knowledge ?k ; v2:articulation ?a .\n      FILTER NOT EXISTS { ?a v2:produces ?k } }\n  \") ]\n\tMessage: O conhecimento do vínculo deve ser o produzido pela articulação indicada.\n"
+    },
+    "missing_function": {
+      "rejected": true,
+      "report": "Validation Report\nConforms: False\nResults (1):\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: [ sh:class v2:Function ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path v2:provides ]\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ReviewSpeech>\n\tResult Path: v2:provides\n\tMessage: Less than 1 values on <https://w3id.org/mado/experimental/v2#ReviewSpeech>->v2:provides\n"
+    },
+    "legacy_only": {
+      "rejected": true,
+      "report": "Validation Report\nConforms: False\nResults (1):\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ArtAudioReview>\n\tValue Node: <https://w3id.org/mado/experimental/v2#ArtAudioReview>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\n"
+    },
+    "missing_relation_content": {
+      "rejected": true,
+      "report": "Validation Report\nConforms: False\nResults (1):\nConstraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: [ sh:class v2:Representation ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:minCount Literal(\"1\", datatype=xsd:integer) ; sh:path v2:sharedType ]\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ProductionThenReview>\n\tResult Path: v2:sharedType\n\tMessage: Less than 1 values on <https://w3id.org/mado/experimental/v2#ProductionThenReview>->v2:sharedType\n"
+    }
+  },
+  "experiments": {
+    "speech_visual_base": {
+      "status": "COMPOSED",
+      "compositions": [
+        [
+          "CaptureSpeech",
+          "ReviewText"
+        ]
+      ],
+      "knowledge": [
+        "KInput",
+        "KReview"
+      ],
+      "pending": 0,
+      "gaps": [],
+      "expected": [
+        "COMPOSED",
+        1
+      ],
+      "passed": true
+    },
+    "new_conjunction_base": {
+      "status": "INSUFFICIENT",
+      "compositions": [],
+      "knowledge": [],
+      "pending": 0,
+      "gaps": [
+        {
+          "code": "FUNCTION_NOT_COVERED",
+          "function": "https://w3id.org/mado/experimental/v2#Review"
+        },
+        {
+          "code": "NO_COMPLETE_COMPOSITION",
+          "explanation": "Nenhum plano parcial ou candidato pendente é apresentado como orientação pronta."
+        }
+      ],
+      "expected": [
+        "INSUFFICIENT",
+        0
+      ],
+      "passed": true
+    },
+    "new_conjunction_extended": {
+      "status": "COMPOSED",
+      "compositions": [
+        [
+          "CaptureKeyboard",
+          "ReviewSpeech"
+        ]
+      ],
+      "knowledge": [
+        "KAudioReview",
+        "KInput",
+        "KReview"
+      ],
+      "pending": 0,
+      "gaps": [],
+      "expected": [
+        "COMPOSED",
+        1
+      ],
+      "passed": true
+    },
+    "new_conjunction_removed_extension": {
+      "status": "INSUFFICIENT",
+      "compositions": [],
+      "knowledge": [],
+      "pending": 0,
+      "gaps": [
+        {
+          "code": "FUNCTION_NOT_COVERED",
+          "function": "https://w3id.org/mado/experimental/v2#Review"
+        },
+        {
+          "code": "NO_COMPLETE_COMPOSITION",
+          "explanation": "Nenhum plano parcial ou candidato pendente é apresentado como orientação pronta."
+        }
+      ],
+      "expected": [
+        "INSUFFICIENT",
+        0
+      ],
+      "passed": true
+    },
+    "new_conjunction_audio_prevented": {
+      "status": "INSUFFICIENT",
+      "compositions": [],
+      "knowledge": [],
+      "pending": 0,
+      "gaps": [
+        {
+          "code": "FUNCTION_NOT_COVERED",
+          "function": "https://w3id.org/mado/experimental/v2#Review"
+        },
+        {
+          "code": "NO_COMPLETE_COMPOSITION",
+          "explanation": "Nenhum plano parcial ou candidato pendente é apresentado como orientação pronta."
+        }
+      ],
+      "expected": [
+        "INSUFFICIENT",
+        0
+      ],
+      "passed": true
+    },
+    "new_conjunction_correction_unknown": {
+      "status": "INSUFFICIENT",
+      "compositions": [],
+      "knowledge": [],
+      "pending": 1,
+      "gaps": [
+        {
+          "code": "PENDING_CONDITIONS",
+          "explanation": "Nenhum plano parcial ou candidato pendente é apresentado como orientação pronta."
+        }
+      ],
+      "expected": [
+        "INSUFFICIENT",
+        0
+      ],
+      "passed": true
+    },
+    "all_available_base": {
+      "status": "COMPOSED",
+      "compositions": [
+        [
+          "CaptureKeyboard",
+          "ReviewText"
+        ],
+        [
+          "CaptureSpeech",
+          "ReviewText"
+        ]
+      ],
+      "knowledge": [
+        "KInput",
+        "KReview"
+      ],
+      "pending": 0,
+      "gaps": [],
+      "expected": [
+        "COMPOSED",
+        2
+      ],
+      "passed": true
+    },
+    "all_available_extended": {
+      "status": "COMPOSED",
+      "compositions": [
+        [
+          "CaptureKeyboard",
+          "ReviewSpeech"
+        ],
+        [
+          "CaptureKeyboard",
+          "ReviewText"
+        ],
+        [
+          "CaptureSpeech",
+          "ReviewSpeech"
+        ],
+        [
+          "CaptureSpeech",
+          "ReviewText"
+        ]
+      ],
+      "knowledge": [
+        "KAudioReview",
+        "KInput",
+        "KReview"
+      ],
+      "pending": 0,
+      "gaps": [],
+      "expected": [
+        "COMPOSED",
+        4
+      ],
+      "passed": true
+    }
+  },
+  "experimental_design": {
+    "composer_sha256": "b2beebb30a442f914564206863b226682e53f4101cb09becd9d921b167a761c3",
+    "added": "Conhecimento KAudioReview, sua articulação, contribuições localizadas e aplicação exata à capacidade já declarada.",
+    "unchanged": [
+      "motor",
+      "capacidades",
+      "funções",
+      "tarefas",
+      "ações unitárias",
+      "regra de sequência"
+    ],
+    "limit": "Experimento de habilitação por fundamento, não extração automática, descoberta de capacidade ou prova de melhor orientação."
+  },
+  "unit_tests": {
+    "run": 38,
+    "passed": true,
+    "successes": [
+      "test_composition.CompositionTests.test_01_baseline_composes_speech_and_visual_review",
+      "test_composition.CompositionTests.test_02_new_conjunction_requires_documented_knowledge_increment",
+      "test_composition.CompositionTests.test_03_extension_does_not_add_capability_rule_action_task_or_scenario",
+      "test_composition.CompositionTests.test_04_removing_extension_reverses_its_operational_effect",
+      "test_composition.CompositionTests.test_05_bibliography_alone_never_enables_audio_review",
+      "test_composition.CompositionTests.test_06_missing_contributions_block_the_application",
+      "test_composition.CompositionTests.test_07_missing_exact_support_cannot_be_replaced_by_other_grounding",
+      "test_composition.CompositionTests.test_08_unconfirmed_contribution_cannot_authorize_selection",
+      "test_composition.CompositionTests.test_09_missing_source_or_locator_blocks_grounding",
+      "test_composition.CompositionTests.test_10_unknown_task_is_not_resolved_by_names_or_fallback",
+      "test_composition.CompositionTests.test_11_absent_and_null_resource_are_pending_false_is_exclusion",
+      "test_composition.CompositionTests.test_12_absent_fact_is_pending_false_fact_blocks",
+      "test_composition.CompositionTests.test_13_every_ready_step_has_only_satisfied_resource_and_fact_requirements",
+      "test_composition.CompositionTests.test_14_diagnostic_or_persona_fields_are_rejected_not_inferred",
+      "test_composition.CompositionTests.test_15_context_identifier_does_not_select_the_configuration",
+      "test_composition.CompositionTests.test_16_repeated_execution_is_deterministic_and_does_not_mutate_inputs",
+      "test_composition.CompositionTests.test_17_single_function_reuses_review_without_forcing_a_second_modality",
+      "test_composition.CompositionTests.test_18_incompatible_intermediate_representation_blocks_composition",
+      "test_composition.CompositionTests.test_19_wrong_function_cannot_fulfil_required_review",
+      "test_composition.CompositionTests.test_20_relation_is_not_invented_from_adjacent_capabilities",
+      "test_composition.CompositionTests.test_21_relation_without_grounding_cannot_be_used",
+      "test_composition.CompositionTests.test_22_sequential_review_is_not_automatically_care_complementarity",
+      "test_composition.CompositionTests.test_23_unconfirmed_case_does_not_execute_composition",
+      "test_composition.CompositionTests.test_24_all_explanation_checks_reference_execution_records",
+      "test_composition.CompositionTests.test_25_wrong_produced_knowledge_blocks_articulation_application",
+      "test_composition.CompositionTests.test_26_unknown_resource_and_non_boolean_values_require_correction",
+      "test_composition.CompositionTests.test_27_external_graph_labels_do_not_replace_functional_semantics",
+      "test_composition.CompositionTests.test_28_declared_relations_and_exact_sources_are_present_in_explanation",
+      "test_composition.CompositionTests.test_29_capabilities_recombine_without_fixed_input_output_pairs",
+      "test_composition.CompositionTests.test_30_legacy_only_contributions_do_not_become_checked_primary_sources",
+      "test_composition.CompositionTests.test_31_criterion_without_documentary_justification_does_not_authorize",
+      "test_composition.CompositionTests.test_32_ready_choice_does_not_appropriate_rejected_application_checks",
+      "test_composition.CompositionTests.test_33_multiple_tasks_are_not_silently_composed",
+      "test_composition.CompositionTests.test_34_missing_requirements_do_not_become_vacuously_satisfied",
+      "test_composition.CompositionTests.test_35_ambiguous_articulation_product_cannot_authorize_either_knowledge",
+      "test_composition.CompositionTests.test_36_non_text_action_cannot_be_rendered_as_instruction",
+      "test_composition.CompositionTests.test_37_unusable_source_url_blocks_documentary_grounding",
+      "test_composition.CompositionTests.test_38_action_uses_pilot_string_contract_labels_may_have_language"
+    ],
+    "failures": [],
+    "skipped": 0
+  },
+  "preserved_files": {
+    "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
+    "engine.py": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
+    "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+    "ontology/main.ttl": "39bc30a533e8773a3893001482ef5506d4baa5b72fad200a1dd93a1a5772f3d4",
+    "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
+    "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+    "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
+    "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
+    "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+    "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+    "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+    "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+    "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+  },
+  "preserved_files_unchanged": true,
+  "reasoner": {
+    "report": "evidence/reasoner-report.json",
+    "matches_current_graph": true,
+    "profile_passed": true,
+    "consistency_passed": true,
+    "checked_at_utc": "2026-10-10T04:15:23.215244+00:00"
+  },
+  "passed": true
+}

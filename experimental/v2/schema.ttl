@@ -1,0 +1,71 @@
+@prefix v2: <https://w3id.org/mado/experimental/v2#> .
+@prefix mado: <https://w3id.org/mado#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/mado/experimental/v2> a owl:Ontology ;
+  owl:versionIRI <https://w3id.org/mado/experimental/2.0.0-alpha1> ;
+  owl:versionInfo "2.0.0-alpha1" ;
+  rdfs:label "MADO V2 — piloto de composição fundamentada"@pt ;
+  rdfs:comment "Extensão experimental isolada. Não substitui a MADO 1.4 nem representa uma versão validada com participantes. Namespace proposto; não pressupõe registro de resolução pública."@pt .
+
+# The six core categories are retained, not replaced by a new disability taxonomy.
+mado:Fonte a owl:Class .
+mado:ConhecimentoMultimodalArticulado a owl:Class .
+mado:CriterioDeDecisaoMultimodal a owl:Class .
+mado:ContextoDeInteracaoDigital a owl:Class .
+mado:DecisaoDeAcessibilidadeMultimodal a owl:Class .
+mado:Resultado a owl:Class .
+mado:TrechoDocumental a owl:Class .
+mado:ArticulacaoDocumentada a owl:Class .
+mado:ContribuicaoNaArticulacao a owl:Class .
+
+v2:Function a owl:Class ; rdfs:label "Função exigida pela tarefa"@pt .
+v2:Task a owl:Class ; rdfs:label "Contrato de tarefa do piloto"@pt .
+v2:Capability a owl:Class ; rdfs:label "Capacidade de interação reutilizável"@pt ;
+  rdfs:comment "Operação unitária de projeto, não resposta completa de um cenário nem capacidade clínica inferida."@pt .
+v2:Resource a owl:Class ; rdfs:label "Recurso necessário"@pt .
+v2:ContextFact a owl:Class ; rdfs:label "Condição a confirmar"@pt .
+v2:Representation a owl:Class ; rdfs:label "Estado informacional"@pt .
+v2:Mode a owl:Class ; rdfs:label "Forma de entrada ou saída"@pt .
+v2:RelationRule a owl:Class ; rdfs:label "Relação funcional documentada entre etapas"@pt ;
+  rdfs:comment "Liga funções e estado compartilhado, não pares fixos de capacidades ou identificadores de cenário. Não classifica automaticamente uma sequência como complementaridade CARE."@pt .
+v2:GroundingApplication a owl:Class ; rdfs:label "Fundamento de uma capacidade"@pt ;
+  rdfs:comment "Vínculo curado reutilizável. Distingue-se da aplicação situada de critério produzida em uma execução."@pt .
+v2:ArticulationSupport a owl:Class ; rdfs:subClassOf mado:ArticulacaoDocumentada .
+v2:Contribution a owl:Class ; rdfs:subClassOf mado:ContribuicaoNaArticulacao .
+
+v2:requiresFunction a owl:ObjectProperty ; rdfs:domain v2:Task ; rdfs:range v2:Function .
+v2:provides a owl:ObjectProperty ; rdfs:domain v2:Capability ; rdfs:range v2:Function .
+v2:inputType a owl:ObjectProperty ; rdfs:range v2:Representation .
+v2:outputType a owl:ObjectProperty ; rdfs:range v2:Representation .
+v2:mode a owl:ObjectProperty ; rdfs:domain v2:Capability ; rdfs:range v2:Mode .
+v2:requiresResource a owl:ObjectProperty ; rdfs:domain v2:Capability ; rdfs:range v2:Resource .
+v2:requiresFact a owl:ObjectProperty ; rdfs:range v2:ContextFact .
+v2:capability a owl:ObjectProperty ; rdfs:domain v2:GroundingApplication ; rdfs:range v2:Capability .
+v2:knowledge a owl:ObjectProperty ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+v2:criterion a owl:ObjectProperty ; rdfs:range mado:CriterioDeDecisaoMultimodal .
+v2:articulation a owl:ObjectProperty ; rdfs:range v2:ArticulationSupport .
+v2:produces a owl:ObjectProperty ; rdfs:domain v2:ArticulationSupport ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+v2:inArticulation a owl:ObjectProperty ; rdfs:domain v2:Contribution ; rdfs:range v2:ArticulationSupport .
+v2:excerpt a owl:ObjectProperty ; rdfs:domain v2:Contribution ; rdfs:range mado:TrechoDocumental .
+mado:trechoDeFonte a owl:ObjectProperty ; rdfs:domain mado:TrechoDocumental ; rdfs:range mado:Fonte .
+v2:source a owl:ObjectProperty ; rdfs:range mado:Fonte .
+v2:fromFunction a owl:ObjectProperty ; rdfs:domain v2:RelationRule ; rdfs:range v2:Function .
+v2:toFunction a owl:ObjectProperty ; rdfs:domain v2:RelationRule ; rdfs:range v2:Function .
+v2:sharedType a owl:ObjectProperty ; rdfs:domain v2:RelationRule ; rdfs:range v2:Representation .
+v2:order a owl:DatatypeProperty ; rdfs:domain v2:Function ; rdfs:range xsd:integer .
+v2:status a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:action a owl:DatatypeProperty ; rdfs:domain v2:Capability ; rdfs:range xsd:string .
+v2:limitation a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:justification a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:operation a owl:DatatypeProperty ; rdfs:domain v2:ArticulationSupport ; rdfs:range xsd:string .
+v2:addedUnderstanding a owl:DatatypeProperty ; rdfs:domain v2:ArticulationSupport ; rdfs:range xsd:string .
+v2:epistemicStatus a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:statement a owl:DatatypeProperty ; rdfs:domain v2:Contribution ; rdfs:range xsd:string .
+v2:relationKind a owl:DatatypeProperty ; rdfs:domain v2:RelationRule ; rdfs:range xsd:string .
+v2:explanation a owl:DatatypeProperty ; rdfs:domain v2:RelationRule ; rdfs:range xsd:string .
+v2:url a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:locator a owl:DatatypeProperty ; rdfs:range xsd:string .
+mado:localizacaoDocumental a owl:DatatypeProperty ; rdfs:range xsd:string .

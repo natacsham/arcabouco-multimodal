@@ -1,0 +1,8 @@
+id;alegacao;tipo;verificacao;limite
+V2-A1;O motor recombina capacidades sem selecionar pares por cenário;operacional;test_03 test_15 e test_29;Capacidades e tarefas precisam estar representadas
+V2-A2;Conhecimento com aplicação exata pode habilitar outro percurso com motor fixo;operacional;test_02 test_03 test_04 e experiments;A capacidade habilitada já existia e não foi extraída automaticamente
+V2-A3;Bibliografia adicional não é fundamento suficiente;epistemica_operacional;test_05 test_06 e test_31;A interpretação científica ainda requer revisão humana
+V2-A4;Critério conhecimento e contribuição permanecem pareados;representacional;grounding.rq SHACL e testes de remoção;Integridade do registro não comprova verdade da interpretação
+V2-A5;Impedimento e informação ausente alteram autorização;operacional;test_11 test_12 e experiments;Condições são declaradas no contexto não medidas pelo programa
+V2-A6;Relação entre etapas exige funções e representação compatíveis;representacional_operacional;relations.rq e testes de transição;Não demonstra preservação semântica real nem complementaridade CARE
+V2-A7;O piloto não modifica o artefato publicado;preservacao;preserved_files_unchanged e branch isolada;Alterações anteriores de interface permanecem fora deste trabalho

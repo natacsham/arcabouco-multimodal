@@ -1,0 +1,142 @@
+@prefix v2: <https://w3id.org/mado/experimental/v2#> .
+@prefix mado: <https://w3id.org/mado#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# The source documents were consulted for the stated passages, not approved as
+# empirical proof of these combinations. All resulting knowledge is design synthesis.
+v2:SourceCARE a mado:Fonte ; rdfs:label "Coutaz et al. (1995), CARE"@pt ;
+  v2:url "https://danielsalber.com/publications/interact1995.pdf" .
+v2:SourceMMI a mado:Fonte ; rdfs:label "W3C Multimodal Interaction Requirements (2003), Note"@pt ;
+  v2:url "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/" .
+v2:SourceKeyboard a mado:Fonte ; rdfs:label "W3C Understanding WCAG 2.2, 2.1.1 Keyboard"@pt ;
+  v2:url "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html" .
+v2:SourceReview a mado:Fonte ; rdfs:label "W3C Understanding WCAG 2.2, 3.3.6 Error Prevention (All), AAA"@pt ;
+  v2:url "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html" .
+v2:SourceLegacy a mado:Fonte ; rdfs:label "Registros preservados da MADO 1.4.0-rc1"@pt ;
+  v2:url "https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json" .
+
+v2:ExcerptCARE a mado:TrechoDocumental ; mado:trechoDeFonte v2:SourceCARE ;
+  mado:localizacaoDocumental "pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade" .
+v2:ExcerptMMI a mado:TrechoDocumental ; mado:trechoDeFonte v2:SourceMMI ;
+  mado:localizacaoDocumental "Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces" .
+v2:ExcerptKeyboard a mado:TrechoDocumental ; mado:trechoDeFonte v2:SourceKeyboard ;
+  mado:localizacaoDocumental "Success Criterion e Intent: funcionalidade operável por interface de teclado" .
+v2:ExcerptReview a mado:TrechoDocumental ; mado:trechoDeFonte v2:SourceReview ;
+  mado:localizacaoDocumental "Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação" .
+v2:ExcerptLegacy a mado:TrechoDocumental ; mado:trechoDeFonte v2:SourceLegacy ;
+  mado:localizacaoDocumental "knowledge/K41 e knowledge/K44; registros parciais; não originais dos estudos" .
+
+v2:Expression a v2:Function ; rdfs:label "Produzir um rascunho"@pt ; v2:order 1 .
+v2:Review a v2:Function ; rdfs:label "Conferir e poder corrigir o rascunho"@pt ; v2:order 2 .
+v2:ContributionContent a v2:Representation ; rdfs:label "Conteúdo que a pessoa quer expressar"@pt .
+v2:TextDraft a v2:Representation ; rdfs:label "Rascunho textual editável"@pt .
+v2:ReviewedText a v2:Representation ; rdfs:label "Conteúdo conferível e corrigível pela pessoa"@pt .
+v2:TaskCreateReviewedText a v2:Task ; rdfs:label "Produzir e revisar uma contribuição digital"@pt ;
+  v2:requiresFunction v2:Expression, v2:Review ;
+  v2:inputType v2:ContributionContent ; v2:outputType v2:ReviewedText .
+v2:TaskReviewExistingText a v2:Task ; rdfs:label "Revisar conteúdo textual já disponível"@pt ;
+  v2:requiresFunction v2:Review ; v2:inputType v2:TextDraft ; v2:outputType v2:ReviewedText .
+
+v2:SpokenEntry a v2:Mode ; rdfs:label "Fala como entrada"@pt .
+v2:WrittenEntry a v2:Mode ; rdfs:label "Escrita como entrada"@pt .
+v2:VisualText a v2:Mode ; rdfs:label "Texto visual como saída"@pt .
+v2:SpokenOutput a v2:Mode ; rdfs:label "Fala sintetizada como saída"@pt .
+v2:Microphone a v2:Resource ; rdfs:label "Microfone"@pt .
+v2:SpeechRecognition a v2:Resource ; rdfs:label "Reconhecimento de fala"@pt .
+v2:Keyboard a v2:Resource ; rdfs:label "Interface de teclado"@pt .
+v2:EditableText a v2:Resource ; rdfs:label "Campo textual editável"@pt .
+v2:Display a v2:Resource ; rdfs:label "Apresentação visual legível"@pt .
+v2:TextToSpeech a v2:Resource ; rdfs:label "Leitura em voz do texto"@pt .
+v2:AudioOutput a v2:Resource ; rdfs:label "Saída de áudio controlável"@pt .
+v2:ContentAvailable a v2:ContextFact ; rdfs:label "Há conteúdo a expressar ou revisar"@pt .
+v2:CanUseSpeech a v2:ContextFact ; rdfs:label "A pessoa consegue e aceita usar fala nesta tarefa"@pt .
+v2:SpeechInputUsable a v2:ContextFact ; rdfs:label "Reconhecimento de fala utilizável neste ambiente e idioma"@pt .
+v2:CanUseKeyboard a v2:ContextFact ; rdfs:label "A pessoa consegue operar a interface de teclado"@pt .
+v2:CanReviewVisualText a v2:ContextFact ; rdfs:label "A pessoa consegue conferir o texto apresentado visualmente"@pt .
+v2:CanReviewSpeech a v2:ContextFact ; rdfs:label "A pessoa consegue conferir o conteúdo por fala sintetizada"@pt .
+v2:AudioUsable a v2:ContextFact ; rdfs:label "O áudio é utilizável no ambiente, com privacidade e percepção suficientes"@pt .
+v2:CanControlPlayback a v2:ContextFact ; rdfs:label "A pessoa consegue pausar e repetir a leitura"@pt .
+v2:CanCorrect a v2:ContextFact ; rdfs:label "Existe um meio operável para corrigir o rascunho"@pt .
+v2:ControlsCompletion a v2:ContextFact ; rdfs:label "A pessoa controla quando concluir, sem envio automático"@pt .
+
+v2:CriterionInput a mado:CriterioDeDecisaoMultimodal ;
+  rdfs:label "Escolher uma entrada funcionalmente adequada e operável"@pt ;
+  v2:source v2:SourceCARE ; v2:locator "pp. 2–5, equivalência funcional e compatibilidade com a pessoa" ;
+  v2:justification "Critério analítico do piloto: entradas podem cumprir a mesma subfunção, mas sua disponibilidade e viabilidade são verificadas separadamente; não se presume igual esforço." .
+v2:CriterionReview a mado:CriterioDeDecisaoMultimodal ;
+  rdfs:label "Permitir conferência e correção antes da conclusão"@pt ;
+  v2:source v2:SourceReview ; v2:locator "3.3.6 (AAA), alternativa de revisão, confirmação e correção" ;
+  v2:justification "Escolha de projeto entre alternativas da diretriz AAA; não é exigência universal de revisão visual nem declaração de conformidade." .
+
+v2:KInput a mado:ConhecimentoMultimodalArticulado ;
+  rdfs:label "Produzir o mesmo tipo de rascunho por uma entrada operável no contexto"@pt ;
+  v2:epistemicStatus "DESIGN_SYNTHESIS_NOT_EMPIRICAL" .
+v2:KReview a mado:ConhecimentoMultimodalArticulado ;
+  rdfs:label "A produção do rascunho precisa ser ligada a uma revisão perceptível e corrigível"@pt ;
+  v2:epistemicStatus "DESIGN_SYNTHESIS_NOT_EMPIRICAL" .
+v2:ArtInput a v2:ArticulationSupport ; v2:produces v2:KInput ; v2:status "CURATED_FOR_PILOT" ;
+  v2:operation "Relacionar equivalência funcional de entradas, operação por teclado e compatibilidade situada, sem concluir equivalência de esforço ou acesso." ;
+  v2:addedUnderstanding "A função produzir rascunho não fica presa à voz ou ao teclado: cada entrada requer condições próprias e produz o mesmo estado informacional de projeto." .
+v2:ArtReview a v2:ArticulationSupport ; v2:produces v2:KReview ; v2:status "CURATED_FOR_PILOT" ;
+  v2:operation "Relacionar entradas e saídas independentes, possibilidade de revisão/correção e retorno perceptível para preservar o controle da pessoa." ;
+  v2:addedUnderstanding "A sequência de produção e revisão só é proposta quando compartilha o mesmo rascunho e existe uma rota operável de correção; não é fusão multimodal nem complementaridade CARE automaticamente." .
+v2:CInputCARE a v2:Contribution ; v2:inArticulation v2:ArtInput ; v2:excerpt v2:ExcerptCARE ;
+  v2:statement "CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual." ; v2:status "PRIMARY_CHECKED" .
+v2:CInputKeyboard a v2:Contribution ; v2:inArticulation v2:ArtInput ; v2:excerpt v2:ExcerptKeyboard ;
+  v2:statement "Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada." ; v2:status "PRIMARY_CHECKED" .
+v2:CInputLegacy a v2:Contribution ; v2:inArticulation v2:ArtInput ; v2:excerpt v2:ExcerptLegacy ;
+  v2:statement "K41 ressalta viabilidade e compatibilidade da entrada. O estado parcial do registro não é promovido a conferência do original." ; v2:status "LEGACY_RECORD_ONLY" .
+v2:CReviewMMI a v2:Contribution ; v2:inArticulation v2:ArtReview ; v2:excerpt v2:ExcerptMMI ;
+  v2:statement "Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação." ; v2:status "PRIMARY_CHECKED" .
+v2:CReviewWCAG a v2:Contribution ; v2:inArticulation v2:ArtReview ; v2:excerpt v2:ExcerptReview ;
+  v2:statement "A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória." ; v2:status "PRIMARY_CHECKED" .
+v2:CReviewLegacy a v2:Contribution ; v2:inArticulation v2:ArtReview ; v2:excerpt v2:ExcerptLegacy ;
+  v2:statement "K44 relaciona retorno perceptível e continuidade. Isso é apoio contextual legado, não prova de desempenho do novo fluxo." ; v2:status "LEGACY_RECORD_ONLY" .
+
+v2:CaptureSpeech a v2:Capability ; rdfs:label "Registrar por fala"@pt ;
+  v2:provides v2:Expression ; v2:mode v2:SpokenEntry ;
+  v2:inputType v2:ContributionContent ; v2:outputType v2:TextDraft ;
+  v2:requiresResource v2:Microphone, v2:SpeechRecognition, v2:EditableText ;
+  v2:requiresFact v2:ContentAvailable, v2:CanUseSpeech, v2:SpeechInputUsable ;
+  v2:action "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável" ;
+  v2:limitation "Reconhecimento pode alterar palavras; não enviar automaticamente nem presumir fidelidade da transcrição." .
+v2:CaptureKeyboard a v2:Capability ; rdfs:label "Registrar por escrita"@pt ;
+  v2:provides v2:Expression ; v2:mode v2:WrittenEntry ;
+  v2:inputType v2:ContributionContent ; v2:outputType v2:TextDraft ;
+  v2:requiresResource v2:Keyboard, v2:EditableText ;
+  v2:requiresFact v2:ContentAvailable, v2:CanUseKeyboard ;
+  v2:action "Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável" ;
+  v2:limitation "Teclado disponível não significa operável pela pessoa; a condição funcional precisa ser confirmada." .
+v2:ReviewText a v2:Capability ; rdfs:label "Conferir pelo texto visual"@pt ;
+  v2:provides v2:Review ; v2:mode v2:VisualText ;
+  v2:inputType v2:TextDraft ; v2:outputType v2:ReviewedText ;
+  v2:requiresResource v2:EditableText, v2:Display ;
+  v2:requiresFact v2:CanReviewVisualText, v2:CanCorrect, v2:ControlsCompletion ;
+  v2:action "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir" ;
+  v2:limitation "A revisão visual não cobre quem não consegue perceber ou compreender essa apresentação." .
+# This capability is declared, but intentionally has NO authorized grounding in
+# the base. The extension adds knowledge and its application, not a new engine,
+# capability, complete configuration, relation rule or scenario-specific text.
+v2:ReviewSpeech a v2:Capability ; rdfs:label "Conferir pela leitura em voz"@pt ;
+  v2:provides v2:Review ; v2:mode v2:SpokenOutput ;
+  v2:inputType v2:TextDraft ; v2:outputType v2:ReviewedText ;
+  v2:requiresResource v2:EditableText, v2:TextToSpeech, v2:AudioOutput ;
+  v2:requiresFact v2:CanReviewSpeech, v2:AudioUsable, v2:CanControlPlayback, v2:CanCorrect, v2:ControlsCompletion ;
+  v2:action "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir" ;
+  v2:limitation "A leitura literal não descreve informação visual ausente do texto; ruído, privacidade ou dificuldade de escuta podem impedir essa rota." .
+
+v2:GroundSpeech a v2:GroundingApplication ; v2:capability v2:CaptureSpeech ;
+  v2:knowledge v2:KInput ; v2:criterion v2:CriterionInput ; v2:articulation v2:ArtInput ;
+  v2:status "CURATED_FOR_PILOT" ; v2:justification "A fala é candidata para a produção do rascunho somente com operação e reconhecimento confirmados." .
+v2:GroundKeyboard a v2:GroundingApplication ; v2:capability v2:CaptureKeyboard ;
+  v2:knowledge v2:KInput ; v2:criterion v2:CriterionInput ; v2:articulation v2:ArtInput ;
+  v2:status "CURATED_FOR_PILOT" ; v2:justification "A escrita oferece outra entrada para o mesmo estado de rascunho, sem exigir fala." .
+v2:GroundTextReview a v2:GroundingApplication ; v2:capability v2:ReviewText ;
+  v2:knowledge v2:KReview ; v2:criterion v2:CriterionReview ; v2:articulation v2:ArtReview ;
+  v2:status "CURATED_FOR_PILOT" ; v2:justification "A revisão textual é admitida somente se a apresentação for perceptível e houver controle de correção e conclusão." .
+v2:ProductionThenReview a v2:RelationRule ; rdfs:label "Produzir e depois revisar o mesmo conteúdo"@pt ;
+  v2:fromFunction v2:Expression ; v2:toFunction v2:Review ; v2:sharedType v2:TextDraft ;
+  v2:relationKind "SEQUENTIAL_REVIEW" ; v2:knowledge v2:KReview ; v2:criterion v2:CriterionReview ;
+  v2:articulation v2:ArtReview ; v2:status "CURATED_FOR_PILOT" ;
+  v2:requiresFact v2:CanCorrect, v2:ControlsCompletion ;
+  v2:explanation "A primeira etapa produz o rascunho; a segunda torna esse mesmo conteúdo conferível antes da conclusão. A forma de entrada e a forma de revisão podem diferir, desde que ambas sejam operáveis e exista correção." .

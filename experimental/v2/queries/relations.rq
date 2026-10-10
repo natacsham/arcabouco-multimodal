@@ -1,0 +1,6 @@
+PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+SELECT ?relation ?from ?to ?shared ?kind ?knowledge ?criterion ?explanation
+WHERE {
+  ?relation a v2:RelationRule ; v2:fromFunction ?from ; v2:toFunction ?to ; v2:sharedType ?shared ;
+    v2:relationKind ?kind ; v2:knowledge ?knowledge ; v2:criterion ?criterion ; v2:explanation ?explanation .
+} ORDER BY ?relation

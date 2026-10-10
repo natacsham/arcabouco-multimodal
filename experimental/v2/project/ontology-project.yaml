@@ -1,0 +1,19 @@
+name: MADO V2 - composicao fundamentada
+version: 2.0.0-alpha1
+status: experimental_pilot
+preserved_baseline_commit: 73013190f26cf8806e7f647dbb3fa36a8c07a3c3
+purpose: Compor percursos de interacao a partir de capacidades unitarias e fundamentos exatos
+scope: Produzir e revisar uma contribuicao digital; revisar texto existente
+not_in_scope:
+  - Alterar a versao da tese ou o site em producao
+  - Interpretar automaticamente narrativas livres
+  - Inventar capacidades nao representadas
+  - Generalizar resultados educacionais ou clinicos
+  - Declarar validacao humana desta nova versao
+source_of_truth:
+  schema: schema.ttl
+  base: base.ttl
+  extension: extensions/audio-review.ttl
+  constraints: shapes.ttl
+runtime: composer.py
+review_state: Sintese analitica assistida a conferir pela autora; verificacao computacional separada

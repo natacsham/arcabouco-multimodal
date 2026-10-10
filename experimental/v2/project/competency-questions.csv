@@ -1,0 +1,9 @@
+id;pergunta;verificacao;resultado_esperado;limite
+V2-Q1;Quais funções a tarefa exige antes da seleção de capacidades?;testes do contrato Task e execution_evidence;Produzir e revisar ou apenas revisar segundo a tarefa confirmada;A tarefa é escolhida explicitamente e não inferida de narrativa
+V2-Q2;Quais capacidades satisfazem cada função nas condições confirmadas?;testes positivos e negativos do compositor;Candidatas viáveis separadas de excluídas e pendentes;Viabilidade informada não equivale a desempenho observado
+V2-Q3;Qual contribuição localizada sustenta cada conhecimento utilizado?;queries/grounding.rq e SHACL;11 linhas com a extensão e 9 sem ela;Conferência de documentos não comprova eficácia da síntese
+V2-Q4;Qual critério e articulação fundamentam exatamente cada capacidade?;queries/grounding.rq e testes de pareamento;Nenhum vínculo genérico a todos os conhecimentos;Critérios analíticos do piloto não substituem CA01–CA88
+V2-Q5;Qual relação liga as etapas e qual conteúdo precisa ser preservado?;queries/relations.rq e testes de representação incompatível;Sequência funcional compartilha TextDraft;Não demonstra fusão ou complementaridade CARE
+V2-Q6;A extensão de conhecimento muda a composição com o motor fixo?;ablação base versus audio-review e remoção;Teclado com revisão por áudio passa de insuficiente a composto;Habilita capacidade já representada e não inventa modalidade
+V2-Q7;Uma condição relevante muda a decisão e sua explicação?;retirada de AudioOutput e testes de fatos falsos;Caminho incompatível excluído e insuficiência explícita;Não avalia empiricamente as alternativas
+V2-Q8;O sistema distingue ausência de informação de impedimento?;CanCorrect ausente ou null versus false;Pendente versus não satisfeita e nenhuma composição pronta;Só examina as condições codificadas

@@ -1,0 +1,7 @@
+{
+  "id": "synthetic-unregistered-keyboard-audio",
+  "task": "TaskCreateReviewedText",
+  "confirmed": true,
+  "resources": {"Microphone": false, "SpeechRecognition": false, "EditableText": true, "Display": false, "Keyboard": true, "TextToSpeech": true, "AudioOutput": true},
+  "facts": {"ContentAvailable": true, "CanUseSpeech": false, "SpeechInputUsable": false, "CanUseKeyboard": true, "CanReviewVisualText": false, "CanReviewSpeech": true, "AudioUsable": true, "CanControlPlayback": true, "CanCorrect": true, "ControlsCompletion": true}
+}
