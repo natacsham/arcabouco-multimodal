@@ -76,7 +76,7 @@ def main():
     before = {str(p.relative_to(ROOT)).replace("\\", "/"): digest(p) for p in protected if p.is_file()}
     base, extended = Composer(BASE), Composer([*BASE, EXT])
     shapes = Graph().parse(HERE / "shapes.ttl", format="turtle")
-    report = {"version": "2.0.0-alpha1", "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+    report = {"version": "2.0.0-alpha2", "checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
               "shacl": {}, "queries": {}, "negative_shacl": {}}
     checks = []
@@ -175,7 +175,7 @@ def main():
     write_json(output / "verification.json", report)
     manifest_files = sorted(p for p in HERE.rglob("*") if p.is_file()
                             and "__pycache__" not in p.parts and p.name != "manifest.json")
-    write_json(output / "manifest.json", {"version": "2.0.0-alpha1", "files": {
+    write_json(output / "manifest.json", {"version": "2.0.0-alpha2", "files": {
         p.relative_to(HERE).as_posix(): digest(p) for p in manifest_files}})
     print(json.dumps({"passed": report["passed"], "unit_tests": result.testsRun,
                       "shacl": {k: v["conforms"] for k, v in report["shacl"].items()},

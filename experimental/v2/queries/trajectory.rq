@@ -1,0 +1,11 @@
+PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+SELECT DISTINCT ?application ?product ?legacy ?reviewStatus ?contribution ?excerpt ?source
+WHERE {
+  ?application v2:knowledge ?product ; v2:articulation ?articulation .
+  ?product v2:derivedFromLegacy ?legacy .
+  ?legacy v2:legacyReviewStatus ?reviewStatus .
+  ?contribution v2:inArticulation ?articulation ;
+                v2:contributionForKnowledge ?legacy ; v2:excerpt ?excerpt .
+  ?excerpt <https://w3id.org/mado#trechoDeFonte> ?source .
+}
+ORDER BY ?application ?legacy ?contribution

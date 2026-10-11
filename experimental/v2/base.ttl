@@ -111,7 +111,7 @@ v2:ReviewText a v2:Capability ; rdfs:label "Conferir pelo texto visual"@pt ;
   v2:provides v2:Review ; v2:mode v2:VisualText ;
   v2:inputType v2:TextDraft ; v2:outputType v2:ReviewedText ;
   v2:requiresResource v2:EditableText, v2:Display ;
-  v2:requiresFact v2:CanReviewVisualText, v2:CanCorrect, v2:ControlsCompletion ;
+  v2:requiresFact v2:ContentAvailable, v2:CanReviewVisualText, v2:CanCorrect, v2:ControlsCompletion ;
   v2:action "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir" ;
   v2:limitation "A revisão visual não cobre quem não consegue perceber ou compreender essa apresentação." .
 # This capability is declared, but intentionally has NO authorized grounding in
@@ -121,7 +121,7 @@ v2:ReviewSpeech a v2:Capability ; rdfs:label "Conferir pela leitura em voz"@pt ;
   v2:provides v2:Review ; v2:mode v2:SpokenOutput ;
   v2:inputType v2:TextDraft ; v2:outputType v2:ReviewedText ;
   v2:requiresResource v2:EditableText, v2:TextToSpeech, v2:AudioOutput ;
-  v2:requiresFact v2:CanReviewSpeech, v2:AudioUsable, v2:CanControlPlayback, v2:CanCorrect, v2:ControlsCompletion ;
+  v2:requiresFact v2:ContentAvailable, v2:CanReviewSpeech, v2:AudioUsable, v2:CanControlPlayback, v2:CanCorrect, v2:ControlsCompletion ;
   v2:action "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir" ;
   v2:limitation "A leitura literal não descreve informação visual ausente do texto; ruído, privacidade ou dificuldade de escuta podem impedir essa rota." .
 

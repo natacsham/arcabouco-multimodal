@@ -1,9 +1,10 @@
 {
   "status": "COMPOSED",
+  "proposal_status": "COMPLETE",
   "context_id": "synthetic-unregistered-keyboard-audio",
   "choices": [
     {
-      "id": "proposal-6de1877a9dffbeb80f3a",
+      "id": "proposal-8b0490d1281809c5f8fb",
       "state": "PASS",
       "steps": [
         {
@@ -450,6 +451,10 @@
               "label": "A pessoa consegue conferir o conteúdo por fala sintetizada"
             },
             {
+              "id": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+              "label": "Há conteúdo a expressar ou revisar"
+            },
+            {
               "id": "https://w3id.org/mado/experimental/v2#ControlsCompletion",
               "label": "A pessoa controla quando concluir, sem envio automático"
             }
@@ -612,6 +617,7 @@
             "check-522b3d6805c710df",
             "check-95cc812f917d9332",
             "check-168151caf71126ae",
+            "check-769027718484715a",
             "check-03f23913fc4aa27b",
             "check-e904a88d9684c63c",
             "check-7c40236b83efab23",
@@ -659,6 +665,7 @@
             "check-522b3d6805c710df",
             "check-95cc812f917d9332",
             "check-168151caf71126ae",
+            "check-769027718484715a",
             "check-03f23913fc4aa27b",
             "check-0e4d28f5d826d970",
             "check-8b6b441736913422",
@@ -812,6 +819,23 @@
               },
               "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
               "id": "check-168151caf71126ae"
+            },
+            {
+              "stage": "capability",
+              "subject": "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+              "kind": "REQUIRES_requiresFact",
+              "state": "PASS",
+              "expected": {
+                "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+                "value": true
+              },
+              "observed": {
+                "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+                "value": true,
+                "declared": true
+              },
+              "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
+              "id": "check-769027718484715a"
             },
             {
               "stage": "capability",
@@ -1192,6 +1216,7 @@
         "check-743f9c4fcaf906bb",
         "check-74d3b2f5f9adaa77",
         "check-74f908c0ac458e51",
+        "check-769027718484715a",
         "check-79b0fb281ad4a868",
         "check-7c40236b83efab23",
         "check-7d07627e695783ec",
@@ -1276,12 +1301,14 @@
         "Proposta composta de capacidades e relações curadas; não foi aplicada nem avaliada em uso.",
         "A compatibilidade de tipos não comprova preservação efetiva do significado do conteúdo.",
         "Ordem determinística não representa ranking de qualidade ou escolha ótima."
-      ]
+      ],
+      "covers_all_required_functions": true,
+      "conditions_satisfied": true
     }
   ],
   "alternatives": [
     {
-      "id": "proposal-6de1877a9dffbeb80f3a",
+      "id": "proposal-8b0490d1281809c5f8fb",
       "state": "PASS",
       "steps": [
         {
@@ -1728,6 +1755,10 @@
               "label": "A pessoa consegue conferir o conteúdo por fala sintetizada"
             },
             {
+              "id": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+              "label": "Há conteúdo a expressar ou revisar"
+            },
+            {
               "id": "https://w3id.org/mado/experimental/v2#ControlsCompletion",
               "label": "A pessoa controla quando concluir, sem envio automático"
             }
@@ -1890,6 +1921,7 @@
             "check-522b3d6805c710df",
             "check-95cc812f917d9332",
             "check-168151caf71126ae",
+            "check-769027718484715a",
             "check-03f23913fc4aa27b",
             "check-e904a88d9684c63c",
             "check-7c40236b83efab23",
@@ -1937,6 +1969,7 @@
             "check-522b3d6805c710df",
             "check-95cc812f917d9332",
             "check-168151caf71126ae",
+            "check-769027718484715a",
             "check-03f23913fc4aa27b",
             "check-0e4d28f5d826d970",
             "check-8b6b441736913422",
@@ -2090,6 +2123,23 @@
               },
               "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
               "id": "check-168151caf71126ae"
+            },
+            {
+              "stage": "capability",
+              "subject": "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+              "kind": "REQUIRES_requiresFact",
+              "state": "PASS",
+              "expected": {
+                "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+                "value": true
+              },
+              "observed": {
+                "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+                "value": true,
+                "declared": true
+              },
+              "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
+              "id": "check-769027718484715a"
             },
             {
               "stage": "capability",
@@ -2470,6 +2520,7 @@
         "check-743f9c4fcaf906bb",
         "check-74d3b2f5f9adaa77",
         "check-74f908c0ac458e51",
+        "check-769027718484715a",
         "check-79b0fb281ad4a868",
         "check-7c40236b83efab23",
         "check-7d07627e695783ec",
@@ -2554,7 +2605,9 @@
         "Proposta composta de capacidades e relações curadas; não foi aplicada nem avaliada em uso.",
         "A compatibilidade de tipos não comprova preservação efetiva do significado do conteúdo.",
         "Ordem determinística não representa ranking de qualidade ou escolha ótima."
-      ]
+      ],
+      "covers_all_required_functions": true,
+      "conditions_satisfied": true
     }
   ],
   "pending_candidates": [],
@@ -2632,6 +2685,7 @@
         "check-be1aac43b66740c8",
         "check-689640b06e04b342",
         "check-61f27c285ca351cc",
+        "check-94e71e0376f5c4d8",
         "check-046cca6c13df4ca6",
         "check-eb89ca6e243e9823",
         "check-250ea98e343a08e9",
@@ -2675,6 +2729,137 @@
       "reason": "CONDITION_OR_GROUNDING_FAILED"
     }
   ],
+  "partial_segments": [],
+  "partial_truncated": false,
+  "function_coverage": [
+    {
+      "function": {
+        "id": "https://w3id.org/mado/experimental/v2#Expression",
+        "label": "Produzir um rascunho"
+      },
+      "available_capabilities": [
+        "https://w3id.org/mado/experimental/v2#CaptureKeyboard"
+      ],
+      "conditional_capabilities": [],
+      "state": "CAPABILITY_AVAILABLE",
+      "limit": "Disponibilidade de uma capacidade não comprova encadeamento completo da tarefa."
+    },
+    {
+      "function": {
+        "id": "https://w3id.org/mado/experimental/v2#Review",
+        "label": "Conferir e poder corrigir o rascunho"
+      },
+      "available_capabilities": [
+        "https://w3id.org/mado/experimental/v2#ReviewSpeech"
+      ],
+      "conditional_capabilities": [],
+      "state": "CAPABILITY_AVAILABLE",
+      "limit": "Disponibilidade de uma capacidade não comprova encadeamento completo da tarefa."
+    }
+  ],
+  "missing_functions": [],
+  "integration_gaps": [],
+  "facts_to_confirm": [],
+  "resources_to_confirm": [],
+  "unavailable_conditions": [
+    {
+      "id": "https://w3id.org/mado/experimental/v2#CanReviewVisualText",
+      "label": "A pessoa consegue conferir o texto apresentado visualmente",
+      "kind": "fact",
+      "value": false,
+      "state": "FAIL",
+      "required_by": [
+        "https://w3id.org/mado/experimental/v2#ReviewText"
+      ],
+      "check_ids": [
+        "check-61f27c285ca351cc"
+      ],
+      "candidate_ids": [],
+      "candidates": [],
+      "question_required_by": []
+    },
+    {
+      "id": "https://w3id.org/mado/experimental/v2#CanUseSpeech",
+      "label": "A pessoa consegue e aceita usar fala nesta tarefa",
+      "kind": "fact",
+      "value": false,
+      "state": "FAIL",
+      "required_by": [
+        "https://w3id.org/mado/experimental/v2#CaptureSpeech"
+      ],
+      "check_ids": [
+        "check-bd2de3ecc17cfd4a"
+      ],
+      "candidate_ids": [],
+      "candidates": [],
+      "question_required_by": []
+    },
+    {
+      "id": "https://w3id.org/mado/experimental/v2#SpeechInputUsable",
+      "label": "Reconhecimento de fala utilizável neste ambiente e idioma",
+      "kind": "fact",
+      "value": false,
+      "state": "FAIL",
+      "required_by": [
+        "https://w3id.org/mado/experimental/v2#CaptureSpeech"
+      ],
+      "check_ids": [
+        "check-5e93f4770e1eabfc"
+      ],
+      "candidate_ids": [],
+      "candidates": [],
+      "question_required_by": []
+    },
+    {
+      "id": "https://w3id.org/mado/experimental/v2#Display",
+      "label": "Apresentação visual legível",
+      "kind": "resource",
+      "value": false,
+      "state": "FAIL",
+      "required_by": [
+        "https://w3id.org/mado/experimental/v2#ReviewText"
+      ],
+      "check_ids": [
+        "check-4c15562729d4f293"
+      ],
+      "candidate_ids": [],
+      "candidates": [],
+      "question_required_by": []
+    },
+    {
+      "id": "https://w3id.org/mado/experimental/v2#Microphone",
+      "label": "Microfone",
+      "kind": "resource",
+      "value": false,
+      "state": "FAIL",
+      "required_by": [
+        "https://w3id.org/mado/experimental/v2#CaptureSpeech"
+      ],
+      "check_ids": [
+        "check-7b0fb031d7e2b8c3"
+      ],
+      "candidate_ids": [],
+      "candidates": [],
+      "question_required_by": []
+    },
+    {
+      "id": "https://w3id.org/mado/experimental/v2#SpeechRecognition",
+      "label": "Reconhecimento de fala",
+      "kind": "resource",
+      "value": false,
+      "state": "FAIL",
+      "required_by": [
+        "https://w3id.org/mado/experimental/v2#CaptureSpeech"
+      ],
+      "check_ids": [
+        "check-b8201b0ebadd4c20"
+      ],
+      "candidate_ids": [],
+      "candidates": [],
+      "question_required_by": []
+    }
+  ],
+  "other_condition_diagnostics": [],
   "gaps": [],
   "input_issues": [],
   "required_functions": [
@@ -2690,9 +2875,21 @@
   "truncated": false,
   "pending_truncated": false,
   "maximum_choices": 64,
+  "search": {
+    "complete": {
+      "examined": 2,
+      "limit": 4096,
+      "truncated": false
+    },
+    "partial": {
+      "examined": 0,
+      "limit": 4096,
+      "truncated": false
+    }
+  },
   "fingerprints": {
-    "experimental/v2/schema.ttl": "f9c2c54d31307a8e5063aff47c0e20662f7a67c935880eedec7f8425caaef98b",
-    "experimental/v2/base.ttl": "ae8737a35d8cd99a115e66c41f36060026775425164141c4343d38e7379ba353",
+    "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
+    "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
     "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27"
   },
   "execution_evidence": [
@@ -3917,6 +4114,23 @@
       "kind": "REQUIRES_requiresFact",
       "state": "PASS",
       "expected": {
+        "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+        "value": true
+      },
+      "observed": {
+        "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+        "value": true,
+        "declared": true
+      },
+      "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
+      "id": "check-769027718484715a"
+    },
+    {
+      "stage": "capability",
+      "subject": "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+      "kind": "REQUIRES_requiresFact",
+      "state": "PASS",
+      "expected": {
         "concept": "https://w3id.org/mado/experimental/v2#ControlsCompletion",
         "value": true
       },
@@ -4483,6 +4697,23 @@
       },
       "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
       "id": "check-61f27c285ca351cc"
+    },
+    {
+      "stage": "capability",
+      "subject": "https://w3id.org/mado/experimental/v2#ReviewText",
+      "kind": "REQUIRES_requiresFact",
+      "state": "PASS",
+      "expected": {
+        "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+        "value": true
+      },
+      "observed": {
+        "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+        "value": true,
+        "declared": true
+      },
+      "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
+      "id": "check-94e71e0376f5c4d8"
     },
     {
       "stage": "capability",
@@ -6317,6 +6548,10 @@
           "label": "A pessoa consegue conferir o conteúdo por fala sintetizada"
         },
         {
+          "id": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+          "label": "Há conteúdo a expressar ou revisar"
+        },
+        {
           "id": "https://w3id.org/mado/experimental/v2#ControlsCompletion",
           "label": "A pessoa controla quando concluir, sem envio automático"
         }
@@ -6479,6 +6714,7 @@
         "check-522b3d6805c710df",
         "check-95cc812f917d9332",
         "check-168151caf71126ae",
+        "check-769027718484715a",
         "check-03f23913fc4aa27b",
         "check-e904a88d9684c63c",
         "check-7c40236b83efab23",
@@ -6526,6 +6762,7 @@
         "check-522b3d6805c710df",
         "check-95cc812f917d9332",
         "check-168151caf71126ae",
+        "check-769027718484715a",
         "check-03f23913fc4aa27b",
         "check-0e4d28f5d826d970",
         "check-8b6b441736913422",
@@ -6686,6 +6923,23 @@
           "kind": "REQUIRES_requiresFact",
           "state": "PASS",
           "expected": {
+            "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+            "value": true
+          },
+          "observed": {
+            "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+            "value": true,
+            "declared": true
+          },
+          "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
+          "id": "check-769027718484715a"
+        },
+        {
+          "stage": "capability",
+          "subject": "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+          "kind": "REQUIRES_requiresFact",
+          "state": "PASS",
+          "expected": {
             "concept": "https://w3id.org/mado/experimental/v2#ControlsCompletion",
             "value": true
           },
@@ -6733,6 +6987,10 @@
         {
           "id": "https://w3id.org/mado/experimental/v2#CanReviewVisualText",
           "label": "A pessoa consegue conferir o texto apresentado visualmente"
+        },
+        {
+          "id": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+          "label": "Há conteúdo a expressar ou revisar"
         },
         {
           "id": "https://w3id.org/mado/experimental/v2#ControlsCompletion",
@@ -6936,6 +7194,7 @@
         "check-be1aac43b66740c8",
         "check-689640b06e04b342",
         "check-61f27c285ca351cc",
+        "check-94e71e0376f5c4d8",
         "check-046cca6c13df4ca6",
         "check-eb89ca6e243e9823",
         "check-250ea98e343a08e9",
@@ -6988,6 +7247,7 @@
         "check-be1aac43b66740c8",
         "check-689640b06e04b342",
         "check-61f27c285ca351cc",
+        "check-94e71e0376f5c4d8",
         "check-046cca6c13df4ca6",
         "check-52c4c1c888262f43",
         "check-f9b6cca3bc8b74cd",
@@ -7098,6 +7358,23 @@
           },
           "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
           "id": "check-61f27c285ca351cc"
+        },
+        {
+          "stage": "capability",
+          "subject": "https://w3id.org/mado/experimental/v2#ReviewText",
+          "kind": "REQUIRES_requiresFact",
+          "state": "PASS",
+          "expected": {
+            "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+            "value": true
+          },
+          "observed": {
+            "concept": "https://w3id.org/mado/experimental/v2#ContentAvailable",
+            "value": true,
+            "declared": true
+          },
+          "explanation": "Todas as condições declaradas são necessárias (AND); ausência não é aprovação.",
+          "id": "check-94e71e0376f5c4d8"
         },
         {
           "stage": "capability",
@@ -7404,6 +7681,7 @@
     "Resultados são propostas de projeto, não garantia de acessibilidade ou melhores resultados educacionais.",
     "Fatos e disponibilidade são declarações confirmadas no contexto; não medições realizadas pelo programa.",
     "Conferência documental representa o estado registrado da contribuição; não nova leitura das fontes nesta execução.",
-    "Não há interpretação de texto livre, comparação de preferências nem otimização entre as alternativas."
+    "Não há interpretação de texto livre, comparação de preferências nem otimização entre as alternativas.",
+    "Etapas parciais não podem ser unidas pela interface para fingir uma composição que não foi verificada."
   ]
 }

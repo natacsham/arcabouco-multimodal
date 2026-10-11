@@ -26,6 +26,7 @@ from rdflib.namespace import XSD  # noqa: E402
 V2 = Namespace("https://w3id.org/mado/experimental/v2#")
 MADO = Namespace("https://w3id.org/mado#")
 MAX_CHOICES = 64
+MAX_COMBINATIONS_PER_PHASE = 4096
 ACCEPTED_EPISTEMIC = {"DESIGN_SYNTHESIS_NOT_EMPIRICAL", "PARTIAL_LEGACY"}
 
 
@@ -400,10 +401,17 @@ class Composer:
     def compose(self, context: dict[str, Any]) -> dict[str, Any]:
         checks = _Checks()
         result: dict[str, Any] = {
-            "status": "INSUFFICIENT", "context_id": context.get("id") if isinstance(context, dict) else None,
+            "status": "INSUFFICIENT", "proposal_status": "NONE",
+            "context_id": context.get("id") if isinstance(context, dict) else None,
             "choices": [], "alternatives": [], "pending_candidates": [], "exclusions": [],
+            "partial_segments": [], "partial_truncated": False,
+            "function_coverage": [], "missing_functions": [], "integration_gaps": [],
+            "facts_to_confirm": [], "resources_to_confirm": [], "unavailable_conditions": [],
+            "other_condition_diagnostics": [],
             "gaps": [], "input_issues": [], "required_functions": [], "truncated": False,
             "pending_truncated": False, "maximum_choices": MAX_CHOICES,
+            "search": {phase: {"examined": 0, "limit": MAX_COMBINATIONS_PER_PHASE, "truncated": False}
+                       for phase in ("complete", "partial")},
             "fingerprints": dict(self.fingerprints), "execution_evidence": checks.rows,
             "scope": "Propostas com uma capacidade por função, uma tarefa e transições registradas; sem interpretação de narrativa.",
         }
@@ -419,6 +427,7 @@ class Composer:
                    "O compositor não presume que o caso estruturado foi confirmado.")
         if not confirmed:
             result["status"] = "UNCONFIRMED"
+            result["proposal_status"] = "UNCONFIRMED"
             checks.add("composition", "context", "COMPOSITION", "NOT_EXECUTED", "contexto confirmado", None,
                        "Nenhuma capacidade ou relação foi autorizada antes da confirmação.")
             return result
@@ -485,10 +494,56 @@ class Composer:
             if not options:
                 result["gaps"].append({"code": "FUNCTION_NOT_COVERED", "function": str(function)})
             candidates.append(options)
+            available = [item["id"] for item in options if item["state"] == "PASS"]
+            conditional = [item["id"] for item in options if item["state"] == "PENDING"]
+            coverage = {"function": self._record(function), "available_capabilities": available,
+                        "conditional_capabilities": conditional,
+                        "state": "CAPABILITY_AVAILABLE" if available else "CONDITIONAL_CAPABILITY" if conditional else "NO_AVAILABLE_CAPABILITY",
+                        "limit": "Disponibilidade de uma capacidade não comprova encadeamento completo da tarefa."}
+            result["function_coverage"].append(coverage)
+            if not available:
+                result["missing_functions"].append(coverage)
         relation_rules = sorted(set(self.graph.subjects(RDF.type, V2.RelationRule)), key=str)
         relation_cache: dict[tuple[str, str], list[dict[str, Any]]] = {}
         result["relation_evaluations"] = []
+
+        def consume(phase: str) -> bool:
+            budget = result["search"][phase]
+            if budget["examined"] >= budget["limit"]:
+                budget["truncated"] = True
+                return False
+            budget["examined"] += 1
+            return True
+
+        def transition_options(left: dict, right: dict) -> list[dict[str, Any]]:
+            key = (left["id"], right["id"])
+            if key not in relation_cache:
+                matches = []
+                for rule in relation_rules:
+                    if (URIRef(left["function"]["id"]) not in self._values(rule, V2.fromFunction)
+                            or URIRef(right["function"]["id"]) not in self._values(rule, V2.toFunction)):
+                        continue
+                    relation = self._relation(rule, left, right, facts, checks)
+                    result["relation_evaluations"].append(relation)
+                    if relation["state"] == "FAIL":
+                        result["exclusions"].append({"kind": "relation", "id": relation["id"],
+                                                     "from_capability": left["id"], "to_capability": right["id"],
+                                                     "reason": "RELATION_NOT_AUTHORIZED", "check_ids": relation["check_ids"]})
+                    else:
+                        matches.append(relation)
+                if not matches:
+                    absence = checks.add("relation", "|".join(key), "AUTHORIZED_TRANSITION", "FAIL",
+                                         "relação tipada e fundamentada", [],
+                                         "Proximidade de funções ou presença de várias modalidades não autoriza uma combinação.")
+                    result["exclusions"].append({"kind": "transition", "from_capability": left["id"],
+                                                 "to_capability": right["id"], "reason": "NO_AUTHORIZED_RELATION",
+                                                 "check_ids": [absence["id"]]})
+                relation_cache[key] = matches
+            return relation_cache[key]
+
         for steps in itertools.product(*candidates):
+            if not consume("complete"):
+                break
             boundary_ok = steps[0]["input_type"] == str(task_input) and steps[-1]["output_type"] == str(task_output)
             boundary = checks.add("composition", "|".join(step["id"] for step in steps), "TASK_BOUNDARIES",
                                   "PASS" if boundary_ok else "FAIL",
@@ -499,33 +554,10 @@ class Composer:
                 result["exclusions"].append({"kind": "composition", "steps": [step["id"] for step in steps],
                                              "reason": "TASK_BOUNDARY_MISMATCH", "check_ids": [boundary["id"]]})
                 continue
-            transitions: list[list[dict[str, Any]]] = []
-            for left, right in zip(steps, steps[1:]):
-                key = (left["id"], right["id"])
-                if key not in relation_cache:
-                    matches = []
-                    for rule in relation_rules:
-                        if (URIRef(left["function"]["id"]) not in self._values(rule, V2.fromFunction)
-                                or URIRef(right["function"]["id"]) not in self._values(rule, V2.toFunction)):
-                            continue
-                        relation = self._relation(rule, left, right, facts, checks)
-                        result["relation_evaluations"].append(relation)
-                        if relation["state"] == "FAIL":
-                            result["exclusions"].append({"kind": "relation", "id": relation["id"],
-                                                         "from_capability": left["id"], "to_capability": right["id"],
-                                                         "reason": "RELATION_NOT_AUTHORIZED", "check_ids": relation["check_ids"]})
-                        else:
-                            matches.append(relation)
-                    if not matches:
-                        absence = checks.add("relation", "|".join(key), "AUTHORIZED_TRANSITION", "FAIL",
-                                             "relação tipada e fundamentada", [],
-                                             "Proximidade de funções ou presença de várias modalidades não autoriza uma combinação.")
-                        result["exclusions"].append({"kind": "transition", "from_capability": left["id"],
-                                                     "to_capability": right["id"], "reason": "NO_AUTHORIZED_RELATION",
-                                                     "check_ids": [absence["id"]]})
-                    relation_cache[key] = matches
-                transitions.append(relation_cache[key])
+            transitions = [transition_options(left, right) for left, right in zip(steps, steps[1:])]
             for relations in itertools.product(*transitions):
+                if not consume("complete"):
+                    break
                 state = _worst([step["state"] for step in steps] + [relation["state"] for relation in relations])
                 bucket = result["choices"] if state == "PASS" else result["pending_candidates"]
                 truncation = "truncated" if state == "PASS" else "pending_truncated"
@@ -534,17 +566,143 @@ class Composer:
                     continue
                 proposal = self._choice(steps, relations, context, state)
                 proposal["check_ids"].append(boundary["id"])
+                proposal["covers_all_required_functions"] = True
+                proposal["conditions_satisfied"] = state == "PASS"
                 bucket.append(proposal)
+            if result["search"]["complete"]["truncated"]:
+                break
+
+        # A segment never combines disconnected functions or satisfies the entire
+        # task. It records usable design work even when the final decision is held.
+        # Longest contiguous intervals first avoid showing redundant subsegments;
+        # this is display enumeration by coverage, not a quality/preference score.
+        if not result["choices"]:
+            supported = [[item for item in options if item["state"] == "PASS"] for options in candidates]
+            intervals = ((start, start + width) for width in range(len(functions) - 1, 0, -1)
+                         for start in range(len(functions) - width + 1))
+            for first, stop in intervals:
+                if result["search"]["partial"]["truncated"]:
+                    break
+                for steps in itertools.product(*supported[first:stop]):
+                    if not consume("partial"):
+                        break
+                    boundary_ok = ((first != 0 or steps[0]["input_type"] == str(task_input))
+                                   and (stop != len(functions) or steps[-1]["output_type"] == str(task_output)))
+                    boundary = checks.add("partial", "|".join(step["id"] for step in steps), "SEGMENT_BOUNDARIES",
+                                          "PASS" if boundary_ok else "FAIL",
+                                          {"task_input_if_initial": str(task_input), "task_output_if_final": str(task_output)},
+                                          {"first_function_index": first, "stop_function_index": stop,
+                                           "input": steps[0]["input_type"], "output": steps[-1]["output_type"]},
+                                          "Somente fronteiras da tarefa presentes neste segmento são conferidas; a entrada de um segmento interno não é presumida disponível.")
+                    if not boundary_ok:
+                        continue
+                    transitions = [[relation for relation in transition_options(left, right) if relation["state"] == "PASS"]
+                                   for left, right in zip(steps, steps[1:])]
+                    for relations in itertools.product(*transitions):
+                        if not consume("partial"):
+                            break
+                        ids = [step["id"] for step in steps]
+                        relation_ids = [relation["id"] for relation in relations]
+                        redundant = False
+                        for previous in result["partial_segments"]:
+                            offset = first - previous["first_function_index"]
+                            if (offset >= 0 and stop <= previous["stop_function_index"]
+                                    and [step["id"] for step in previous["steps"]][offset:offset + len(ids)] == ids
+                                    and [relation["id"] for relation in previous["relations"]][offset:offset + len(relation_ids)] == relation_ids):
+                                redundant = True
+                                break
+                        if redundant:
+                            continue
+                        if len(result["partial_segments"]) >= MAX_CHOICES:
+                            result["partial_truncated"] = True
+                            continue
+                        partial = self._choice(steps, relations, context, "PARTIAL")
+                        partial.update({
+                            "first_function_index": first, "stop_function_index": stop,
+                            "covers_all_required_functions": False, "conditions_satisfied": True,
+                            "ready_for_whole_task": False,
+                            "covered_functions": [self._record(function) for function in functions[first:stop]],
+                            "missing_functions": [self._record(function) for index, function in enumerate(functions)
+                                                  if not first <= index < stop],
+                            "entry": {"representation": steps[0]["input_type"],
+                                      "origin": "DECLARED_TASK_INPUT" if first == 0 else "PRIOR_FUNCTION_OUTPUT_REQUIRED",
+                                      "prior_function": str(functions[first - 1]) if first else None,
+                                      "availability_verified": False,
+                                      "can_execute_without_required_input": False},
+                            "output_representation": steps[-1]["output_type"],
+                            "remaining_after": [self._record(function) for function in functions[stop:]],
+                        })
+                        partial["check_ids"].append(boundary["id"])
+                        partial["limits"].append("Segmento apoiado, não orientação completa. Não implica conclusão, envio ou atendimento das funções que ficaram de fora.")
+                        if first:
+                            partial["limits"].append("Esta parte depende da saída de uma função anterior; a disponibilidade dessa entrada não foi comprovada.")
+                        result["partial_segments"].append(partial)
+                    if result["search"]["partial"]["truncated"]:
+                        break
+
+        question_routes: dict[str, list[dict[str, str]]] = {}
+        for pending in result["pending_candidates"]:
+            for entry in pending["steps"] + pending["relations"]:
+                question_routes.setdefault(entry["id"], []).append({
+                    "id": pending["id"], "kind": "CONDITIONAL_COMPLETE_CANDIDATE"})
+        if not result["choices"]:
+            for capability in result["capability_evaluations"]:
+                if capability["state"] == "PENDING" and capability["groundings"]:
+                    question_routes.setdefault(capability["id"], []).append({
+                        "id": capability["id"], "kind": "CONDITIONAL_CAPABILITY_NOT_COMPLETE_PLAN"})
+        conditions: dict[tuple[str, str], dict[str, Any]] = {}
+        for row in checks.rows:
+            if row["kind"] not in {"REQUIRES_requiresFact", "REQUIRES_requiresResource"}:
+                continue
+            observed = row["observed"]
+            if not observed["declared"] or observed["value"] is True:
+                continue
+            key = (row["kind"], observed["concept"])
+            entry = conditions.setdefault(key, {
+                **self._record(URIRef(observed["concept"])),
+                "kind": "fact" if row["kind"] == "REQUIRES_requiresFact" else "resource",
+                "value": observed["value"], "state": row["state"], "required_by": [], "check_ids": [],
+                "candidate_ids": [], "candidates": [], "question_required_by": [],
+            })
+            if row["subject"] not in entry["required_by"]:
+                entry["required_by"].append(row["subject"])
+            entry["check_ids"].append(row["id"])
+            if row["subject"] in question_routes:
+                if row["subject"] not in entry["question_required_by"]:
+                    entry["question_required_by"].append(row["subject"])
+                for candidate in question_routes[row["subject"]]:
+                    if candidate not in entry["candidates"]:
+                        entry["candidates"].append(candidate)
+                    if candidate["id"] not in entry["candidate_ids"]:
+                        entry["candidate_ids"].append(candidate["id"])
+        for key in sorted(conditions):
+            condition = conditions[key]
+            if condition["value"] is False:
+                result["unavailable_conditions"].append(condition)
+            elif condition["candidates"]:
+                target = "facts_to_confirm" if condition["kind"] == "fact" else "resources_to_confirm"
+                result[target].append(condition)
+            else:
+                condition["reason"] = "NO_CURRENTLY_VIABLE_CANDIDATE_DEPENDS_ON_THIS_CONFIRMATION"
+                result["other_condition_diagnostics"].append(condition)
+        result["integration_gaps"] = [item for item in result["exclusions"] if item["kind"] in {"relation", "transition", "composition"}]
         result["alternatives"] = result["choices"]
         if result["choices"]:
             result["status"] = "COMPOSED"
+            result["proposal_status"] = "COMPLETE"
         else:
+            result["proposal_status"] = ("CONDITIONAL" if result["pending_candidates"] else
+                                         "PARTIAL" if result["partial_segments"] else "NONE")
             result["gaps"].append({"code": "PENDING_CONDITIONS" if result["pending_candidates"] else "NO_COMPLETE_COMPOSITION",
                                    "explanation": "Nenhum plano parcial ou candidato pendente é apresentado como orientação pronta."})
+        if any(phase["truncated"] for phase in result["search"].values()):
+            result["gaps"].append({"code": "SEARCH_LIMIT_REACHED",
+                                   "explanation": "A busca foi limitada; ausência de uma composição não prova inexistência de outras combinações na base."})
         result["limits"] = [
             "Resultados são propostas de projeto, não garantia de acessibilidade ou melhores resultados educacionais.",
             "Fatos e disponibilidade são declarações confirmadas no contexto; não medições realizadas pelo programa.",
             "Conferência documental representa o estado registrado da contribuição; não nova leitura das fontes nesta execução.",
             "Não há interpretação de texto livre, comparação de preferências nem otimização entre as alternativas.",
+            "Etapas parciais não podem ser unidas pela interface para fingir uma composição que não foi verificada.",
         ]
         return result

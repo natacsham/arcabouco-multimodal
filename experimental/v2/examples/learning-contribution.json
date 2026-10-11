@@ -1,0 +1,34 @@
+{
+  "id": "SYN-NEW-PARTICIPATION-01",
+  "task": "TaskCreateReviewedText",
+  "confirmed": true,
+  "resources": {
+    "Keyboard": true,
+    "EditableText": true,
+    "TextToSpeech": true,
+    "AudioOutput": true,
+    "Display": false,
+    "Microphone": false,
+    "SpeechRecognition": false
+  },
+  "facts": {
+    "ContentAvailable": true,
+    "LearningCommunicationContext": true,
+    "CanUseKeyboard": true,
+    "KeyboardEffortAcceptable": true,
+    "KeyboardCompatible": true,
+    "KeyboardFeedbackPerceptible": true,
+    "CanUseSpeech": false,
+    "SpeechInputUsable": false,
+    "SpeechEffortAcceptable": false,
+    "SpeechCompatible": false,
+    "SpeechFeedbackPerceptible": false,
+    "CanReviewVisualText": false,
+    "CanReviewSpeech": true,
+    "AudioUsable": true,
+    "CanControlPlayback": true,
+    "CanCorrect": true,
+    "ControlsCompletion": true,
+    "CanVerifyMeaning": true
+  }
+}

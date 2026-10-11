@@ -6,3 +6,5 @@ V2-A4;Critério conhecimento e contribuição permanecem pareados;representacion
 V2-A5;Impedimento e informação ausente alteram autorização;operacional;test_11 test_12 e experiments;Condições são declaradas no contexto não medidas pelo programa
 V2-A6;Relação entre etapas exige funções e representação compatíveis;representacional_operacional;relations.rq e testes de transição;Não demonstra preservação semântica real nem complementaridade CARE
 V2-A7;O piloto não modifica o artefato publicado;preservacao;preserved_files_unchanged e branch isolada;Alterações anteriores de interface permanecem fora deste trabalho
+V2-A8;Registros reais da trajetória alimentam aplicações e condições operacionais explícitas;operacional;test_trajectory e trajectory-report.json;Síntese assistida proposta e subconjunto da base não migração integral
+V2-A9;Ausência de composição completa não descarta automaticamente etapas sustentadas;operacional;testes de proposal_status e partial_segments;Segmentos não equivalem a atendimento integral nem podem ser reunidos sem verificar a ligação

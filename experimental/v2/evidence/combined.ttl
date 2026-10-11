@@ -239,6 +239,7 @@
 <https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#CanControlPlayback> .
 <https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#CanCorrect> .
 <https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#CanReviewSpeech> .
+<https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#ContentAvailable> .
 <https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#ControlsCompletion> .
 <https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresResource> <https://w3id.org/mado/experimental/v2#AudioOutput> .
 <https://w3id.org/mado/experimental/v2#ReviewSpeech> <https://w3id.org/mado/experimental/v2#requiresResource> <https://w3id.org/mado/experimental/v2#EditableText> .
@@ -253,6 +254,7 @@
 <https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#provides> <https://w3id.org/mado/experimental/v2#Review> .
 <https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#CanCorrect> .
 <https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#CanReviewVisualText> .
+<https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#ContentAvailable> .
 <https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#requiresFact> <https://w3id.org/mado/experimental/v2#ControlsCompletion> .
 <https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#requiresResource> <https://w3id.org/mado/experimental/v2#Display> .
 <https://w3id.org/mado/experimental/v2#ReviewText> <https://w3id.org/mado/experimental/v2#requiresResource> <https://w3id.org/mado/experimental/v2#EditableText> .
@@ -385,5 +387,5 @@
 <https://w3id.org/mado/experimental/v2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
 <https://w3id.org/mado/experimental/v2> <http://www.w3.org/2000/01/rdf-schema#comment> "Extensão experimental isolada. Não substitui a MADO 1.4 nem representa uma versão validada com participantes. Namespace proposto; não pressupõe registro de resolução pública."@pt .
 <https://w3id.org/mado/experimental/v2> <http://www.w3.org/2000/01/rdf-schema#label> "MADO V2 — piloto de composição fundamentada"@pt .
-<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/mado/experimental/2.0.0-alpha1> .
-<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionInfo> "2.0.0-alpha1" .
+<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/mado/experimental/2.0.0-alpha2> .
+<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionInfo> "2.0.0-alpha2" .

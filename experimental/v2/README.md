@@ -1,6 +1,8 @@
 # MADO V2 — composição fundamentada de formas de interação
 
-**Versão experimental `2.0.0-alpha1`.** Este diretório implementa um primeiro piloto da evolução da MADO. O site, o motor público, a base anterior e a versão da tese não são substituídos. Origem preservada: commit `73013190f26cf8806e7f647dbb3fa36a8c07a3c3`.
+**Versão experimental `2.0.0-alpha2`.** Este diretório implementa uma evolução isolada da MADO. O site, o motor público, a base anterior e a versão da tese não são substituídos. Origem preservada: commit `73013190f26cf8806e7f647dbb3fa36a8c07a3c3`. O primeiro piloto (`alpha1`) permanece no histórico.
+
+A `alpha2` acrescenta uma ponte com **os registros reais da pesquisa** e separa proposta completa, condicional e parcial. [Veja o que cada conhecimento acrescenta e onde está a base consultada](docs/reutilizacao-da-trajetoria.md).
 
 ## O que mudou
 
@@ -11,6 +13,7 @@ Em vez de selecionar somente configurações completas previamente redigidas, es
 3. Exige condições funcionais e recursos confirmados, além de fundamentação exata.
 4. Liga etapas somente quando existe relação documentada e o conteúdo produzido por uma é aceito pela seguinte.
 5. Apresenta as combinações admissíveis com as verificações, contribuições documentais e limites.
+6. Quando não há percurso completo, identifica as condições a confirmar e as etapas sustentadas que ainda podem ser aproveitadas, sem apresentá-las como solução integral.
 
 Não há lista de pares completos como “teclado + leitura em voz” no motor ou na base. Esse percurso resulta da composição. Existem, entretanto, operações unitárias, condições, tipos de conteúdo e uma regra de sequência previamente modelados. O sistema não inventa capacidades nem interpreta automaticamente uma nova diretriz.
 
@@ -50,11 +53,17 @@ python -B experimental/v2/cli.py --context experimental/v2/examples/speech-visua
 python -B experimental/v2/cli.py --context experimental/v2/examples/keyboard-audio.json
 python -B experimental/v2/cli.py --context experimental/v2/examples/keyboard-audio.json --extension experimental/v2/extensions/audio-review.ttl
 python -B experimental/v2/verify.py
+python -B experimental/v2/cli.py --trajectory --context experimental/v2/examples/learning-contribution.json
+python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
 ```
 
 O CLI lê JSON estruturado e emite JSON no terminal. Não salva contexto ou histórico. Também aceita `--context -` para receber o objeto pela entrada padrão. Os exemplos são sintéticos; os identificadores não são consultados para escolher capacidades. Texto livre, diagnósticos e campos desconhecidos não são interpretados silenciosamente.
 
 Disponibilidade e condições usam `true`, `false` ou `null`. Ausência e `null` significam **pendência**, não aprovação. `COMPOSED` significa proposta completa segundo as condições registradas, não execução da atividade nem resultado observado. `INSUFFICIENT` significa ausência de proposta completa; `UNCONFIRMED`, que falta confirmação do contexto. Alternativas não recebem ranking de qualidade.
+
+O campo `proposal_status` detalha esse resultado: `COMPLETE`, `CONDITIONAL`, `PARTIAL`, `NONE` ou `UNCONFIRMED`. Portanto, `INSUFFICIENT` não significa que todo o conhecimento foi descartado. `partial_segments` conserva trechos contíguos do percurso com apoio verificado; sua entrada pode depender de uma etapa anterior ainda não coberta. Não se deve juntar esses segmentos na interface como se uma composição completa tivesse sido verificada.
+
+Use `--trajectory` no CLI para carregar a ponte da trajetória em vez do piloto genérico. Esse modo lê `data/knowledge-base.json` e os vínculos específicos de `trajectory-bindings.json`; não interpreta publicações ou uma narrativa em texto livre durante a execução. Condições adicionais derivadas de K41 são obrigatórias e ficam pendentes quando não informadas.
 
 ## Conferir o raciocínio
 
@@ -77,6 +86,9 @@ Os estados das verificações são `PASS`, `FAIL`, `PENDING` e `NOT_EXECUTED`. C
 | `extensions/audio-review.ttl` | Incremento documental comparado no experimento |
 | `shapes.ttl` | Integridade e pareamento dos registros |
 | `composer.py` | Composição determinística; não interpreta fontes ou narrativa |
+| `trajectory.py` | Projeção da parcela utilizada da base real, com hashes, origem e condições preservadas |
+| `trajectory-bindings.json` | Aplicações analíticas propostas para operacionalizar registros da trajetória |
+| `verify_trajectory.py` | Execuções sintéticas e verificação da ponte com a base |
 | `queries/` | Consultas de fundamentação exata e relações funcionais |
 | `tests/test_composition.py` | Testes sintéticos, positivos e adversos |
 | `project/competency-questions.csv` | Oito questões específicas do piloto e respectivos limites |
@@ -94,14 +106,14 @@ As contribuições são paráfrases acompanhadas de fontes e localizações; PDF
 
 `CURATED_FOR_PILOT` significa habilitação técnica nesta proposta de modelagem assistida, **não aprovação semântica pela autora ou especialista**. Os conhecimentos são sínteses de projeto (`DESIGN_SYNTHESIS_NOT_EMPIRICAL`), não resultados empíricos. A autora ainda deve conferir a síntese, suas condições e sua adequação à trajetória da tese.
 
-Os critérios analíticos deste piloto são identificados separadamente; não foram renomeados como CA01–CA88. K41/K44 aparecem como antecedentes parciais, sem modificar os registros originais. A integração ampla à base e à interface exigirá revisão semântica e regressão próprias.
+No piloto genérico, os critérios analíticos são identificados separadamente; não foram renomeados como CA01–CA88. A ponte da trajetória mantém os identificadores reais que emprega, como CA38, e explicita as novas aplicações como propostas. K28/K29 continuam candidatos reconstruídos e K41 permanece documentalmente parcial. A integração ampla à base e à interface exigirá revisão semântica e regressão próprias.
 
 ## Limites que permanecem
 
 - A tarefa e as condições são estruturadas e confirmadas previamente; não há interpretação de narrativa.
 - A composição depende de funções, capacidades e relações representadas. Uma referência bibliográfica nova, sozinha, não muda uma decisão.
 - O recorte usa uma capacidade por função, sequência linear e até 64 propostas retornadas, com aviso quando esse limite é atingido.
-- Esse limite controla o tamanho da saída, não todo o custo da busca. O piloto não foi dimensionado para grandes catálogos combinatórios.
+- A busca também limita a enumeração a 4.096 tentativas por fase e registra interrupção. Esse controle não demonstra escalabilidade para grandes catálogos; se o limite for atingido, ausência de resultado não comprova inexistência de outra combinação.
 - A matriz de alternativas não foi avaliada com participantes, leitor de tela ou tarefa real.
 - Nenhuma alegação de melhoria da aprendizagem, acessibilidade universal ou escolha ótima é feita.
 - Esta V2 não está conectada à página pública. A página continua usando sua versão preservada.

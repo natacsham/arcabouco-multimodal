@@ -1,0 +1,93 @@
+{
+  "version": "trajectory-pilot-1",
+  "status": "PROPOSED_OPERATIONALIZATION",
+  "interpretation": "Operacionalização analítica assistida da trajetória; não descoberta pelo programa nem nova conferência dos artigos originais.",
+  "records": {
+    "knowledge": {
+      "K28": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
+      "K29": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2",
+      "K41": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470"
+    },
+    "sources": {
+      "F01": "50992e6ea62bcba5586433c7cee3ba237542c9fdfb69b13e36925f68c131951c",
+      "F05": "82216e257b08b59ebe65b47c5b370990b7f14916c138d48004a4893e4f822198",
+      "F08": "2d399ade0cc747e7ba4606588a0c0a4f2a6dc68aa324eb8653191d6c1a2cb559",
+      "FN-WCAG": "e9c21484a88d83ac42f269c9bab08b63d3c37f351b32cc48dc0e137311ba0eae"
+    },
+    "excerpts": {
+      "TD-RC3-REF-04": "dc66d4a548bdfd40565770dc4c84a27390e10319da643855a74ae55f58f667a2",
+      "TD-RC3-REF-07": "ef97d03fa610dd3d80b720b8958fe509b64e89c45b499e2653b8b713b4978580",
+      "TD-EV29": "75d14a67ef1c0a160197d646b89d6446a0bd81bd586614c9628f1088357b8d43",
+      "TD-EV30": "9c4198506959705853efee82978bc9205e5545ac3716666917bc330e7d5cf59d",
+      "TD-ORI-0238": "81b15de4d2e08915f169484cd495bfd4bcbf36be292777f5b631891ec5d34b4a"
+    },
+    "contributions": {
+      "C-K41-01": "bd5f1440af90b37ae9e2dce72add8d7f1789ac69245b6c10299fbf8461a9366a",
+      "C-K41-02": "d0dbe54da713571944cdeb9df0916714db44d5e600d45fd2fadbef808d0e2a4f"
+    },
+    "criteria": {"CA38": "404e90232edaa58d020cf9e7cf42f11fdd3820fc83263160dcfb2c9002da31d2"},
+    "criterion_origins": {"ORI-0238": "8c911b546cfa56ce957061bcbd252803d1ed38133f1504217318949e64724c07"}
+  },
+  "facts": {
+    "LearningCommunicationContext": {"label": "A contribuição integra uma atividade de comunicação em contexto de aprendizagem", "knowledge_ids": ["K28", "K29"]},
+    "KeyboardEffortAcceptable": {"label": "O esforço e o desempenho da entrada por teclado são aceitáveis nesta tarefa", "knowledge_ids": ["K41"]},
+    "KeyboardCompatible": {"label": "A interface de teclado é compatível com o dispositivo e o sistema usados", "knowledge_ids": ["K41"]},
+    "KeyboardFeedbackPerceptible": {"label": "A pessoa percebe o resultado da entrada por teclado", "knowledge_ids": ["K41"]},
+    "SpeechEffortAcceptable": {"label": "O esforço e o desempenho da entrada por fala são aceitáveis nesta tarefa", "knowledge_ids": ["K41"]},
+    "SpeechCompatible": {"label": "A entrada por fala é compatível com o dispositivo e o sistema usados", "knowledge_ids": ["K41"]},
+    "SpeechFeedbackPerceptible": {"label": "A pessoa percebe o resultado do reconhecimento de fala", "knowledge_ids": ["K41"]},
+    "CanVerifyMeaning": {"label": "A pessoa pode conferir o significado relevante do rascunho pela apresentação escolhida", "knowledge_ids": ["K28", "K29"]}
+  },
+  "applications": [
+    {
+      "id": "TrajectoryGroundKeyboard", "kind": "capability", "target": "CaptureKeyboard", "status": "PROPOSED_OPERATIONALIZATION",
+      "label": "Aplicação situada de viabilidade à entrada por teclado", "knowledge_ids": ["K41"],
+      "legacy_supports": [{"knowledge_id": "K41", "contribution_id": "C-K41-01", "excerpt_id": "TD-RC3-REF-04"}, {"knowledge_id": "K41", "contribution_id": "C-K41-02", "excerpt_id": "TD-RC3-REF-07"}],
+      "primary_contribution_ids": ["CInputKeyboard", "CInputCARE"], "criterion": "CA38", "criterion_origin": "ORI-0238",
+      "requires_facts": ["LearningCommunicationContext", "KeyboardEffortAcceptable", "KeyboardCompatible", "KeyboardFeedbackPerceptible"],
+      "operation": "Operacionalizar a viabilidade situada registrada em K41 para a entrada por teclado; relacionar a exigência de operação ao requisito primário de interface de teclado e à distinção entre equivalência funcional e uso individual.",
+      "understanding": "A disponibilidade do teclado não basta: esforço, compatibilidade e percepção do resultado precisam ser confirmados para esta entrada. A restrição é proposta para o piloto, sem promover os registros de K41 a leitura do original.",
+      "justification": "CA38 fundamenta a rota de teclado; K41 fornece condições situadas de sua admissibilidade. Não fundamenta voz, revisão ou envio da contribuição."
+    },
+    {
+      "id": "TrajectoryGroundSpeech", "kind": "capability", "target": "CaptureSpeech", "status": "PROPOSED_OPERATIONALIZATION",
+      "label": "Aplicação situada de entrada por fala", "knowledge_ids": ["K41", "K29"],
+      "legacy_supports": [{"knowledge_id": "K41", "contribution_id": "C-K41-01", "excerpt_id": "TD-RC3-REF-04"}, {"knowledge_id": "K41", "contribution_id": "C-K41-02", "excerpt_id": "TD-RC3-REF-07"}, {"knowledge_id": "K29", "excerpt_id": "TD-EV30", "statement_field": "rastreabilidade"}],
+      "primary_contribution_ids": ["CInputCARE", "CReviewMMI"], "criterion": "CriterionInput",
+      "requires_facts": ["LearningCommunicationContext", "SpeechEffortAcceptable", "SpeechCompatible", "SpeechFeedbackPerceptible"],
+      "operation": "Relacionar o antecedente candidato de entrada e percepção multiformato de K29 à viabilidade situada de K41 e à separação entre entrada e saída nos requisitos MMI.",
+      "understanding": "A fala pode oferecer outra rota para produzir o rascunho apenas sob condições próprias de operação e reconhecimento. Não se deduz sua adequação de diagnóstico nem da mera presença de microfone.",
+      "justification": "O critério de entrada do piloto sustenta a mesma função de captura; K29 delimita o antecedente de comunicação e K41 impõe checagens para a forma de entrada."
+    },
+    {
+      "id": "TrajectoryGroundTextReview", "kind": "capability", "target": "ReviewText", "status": "PROPOSED_OPERATIONALIZATION",
+      "label": "Aplicação da coordenação operacional à revisão visual", "knowledge_ids": ["K28"],
+      "legacy_supports": [{"knowledge_id": "K28", "excerpt_id": "TD-EV29", "statement_field": "rastreabilidade"}, {"knowledge_id": "K28", "excerpt_id": "TD-EV30", "statement_field": "rastreabilidade"}],
+      "primary_contribution_ids": ["CReviewWCAG", "CReviewMMI"], "criterion": "CriterionReview",
+      "requires_facts": ["LearningCommunicationContext", "CanVerifyMeaning"],
+      "operation": "Desdobrar o antecedente candidato K28 em uma etapa delimitada de revisão, em conjunto com a opção de prevenção de erros da WCAG e a independência entre entrada e apresentação.",
+      "understanding": "Produzir o rascunho e apresentá-lo não conclui a tarefa: é necessária uma apresentação que a pessoa possa conferir e um mecanismo de correção. Não se afirma que envio ou confirmação final já ocorreram.",
+      "justification": "CriterionReview escolhe uma alternativa de projeto AAA; K28 motiva a coordenação da revisão com a produção, permanecendo candidato a revisão documental."
+    },
+    {
+      "id": "TrajectoryGroundAudioReview", "kind": "capability", "target": "ReviewSpeech", "status": "PROPOSED_OPERATIONALIZATION",
+      "label": "Aplicação de apresentação alternativa à revisão pela fala sintetizada", "knowledge_ids": ["K29", "K28"],
+      "legacy_supports": [{"knowledge_id": "K29", "excerpt_id": "TD-EV30", "statement_field": "rastreabilidade"}, {"knowledge_id": "K28", "excerpt_id": "TD-EV29", "statement_field": "rastreabilidade"}],
+      "primary_contribution_ids": ["CAudioMMI", "CAudioReview"], "criterion": "CriterionReview",
+      "requires_facts": ["LearningCommunicationContext", "CanVerifyMeaning"],
+      "operation": "Relacionar os antecedentes candidatos de apresentação multiformato e coordenação operacional à descrição primária de TTS e à opção de revisão antes da conclusão.",
+      "understanding": "Uma revisão não precisa ser visual quando outra apresentação do mesmo rascunho permite conferir o significado e controlar a correção. Isso é proposta analítica assistida, não prova de compreensão ou equivalência para a pessoa.",
+      "justification": "A escolha usa K29 para a abertura de apresentação e K28 para sua função coordenada no fluxo; só é autorizada como proposta se escuta, controles, correção e conferência do significado forem declarados."
+    },
+    {
+      "id": "ProductionThenReview", "kind": "relation", "target": "ProductionThenReview", "status": "PROPOSED_OPERATIONALIZATION",
+      "label": "Articulação situada entre produção e revisão da contribuição", "knowledge_ids": ["K28", "K29"],
+      "legacy_supports": [{"knowledge_id": "K28", "excerpt_id": "TD-EV29", "statement_field": "rastreabilidade"}, {"knowledge_id": "K29", "excerpt_id": "TD-EV30", "statement_field": "rastreabilidade"}],
+      "primary_contribution_ids": ["CReviewMMI", "CReviewWCAG"], "criterion": "CriterionReview",
+      "requires_facts": ["LearningCommunicationContext", "CanVerifyMeaning"],
+      "operation": "Relacionar coordenação de etapas de K28 e alternativas de entrada/percepção de K29 para uma sequência sobre o mesmo rascunho, sob condições do piloto.",
+      "understanding": "A entrada deve deixar informação conferível para a etapa seguinte. Trocar o modo de apresentação não dispensa acesso ao conteúdo nem correção; sequência não é classificada automaticamente como complementaridade CARE.",
+      "justification": "A relação emprega os antecedentes do estudo de comunicação sem copiar sua interface e sem afirmar acesso individual validado."
+    }
+  ]
+}

@@ -18,6 +18,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--context", required=True, help="Arquivo JSON confirmado, ou - para ler de stdin.")
     parser.add_argument("--extension", action="append", default=[], type=Path,
                         help="Arquivo Turtle local adicional; pode ser repetido. Não modifica a base.")
+    parser.add_argument("--trajectory", action="store_true",
+                        help="Usar a ponte conferível com os registros da base real da trajetória.")
     args = parser.parse_args(argv)
     folder = Path(__file__).resolve().parent
     try:
@@ -25,7 +27,16 @@ def main(argv: list[str] | None = None) -> int:
             context = json.load(sys.stdin)
         else:
             context = json.loads(Path(args.context).read_text(encoding="utf-8-sig"))
-        composer = Composer([folder / "schema.ttl", folder / "base.ttl", *args.extension])
+        if args.trajectory:
+            if args.extension:
+                raise ValueError("--trajectory já define os fundamentos e não aceita extensões arbitrárias.")
+            try:
+                from .trajectory import ResearchComposer
+            except ImportError:
+                from trajectory import ResearchComposer
+            composer = ResearchComposer()
+        else:
+            composer = Composer([folder / "schema.ttl", folder / "base.ttl", *args.extension])
         result = composer.compose(context)
         # ASCII escaping keeps output portable on Windows terminals; JSON readers
         # recover the original Portuguese characters. No local case file is made.
