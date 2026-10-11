@@ -219,6 +219,73 @@ class PublicationGateTests(unittest.TestCase):
         self.report["completed"] = False
         self.assertFalse(gate.parity_components(self.parity(), self.report, self.manifest)["passed"])
 
+    def public_smoke(self):
+        self.write("tests/public-smoke.mjs", "// synthetic exact public test")
+        self.write("web/amado/manifest.json", json.dumps(self.manifest))
+        expected = {"amado/" + name: digest for name, digest in self.manifest["frontend_sha256"].items()}
+        expected.update(self.manifest["site_assets_sha256"])
+        expected.update({"amado/runtime/" + name: item["sha256"] for name, item in self.manifest["runtime"].items()})
+        expected.update({"amado/engine.py": self.manifest["core_sha256"],
+                         "amado/bridge.py": self.manifest["bridge_sha256"],
+                         "amado/assets/base.zip": self.manifest["base_zip_sha256"]})
+        return {"type": "SYNTHETIC_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
+                "completed": True, "passed": True, "checks": {"synthetic": True},
+                "errors": [], "external_requests": [], "version": self.manifest["version"],
+                "expected_commit": "a" * 40, "checked_at": "2026-10-11T00:00:00Z",
+                "test_sha256": gate.sha("tests/public-smoke.mjs"),
+                "public_manifest_sha256": gate.sha("web/amado/manifest.json"),
+                "assets": {name: {"passed": True, "expected_sha256": digest, "served_sha256": digest}
+                           for name, digest in expected.items()}}
+
+    def test_public_smoke_preserves_actual_execution_commit_and_limited_scope(self):
+        report = self.public_smoke()
+        original = copy.deepcopy(report)
+        result = gate.current_public_smoke(report, self.manifest)
+        self.assertTrue(result["passed"], result["checks"])
+        self.assertEqual(result["evidence_use"], "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE")
+        self.assertEqual(result["expected_commit"], "a" * 40)
+        self.assertEqual(result["check_count"], 1)
+        self.assertIn("não equivale aos 118", result["scope"])
+        self.assertEqual(report, original)
+
+    def test_public_smoke_changed_base_manifest_test_or_consumed_asset_fails(self):
+        report = self.public_smoke()
+        for name in ("data/knowledge-base.json", "web/amado/manifest.json", "tests/public-smoke.mjs",
+                     "web/amado/assets/base.zip", "web/amado/engine.py", "web/amado/bridge.py",
+                     "web/amado/index.html", "web/amado/guiado.html", "web/amado/intake.mjs",
+                     "web/amado/client.mjs", "web/source-path.js"):
+            with self.subTest(name=name):
+                original = (self.root / name).read_bytes()
+                self.write(name, "changed after public execution")
+                self.assertFalse(gate.current_public_smoke(report, self.manifest)["passed"])
+                (self.root / name).write_bytes(original)
+
+    def test_public_smoke_errors_empty_or_failed_checks_cannot_approve(self):
+        report = self.public_smoke()
+        for key, value in (("errors", ["page failed"]), ("completed", False), ("passed", False),
+                           ("checks", {}), ("checks", {"failed": False}), ("checks", {"truthy": "true"}),
+                           ("external_requests", ["https://external.example/"]),
+                           ("test_sha256", "0" * 64), ("public_manifest_sha256", "0" * 64)):
+            with self.subTest(key=key, value=value):
+                broken = copy.deepcopy(report)
+                broken[key] = value
+                self.assertFalse(gate.current_public_smoke(broken, self.manifest)["passed"])
+
+    def test_public_smoke_missing_mismatched_or_unsafe_asset_cannot_approve(self):
+        report = self.public_smoke()
+        for mode in ("missing", "served_changed", "failed", "unsafe"):
+            with self.subTest(mode=mode):
+                broken = copy.deepcopy(report)
+                if mode == "missing":
+                    broken["assets"].pop("amado/intake.mjs")
+                elif mode == "served_changed":
+                    broken["assets"]["amado/assets/base.zip"]["served_sha256"] = "0" * 64
+                elif mode == "failed":
+                    broken["assets"]["amado/bridge.py"]["passed"] = False
+                else:
+                    broken["assets"]["../engine.py"] = broken["assets"]["amado/engine.py"]
+                self.assertFalse(gate.current_public_smoke(broken, self.manifest)["passed"])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

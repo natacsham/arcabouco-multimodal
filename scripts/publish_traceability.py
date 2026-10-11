@@ -184,6 +184,57 @@ def parity_components(report, browser, manifest):
                        + "O relatório originário não selou o hash de decisions.json; este vínculo é qualificado, não uma assinatura criptográfica histórica nem uma nova execução de navegador.")}
 
 
+def current_public_smoke(report, manifest):
+    """Verify the bounded public smoke, not the full local browser regression.
+
+    Preserve the deployment commit and execution time recorded by the test.
+    Serving identity is established by the manifest/assets, not current HEAD.
+    """
+    expected = {"amado/" + name: digest for name, digest in manifest.get("frontend_sha256", {}).items()}
+    expected.update(manifest.get("site_assets_sha256", {}))
+    expected.update({"amado/runtime/" + name: item["sha256"]
+                     for name, item in manifest.get("runtime", {}).items()})
+    expected.update({"amado/engine.py": manifest.get("core_sha256"),
+                     "amado/bridge.py": manifest.get("bridge_sha256"),
+                     "amado/assets/base.zip": manifest.get("base_zip_sha256")})
+    assets = report.get("assets") or {}
+    test_checks = report.get("checks") or {}
+    safe_paths = all(isinstance(name, str) and not name.startswith("/")
+                     and "\\" not in name and ":" not in name
+                     and ".." not in name.split("/") for name in assets)
+    checks = {
+        "recognized_smoke": report.get("type") == "SYNTHETIC_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
+        "completed_and_passed": report.get("completed") is True and report.get("passed") is True,
+        "nonempty_successful_checks": bool(test_checks) and all(value is True for value in test_checks.values()),
+        "no_errors": report.get("errors") == [] and report.get("external_requests") == [],
+        "exact_test": _matches("tests/public-smoke.mjs", report.get("test_sha256")),
+        "exact_manifest": _matches("web/amado/manifest.json", report.get("public_manifest_sha256")),
+        "version": report.get("version") == manifest.get("version"),
+        "deployment_commit_recorded": bool(re.fullmatch(r"[a-f0-9]{40}", report.get("expected_commit") or "")),
+        "all_consumed_assets_recorded": bool(manifest.get("frontend_sha256"))
+            and bool(manifest.get("site_assets_sha256")) and bool(manifest.get("runtime"))
+            and {"amado/index.html", "amado/guiado.html", "amado/client.mjs", "amado/worker.mjs",
+                 "amado/simple-flow.js", "amado/intake.mjs"} <= set(expected)
+            and set(assets) == set(expected),
+        "current_asset_bytes": safe_paths and bool(assets) and all(
+            isinstance(item, dict) and item.get("passed") is True
+            and item.get("expected_sha256") == item.get("served_sha256") == expected.get(name)
+            and _matches("web/" + name, item.get("served_sha256"))
+            for name, item in assets.items()),
+        "current_base_inputs": bool(manifest.get("files")) and all(
+            _matches(name, digest) for name, digest in manifest.get("files", {}).items()),
+        "current_native_engine": _matches("engine.py", manifest.get("core_sha256")),
+    }
+    return {"passed": all(checks.values()), "checks": checks,
+            "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE" if all(checks.values()) else "NOT_VERIFIED_CURRENT_BUILD",
+            "checked_at": report.get("checked_at"), "expected_commit": report.get("expected_commit"),
+            "commit_observation": report.get("commit_observation"),
+            "test_sha256": report.get("test_sha256"), "public_manifest_sha256": report.get("public_manifest_sha256"),
+            "check_count": len(test_checks), "asset_count": len(assets),
+            "scope": "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana.",
+            "limits": report.get("limits", [])}
+
+
 def current_presentation(report, manifest):
     return (report.get("completed") is True and report.get("passed") is True
             and not report.get("errors") and bool(report.get("checks"))
@@ -280,8 +331,20 @@ def main():
         summary["reports"][name] = {"url": name, "sha256": sha("evidence/" + name),
                                     **({"evidence_use": reused[name]["evidence_use"]} if name in reused else
                                        {"evidence_use": "CURRENT_PRESENTATION_EXECUTION"} if name == "simple-flow-browser.json" else {})}
-    smoke_path = ROOT / "evidence/simple-flow-public.json"
+    smoke_path = ROOT / "evidence/public-smoke.json"
+    full_public_path = ROOT / "evidence/simple-flow-public.json"
     if smoke_path.exists():
+        smoke = read("evidence/public-smoke.json")
+        verification = current_public_smoke(smoke, manifest)
+        summary["public_smoke_status"] = verification["evidence_use"]
+        summary["results"]["public_smoke"] = verification
+        if verification["passed"]:
+            (target / smoke_path.name).write_bytes(smoke_path.read_bytes())
+            summary["reports"][smoke_path.name] = {
+                "url": smoke_path.name, "sha256": sha("evidence/" + smoke_path.name),
+                "evidence_use": verification["evidence_use"], "expected_commit": smoke["expected_commit"]}
+    elif full_public_path.exists():
+        smoke_path = full_public_path
         smoke = read("evidence/simple-flow-public.json")
         verified = current_presentation(smoke, manifest)
         summary["public_smoke_status"] = "VERIFIED_CURRENT_BUILD" if verified else "NOT_VERIFIED_CURRENT_BUILD"

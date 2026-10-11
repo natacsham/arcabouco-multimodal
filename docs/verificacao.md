@@ -61,6 +61,12 @@ Examine SHACL e consultas separadamente: um reasoner opera sob semântica OWL e 
 
 Guarde versão, hash, ferramenta, entrada e resultado ao reproduzir uma execução. Sem esses elementos, resultados de versões diferentes podem ser confundidos.
 
+## Conferência da publicação RC2 — 11/10/2026
+
+`evidence/public-smoke.json` registra a execução sintética real no endereço público da revisão `b560fa6`: 25 verificações aprovadas e 37 arquivos servidos com hashes correspondentes. `tests/public-smoke.mjs` reproduz esse procedimento. Nas duas apresentações, a narrativa de Matemática, após respostas explícitas e confirmação, preservou os grupos de dois estudantes surdos e um estudante cego e produziu `GERADA_PARCIAL`, com `PAD-CONTEUDO-WEB-EQUIVALENTE`, K10, K42 e ART-REF-03. Os registros K10/K42 foram conferidos na fundamentação da própria escolha, não apenas no catálogo.
+
+Essa conferência percorre um fluxo por apresentação; não substitui a regressão local de 118 verificações, não é uma sessão humana e não demonstra ensino da notação matemática, cobertura integral dos participantes ou efeito na aprendizagem. Microfone, leitores de tela e conformidade integral WCAG não foram avaliados nesse smoke. A revisão efetivamente testada permanece registrada mesmo quando um commit posterior acrescenta o relatório, sem modificar o produto.
+
 ## Histórico da apresentação 1.3 — 07/10/2026
 
 As medições e relatórios abaixo pertencem à origem preservada; não são testes desta versão. O índice atual acima separa a nova evidência.

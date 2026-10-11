@@ -2,7 +2,7 @@
   "version": "1.4.0-rc2",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-11T07:40:00.063093+00:00",
+  "compiled_at_utc": "2026-10-11T07:53:39.410734+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -613,6 +613,40 @@
       "browser_evidence_use": "CURRENT_BUILD_EXECUTION",
       "scope": "A entrada comum usa o compositor por funções para escrita com revisão e revisão de texto. Acesso a conteúdo e demais tarefas seguem o motor existente, conforme sua cobertura; não se afirma composição completa para todas as tarefas.",
       "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"
+    },
+    "public_smoke": {
+      "passed": true,
+      "checks": {
+        "recognized_smoke": true,
+        "completed_and_passed": true,
+        "nonempty_successful_checks": true,
+        "no_errors": true,
+        "exact_test": true,
+        "exact_manifest": true,
+        "version": true,
+        "deployment_commit_recorded": true,
+        "all_consumed_assets_recorded": true,
+        "current_asset_bytes": true,
+        "current_base_inputs": true,
+        "current_native_engine": true
+      },
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "checked_at": "2026-10-11T07:46:09.257Z",
+      "expected_commit": "b560fa6f994b56028bfaa1f919a344b5b83aa5c5",
+      "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
+      "test_sha256": "2e256ecbc738db596b3a1659fa6a2d7dd1bdcf6008c1f5d3450031a4f1c8c9dc",
+      "public_manifest_sha256": "641c32fb43f6b02fde661a0c5d7854550a452bba89f5882ef669aec2c4e3e378",
+      "check_count": 25,
+      "asset_count": 37,
+      "scope": "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana.",
+      "limits": [
+        "Synthetic explicit follow-up answers; not an expert session or learning evaluation.",
+        "The mathematics topic is contextual. The confirmed operational task is accessible digital-content access, not a complete mathematics-teaching method.",
+        "GERADA_PARCIAL does not establish coverage of every participant or guarantee educational benefit.",
+        "Microphone accuracy, screen readers, comprehension with users and full WCAG conformance were not tested in this public smoke.",
+        "Negative resource phrases in narrative are not treated as verified parser support; the local variant tested unconfirmed reader availability and operation.",
+        "This smoke verifies one flow in each presentation, not the full 118-check local regression."
+      ]
     }
   },
   "limits": [
@@ -648,7 +682,7 @@
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "e4f867246a4a332fbb5b49891b614ff5add7a53523161dea9d67362ef9d94d82"
+      "sha256": "d4410b8543279b8f8dea81a20f27e86b18ae4eb8780c5762d2726b16654f89f4"
     },
     "build-manifest.json": {
       "url": "build-manifest.json",
@@ -667,8 +701,14 @@
     "source-catalog-browser.json": {
       "url": "source-catalog-browser.json",
       "sha256": "61829d1f38dabbdb626409aad7790cdd9b7e2c28582a702fc8be13f32d7f2ecf"
+    },
+    "public-smoke.json": {
+      "url": "public-smoke.json",
+      "sha256": "2cc81e89edaebf7b1aa8beee3fb6590ddedebe082cb7e46a86dc7d9b06676296",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "expected_commit": "b560fa6f994b56028bfaa1f919a344b5b83aa5c5"
     }
   },
   "historical_evidence_notice": "Os relatórios identificam individualmente execução atual ou reúso de componentes idênticos. A apresentação simplificada possui seu próprio relatório. Evidências antigas não aprovam bytes diferentes.",
-  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE"
 }

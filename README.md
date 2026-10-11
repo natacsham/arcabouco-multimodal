@@ -34,7 +34,7 @@ O foco da pesquisa é a articulação desses conhecimentos: o que pode ser relac
 - [Execute e reproduza as verificações](docs/reproduzir.md).
 - [Confira as licenças dos componentes de terceiros](THIRD_PARTY.md).
 
-O endereço previsto reúne [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). A publicação é condicionada ao sucesso das verificações no fluxo do GitHub Pages.
+Os endereços públicos reúnem [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). A publicação é condicionada ao sucesso das verificações no fluxo do GitHub Pages. A [conferência do endereço publicado](evidence/public-smoke.json) identifica separadamente a revisão e os fluxos realmente executados.
 
 Cada escolha pode ser examinada por duas leituras: **como seu conhecimento foi construído** e **por que ele foi empregado naquele caso**. Ambas usam os mesmos registros, distinguindo contribuição da fonte, operação de articulação, conhecimento, aplicação do critério e limite. Contribuição não detalhada permanece como lacuna, sem justificativa inventada. [Contrato da explicação pública](docs/explicacao-publica.md).
 
