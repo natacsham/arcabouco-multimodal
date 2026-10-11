@@ -4,11 +4,11 @@ const copy = value => JSON.parse(JSON.stringify(value));
 const norm = value => String(value || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
 const uniq = values => [...new Set(values)];
 const fields = {
-  tarefas: ['TAREFA', 'Qual atividade a pessoa precisa realizar?'],
-  caracteristicas_pessoa: ['CARACTERISTICA_PESSOA', 'O que precisamos considerar sobre a pessoa nesta atividade?'],
-  barreiras: ['BARREIRA', 'O que dificulta a atividade?'],
-  necessidades: ['NECESSIDADE', 'Que apoio a pessoa precisa?'],
-  ambientes: ['AMBIENTE', 'Onde a atividade acontece?'],
+  tarefas: ['TAREFA', 'O que a pessoa precisa conseguir fazer?'],
+  caracteristicas_pessoa: ['CARACTERISTICA_PESSOA', 'Que capacidades ou dificuldades precisamos considerar?'],
+  barreiras: ['BARREIRA', 'Quais dificuldades precisam ser consideradas?'],
+  necessidades: ['NECESSIDADE', 'Que apoio faz falta?'],
+  ambientes: ['AMBIENTE', 'Onde isso acontece?'],
   modalidades_disponiveis: ['MODALIDADE', 'Que formas de interação podem ser usadas?'],
   recursos_digitais: ['RECURSO_DIGITAL', 'Qual aplicativo ou conteúdo está envolvido?'],
   recursos_disponiveis: ['RECURSO_DISPONIVEL', 'Quais equipamentos e apoios estão disponíveis?'],
@@ -33,26 +33,67 @@ function participants(current, catalog) {
     modalidade_ids: ids(row.modalidades), recurso_operado_ids: ids(row.recursos_operados),
     objetivo_participacao: row.objetivo || ''}));
 }
+export function participantName(person, fallback = '') {
+  const label = person?.label || fallback || person?.grupo_rotulo || '';
+  // Shorten only the engine's generated label. Preserve names and descriptions
+  // supplied by people, and do not turn a diagnostic label into an ability.
+  const generated = label.match(/^(\d+) estudante\(s\): (.+?) informado no relato$/i);
+  if (!generated) return label;
+  const count = Number(person?.quantidade || generated[1]);
+  const description = person?.grupo_rotulo || generated[2];
+  return (count === 1 ? 'Estudante ' : 'Estudantes ') + description + ' (' + count + ')';
+}
+function activityContext(current, catalog) {
+  const context = current.context || {};
+  const labels = new Map((catalog?.concepts?.TAREFA || []).map(item => [item.id, item.label]));
+  const values = context.tarefas?.length ? context.tarefas : context.raw?.tarefas || [];
+  const known = values.map(value => typeof value === 'object' ? value.label || labels.get(value.id) : labels.get(value) ||
+    (String(value).startsWith('TAR-') ? '' : value)).filter(Boolean);
+  return known.length ? 'Atividade informada: ' + uniq(known).join('; ') : '';
+}
 export function legacyQuestions(current, catalog) {
   const raw = current.context?.raw || {};
-  return (current.questions || []).filter(item => item.field !== 'mapping').map(item => {
+  const people = participants(current, catalog);
+  const pending = (current.questions || []).filter(item => item.field !== 'mapping');
+  return pending.filter(item => item.field !== 'apoios_informados' || !pending.some(other =>
+    other.participant_id === item.participant_id && other.field === 'modalidades_disponiveis')).map(item => {
     const field = item.field;
-    const person = item.participant_id && participants(current, catalog).find(row => row.id === item.participant_id);
+    const person = item.participant_id && people.find(row => row.id === item.participant_id);
     const selected = person && item.answer_field ? person[item.answer_field] || [] : raw[field] || [];
     const question = {...item, id: item.participant_id ? field+':'+item.participant_id : field,
       field, label: item.question, type: item.type || 'multi', options: [],
-      existingParticipations: participants(current, catalog)};
-    if (field === 'objetivo') return {...question, type: 'text', label: 'O que a pessoa quer conseguir fazer?'};
-    if (field === 'barreira_ou_necessidade') return {...question, label: 'O que dificulta a atividade ou precisa de apoio?',
+      context_label: activityContext(current, catalog),
+      participant_label: item.participant_id ? participantName(person, item.participant_label) : '',
+      help: 'Marque apenas o que corresponde ao seu caso.', existingParticipations: people};
+    if (field === 'objetivo') return {...question, type: 'text', label: 'O que você espera alcançar?', help: ''};
+    if (field === 'barreira_ou_necessidade') return {...question, label: 'Quais dificuldades ou necessidades você percebe?',
+      help: 'Pode marcar uma ou mais respostas. Não é preciso marcar todas.',
       options: [...options(catalog, 'BARREIRA', raw.barreiras, 'barreiras', item.concept_ids), ...options(catalog, 'NECESSIDADE', raw.necessidades, 'necessidades', item.concept_ids)]};
-    if (field === 'participantes') return {...question, label: item.concept_ids ? item.question : 'Quem participa desta atividade?',
-      options: options(catalog, 'PAPEL_NO_CONTEXTO', [], undefined, item.concept_ids), existingParticipations: participants(current, catalog)};
+    if (field === 'participantes') return {...question,
+      label: item.concept_ids ? 'Quem pode ajudar a preparar ou adaptar o conteúdo?' : 'Quem participa desse desafio?',
+      help: item.concept_ids ? 'Selecione quem poderá assumir esse apoio.' : 'Inclua quem precisa do apoio e quem pode ajudar.',
+      options: options(catalog, 'PAPEL_NO_CONTEXTO', [], undefined, item.concept_ids)};
+    if (field === 'apoios_informados') return {...question, type: 'text',
+      label: 'Há alguma outra forma de comunicação ou apoio?',
+      help: 'Se souber, descreva o que já é usado pelas pessoas indicadas. Você pode continuar sem preencher.'};
     const config = fields[field];
-    const subject = (person?.quantidade || 1) > 1 ? 'este grupo' : 'esta pessoa';
-    const personalLabels = {caracteristicas_pessoa:'Que capacidades ou dificuldades precisamos considerar para '+subject+'?',
-      modalidades_disponiveis:'Como '+subject+' acompanha o conteúdo?', recursos_disponiveis:'Que recursos '+subject+' consegue usar?'};
-    return config ? {...question, label: item.participant_id ? personalLabels[field] || item.question : item.concept_ids ? item.question : config[1],
-      options: options(catalog, config[0], selected, undefined, item.concept_ids)} : {...question, type: 'text'};
+    const personalLabels = {caracteristicas_pessoa:'O que facilita ou dificulta a participação?',
+      modalidades_disponiveis:'Como acessa e acompanha o conteúdo?', recursos_disponiveis:'Quais destes recursos já consegue usar?'};
+    if (!config) return {...question, type: 'text'};
+    const projected = {...question, label: item.participant_id ? personalLabels[field] || config[1] : config[1],
+      options: options(catalog, config[0], selected, undefined, item.concept_ids)};
+    if (field === 'tarefas') projected.help = 'Pense no que precisa ser feito, como acessar um material, escrever ou participar de uma apresentação.';
+    if (item.participant_id && field === 'modalidades_disponiveis') {
+      // A game may contain several access modes. It cannot, by itself, answer
+      // how a person perceives the content. Keep it in resources and decisions.
+      projected.options = projected.options.filter(option => option.id !== 'MOD-JOGO-INTERATIVO');
+      projected.help = 'Marque as formas que as pessoas indicadas já usam. Pode escolher mais de uma.';
+      projected.note_label = 'Outra forma de comunicação ou apoio (opcional)';
+      projected.handles_ids = ['apoios_informados:' + item.participant_id];
+    } else if (item.participant_id && field === 'recursos_disponiveis') {
+      projected.help = 'Marque os recursos que as pessoas indicadas sabem utilizar.';
+    }
+    return projected;
   });
 }
 export function legacyAnswer(current, question, value, note = '') {
@@ -96,7 +137,7 @@ export function legacyAnswer(current, question, value, note = '') {
 export function legacySummary(current) {
   const c = current.context || {};
   const people = c.participantes || [];
-  const personName = person => person.label || person.grupo_rotulo || person.papel;
+  const personName = person => participantName(person, person.papel);
   const rows = [
     ['Pessoas', people.map(personName)],
     ['Sobre a pessoa', c.caracteristicas_relevantes], ['Atividade', c.tarefas], ['Objetivo', c.objetivo],

@@ -74,6 +74,8 @@ await context.addInitScript(()=>{
         const controls=[...document.querySelectorAll('#main input,#main textarea,#main select')].filter(element=>element.checkVisibility());
         window.__simpleProbe.busySnapshots.push({operation:data.operation,
           busy:document.querySelector('#main')?.getAttribute('aria-busy')==='true',
+          generationVisible:document.querySelector('#generation-progress')?.checkVisibility()===true,
+          generationText:document.querySelector('#generation-progress')?.textContent.trim()||'',
           controls:controls.map(element=>({id:element.id,name:element.name,blocked:element.matches(':disabled')||element.readOnly===true}))});
       }
       return super.postMessage(data,...rest);
@@ -97,6 +99,14 @@ await context.route('**/*',route=>{
   return route.continue();
 });
 const ready=page=>page.waitForFunction(()=>document.querySelector('#health')?.dataset.state==='ready'&&document.querySelector('#main')?.getAttribute('aria-busy')==='false',{}, {timeout:180000});
+async function questionProgress(page){
+  const text=await page.locator('#question-progress').innerText();
+  const match=text.match(/(\d+)\s+de\s+(\d+)/i);
+  assert(match,'Question progress exposes current and currently estimated total: '+text);
+  const current=Number(match[1]),total=Number(match[2]);
+  assert(current>0&&total>=current,'Consistent current/total question count');
+  return {current,total,text};
+}
 async function contrastSamples(page){
   return page.evaluate(()=>{
     const rgba=text=>{const match=text.match(/rgba?\(([^)]+)\)/);if(!match)return null;const values=match[1].split(/[,\s/]+/).filter(Boolean).map(Number);return [...values.slice(0,3),values[3]??1];};
@@ -131,7 +141,7 @@ try{
     check(key('examples_recollected'),await page.locator('#case-examples').getAttribute('open')===null);
     check(key('label_and_concrete_placeholder'),await page.locator('label[for="case-narrative"]').count()===1&&/pessoa|aluno|estudante/i.test(await page.locator('#case-narrative').getAttribute('placeholder')));
     check(key('microphone_visible'),await page.locator('#dictate-case').isVisible()&&/falar|ditar/i.test(await page.locator('#dictate-case').innerText())&&await page.locator('#dictate-case svg').count()>0);
-    check(key('accessibility_challenge_not_generic_problem'),/desafio de acessibilidade/i.test(await page.locator('h1').innerText())&&
+    check(key('direct_challenge_heading'),(await page.locator('h1').innerText()).trim()==='Qual é o seu desafio de hoje?'&&
       !/problema/i.test(await page.locator('#case-entry').innerText())&&await page.locator('#dictate-case').innerText()==='Falar');
     await page.locator('#case-narrative').focus();
     report.contrast??={};report.contrast[view]=await contrastSamples(page);
@@ -197,6 +207,60 @@ try{
     check(key('keyboard_then_audio_review'),chosenSteps.some(steps=>steps.length===2&&steps[0].endsWith('#CaptureKeyboard')&&steps[1].endsWith('#ReviewSpeech')));
     check(key('composition_foundation_present'),composed.choices.every(choice=>choice.steps.every(step=>step.groundings.length>0&&step.groundings.every(item=>item.knowledge.id&&item.criterion.id&&item.articulation.contributions.length>0))));
     await page.locator('#new-case').click();await ready(page);
+    // Regression of the reported loop: the old flow re-asked the barrier when
+    // the organizing task received ONE valid option, not every offered need.
+    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
+    await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
+    const sparseInitial=await page.evaluate(()=>window.__simpleProbe.state);
+    const sparseAnswers=[], sparseProgress=[];
+    while(await page.locator('#case-questions').isVisible()){
+      const row=page.locator('#questions-form [data-question]'),question=await row.getAttribute('data-question');
+      const field=question.split(':')[0],person=await page.locator('#question-person').innerText();
+      const progress=await questionProgress(page);sparseProgress.push(progress);
+      assert(!sparseAnswers.some(answer=>answer.id===question),'A completed partial/unknown answer must not be re-asked: '+question);
+      assert(sparseAnswers.length<22,'Partial/unknown answers must terminate without skip-all');
+      if(field==='tarefas')await row.locator('input[value="TAR-ORGANIZAR-CONTEUDO-DIGITAL"]').check();
+      else if(field==='barreira_ou_necessidade'){
+        const control=row.locator('input[value="BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"]');
+        const label=control.locator('xpath=ancestor::label[1]');
+        check(key('whole_option_has_pointer'),await label.evaluate(element=>getComputedStyle(element).cursor)==='pointer');
+        const box=await label.boundingBox();assert(box);
+        await label.click({position:{x:box.width-12,y:box.height/2}});
+        check(key('whole_option_click_selects_single_barrier'),await control.isChecked()&&await row.locator('input:checked').count()===1);
+      }else if(field==='apoios_informados')await row.locator('textarea').fill('não sei');
+      else if(field==='objetivo')await row.locator('textarea').fill('Ainda não sei');
+      else await row.locator('input[value="unknown"]').check();
+      if(field==='modalidades_disponiveis'&&person){
+        check(key('group_access_has_named_participant'),/estudante/i.test(person)&&/surd|ceg/i.test(person));
+        check(key('group_question_programmatically_names_context'),await row.evaluate(element=>{
+          const references=(element.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean);
+          return ['question-person','question-context','question-help'].every(id=>references.includes(id)&&document.getElementById(id))&&
+            element.querySelector('legend')?.textContent.includes(document.getElementById('question-person').textContent);
+        }));
+        check(key('game_not_offered_as_perceptual_access'),await row.locator('input[value="MOD-JOGO-INTERATIVO"]').count()===0);
+        const note=row.locator('textarea');
+        if(await note.count()){
+          await note.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+          await note.fill('não sei');
+        }
+        if(!sparseAnswers.some(answer=>answer.id.startsWith('modalidades_disponiveis:')))
+          await page.screenshot({path:path.join(artifacts,view+'-question-progress.png'),fullPage:true});
+      }
+      if(field!=='tarefas')assert((await page.locator('#question-context').innerText()).includes('Organizar'),'Follow-up identifies the selected activity');
+      sparseAnswers.push({id:question,participant:person,answer:field==='tarefas'?'TAR-ORGANIZAR-CONTEUDO-DIGITAL':field==='barreira_ou_necessidade'?'BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE':'unknown'});
+      await page.locator('#answer-questions').click();
+      await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:20000});
+    }
+    const sparseState=await page.evaluate(()=>window.__simpleProbe.state);
+    check(key('partial_and_unknown_answers_advance_once'),sparseAnswers.some(answer=>answer.id==='barreira_ou_necessidade')&&new Set(sparseAnswers.map(answer=>answer.id)).size===sparseAnswers.length);
+    check(key('question_progress_increases'),sparseProgress.every((progress,index)=>index===0||progress.current>sparseProgress[index-1].current));
+    check(key('unknown_free_text_is_not_support_fact'),(sparseState.participations||[]).every(person=>!/^\s*(?:ainda )?n[aã]o sei[.!]?\s*$/i.test(person.apoios_informados||'')));
+    check(key('single_barrier_does_not_assert_all_needs'),
+      JSON.stringify([...sparseState.context.raw.barreiras].sort())===JSON.stringify([...new Set([...sparseInitial.context.raw.barreiras,'BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE'])].sort())&&
+      JSON.stringify(sparseState.context.raw.necessidades)===JSON.stringify(sparseInitial.context.raw.necessidades));
+    report.partial_answer_regression??={};report.partial_answer_regression[view]={answers:sparseAnswers,progress:sparseProgress,raw:sparseState.context.raw,
+      note:'This regression uses one offered barrier and unknown answers. The historical published flow repeated that barrier question after the first selection.'};
+    await page.locator('#new-case').click();await ready(page);
     // A collective teaching challenge must not collapse different participants
     // into the single-person writing pilot or infer an assistive technology.
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
@@ -247,6 +311,11 @@ try{
         });
         await control.check();
       }
+      if(field==='modalidades_disponiveis'&&questionPerson&&await row.locator('textarea').count()){
+        const note=row.locator('textarea');await note.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+        await note.fill(/surd/i.test(questionPerson)?'O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.':
+          'O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.');
+      }
       await page.locator('#answer-questions').click();
       groupAnswers.push({question,participant_label:questionPerson,values});
       assert.equal(new Set(groupAnswers.map(item=>item.question)).size,groupAnswers.length,
@@ -284,6 +353,16 @@ try{
       JSON.stringify(teachingResult.decision.component_ids)===JSON.stringify(['PAD-CONTEUDO-WEB-EQUIVALENTE'])&&
       JSON.stringify([...teachingResult.decision.knowledge_ids].sort())===JSON.stringify(['K10','K42'])&&
       JSON.stringify(teachingResult.decision.articulation_ids)===JSON.stringify(['ART-REF-03']));
+    check(key('partial_orientation_starts_with_supported_action'),
+      (await page.locator('#orientation-main').innerText()).trim().length>0&&
+      !/^\s*Faltam informa[cç][oõ]es e apoios verificados/i.test(await page.locator('#orientation-main').innerText())&&
+      await page.locator('#orientation-main .orientation-step').count()>0&&
+      (await page.locator('#orientation-main .step-action').first().innerText()).trim().length>20);
+    check(key('partial_orientation_has_named_blocks_and_limits'),
+      await page.locator('#orientation-main .step-combination').count()>0&&
+      await page.locator('.orientation-gaps').count()>0&&
+      !/Fun[cç][aã]o requerida ainda sem/i.test(await page.locator('#orientation-main').innerText()));
+    await page.screenshot({path:path.join(artifacts,view+'-teaching-partial.png'),fullPage:true});
     await page.locator('#new-case').click();await ready(page);
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
     await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
@@ -308,6 +387,11 @@ try{
           if(!await control.isVisible())await control.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
           await control.check();
         }
+        if(field==='modalidades_disponiveis'&&person&&await row.locator('textarea').count()){
+          const note=row.locator('textarea');await note.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+          await note.fill(/surd/i.test(person)?'O grupo compreende texto e imagens. Outros apoios ainda precisam ser conferidos.':
+            'A operação de leitor de tela ainda não foi confirmada. É preciso conferir outra forma de acesso.');
+        }
       }
       await page.locator('#answer-questions').click();variantAnswers.push(question);
       assert.equal(new Set(variantAnswers).size,variantAnswers.length,'Resource variant questions must not repeat');
@@ -328,6 +412,8 @@ try{
       note:'Same narrative; the reader availability and personal operation were not confirmed in the follow-up answers. This checks absence of support, not recognition of a textual prohibition.'};
     check(key('unconfirmed_reader_changes_teaching_decision'),changedTeaching.decision.status.startsWith('SUSPENSA')&&
       changedTeaching.decision.component_ids.length===0&&await page.locator('#orientation-result').isVisible());
+    check(key('suspended_output_has_no_invented_action'),await page.locator('#orientation-main .orientation-step').count()===0&&
+      (await page.locator('#orientation-main').innerText()).trim().length>0);
     await page.locator('#new-case').click();await ready(page);
     // Dictation is explicit and requires confirmation before a remote browser service.
     await page.locator('#dictate-case').focus();await page.keyboard.press('Enter');
@@ -378,11 +464,15 @@ try{
     await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
     check(key('unknown_not_silently_completed'),await page.locator('#generate-orientation').isDisabled());
     await page.locator('#edit-case').click();await page.locator('#analyze-case').click();
-    await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
-    check(key('unchanged_narrative_preserves_answers'),await page.locator('#questions-form [name="objetivo"]').count()===0&&await page.evaluate(()=>window.__simpleProbe.state.context.objetivo)==='Compreender a informação das imagens e continuar a atividade.');
-    await page.locator('#skip-questions').click();await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
+    await page.waitForFunction(()=>!document.querySelector('#case-questions').hidden||!document.querySelector('#case-review').hidden,{}, {timeout:180000});
+    check(key('unchanged_narrative_preserves_answers'),
+      (await page.locator('#case-questions').isHidden()||await page.locator('#questions-form [name="objetivo"]').count()===0)&&
+      await page.evaluate(()=>window.__simpleProbe.state.context.objetivo)==='Compreender a informação das imagens e continuar a atividade.');
+    if(await page.locator('#case-questions').isVisible())await page.locator('#skip-questions').click();
+    await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
     const busySnapshots=await page.evaluate(()=>window.__simpleProbe.busySnapshots);
     check(key('inputs_blocked_while_processing'),busySnapshots.length>0&&busySnapshots.every(snapshot=>snapshot.busy&&snapshot.controls.every(control=>control.blocked)));
+    check(key('generation_progress_visible'),busySnapshots.filter(snapshot=>['generate','compose'].includes(snapshot.operation)).every(snapshot=>snapshot.generationVisible&&/orienta|combin|verifica/i.test(snapshot.generationText)));
     report.busy_controls??={};report.busy_controls[view]=busySnapshots;
     await page.setViewportSize({width:320,height:900});
     check(key('reflow_320'),await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));

@@ -89,6 +89,14 @@ O AMADO executa Python no navegador por Pyodide, com RDF e consultas SPARQL. Nã
 
 O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A organização anterior da interface continua em `amado/completo.html` e `amado/completo-guiado.html`, utilizando a mesma versão atual dos motores. A versão anterior completa permanece no histórico do repositório.
 
+### Como as perguntas avançam e como ler o resultado
+
+Cada pergunta identifica a atividade e, quando necessário, a pessoa ou o grupo a que se refere. Uma resposta encerra essa pergunta no diálogo: não é necessário marcar todas as opções. “Ainda não sei” permite continuar sem transformar ausência de informação em confirmação. O indicador mostra a posição e o total previsto, que pode mudar conforme as respostas.
+
+Esse controle pertence à interface (`web/amado/simple-flow.js`); não altera a verificação das condições pelo motor. Por exemplo, escolher uma dificuldade não confirma as demais. O botão **Completar as informações que faltam** permite retomar explicitamente os pontos pendentes, sem repetir perguntas automaticamente.
+
+A orientação usa os mesmos dados de execução: cada cartão começa pela ação, explica a combinação modal e mostra as condições essenciais. Alternativas, acompanhamento e limites ficam disponíveis no próprio cartão. Quando há apoio parcial, ele aparece antes das lacunas; quando não há configuração fundamentada, a interface informa o que falta, sem apresentar uma recomendação fictícia. A fundamentação continua consultável. [Fluxo de leitura e verificações](docs/visao-guiada.md).
+
 ## Arquivos e reprodução
 
 - `ontology/`: formalização e grafo da distribuição pública.

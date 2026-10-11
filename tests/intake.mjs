@@ -43,7 +43,10 @@ const groupCurrent = {context: {raw:{modalidades_disponiveis:[]}, participantes:
     answer_field:'modalidade_ids',concept_ids:['M1'],question:'Como este grupo acompanha a atividade?'}]};
 const groupQuestion = legacyQuestions(groupCurrent,catalog)[0];
 assert.equal(groupQuestion.id,'modalidades_disponiveis:DEAF');
-assert.equal(groupQuestion.label,'Como este grupo acompanha o conteúdo?');
+assert.equal(groupQuestion.label,'Como acessa e acompanha o conteúdo?');
+assert.equal(groupQuestion.participant_label,'Estudantes surdos (2)');
+assert.equal(groupQuestion.note_label,'Outra forma de comunicação ou apoio (opcional)');
+assert.deepEqual(groupQuestion.handles_ids,['apoios_informados:DEAF']);
 assert.deepEqual(groupQuestion.options.map(row=>row.id),['M1']);
 const groupAnswer = legacyAnswer(groupCurrent,groupQuestion,['M1']);
 assert.deepEqual(groupAnswer.participations[0].modalidade_ids,['M1']);
@@ -79,7 +82,8 @@ assert.deepEqual(requirementQuestion.options.map(row=>row.id),['R2'],
   'A specific existing capability requirement must be answerable even if hidden in the general catalogue');
 const specificRole=legacyQuestions({...current,questions:[{field:'participantes',concept_ids:['P2'],
   question:'Quem pode preparar ou adaptar o conteúdo?'}]},catalog)[0];
-assert.equal(specificRole.label,'Quem pode preparar ou adaptar o conteúdo?');
+assert.equal(specificRole.label,'Quem pode ajudar a preparar ou adaptar o conteúdo?');
+assert.equal(specificRole.context_label,'Atividade informada: Ler uma página');
 assert.deepEqual(specificRole.options.map(row=>row.id),['P2']);
 const multiSupported=structuredClone(groupCurrent);
 multiSupported.participations.forEach(person=>person.papel_id='PAPEL-ESTUDANTE');
@@ -93,6 +97,45 @@ const preciseTask=legacyQuestions({...current,questions:[{field:'tarefas',type:'
 const broaderTask=structuredClone(current);broaderTask.context.raw.tarefas=['BROAD-TASK'];
 assert.deepEqual(legacyAnswer(broaderTask,preciseTask,'T1').tarefas,['T1'],
   'A radio-confirmed operational activity replaces the broad extraction hypothesis instead of adding another task');
+
+// Labels describe the actual participant without changing its identity, count,
+// diagnosis record or inferred capabilities. The shortened label is UI-only.
+const generatedGroups=structuredClone(groupCurrent);
+Object.assign(generatedGroups.participations[0],{label:'2 estudante(s): surdos informado no relato',grupo_rotulo:'surdos'});
+Object.assign(generatedGroups.participations[1],{label:'1 estudante(s): cego informado no relato',grupo_rotulo:'cego',quantidade:1});
+const generatedBefore=structuredClone(generatedGroups);
+const generatedQuestions=legacyQuestions(generatedGroups,catalog);
+assert.equal(generatedQuestions[0].participant_label,'Estudantes surdos (2)');
+const blindQuestion=legacyQuestions({...generatedGroups,questions:[{...generatedGroups.questions[0],participant_id:'BLIND'}]},catalog)[0];
+assert.equal(blindQuestion.participant_label,'Estudante cego (1)');
+assert.deepEqual(generatedGroups,generatedBefore,'Readable identities never mutate participant evidence');
+assert.deepEqual(legacyAnswer(generatedGroups,generatedQuestions[0],['M1']).participations[1].modalidade_ids,[],
+  'Shorter presentation must not transfer selected modes to the other participant');
+
+const modeCatalog=structuredClone(catalog);
+modeCatalog.concepts.MODALIDADE.push(item('MOD-JOGO-INTERATIVO','Interação em jogo digital'),item('MOD-VIDEO','Vídeo'));
+modeCatalog.concepts.RECURSO_DIGITAL=[item('RD-JOGO','Jogo digital')];
+const modeCase={...generatedGroups,questions:[{...generatedGroups.questions[0],concept_ids:['M1','MOD-JOGO-INTERATIVO','MOD-VIDEO']},
+  {field:'apoios_informados',participant_id:'DEAF',answer_field:'apoios_informados',type:'text'},
+  {field:'caracteristicas_pessoa',participant_id:'BLIND',answer_field:'caracteristica_ids',concept_ids:['C1']}]};
+const modeQuestions=legacyQuestions(modeCase,modeCatalog);
+assert.deepEqual(modeQuestions[0].options.map(row=>row.id),['M1','MOD-VIDEO'],
+  'A game is not an answer to how a participant accesses content; video remains available');
+assert(!modeQuestions.some(row=>row.field==='apoios_informados'),
+  'Personal access and its optional support note appear together, not as duplicate questions');
+assert.equal(modeQuestions[1].note_label,undefined,'Other personal questions do not repeat the optional support field');
+assert(legacyQuestions({...current,questions:[{field:'modalidades_disponiveis'}]},modeCatalog)[0].options
+  .some(row=>row.id==='MOD-JOGO-INTERATIVO'),'This scoped UI correction does not remove game from the base vocabulary');
+assert(legacyQuestions({...current,questions:[{field:'recursos_digitais'}]},modeCatalog)[0].options
+  .some(row=>row.id==='RD-JOGO'),'A game remains a possible digital resource');
+const supportOnly=legacyQuestions({...modeCase,questions:[modeCase.questions[1]]},modeCatalog)[0];
+assert.equal(supportOnly.type,'text');
+assert.equal(supportOnly.label,'Há alguma outra forma de comunicação ou apoio?');
+assert.equal(supportOnly.note_label,undefined,'The standalone support question has only its own textarea');
+const unknownActivity=legacyQuestions({context:{raw:{}},questions:[{field:'participantes',concept_ids:['P2']}]},catalog)[0];
+assert.equal(unknownActivity.context_label,'','An absent activity must not be fabricated from an example or role');
+assert(!unknownActivity.label.includes('nesta atividade'));
+assert(questions[0].help.includes('Não é preciso marcar todas'));
 
 const composition = {tasks: [{id: 'TaskCreateReviewedText', label: 'Escrever e revisar', required_functions: [item('Expression'), item('Review')]},
   {id: 'TaskReviewExistingText', label: 'Revisar texto', required_functions: [item('Review')]}],

@@ -9,6 +9,25 @@
 
 O resultado efetivo e os limites são registrados nos relatórios desta revisão. Uma composição parcial não comprova cobertura integral da turma, notação matemática ou resultado educacional. A versão da tese e o repositório MADO permanecem intactos.
 
+### Correção do diálogo e da leitura — 11/10/2026
+
+A revisão de interface preserva `46e318a` no histórico. Corrige a repetição de uma
+pergunta já respondida quando o motor ainda devolve outros requisitos do mesmo
+campo. A conclusão do passo do diálogo passa a ser registrada separadamente da
+satisfação das condições; não é necessário marcar todas as opções para avançar.
+
+As perguntas identificam atividade e participante, mostram progresso previsto e
+têm opções clicáveis em toda a área. O complemento de comunicação não é perguntado
+duas vezes. A geração tem um estado de espera visível e a leitura da orientação
+separa ação, combinação modal, condição de uso e aprofundamento. Apoio parcial e
+suspensão permanecem estados distintos. As opções completas, parciais e pendentes
+do compositor são apresentadas em grupos próprios.
+
+Motor, base, consultas, ontologia e versões da tese não foram alterados. A
+identidade desses arquivos é conferida pelo manifesto. As evidências novas
+pertencem ao diálogo e à projeção da saída, não a uma nova validação ontológica
+ou humana. [Detalhes do percurso e testes](visao-guiada.md).
+
 ## Histórico: 1.4.0-rc1 — fundamentação examinável
 
 O repositório independente parte do conteúdo público de `natacsham/MADO`, commit `d660b773ed08038a7a543205575a16fc22d2c1c2`. A importação é o commit raiz deste novo histórico; não altera a origem nem a tese.

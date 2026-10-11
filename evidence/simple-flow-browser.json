@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SIMPLE_FLOW_BROWSER_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-11T07:29:47.333Z",
+  "checked_at": "2026-10-11T23:52:30.635Z",
   "target": "LOCAL_SUBPATH",
   "checks": {
     "served_manifest_matches_build": true,
@@ -9,7 +9,7 @@
     "index.html_examples_recollected": true,
     "index.html_label_and_concrete_placeholder": true,
     "index.html_microphone_visible": true,
-    "index.html_accessibility_challenge_not_generic_problem": true,
+    "index.html_direct_challenge_heading": true,
     "index.html_sampled_text_field_focus_contrast": true,
     "index.html_sampled_high_contrast": true,
     "index.html_keyboard_reaches_voice": true,
@@ -30,6 +30,15 @@
     "index.html_narrative_composes_without_loading_template": true,
     "index.html_keyboard_then_audio_review": true,
     "index.html_composition_foundation_present": true,
+    "index.html_whole_option_has_pointer": true,
+    "index.html_whole_option_click_selects_single_barrier": true,
+    "index.html_group_access_has_named_participant": true,
+    "index.html_group_question_programmatically_names_context": true,
+    "index.html_game_not_offered_as_perceptual_access": true,
+    "index.html_partial_and_unknown_answers_advance_once": true,
+    "index.html_question_progress_increases": true,
+    "index.html_unknown_free_text_is_not_support_fact": true,
+    "index.html_single_barrier_does_not_assert_all_needs": true,
     "index.html_teaching_participants_distinct": true,
     "index.html_teaching_task_general_not_theme_key": true,
     "index.html_no_inferred_classroom_or_assistive_technology": true,
@@ -40,8 +49,11 @@
     "index.html_teaching_waits_for_confirmation": true,
     "index.html_teaching_uses_actual_engine_after_confirmation": true,
     "index.html_teaching_reuses_existing_pattern_with_partial_limit": true,
+    "index.html_partial_orientation_starts_with_supported_action": true,
+    "index.html_partial_orientation_has_named_blocks_and_limits": true,
     "index.html_reader_availability_and_operation_not_confirmed": true,
     "index.html_unconfirmed_reader_changes_teaching_decision": true,
+    "index.html_suspended_output_has_no_invented_action": true,
     "index.html_voice_not_started_without_consent": true,
     "index.html_cancel_voice_returns_focus": true,
     "index.html_voice_started_after_consent": true,
@@ -55,6 +67,7 @@
     "index.html_unknown_not_silently_completed": true,
     "index.html_unchanged_narrative_preserves_answers": true,
     "index.html_inputs_blocked_while_processing": true,
+    "index.html_generation_progress_visible": true,
     "index.html_reflow_320": true,
     "index.html_reflow_320_text_200": true,
     "index.html_reload_forgets_narrative": true,
@@ -65,7 +78,7 @@
     "guiado.html_examples_recollected": true,
     "guiado.html_label_and_concrete_placeholder": true,
     "guiado.html_microphone_visible": true,
-    "guiado.html_accessibility_challenge_not_generic_problem": true,
+    "guiado.html_direct_challenge_heading": true,
     "guiado.html_sampled_text_field_focus_contrast": true,
     "guiado.html_sampled_high_contrast": true,
     "guiado.html_keyboard_reaches_voice": true,
@@ -86,6 +99,15 @@
     "guiado.html_narrative_composes_without_loading_template": true,
     "guiado.html_keyboard_then_audio_review": true,
     "guiado.html_composition_foundation_present": true,
+    "guiado.html_whole_option_has_pointer": true,
+    "guiado.html_whole_option_click_selects_single_barrier": true,
+    "guiado.html_group_access_has_named_participant": true,
+    "guiado.html_group_question_programmatically_names_context": true,
+    "guiado.html_game_not_offered_as_perceptual_access": true,
+    "guiado.html_partial_and_unknown_answers_advance_once": true,
+    "guiado.html_question_progress_increases": true,
+    "guiado.html_unknown_free_text_is_not_support_fact": true,
+    "guiado.html_single_barrier_does_not_assert_all_needs": true,
     "guiado.html_teaching_participants_distinct": true,
     "guiado.html_teaching_task_general_not_theme_key": true,
     "guiado.html_no_inferred_classroom_or_assistive_technology": true,
@@ -96,8 +118,11 @@
     "guiado.html_teaching_waits_for_confirmation": true,
     "guiado.html_teaching_uses_actual_engine_after_confirmation": true,
     "guiado.html_teaching_reuses_existing_pattern_with_partial_limit": true,
+    "guiado.html_partial_orientation_starts_with_supported_action": true,
+    "guiado.html_partial_orientation_has_named_blocks_and_limits": true,
     "guiado.html_reader_availability_and_operation_not_confirmed": true,
     "guiado.html_unconfirmed_reader_changes_teaching_decision": true,
+    "guiado.html_suspended_output_has_no_invented_action": true,
     "guiado.html_voice_not_started_without_consent": true,
     "guiado.html_cancel_voice_returns_focus": true,
     "guiado.html_voice_started_after_consent": true,
@@ -111,6 +136,7 @@
     "guiado.html_unknown_not_silently_completed": true,
     "guiado.html_unchanged_narrative_preserves_answers": true,
     "guiado.html_inputs_blocked_while_processing": true,
+    "guiado.html_generation_progress_visible": true,
     "guiado.html_reflow_320": true,
     "guiado.html_reflow_320_text_200": true,
     "guiado.html_reload_forgets_narrative": true,
@@ -188,21 +214,21 @@
       }
     },
     "frontend_sha256": {
-      "index.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
+      "index.html": "9cdc299b305f89a90667cba0182e7f1b3f30de02e2b99a3c0411ba951694570a",
       "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
       "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
       "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
       "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
+      "guiado.html": "9cdc299b305f89a90667cba0182e7f1b3f30de02e2b99a3c0411ba951694570a",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-      "simple-flow.js": "703a17bae6c5ac287c4724c43f2750aad398fa66e642ec503068db0517ed94bf",
-      "simple-flow.css": "f98d1047d42eba688a50ad4891ae1aba64c953ea5c28caf3b7067335304f8431",
+      "simple-flow.js": "813ec93271d16841b3dc8495e4c67cb1af28550dac9613bb5922aeb88b3d641b",
+      "simple-flow.css": "2738a5f0d7ace8f8bbfe94ced5462a3be97b269d3ca1f3e15a0f524941c9e5e2",
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
-      "intake.mjs": "98a08a564804c6d4c469e5f24b2bf6e2114c382d05a832bf065cf9a7d19ed027",
+      "intake.mjs": "40415c9e9969ef859b7c8ca0c5efc3af73c15cd4c488f34cd231ad906820eb32",
       "completo.html": "3c6fc3e388b6df3e3d3284342a10025437d813cfe10d3b51313d4f648649d7a2",
       "completo-guiado.html": "fcad9bab6756d0fdcb2e816e64c85fcfa4564be46ece4de80ae26826b6d15b55"
     },
@@ -242,7 +268,7 @@
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "test_sha256": "a9ea0147d1820224a10f7b9822975ef26b5f4079af184ed8766b864d104aea59",
+  "test_sha256": "05071e8b8023cc2224060f6859365635a3a24d5d09021452006fc29602848f28",
   "native_decision": {
     "status": "GERADA",
     "components": [
@@ -284,7 +310,7 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Qual é o desafio de acessibilidade?",
+        "text": "Qual é o seu desafio de hoje?",
         "ratio": 13.054290705015273,
         "minimum": 3
       },
@@ -368,7 +394,7 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Qual é o desafio de acessibilidade?",
+        "text": "Qual é o seu desafio de hoje?",
         "ratio": 21,
         "minimum": 3
       },
@@ -452,7 +478,7 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Qual é o desafio de acessibilidade?",
+        "text": "Qual é o seu desafio de hoje?",
         "ratio": 13.054290705015273,
         "minimum": 3
       },
@@ -536,7 +562,7 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Qual é o desafio de acessibilidade?",
+        "text": "Qual é o seu desafio de hoje?",
         "ratio": 21,
         "minimum": 3
       },
@@ -589,6 +615,240 @@
       }
     ]
   },
+  "partial_answer_regression": {
+    "index.html": {
+      "answers": [
+        {
+          "id": "tarefas",
+          "participant": "",
+          "answer": "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+        },
+        {
+          "id": "barreira_ou_necessidade",
+          "participant": "",
+          "answer": "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"
+        },
+        {
+          "id": "modalidades_disponiveis:PART-CASO-03-D6F675",
+          "participant": "Estudantes surdos (2)",
+          "answer": "unknown"
+        },
+        {
+          "id": "caracteristicas_pessoa:PART-CASO-03-D6F675",
+          "participant": "Estudantes surdos (2)",
+          "answer": "unknown"
+        },
+        {
+          "id": "modalidades_disponiveis:PART-CASO-04-A5ECD8",
+          "participant": "Estudante cego (1)",
+          "answer": "unknown"
+        },
+        {
+          "id": "caracteristicas_pessoa:PART-CASO-04-A5ECD8",
+          "participant": "Estudante cego (1)",
+          "answer": "unknown"
+        },
+        {
+          "id": "recursos_digitais",
+          "participant": "",
+          "answer": "unknown"
+        },
+        {
+          "id": "ambientes",
+          "participant": "",
+          "answer": "unknown"
+        },
+        {
+          "id": "recursos_disponiveis",
+          "participant": "",
+          "answer": "unknown"
+        }
+      ],
+      "progress": [
+        {
+          "current": 1,
+          "total": 6,
+          "text": "Pergunta 1 de 6 previstas"
+        },
+        {
+          "current": 2,
+          "total": 9,
+          "text": "Pergunta 2 de 9 previstas"
+        },
+        {
+          "current": 3,
+          "total": 9,
+          "text": "Pergunta 3 de 9 previstas"
+        },
+        {
+          "current": 4,
+          "total": 9,
+          "text": "Pergunta 4 de 9 previstas"
+        },
+        {
+          "current": 5,
+          "total": 9,
+          "text": "Pergunta 5 de 9 previstas"
+        },
+        {
+          "current": 6,
+          "total": 9,
+          "text": "Pergunta 6 de 9 previstas"
+        },
+        {
+          "current": 7,
+          "total": 9,
+          "text": "Pergunta 7 de 9 previstas"
+        },
+        {
+          "current": 8,
+          "total": 9,
+          "text": "Pergunta 8 de 9 previstas"
+        },
+        {
+          "current": 9,
+          "total": 9,
+          "text": "Pergunta 9 de 9 previstas"
+        }
+      ],
+      "raw": {
+        "tarefas": [
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+        ],
+        "caracteristicas_pessoa": [],
+        "recursos_digitais": [],
+        "barreiras": [
+          "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"
+        ],
+        "necessidades": [
+          "NEC-APOIAR-COMPREENSAO-TURMA"
+        ],
+        "ambientes": [],
+        "modalidades_disponiveis": [],
+        "recursos_disponiveis": [],
+        "recursos_impedidos": [],
+        "recursos_propostos": [],
+        "funcoes_requeridas_ids": []
+      },
+      "note": "This regression uses one offered barrier and unknown answers. The historical published flow repeated that barrier question after the first selection."
+    },
+    "guiado.html": {
+      "answers": [
+        {
+          "id": "tarefas",
+          "participant": "",
+          "answer": "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+        },
+        {
+          "id": "barreira_ou_necessidade",
+          "participant": "",
+          "answer": "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"
+        },
+        {
+          "id": "modalidades_disponiveis:PART-CASO-03-8BFD1C",
+          "participant": "Estudantes surdos (2)",
+          "answer": "unknown"
+        },
+        {
+          "id": "caracteristicas_pessoa:PART-CASO-03-8BFD1C",
+          "participant": "Estudantes surdos (2)",
+          "answer": "unknown"
+        },
+        {
+          "id": "modalidades_disponiveis:PART-CASO-04-C38161",
+          "participant": "Estudante cego (1)",
+          "answer": "unknown"
+        },
+        {
+          "id": "caracteristicas_pessoa:PART-CASO-04-C38161",
+          "participant": "Estudante cego (1)",
+          "answer": "unknown"
+        },
+        {
+          "id": "recursos_digitais",
+          "participant": "",
+          "answer": "unknown"
+        },
+        {
+          "id": "ambientes",
+          "participant": "",
+          "answer": "unknown"
+        },
+        {
+          "id": "recursos_disponiveis",
+          "participant": "",
+          "answer": "unknown"
+        }
+      ],
+      "progress": [
+        {
+          "current": 1,
+          "total": 6,
+          "text": "Pergunta 1 de 6 previstas"
+        },
+        {
+          "current": 2,
+          "total": 9,
+          "text": "Pergunta 2 de 9 previstas"
+        },
+        {
+          "current": 3,
+          "total": 9,
+          "text": "Pergunta 3 de 9 previstas"
+        },
+        {
+          "current": 4,
+          "total": 9,
+          "text": "Pergunta 4 de 9 previstas"
+        },
+        {
+          "current": 5,
+          "total": 9,
+          "text": "Pergunta 5 de 9 previstas"
+        },
+        {
+          "current": 6,
+          "total": 9,
+          "text": "Pergunta 6 de 9 previstas"
+        },
+        {
+          "current": 7,
+          "total": 9,
+          "text": "Pergunta 7 de 9 previstas"
+        },
+        {
+          "current": 8,
+          "total": 9,
+          "text": "Pergunta 8 de 9 previstas"
+        },
+        {
+          "current": 9,
+          "total": 9,
+          "text": "Pergunta 9 de 9 previstas"
+        }
+      ],
+      "raw": {
+        "tarefas": [
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+        ],
+        "caracteristicas_pessoa": [],
+        "recursos_digitais": [],
+        "barreiras": [
+          "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"
+        ],
+        "necessidades": [
+          "NEC-APOIAR-COMPREENSAO-TURMA"
+        ],
+        "ambientes": [],
+        "modalidades_disponiveis": [],
+        "recursos_disponiveis": [],
+        "recursos_impedidos": [],
+        "recursos_propostos": [],
+        "funcoes_requeridas_ids": []
+      },
+      "note": "This regression uses one offered barrier and unknown answers. The historical published flow repeated that barrier question after the first selection."
+    }
+  },
   "teaching_case": {
     "index.html": {
       "answers": [
@@ -615,64 +875,50 @@
           ]
         },
         {
-          "question": "modalidades_disponiveis:PART-CASO-03-750B88",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "question": "modalidades_disponiveis:PART-CASO-03-77338D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "MOD-TEXTO",
             "MOD-IMAGEM"
           ]
         },
         {
-          "question": "caracteristicas_pessoa:PART-CASO-03-750B88",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "question": "caracteristicas_pessoa:PART-CASO-03-77338D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
           ]
         },
         {
-          "question": "apoios_informados:PART-CASO-03-750B88",
-          "participant_label": "2 estudante(s): surdos informado no relato",
-          "values": [
-            "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos."
-          ]
-        },
-        {
-          "question": "modalidades_disponiveis:PART-CASO-04-FB4C98",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "question": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "MOD-AUDIO"
           ]
         },
         {
-          "question": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "question": "caracteristicas_pessoa:PART-CASO-04-3A5B3E",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "CAR-INTERACAO-NAO-VISUAL"
           ]
         },
         {
-          "question": "apoios_informados:PART-CASO-04-FB4C98",
-          "participant_label": "1 estudante(s): cego informado no relato",
-          "values": [
-            "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação."
-          ]
-        },
-        {
-          "question": "recursos_disponiveis:PART-CASO-03-750B88",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "question": "recursos_disponiveis:PART-CASO-03-77338D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
           ]
         },
         {
-          "question": "recursos_disponiveis:PART-CASO-04-FB4C98",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "question": "recursos_disponiveis:PART-CASO-04-3A5B3E",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "REC-LEITOR-DE-TELA"
           ]
         },
         {
-          "question": "recursos_disponiveis:PART-CASO-05-466D07",
+          "question": "recursos_disponiveis:PART-CASO-05-735F3A",
           "participant_label": "Responsável pela adaptação do recurso",
           "values": [
             "REC-EDITOR-MULTIMIDIA"
@@ -702,7 +948,7 @@
         }
       ],
       "context": {
-        "id": "CTX-CASO-ED5818EF16",
+        "id": "CTX-CASO-414B567171",
         "natureza": "CASO_INFORMADO_PELA_PESSOA",
         "status": "AGUARDANDO_CARACTERIZACAO",
         "texto_curto": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
@@ -718,7 +964,7 @@
         "caracteristicas_estruturadas": [],
         "participantes": [
           {
-            "id": "PART-CASO-02-A2811D",
+            "id": "PART-CASO-02-EF3686",
             "papel_id": "PAPEL-PROFESSORA",
             "label": "Professora",
             "grupo_rotulo": "",
@@ -735,7 +981,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-F2CA31",
+            "id": "PART-CASO-03-BC21A3",
             "papel_id": "PAPEL-TURMA",
             "label": "Turma",
             "grupo_rotulo": "",
@@ -752,7 +998,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-750B88",
+            "id": "PART-CASO-03-77338D",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "2 estudante(s): surdos informado no relato",
             "grupo_rotulo": "surdos",
@@ -774,7 +1020,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-04-FB4C98",
+            "id": "PART-CASO-04-3A5B3E",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "1 estudante(s): cego informado no relato",
             "grupo_rotulo": "cego",
@@ -803,7 +1049,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-05-466D07",
+            "id": "PART-CASO-05-735F3A",
             "papel_id": "PAPEL-RESPONSAVEL-ADAPTACAO",
             "label": "Responsável pela adaptação do recurso",
             "grupo_rotulo": "",
@@ -890,8 +1136,8 @@
       },
       "participant_conditions": [
         {
-          "id": "PART-CASO-03-750B88",
-          "contexto_id": "CTX-CASO-ED5818EF16",
+          "id": "PART-CASO-03-77338D",
+          "contexto_id": "CTX-CASO-414B567171",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -911,8 +1157,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-FB4C98",
-          "contexto_id": "CTX-CASO-ED5818EF16",
+          "id": "PART-CASO-04-3A5B3E",
+          "contexto_id": "CTX-CASO-414B567171",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -979,64 +1225,50 @@
           ]
         },
         {
-          "question": "modalidades_disponiveis:PART-CASO-03-CD867F",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "question": "modalidades_disponiveis:PART-CASO-03-AC981D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "MOD-TEXTO",
             "MOD-IMAGEM"
           ]
         },
         {
-          "question": "caracteristicas_pessoa:PART-CASO-03-CD867F",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "question": "caracteristicas_pessoa:PART-CASO-03-AC981D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
           ]
         },
         {
-          "question": "apoios_informados:PART-CASO-03-CD867F",
-          "participant_label": "2 estudante(s): surdos informado no relato",
-          "values": [
-            "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos."
-          ]
-        },
-        {
-          "question": "modalidades_disponiveis:PART-CASO-04-E43734",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "question": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "MOD-AUDIO"
           ]
         },
         {
-          "question": "caracteristicas_pessoa:PART-CASO-04-E43734",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "question": "caracteristicas_pessoa:PART-CASO-04-B7D9C9",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "CAR-INTERACAO-NAO-VISUAL"
           ]
         },
         {
-          "question": "apoios_informados:PART-CASO-04-E43734",
-          "participant_label": "1 estudante(s): cego informado no relato",
-          "values": [
-            "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação."
-          ]
-        },
-        {
-          "question": "recursos_disponiveis:PART-CASO-03-CD867F",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "question": "recursos_disponiveis:PART-CASO-03-AC981D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
           ]
         },
         {
-          "question": "recursos_disponiveis:PART-CASO-04-E43734",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "question": "recursos_disponiveis:PART-CASO-04-B7D9C9",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "REC-LEITOR-DE-TELA"
           ]
         },
         {
-          "question": "recursos_disponiveis:PART-CASO-05-012CCE",
+          "question": "recursos_disponiveis:PART-CASO-05-E66176",
           "participant_label": "Responsável pela adaptação do recurso",
           "values": [
             "REC-EDITOR-MULTIMIDIA"
@@ -1066,7 +1298,7 @@
         }
       ],
       "context": {
-        "id": "CTX-CASO-D67AAF4B36",
+        "id": "CTX-CASO-A57500CB45",
         "natureza": "CASO_INFORMADO_PELA_PESSOA",
         "status": "AGUARDANDO_CARACTERIZACAO",
         "texto_curto": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
@@ -1082,7 +1314,7 @@
         "caracteristicas_estruturadas": [],
         "participantes": [
           {
-            "id": "PART-CASO-02-2E6E57",
+            "id": "PART-CASO-02-F34F1F",
             "papel_id": "PAPEL-PROFESSORA",
             "label": "Professora",
             "grupo_rotulo": "",
@@ -1099,7 +1331,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-453EE5",
+            "id": "PART-CASO-03-E20BB8",
             "papel_id": "PAPEL-TURMA",
             "label": "Turma",
             "grupo_rotulo": "",
@@ -1116,7 +1348,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-CD867F",
+            "id": "PART-CASO-03-AC981D",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "2 estudante(s): surdos informado no relato",
             "grupo_rotulo": "surdos",
@@ -1138,7 +1370,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-04-E43734",
+            "id": "PART-CASO-04-B7D9C9",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "1 estudante(s): cego informado no relato",
             "grupo_rotulo": "cego",
@@ -1167,7 +1399,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-05-012CCE",
+            "id": "PART-CASO-05-E66176",
             "papel_id": "PAPEL-RESPONSAVEL-ADAPTACAO",
             "label": "Responsável pela adaptação do recurso",
             "grupo_rotulo": "",
@@ -1254,8 +1486,8 @@
       },
       "participant_conditions": [
         {
-          "id": "PART-CASO-03-CD867F",
-          "contexto_id": "CTX-CASO-D67AAF4B36",
+          "id": "PART-CASO-03-AC981D",
+          "contexto_id": "CTX-CASO-A57500CB45",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -1275,8 +1507,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-E43734",
-          "contexto_id": "CTX-CASO-D67AAF4B36",
+          "id": "PART-CASO-04-B7D9C9",
+          "contexto_id": "CTX-CASO-A57500CB45",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -1325,15 +1557,13 @@
         "tarefas",
         "barreira_ou_necessidade",
         "participantes",
-        "modalidades_disponiveis:PART-CASO-03-850D5E",
-        "caracteristicas_pessoa:PART-CASO-03-850D5E",
-        "apoios_informados:PART-CASO-03-850D5E",
-        "modalidades_disponiveis:PART-CASO-04-41DEF6",
-        "caracteristicas_pessoa:PART-CASO-04-41DEF6",
-        "apoios_informados:PART-CASO-04-41DEF6",
-        "recursos_disponiveis:PART-CASO-03-850D5E",
-        "recursos_disponiveis:PART-CASO-04-41DEF6",
-        "recursos_disponiveis:PART-CASO-05-26493A",
+        "modalidades_disponiveis:PART-CASO-03-735831",
+        "caracteristicas_pessoa:PART-CASO-03-735831",
+        "modalidades_disponiveis:PART-CASO-04-E97B08",
+        "caracteristicas_pessoa:PART-CASO-04-E97B08",
+        "recursos_disponiveis:PART-CASO-03-735831",
+        "recursos_disponiveis:PART-CASO-04-E97B08",
+        "recursos_disponiveis:PART-CASO-05-C6FA8A",
         "recursos_digitais",
         "ambientes",
         "recursos_disponiveis"
@@ -1357,15 +1587,13 @@
         "tarefas",
         "barreira_ou_necessidade",
         "participantes",
-        "modalidades_disponiveis:PART-CASO-03-9603EA",
-        "caracteristicas_pessoa:PART-CASO-03-9603EA",
-        "apoios_informados:PART-CASO-03-9603EA",
-        "modalidades_disponiveis:PART-CASO-04-533FDC",
-        "caracteristicas_pessoa:PART-CASO-04-533FDC",
-        "apoios_informados:PART-CASO-04-533FDC",
-        "recursos_disponiveis:PART-CASO-03-9603EA",
-        "recursos_disponiveis:PART-CASO-04-533FDC",
-        "recursos_disponiveis:PART-CASO-05-09929C",
+        "modalidades_disponiveis:PART-CASO-03-10EFD2",
+        "caracteristicas_pessoa:PART-CASO-03-10EFD2",
+        "modalidades_disponiveis:PART-CASO-04-E089EB",
+        "caracteristicas_pessoa:PART-CASO-04-E089EB",
+        "recursos_disponiveis:PART-CASO-03-10EFD2",
+        "recursos_disponiveis:PART-CASO-04-E089EB",
+        "recursos_disponiveis:PART-CASO-05-9A31B9",
         "recursos_digitais",
         "ambientes",
         "recursos_disponiveis"
@@ -1390,6 +1618,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1401,6 +1631,8 @@
       {
         "operation": "generate",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1412,6 +1644,8 @@
       {
         "operation": "compose",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1423,6 +1657,8 @@
       {
         "operation": "analyze",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-narrative",
@@ -1439,6 +1675,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1470,6 +1708,102 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "controls": [
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "controls": [
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1506,6 +1840,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1522,60 +1858,62 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D",
             "blocked": true
           },
           {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "id": "note-modalidades_disponiveis:PART-CASO-03-77338D",
+            "name": "modalidades_disponiveis:PART-CASO-03-77338D:note",
             "blocked": true
           }
         ]
@@ -1583,10 +1921,47 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
-            "id": "answer-apoios_informados:PART-CASO-03-750B88",
-            "name": "apoios_informados:PART-CASO-03-750B88",
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "blocked": true
+          },
+          {
+            "id": "note-modalidades_disponiveis:PART-CASO-04-3A5B3E",
+            "name": "modalidades_disponiveis:PART-CASO-04-3A5B3E:note",
             "blocked": true
           }
         ]
@@ -1594,40 +1969,27 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "name": "caracteristicas_pessoa:PART-CASO-04-3A5B3E",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "name": "caracteristicas_pessoa:PART-CASO-04-3A5B3E",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "name": "caracteristicas_pessoa:PART-CASO-04-3A5B3E",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "name": "caracteristicas_pessoa:PART-CASO-04-3A5B3E",
             "blocked": true
           }
         ]
@@ -1635,25 +1997,22 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "name": "recursos_disponiveis:PART-CASO-04-3A5B3E",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "name": "recursos_disponiveis:PART-CASO-04-3A5B3E",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "name": "recursos_disponiveis:PART-CASO-04-3A5B3E",
             "blocked": true
           }
         ]
@@ -1661,10 +2020,22 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
-            "id": "answer-apoios_informados:PART-CASO-04-FB4C98",
-            "name": "apoios_informados:PART-CASO-04-FB4C98",
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-735F3A",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-735F3A",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-735F3A",
             "blocked": true
           }
         ]
@@ -1672,48 +2043,8 @@
       {
         "operation": "update",
         "busy": true,
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-04-FB4C98",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-04-FB4C98",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-04-FB4C98",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-466D07",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-466D07",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-466D07",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1755,6 +2086,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1791,6 +2124,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1812,6 +2147,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1823,6 +2160,8 @@
       {
         "operation": "generate",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1834,6 +2173,8 @@
       {
         "operation": "analyze",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-narrative",
@@ -1850,6 +2191,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1881,6 +2224,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1917,6 +2262,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -1933,60 +2280,62 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831",
             "blocked": true
           },
           {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "id": "note-modalidades_disponiveis:PART-CASO-03-735831",
+            "name": "modalidades_disponiveis:PART-CASO-03-735831:note",
             "blocked": true
           }
         ]
@@ -1994,10 +2343,47 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
-            "id": "answer-apoios_informados:PART-CASO-03-850D5E",
-            "name": "apoios_informados:PART-CASO-03-850D5E",
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08",
+            "blocked": true
+          },
+          {
+            "id": "note-modalidades_disponiveis:PART-CASO-04-E97B08",
+            "name": "modalidades_disponiveis:PART-CASO-04-E97B08:note",
             "blocked": true
           }
         ]
@@ -2005,40 +2391,27 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E97B08",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E97B08",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E97B08",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E97B08",
             "blocked": true
           }
         ]
@@ -2046,25 +2419,22 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "name": "recursos_disponiveis:PART-CASO-05-C6FA8A",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "name": "recursos_disponiveis:PART-CASO-05-C6FA8A",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "name": "recursos_disponiveis:PART-CASO-05-C6FA8A",
             "blocked": true
           }
         ]
@@ -2072,38 +2442,8 @@
       {
         "operation": "update",
         "busy": true,
-        "controls": [
-          {
-            "id": "answer-apoios_informados:PART-CASO-04-41DEF6",
-            "name": "apoios_informados:PART-CASO-04-41DEF6",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-26493A",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-26493A",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-26493A",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2145,6 +2485,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2181,6 +2523,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2202,6 +2546,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2213,6 +2559,8 @@
       {
         "operation": "generate",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2224,6 +2572,8 @@
       {
         "operation": "analyze",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-narrative",
@@ -2240,6 +2590,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "answer-objetivo",
@@ -2253,6 +2605,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2264,6 +2618,8 @@
       {
         "operation": "generate",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2275,6 +2631,8 @@
       {
         "operation": "compose",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2286,6 +2644,8 @@
       {
         "operation": "analyze",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-narrative",
@@ -2302,6 +2662,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2333,6 +2695,102 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "controls": [
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "controls": [
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2369,6 +2827,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2385,60 +2845,62 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D",
             "blocked": true
           },
           {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "id": "note-modalidades_disponiveis:PART-CASO-03-AC981D",
+            "name": "modalidades_disponiveis:PART-CASO-03-AC981D:note",
             "blocked": true
           }
         ]
@@ -2446,10 +2908,47 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
-            "id": "answer-apoios_informados:PART-CASO-03-CD867F",
-            "name": "apoios_informados:PART-CASO-03-CD867F",
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "blocked": true
+          },
+          {
+            "id": "note-modalidades_disponiveis:PART-CASO-04-B7D9C9",
+            "name": "modalidades_disponiveis:PART-CASO-04-B7D9C9:note",
             "blocked": true
           }
         ]
@@ -2457,40 +2956,27 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "name": "caracteristicas_pessoa:PART-CASO-04-B7D9C9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "name": "caracteristicas_pessoa:PART-CASO-04-B7D9C9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "name": "caracteristicas_pessoa:PART-CASO-04-B7D9C9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "name": "caracteristicas_pessoa:PART-CASO-04-B7D9C9",
             "blocked": true
           }
         ]
@@ -2498,25 +2984,22 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "name": "recursos_disponiveis:PART-CASO-04-B7D9C9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "name": "recursos_disponiveis:PART-CASO-04-B7D9C9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "name": "recursos_disponiveis:PART-CASO-04-B7D9C9",
             "blocked": true
           }
         ]
@@ -2524,10 +3007,22 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
-            "id": "answer-apoios_informados:PART-CASO-04-E43734",
-            "name": "apoios_informados:PART-CASO-04-E43734",
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-E66176",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-E66176",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-E66176",
             "blocked": true
           }
         ]
@@ -2535,48 +3030,8 @@
       {
         "operation": "update",
         "busy": true,
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-04-E43734",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-04-E43734",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-04-E43734",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-012CCE",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-012CCE",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-012CCE",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2618,6 +3073,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2654,6 +3111,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2675,6 +3134,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2686,6 +3147,8 @@
       {
         "operation": "generate",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2697,6 +3160,8 @@
       {
         "operation": "analyze",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-narrative",
@@ -2713,6 +3178,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2744,6 +3211,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2780,6 +3249,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -2796,60 +3267,62 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2",
             "blocked": true
           },
           {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "id": "note-modalidades_disponiveis:PART-CASO-03-10EFD2",
+            "name": "modalidades_disponiveis:PART-CASO-03-10EFD2:note",
             "blocked": true
           }
         ]
@@ -2857,10 +3330,47 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
-            "id": "answer-apoios_informados:PART-CASO-03-9603EA",
-            "name": "apoios_informados:PART-CASO-03-9603EA",
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB",
+            "blocked": true
+          },
+          {
+            "id": "note-modalidades_disponiveis:PART-CASO-04-E089EB",
+            "name": "modalidades_disponiveis:PART-CASO-04-E089EB:note",
             "blocked": true
           }
         ]
@@ -2868,40 +3378,27 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E089EB",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E089EB",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E089EB",
             "blocked": true
           },
           {
             "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E089EB",
             "blocked": true
           }
         ]
@@ -2909,25 +3406,22 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "name": "recursos_disponiveis:PART-CASO-05-9A31B9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "name": "recursos_disponiveis:PART-CASO-05-9A31B9",
             "blocked": true
           },
           {
             "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "name": "recursos_disponiveis:PART-CASO-05-9A31B9",
             "blocked": true
           }
         ]
@@ -2935,38 +3429,8 @@
       {
         "operation": "update",
         "busy": true,
-        "controls": [
-          {
-            "id": "answer-apoios_informados:PART-CASO-04-533FDC",
-            "name": "apoios_informados:PART-CASO-04-533FDC",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-09929C",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-09929C",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis:PART-CASO-05-09929C",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -3008,6 +3472,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -3044,6 +3510,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "",
@@ -3065,6 +3533,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -3076,6 +3546,8 @@
       {
         "operation": "generate",
         "busy": true,
+        "generationVisible": true,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -3087,6 +3559,8 @@
       {
         "operation": "analyze",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "case-narrative",
@@ -3103,6 +3577,8 @@
       {
         "operation": "update",
         "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
         "controls": [
           {
             "id": "answer-objetivo",

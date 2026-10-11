@@ -27,7 +27,7 @@ const report = {
     'GERADA_PARCIAL does not establish coverage of every participant or guarantee educational benefit.',
     'Microphone accuracy, screen readers, comprehension with users and full WCAG conformance were not tested in this public smoke.',
     'Negative resource phrases in narrative are not treated as verified parser support; the local variant tested unconfirmed reader availability and operation.',
-    'This smoke verifies one flow in each presentation, not the full 118-check local regression.'
+    'This smoke verifies a short partial-answer regression and one complete flow in each presentation; it does not replace the full local regression.'
   ]
 };
 const check = (name, result) => {report.checks[name] = Boolean(result); assert(result, name);};
@@ -109,6 +109,20 @@ try {
     await page.goto(base + 'amado/' + view, {waitUntil: 'domcontentloaded'}); await ready(page);
     const flow = report.flows[view] = {questions: []};
     check(view + '_real_worker_ready', await page.locator('#analyze-case').isEnabled());
+    check(view + '_direct_challenge_heading',(await page.locator('h1').innerText()).trim()==='Qual é o seu desafio de hoje?');
+    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
+    await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
+    await page.locator('#questions-form input[value="TAR-ORGANIZAR-CONTEUDO-DIGITAL"]').check();
+    await page.locator('#answer-questions').click();
+    await page.locator('#questions-form [data-question="barreira_ou_necessidade"]').waitFor({state:'visible',timeout:180000});
+    const barrier=page.locator('#questions-form input[value="BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"]');
+    const label=barrier.locator('xpath=ancestor::label[1]'),box=await label.boundingBox();assert(box);
+    await label.click({position:{x:box.width-12,y:box.height/2}});
+    check(view+'_whole_option_selects_one_barrier',await barrier.isChecked()&&await page.locator('#questions-form input:checked').count()===1&&await label.evaluate(element=>getComputedStyle(element).cursor)==='pointer');
+    await page.locator('#answer-questions').click();
+    await page.waitForFunction(()=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!=='barreira_ou_necessidade',{}, {timeout:20000});
+    check(view+'_single_barrier_answer_advances',true);
+    await page.locator('#new-case').click();await ready(page);
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
     await page.locator('#analyze-case').click(); await page.locator('#case-questions').waitFor({state: 'visible', timeout: 180000});
     const initial = await page.evaluate(() => window.__publicSmoke.state);
@@ -117,6 +131,8 @@ try {
     while (await page.locator('#case-questions').isVisible()) {
       const row = page.locator('#questions-form [data-question]'), id = await row.getAttribute('data-question');
       const person = await page.locator('#question-person').innerText(), field = id.split(':')[0];
+      const progress=await page.locator('#question-progress').innerText();
+      assert(/\d+\s+de\s+\d+/.test(progress),'Progress is available while answering');
       const values = field === 'tarefas' ? ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'] :
         field === 'participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
         field === 'modalidades_disponiveis' ? /surd/i.test(person) ? ['MOD-TEXTO', 'MOD-IMAGEM'] : /ceg/i.test(person) ? ['MOD-AUDIO'] : ['MOD-TEXTO'] :
@@ -140,7 +156,12 @@ try {
         });
         await control.check();
       }
-      flow.questions.push({id, participant_label: person, values});
+      if(field==='modalidades_disponiveis'&&person&&await row.locator('textarea').count()){
+        const note=row.locator('textarea');await note.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+        await note.fill(/surd/i.test(person)?'O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.':
+          'O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.');
+      }
+      flow.questions.push({id, participant_label: person, values,progress});
       assert.equal(new Set(flow.questions.map(item => item.id)).size, flow.questions.length, 'No repeated question');
       assert(flow.questions.length <= 20, 'Intake terminates');
       await page.locator('#answer-questions').click();
@@ -163,7 +184,10 @@ try {
       JSON.stringify(flow.decision.component_ids) === JSON.stringify(['PAD-CONTEUDO-WEB-EQUIVALENTE']) &&
       JSON.stringify([...flow.decision.knowledge_ids].sort()) === JSON.stringify(['K10', 'K42']) &&
       JSON.stringify(flow.decision.articulation_ids) === JSON.stringify(['ART-REF-03']) && flow.decision.checks_executed > 0);
-    check(view + '_partial_status_visible', (await page.locator('#orientation-state').innerText()) === 'Orientação com limites');
+    check(view + '_partial_status_visible', (await page.locator('#orientation-state').innerText()) === 'Apoio para parte do desafio');
+    check(view+'_partial_orientation_starts_with_supported_action',await page.locator('#orientation-main .orientation-step').count()>0&&
+      !/^\s*Faltam informa[cç][oõ]es e apoios verificados/i.test(await page.locator('#orientation-main').innerText())&&
+      (await page.locator('#orientation-main .step-action').first().innerText()).trim().length>20);
     await page.locator('#orientation-foundations > summary').click();
     // Native details dispatches toggle asynchronously after the click. Wait for
     // this execution's record, not a delay or a prepared/global catalogue.

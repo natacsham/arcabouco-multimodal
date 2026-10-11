@@ -61,9 +61,37 @@ Examine SHACL e consultas separadamente: um reasoner opera sob semântica OWL e 
 
 Guarde versão, hash, ferramenta, entrada e resultado ao reproduzir uma execução. Sem esses elementos, resultados de versões diferentes podem ser confundidos.
 
-## Conferência da publicação RC2 — 11/10/2026
+## Correção do diálogo e da leitura — 11/10/2026
 
-`evidence/public-smoke.json` registra a execução sintética real no endereço público da revisão `b560fa6`: 25 verificações aprovadas e 37 arquivos servidos com hashes correspondentes. `tests/public-smoke.mjs` reproduz esse procedimento. Nas duas apresentações, a narrativa de Matemática, após respostas explícitas e confirmação, preservou os grupos de dois estudantes surdos e um estudante cego e produziu `GERADA_PARCIAL`, com `PAD-CONTEUDO-WEB-EQUIVALENTE`, K10, K42 e ART-REF-03. Os registros K10/K42 foram conferidos na fundamentação da própria escolha, não apenas no catálogo.
+`evidence/simple-flow-browser.json` registra **144/144 verificações aprovadas**
+nas duas entradas simplificadas. O caso de resposta isolada, que reproduzia a
+repetição na revisão anterior, concluiu nove perguntas sem reapresentá-las. O
+percurso sintético de Matemática com respostas explícitas concluiu treze perguntas,
+preservou os participantes e produziu a mesma configuração parcial
+`PAD-CONTEUDO-WEB-EQUIVALENTE`, com K10, K42 e ART-REF-03. A variante sem confirmação
+de leitor de tela continuou suspensa, sem cartão de orientação fictício.
+
+Foram conferidos clique na área inteira da opção, associação programática entre
+pergunta e participante, progresso, foco, estado de geração, contraste amostrado,
+reflow em 320 px, ampliação em 200% e ausência de armazenamento do caso. O ditado
+foi simulado para verificar o controle da interface, não o reconhecimento da voz.
+O relatório preserva os limites: não houve avaliação com participantes ou leitor
+de tela, nem certificação de acessibilidade integral.
+
+As dez verificações de `tests/result-presentation.mjs` exercitam as funções reais
+de apresentação com dados declaradamente sintéticos. Incluem a coexistência de
+opções completas, parciais e pendentes, preservação da resposta, condições,
+alternativas e ausência de orientação fictícia. Não são testes do raciocínio do
+motor nem uma nova evidência empírica.
+
+Motor, base, consultas e ontologia permanecem idênticos. Os relatórios técnicos
+anteriores são reutilizados somente para seus arquivos inalterados; não são
+apresentados como uma nova execução de HermiT ou SHACL. A verificação do endereço
+público é identificada separadamente por revisão e hash em `evidence/public-smoke.json`.
+
+## Histórico: conferência da publicação RC2 — 11/10/2026
+
+O [relatório preservado em `46e318a`](https://github.com/natacsham/arcabouco-multimodal/blob/46e318afbd529a7ddfa28b8257c32743e06537cd/evidence/public-smoke.json) registra a execução sintética real no endereço público da revisão `b560fa6`: 25 verificações aprovadas e 37 arquivos servidos com hashes correspondentes. Nas duas apresentações, a narrativa de Matemática, após respostas explícitas e confirmação, preservou os grupos de dois estudantes surdos e um estudante cego e produziu `GERADA_PARCIAL`, com `PAD-CONTEUDO-WEB-EQUIVALENTE`, K10, K42 e ART-REF-03. Os registros K10/K42 foram conferidos na fundamentação da própria escolha, não apenas no catálogo. O relatório de mesmo nome na versão corrente pode pertencer a uma execução posterior; deve-se conferir seu identificador de revisão.
 
 Essa conferência percorre um fluxo por apresentação; não substitui a regressão local de 118 verificações, não é uma sessão humana e não demonstra ensino da notação matemática, cobertura integral dos participantes ou efeito na aprendizagem. Microfone, leitores de tela e conformidade integral WCAG não foram avaliados nesse smoke. A revisão efetivamente testada permanece registrada mesmo quando um commit posterior acrescenta o relatório, sem modificar o produto.
 
