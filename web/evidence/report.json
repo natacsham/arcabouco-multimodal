@@ -2,7 +2,7 @@
   "version": "1.4.0-rc1",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-11T05:10:10.883017+00:00",
+  "compiled_at_utc": "2026-10-11T05:15:35.753719+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -510,7 +510,7 @@
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "dc13a7daa6808dac1783c741ff33b6e9362cf1158c15f8a34b18db43048ccbaf"
+      "sha256": "83a9343c6b03dfc6dfe9ff78302e33d9650e7344bc7bc4717f3dd2b3c0e7f83e"
     },
     "build-manifest.json": {
       "url": "build-manifest.json",
@@ -525,8 +525,12 @@
       "url": "simple-flow-browser.json",
       "sha256": "4f09a0426cc09029ab0331c8473907658b5ff50f34b7e5f9231a8611cface1af",
       "evidence_use": "CURRENT_PRESENTATION_EXECUTION"
+    },
+    "simple-flow-public.json": {
+      "url": "simple-flow-public.json",
+      "sha256": "6dc28e8a17b225c1c4040ca7a4d78f1e60c228a66ed098ad083a494ceece66e6"
     }
   },
   "historical_evidence_notice": "Os resultados da apresentação anterior são reutilizados para componentes cujos hashes foram conferidos, incluindo os arquivos preservados completo.html e completo-guiado.html. A apresentação simplificada possui seu próprio relatório atual. Relatórios herdados de 1.3 não integram a aprovação desta versão.",
-  "public_smoke_status": "PENDING_FOR_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD"
 }

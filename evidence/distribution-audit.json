@@ -1,6 +1,6 @@
 {
   "scope": "TRACKED_PUBLIC_FILES_AND_BROWSER_BUNDLE",
-  "tracked_file_count": 610,
+  "tracked_file_count": 612,
   "browser_bundle_entries": 219,
   "rdf_files": {
     "experimental/v2/base.ttl": {
