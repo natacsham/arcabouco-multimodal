@@ -102,7 +102,8 @@ def build():
         },
         "frontend_sha256": {
             name: sha(APP / name)
-            for name in ("index.html", "app.js", "styles.css", "worker.mjs", "client.mjs", "guiado.html", "guided.js", "guided.css", "views.css", "composition.js", "composition.css")
+            for name in ("index.html", "app.js", "styles.css", "worker.mjs", "client.mjs", "guiado.html", "guided.js", "guided.css", "views.css", "composition.js", "composition.css",
+                         "simple-flow.js", "simple-flow.css", "voice.js", "intake.mjs", "completo.html", "completo-guiado.html")
         },
         "site_assets_sha256": {
             name: sha(WEB / name)

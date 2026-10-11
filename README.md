@@ -8,7 +8,7 @@ O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação
 
 **Este é o projeto em desenvolvimento.** As melhorias da ontologia e do AMADO são integradas aqui, em `arcabouco-multimodal`; não existe um produto separado chamado “Evolution”. O repositório `MADO` anterior permanece preservado. A versão 1.4 da base e o módulo de composição 2.0.0-alpha2 têm identificadores distintos para permitir conferir exatamente o que foi executado.
 
-No mesmo AMADO, **Combinar formas de escrever e revisar** permite explorar o novo compositor por funções. Ele consulta registros da pesquisa e fundamentos multimodais para ligar uma forma viável de produzir conteúdo a uma forma viável de revisá-lo. Os demais casos continuam disponíveis no fluxo existente. [Como usar e o que já está coberto](docs/composicao-por-funcoes.md).
+No AMADO, conte um problema por texto ou ditado, responda apenas às perguntas necessárias e confira o desafio antes de gerar a orientação. Os exemplos ficam disponíveis junto do campo de entrada. A interface encaminha tarefas de escrita e revisão explicitamente reconhecidas ao compositor por funções; as demais tarefas seguem o motor existente. A interpretação é limitada e precisa de confirmação. [Como usar e o que já está coberto](docs/composicao-por-funcoes.md).
 
 ## Qual problema esta pesquisa enfrenta?
 
@@ -63,6 +63,8 @@ O modelo diferencia modo de interação, recurso digital, dispositivo e respons�
 **Encontrar conhecimento não significa autorizar seu uso.** Ausência de informações ou de sustentação pode produzir perguntas, condições pendentes ou suspensão da decisão.
 
 O AMADO executa Python no navegador por Pyodide, com RDF e consultas SPARQL. Não há servidor de decisões nem chamada a modelo de linguagem. A ontologia não gera prosa sozinha: o compositor emprega padrões e formulações previamente documentados. A narrativa livre também tem cobertura limitada e exige confirmação.
+
+O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A apresentação anterior continua em `amado/completo.html` e `amado/completo-guiado.html`, sem alteração dos motores.
 
 ## Arquivos e reprodução
 

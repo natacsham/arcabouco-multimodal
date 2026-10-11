@@ -1,0 +1,718 @@
+{
+  "type": "SYNTHETIC_SIMPLE_FLOW_BROWSER_NOT_PARTICIPANT_SESSION",
+  "checked_at": "2026-10-11T05:07:32.873Z",
+  "target": "LOCAL_SUBPATH",
+  "checks": {
+    "served_manifest_matches_build": true,
+    "index.html_one_initial_narrative": true,
+    "index.html_no_separate_writing_module": true,
+    "index.html_examples_recollected": true,
+    "index.html_label_and_concrete_placeholder": true,
+    "index.html_microphone_visible": true,
+    "index.html_sampled_text_field_focus_contrast": true,
+    "index.html_sampled_high_contrast": true,
+    "index.html_keyboard_reaches_voice": true,
+    "index.html_example_has_review": true,
+    "index.html_example_entry_hidden": true,
+    "index.html_generation_waits_confirmation": true,
+    "index.html_orientation_focus": true,
+    "index.html_meaningful_main": true,
+    "index.html_foundations_recollected": true,
+    "index.html_exact_native_decision_projection": true,
+    "index.html_real_traceability": true,
+    "index.html_foundations_keyboard_access": true,
+    "index.html_details_do_not_regenerate": true,
+    "index.html_editing_discards_orientation": true,
+    "index.html_clear_case": true,
+    "index.html_composition_asks_missing_conditions": true,
+    "index.html_only_four_unstated_composition_conditions": true,
+    "index.html_narrative_composes_without_loading_template": true,
+    "index.html_keyboard_then_audio_review": true,
+    "index.html_composition_foundation_present": true,
+    "index.html_voice_not_started_without_consent": true,
+    "index.html_cancel_voice_returns_focus": true,
+    "index.html_voice_started_after_consent": true,
+    "index.html_voice_transcript_no_duplication": true,
+    "index.html_voice_stop": true,
+    "index.html_manual_edit_preserved_against_late_voice": true,
+    "index.html_permission_error_preserves_text": true,
+    "index.html_only_missing_questions": true,
+    "index.html_answer_preserves_other_information": true,
+    "index.html_unknown_not_silently_completed": true,
+    "index.html_unchanged_narrative_preserves_answers": true,
+    "index.html_inputs_blocked_while_processing": true,
+    "index.html_reflow_320": true,
+    "index.html_reflow_320_text_200": true,
+    "index.html_reload_forgets_narrative": true,
+    "index.html_no_case_storage": true,
+    "index.html_short_description_error": true,
+    "guiado.html_one_initial_narrative": true,
+    "guiado.html_no_separate_writing_module": true,
+    "guiado.html_examples_recollected": true,
+    "guiado.html_label_and_concrete_placeholder": true,
+    "guiado.html_microphone_visible": true,
+    "guiado.html_sampled_text_field_focus_contrast": true,
+    "guiado.html_sampled_high_contrast": true,
+    "guiado.html_keyboard_reaches_voice": true,
+    "guiado.html_example_has_review": true,
+    "guiado.html_example_entry_hidden": true,
+    "guiado.html_generation_waits_confirmation": true,
+    "guiado.html_orientation_focus": true,
+    "guiado.html_meaningful_main": true,
+    "guiado.html_foundations_recollected": true,
+    "guiado.html_exact_native_decision_projection": true,
+    "guiado.html_real_traceability": true,
+    "guiado.html_foundations_keyboard_access": true,
+    "guiado.html_details_do_not_regenerate": true,
+    "guiado.html_editing_discards_orientation": true,
+    "guiado.html_clear_case": true,
+    "guiado.html_composition_asks_missing_conditions": true,
+    "guiado.html_only_four_unstated_composition_conditions": true,
+    "guiado.html_narrative_composes_without_loading_template": true,
+    "guiado.html_keyboard_then_audio_review": true,
+    "guiado.html_composition_foundation_present": true,
+    "guiado.html_voice_not_started_without_consent": true,
+    "guiado.html_cancel_voice_returns_focus": true,
+    "guiado.html_voice_started_after_consent": true,
+    "guiado.html_voice_transcript_no_duplication": true,
+    "guiado.html_voice_stop": true,
+    "guiado.html_manual_edit_preserved_against_late_voice": true,
+    "guiado.html_permission_error_preserves_text": true,
+    "guiado.html_only_missing_questions": true,
+    "guiado.html_answer_preserves_other_information": true,
+    "guiado.html_unknown_not_silently_completed": true,
+    "guiado.html_unchanged_narrative_preserves_answers": true,
+    "guiado.html_inputs_blocked_while_processing": true,
+    "guiado.html_reflow_320": true,
+    "guiado.html_reflow_320_text_200": true,
+    "guiado.html_reload_forgets_narrative": true,
+    "guiado.html_no_case_storage": true,
+    "guiado.html_short_description_error": true,
+    "loading_failure_shows_error": true,
+    "retry_loads_real_engine": true,
+    "unsupported_voice_has_text_alternative": true,
+    "no_case_transmission": true,
+    "no_javascript_errors": true
+  },
+  "errors": [],
+  "external_requests": [],
+  "limits": [
+    "Speech recognition is mocked: no microphone capture or recognition accuracy is evaluated.",
+    "NVDA, VoiceOver and comprehension with actual users were not tested; no full WCAG conformance claim."
+  ],
+  "build": {
+    "version": "1.4.0-rc1",
+    "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
+    "instrument": "AMADO",
+    "public_projection": true,
+    "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
+    "core_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
+    "bridge_sha256": "dc16de38e285da9ce3205fa6a2f56bb6c4468390c09366183ed773a985278336",
+    "base_zip_sha256": "e0c73ff47c6894ec6dfab15845d4f50c4d30b06f16aa103052bf50c089073c24",
+    "pyodide_version": "314.0.7",
+    "runtime": {
+      "pyodide-lock.json": {
+        "bytes": 119077,
+        "sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010"
+      },
+      "pyodide.asm.mjs": {
+        "bytes": 1250344,
+        "sha256": "f7cdc8ece80678ceb712f8e65ebe6d3a83203a180c399865f49612a051693635"
+      },
+      "pyodide.asm.wasm": {
+        "bytes": 9598218,
+        "sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6"
+      },
+      "pyodide.mjs": {
+        "bytes": 17931,
+        "sha256": "6f1d60f7bf529beb300f0f47983c921d3982363640ba20af0e38efdddbc66109"
+      },
+      "python_stdlib.zip": {
+        "bytes": 2545637,
+        "sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a"
+      }
+    },
+    "license_notices": {
+      "licenses/EMSCRIPTEN-5.0.3-LICENSE.txt": "620a78084fc7ca97c0b5dea9abf891f3ffcadfdbf305276f099c9c4e12fc1d86",
+      "licenses/LLVM-COMPILER-RT-LICENSE.txt": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+      "licenses/LLVM-LIBCXX-LICENSE.txt": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+      "licenses/MUSL-COPYRIGHT.txt": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af",
+      "licenses/PYODIDE-MPL-2.0.txt": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "licenses/PYODIDE-STACKFRAME-LICENSE.txt": "899da9d991cb211a3642b84e82a9ae0b4b4e44546fd207e34d7d4ec2eb40f420",
+      "licenses/PYTHON-3.14.2-LICENSE.txt": "b0e25a78cffb43f4d92de8b61ccfa1f1f98ecbc22330b54b5251e7b6ba010231",
+      "licenses/PYTHON-3.14.2-THIRD-PARTY.rst": "c695d550b135e53e38807e76496d1db17d22c40e461d1f3f354c86188d3305dd",
+      "licenses/README.md": "f6104c41292b57ff6d35edb7008ac8a87bbd66bdff6f9d20c16e94939a98df68"
+    },
+    "case_history": false,
+    "llm": false,
+    "composition": {
+      "version": "2.0.0-alpha2",
+      "implementation": "ResearchComposer",
+      "case_storage": false,
+      "files": {
+        "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
+        "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
+        "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
+        "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+        "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
+        "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+        "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
+      }
+    },
+    "frontend_sha256": {
+      "index.html": "bb712f268b6fc5eafc569688615d7d1960d161d6621ecae857828a5de7536620",
+      "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
+      "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
+      "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
+      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+      "guiado.html": "bb712f268b6fc5eafc569688615d7d1960d161d6621ecae857828a5de7536620",
+      "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
+      "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
+      "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+      "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
+      "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
+      "simple-flow.js": "fe2622d8424e20b3ab68f65d7f39a13d39cbc3607802948ac89524f408a0fffb",
+      "simple-flow.css": "56e15a7978d37e6051d6e4fb86e226b417cb3074097923b31a1aef841a36fcf1",
+      "voice.js": "a583dce035172e235ba642a6df396c397bf70b48f7252207e133a457caa35f1d",
+      "intake.mjs": "351deecffec3faa294c00fa7f043feb35515816100c416498acdaf93ad9f691a",
+      "completo.html": "a7aa3f6763acb5a86f1aadfd9a1c685a26fe4b0dd0ecb2971f2e051df4e55d37",
+      "completo-guiado.html": "1b32dd18123b53a5971628f30bb66d0a062d4cbc926997ed3fc94809a642511a"
+    },
+    "site_assets_sha256": {
+      "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
+      "ontologia/index.html": "43c7037f08becaaaa5d6846f5b14e9a5807a80dc48dc369c2cf49860ecf3f768",
+      "site.css": "b2f8e4240650eaf41c1292fa48993597eb382a0c49d26588b69df5aa7deb1fc8",
+      "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
+      "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
+      "explanation.js": "60f4bbb76c92740838d4521145e1b65b8bd84305a3a07982ad9ef44bdf0f9948",
+      "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
+      "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
+      "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
+    },
+    "files": {
+      "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
+      "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
+      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+      "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
+      "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
+      "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
+      "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
+      "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
+      "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
+      "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+      "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
+      "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
+      "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
+      "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+      "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
+      "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+      "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
+    }
+  },
+  "test_sha256": "56700bcf1fad106e3a1a069082ecd0457c1d45bb4eb3bace4f5d640d6d6213b9",
+  "native_decision": {
+    "status": "GERADA",
+    "components": [
+      "PAD-CONTEUDO-WEB-EQUIVALENTE"
+    ],
+    "projection_sha256": "b23d19c8c3c4a377c05f582ec2dc6931a4aee720a902dbe166be8eb48cd05e1b"
+  },
+  "browser": "154.0.8037.98",
+  "contrast": {
+    "index.html": [
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A−",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A+",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Texto original",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Alto contraste",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H1",
+        "text": "Em que você precisa de ajuda?",
+        "ratio": 13.054290705015273,
+        "minimum": 3
+      },
+      {
+        "kind": "text",
+        "element": "health",
+        "text": "Pronto para receber seu relato.",
+        "ratio": 8.33807086916269,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LABEL",
+        "text": "Conte o problema que você quer resolver",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-narrative",
+        "text": "",
+        "ratio": 14.170936979571254,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-help",
+        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "ratio": 7.93130170772904,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "dictate-case",
+        "text": "Falar o problema",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "analyze-case",
+        "text": "Continuar",
+        "ratio": 7.6658037122968254,
+        "minimum": 4.5
+      },
+      {
+        "kind": "field_boundary",
+        "element": "case-narrative",
+        "ratio": 7.6658037122968254,
+        "minimum": 3
+      },
+      {
+        "kind": "focus",
+        "element": "case-narrative",
+        "ratio": 5.0357367229889105,
+        "minimum": 3
+      }
+    ],
+    "index.html_high": [
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A−",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A+",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Texto original",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Alto contraste",
+        "ratio": 12.303564830665552,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H1",
+        "text": "Em que você precisa de ajuda?",
+        "ratio": 21,
+        "minimum": 3
+      },
+      {
+        "kind": "text",
+        "element": "health",
+        "text": "Pronto para receber seu relato.",
+        "ratio": 18.527757227085583,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LABEL",
+        "text": "Conte o problema que você quer resolver",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-narrative",
+        "text": "",
+        "ratio": 14.170936979571254,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-help",
+        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "dictate-case",
+        "text": "Falar o problema",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "analyze-case",
+        "text": "Continuar",
+        "ratio": 11.010302524036664,
+        "minimum": 4.5
+      },
+      {
+        "kind": "field_boundary",
+        "element": "case-narrative",
+        "ratio": 11.010302524036664,
+        "minimum": 3
+      },
+      {
+        "kind": "focus",
+        "element": "case-narrative",
+        "ratio": 5.250460471662055,
+        "minimum": 3
+      }
+    ],
+    "guiado.html": [
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A−",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A+",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Texto original",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Alto contraste",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H1",
+        "text": "Em que você precisa de ajuda?",
+        "ratio": 13.054290705015273,
+        "minimum": 3
+      },
+      {
+        "kind": "text",
+        "element": "health",
+        "text": "Pronto para receber seu relato.",
+        "ratio": 8.33807086916269,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LABEL",
+        "text": "Conte o problema que você quer resolver",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-narrative",
+        "text": "",
+        "ratio": 14.170936979571254,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-help",
+        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "ratio": 7.93130170772904,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "dictate-case",
+        "text": "Falar o problema",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "analyze-case",
+        "text": "Continuar",
+        "ratio": 7.6658037122968254,
+        "minimum": 4.5
+      },
+      {
+        "kind": "field_boundary",
+        "element": "case-narrative",
+        "ratio": 7.6658037122968254,
+        "minimum": 3
+      },
+      {
+        "kind": "focus",
+        "element": "case-narrative",
+        "ratio": 5.0357367229889105,
+        "minimum": 3
+      }
+    ],
+    "guiado.html_high": [
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A−",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "A+",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Texto original",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "BUTTON",
+        "text": "Alto contraste",
+        "ratio": 12.303564830665552,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H1",
+        "text": "Em que você precisa de ajuda?",
+        "ratio": 21,
+        "minimum": 3
+      },
+      {
+        "kind": "text",
+        "element": "health",
+        "text": "Pronto para receber seu relato.",
+        "ratio": 18.527757227085583,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LABEL",
+        "text": "Conte o problema que você quer resolver",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-narrative",
+        "text": "",
+        "ratio": 14.170936979571254,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "case-help",
+        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "dictate-case",
+        "text": "Falar o problema",
+        "ratio": 9.312093504050283,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "analyze-case",
+        "text": "Continuar",
+        "ratio": 11.010302524036664,
+        "minimum": 4.5
+      },
+      {
+        "kind": "field_boundary",
+        "element": "case-narrative",
+        "ratio": 11.010302524036664,
+        "minimum": 3
+      },
+      {
+        "kind": "focus",
+        "element": "case-narrative",
+        "ratio": 5.250460471662055,
+        "minimum": 3
+      }
+    ]
+  },
+  "busy_controls": {
+    "index.html": [
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "generate",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "compose",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-objetivo",
+            "name": "objetivo",
+            "blocked": true
+          }
+        ]
+      }
+    ],
+    "guiado.html": [
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "generate",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "compose",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-objetivo",
+            "name": "objetivo",
+            "blocked": true
+          }
+        ]
+      }
+    ]
+  },
+  "completed": true,
+  "passed": true
+}

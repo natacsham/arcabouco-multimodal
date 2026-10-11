@@ -4,21 +4,23 @@ O endereço de uso continua sendo o AMADO do **arcabouco-multimodal**. O reposit
 
 ## O que foi conectado
 
-A seção **Combinar formas de escrever e revisar**, disponível nas duas apresentações, usa o compositor 2.0.0-alpha2. Ele examina capacidades separadas de entrada e revisão, suas condições e uma relação documentada entre elas. Não procura o identificador de um cenário completo nem copia uma orientação pronta para o par escolhido.
+O campo **Conte o problema que você quer resolver** é a entrada comum do AMADO. Para tarefas de escrita ou revisão explicitamente reconhecidas em contexto de aprendizagem, a interface usa o compositor 2.0.0-alpha2. Ele examina capacidades separadas de entrada e revisão, suas condições e uma relação documentada entre elas. Não procura o identificador de um cenário completo nem copia uma orientação pronta para o par escolhido.
 
 A composição ainda tem um recorte: produzir e revisar uma contribuição digital em contexto de aprendizagem, ou revisar texto já disponível. Os casos de outras tarefas continuam usando o mecanismo anterior. Não há conversão silenciosa de qualquer narrativa para estas duas tarefas.
 
 ## Como experimentar
 
-1. Abra a seção de composição no AMADO e escolha a tarefa.
-2. Informe as condições e recursos: **sim**, **não** ou **a confirmar**. O exemplo sintético apenas ajuda a conhecer os campos; suas premissas não são fatos de uma pessoa real.
-3. Confira as informações e peça a composição.
-4. Veja as etapas propostas e abra os fundamentos junto de cada etapa.
-5. Altere uma condição, confirme novamente e compare. Por exemplo: impedir a saída de áudio inviabiliza a revisão por leitura em voz; não inviabiliza automaticamente a entrada por teclado.
+1. Conte o desafio por texto ou ditado. Por exemplo: uma pessoa precisa escrever uma contribuição para uma atividade de aprendizagem e conferir o rascunho com leitura em voz.
+2. Se faltar uma condição necessária, o AMADO pergunta. Responda o que souber; **não sei ainda** não é convertido em aprovação.
+3. Confira **Este é o seu desafio?** e confirme antes de gerar a orientação.
+4. Leia a orientação. Condições, alternativas e fundamentos permanecem disponíveis em blocos recolhidos.
+5. Corrija o relato para comparar outra condição. A orientação anterior perde a confirmação e precisa ser construída novamente.
+
+Os exemplos opcionais são preparados para demonstração, não fatos de uma pessoa real. A apresentação anterior, com campos detalhados e a seção de composição separada, permanece em `amado/completo.html` e `amado/completo-guiado.html`.
 
 **Completa** significa que há um percurso fundamentado para as funções representadas. **Condicional** exige informação adicional. **Parcial** preserva etapas sustentadas sem afirmar que resolvem a tarefa inteira. Uma etapa intermediária pode depender de conteúdo ainda não produzido. As opções não são classificadas da melhor para a pior.
 
-Esta tela planeja uma forma de interação. Não executa um editor, reconhecimento de fala, leitura do rascunho, envio de conteúdo ou avaliação da aprendizagem.
+Esta tela planeja uma forma de interação. Não executa o editor nem a leitura do rascunho recomendados e não avalia a aprendizagem. O ditado do relato e a leitura em voz da orientação são controles da interface, distintos das capacidades propostas para a atividade.
 
 ## Onde está a base consultada
 
@@ -43,3 +45,5 @@ Os registros reconstruídos ou documentalmente parciais conservam seus estados. 
 As verificações do módulo estão em `experimental/v2/evidence/`. A integração no navegador possui testes próprios, separados dos testes da versão da tese. A paridade compara a execução local e a execução real no navegador; não substitui avaliação com pessoas.
 
 Não há cadastro, gravação do caso ou histórico. Limpar, atualizar ou fechar descarta as informações. Os campos desconhecidos não são completados por diagnóstico e as etapas pendentes não são apresentadas como aprovadas.
+
+`web/amado/intake.mjs` converte sinais explícitos do relato em propostas de contexto. Recursos presentes não provam capacidade funcional; diagnósticos não completam condições. A síntese fica disponível para conferência, e só o contexto confirmado chega ao motor.

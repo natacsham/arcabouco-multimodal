@@ -24,7 +24,9 @@ A variante pública foi projetada para trabalhar com **um caso atual em memória
 
 Limpar, atualizar ou fechar a página descarta o caso no instrumento. Isso não impede capturas ou cópias feitas pela própria pessoa, nem elimina registros técnicos que o navegador ou o provedor de hospedagem possam manter sobre acesso à página. Não use casos com nomes, documentos pessoais ou informações identificáveis.
 
-A interface não precisa de microfone ou serviço de reconhecimento de voz remoto para funcionar. Recursos de entrada oferecidos pelo sistema operacional ou pelo navegador possuem condições próprias; não devem ser confundidos com armazenamento pelo AMADO.
+A interface funciona integralmente por texto e teclado. O botão **Falar o problema** inicia o ditado somente por solicitação. Quando houver reconhecimento local em português disponível, essa rota é preferida. Nos demais casos, a interface pede confirmação e informa que o navegador pode enviar a voz ao seu serviço de transcrição. Não se deve ditar dados identificáveis.
+
+O AMADO recebe o texto do reconhecimento, mas não grava arquivos de áudio nem os armazena. Essa ausência de gravação pelo instrumento não equivale a ausência de processamento remoto pelo navegador. A precisão do reconhecimento e as condições do serviço dependem do navegador e não são comprovadas por testes que simulam seus eventos.
 
 ## Sem retroalimentação automática
 
