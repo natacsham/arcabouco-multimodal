@@ -131,6 +131,8 @@ try{
     check(key('examples_recollected'),await page.locator('#case-examples').getAttribute('open')===null);
     check(key('label_and_concrete_placeholder'),await page.locator('label[for="case-narrative"]').count()===1&&/pessoa|aluno|estudante/i.test(await page.locator('#case-narrative').getAttribute('placeholder')));
     check(key('microphone_visible'),await page.locator('#dictate-case').isVisible()&&/falar|ditar/i.test(await page.locator('#dictate-case').innerText())&&await page.locator('#dictate-case svg').count()>0);
+    check(key('accessibility_challenge_not_generic_problem'),/desafio de acessibilidade/i.test(await page.locator('h1').innerText())&&
+      !/problema/i.test(await page.locator('#case-entry').innerText())&&await page.locator('#dictate-case').innerText()==='Falar');
     await page.locator('#case-narrative').focus();
     report.contrast??={};report.contrast[view]=await contrastSamples(page);
     check(key('sampled_text_field_focus_contrast'),report.contrast[view].every(sample=>sample.ratio>=sample.minimum));
@@ -195,6 +197,138 @@ try{
     check(key('keyboard_then_audio_review'),chosenSteps.some(steps=>steps.length===2&&steps[0].endsWith('#CaptureKeyboard')&&steps[1].endsWith('#ReviewSpeech')));
     check(key('composition_foundation_present'),composed.choices.every(choice=>choice.steps.every(step=>step.groundings.length>0&&step.groundings.every(item=>item.knowledge.id&&item.criterion.id&&item.articulation.contributions.length>0))));
     await page.locator('#new-case').click();await ready(page);
+    // A collective teaching challenge must not collapse different participants
+    // into the single-person writing pilot or infer an assistive technology.
+    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
+    await page.locator('#analyze-case').click();
+    await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
+    const teaching=await page.evaluate(()=>window.__simpleProbe.state);
+    const groups=teaching.context.participantes;
+    check(key('teaching_participants_distinct'),groups.some(group=>/surd/i.test(group.label)&&group.quantidade===2)&&
+      groups.some(group=>/ceg/i.test(group.label)&&group.quantidade===1));
+    check(key('teaching_task_general_not_theme_key'),teaching.context.raw.tarefas.length>0&&
+      teaching.context.raw.tarefas.every(id=>!/matemat/i.test(id)));
+    check(key('no_inferred_classroom_or_assistive_technology'),teaching.context.raw.ambientes.length===0&&
+      !JSON.stringify(groups.map(group=>[group.modalidades,group.recursos_operados])).match(/Libras|leitor de tela|Braille/i));
+    check(key('specific_question_focus'),await page.locator('#questions-title').evaluate(el=>el===document.activeElement)&&
+      (await page.locator('#questions-title').innerText()).includes('?')&&await page.locator('#questions-form [data-question]').count()===1);
+    const groupAnswers=[];
+    report.teaching_case??={};report.teaching_case[view]={answers:groupAnswers};
+    while(await page.locator('#case-questions').isVisible()){
+      const row=page.locator('#questions-form [data-question]'),question=await row.getAttribute('data-question');
+      const questionPerson=await page.locator('#question-person').innerText();
+      const field=question.split(':')[0];
+      const values=field==='tarefas' ? ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'] :
+        field==='participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
+        field==='modalidades_disponiveis' ? /surd/i.test(questionPerson) ? ['MOD-TEXTO','MOD-IMAGEM'] : /ceg/i.test(questionPerson) ? ['MOD-AUDIO'] : ['MOD-TEXTO'] :
+        field==='caracteristicas_pessoa' ? /ceg/i.test(questionPerson) ? ['CAR-INTERACAO-NAO-VISUAL'] : ['unknown'] :
+        field==='recursos_digitais' ? ['RED-PAGINA-WEB'] : field==='ambientes' ? ['AMB-SALA-DE-AULA'] :
+        field==='recursos_disponiveis' ? questionPerson ? /ceg/i.test(questionPerson) ? ['REC-LEITOR-DE-TELA'] :
+          /adapta/i.test(questionPerson) ? ['REC-EDITOR-MULTIMIDIA'] : ['unknown'] : [] :
+        field==='apoios_informados' ? [/surd/i.test(questionPerson) ? 'O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.' :
+          'O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.'] : [];
+      // An engine-derived resource question may offer only the required subset;
+      // the ordinary equipment question still shows the public catalogue.
+      if(field==='recursos_disponiveis'&&!questionPerson){
+        for(const candidate of ['REC-COMPUTADOR','REC-LEITOR-DE-TELA','REC-EDITOR-MULTIMIDIA'])
+          if(await row.locator('input[value="'+candidate+'"]').count())values.push(candidate);
+      }
+      if(field==='barreira_ou_necessidade'){
+        for(const candidate of ['NEC-ACESSO-EQUIVALENTE','NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE'])
+          if(await row.locator('input[value="'+candidate+'"]').count())values.push(candidate);
+      }
+      assert(values.length,'Unexpected teaching intake question: '+question);
+      if(field==='apoios_informados')await row.locator('textarea').fill(values[0]);
+      else for(const value of values){
+        const control=row.locator('input[value="'+value+'"]');
+        assert.equal(await control.count(),1,'Existing concept must be selectable: '+value);
+        if(!await control.isVisible())await control.evaluate(element=>{
+          for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;
+        });
+        await control.check();
+      }
+      await page.locator('#answer-questions').click();
+      groupAnswers.push({question,participant_label:questionPerson,values});
+      assert.equal(new Set(groupAnswers.map(item=>item.question)).size,groupAnswers.length,
+        'Teaching questions must advance, not repeat a group answer');
+      assert(groupAnswers.length<=20,'Teaching intake must terminate');
+      await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||
+        document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
+    }
+    await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
+    const teachingAnswered=await page.evaluate(()=>window.__simpleProbe.state);
+    const scopedGroups=teachingAnswered.participations.filter(group=>group.papel_id==='PAPEL-ESTUDANTE');
+    const deaf=scopedGroups.find(group=>/surd/i.test(group.label)),blind=scopedGroups.find(group=>/ceg/i.test(group.label));
+    check(key('answers_preserve_group_counts_and_separation'),deaf.quantidade===2&&blind.quantidade===1&&
+      JSON.stringify([...deaf.modalidade_ids].sort())===JSON.stringify(['MOD-IMAGEM','MOD-TEXTO'])&&JSON.stringify(blind.modalidade_ids)===JSON.stringify(['MOD-AUDIO'])&&
+      teachingAnswered.context.raw.modalidades_disponiveis.length===0&&
+      deaf.tarefa_ids.length>0&&blind.tarefa_ids.length>0);
+    check(key('groups_answered_individually'),groupAnswers.filter(item=>item.question.startsWith('modalidades_disponiveis:')).length===2&&
+      groupAnswers.some(item=>/surd/i.test(item.participant_label))&&groupAnswers.some(item=>/ceg/i.test(item.participant_label)));
+    const teachingSummary=await page.locator('#review-summary').innerText();
+    check(key('short_review_preserves_groups'),/surd/i.test(teachingSummary)&&/ceg/i.test(teachingSummary)&&
+      teachingSummary.length<650&&!teachingSummary.includes('Para a orientação, consideraremos'));
+    check(key('teaching_waits_for_confirmation'),await page.locator('#generate-orientation').isDisabled());
+    await page.locator('#case-confirmed').check();await page.locator('#generate-orientation').click();
+    await page.locator('#orientation-result').waitFor({state:'visible',timeout:180000});
+    const teachingResult=await page.evaluate(()=>window.__simpleProbe.generated);
+    check(key('teaching_uses_actual_engine_after_confirmation'),await page.evaluate(()=>window.__simpleProbe.generationKind)==='generate'&&
+      Boolean(teachingResult.decision?.status)&&teachingResult.execution_evidence.checks.length>0);
+    report.teaching_case??={};report.teaching_case[view]={answers:groupAnswers,context:teachingAnswered.context,
+      participant_conditions:scopedGroups,decision_status:teachingResult.decision.status,
+      component_ids:teachingResult.decision.component_ids,knowledge_ids:teachingResult.decision.knowledge_ids,
+      articulation_ids:teachingResult.decision.articulation_ids,
+      limitations:teachingResult.decision.informacoes_ausentes,
+      note:'This checks the real public intake and explicit synthetic follow-up answers, not a pre-registered mathematics response. The partial coverage and unresolved personal conditions remain visible.'};
+    check(key('teaching_reuses_existing_pattern_with_partial_limit'),teachingResult.decision.status==='GERADA_PARCIAL'&&
+      JSON.stringify(teachingResult.decision.component_ids)===JSON.stringify(['PAD-CONTEUDO-WEB-EQUIVALENTE'])&&
+      JSON.stringify([...teachingResult.decision.knowledge_ids].sort())===JSON.stringify(['K10','K42'])&&
+      JSON.stringify(teachingResult.decision.articulation_ids)===JSON.stringify(['ART-REF-03']));
+    await page.locator('#new-case').click();await ready(page);
+    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
+    await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
+    const variantAnswers=[];
+    while(await page.locator('#case-questions').isVisible()){
+      const row=page.locator('#questions-form [data-question]'),question=await row.getAttribute('data-question');
+      const field=question.split(':')[0],person=await page.locator('#question-person').innerText();
+      if(field==='apoios_informados')await row.locator('textarea').fill(/surd/i.test(person) ?
+        'O grupo compreende texto e imagens. Outros apoios ainda precisam ser conferidos.' : 'A operação de leitor de tela ainda não foi confirmada. É preciso conferir outra forma de acesso.');
+      else {
+        const wanted=field==='tarefas' ? ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'] :
+          field==='barreira_ou_necessidade' ? ['NEC-ACESSO-EQUIVALENTE','NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE'] :
+          field==='participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
+          field==='modalidades_disponiveis' ? /surd/i.test(person) ? ['MOD-TEXTO','MOD-IMAGEM'] : ['MOD-AUDIO'] :
+          field==='caracteristicas_pessoa' ? /ceg/i.test(person) ? ['CAR-INTERACAO-NAO-VISUAL'] : ['unknown'] :
+          field==='recursos_digitais' ? ['RED-PAGINA-WEB'] : field==='ambientes' ? ['AMB-SALA-DE-AULA'] :
+          field==='recursos_disponiveis' ? !person||/adapta/i.test(person) ? ['REC-EDITOR-MULTIMIDIA'] : ['unknown'] : [];
+        assert(wanted.length,'Unexpected resource variant question: '+question);
+        for(const value of wanted){
+          const control=row.locator('input[value="'+value+'"]');
+          assert.equal(await control.count(),1,'Existing resource variant option: '+value);
+          if(!await control.isVisible())await control.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+          await control.check();
+        }
+      }
+      await page.locator('#answer-questions').click();variantAnswers.push(question);
+      assert.equal(new Set(variantAnswers).size,variantAnswers.length,'Resource variant questions must not repeat');
+      assert(variantAnswers.length<=20,'Resource variant intake must terminate');
+      await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||
+        document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
+    }
+    const changedTeachingState=await page.evaluate(()=>window.__simpleProbe.state);
+    check(key('reader_availability_and_operation_not_confirmed'),
+      !changedTeachingState.context.raw.recursos_disponiveis.includes('REC-LEITOR-DE-TELA')&&
+      changedTeachingState.participations.every(person=>!person.recurso_operado_ids.includes('REC-LEITOR-DE-TELA')));
+    await page.locator('#case-confirmed').check();await page.locator('#generate-orientation').click();
+    await page.locator('#orientation-result').waitFor({state:'visible',timeout:180000});
+    const changedTeaching=await page.evaluate(()=>window.__simpleProbe.generated);
+    report.teaching_resource_variant??={};report.teaching_resource_variant[view]={questions:variantAnswers,
+      status:changedTeaching.decision.status,component_ids:changedTeaching.decision.component_ids,
+      information_missing:changedTeaching.decision.informacoes_ausentes,
+      note:'Same narrative; the reader availability and personal operation were not confirmed in the follow-up answers. This checks absence of support, not recognition of a textual prohibition.'};
+    check(key('unconfirmed_reader_changes_teaching_decision'),changedTeaching.decision.status.startsWith('SUSPENSA')&&
+      changedTeaching.decision.component_ids.length===0&&await page.locator('#orientation-result').isVisible());
+    await page.locator('#new-case').click();await ready(page);
     // Dictation is explicit and requires confirmation before a remote browser service.
     await page.locator('#dictate-case').focus();await page.keyboard.press('Enter');
     await page.locator('#speech-consent').waitFor({state:'visible'});
@@ -208,7 +342,11 @@ try{
       window.__speech.instances.at(-1).emit('result',{resultIndex:0,results:[first]});
       const second=[{transcript:' Precisa ler imagens com o leitor de tela.',confidence:1}];second.isFinal=true;
       window.__speech.instances.at(-1).emit('result',{resultIndex:1,results:[first,second]});
+      const provisional=[{transcript:' Uma parte ainda sendo reconhecida',confidence:1}];provisional.isFinal=false;
+      window.__speech.instances.at(-1).emit('result',{resultIndex:2,results:[first,second,provisional]});
     });
+    check(key('provisional_voice_visibly_distinct'),/Transcrição provisória/.test(await page.locator('#dictation-preview').innerText())&&
+      !(await page.locator('#case-narrative').inputValue()).includes('ainda sendo reconhecida'));
     check(key('voice_transcript_no_duplication'),await page.locator('#case-narrative').evaluate(el=>(el.value.match(/Uma pessoa usa um computador/g)||[]).length===1&&el.value.includes('leitor de tela')));
     await page.locator('#dictate-case').click();
     check(key('voice_stop'),await page.evaluate(()=>window.__speech.stops)>0&&await page.locator('#dictate-case').getAttribute('aria-pressed')==='false');
@@ -279,7 +417,9 @@ try{
   check('no_case_transmission',requests.every(row=>row.method==='GET'&&!((row.url+row.body).includes('MARCADOR-PRIVACIDADE')))&&report.external_requests.length===0);
   check('no_javascript_errors',report.errors.length===0);
   report.completed=true;report.passed=true;
-}catch(error){report.passed=false;report.failure=String(error.stack||error).replaceAll(root,'<PROJECT>');process.exitCode=1;await page?.screenshot({path:path.join(artifacts,'failure.png'),fullPage:true}).catch(()=>{});}
+}catch(error){report.passed=false;report.failure=String(error.stack||error)
+  .replaceAll(root,'<PROJECT>').replaceAll(root.replaceAll('\\','/'),'<PROJECT>').replaceAll('file:///<PROJECT>','<PROJECT>');
+  process.exitCode=1;await page?.screenshot({path:path.join(artifacts,'failure.png'),fullPage:true}).catch(()=>{});}
 finally{
   await browser.close();await new Promise(resolve=>server.close(resolve));
   await fs.writeFile(path.join(root,'evidence',process.env.SIMPLE_PUBLIC_URL?'simple-flow-public.json':'simple-flow-browser.json'),JSON.stringify(report,null,2)+'\n');

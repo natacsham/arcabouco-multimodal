@@ -10,7 +10,7 @@ Com Python 3.12 ou posterior, na pasta do repositório:
 python -m http.server 8767 --directory web --bind 127.0.0.1
 ```
 
-Abra `http://127.0.0.1:8767/`. O Python do navegador e a base são distribuídos junto com a página; o servidor acima só entrega arquivos. Aguarde o indicador de carregamento. Conte o problema ou abra um exemplo, complete as informações necessárias, confirme o desafio e gere a orientação. **Informar outro problema** limpa o caso atual; durante uma operação, aguarde sua conclusão.
+Abra `http://127.0.0.1:8767/`. O Python do navegador e a base são distribuídos junto com a página; o servidor acima só entrega arquivos. Aguarde o indicador de carregamento. Conte seu desafio ou abra um exemplo, complete as informações necessárias, confirme e gere a orientação. Reiniciar limpa o caso atual; durante uma operação, aguarde sua conclusão.
 
 O caso não é salvo. Recarregar ou fechar a aba descarta a entrada e a orientação. Os arquivos estáticos podem ser mantidos no cache do navegador; eles não contêm o caso digitado. A hospedagem pode manter seus próprios registros de acesso aos arquivos públicos.
 
@@ -19,6 +19,8 @@ O caso não é salvo. Recarregar ou fechar a aba descarta a entrada e a orienta�
 ```text
 python -m pip install -r requirements.txt
 python scripts/build_traceability_rdf.py
+python -B scripts/source_catalog.py --check
+python -B scripts/source_catalog.py --write-projection web/assets/source-catalog.json
 ```
 
 `verify_public.py` executa os testes Python e SHACL, confere o hash da verificação formal registrada e informa falhas. Essa conferência de hash não é uma nova execução do HermiT.
@@ -45,12 +47,13 @@ O piloto é uma projeção de uma execução técnica preparada, não uma sessã
 
 ## Navegador
 
-A entrada simples atende aos dois motores. Tarefas de escrita e revisão explicitamente reconhecidas em contexto de aprendizagem são encaminhadas ao módulo `experimental/v2`. Condições desconhecidas precisam ser conferidas; recursos disponíveis não autorizam inferir capacidades. [Escopo e percurso dos dados](composicao-por-funcoes.md).
+A entrada simples atende aos dois motores. Tarefas representadas de escrita, revisão e acesso a conteúdo são encaminhadas ao módulo `experimental/v2`. Condições desconhecidas precisam ser conferidas por participante; recursos disponíveis não autorizam inferir capacidades. [Escopo e percurso dos dados](composicao-por-funcoes.md).
 
 Verificação da apresentação simples:
 
 ```text
 node tests/intake.mjs
+node tests/source-path.mjs
 node tests/simple-flow-browser.mjs
 ```
 
@@ -74,7 +77,7 @@ python scripts/audit_distribution.py
 python scripts/publish_traceability.py
 ```
 
-Os testes anteriores foram realizados na apresentação detalhada preservada. Seus relatórios só são reutilizados quando os hashes do motor, do pacote e dos arquivos da apresentação anterior continuam iguais. Eles não constituem uma nova avaliação da entrada simples. A comparação verifica a semântica nativa/navegador, não apenas o número de configurações. NVDA e VoiceOver continuam pendentes; estes testes não certificam conformidade integral.
+Os testes da apresentação detalhada abrem `completo.html` e `completo-guiado.html`. Nesta revisão, seus resultados precisam ser reexecutados com os mesmos arquivos do manifesto atual; evidência anterior só pode ser reutilizada quando os componentes testados forem idênticos. A entrada simples tem relatório próprio. A comparação verifica a semântica nativa/navegador, não apenas o número de configurações. NVDA e VoiceOver continuam pendentes; estes testes não certificam conformidade integral.
 
 `TRACE_PUBLIC_URL=https://natacsham.github.io/arcabouco-multimodal/` direciona os mesmos testes ao endereço publicado. Esse resultado é separado em `traceability-public.json`.
 

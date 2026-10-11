@@ -69,3 +69,12 @@ v2:explanation a owl:DatatypeProperty ; rdfs:domain v2:RelationRule ; rdfs:range
 v2:url a owl:DatatypeProperty ; rdfs:range xsd:string .
 v2:locator a owl:DatatypeProperty ; rdfs:range xsd:string .
 mado:localizacaoDocumental a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:scope a owl:DatatypeProperty ; rdfs:range xsd:string ;
+  rdfs:comment "context identifica fatos compartilhados; condições pessoais não são herdadas por outro participante."@pt .
+v2:edition a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:review_status a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:referenceKind a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:document_url a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:document_version a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:document_review_status a owl:DatatypeProperty ; rdfs:range xsd:string .
+v2:document_paraphrase a owl:DatatypeProperty ; rdfs:range xsd:string .

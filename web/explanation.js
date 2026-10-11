@@ -10,6 +10,14 @@ const list = (items, empty = 'Não detalhado neste registro.') => {
   return values.length ? `<ul>${values.map(value => `<li>${escape(value)}</li>`).join('')}</ul>` : `<p class="explanation-gap">${escape(empty)}</p>`;
 };
 const field = (label, value, empty) => `<div class="explanation-field"><strong>${escape(label)}</strong>${list(value, empty)}</div>`;
+const sourceLink = (url, label = 'Consultar a fonte original') => {
+  if (typeof url !== 'string') return '';
+  try {
+    const parsed = new URL(url);
+    return ['https:', 'http:'].includes(parsed.protocol)
+      ? `<p><a href="${escape(parsed.href)}">${escape(label)}</a></p>` : '';
+  } catch { return ''; }
+};
 const labels = {
   DISPONIVEL_CONFIRMADO:'Disponível', CONFIRMADO_DISPONIVEL:'Recurso confirmado', NAO_CONFIRMADO:'A confirmar', PROPOSTO_A_PREPARAR:'Proposto, ainda a preparar', REQUER_PREPARACAO:'Requer preparação', IMPEDIDO:'Não pode ser usado',
   PASS:'Condição atendida', FAIL:'Condição não atendida', PENDING:'A confirmar', NOT_EXECUTED:'Não verificado pelo motor',
@@ -98,7 +106,7 @@ function contribution(row) {
   const source = row.source || {};
   const excerpt = row.excerpt || {};
   const location = excerpt.location || row.location;
-  return `<li class="explanation-contribution">${field('Contribuição registrada', statement, 'A contribuição individual desta fonte ainda não foi detalhada.')}${field('Fonte', text(source), 'A fonte não foi incluída neste retorno.')}${field('Localização', location, 'A localização documental não foi detalhada; o identificador não a substitui.')}${row.contribution_role ? field('Papel desta contribuição', human(row.contribution_role)) : ''}${row.nature ? field('Natureza do registro', human(row.nature)) : ''}${documentarySupport(row)}${row.justification ? field('Por que essa contribuição foi relacionada', row.justification) : ''}<p class="explanation-state"><strong>Conferência:</strong> ${escape(human(row.verification_status || 'PENDENTE'))}</p>${excerpt.publication_notice ? `<p class="explanation-note">${escape(excerpt.publication_notice)}</p>` : ''}${technical([row.id, row.articulation_id, row.knowledge_id, row.excerpt_id, source.id])}</li>`;
+  return `<li class="explanation-contribution">${field('Contribuição registrada', statement, 'A contribuição individual desta fonte ainda não foi detalhada.')}${field('Fonte', text(source), 'A fonte não foi incluída neste retorno.')}${field('Localização', location, 'A localização documental não foi detalhada; o identificador não a substitui.')}${sourceLink(excerpt.document_url || source.url)}${row.contribution_role ? field('Papel desta contribuição', human(row.contribution_role)) : ''}${row.nature ? field('Natureza do registro', human(row.nature)) : ''}${documentarySupport(row)}${row.justification ? field('Por que essa contribuição foi relacionada', row.justification) : ''}<p class="explanation-state"><strong>Conferência:</strong> ${escape(human(row.verification_status || 'PENDENTE'))}</p>${excerpt.publication_notice ? `<p class="explanation-note">${escape(excerpt.publication_notice)}</p>` : ''}${technical([row.id, row.articulation_id, row.knowledge_id, row.excerpt_id, source.id])}</li>`;
 }
 
 function makePresenter(result) {

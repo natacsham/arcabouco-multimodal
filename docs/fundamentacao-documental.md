@@ -1,6 +1,6 @@
 # Fundamentação documental da articulação
 
-Esta revisão pertence ao repositório independente **Arcabouço Multimodal**, versão `1.4.0-rc1`. Não modifica a MADO `1.3.0-rc1` publicada nem reescreve a avaliação da tese. O acréscimo torna inspecionável **qual parcela de cada registro foi empregada numa articulação**; não transforma uma referência bibliográfica em prova de toda a decisão.
+Esta revisão pertence ao repositório independente **Arcabouço Multimodal**, versão `1.4.0-rc2`. Não modifica a MADO `1.3.0-rc1` publicada nem reescreve a avaliação da tese. O acréscimo torna inspecionável **qual parcela de cada registro foi empregada numa articulação**; não transforma uma referência bibliográfica em prova de toda a decisão.
 
 ## Três percursos diferentes
 
@@ -27,7 +27,7 @@ Aplicação de critério ─ aplicacaoMobilizaContribuicao → Contribuição
 
 ## O que foi efetivamente conferido
 
-Foram introduzidas **26 contribuições**, relativas a **11 conhecimentos (K35–K45)** e **nove articulações**. Todas estão como `CONFERIDA_NO_REGISTRO`, não como `CONFERIDA_NO_DOCUMENTO`.
+Foram preservadas **26 contribuições**, relativas a **11 conhecimentos (K35–K45)** e **nove articulações**. Nesta RC2, 25 permanecem `CONFERIDA_NO_REGISTRO`; `C-K42-02` recebeu conferência da seção original e está `CONFERIDA_NO_DOCUMENTO`. Isso não promove a fundamentação integral de K42.
 
 A conferência de 08/10/2026 utilizou os registros preservados da base RC4. Os PDFs originais não estavam disponíveis nos caminhos consultados; portanto, não houve reconferência de paginação, contexto integral ou fidelidade da extração ao original. O arquivo documental de origem foi identificado pelo SHA-256 `ca2ac9142e44e5198c6fe916a8a25a8a02c4e473be4c87511aab29bf2e3afbe1`. Ele permanece fora desta distribuição pública. Os textos públicos das contribuições são paráfrases analíticas, não transcrições dos documentos.
 
@@ -39,6 +39,19 @@ A conferência de 08/10/2026 utilizou os registros preservados da base RC4. Os P
 
 O responsável registrado é a assistência computacional que realizou esta conferência. A data é civil (`YYYY-MM-DD`); nenhum horário foi inventado. Os estados históricos de curadoria das articulações foram preservados como histórico; não substituem o nível desta nova conferência.
 
+### Reconferência online em 11/10/2026
+
+| Registros existentes | Original e seção consultados | Alcance |
+|---|---|---|
+| ORI-0001, ORI-0014, ORI-0090, ORI-0148 e respectivos trechos | [WCAG 2.2, Recommendation de 05/10/2023](https://www.w3.org/TR/2023/REC-WCAG22-20231005/): 1.1.1, 1.3.1, 1.2.5, 1.2.2 | Paráfrase, localização, edição, URL e data das seções; não aprovação de todas as extrações WCAG |
+| ORI-0012, ORI-0013 e respectivos trechos | [MMI Requirements, Note de 08/01/2003](https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/): 1.9 (MMI-G16), 2.1 (MMI-I1) | Localização e paráfrase dos requisitos existentes; não dedução de solução pedagógica |
+| FN-AAG | [Página oficial de acessibilidade Android](https://developer.android.com/guide/topics/ui/accessibility) | Página atual consultada; edição histórica das extrações não reconferida |
+| FN-ABNT-WEB | Endereço ABNT citado pela publicação | Redirecionamento para acesso restrito; conteúdo integral não consultado |
+
+Nenhum PDF foi baixado. As referências E06-F15 e E06-F17 agora apontam para as edições identificadas e para suas fontes operacionais existentes; continuam como bibliografia citada na auditoria, sem promoção indiscriminada. Citações de outras publicações não foram consideradas documentos integralmente examinados.
+
+O filtro anterior confundia `https://` com caminhos Windows: 73 citações foram restauradas por ID a partir do registro preservado da RC3, com hashes de procedência. O catálogo identifica endereços completos, reparos candidatos e seis grupos candidatos a duplicação, sem excluir IDs nem declarar leitura pela simples existência de um link. Esta correção bibliográfica não acrescenta conhecimentos ou padrões decisórios.
+
 ## Piloto: CA02, K38 e K43
 
 No padrão `PAD-ORGANIZAR-CONTEUDO-PERSISTENTE`, a aplicação de **CA02** relaciona explicitamente **K38 e K43** às origens **ORI-0012, ORI-0013 e ORI-0014**. Essas origens são itens de MMI e WCAG preservados na extração dos critérios. Elas sustentam a aplicação do critério; não são automaticamente promovidas a fontes de cada conhecimento.
@@ -48,7 +61,7 @@ No padrão `PAD-ORGANIZAR-CONTEUDO-PERSISTENTE`, a aplicação de **CA02** relac
 | K38 / TD-EV13 | Preservação da informação numa representação descritiva acessível | Oferece um princípio de preservação de significado, não um procedimento completo de autoria |
 | K38 / TD-EV34 | Organização de formatos e mediação na persona | Relaciona formatos a funções de organização; unidade persistente é reconstrução posterior |
 | K38 / TD-EV29 | Revisão, confirmação e feedback no redesenho de mensagens | A função pode informar outra tarefa; não autoriza copiar o fluxo de mensagens |
-| K38 / TD-EV42 | Contextualização da persona em tarefa e fluxo do SIGAA | Apoia delimitar a tarefa; não demonstra efeito de uma nova atividade educacional |
+| K38 / TD-EV42 | Contextualização da persona em tarefa e fluxo de um ambiente educacional | Apoia delimitar a tarefa; não demonstra efeito de uma nova atividade educacional |
 | K43 / TD-EV34 e TD-EV36 | Organização de formatos, tecnologias assistivas e condições das personas | Contribui para discutir coordenação de modalidades, sem provar uma ordem universal |
 | K43 / TD-RC3-REF-09 e TD-RC3-REF-10 | Contextualização educacional e relação entre perfil, tarefa e recursos | Informa aplicação situada; não comprova causalmente redução de sobrecarga ou aprendizagem |
 
@@ -75,6 +88,8 @@ Na raiz do repositório:
 ```powershell
 python -B scripts/build_traceability_rdf.py
 python -B scripts/build_traceability_rdf.py --check
+python -B scripts/source_catalog.py --check
+python -B scripts/source_catalog.py --write-projection web/assets/source-catalog.json
 python -B -m unittest discover -s tests -p test_contributions.py
 ```
 

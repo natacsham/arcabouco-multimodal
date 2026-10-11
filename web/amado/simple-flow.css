@@ -6,6 +6,7 @@ body.simple-view main {max-width:86rem;gap:1rem;margin:1.5rem auto}
 .simple-view textarea {width:100%;line-height:1.55;resize:vertical}
 .simple-view h2 {font-size:1.5rem}
 .simple-view h3 {font-size:1.125rem}
+.simple-view :is(h1,h2,h3,.question-person) {overflow-wrap:anywhere}
 .simple-view p {max-width:none}
 .input-tools {display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:space-between;align-items:center;margin-top:.5rem}
 .input-tools p {margin:0;color:#35565f}
@@ -23,9 +24,14 @@ body.simple-view main {max-width:86rem;gap:1rem;margin:1.5rem auto}
 .simple-view .text-button {padding:.5rem 0;border:0;background:transparent;color:var(--primary);text-decoration:underline}
 .question {padding:.75rem 0;border-bottom:1px solid #c7d8dc;margin:0 0 .5rem}
 .question label,.question legend {font-weight:600}
+.question-person {margin:.25rem 0;font-weight:600;color:var(--primary-dark)}
 .question-options {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:.5rem;margin:.75rem 0}
 .question-options label {font-weight:400;display:flex;gap:.5rem;align-items:start;line-height:1.4;padding:.35rem}
 .question-options input {flex-shrink:0;margin:.2rem 0}
+.question-unknown {display:flex;align-items:center;gap:.5rem;min-height:44px;font-weight:400!important}
+.question-single {grid-template-columns:repeat(auto-fit,minmax(min(100%,8rem),1fr));max-width:32rem}
+.question-single label {border:1px solid var(--border);border-radius:.375rem;min-height:44px;align-items:center;padding:.5rem .75rem}
+.question-single label:has(input:checked) {background:var(--soft);border-color:var(--primary)}
 .question select {width:100%}
 .question-search {font-size:.9375rem;margin-top:.5rem}
 .review-fields {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:.75rem}
@@ -33,6 +39,11 @@ body.simple-view main {max-width:86rem;gap:1rem;margin:1.5rem auto}
 .review-field strong {display:block}
 .review-field p {margin:.25rem 0}
 #review-summary p {font-size:1.0625rem;margin:.5rem 0}
+.review-summary {margin:.75rem 0}
+.review-summary > div {margin:.6rem 0}
+.review-summary dt {font-weight:600}
+.review-summary dd {margin:.15rem 0;line-height:1.5}
+#dictation-preview {padding:.5rem .75rem;border-left:3px solid var(--primary);background:var(--soft);color:var(--primary-dark)}
 .result-heading {display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:baseline;justify-content:space-between}
 #orientation-state {font-size:.9375rem;font-weight:600}
 .orientation-step {margin:1rem 0;padding:1rem;border-left:4px solid var(--primary);background:var(--soft)}

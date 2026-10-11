@@ -5,7 +5,7 @@ export function setupDictation({button, input, status, preview, dialog, allow, c
   const caption = button.querySelector('span');
   function state(listening) {
     active = listening; button.setAttribute('aria-pressed', String(listening));
-    caption.textContent = listening ? 'Parar ditado' : 'Falar o problema';
+    caption.textContent = listening ? 'Parar' : 'Falar';
   }
   function closeDialog() { if (dialog.open) dialog.close(); button.focus(); }
   async function start(local) {
@@ -20,7 +20,7 @@ export function setupDictation({button, input, status, preview, dialog, allow, c
     instance.onstart = () => {
       if (thisToken !== token) { instance.abort(); return; }
       checking = false;
-      state(true); status.textContent = 'Pode falar. Use Parar ditado quando terminar.';
+      state(true); status.textContent = 'Ouvindo… O texto reconhecido aparecerá no campo.';
     };
     instance.onresult = event => {
       if (thisToken !== token) return;
@@ -36,7 +36,9 @@ export function setupDictation({button, input, status, preview, dialog, allow, c
         instance.stop(); return;
       }
       input.value = text; input.dispatchEvent(new Event('input', {bubbles:true}));
-      preview.textContent = interim; preview.hidden = !interim;
+      // Interim words are explicitly provisional; finalized text stays editable
+      // in the narrative field. Do not announce every interim word as a status.
+      preview.textContent = interim ? 'Transcrição provisória: '+interim : ''; preview.hidden = !interim;
     };
     instance.onerror = event => {
       if (thisToken !== token) return;
@@ -54,7 +56,7 @@ export function setupDictation({button, input, status, preview, dialog, allow, c
     instance.onend = () => {
       if (thisToken !== token) return;
       checking = false; state(false); preview.hidden = true; recognition = null;
-      if (!failed) status.textContent = 'Ditado encerrado. Confira o texto antes de continuar.';
+      if (!failed) status.textContent = 'Transcrição no campo. Confira o texto antes de continuar.';
     };
     try { instance.start(); } catch {
       checking = false; state(false); recognition = null; status.textContent = 'Não foi possível iniciar o ditado. Tente novamente ou continue escrevendo.';

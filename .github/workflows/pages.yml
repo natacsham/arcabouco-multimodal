@@ -20,11 +20,14 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
       - run: python scripts/build_traceability_rdf.py --check
+      - run: python -B scripts/source_catalog.py --check --check-projection web/assets/source-catalog.json
       - run: python scripts/verify_public.py
       - run: python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
       - run: python -B experimental/v2/verify.py
       - run: python scripts/check_bundle.py
       - run: node tests/intake.mjs
+      - run: node tests/source-path.mjs
+      - run: python -B tests/publish-gates.py
       - run: python scripts/audit_distribution.py
       - run: python scripts/publish_traceability.py
       - uses: actions/configure-pages@v5

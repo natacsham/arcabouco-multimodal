@@ -32,6 +32,7 @@ const base=process.env.TRACE_PUBLIC_URL||`http://127.0.0.1:${server.address().po
 const origin=new URL(base).origin;
 const report={version:'1.4.0-rc1',type:'SYNTHETIC_TECHNICAL_BROWSER_CHECK',execution_target:process.env.TRACE_PUBLIC_URL?'PUBLIC_SITE':'LOCAL_SUBPATH',executed_at:new Date().toISOString(),checks:{},errors:[],external_requests:[],methods:[],limitations:['NVDA e VoiceOver não testados.','Não representa avaliação humana ou conformidade WCAG integral.','Tempos de laboratório; sem garantia de desempenho em dispositivos móveis.']};
 report.build=JSON.parse(await fs.readFile(path.join(web,'amado/manifest.json'),'utf8'));
+report.version=report.build.version;
 report.test_sha256=crypto.createHash('sha256').update(await fs.readFile(fileURLToPath(import.meta.url))).digest('hex');
 const browser=await chromium.launch({headless:true,executablePath:process.env.AMADO_CHROMIUM||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1243/chrome-win64/chrome.exe')});
 report.browser=browser.version();
@@ -115,7 +116,7 @@ try{
   }
   const displayed=[];
   for(const view of ['index.html','guiado.html']){
-    await page.goto(base+'amado/'+view);await idle(page);
+    await page.goto(base+'amado/'+(view==='index.html'?'completo.html':'completo-guiado.html'));await idle(page);
     check(view+'_ready',await page.locator('#health').getAttribute('data-state')==='ready');
     const resizeBaseline=await page.evaluate(()=>window.__traceProbe.resizeListeners.size);
     await page.locator('#reported-step input[value="yes"]').check();
@@ -214,7 +215,7 @@ try{
   await fs.writeFile(path.join(artifacts,'decisions.json'),JSON.stringify(decisions));
   await page.evaluate(()=>window.probeWorker.terminate());
   // Failure recovery is not a successful empty orientation.
-  failBundle=true;await page.goto(base+'amado/');await idle(page);
+  failBundle=true;await page.goto(base+'amado/completo.html');await idle(page);
   check('failed_load_does_not_generate',Boolean((await page.locator('#runtime-error').textContent()).trim())&&!await page.locator('#saida').isVisible());
   failBundle=false;await page.locator('#clear-case').click();await idle(page);
   check('load_failure_recovers',await page.locator('#health').getAttribute('data-state')==='ready');

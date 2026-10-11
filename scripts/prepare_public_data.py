@@ -18,6 +18,7 @@ from rdflib import Graph, Literal, Namespace, RDF, OWL, RDFS
 
 M = Namespace("https://w3id.org/mado#")
 VERSION = "1.3.0-rc1"
+LOCAL_PATH = re.compile(r"(?<![\w:/\\])[A-Za-z]:[/\\]|file://", re.I)
 
 
 def sha(path):
@@ -56,7 +57,7 @@ def scrub(value):
     if isinstance(value, list):
         return [scrub(v) for v in value]
     if isinstance(value, str):
-        if re.search(r"[A-Za-z]:[/\\]|file://", value):
+        if LOCAL_PATH.search(value):
             return "[Caminho local omitido da distribuição pública]"
     return value
 
@@ -238,7 +239,7 @@ def build(source):
     g += tbox
     # Strip local paths and quote predicates wherever duplicates were recorded.
     for s, p, o in list(g):
-        if isinstance(o, Literal) and re.search(r"[A-Za-z]:[/\\]|file://", str(o)):
+        if isinstance(o, Literal) and LOCAL_PATH.search(str(o)):
             g.remove((s, p, o))
         if str(p).rsplit("#", 1)[-1] in {"textoItemOriginal", "textoDoItemOriginal"}:
             g.remove((s, p, o))

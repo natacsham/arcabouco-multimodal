@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SIMPLE_FLOW_BROWSER_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-11T05:07:32.873Z",
+  "checked_at": "2026-10-11T07:29:47.333Z",
   "target": "LOCAL_SUBPATH",
   "checks": {
     "served_manifest_matches_build": true,
@@ -9,6 +9,7 @@
     "index.html_examples_recollected": true,
     "index.html_label_and_concrete_placeholder": true,
     "index.html_microphone_visible": true,
+    "index.html_accessibility_challenge_not_generic_problem": true,
     "index.html_sampled_text_field_focus_contrast": true,
     "index.html_sampled_high_contrast": true,
     "index.html_keyboard_reaches_voice": true,
@@ -29,9 +30,22 @@
     "index.html_narrative_composes_without_loading_template": true,
     "index.html_keyboard_then_audio_review": true,
     "index.html_composition_foundation_present": true,
+    "index.html_teaching_participants_distinct": true,
+    "index.html_teaching_task_general_not_theme_key": true,
+    "index.html_no_inferred_classroom_or_assistive_technology": true,
+    "index.html_specific_question_focus": true,
+    "index.html_answers_preserve_group_counts_and_separation": true,
+    "index.html_groups_answered_individually": true,
+    "index.html_short_review_preserves_groups": true,
+    "index.html_teaching_waits_for_confirmation": true,
+    "index.html_teaching_uses_actual_engine_after_confirmation": true,
+    "index.html_teaching_reuses_existing_pattern_with_partial_limit": true,
+    "index.html_reader_availability_and_operation_not_confirmed": true,
+    "index.html_unconfirmed_reader_changes_teaching_decision": true,
     "index.html_voice_not_started_without_consent": true,
     "index.html_cancel_voice_returns_focus": true,
     "index.html_voice_started_after_consent": true,
+    "index.html_provisional_voice_visibly_distinct": true,
     "index.html_voice_transcript_no_duplication": true,
     "index.html_voice_stop": true,
     "index.html_manual_edit_preserved_against_late_voice": true,
@@ -51,6 +65,7 @@
     "guiado.html_examples_recollected": true,
     "guiado.html_label_and_concrete_placeholder": true,
     "guiado.html_microphone_visible": true,
+    "guiado.html_accessibility_challenge_not_generic_problem": true,
     "guiado.html_sampled_text_field_focus_contrast": true,
     "guiado.html_sampled_high_contrast": true,
     "guiado.html_keyboard_reaches_voice": true,
@@ -71,9 +86,22 @@
     "guiado.html_narrative_composes_without_loading_template": true,
     "guiado.html_keyboard_then_audio_review": true,
     "guiado.html_composition_foundation_present": true,
+    "guiado.html_teaching_participants_distinct": true,
+    "guiado.html_teaching_task_general_not_theme_key": true,
+    "guiado.html_no_inferred_classroom_or_assistive_technology": true,
+    "guiado.html_specific_question_focus": true,
+    "guiado.html_answers_preserve_group_counts_and_separation": true,
+    "guiado.html_groups_answered_individually": true,
+    "guiado.html_short_review_preserves_groups": true,
+    "guiado.html_teaching_waits_for_confirmation": true,
+    "guiado.html_teaching_uses_actual_engine_after_confirmation": true,
+    "guiado.html_teaching_reuses_existing_pattern_with_partial_limit": true,
+    "guiado.html_reader_availability_and_operation_not_confirmed": true,
+    "guiado.html_unconfirmed_reader_changes_teaching_decision": true,
     "guiado.html_voice_not_started_without_consent": true,
     "guiado.html_cancel_voice_returns_focus": true,
     "guiado.html_voice_started_after_consent": true,
+    "guiado.html_provisional_voice_visibly_distinct": true,
     "guiado.html_voice_transcript_no_duplication": true,
     "guiado.html_voice_stop": true,
     "guiado.html_manual_edit_preserved_against_late_voice": true,
@@ -101,14 +129,14 @@
     "NVDA, VoiceOver and comprehension with actual users were not tested; no full WCAG conformance claim."
   ],
   "build": {
-    "version": "1.4.0-rc1",
+    "version": "1.4.0-rc2",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
-    "bridge_sha256": "dc16de38e285da9ce3205fa6a2f56bb6c4468390c09366183ed773a985278336",
-    "base_zip_sha256": "e0c73ff47c6894ec6dfab15845d4f50c4d30b06f16aa103052bf50c089073c24",
+    "core_sha256": "28d595f17039e71a25c61d360bf7c26fb98b9224de52edc1390b8df9ad6ad7a1",
+    "bridge_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
+    "base_zip_sha256": "94bd6531c09196147194462e3f48ef7bd7859e7cf6fbf26bf0ea8231c54bd493",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -150,51 +178,53 @@
       "implementation": "ResearchComposer",
       "case_storage": false,
       "files": {
-        "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
-        "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
-        "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
-        "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+        "experimental/v2/composer.py": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
+        "experimental/v2/trajectory.py": "a4136772e09e27b69dcdb1477953894a741bdc4e526d46422049b450b3b0e369",
+        "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+        "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
         "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-        "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+        "experimental/v2/trajectory-bindings.json": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
         "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
       }
     },
     "frontend_sha256": {
-      "index.html": "bb712f268b6fc5eafc569688615d7d1960d161d6621ecae857828a5de7536620",
+      "index.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
       "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
       "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
       "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
       "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "bb712f268b6fc5eafc569688615d7d1960d161d6621ecae857828a5de7536620",
+      "guiado.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-      "simple-flow.js": "fe2622d8424e20b3ab68f65d7f39a13d39cbc3607802948ac89524f408a0fffb",
-      "simple-flow.css": "56e15a7978d37e6051d6e4fb86e226b417cb3074097923b31a1aef841a36fcf1",
-      "voice.js": "a583dce035172e235ba642a6df396c397bf70b48f7252207e133a457caa35f1d",
-      "intake.mjs": "351deecffec3faa294c00fa7f043feb35515816100c416498acdaf93ad9f691a",
-      "completo.html": "a7aa3f6763acb5a86f1aadfd9a1c685a26fe4b0dd0ecb2971f2e051df4e55d37",
-      "completo-guiado.html": "1b32dd18123b53a5971628f30bb66d0a062d4cbc926997ed3fc94809a642511a"
+      "simple-flow.js": "703a17bae6c5ac287c4724c43f2750aad398fa66e642ec503068db0517ed94bf",
+      "simple-flow.css": "f98d1047d42eba688a50ad4891ae1aba64c953ea5c28caf3b7067335304f8431",
+      "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
+      "intake.mjs": "98a08a564804c6d4c469e5f24b2bf6e2114c382d05a832bf065cf9a7d19ed027",
+      "completo.html": "3c6fc3e388b6df3e3d3284342a10025437d813cfe10d3b51313d4f648649d7a2",
+      "completo-guiado.html": "fcad9bab6756d0fdcb2e816e64c85fcfa4564be46ece4de80ae26826b6d15b55"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
-      "ontologia/index.html": "43c7037f08becaaaa5d6846f5b14e9a5807a80dc48dc369c2cf49860ecf3f768",
-      "site.css": "b2f8e4240650eaf41c1292fa48993597eb382a0c49d26588b69df5aa7deb1fc8",
+      "ontologia/index.html": "d41b5253e9cee104324bceebd6117ed1bb6dc8776b3d97d657087df202dc839a",
+      "site.css": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
-      "explanation.js": "60f4bbb76c92740838d4521145e1b65b8bd84305a3a07982ad9ef44bdf0f9948",
+      "explanation.js": "99ed5c901099216983a26bbd3a4afa92de2993f3810982081bdcca1147f6d57c",
       "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
       "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
-      "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
+      "assets/explanation-pilot.json": "2db2610d8de415e81833c80e1d650842f2a513de82413cf8b6be97af023aa704",
+      "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
+      "assets/source-catalog.json": "0b4faeb7190b5a6a46e721a63afaf8f19c875df8c6b9d7c30e637aee1e367ddc"
     },
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
-      "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
+      "data/knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b",
       "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
-      "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+      "ontology/mado-combined.ttl": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -203,16 +233,16 @@
       "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
       "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
       "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
-      "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
-      "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
-      "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
-      "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+      "experimental/v2/composer.py": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
+      "experimental/v2/trajectory.py": "a4136772e09e27b69dcdb1477953894a741bdc4e526d46422049b450b3b0e369",
+      "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+      "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
       "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-      "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+      "experimental/v2/trajectory-bindings.json": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "test_sha256": "56700bcf1fad106e3a1a069082ecd0457c1d45bb4eb3bace4f5d640d6d6213b9",
+  "test_sha256": "a9ea0147d1820224a10f7b9822975ef26b5f4079af184ed8766b864d104aea59",
   "native_decision": {
     "status": "GERADA",
     "components": [
@@ -220,7 +250,7 @@
     ],
     "projection_sha256": "b23d19c8c3c4a377c05f582ec2dc6931a4aee720a902dbe166be8eb48cd05e1b"
   },
-  "browser": "154.0.8037.98",
+  "browser": "155.0.8059.39",
   "contrast": {
     "index.html": [
       {
@@ -254,21 +284,14 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Em que você precisa de ajuda?",
+        "text": "Qual é o desafio de acessibilidade?",
         "ratio": 13.054290705015273,
         "minimum": 3
       },
       {
         "kind": "text",
-        "element": "health",
-        "text": "Pronto para receber seu relato.",
-        "ratio": 8.33807086916269,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
         "element": "LABEL",
-        "text": "Conte o problema que você quer resolver",
+        "text": "Descreva a situação",
         "ratio": 14.079618687682288,
         "minimum": 4.5
       },
@@ -282,14 +305,14 @@
       {
         "kind": "text",
         "element": "case-help",
-        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "text": "Escreva ou use o microfone.",
         "ratio": 7.93130170772904,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "dictate-case",
-        "text": "Falar o problema",
+        "text": "Falar",
         "ratio": 9.312093504050283,
         "minimum": 4.5
       },
@@ -345,21 +368,14 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Em que você precisa de ajuda?",
+        "text": "Qual é o desafio de acessibilidade?",
         "ratio": 21,
         "minimum": 3
       },
       {
         "kind": "text",
-        "element": "health",
-        "text": "Pronto para receber seu relato.",
-        "ratio": 18.527757227085583,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
         "element": "LABEL",
-        "text": "Conte o problema que você quer resolver",
+        "text": "Descreva a situação",
         "ratio": 21,
         "minimum": 4.5
       },
@@ -373,14 +389,14 @@
       {
         "kind": "text",
         "element": "case-help",
-        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "text": "Escreva ou use o microfone.",
         "ratio": 21,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "dictate-case",
-        "text": "Falar o problema",
+        "text": "Falar",
         "ratio": 9.312093504050283,
         "minimum": 4.5
       },
@@ -436,21 +452,14 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Em que você precisa de ajuda?",
+        "text": "Qual é o desafio de acessibilidade?",
         "ratio": 13.054290705015273,
         "minimum": 3
       },
       {
         "kind": "text",
-        "element": "health",
-        "text": "Pronto para receber seu relato.",
-        "ratio": 8.33807086916269,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
         "element": "LABEL",
-        "text": "Conte o problema que você quer resolver",
+        "text": "Descreva a situação",
         "ratio": 14.079618687682288,
         "minimum": 4.5
       },
@@ -464,14 +473,14 @@
       {
         "kind": "text",
         "element": "case-help",
-        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "text": "Escreva ou use o microfone.",
         "ratio": 7.93130170772904,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "dictate-case",
-        "text": "Falar o problema",
+        "text": "Falar",
         "ratio": 9.312093504050283,
         "minimum": 4.5
       },
@@ -527,21 +536,14 @@
       {
         "kind": "text",
         "element": "H1",
-        "text": "Em que você precisa de ajuda?",
+        "text": "Qual é o desafio de acessibilidade?",
         "ratio": 21,
         "minimum": 3
       },
       {
         "kind": "text",
-        "element": "health",
-        "text": "Pronto para receber seu relato.",
-        "ratio": 18.527757227085583,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
         "element": "LABEL",
-        "text": "Conte o problema que você quer resolver",
+        "text": "Descreva a situação",
         "ratio": 21,
         "minimum": 4.5
       },
@@ -555,14 +557,14 @@
       {
         "kind": "text",
         "element": "case-help",
-        "text": "Escreva ou fale. Você poderá conferir o texto antes de continuar.",
+        "text": "Escreva ou use o microfone.",
         "ratio": 21,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "dictate-case",
-        "text": "Falar o problema",
+        "text": "Falar",
         "ratio": 9.312093504050283,
         "minimum": 4.5
       },
@@ -586,6 +588,802 @@
         "minimum": 3
       }
     ]
+  },
+  "teaching_case": {
+    "index.html": {
+      "answers": [
+        {
+          "question": "tarefas",
+          "participant_label": "",
+          "values": [
+            "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+          ]
+        },
+        {
+          "question": "barreira_ou_necessidade",
+          "participant_label": "",
+          "values": [
+            "NEC-ACESSO-EQUIVALENTE",
+            "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"
+          ]
+        },
+        {
+          "question": "participantes",
+          "participant_label": "",
+          "values": [
+            "PAPEL-RESPONSAVEL-ADAPTACAO"
+          ]
+        },
+        {
+          "question": "modalidades_disponiveis:PART-CASO-03-750B88",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "MOD-TEXTO",
+            "MOD-IMAGEM"
+          ]
+        },
+        {
+          "question": "caracteristicas_pessoa:PART-CASO-03-750B88",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "unknown"
+          ]
+        },
+        {
+          "question": "apoios_informados:PART-CASO-03-750B88",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos."
+          ]
+        },
+        {
+          "question": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "MOD-AUDIO"
+          ]
+        },
+        {
+          "question": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "CAR-INTERACAO-NAO-VISUAL"
+          ]
+        },
+        {
+          "question": "apoios_informados:PART-CASO-04-FB4C98",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação."
+          ]
+        },
+        {
+          "question": "recursos_disponiveis:PART-CASO-03-750B88",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "unknown"
+          ]
+        },
+        {
+          "question": "recursos_disponiveis:PART-CASO-04-FB4C98",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "REC-LEITOR-DE-TELA"
+          ]
+        },
+        {
+          "question": "recursos_disponiveis:PART-CASO-05-466D07",
+          "participant_label": "Responsável pela adaptação do recurso",
+          "values": [
+            "REC-EDITOR-MULTIMIDIA"
+          ]
+        },
+        {
+          "question": "recursos_digitais",
+          "participant_label": "",
+          "values": [
+            "RED-PAGINA-WEB"
+          ]
+        },
+        {
+          "question": "ambientes",
+          "participant_label": "",
+          "values": [
+            "AMB-SALA-DE-AULA"
+          ]
+        },
+        {
+          "question": "recursos_disponiveis",
+          "participant_label": "",
+          "values": [
+            "REC-LEITOR-DE-TELA",
+            "REC-EDITOR-MULTIMIDIA"
+          ]
+        }
+      ],
+      "context": {
+        "id": "CTX-CASO-ED5818EF16",
+        "natureza": "CASO_INFORMADO_PELA_PESSOA",
+        "status": "AGUARDANDO_CARACTERIZACAO",
+        "texto_curto": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
+        "objetivo": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
+        "titulo_curto": "Caso informado agora",
+        "premissas_do_exemplo": [],
+        "operacao_do_recurso": "",
+        "impedimentos_verificados": false,
+        "tarefas": [
+          "Acessar e compreender conteúdo digital"
+        ],
+        "caracteristicas_relevantes": [],
+        "caracteristicas_estruturadas": [],
+        "participantes": [
+          {
+            "id": "PART-CASO-02-A2811D",
+            "papel_id": "PAPEL-PROFESSORA",
+            "label": "Professora",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "",
+            "papel": "Professora",
+            "caracteristicas": [],
+            "tarefas": [],
+            "modalidades": [],
+            "recursos_operados": [],
+            "objetivo": "",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-03-F2CA31",
+            "papel_id": "PAPEL-TURMA",
+            "label": "Turma",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "",
+            "papel": "Turma",
+            "caracteristicas": [],
+            "tarefas": [],
+            "modalidades": [],
+            "recursos_operados": [],
+            "objetivo": "",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-03-750B88",
+            "papel_id": "PAPEL-ESTUDANTE",
+            "label": "2 estudante(s): surdos informado no relato",
+            "grupo_rotulo": "surdos",
+            "quantidade": 2,
+            "observacoes": "",
+            "apoios_informados": "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.",
+            "papel": "Estudante",
+            "caracteristicas": [],
+            "tarefas": [
+              "Comunicar conteúdo"
+            ],
+            "modalidades": [
+              "Imagem",
+              "Texto"
+            ],
+            "recursos_operados": [],
+            "objetivo": "dois estudantes surdos",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-04-FB4C98",
+            "papel_id": "PAPEL-ESTUDANTE",
+            "label": "1 estudante(s): cego informado no relato",
+            "grupo_rotulo": "cego",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.",
+            "papel": "Estudante",
+            "caracteristicas": [
+              {
+                "id": "CAR-INTERACAO-NAO-VISUAL",
+                "label": "Interação predominantemente não visual",
+                "categoria": "CARACTERISTICA_FUNCIONAL"
+              }
+            ],
+            "tarefas": [
+              "Comunicar conteúdo"
+            ],
+            "modalidades": [
+              "Áudio"
+            ],
+            "recursos_operados": [
+              "Leitor de tela"
+            ],
+            "objetivo": "um estudante cego",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-05-466D07",
+            "papel_id": "PAPEL-RESPONSAVEL-ADAPTACAO",
+            "label": "Responsável pela adaptação do recurso",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "",
+            "papel": "Responsável pela adaptação do recurso",
+            "caracteristicas": [],
+            "tarefas": [],
+            "modalidades": [],
+            "recursos_operados": [
+              "Editor de apresentação, página ou painel multimídia"
+            ],
+            "objetivo": "",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          }
+        ],
+        "recursos_digitais": [
+          "Página ou conteúdo na web"
+        ],
+        "barreiras": [],
+        "necessidades": [
+          "Apoiar a compreensão e a participação da turma",
+          "Manter uma alternativa que preserve a mesma função",
+          "Preservar acesso ao significado por modalidade alternativa"
+        ],
+        "ambientes": [
+          "Sala de aula"
+        ],
+        "modalidades_disponiveis": [],
+        "recursos_disponiveis": [
+          "Leitor de tela",
+          "Editor de apresentação, página ou painel multimídia"
+        ],
+        "recursos_impedidos": [],
+        "recursos_propostos": [],
+        "estado_dos_recursos": [
+          {
+            "id": "REC-LEITOR-DE-TELA",
+            "label": "Leitor de tela",
+            "estado": "DISPONIVEL_CONFIRMADO"
+          },
+          {
+            "id": "REC-EDITOR-MULTIMIDIA",
+            "label": "Editor de apresentação, página ou painel multimídia",
+            "estado": "DISPONIVEL_CONFIRMADO"
+          }
+        ],
+        "funcoes_requeridas": [],
+        "function_derivation": [],
+        "restricoes": [],
+        "informacoes_ausentes": [
+          "Quais capacidades ou dificuldades são relevantes para 2 estudante(s): surdos informado no relato? Não presuma uma forma pelo diagnóstico.",
+          "Quais destes recursos 2 estudante(s): surdos informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza."
+        ],
+        "baseado_em": [],
+        "raw": {
+          "tarefas": [
+            "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+          ],
+          "caracteristicas_pessoa": [],
+          "recursos_digitais": [
+            "RED-PAGINA-WEB"
+          ],
+          "barreiras": [],
+          "necessidades": [
+            "NEC-APOIAR-COMPREENSAO-TURMA",
+            "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE",
+            "NEC-ACESSO-EQUIVALENTE"
+          ],
+          "ambientes": [
+            "AMB-SALA-DE-AULA"
+          ],
+          "modalidades_disponiveis": [],
+          "recursos_disponiveis": [
+            "REC-LEITOR-DE-TELA",
+            "REC-EDITOR-MULTIMIDIA"
+          ],
+          "recursos_impedidos": [],
+          "recursos_propostos": [],
+          "funcoes_requeridas_ids": []
+        }
+      },
+      "participant_conditions": [
+        {
+          "id": "PART-CASO-03-750B88",
+          "contexto_id": "CTX-CASO-ED5818EF16",
+          "papel_id": "PAPEL-ESTUDANTE",
+          "label": "2 estudante(s): surdos informado no relato",
+          "grupo_rotulo": "surdos",
+          "quantidade": 2,
+          "observacoes": "",
+          "apoios_informados": "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.",
+          "caracteristica_ids": [],
+          "tarefa_ids": [
+            "TAR-COMUNICAR-CONTEUDO-1545B38"
+          ],
+          "modalidade_ids": [
+            "MOD-IMAGEM",
+            "MOD-TEXTO"
+          ],
+          "recurso_operado_ids": [],
+          "objetivo_participacao": "dois estudantes surdos",
+          "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+        },
+        {
+          "id": "PART-CASO-04-FB4C98",
+          "contexto_id": "CTX-CASO-ED5818EF16",
+          "papel_id": "PAPEL-ESTUDANTE",
+          "label": "1 estudante(s): cego informado no relato",
+          "grupo_rotulo": "cego",
+          "quantidade": 1,
+          "observacoes": "",
+          "apoios_informados": "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.",
+          "caracteristica_ids": [
+            "CAR-INTERACAO-NAO-VISUAL"
+          ],
+          "tarefa_ids": [
+            "TAR-COMUNICAR-CONTEUDO-1545B38"
+          ],
+          "modalidade_ids": [
+            "MOD-AUDIO"
+          ],
+          "recurso_operado_ids": [
+            "REC-LEITOR-DE-TELA"
+          ],
+          "objetivo_participacao": "um estudante cego",
+          "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+        }
+      ],
+      "decision_status": "GERADA_PARCIAL",
+      "component_ids": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE"
+      ],
+      "knowledge_ids": [
+        "K10",
+        "K42"
+      ],
+      "articulation_ids": [
+        "ART-REF-03"
+      ],
+      "limitations": [
+        "Quais capacidades ou dificuldades são relevantes para 2 estudante(s): surdos informado no relato? Não presuma uma forma pelo diagnóstico.",
+        "Quais destes recursos 2 estudante(s): surdos informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza.",
+        "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "Função requerida ainda sem cobertura: Preservar significado por alternativas perceptivas e operacionais"
+      ],
+      "note": "This checks the real public intake and explicit synthetic follow-up answers, not a pre-registered mathematics response. The partial coverage and unresolved personal conditions remain visible."
+    },
+    "guiado.html": {
+      "answers": [
+        {
+          "question": "tarefas",
+          "participant_label": "",
+          "values": [
+            "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+          ]
+        },
+        {
+          "question": "barreira_ou_necessidade",
+          "participant_label": "",
+          "values": [
+            "NEC-ACESSO-EQUIVALENTE",
+            "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"
+          ]
+        },
+        {
+          "question": "participantes",
+          "participant_label": "",
+          "values": [
+            "PAPEL-RESPONSAVEL-ADAPTACAO"
+          ]
+        },
+        {
+          "question": "modalidades_disponiveis:PART-CASO-03-CD867F",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "MOD-TEXTO",
+            "MOD-IMAGEM"
+          ]
+        },
+        {
+          "question": "caracteristicas_pessoa:PART-CASO-03-CD867F",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "unknown"
+          ]
+        },
+        {
+          "question": "apoios_informados:PART-CASO-03-CD867F",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos."
+          ]
+        },
+        {
+          "question": "modalidades_disponiveis:PART-CASO-04-E43734",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "MOD-AUDIO"
+          ]
+        },
+        {
+          "question": "caracteristicas_pessoa:PART-CASO-04-E43734",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "CAR-INTERACAO-NAO-VISUAL"
+          ]
+        },
+        {
+          "question": "apoios_informados:PART-CASO-04-E43734",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação."
+          ]
+        },
+        {
+          "question": "recursos_disponiveis:PART-CASO-03-CD867F",
+          "participant_label": "2 estudante(s): surdos informado no relato",
+          "values": [
+            "unknown"
+          ]
+        },
+        {
+          "question": "recursos_disponiveis:PART-CASO-04-E43734",
+          "participant_label": "1 estudante(s): cego informado no relato",
+          "values": [
+            "REC-LEITOR-DE-TELA"
+          ]
+        },
+        {
+          "question": "recursos_disponiveis:PART-CASO-05-012CCE",
+          "participant_label": "Responsável pela adaptação do recurso",
+          "values": [
+            "REC-EDITOR-MULTIMIDIA"
+          ]
+        },
+        {
+          "question": "recursos_digitais",
+          "participant_label": "",
+          "values": [
+            "RED-PAGINA-WEB"
+          ]
+        },
+        {
+          "question": "ambientes",
+          "participant_label": "",
+          "values": [
+            "AMB-SALA-DE-AULA"
+          ]
+        },
+        {
+          "question": "recursos_disponiveis",
+          "participant_label": "",
+          "values": [
+            "REC-LEITOR-DE-TELA",
+            "REC-EDITOR-MULTIMIDIA"
+          ]
+        }
+      ],
+      "context": {
+        "id": "CTX-CASO-D67AAF4B36",
+        "natureza": "CASO_INFORMADO_PELA_PESSOA",
+        "status": "AGUARDANDO_CARACTERIZACAO",
+        "texto_curto": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
+        "objetivo": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
+        "titulo_curto": "Caso informado agora",
+        "premissas_do_exemplo": [],
+        "operacao_do_recurso": "",
+        "impedimentos_verificados": false,
+        "tarefas": [
+          "Acessar e compreender conteúdo digital"
+        ],
+        "caracteristicas_relevantes": [],
+        "caracteristicas_estruturadas": [],
+        "participantes": [
+          {
+            "id": "PART-CASO-02-2E6E57",
+            "papel_id": "PAPEL-PROFESSORA",
+            "label": "Professora",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "",
+            "papel": "Professora",
+            "caracteristicas": [],
+            "tarefas": [],
+            "modalidades": [],
+            "recursos_operados": [],
+            "objetivo": "",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-03-453EE5",
+            "papel_id": "PAPEL-TURMA",
+            "label": "Turma",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "",
+            "papel": "Turma",
+            "caracteristicas": [],
+            "tarefas": [],
+            "modalidades": [],
+            "recursos_operados": [],
+            "objetivo": "",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-03-CD867F",
+            "papel_id": "PAPEL-ESTUDANTE",
+            "label": "2 estudante(s): surdos informado no relato",
+            "grupo_rotulo": "surdos",
+            "quantidade": 2,
+            "observacoes": "",
+            "apoios_informados": "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.",
+            "papel": "Estudante",
+            "caracteristicas": [],
+            "tarefas": [
+              "Comunicar conteúdo"
+            ],
+            "modalidades": [
+              "Imagem",
+              "Texto"
+            ],
+            "recursos_operados": [],
+            "objetivo": "dois estudantes surdos",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-04-E43734",
+            "papel_id": "PAPEL-ESTUDANTE",
+            "label": "1 estudante(s): cego informado no relato",
+            "grupo_rotulo": "cego",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.",
+            "papel": "Estudante",
+            "caracteristicas": [
+              {
+                "id": "CAR-INTERACAO-NAO-VISUAL",
+                "label": "Interação predominantemente não visual",
+                "categoria": "CARACTERISTICA_FUNCIONAL"
+              }
+            ],
+            "tarefas": [
+              "Comunicar conteúdo"
+            ],
+            "modalidades": [
+              "Áudio"
+            ],
+            "recursos_operados": [
+              "Leitor de tela"
+            ],
+            "objetivo": "um estudante cego",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          },
+          {
+            "id": "PART-CASO-05-012CCE",
+            "papel_id": "PAPEL-RESPONSAVEL-ADAPTACAO",
+            "label": "Responsável pela adaptação do recurso",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "observacoes": "",
+            "apoios_informados": "",
+            "papel": "Responsável pela adaptação do recurso",
+            "caracteristicas": [],
+            "tarefas": [],
+            "modalidades": [],
+            "recursos_operados": [
+              "Editor de apresentação, página ou painel multimídia"
+            ],
+            "objetivo": "",
+            "origem_registro": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
+          }
+        ],
+        "recursos_digitais": [
+          "Página ou conteúdo na web"
+        ],
+        "barreiras": [],
+        "necessidades": [
+          "Apoiar a compreensão e a participação da turma",
+          "Manter uma alternativa que preserve a mesma função",
+          "Preservar acesso ao significado por modalidade alternativa"
+        ],
+        "ambientes": [
+          "Sala de aula"
+        ],
+        "modalidades_disponiveis": [],
+        "recursos_disponiveis": [
+          "Leitor de tela",
+          "Editor de apresentação, página ou painel multimídia"
+        ],
+        "recursos_impedidos": [],
+        "recursos_propostos": [],
+        "estado_dos_recursos": [
+          {
+            "id": "REC-LEITOR-DE-TELA",
+            "label": "Leitor de tela",
+            "estado": "DISPONIVEL_CONFIRMADO"
+          },
+          {
+            "id": "REC-EDITOR-MULTIMIDIA",
+            "label": "Editor de apresentação, página ou painel multimídia",
+            "estado": "DISPONIVEL_CONFIRMADO"
+          }
+        ],
+        "funcoes_requeridas": [],
+        "function_derivation": [],
+        "restricoes": [],
+        "informacoes_ausentes": [
+          "Quais capacidades ou dificuldades são relevantes para 2 estudante(s): surdos informado no relato? Não presuma uma forma pelo diagnóstico.",
+          "Quais destes recursos 2 estudante(s): surdos informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza."
+        ],
+        "baseado_em": [],
+        "raw": {
+          "tarefas": [
+            "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+          ],
+          "caracteristicas_pessoa": [],
+          "recursos_digitais": [
+            "RED-PAGINA-WEB"
+          ],
+          "barreiras": [],
+          "necessidades": [
+            "NEC-APOIAR-COMPREENSAO-TURMA",
+            "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE",
+            "NEC-ACESSO-EQUIVALENTE"
+          ],
+          "ambientes": [
+            "AMB-SALA-DE-AULA"
+          ],
+          "modalidades_disponiveis": [],
+          "recursos_disponiveis": [
+            "REC-LEITOR-DE-TELA",
+            "REC-EDITOR-MULTIMIDIA"
+          ],
+          "recursos_impedidos": [],
+          "recursos_propostos": [],
+          "funcoes_requeridas_ids": []
+        }
+      },
+      "participant_conditions": [
+        {
+          "id": "PART-CASO-03-CD867F",
+          "contexto_id": "CTX-CASO-D67AAF4B36",
+          "papel_id": "PAPEL-ESTUDANTE",
+          "label": "2 estudante(s): surdos informado no relato",
+          "grupo_rotulo": "surdos",
+          "quantidade": 2,
+          "observacoes": "",
+          "apoios_informados": "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.",
+          "caracteristica_ids": [],
+          "tarefa_ids": [
+            "TAR-COMUNICAR-CONTEUDO-1545B38"
+          ],
+          "modalidade_ids": [
+            "MOD-IMAGEM",
+            "MOD-TEXTO"
+          ],
+          "recurso_operado_ids": [],
+          "objetivo_participacao": "dois estudantes surdos",
+          "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+        },
+        {
+          "id": "PART-CASO-04-E43734",
+          "contexto_id": "CTX-CASO-D67AAF4B36",
+          "papel_id": "PAPEL-ESTUDANTE",
+          "label": "1 estudante(s): cego informado no relato",
+          "grupo_rotulo": "cego",
+          "quantidade": 1,
+          "observacoes": "",
+          "apoios_informados": "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.",
+          "caracteristica_ids": [
+            "CAR-INTERACAO-NAO-VISUAL"
+          ],
+          "tarefa_ids": [
+            "TAR-COMUNICAR-CONTEUDO-1545B38"
+          ],
+          "modalidade_ids": [
+            "MOD-AUDIO"
+          ],
+          "recurso_operado_ids": [
+            "REC-LEITOR-DE-TELA"
+          ],
+          "objetivo_participacao": "um estudante cego",
+          "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+        }
+      ],
+      "decision_status": "GERADA_PARCIAL",
+      "component_ids": [
+        "PAD-CONTEUDO-WEB-EQUIVALENTE"
+      ],
+      "knowledge_ids": [
+        "K10",
+        "K42"
+      ],
+      "articulation_ids": [
+        "ART-REF-03"
+      ],
+      "limitations": [
+        "Quais capacidades ou dificuldades são relevantes para 2 estudante(s): surdos informado no relato? Não presuma uma forma pelo diagnóstico.",
+        "Quais destes recursos 2 estudante(s): surdos informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza.",
+        "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "Função requerida ainda sem cobertura: Preservar significado por alternativas perceptivas e operacionais"
+      ],
+      "note": "This checks the real public intake and explicit synthetic follow-up answers, not a pre-registered mathematics response. The partial coverage and unresolved personal conditions remain visible."
+    }
+  },
+  "teaching_resource_variant": {
+    "index.html": {
+      "questions": [
+        "tarefas",
+        "barreira_ou_necessidade",
+        "participantes",
+        "modalidades_disponiveis:PART-CASO-03-850D5E",
+        "caracteristicas_pessoa:PART-CASO-03-850D5E",
+        "apoios_informados:PART-CASO-03-850D5E",
+        "modalidades_disponiveis:PART-CASO-04-41DEF6",
+        "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+        "apoios_informados:PART-CASO-04-41DEF6",
+        "recursos_disponiveis:PART-CASO-03-850D5E",
+        "recursos_disponiveis:PART-CASO-04-41DEF6",
+        "recursos_disponiveis:PART-CASO-05-26493A",
+        "recursos_digitais",
+        "ambientes",
+        "recursos_disponiveis"
+      ],
+      "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
+      "component_ids": [],
+      "information_missing": [
+        "Quais capacidades ou dificuldades são relevantes para 2 estudante(s): surdos informado no relato? Não presuma uma forma pelo diagnóstico.",
+        "Quais destes recursos 2 estudante(s): surdos informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza.",
+        "Quais destes recursos 1 estudante(s): cego informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza.",
+        "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "A necessidade 'Manter uma alternativa que preserve a mesma função' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "A necessidade 'Preservar acesso ao significado por modalidade alternativa' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "Função requerida ainda sem cobertura: Preservar significado por alternativas perceptivas e operacionais",
+        "Função requerida ainda sem cobertura: Preservar o significado entre formas de representação"
+      ],
+      "note": "Same narrative; the reader availability and personal operation were not confirmed in the follow-up answers. This checks absence of support, not recognition of a textual prohibition."
+    },
+    "guiado.html": {
+      "questions": [
+        "tarefas",
+        "barreira_ou_necessidade",
+        "participantes",
+        "modalidades_disponiveis:PART-CASO-03-9603EA",
+        "caracteristicas_pessoa:PART-CASO-03-9603EA",
+        "apoios_informados:PART-CASO-03-9603EA",
+        "modalidades_disponiveis:PART-CASO-04-533FDC",
+        "caracteristicas_pessoa:PART-CASO-04-533FDC",
+        "apoios_informados:PART-CASO-04-533FDC",
+        "recursos_disponiveis:PART-CASO-03-9603EA",
+        "recursos_disponiveis:PART-CASO-04-533FDC",
+        "recursos_disponiveis:PART-CASO-05-09929C",
+        "recursos_digitais",
+        "ambientes",
+        "recursos_disponiveis"
+      ],
+      "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
+      "component_ids": [],
+      "information_missing": [
+        "Quais capacidades ou dificuldades são relevantes para 2 estudante(s): surdos informado no relato? Não presuma uma forma pelo diagnóstico.",
+        "Quais destes recursos 2 estudante(s): surdos informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza.",
+        "Quais destes recursos 1 estudante(s): cego informado no relato consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza.",
+        "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "A necessidade 'Manter uma alternativa que preserve a mesma função' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "A necessidade 'Preservar acesso ao significado por modalidade alternativa' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
+        "Função requerida ainda sem cobertura: Preservar significado por alternativas perceptivas e operacionais",
+        "Função requerida ainda sem cobertura: Preservar o significado entre formas de representação"
+      ],
+      "note": "Same narrative; the reader availability and personal operation were not confirmed in the follow-up answers. This checks absence of support, not recognition of a textual prohibition."
+    }
   },
   "busy_controls": {
     "index.html": [
@@ -613,6 +1411,807 @@
       },
       {
         "operation": "compose",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-750B88",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-03-750B88",
+            "name": "apoios_informados:PART-CASO-03-750B88",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-FB4C98",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-04-FB4C98",
+            "name": "apoios_informados:PART-CASO-04-FB4C98",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-04-FB4C98",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-466D07",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-466D07",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-466D07",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "generate",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-850D5E",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-03-850D5E",
+            "name": "apoios_informados:PART-CASO-03-850D5E",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-41DEF6",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-41DEF6",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-04-41DEF6",
+            "name": "apoios_informados:PART-CASO-04-41DEF6",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-26493A",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-26493A",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-26493A",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "generate",
         "busy": true,
         "controls": [
           {
@@ -675,6 +2274,807 @@
       },
       {
         "operation": "compose",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-CD867F",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-03-CD867F",
+            "name": "apoios_informados:PART-CASO-03-CD867F",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-E43734",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-04-E43734",
+            "name": "apoios_informados:PART-CASO-04-E43734",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-04-E43734",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-012CCE",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-012CCE",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-012CCE",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "generate",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "analyze",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-narrative",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "case-template",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "tarefas",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "barreira_ou_necessidade",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "participantes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-03-9603EA",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-03-9603EA",
+            "name": "apoios_informados:PART-CASO-03-9603EA",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "modalidades_disponiveis:PART-CASO-04-533FDC",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "caracteristicas_pessoa:PART-CASO-04-533FDC",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "answer-apoios_informados:PART-CASO-04-533FDC",
+            "name": "apoios_informados:PART-CASO-04-533FDC",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-09929C",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-09929C",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis:PART-CASO-05-09929C",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_digitais",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "ambientes",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "recursos_disponiveis",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "controls": [
+          {
+            "id": "case-confirmed",
+            "name": "",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "generate",
         "busy": true,
         "controls": [
           {

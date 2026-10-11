@@ -1,6 +1,6 @@
 # Verificação, evidências e limites
 
-**Versão alvo: MADO 1.4.0-rc1.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios herdados de 1.3 não comprovam esta evolução.
+**Versão alvo: MADO 1.4.0-rc2.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios de outras versões não comprovam esta revisão.
 
 Além das verificações anteriores, `tests/test_contributions.py` examina a contribuição documental e `tests/test_execution_evidence.py` testa a fidelidade da explicação ao que o motor executou. `tests/traceability-browser.mjs` executa as duas apresentações e os mesmos casos estruturados no navegador. `evidence/parity-report.json` compara o conteúdo produzido em Python local e Pyodide.
 

@@ -1,17 +1,17 @@
 {
   "version": "2.0.0-alpha2",
-  "checked_at_utc": "2026-10-11T04:18:09.305089+00:00",
+  "checked_at_utc": "2026-10-11T06:55:33.626324+00:00",
   "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
   "shacl": {
     "base": {
       "conforms": true,
       "report": "Validation Report\nConforms: True\n",
-      "triples": 366
+      "triples": 384
     },
     "extended": {
       "conforms": true,
       "report": "Validation Report\nConforms: True\n",
-      "triples": 391
+      "triples": 409
     }
   },
   "queries": {
@@ -531,7 +531,7 @@
     }
   },
   "experimental_design": {
-    "composer_sha256": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
+    "composer_sha256": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
     "added": "Conhecimento KAudioReview, sua articulação, contribuições localizadas e aplicação exata à capacidade já declarada.",
     "unchanged": [
       "motor",
@@ -544,7 +544,7 @@
     "limit": "Experimento de habilitação por fundamento, não extração automática, descoberta de capacidade ou prova de melhor orientação."
   },
   "unit_tests": {
-    "run": 71,
+    "run": 75,
     "passed": true,
     "successes": [
       "test_composition.CompositionTests.test_01_baseline_composes_speech_and_visual_review",
@@ -594,6 +594,10 @@
       "test_partial_composition.PartialCompositionTests.test_pending_whole_plan_separates_usable_step_and_question",
       "test_partial_composition.PartialCompositionTests.test_review_existing_content_never_assumes_content_exists",
       "test_partial_composition.PartialCompositionTests.test_unknown_condition_of_impossible_route_is_not_a_question",
+      "test_participants.ParticipantTests.test_conflicting_shared_facts_and_duplicate_people_are_blocked",
+      "test_participants.ParticipantTests.test_distinct_routes_use_conditions_of_their_own_participant",
+      "test_participants.ParticipantTests.test_missing_personal_capacities_are_not_filled_by_global_true_or_diagnosis",
+      "test_participants.ParticipantTests.test_resource_available_to_one_person_is_not_operability_of_another",
       "test_trajectory.TrajectoryTests.test_01_reads_real_knowledge_with_hash_and_original_record_values",
       "test_trajectory.TrajectoryTests.test_02_blocked_speech_input_does_not_disable_speech_output",
       "test_trajectory.TrajectoryTests.test_03_audio_support_is_necessary_for_the_audio_only_context",
@@ -623,10 +627,10 @@
     "skipped": 0
   },
   "preserved_files": {
-    "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
-    "engine.py": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
-    "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
-    "ontology/main.ttl": "39bc30a533e8773a3893001482ef5506d4baa5b72fad200a1dd93a1a5772f3d4",
+    "data/knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b",
+    "engine.py": "6581eb530234279ab7c7bc9ebe59f7131dbe6a6c0a0a28884ed6911a8c8abd3a",
+    "ontology/mado-combined.ttl": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5",
+    "ontology/main.ttl": "ff5cc45839ca1563c5f6c936a83026a7af2bf55fadde93594eed3a2655c21f8d",
     "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
     "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
     "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
@@ -643,7 +647,7 @@
     "matches_current_graph": true,
     "profile_passed": true,
     "consistency_passed": true,
-    "checked_at_utc": "2026-10-11T03:47:56.794887+00:00"
+    "checked_at_utc": "2026-10-11T06:55:01.139246+00:00"
   },
   "passed": true
 }

@@ -78,7 +78,7 @@ def build():
         if p.is_file()
     }
     manifest = {
-        "version": "1.4.0-rc1",
+        "version": "1.4.0-rc2",
         "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
         "instrument": "AMADO",
         "public_projection": True,
@@ -107,7 +107,7 @@ def build():
         },
         "site_assets_sha256": {
             name: sha(WEB / name)
-            for name in ("index.html", "ontologia/index.html", "site.css", "shell.css", "site.js", "sitemap.xml", "explanation.js", "explanation.css", "explanation-pilot.js", "assets/explanation-pilot.json")
+            for name in ("index.html", "ontologia/index.html", "site.css", "shell.css", "site.js", "sitemap.xml", "explanation.js", "explanation.css", "explanation-pilot.js", "assets/explanation-pilot.json", "source-path.js", "assets/source-catalog.json")
         },
         "files": {
             p.relative_to(ROOT).as_posix(): sha(p)

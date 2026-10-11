@@ -4,7 +4,7 @@
   "context_id": "synthetic-unregistered-keyboard-audio",
   "choices": [
     {
-      "id": "proposal-8b0490d1281809c5f8fb",
+      "id": "proposal-8f946b5189ea22ebb855",
       "state": "PASS",
       "steps": [
         {
@@ -1308,7 +1308,7 @@
   ],
   "alternatives": [
     {
-      "id": "proposal-8b0490d1281809c5f8fb",
+      "id": "proposal-8f946b5189ea22ebb855",
       "state": "PASS",
       "steps": [
         {
@@ -2888,8 +2888,8 @@
     }
   },
   "fingerprints": {
-    "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
-    "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+    "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+    "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
     "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27"
   },
   "execution_evidence": [

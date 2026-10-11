@@ -32,26 +32,31 @@ async function run(action, message='') {
   $('#flow-error').textContent = ''; status(message);
   const controls = [...document.querySelectorAll('#main button,#main input,#main textarea,#main select')].map(element => [element,element.disabled]);
   controls.forEach(([element]) => element.disabled = true);
+  let recoveryFocus;
   try { await action(expected); }
   catch (error) {
-    if (expected === epoch) { $('#flow-error').textContent = error.message || String(error); status(''); }
+    if (expected === epoch) { $('#flow-error').textContent = error.message || String(error); status(''); recoveryFocus = error.field; }
   } finally {
     if (expected === epoch) {
       busy = false; $('#main').setAttribute('aria-busy','false');
       controls.forEach(([element,disabled]) => element.disabled = disabled);
       $('#generate-orientation').disabled = !$('#case-confirmed').checked;
       $('#load-example').disabled = !$('#case-template').value;
+      if (recoveryFocus) $('#'+recoveryFocus)?.focus();
     }
   }
 }
 function questionMarkup(question) {
-  const id = question.id, base = '<fieldset class="question" data-question="'+esc(id)+'"><legend>'+esc(question.label)+'</legend>';
+  const id = question.id, base = '<fieldset class="question" data-question="'+esc(id)+'"><legend class="sr-only">'+esc(question.label)+'</legend>';
   if (question.type === 'text') return base+'<label class="sr-only" for="answer-'+esc(id)+'">'+esc(question.label)+'</label><textarea id="answer-'+esc(id)+'" name="'+esc(id)+'" rows="2"></textarea></fieldset>';
-  if (question.type === 'single') return base+'<label class="sr-only" for="answer-'+esc(id)+'">'+esc(question.label)+'</label><select id="answer-'+esc(id)+'" name="'+esc(id)+'"><option value="unknown">Não sei ainda</option>'+question.options.filter(option => option.id !== 'unknown').map(option => '<option value="'+esc(option.id)+'">'+esc(option.label)+'</option>').join('')+'</select></fieldset>';
+  if (question.type === 'single') return base+'<div class="question-options question-single">'+question.options.map(option =>
+    '<label><input type="radio" name="'+esc(id)+'" value="'+esc(option.id)+'"> '+esc(option.label)+'</label>').join('')+'</div></fieldset>';
   const checkbox = (option,index) => '<label><input type="checkbox" name="'+esc(id)+'" value="'+esc(option.id)+'"> '+esc(option.label)+'</label>';
   const initial = question.options.slice(0,6), other = question.options.slice(6);
+  const note = question.participant_id ? '<details><summary>Outra forma de apoio</summary><label for="note-'+esc(id)+'">Descreva o apoio usado por este grupo</label><textarea id="note-'+esc(id)+'" name="'+esc(id)+':note" maxlength="2000" rows="2"></textarea></details>' : '';
   return base+'<div class="question-options">'+initial.map(checkbox).join('')+'</div>'+
-    (other.length ? '<details><summary>Ver outras respostas possíveis</summary><div class="question-options">'+other.map(checkbox).join('')+'</div></details>' : '')+'</fieldset>';
+    (other.length ? '<details><summary>Ver outras respostas possíveis</summary><div class="question-options">'+other.map(checkbox).join('')+'</div></details>' : '')+
+    '<label class="question-unknown"><input type="checkbox" name="'+esc(id)+'" value="unknown"> Ainda não sei</label>'+note+'</fieldset>';
 }
 function unanswered() {
   return (mode === 'legacy' ? legacyQuestions(current,catalog) : compositionQuestions(draft,compositionCatalog)).filter(question => !skipped.has(question.id));
@@ -61,6 +66,9 @@ function askOrReview() {
   // One missing piece at a time; the rest of the decomposition stays internal.
   questions = unanswered().slice(0,1);
   if (!questions.length) { review(); return; }
+  $('#questions-title').textContent = questions[0].label;
+  $('#question-person').textContent = questions[0].participant_label || '';
+  $('#question-person').hidden = !questions[0].participant_label;
   $('#question-fields').innerHTML = questions.map(questionMarkup).join('');
   status(''); screen('case-questions','questions-title');
 }
@@ -72,19 +80,24 @@ function review() {
   invalidate();
   const rows = summaryRows(), narrative = $('#case-narrative').value.trim();
   const find = label => rows.find(row => row.label === label)?.value || '';
-  const short = narrative.length <= 650 ? narrative : narrative.slice(0,650)+'…';
-  const additions = [find('Objetivo'),find('Atividade'),find('Dificuldade')].filter(Boolean);
-  $('#review-summary').innerHTML = para(short)+ (additions.length ? '<p><strong>Para a orientação, consideraremos:</strong> '+esc(additions.join(' · '))+'</p>' : '');
-  $('#review-fields').innerHTML = fieldsHTML(rows) + (narrative.length > 650 ? '<h3>Relato completo</h3>'+para(narrative) : '');
+  const concise = [['Atividade',find('Atividade')],['Objetivo',find('Objetivo')],['Pessoas',find('Pessoas')]]
+    .filter(([,value]) => value && value !== narrative);
+  $('#review-summary').innerHTML = concise.length ? '<dl class="review-summary">'+concise.map(([label,value]) =>
+    '<div><dt>'+esc(label)+'</dt><dd>'+esc(value)+'</dd></div>').join('')+'</dl>' : para(narrative.length > 300 ? narrative.slice(0,300)+'…' : narrative);
+  $('#review-fields').innerHTML = fieldsHTML(rows)+'<h3>Seu relato</h3>'+para(narrative);
   const missing = mode === 'legacy' ? current.questions || [] : compositionQuestions(draft,compositionCatalog);
   $('#review-gaps').hidden = !missing.length;
-  $('#review-gaps').textContent = missing.length ? 'Ainda há informações a confirmar. A orientação indicará o que pode ser sugerido com os dados disponíveis e o que permanece pendente.' : '';
+  $('#review-gaps').textContent = missing.length ? 'Algumas informações ainda não foram confirmadas. A orientação mostrará esses limites.' : '';
   $('#review-details').open = false; status(''); screen('case-review','review-title');
 }
 async function organize(expected) {
   voice.clear(); invalidate(); skipped.clear();
   const text = $('#case-narrative').value.trim();
-  if (text.length < 20) throw new Error('Conte um pouco mais: o que a pessoa precisa fazer e qual dificuldade encontra?');
+  if (text.length < 20) {
+    $('#case-narrative').setAttribute('aria-invalid','true');
+    throw Object.assign(new Error('Descreva o que a pessoa precisa fazer e o que dificulta a atividade.'),{field:'case-narrative'});
+  }
+  $('#case-narrative').removeAttribute('aria-invalid');
   if (organizedNarrative === text && (mode === 'legacy' ? current : draft)) { askOrReview(); return; }
   if (exampleNarrative === text && exampleId) {
     if (exampleId === 'composition-example') {
@@ -106,15 +119,29 @@ async function organize(expected) {
   askOrReview();
 }
 $('#case-form').addEventListener('submit',event => { event.preventDefault(); run(organize,'Lendo o que você informou…'); });
+$('#questions-form').addEventListener('change',event => {
+  const changed = event.target;
+  if (changed.type !== 'checkbox' || !changed.checked) return;
+  for (const other of document.getElementsByName(changed.name)) if (other !== changed &&
+      (changed.value === 'unknown' || other.value === 'unknown')) other.checked = false;
+});
 $('#questions-form').addEventListener('submit',event => {
   event.preventDefault();
   run(async expected => {
     for (const question of questions) {
       const controls = [...document.getElementsByName(question.id)];
-      const value = question.type === 'multi' ? controls.filter(field => field.checked).map(field => field.value) : controls[0]?.value.trim();
-      if (!value || value === 'unknown' || Array.isArray(value) && !value.length) { skipped.add(question.id); continue; }
-      if (mode === 'legacy') current = await request('update',{payload:legacyAnswer(current,question,value)});
-      else draft[question.field][question.concept_id] = value === 'true';
+      const value = question.type === 'multi' ? controls.filter(field => field.checked).map(field => field.value) :
+        question.type === 'single' ? controls.find(field => field.checked)?.value : controls[0]?.value.trim();
+      const note = document.getElementsByName(question.id+':note')[0]?.value.trim() || '';
+      if (!value || value === 'unknown' || Array.isArray(value) && (!value.length || value.includes('unknown'))) {
+        skipped.add(question.id);
+        if (!(mode === 'legacy' && note && question.participant_id)) continue;
+      }
+      if (mode === 'legacy') current = await request('update',{payload:legacyAnswer(current,question,value,note)});
+      else {
+        const target = question.participant_id ? draft.participants?.find(person => person.id === question.participant_id) : draft;
+        if (target) { target[question.field] ||= {}; target[question.field][question.concept_id] = value === 'true'; }
+      }
     }
     if (expected === epoch) askOrReview();
   },'Atualizando as informações…');
@@ -126,6 +153,7 @@ $('#case-confirmed').addEventListener('change',() => {
 });
 $('#case-narrative').addEventListener('input',() => {
   invalidate(); skipped.clear();
+  $('#case-narrative').removeAttribute('aria-invalid');
   if ($('#case-narrative').value.trim() !== exampleNarrative) { exampleId = exampleNarrative = null; $('#case-template').value = ''; }
 });
 $('#case-template').addEventListener('change',() => { $('#load-example').disabled = !$('#case-template').value; });
@@ -166,11 +194,13 @@ function legacyOutput(response) {
 function compositionOutput(response) {
   const names = new Map(Object.entries(compositionCatalog.labels || {}));
   const label = item => typeof item === 'object' && item ? item.label || label(item.id) : names.get(item) || String(item || '').split('#').pop();
-  const complete = response.choices || [], partial = response.partial_segments || [], pending = response.pending_candidates || [];
-  const state = {COMPLETE:'Orientação construída',CONDITIONAL:'Há condições a confirmar',PARTIAL:'Apoio parcial',NONE:'Ainda falta apoio para este caso'};
+  const state = {COMPLETE:'Orientação construída',CONDITIONAL:'Há condições a confirmar',PARTIAL:'Apoio parcial',
+    INSUFFICIENT:'Ainda falta apoio para este caso',NONE:'Ainda falta apoio para este caso'};
   $('#orientation-state').textContent = state[response.proposal_status] || 'Confira as condições';
-  const choices = complete.length ? complete : pending.length ? pending : partial;
-  $('#orientation-main').innerHTML = para(complete.length ? 'Estas formas de produzir e conferir o conteúdo atendem às condições informadas.' :
+  const view = local => {
+    const complete = local.choices || [], partial = local.partial_segments || [], pending = local.pending_candidates || [];
+    const choices = complete.length ? complete : pending.length ? pending : partial;
+    return para(complete.length ? 'Estas formas de produzir e conferir o conteúdo atendem às condições informadas.' :
     pending.length ? 'Estas possibilidades dependem de informações ainda não confirmadas. Confira as condições antes de utilizá-las.' :
     partial.length ? 'Há apoio para parte da atividade. Estas etapas ainda não cobrem a tarefa inteira.' : 'Não encontramos uma combinação sustentada nas condições informadas.')+
     choices.map(choice => '<article class="orientation-step">'+(choice.steps || []).map(step => '<h3>'+esc(step.label)+'</h3>'+para(step.action)+
@@ -178,11 +208,17 @@ function compositionOutput(response) {
       (choice.relations || []).map(relation => para(relation.explanation)).join('')+
       (choice.entry ? '<p><strong>Antes de usar esta parte:</strong> é necessário '+esc(label(choice.entry.representation))+'. A disponibilidade dessa entrada ainda não foi verificada.</p>' : '')+
       (choice.missing_functions?.length ? '<p><strong>Ainda falta:</strong> '+esc(choice.missing_functions.map(label).join('; '))+'</p>' : '')+'</article>').join('');
+  };
+  const people = response.participant_results || [];
+  $('#orientation-main').innerHTML = people.length ? people.map(person => '<section class="participant-orientation"><h3>'+esc(person.label)+'</h3>'+view(person.result)+'</section>').join('') : view(response);
+  const choices = [...(response.choices || []),...(response.pending_candidates || []),...(response.partial_segments || [])];
   $('#orientation-detail-body').innerHTML = '<h3>Condições a confirmar</h3>'+list([...(response.facts_to_confirm || []),...(response.resources_to_confirm || [])])+
     '<h3>Limites</h3>'+list(response.limits)+choices.map(choice => list(choice.limits)+(choice.steps || []).map(step => para(step.limitation)).join('')).join('');
   speechText = $('#orientation-main').innerText;
 }
 function compositionFoundations(response) {
+  if (response.participant_results?.length) return response.participant_results.map(person =>
+    '<h3>'+esc(person.label)+'</h3>'+compositionFoundations(person.result)).join('');
   const names = new Map(Object.entries(compositionCatalog.labels || {}));
   const label = item => typeof item === 'object' && item ? item.label || label(item.id) : names.get(item) || String(item || '').split('#').pop();
   const states = {PASS:'Atendida',FAIL:'Não atendida',PENDING:'A confirmar',NOT_EXECUTED:'Não verificada'};
@@ -260,7 +296,7 @@ async function load() {
       $('#case-template').innerHTML = '<option value="">Selecione um exemplo…</option>'+catalog.templates.map(item => '<option value="'+esc(item.id)+'">'+esc(item.titulo_curto || item.texto_curto)+'</option>').join('')+
         '<option value="composition-example">Escrever e conferir um texto com outra forma de interação</option>';
       if (expected !== epoch) return;
-      $('#health').dataset.state = 'ready'; $('#health').textContent = 'Pronto para receber seu relato.';
+      $('#health').dataset.state = 'ready'; $('#health').textContent = '';
     } catch (error) {
       $('#health').dataset.state = 'error'; $('#health').textContent = 'Não foi possível carregar o AMADO.';
       $('#retry-load').hidden = false; throw error;

@@ -1,6 +1,6 @@
 {
   "decision": {
-    "id": "D-GERADA-714A4A7BD1",
+    "id": "D-GERADA-77D8039602",
     "status": "GERADA_PARCIAL",
     "orientacao_principal": "Para construir com a professora e os colegas um recurso digital sobre um problema de História, transformando o conhecimento do estudante em uma produção organizada, revisável e compreensível pela turma, construa o recurso como uma produção compartilhada com autoria identificável, função explícita para cada modo e alternativa equivalente. 1. Organizar objetivo, autoria e transições: criar blocos curtos com uma ideia central, autoria identificada, fonte ou exemplo e um ponto explícito de revisão antes de publicar; combinar quem abre cada bloco, quando colegas perguntam, como a professora sinaliza a transição e como o estudante registra uma contribuição que ficará para revisão. 2. Produzir e preservar a contribuição autoral: registrar a explicação em trechos curtos de áudio, associar uma síntese textual editável e permitir que o estudante aprove ou refaça cada trecho; selecionar ou produzir cada imagem e desenho com o estudante, registrar o que ela demonstra e acrescentar descrição textual ou oral equivalente ao ponto usado na atividade. 3. Acrescentar vídeo ou jogo somente pela função: usar um trecho curto de vídeo somente para a relação previamente escolhida, com pausa para explicação, legendas, descrição do conteúdo visual e retomada em texto ou fala; criar poucas situações de ordenar, relacionar ou comparar; após cada resposta, oferecer feedback explicativo, permitir nova tentativa e discutir divergências com a turma. 4. Revisar, confirmar e registrar o que precisa mudar: revisar cada bloco com o estudante, testar com pelo menos um colega, registrar o que precisou de explicação e publicar somente após confirmação de conteúdo e alternativas.",
     "justificativa": "A consulta recuperou 6 conhecimentos diretamente e acrescentou 10 por relações documentadas e habilitadas. Esses conhecimentos fundamentaram 7 critérios e 7 componentes da configuração.",
@@ -348,8 +348,11 @@
         "condition_ids": [
           "REC-EDITOR-MULTIMIDIA",
           "REC-ROTEIRO-COLABORATIVO",
-          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
           "MOD-TEXTO",
           "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE",
           "BAR-FALA-ISOLADA-NAO-PERSISTE",
@@ -521,8 +524,11 @@
         "condition_ids": [
           "REC-CELULAR-CAMERA-MICROFONE",
           "REC-MICROFONE",
-          "TAR-COMUNICAR-E-EXPRESSAR",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-COMUNICAR-E-EXPRESSAR",
           "MOD-AUDIO",
           "MOD-FALA",
           "CAR-EXPRESSAO-ORAL-AUTORAL",
@@ -695,8 +701,11 @@
           "REC-CAMERA",
           "REC-DESCRICAO-TEXTUAL",
           "REC-EDITOR-MULTIMIDIA",
-          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
           "MOD-DESENHO",
           "MOD-IMAGEM",
           "CAR-EXPRESSAO-POR-DESENHO-IMAGEM",
@@ -869,6 +878,9 @@
         "availability_status": "CONDICIONAL_A_CONFIRMACAO",
         "condition_ids": [
           "REC-REPRODUTOR-VIDEO",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
           "MOD-VIDEO",
           "REC-AUDIODESCRICAO",
@@ -1030,6 +1042,9 @@
         "availability_status": "CONDICIONAL_A_CONFIRMACAO",
         "condition_ids": [
           "REC-PLATAFORMA-JOGO-QUIZ",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
           "MOD-JOGO-INTERATIVO",
           "REC-FEEDBACK-ACESSIVEL",
@@ -1189,8 +1204,11 @@
         "condition_ids": [
           "REC-FEEDBACK-ACESSIVEL",
           "REC-ROTEIRO-COLABORATIVO",
-          "TAR-COMUNICAR-E-EXPRESSAR",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-COMUNICAR-E-EXPRESSAR",
           "MOD-FALA",
           "NEC-COORDENAR-AUTORIA-COLABORATIVA",
           "NEC-PRESERVAR-PROTAGONISMO",
@@ -1357,6 +1375,7 @@
         "condition_ids": [
           "REC-EDITOR-MULTIMIDIA",
           "REC-FEEDBACK-ACESSIVEL",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-REVISAR-E-CONFIRMAR",
           "MOD-TEXTO",
           "NEC-FEEDBACK-E-FECHAMENTO",
@@ -1557,6 +1576,26 @@
       "PAD-PAPEIS-TURNOS-AUTORIA",
       "PAD-REVISAO-CONFIRMACAO"
     ],
+    "participant_coverage": [],
+    "candidate_knowledge_ids": [
+      "K07",
+      "K17",
+      "K19",
+      "K27",
+      "K31",
+      "K32",
+      "K22",
+      "K24",
+      "K35",
+      "K36",
+      "K37",
+      "K38",
+      "K39",
+      "K42",
+      "K43",
+      "K45"
+    ],
+    "function_derivation": [],
     "limite": "Decisão válida somente para o contexto, as relações confirmadas e a cobertura representada; apoia a escolha e o acompanhamento, mas não demonstra eficácia pedagógica nem constitui orientação universal."
   },
   "traceability": {
@@ -1622,7 +1661,7 @@
             "trecho_id": "TD-ORI-0012",
             "texto": "",
             "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
-            "localizacao_publica": "AT02 · MMI",
+            "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO"
           },
           {
@@ -1631,7 +1670,7 @@
             "trecho_id": "TD-ORI-0013",
             "texto": "",
             "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
-            "localizacao_publica": "AT02 · MMI",
+            "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO"
           },
           {
@@ -1640,7 +1679,7 @@
             "trecho_id": "TD-ORI-0014",
             "texto": "",
             "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
-            "localizacao_publica": "AT02 · WCAG",
+            "localizacao_publica": "1.3.1 — Info and Relationships",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO"
           }
         ],
@@ -1900,7 +1939,7 @@
             "trecho_id": "TD-ORI-0148",
             "texto": "",
             "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
-            "localizacao_publica": "AT17 · WCAG",
+            "localizacao_publica": "1.2.2 — Captions (Prerecorded)",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO"
           },
           {
@@ -2069,7 +2108,7 @@
             "trecho_id": "TD-ORI-0001",
             "texto": "",
             "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
-            "localizacao_publica": "AT01 · WCAG",
+            "localizacao_publica": "1.1.1 — Non-text Content",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO"
           },
           {
@@ -2126,7 +2165,7 @@
             "trecho_id": "TD-ORI-0090",
             "texto": "",
             "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
-            "localizacao_publica": "AT05 · WCAG",
+            "localizacao_publica": "1.2.5 — Audio Description (Prerecorded)",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO"
           },
           {
@@ -3233,12 +3272,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
             ],
             "labels": [
-              "Organizar um conteúdo digital",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Organizar um conteúdo digital"
             ]
           },
           {
@@ -3295,12 +3340,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-COMUNICAR-E-EXPRESSAR",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "labels": [
-              "Comunicar ou expressar conhecimento",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Comunicar ou expressar conhecimento"
             ]
           },
           {
@@ -3357,12 +3408,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
             ],
             "labels": [
-              "Organizar um conteúdo digital",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Organizar um conteúdo digital"
             ]
           },
           {
@@ -3417,9 +3474,15 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
             ],
             "labels": [
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
               "Produzir conteúdo usando formas complementares"
             ]
           },
@@ -3473,9 +3536,15 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
             ],
             "labels": [
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
               "Produzir conteúdo usando formas complementares"
             ]
           },
@@ -3529,12 +3598,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-COMUNICAR-E-EXPRESSAR",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "labels": [
-              "Comunicar ou expressar conhecimento",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Comunicar ou expressar conhecimento"
             ]
           },
           {
@@ -3591,9 +3666,11 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-REVISAR-E-CONFIRMAR"
             ],
             "labels": [
+              "Revisar, testar e publicar o recurso digital",
               "Revisar e confirmar conteúdo ou ação"
             ]
           },
@@ -4457,28 +4534,29 @@
   ],
   "execution_evidence": {
     "schema_version": "1.0",
-    "version": "1.4.0-rc1",
-    "context_id": "CTX-CASO-048337C7C1",
+    "version": "1.4.0-rc2",
+    "context_id": "CTX-CASO-3F90800716",
     "checks": [
       {
         "stage": "context",
-        "subject_id": "CTX-CASO-048337C7C1",
+        "subject_id": "CTX-CASO-3F90800716",
         "rule_id": "context_confirmation",
         "outcome": "PASS",
         "message": "Confirmação explícita da organização do contexto.",
         "operator": "IS_TRUE",
         "observed": true,
-        "id": "CHECK-1b934ee3f8321d50"
+        "id": "CHECK-1f6fd905ad39f1bd"
       },
       {
         "stage": "context",
-        "subject_id": "CTX-CASO-048337C7C1",
+        "subject_id": "CTX-CASO-3F90800716",
         "rule_id": "minimum_context",
         "outcome": "PASS",
-        "message": "Conferência dos campos mínimos antes de avaliar configurações.",
-        "operator": "NO_MISSING_FIELDS",
+        "message": "Campos mínimos conferidos; perguntas sobre rotas individuais pendentes permanecem visíveis e são avaliadas em cada configuração.",
+        "operator": "NO_MISSING_ESSENTIAL_FIELDS",
         "missing_fields": [],
-        "id": "CHECK-abdbf13a5cb5a4e7"
+        "pending_questions": [],
+        "id": "CHECK-20ff584b40259651"
       },
       {
         "stage": "knowledge",
@@ -19330,10 +19408,57 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
-          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
+          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
         ],
-        "id": "CHECK-a7a5cf1751867ba0"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ]
+        ],
+        "id": "CHECK-5973de9f05490b46"
       },
       {
         "stage": "component",
@@ -19358,7 +19483,12 @@
         "matched_ids": [
           "MOD-TEXTO"
         ],
-        "id": "CHECK-2adbe2bd4b4e9223"
+        "participant_ids": [
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-8c3eb66de4a0bd10"
       },
       {
         "stage": "component",
@@ -19727,10 +19857,50 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
-          "TAR-COMUNICAR-E-EXPRESSAR",
-          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
+          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-COMUNICAR-E-EXPRESSAR"
         ],
-        "id": "CHECK-7ac21cf5bc86a8c7"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ]
+        ],
+        "id": "CHECK-cfde5e58f9c58b8b"
       },
       {
         "stage": "component",
@@ -19757,7 +19927,13 @@
           "MOD-AUDIO",
           "MOD-FALA"
         ],
-        "id": "CHECK-3f2e476bce5f3fc6"
+        "participant_ids": [
+          "PART-CASO-01-6D8C95",
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-1c5573c3ed04fa96"
       },
       {
         "stage": "component",
@@ -20121,10 +20297,57 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
-          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
+          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
         ],
-        "id": "CHECK-aa2bcb0851c73bbb"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ],
+          [
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+          ]
+        ],
+        "id": "CHECK-57f04a7f7781921d"
       },
       {
         "stage": "component",
@@ -20151,7 +20374,13 @@
           "MOD-DESENHO",
           "MOD-IMAGEM"
         ],
-        "id": "CHECK-a8ac0dcd8f9be900"
+        "participant_ids": [
+          "PART-CASO-01-6D8C95",
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-20b5bcc7b7b1a98f"
       },
       {
         "stage": "component",
@@ -20211,12 +20440,12 @@
           }
         ],
         "matched_ids": [
-          "CAR-EXPRESSAO-VISUAL-AUTORAL",
           "CAR-EXPRESSAO-POR-DESENHO-IMAGEM",
-          "NEC-ALTERNATIVAS-DE-ACESSO-AO-RECURSO",
-          "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"
+          "CAR-EXPRESSAO-VISUAL-AUTORAL",
+          "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE",
+          "NEC-ALTERNATIVAS-DE-ACESSO-AO-RECURSO"
         ],
-        "id": "CHECK-1f1fa5f1f6e83687"
+        "id": "CHECK-112ae6a1c5c04fb5"
       },
       {
         "stage": "component",
@@ -20504,9 +20733,32 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
         ],
-        "id": "CHECK-0f93dd21cf09fcba"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ]
+        ],
+        "id": "CHECK-561f4c805fe0186b"
       },
       {
         "stage": "component",
@@ -20531,7 +20783,11 @@
         "matched_ids": [
           "MOD-VIDEO"
         ],
-        "id": "CHECK-463632f512def06a"
+        "participant_ids": [
+          "PART-CASO-02-E5DF38"
+        ],
+        "task_paths": [],
+        "id": "CHECK-5bfe47a787b857b2"
       },
       {
         "stage": "component",
@@ -20565,7 +20821,9 @@
           "REC-AUDIODESCRICAO",
           "REC-LEGENDAS"
         ],
-        "id": "CHECK-80ad6382e178c302"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-e69ebcc7a853edca"
       },
       {
         "stage": "component",
@@ -20873,9 +21131,32 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
         ],
-        "id": "CHECK-ae010e3ee53540c0"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ]
+        ],
+        "id": "CHECK-6c37c55f5aaea19b"
       },
       {
         "stage": "component",
@@ -20900,7 +21181,12 @@
         "matched_ids": [
           "MOD-JOGO-INTERATIVO"
         ],
-        "id": "CHECK-2113162ab08eb6b5"
+        "participant_ids": [
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-5df8fb8560570682"
       },
       {
         "stage": "component",
@@ -20932,7 +21218,9 @@
         "matched_ids": [
           "REC-FEEDBACK-ACESSIVEL"
         ],
-        "id": "CHECK-08ff5fcad40bf51c"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-2b28e8a4983012cb"
       },
       {
         "stage": "component",
@@ -21269,10 +21557,50 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
-          "TAR-COMUNICAR-E-EXPRESSAR",
-          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
+          "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-COMUNICAR-E-EXPRESSAR"
         ],
-        "id": "CHECK-476decee27bdd50a"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          [
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ]
+        ],
+        "id": "CHECK-ed0294d4cd014f45"
       },
       {
         "stage": "component",
@@ -21297,7 +21625,13 @@
         "matched_ids": [
           "MOD-FALA"
         ],
-        "id": "CHECK-6dac5006fbefd43f"
+        "participant_ids": [
+          "PART-CASO-01-6D8C95",
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-07668a76b587d3ca"
       },
       {
         "stage": "component",
@@ -21355,12 +21689,12 @@
         ],
         "matched_ids": [
           "NEC-COORDENAR-AUTORIA-COLABORATIVA",
-          "NEC-PRESERVAR-VINCULO-SOCIAL",
           "NEC-PRESERVAR-PROTAGONISMO",
+          "NEC-PRESERVAR-VINCULO-SOCIAL",
           "BAR-AUTORIA-SEM-COORDENACAO",
           "BAR-TRANSICAO-E-CONTRADICAO-DIFICIL"
         ],
-        "id": "CHECK-cbf0912e4408485c"
+        "id": "CHECK-07d44a1f107527d5"
       },
       {
         "stage": "component",
@@ -21661,9 +21995,20 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-REVISAR-E-CONFIRMAR"
         ],
-        "id": "CHECK-e9e31e7adbac7a91"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-REVISAR-E-CONFIRMAR"
+          ],
+          [
+            "TAR-REVISAR-E-CONFIRMAR"
+          ]
+        ],
+        "id": "CHECK-2e575bd9570c5ff7"
       },
       {
         "stage": "component",
@@ -21688,7 +22033,12 @@
         "matched_ids": [
           "MOD-TEXTO"
         ],
-        "id": "CHECK-d7952e4313bcc59c"
+        "participant_ids": [
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-1a9a7e502d4b6b1e"
       },
       {
         "stage": "component",
@@ -21726,11 +22076,11 @@
           }
         ],
         "matched_ids": [
-          "NEC-REVISAO-E-CONFIRMACAO",
           "NEC-FEEDBACK-E-FECHAMENTO",
-          "NEC-PRESERVAR-CONTEUDO-PARA-REVISAO"
+          "NEC-PRESERVAR-CONTEUDO-PARA-REVISAO",
+          "NEC-REVISAO-E-CONFIRMACAO"
         ],
-        "id": "CHECK-ee8f9d86e5faabab"
+        "id": "CHECK-ef89b6485c5829a4"
       },
       {
         "stage": "component",
@@ -22002,7 +22352,9 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [],
-        "id": "CHECK-e044c060ecd3ef92"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-2013f10ef961e361"
       },
       {
         "stage": "component",
@@ -22027,7 +22379,11 @@
         "matched_ids": [
           "MOD-AUDIO"
         ],
-        "id": "CHECK-5758c49c27f76d32"
+        "participant_ids": [
+          "PART-CASO-01-6D8C95"
+        ],
+        "task_paths": [],
+        "id": "CHECK-3371754deb3b3b70"
       },
       {
         "stage": "component",
@@ -22347,7 +22703,9 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [],
-        "id": "CHECK-193ee37323fda519"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-a0a0fcda474fc613"
       },
       {
         "stage": "component",
@@ -22370,7 +22728,9 @@
           "MOD-JOGO-INTERATIVO"
         ],
         "matched_ids": [],
-        "id": "CHECK-4383825fc9657994"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-303677d116cb2d49"
       },
       {
         "stage": "component",
@@ -22399,7 +22759,9 @@
           "REC-FEEDBACK-ACESSIVEL"
         ],
         "matched_ids": [],
-        "id": "CHECK-c231a7a7dd7bf8fd"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-90c6c9507e098d5f"
       },
       {
         "stage": "component",
@@ -22686,7 +23048,9 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [],
-        "id": "CHECK-1c45e03361df982a"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-75cba967157b44c5"
       },
       {
         "stage": "component",
@@ -22713,7 +23077,13 @@
           "MOD-AUDIO",
           "MOD-TEXTO"
         ],
-        "id": "CHECK-72e92d6cf858ed0c"
+        "participant_ids": [
+          "PART-CASO-01-6D8C95",
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-cf4f9357eebdd378"
       },
       {
         "stage": "component",
@@ -23052,9 +23422,32 @@
           "TAR-REVISAR-E-CONFIRMAR"
         ],
         "matched_ids": [
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-COMUNICAR-E-EXPRESSAR"
         ],
-        "id": "CHECK-548ca1305f2fa79f"
+        "participant_ids": [],
+        "task_paths": [
+          [
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-REVISAR-PUBLICAR-RECURSO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ],
+          [
+            "TAR-COMUNICAR-E-EXPRESSAR"
+          ]
+        ],
+        "id": "CHECK-1b469f916e0b57bc"
       },
       {
         "stage": "component",
@@ -23083,7 +23476,13 @@
           "MOD-AUDIO",
           "MOD-TEXTO"
         ],
-        "id": "CHECK-47496accda3cca22"
+        "participant_ids": [
+          "PART-CASO-01-6D8C95",
+          "PART-CASO-02-E5DF38",
+          "PART-CASO-03-2E4607"
+        ],
+        "task_paths": [],
+        "id": "CHECK-db936e582bf4c43c"
       },
       {
         "stage": "component",
@@ -23106,7 +23505,9 @@
           "RED-JOGO"
         ],
         "matched_ids": [],
-        "id": "CHECK-55c5f402722025e0"
+        "participant_ids": [],
+        "task_paths": [],
+        "id": "CHECK-f788afc5ead4090e"
       },
       {
         "stage": "component",
@@ -23345,7 +23746,7 @@
       },
       {
         "stage": "coverage",
-        "subject_id": "CTX-CASO-048337C7C1",
+        "subject_id": "CTX-CASO-3F90800716",
         "rule_id": "required_functions_coverage",
         "outcome": "PENDING",
         "message": "Funções requeridas comparadas às oferecidas pelos padrões selecionados.",
@@ -23396,7 +23797,7 @@
           "FUN-PRESERVAR-ACESSO",
           "FUN-SELECIONAR-MODO-POR-CONDICAO"
         ],
-        "id": "CHECK-6177649eb0bebbbf"
+        "id": "CHECK-b6f19140b7af5095"
       },
       {
         "stage": "documentary",
@@ -51806,12 +52207,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
             ],
             "labels": [
-              "Organizar um conteúdo digital",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Organizar um conteúdo digital"
             ]
           },
           {
@@ -51853,8 +52260,8 @@
           "CHECK-02000310aeb4f2f8",
           "CHECK-105df0c79f259007",
           "CHECK-e0c3652e0ec20cac",
-          "CHECK-a7a5cf1751867ba0",
-          "CHECK-2adbe2bd4b4e9223",
+          "CHECK-5973de9f05490b46",
+          "CHECK-8c3eb66de4a0bd10",
           "CHECK-cb1937c0e9e6012b",
           "CHECK-333486ed7339191a",
           "CHECK-c8fc7e10fb88b51a",
@@ -51923,8 +52330,11 @@
           "condition_ids": [
             "REC-EDITOR-MULTIMIDIA",
             "REC-ROTEIRO-COLABORATIVO",
-            "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
             "MOD-TEXTO",
             "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE",
             "BAR-FALA-ISOLADA-NAO-PERSISTE",
@@ -52042,7 +52452,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-01"
+          "id": "CFG-D-GERADA-77D8039602-01"
         }
       },
       {
@@ -52065,12 +52475,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-COMUNICAR-E-EXPRESSAR",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "labels": [
-              "Comunicar ou expressar conhecimento",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Comunicar ou expressar conhecimento"
             ]
           },
           {
@@ -52110,8 +52526,8 @@
           "CHECK-30a2cd5029081b1f",
           "CHECK-ad0dcf9874b9483f",
           "CHECK-f0ed0f7ce80ca4f1",
-          "CHECK-7ac21cf5bc86a8c7",
-          "CHECK-3f2e476bce5f3fc6",
+          "CHECK-cfde5e58f9c58b8b",
+          "CHECK-1c5573c3ed04fa96",
           "CHECK-674e3cd4140934e2",
           "CHECK-7115cf543c4e9cf9",
           "CHECK-f92e92993574779d",
@@ -52180,8 +52596,11 @@
           "condition_ids": [
             "REC-CELULAR-CAMERA-MICROFONE",
             "REC-MICROFONE",
-            "TAR-COMUNICAR-E-EXPRESSAR",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-COMUNICAR-E-EXPRESSAR",
             "MOD-AUDIO",
             "MOD-FALA",
             "CAR-EXPRESSAO-ORAL-AUTORAL",
@@ -52290,7 +52709,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-02"
+          "id": "CFG-D-GERADA-77D8039602-02"
         }
       },
       {
@@ -52315,12 +52734,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
             ],
             "labels": [
-              "Organizar um conteúdo digital",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Organizar um conteúdo digital"
             ]
           },
           {
@@ -52362,9 +52787,9 @@
           "CHECK-6da114ac5ec99111",
           "CHECK-a277289f302f1b8b",
           "CHECK-0d629d09eb8c9b43",
-          "CHECK-aa2bcb0851c73bbb",
-          "CHECK-a8ac0dcd8f9be900",
-          "CHECK-1f1fa5f1f6e83687",
+          "CHECK-57f04a7f7781921d",
+          "CHECK-20b5bcc7b7b1a98f",
+          "CHECK-112ae6a1c5c04fb5",
           "CHECK-850eb67c315de63b",
           "CHECK-ebff6456fbce9830",
           "CHECK-9c3cd831713cc094",
@@ -52442,8 +52867,11 @@
             "REC-CAMERA",
             "REC-DESCRICAO-TEXTUAL",
             "REC-EDITOR-MULTIMIDIA",
-            "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
             "MOD-DESENHO",
             "MOD-IMAGEM",
             "CAR-EXPRESSAO-POR-DESENHO-IMAGEM",
@@ -52555,7 +52983,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-03"
+          "id": "CFG-D-GERADA-77D8039602-03"
         }
       },
       {
@@ -52576,9 +53004,15 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
             ],
             "labels": [
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
               "Produzir conteúdo usando formas complementares"
             ]
           },
@@ -52619,9 +53053,9 @@
           "CHECK-58d7a5377146bd95",
           "CHECK-bb4d611e7530cfcb",
           "CHECK-d4ebc2d49cee42d0",
-          "CHECK-0f93dd21cf09fcba",
-          "CHECK-463632f512def06a",
-          "CHECK-80ad6382e178c302",
+          "CHECK-561f4c805fe0186b",
+          "CHECK-5bfe47a787b857b2",
+          "CHECK-e69ebcc7a853edca",
           "CHECK-183f75dcc91fbd88",
           "CHECK-7597fa5589b09321",
           "CHECK-bfddeebfe19a1201",
@@ -52697,6 +53131,9 @@
           "availability_status": "CONDICIONAL_A_CONFIRMACAO",
           "condition_ids": [
             "REC-REPRODUTOR-VIDEO",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
             "MOD-VIDEO",
             "REC-AUDIODESCRICAO",
@@ -52804,7 +53241,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-04"
+          "id": "CFG-D-GERADA-77D8039602-04"
         }
       },
       {
@@ -52825,9 +53262,15 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
             ],
             "labels": [
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
               "Produzir conteúdo usando formas complementares"
             ]
           },
@@ -52865,9 +53308,9 @@
           "CHECK-fe9129017ccd4cf8",
           "CHECK-3078644b500a36d4",
           "CHECK-a8adfca65b352239",
-          "CHECK-ae010e3ee53540c0",
-          "CHECK-2113162ab08eb6b5",
-          "CHECK-08ff5fcad40bf51c",
+          "CHECK-6c37c55f5aaea19b",
+          "CHECK-5df8fb8560570682",
+          "CHECK-2b28e8a4983012cb",
           "CHECK-53d45a4c7ab33d32",
           "CHECK-225b9d638327120b",
           "CHECK-665f8e8b164b446e",
@@ -52936,6 +53379,9 @@
           "availability_status": "CONDICIONAL_A_CONFIRMACAO",
           "condition_ids": [
             "REC-PLATAFORMA-JOGO-QUIZ",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
             "MOD-JOGO-INTERATIVO",
             "REC-FEEDBACK-ACESSIVEL",
@@ -53041,7 +53487,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-05"
+          "id": "CFG-D-GERADA-77D8039602-05"
         }
       },
       {
@@ -53064,12 +53510,18 @@
           {
             "field": "tarefas",
             "ids": [
-              "TAR-COMUNICAR-E-EXPRESSAR",
-              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+              "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "labels": [
-              "Comunicar ou expressar conhecimento",
-              "Produzir conteúdo usando formas complementares"
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
+              "Produzir conteúdo usando formas complementares",
+              "Comunicar ou expressar conhecimento"
             ]
           },
           {
@@ -53111,9 +53563,9 @@
           "CHECK-21aaf7fde7d8e583",
           "CHECK-953b62a699d9c884",
           "CHECK-139c02d37041a37b",
-          "CHECK-476decee27bdd50a",
-          "CHECK-6dac5006fbefd43f",
-          "CHECK-cbf0912e4408485c",
+          "CHECK-ed0294d4cd014f45",
+          "CHECK-07668a76b587d3ca",
+          "CHECK-07d44a1f107527d5",
           "CHECK-59aa75cbce2a0d3b",
           "CHECK-f41740afbfc841cf",
           "CHECK-3d23c764894eabf3",
@@ -53181,8 +53633,11 @@
           "condition_ids": [
             "REC-FEEDBACK-ACESSIVEL",
             "REC-ROTEIRO-COLABORATIVO",
-            "TAR-COMUNICAR-E-EXPRESSAR",
+            "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+            "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+            "TAR-COMUNICAR-E-EXPRESSAR",
             "MOD-FALA",
             "NEC-COORDENAR-AUTORIA-COLABORATIVA",
             "NEC-PRESERVAR-PROTAGONISMO",
@@ -53295,7 +53750,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-06"
+          "id": "CFG-D-GERADA-77D8039602-06"
         }
       },
       {
@@ -53318,9 +53773,11 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-REVISAR-E-CONFIRMAR"
             ],
             "labels": [
+              "Revisar, testar e publicar o recurso digital",
               "Revisar e confirmar conteúdo ou ação"
             ]
           },
@@ -53352,9 +53809,9 @@
           "CHECK-22dab064a878871c",
           "CHECK-0c45a29084ef971d",
           "CHECK-2f3d9d0b618e0bfc",
-          "CHECK-e9e31e7adbac7a91",
-          "CHECK-d7952e4313bcc59c",
-          "CHECK-ee8f9d86e5faabab",
+          "CHECK-2e575bd9570c5ff7",
+          "CHECK-1a9a7e502d4b6b1e",
+          "CHECK-ef89b6485c5829a4",
           "CHECK-5df4cd32934f0a56",
           "CHECK-944dcb180e5877ab",
           "CHECK-e467c4735710e471",
@@ -53422,6 +53879,7 @@
           "condition_ids": [
             "REC-EDITOR-MULTIMIDIA",
             "REC-FEEDBACK-ACESSIVEL",
+            "TAR-REVISAR-PUBLICAR-RECURSO",
             "TAR-REVISAR-E-CONFIRMAR",
             "MOD-TEXTO",
             "NEC-FEEDBACK-E-FECHAMENTO",
@@ -53504,7 +53962,7 @@
               ]
             }
           ],
-          "id": "CFG-D-GERADA-714A4A7BD1-07"
+          "id": "CFG-D-GERADA-77D8039602-07"
         }
       },
       {
@@ -53545,8 +54003,8 @@
           "CHECK-63f0b0e8afd414f7",
           "CHECK-471c8a486ba76bfa",
           "CHECK-e3aed0733bf8077b",
-          "CHECK-e044c060ecd3ef92",
-          "CHECK-5758c49c27f76d32",
+          "CHECK-2013f10ef961e361",
+          "CHECK-3371754deb3b3b70",
           "CHECK-35e6e829fdd81e9e",
           "CHECK-cc8c9a6081f2b000",
           "CHECK-8d4a1e42f36b3a58",
@@ -53576,9 +54034,9 @@
           "CHECK-9b859ded3b043d9a",
           "CHECK-72b5aef32e277aea",
           "CHECK-0cbdfa296884fd46",
-          "CHECK-193ee37323fda519",
-          "CHECK-4383825fc9657994",
-          "CHECK-c231a7a7dd7bf8fd",
+          "CHECK-a0a0fcda474fc613",
+          "CHECK-303677d116cb2d49",
+          "CHECK-90c6c9507e098d5f",
           "CHECK-5adf215b9daf515f",
           "CHECK-2b7fac112b6edb8f",
           "CHECK-dc8eb4e53ab7bf69",
@@ -53640,8 +54098,8 @@
           "CHECK-85152af0ab16d40f",
           "CHECK-bf34e2b5818c4992",
           "CHECK-b85e50efd7825569",
-          "CHECK-1c45e03361df982a",
-          "CHECK-72e92d6cf858ed0c",
+          "CHECK-75cba967157b44c5",
+          "CHECK-cf4f9357eebdd378",
           "CHECK-a916402946a1148d",
           "CHECK-c9d999c7c877cb45",
           "CHECK-d80a94d6ed106315",
@@ -53671,9 +54129,15 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "labels": [
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
               "Comunicar ou expressar conhecimento"
             ]
           },
@@ -53702,9 +54166,9 @@
           "CHECK-69ebb7871cda6ccb",
           "CHECK-3d08fe350b0d8e8b",
           "CHECK-5e60a2ecade99b59",
-          "CHECK-548ca1305f2fa79f",
-          "CHECK-47496accda3cca22",
-          "CHECK-55c5f402722025e0",
+          "CHECK-1b469f916e0b57bc",
+          "CHECK-db936e582bf4c43c",
+          "CHECK-f788afc5ead4090e",
           "CHECK-1ddd693775f70461",
           "CHECK-f8e0b323f3e6e60c",
           "CHECK-a3f32c2c2346eb7f",
@@ -53744,10 +54208,15 @@
             "fonte_id": "FN-MMI",
             "fonte_item": "MMI",
             "trecho_id": "TD-ORI-0012",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · MMI",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+            "document_version": "2003-01-08",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "A aplicação deve coordenar a navegação e o fluxo entre modalidades; o requisito orienta a interação, sem prescrever um recurso pedagógico.",
+            "record_locator": "AT02 · MMI"
           },
           {
             "id": "ORI-0013",
@@ -53756,10 +54225,15 @@
             "fonte_id": "FN-MMI",
             "fonte_item": "MMI",
             "trecho_id": "TD-ORI-0013",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · MMI",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+            "document_version": "2003-01-08",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "O acesso a dados de entrada específicos das modalidades permite processá-los conjuntamente; não basta apresentar formatos separados.",
+            "record_locator": "AT02 · MMI"
           },
           {
             "id": "ORI-0014",
@@ -53768,10 +54242,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0014",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.3.1 — Info and Relationships",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto.",
+            "record_locator": "AT02 · WCAG"
           }
         ],
         "justification": "Estrutura e relações precisam permanecer explícitas e processáveis.",
@@ -53901,10 +54380,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0148",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT17 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.2.2 — Captions (Prerecorded)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#captions-prerecorded",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Áudio pré-gravado em mídia sincronizada requer legendas, exceto quando a mídia constitui alternativa ao texto e está identificada assim.",
+            "record_locator": "AT17 · WCAG"
           },
           {
             "id": "ORI-0149",
@@ -54056,10 +54540,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0001",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT01 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.1.1 — Non-text Content",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#non-text-content",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Alternativas textuais devem cumprir a finalidade do conteúdo não textual; controles, mídia e testes possuem condições e exceções próprias.",
+            "record_locator": "AT01 · WCAG"
           },
           {
             "id": "ORI-0002",
@@ -54108,10 +54597,15 @@
             "fonte_id": "FN-MMI",
             "fonte_item": "MMI",
             "trecho_id": "TD-ORI-0012",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · MMI",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+            "document_version": "2003-01-08",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "A aplicação deve coordenar a navegação e o fluxo entre modalidades; o requisito orienta a interação, sem prescrever um recurso pedagógico.",
+            "record_locator": "AT02 · MMI"
           },
           {
             "id": "ORI-0013",
@@ -54120,10 +54614,15 @@
             "fonte_id": "FN-MMI",
             "fonte_item": "MMI",
             "trecho_id": "TD-ORI-0013",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · MMI",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+            "document_version": "2003-01-08",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "O acesso a dados de entrada específicos das modalidades permite processá-los conjuntamente; não basta apresentar formatos separados.",
+            "record_locator": "AT02 · MMI"
           },
           {
             "id": "ORI-0014",
@@ -54132,10 +54631,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0014",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.3.1 — Info and Relationships",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto.",
+            "record_locator": "AT02 · WCAG"
           }
         ],
         "justification": "Relações e sequência devem permanecer explícitas.",
@@ -54211,10 +54715,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0090",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT05 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.2.5 — Audio Description (Prerecorded)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-description-prerecorded",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Vídeo pré-gravado em mídia sincronizada requer audiodescrição do conteúdo visual relevante; esta origem não especifica recursos de Matemática.",
+            "record_locator": "AT05 · WCAG"
           },
           {
             "id": "ORI-0091",
@@ -54263,10 +54772,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0148",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT17 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.2.2 — Captions (Prerecorded)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#captions-prerecorded",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Áudio pré-gravado em mídia sincronizada requer legendas, exceto quando a mídia constitui alternativa ao texto e está identificada assim.",
+            "record_locator": "AT17 · WCAG"
           },
           {
             "id": "ORI-0149",
@@ -54676,10 +55190,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0001",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT01 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.1.1 — Non-text Content",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#non-text-content",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Alternativas textuais devem cumprir a finalidade do conteúdo não textual; controles, mídia e testes possuem condições e exceções próprias.",
+            "record_locator": "AT01 · WCAG"
           },
           {
             "id": "ORI-0002",
@@ -54728,10 +55247,15 @@
             "fonte_id": "FN-MMI",
             "fonte_item": "MMI",
             "trecho_id": "TD-ORI-0012",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · MMI",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+            "document_version": "2003-01-08",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "A aplicação deve coordenar a navegação e o fluxo entre modalidades; o requisito orienta a interação, sem prescrever um recurso pedagógico.",
+            "record_locator": "AT02 · MMI"
           },
           {
             "id": "ORI-0013",
@@ -54740,10 +55264,15 @@
             "fonte_id": "FN-MMI",
             "fonte_item": "MMI",
             "trecho_id": "TD-ORI-0013",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · MMI",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+            "document_version": "2003-01-08",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "O acesso a dados de entrada específicos das modalidades permite processá-los conjuntamente; não basta apresentar formatos separados.",
+            "record_locator": "AT02 · MMI"
           },
           {
             "id": "ORI-0014",
@@ -54752,10 +55281,15 @@
             "fonte_id": "FN-WCAG",
             "fonte_item": "WCAG",
             "trecho_id": "TD-ORI-0014",
-            "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+            "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
             "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-            "localizacao_publica": "AT02 · WCAG",
-            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+            "localizacao_publica": "1.3.1 — Info and Relationships",
+            "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+            "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+            "document_version": "2023-10-05",
+            "document_review_date": "2026-10-11",
+            "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto.",
+            "record_locator": "AT02 · WCAG"
           }
         ],
         "justification": "Estrutura precisa permanecer identificável.",
@@ -55016,8 +55550,8 @@
       "interpretation": "Interseção declarada de requisitos e funções dos padrões; não comprova eficácia em uso."
     },
     "entities": {
-      "CTX-CASO-048337C7C1": {
-        "id": "CTX-CASO-048337C7C1",
+      "CTX-CASO-3F90800716": {
+        "id": "CTX-CASO-3F90800716",
         "title": "Contexto confirmado desta execução"
       },
       "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA": {
@@ -55669,6 +56203,15 @@
           "EST05"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
       },
       "K27": {
@@ -55780,6 +56323,15 @@
           "EST07"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
       },
       "TD-EV28": {
@@ -55911,6 +56463,15 @@
           "EST03"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line"
       },
       "TD-EV13": {
@@ -55973,6 +56534,15 @@
           "EST06"
         ],
         "status": "PRESERVADO_NA_BASE_ARQUIVO_A_CONFIRMAR",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Validação e refinamento das Personas Multimodais"
       },
       "TD-EV40": {
@@ -56084,6 +56654,15 @@
         "arquivo": "elicitation/original/WhatsApp Audio 2026-08-27 at 00.38.04.mp4",
         "estudo_ids": [],
         "status": "TRANSCRICAO_AUTOMATICA_A_CONFERIR",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Gravação da elicitação com a especialista — parte 2"
       },
       "TD-EL03": {
@@ -56372,6 +56951,15 @@
           "EST02"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "A Scheme for Multimodal Component Recommendation"
       },
       "TD-RC3-REF-03": {
@@ -56397,6 +56985,15 @@
           "EST01"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "An application of mobility aids for the visually impaired"
       },
       "TD-RC3-REF-06": {
@@ -56422,6 +57019,15 @@
           "EST04"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Enhancing interaction of people with quadriplegia"
       },
       "TD-RC3-REF-07": {
@@ -56634,9 +57240,15 @@
         "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
         "classificacao": "TRECHO_DOCUMENTAL",
         "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-        "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+        "localizacao_publica": "1.1.1 — Non-text Content",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
         "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#non-text-content",
+        "document_version": "2023-10-05",
+        "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Alternativas textuais devem cumprir a finalidade do conteúdo não textual; controles, mídia e testes possuem condições e exceções próprias.",
+        "record_locator": "PLANILHA_FINAL_DE_EXTRACAO",
         "title": "TD-ORI-0001"
       },
       "FN-WCAG": {
@@ -56648,6 +57260,17 @@
           "EST07"
         ],
         "status": "ITENS_PRESERVADOS_NA_PLANILHA",
+        "url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/",
+        "urls": [
+          "https://www.w3.org/TR/2023/REC-WCAG22-20231005/"
+        ],
+        "url_candidates": [],
+        "doi": null,
+        "edition": "WCAG 2.2 — W3C Recommendation, 2023-10-05",
+        "edition_status": "EDICAO_LOCALIZADA_NO_ORIGINAL",
+        "consulted_at": "2026-10-11",
+        "access_status": "SECOES_SELECIONADAS_CONSULTADAS",
+        "metadata_origin": "CONSULTA_ONLINE_PRIMARIA_DE_SECOES_IDENTIFICADAS",
         "title": "Web Content Accessibility Guidelines"
       },
       "TD-ORI-0014": {
@@ -56658,9 +57281,15 @@
         "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
         "classificacao": "TRECHO_DOCUMENTAL",
         "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-        "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+        "localizacao_publica": "1.3.1 — Info and Relationships",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
         "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+        "document_version": "2023-10-05",
+        "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto.",
+        "record_locator": "PLANILHA_FINAL_DE_EXTRACAO",
         "title": "TD-ORI-0014"
       },
       "TD-ORI-0090": {
@@ -56671,9 +57300,15 @@
         "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
         "classificacao": "TRECHO_DOCUMENTAL",
         "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-        "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+        "localizacao_publica": "1.2.5 — Audio Description (Prerecorded)",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
         "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-description-prerecorded",
+        "document_version": "2023-10-05",
+        "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Vídeo pré-gravado em mídia sincronizada requer audiodescrição do conteúdo visual relevante; esta origem não especifica recursos de Matemática.",
+        "record_locator": "PLANILHA_FINAL_DE_EXTRACAO",
         "title": "TD-ORI-0090"
       },
       "TD-ORI-0148": {
@@ -56684,9 +57319,15 @@
         "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
         "classificacao": "TRECHO_DOCUMENTAL",
         "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-        "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+        "localizacao_publica": "1.2.2 — Captions (Prerecorded)",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
         "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#captions-prerecorded",
+        "document_version": "2023-10-05",
+        "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Áudio pré-gravado em mídia sincronizada requer legendas, exceto quando a mídia constitui alternativa ao texto e está identificada assim.",
+        "record_locator": "PLANILHA_FINAL_DE_EXTRACAO",
         "title": "TD-ORI-0148"
       },
       "FN-ABNT-WEB": {
@@ -56698,6 +57339,17 @@
           "EST07"
         ],
         "status": "ITENS_PRESERVADOS_NA_PLANILHA",
+        "url": "https://www.abntcolecao.com.br/mpf/norma.aspx?ID=567818",
+        "urls": [
+          "https://www.abntcolecao.com.br/mpf/norma.aspx?ID=567818"
+        ],
+        "url_candidates": [],
+        "doi": null,
+        "edition": "NBR 17225:2025",
+        "edition_status": "DECLARADA_NA_CITACAO_A_CONFERIR",
+        "consulted_at": "2026-10-11",
+        "access_status": "ACESSO_RESTRITO",
+        "metadata_origin": "LINK_CITADO_REDIRECIONOU_PARA_RESTRICAO_DE_ACESSO",
         "title": "ABNT NBR 17225 — acessibilidade web"
       },
       "FN-ABNT-MOBILE": {
@@ -56709,6 +57361,15 @@
           "EST07"
         ],
         "status": "ITENS_PRESERVADOS_NA_PLANILHA",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "ABNT NBR 17060 — acessibilidade em aplicativos móveis"
       },
       "K36": {
@@ -57207,6 +57868,15 @@
           "EST03"
         ],
         "status": "DOCUMENTADO_NO_CORPUS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Teste de Conformidade da Ferramenta WABlind – Primeira Versão"
       },
       "EST03": {
@@ -57508,6 +58178,15 @@
           "EST07"
         ],
         "status": "FONTE_AUTORITATIVA_DOS_CRITERIOS",
+        "url": null,
+        "urls": [],
+        "url_candidates": [],
+        "doi": null,
+        "edition": null,
+        "edition_status": "NAO_IDENTIFICADA",
+        "consulted_at": null,
+        "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+        "metadata_origin": "REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE",
         "title": "Planilha final de extração e consolidação dos critérios"
       },
       "EST06": {
@@ -58948,10 +59627,15 @@
         "fonte_id": "FN-MMI",
         "fonte_item": "MMI",
         "trecho_id": "TD-ORI-0012",
-        "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+        "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-        "localizacao_publica": "AT02 · MMI",
+        "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
         "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+        "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+        "document_version": "2003-01-08",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "A aplicação deve coordenar a navegação e o fluxo entre modalidades; o requisito orienta a interação, sem prescrever um recurso pedagógico.",
+        "record_locator": "AT02 · MMI",
         "title": "ORI-0012"
       },
       "FN-MMI": {
@@ -58963,6 +59647,17 @@
           "EST07"
         ],
         "status": "ITENS_PRESERVADOS_NA_PLANILHA",
+        "url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+        "urls": [
+          "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/"
+        ],
+        "url_candidates": [],
+        "doi": null,
+        "edition": "Multimodal Interaction Requirements — W3C Working Group Note, 2003-01-08",
+        "edition_status": "EDICAO_LOCALIZADA_NO_ORIGINAL",
+        "consulted_at": "2026-10-11",
+        "access_status": "SECOES_SELECIONADAS_CONSULTADAS",
+        "metadata_origin": "CONSULTA_ONLINE_PRIMARIA_DE_SECOES_IDENTIFICADAS",
         "title": "W3C Multimodal Interaction Requirements"
       },
       "TD-ORI-0012": {
@@ -58973,9 +59668,15 @@
         "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
         "classificacao": "TRECHO_DOCUMENTAL",
         "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-        "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+        "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
         "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+        "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+        "document_version": "2003-01-08",
+        "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "A aplicação deve coordenar a navegação e o fluxo entre modalidades; o requisito orienta a interação, sem prescrever um recurso pedagógico.",
+        "record_locator": "PLANILHA_FINAL_DE_EXTRACAO",
         "title": "TD-ORI-0012"
       },
       "ORI-0013": {
@@ -58985,10 +59686,15 @@
         "fonte_id": "FN-MMI",
         "fonte_item": "MMI",
         "trecho_id": "TD-ORI-0013",
-        "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+        "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-        "localizacao_publica": "AT02 · MMI",
+        "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
         "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+        "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+        "document_version": "2003-01-08",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "O acesso a dados de entrada específicos das modalidades permite processá-los conjuntamente; não basta apresentar formatos separados.",
+        "record_locator": "AT02 · MMI",
         "title": "ORI-0013"
       },
       "TD-ORI-0013": {
@@ -58999,9 +59705,15 @@
         "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
         "classificacao": "TRECHO_DOCUMENTAL",
         "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-        "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+        "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
         "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+        "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+        "document_version": "2003-01-08",
+        "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "O acesso a dados de entrada específicos das modalidades permite processá-los conjuntamente; não basta apresentar formatos separados.",
+        "record_locator": "PLANILHA_FINAL_DE_EXTRACAO",
         "title": "TD-ORI-0013"
       },
       "ORI-0014": {
@@ -59011,10 +59723,15 @@
         "fonte_id": "FN-WCAG",
         "fonte_item": "WCAG",
         "trecho_id": "TD-ORI-0014",
-        "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+        "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-        "localizacao_publica": "AT02 · WCAG",
+        "localizacao_publica": "1.3.1 — Info and Relationships",
         "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+        "document_version": "2023-10-05",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto.",
+        "record_locator": "AT02 · WCAG",
         "title": "ORI-0014"
       },
       "CA74": {
@@ -59438,10 +60155,15 @@
         "fonte_id": "FN-WCAG",
         "fonte_item": "WCAG",
         "trecho_id": "TD-ORI-0148",
-        "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+        "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-        "localizacao_publica": "AT17 · WCAG",
+        "localizacao_publica": "1.2.2 — Captions (Prerecorded)",
         "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#captions-prerecorded",
+        "document_version": "2023-10-05",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Áudio pré-gravado em mídia sincronizada requer legendas, exceto quando a mídia constitui alternativa ao texto e está identificada assim.",
+        "record_locator": "AT17 · WCAG",
         "title": "ORI-0148"
       },
       "ORI-0149": {
@@ -59750,10 +60472,15 @@
         "fonte_id": "FN-WCAG",
         "fonte_item": "WCAG",
         "trecho_id": "TD-ORI-0001",
-        "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+        "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-        "localizacao_publica": "AT01 · WCAG",
+        "localizacao_publica": "1.1.1 — Non-text Content",
         "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#non-text-content",
+        "document_version": "2023-10-05",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Alternativas textuais devem cumprir a finalidade do conteúdo não textual; controles, mídia e testes possuem condições e exceções próprias.",
+        "record_locator": "AT01 · WCAG",
         "title": "ORI-0001"
       },
       "ORI-0002": {
@@ -59874,10 +60601,15 @@
         "fonte_id": "FN-WCAG",
         "fonte_item": "WCAG",
         "trecho_id": "TD-ORI-0090",
-        "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+        "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
         "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-        "localizacao_publica": "AT05 · WCAG",
+        "localizacao_publica": "1.2.5 — Audio Description (Prerecorded)",
         "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+        "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-description-prerecorded",
+        "document_version": "2023-10-05",
+        "document_review_date": "2026-10-11",
+        "document_paraphrase": "Vídeo pré-gravado em mídia sincronizada requer audiodescrição do conteúdo visual relevante; esta origem não especifica recursos de Matemática.",
+        "record_locator": "AT05 · WCAG",
         "title": "ORI-0090"
       },
       "ORI-0091": {
@@ -60071,9 +60803,9 @@
     ],
     "status": "GERADA_PARCIAL",
     "hashes": {
-      "engine_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
-      "base_sha256": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
-      "ontology_sha256": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+      "engine_sha256": "28d595f17039e71a25c61d360bf7c26fb98b9224de52edc1390b8df9ad6ad7a1",
+      "base_sha256": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b",
+      "ontology_sha256": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5",
       "cq2_sha256": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d"
     },
     "knowledge_construction": {
@@ -60131,7 +60863,9 @@
         },
         "source": {
           "id": "F03",
-          "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line"
+          "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60154,7 +60888,9 @@
         },
         "source": {
           "id": "F06",
-          "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+          "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60177,7 +60913,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60200,7 +60938,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60223,7 +60963,9 @@
         },
         "source": {
           "id": "F06",
-          "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+          "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60246,7 +60988,9 @@
         },
         "source": {
           "id": "F06",
-          "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+          "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60269,7 +61013,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60292,7 +61038,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60315,7 +61063,9 @@
         },
         "source": {
           "id": "F06",
-          "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+          "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60338,7 +61088,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60361,7 +61113,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60384,7 +61138,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60407,7 +61163,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60430,7 +61188,9 @@
         },
         "source": {
           "id": "F06",
-          "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+          "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60453,7 +61213,9 @@
         },
         "source": {
           "id": "F02",
-          "title": "A Scheme for Multimodal Component Recommendation"
+          "title": "A Scheme for Multimodal Component Recommendation",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60476,7 +61238,9 @@
         },
         "source": {
           "id": "F01",
-          "title": "An application of mobility aids for the visually impaired"
+          "title": "An application of mobility aids for the visually impaired",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60499,7 +61263,9 @@
         },
         "source": {
           "id": "F05",
-          "title": "Enhancing interaction of people with quadriplegia"
+          "title": "Enhancing interaction of people with quadriplegia",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60522,7 +61288,9 @@
         },
         "source": {
           "id": "F03",
-          "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line"
+          "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+          "url": null,
+          "edition": null
         }
       },
       {
@@ -60530,22 +61298,28 @@
         "articulation_id": "ART-REF-03",
         "knowledge_id": "K42",
         "excerpt_id": "TD-ORI-0014",
-        "statement": "O item preservado na extração de critérios requer que informação, estrutura e relações possam ser recuperadas programaticamente ou em texto.",
+        "statement": "O requisito 1.3.1 da WCAG 2.2 exige que informações, estrutura e relações possam ser identificadas por software ou estejam disponíveis em texto.",
         "contribution_role": "ESTRUTURA_PERCEPTIVEL",
         "nature": "PARAFRASE_DE_ITEM_NORMATIVO_EXTRAIDO",
-        "justification": "Conferência no registro de extração, não na versão original da norma. Apoia preservar relações essenciais, sem impor uma tradução única para todo conteúdo.",
-        "verification_status": "CONFERIDA_NO_REGISTRO",
-        "reviewer": "Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original",
-        "review_date": "2026-10-08",
+        "justification": "Conferência do requisito 1.3.1 na Recommendation de 2023-10-05, em 2026-10-11. Apoia preservar relações essenciais; não determina sozinho uma tradução única nem comprova a adequação de toda configuração.",
+        "verification_status": "CONFERIDA_NO_DOCUMENTO",
+        "reviewer": "Assistência computacional; consulta à seção original identificada, sem nova avaliação humana",
+        "review_date": "2026-10-11",
         "excerpt": {
           "id": "TD-ORI-0014",
-          "location": "PLANILHA_FINAL_DE_EXTRACAO",
+          "location": "1.3.1 — Info and Relationships",
           "publication_notice": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
-          "publication_state": "TEXTO_NAO_REDISTRIBUIDO"
+          "publication_state": "TEXTO_NAO_REDISTRIBUIDO",
+          "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+          "document_version": "2023-10-05",
+          "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+          "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto."
         },
         "source": {
           "id": "FN-WCAG",
-          "title": "Web Content Accessibility Guidelines"
+          "title": "Web Content Accessibility Guidelines",
+          "url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/",
+          "edition": "WCAG 2.2 — W3C Recommendation, 2023-10-05"
         }
       },
       {
@@ -60568,7 +61342,9 @@
         },
         "source": {
           "id": "F08",
-          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+          "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+          "url": null,
+          "edition": null
         }
       }
     ]
@@ -60583,8 +61359,8 @@
         "title": "Conferência do contexto",
         "summary": "O contexto foi informado e confirmado; não é um diagnóstico automático.",
         "check_ids": [
-          "CHECK-1b934ee3f8321d50",
-          "CHECK-abdbf13a5cb5a4e7"
+          "CHECK-1f6fd905ad39f1bd",
+          "CHECK-20ff584b40259651"
         ]
       },
       {
@@ -61778,8 +62554,8 @@
           "CHECK-02000310aeb4f2f8",
           "CHECK-105df0c79f259007",
           "CHECK-e0c3652e0ec20cac",
-          "CHECK-a7a5cf1751867ba0",
-          "CHECK-2adbe2bd4b4e9223",
+          "CHECK-5973de9f05490b46",
+          "CHECK-8c3eb66de4a0bd10",
           "CHECK-cb1937c0e9e6012b",
           "CHECK-333486ed7339191a",
           "CHECK-c8fc7e10fb88b51a",
@@ -61797,8 +62573,8 @@
           "CHECK-30a2cd5029081b1f",
           "CHECK-ad0dcf9874b9483f",
           "CHECK-f0ed0f7ce80ca4f1",
-          "CHECK-7ac21cf5bc86a8c7",
-          "CHECK-3f2e476bce5f3fc6",
+          "CHECK-cfde5e58f9c58b8b",
+          "CHECK-1c5573c3ed04fa96",
           "CHECK-674e3cd4140934e2",
           "CHECK-7115cf543c4e9cf9",
           "CHECK-f92e92993574779d",
@@ -61816,9 +62592,9 @@
           "CHECK-6da114ac5ec99111",
           "CHECK-a277289f302f1b8b",
           "CHECK-0d629d09eb8c9b43",
-          "CHECK-aa2bcb0851c73bbb",
-          "CHECK-a8ac0dcd8f9be900",
-          "CHECK-1f1fa5f1f6e83687",
+          "CHECK-57f04a7f7781921d",
+          "CHECK-20b5bcc7b7b1a98f",
+          "CHECK-112ae6a1c5c04fb5",
           "CHECK-850eb67c315de63b",
           "CHECK-ebff6456fbce9830",
           "CHECK-9c3cd831713cc094",
@@ -61835,9 +62611,9 @@
           "CHECK-58d7a5377146bd95",
           "CHECK-bb4d611e7530cfcb",
           "CHECK-d4ebc2d49cee42d0",
-          "CHECK-0f93dd21cf09fcba",
-          "CHECK-463632f512def06a",
-          "CHECK-80ad6382e178c302",
+          "CHECK-561f4c805fe0186b",
+          "CHECK-5bfe47a787b857b2",
+          "CHECK-e69ebcc7a853edca",
           "CHECK-183f75dcc91fbd88",
           "CHECK-7597fa5589b09321",
           "CHECK-bfddeebfe19a1201",
@@ -61854,9 +62630,9 @@
           "CHECK-fe9129017ccd4cf8",
           "CHECK-3078644b500a36d4",
           "CHECK-a8adfca65b352239",
-          "CHECK-ae010e3ee53540c0",
-          "CHECK-2113162ab08eb6b5",
-          "CHECK-08ff5fcad40bf51c",
+          "CHECK-6c37c55f5aaea19b",
+          "CHECK-5df8fb8560570682",
+          "CHECK-2b28e8a4983012cb",
           "CHECK-53d45a4c7ab33d32",
           "CHECK-225b9d638327120b",
           "CHECK-665f8e8b164b446e",
@@ -61874,9 +62650,9 @@
           "CHECK-21aaf7fde7d8e583",
           "CHECK-953b62a699d9c884",
           "CHECK-139c02d37041a37b",
-          "CHECK-476decee27bdd50a",
-          "CHECK-6dac5006fbefd43f",
-          "CHECK-cbf0912e4408485c",
+          "CHECK-ed0294d4cd014f45",
+          "CHECK-07668a76b587d3ca",
+          "CHECK-07d44a1f107527d5",
           "CHECK-59aa75cbce2a0d3b",
           "CHECK-f41740afbfc841cf",
           "CHECK-3d23c764894eabf3",
@@ -61893,9 +62669,9 @@
           "CHECK-22dab064a878871c",
           "CHECK-0c45a29084ef971d",
           "CHECK-2f3d9d0b618e0bfc",
-          "CHECK-e9e31e7adbac7a91",
-          "CHECK-d7952e4313bcc59c",
-          "CHECK-ee8f9d86e5faabab",
+          "CHECK-2e575bd9570c5ff7",
+          "CHECK-1a9a7e502d4b6b1e",
+          "CHECK-ef89b6485c5829a4",
           "CHECK-5df4cd32934f0a56",
           "CHECK-944dcb180e5877ab",
           "CHECK-e467c4735710e471",
@@ -61911,8 +62687,8 @@
           "CHECK-63f0b0e8afd414f7",
           "CHECK-471c8a486ba76bfa",
           "CHECK-e3aed0733bf8077b",
-          "CHECK-e044c060ecd3ef92",
-          "CHECK-5758c49c27f76d32",
+          "CHECK-2013f10ef961e361",
+          "CHECK-3371754deb3b3b70",
           "CHECK-35e6e829fdd81e9e",
           "CHECK-cc8c9a6081f2b000",
           "CHECK-8d4a1e42f36b3a58",
@@ -61929,9 +62705,9 @@
           "CHECK-9b859ded3b043d9a",
           "CHECK-72b5aef32e277aea",
           "CHECK-0cbdfa296884fd46",
-          "CHECK-193ee37323fda519",
-          "CHECK-4383825fc9657994",
-          "CHECK-c231a7a7dd7bf8fd",
+          "CHECK-a0a0fcda474fc613",
+          "CHECK-303677d116cb2d49",
+          "CHECK-90c6c9507e098d5f",
           "CHECK-5adf215b9daf515f",
           "CHECK-2b7fac112b6edb8f",
           "CHECK-dc8eb4e53ab7bf69",
@@ -61947,8 +62723,8 @@
           "CHECK-85152af0ab16d40f",
           "CHECK-bf34e2b5818c4992",
           "CHECK-b85e50efd7825569",
-          "CHECK-1c45e03361df982a",
-          "CHECK-72e92d6cf858ed0c",
+          "CHECK-75cba967157b44c5",
+          "CHECK-cf4f9357eebdd378",
           "CHECK-a916402946a1148d",
           "CHECK-c9d999c7c877cb45",
           "CHECK-d80a94d6ed106315",
@@ -61965,9 +62741,9 @@
           "CHECK-69ebb7871cda6ccb",
           "CHECK-3d08fe350b0d8e8b",
           "CHECK-5e60a2ecade99b59",
-          "CHECK-548ca1305f2fa79f",
-          "CHECK-47496accda3cca22",
-          "CHECK-55c5f402722025e0",
+          "CHECK-1b469f916e0b57bc",
+          "CHECK-db936e582bf4c43c",
+          "CHECK-f788afc5ead4090e",
           "CHECK-1ddd693775f70461",
           "CHECK-f8e0b323f3e6e60c",
           "CHECK-a3f32c2c2346eb7f",
@@ -61988,14 +62764,14 @@
         "title": "Cobertura declarada e limites",
         "summary": "Funções requeridas e oferecidas são comparadas; isso não mede eficácia em uso.",
         "check_ids": [
-          "CHECK-6177649eb0bebbbf"
+          "CHECK-b6f19140b7af5095"
         ]
       }
     ],
     "configurations": [
       {
         "component_id": "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
-        "id": "CFG-D-GERADA-714A4A7BD1-01",
+        "id": "CFG-D-GERADA-77D8039602-01",
         "title": "Estrutura persistente para organizar e retomar o conteúdo",
         "selection": "SELECTED",
         "availability_status": "CONFIRMADO_DISPONIVEL",
@@ -62048,7 +62824,9 @@
               },
               "source": {
                 "id": "F03",
-                "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line"
+                "title": "Avaliação da Comunicabilidade da WABlind em Enciclopédias On-line",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62071,7 +62849,9 @@
               },
               "source": {
                 "id": "F06",
-                "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+                "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62094,7 +62874,9 @@
               },
               "source": {
                 "id": "F08",
-                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62117,7 +62899,9 @@
               },
               "source": {
                 "id": "F08",
-                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62140,7 +62924,9 @@
               },
               "source": {
                 "id": "F06",
-                "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+                "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62163,7 +62949,9 @@
               },
               "source": {
                 "id": "F06",
-                "title": "Personas Multimodais: Hábitos digitais e acessibilidade"
+                "title": "Personas Multimodais: Hábitos digitais e acessibilidade",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62186,7 +62974,9 @@
               },
               "source": {
                 "id": "F08",
-                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62209,7 +62999,9 @@
               },
               "source": {
                 "id": "F08",
-                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62232,7 +63024,9 @@
               },
               "source": {
                 "id": "F02",
-                "title": "A Scheme for Multimodal Component Recommendation"
+                "title": "A Scheme for Multimodal Component Recommendation",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62255,7 +63049,9 @@
               },
               "source": {
                 "id": "F01",
-                "title": "An application of mobility aids for the visually impaired"
+                "title": "An application of mobility aids for the visually impaired",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62278,7 +63074,9 @@
               },
               "source": {
                 "id": "F05",
-                "title": "Enhancing interaction of people with quadriplegia"
+                "title": "Enhancing interaction of people with quadriplegia",
+                "url": null,
+                "edition": null
               }
             },
             {
@@ -62301,7 +63099,9 @@
               },
               "source": {
                 "id": "F08",
-                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"
+                "title": "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos",
+                "url": null,
+                "edition": null
               }
             }
           ],
@@ -63220,24 +64020,45 @@
               ]
             },
             {
-              "id": "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-              "label": "Organizar conteúdo digital",
+              "id": "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "label": "Construir colaborativamente um recurso digital de História",
               "check_ids": [
-                "CHECK-a7a5cf1751867ba0"
+                "CHECK-5973de9f05490b46"
+              ]
+            },
+            {
+              "id": "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "label": "Selecionar fatos, fontes e relações históricas para o recurso",
+              "check_ids": [
+                "CHECK-5973de9f05490b46"
+              ]
+            },
+            {
+              "id": "TAR-REVISAR-PUBLICAR-RECURSO",
+              "label": "Revisar, testar e publicar o recurso digital",
+              "check_ids": [
+                "CHECK-5973de9f05490b46"
               ]
             },
             {
               "id": "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
               "label": "Produzir conteúdo com formas complementares de expressão",
               "check_ids": [
-                "CHECK-a7a5cf1751867ba0"
+                "CHECK-5973de9f05490b46"
+              ]
+            },
+            {
+              "id": "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+              "label": "Organizar conteúdo digital",
+              "check_ids": [
+                "CHECK-5973de9f05490b46"
               ]
             },
             {
               "id": "MOD-TEXTO",
               "label": "Texto",
               "check_ids": [
-                "CHECK-2adbe2bd4b4e9223"
+                "CHECK-8c3eb66de4a0bd10"
               ]
             },
             {
@@ -63322,10 +64143,15 @@
                   "fonte_id": "FN-MMI",
                   "fonte_item": "MMI",
                   "trecho_id": "TD-ORI-0012",
-                  "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+                  "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
                   "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-                  "localizacao_publica": "AT02 · MMI",
-                  "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+                  "localizacao_publica": "1.9 — Navigational and Application Flow (MMI-G16)",
+                  "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+                  "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+                  "document_version": "2003-01-08",
+                  "document_review_date": "2026-10-11",
+                  "document_paraphrase": "A aplicação deve coordenar a navegação e o fluxo entre modalidades; o requisito orienta a interação, sem prescrever um recurso pedagógico.",
+                  "record_locator": "AT02 · MMI"
                 },
                 {
                   "id": "ORI-0013",
@@ -63334,10 +64160,15 @@
                   "fonte_id": "FN-MMI",
                   "fonte_item": "MMI",
                   "trecho_id": "TD-ORI-0013",
-                  "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+                  "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
                   "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-                  "localizacao_publica": "AT02 · MMI",
-                  "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+                  "localizacao_publica": "2.1 — Modality-specific Data (MMI-I1)",
+                  "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+                  "document_url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+                  "document_version": "2003-01-08",
+                  "document_review_date": "2026-10-11",
+                  "document_paraphrase": "O acesso a dados de entrada específicos das modalidades permite processá-los conjuntamente; não basta apresentar formatos separados.",
+                  "record_locator": "AT02 · MMI"
                 },
                 {
                   "id": "ORI-0014",
@@ -63346,10 +64177,15 @@
                   "fonte_id": "FN-WCAG",
                   "fonte_item": "WCAG",
                   "trecho_id": "TD-ORI-0014",
-                  "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+                  "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
                   "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-                  "localizacao_publica": "AT02 · WCAG",
-                  "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+                  "localizacao_publica": "1.3.1 — Info and Relationships",
+                  "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+                  "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#info-and-relationships",
+                  "document_version": "2023-10-05",
+                  "document_review_date": "2026-10-11",
+                  "document_paraphrase": "Informações, estrutura e relações apresentadas visualmente devem permanecer identificáveis por software ou disponíveis em texto.",
+                  "record_locator": "AT02 · WCAG"
                 }
               ],
               "justification": "Estrutura e relações precisam permanecer explícitas e processáveis.",
@@ -63469,8 +64305,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -63598,10 +64434,57 @@
                 "TAR-REVISAR-E-CONFIRMAR"
               ],
               "matched_ids": [
-                "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
-                "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+                "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+                "TAR-REVISAR-PUBLICAR-RECURSO",
+                "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+                "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
               ],
-              "id": "CHECK-a7a5cf1751867ba0"
+              "participant_ids": [],
+              "task_paths": [
+                [
+                  "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+                  "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+                ],
+                [
+                  "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+                ],
+                [
+                  "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+                  "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+                  "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+                ],
+                [
+                  "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+                  "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+                ],
+                [
+                  "TAR-REVISAR-PUBLICAR-RECURSO",
+                  "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+                  "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+                ],
+                [
+                  "TAR-REVISAR-PUBLICAR-RECURSO",
+                  "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+                ],
+                [
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+                  "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+                ],
+                [
+                  "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+                ],
+                [
+                  "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
+                ]
+              ],
+              "id": "CHECK-5973de9f05490b46"
             },
             {
               "stage": "component",
@@ -63626,7 +64509,12 @@
               "matched_ids": [
                 "MOD-TEXTO"
               ],
-              "id": "CHECK-2adbe2bd4b4e9223"
+              "participant_ids": [
+                "PART-CASO-02-E5DF38",
+                "PART-CASO-03-2E4607"
+              ],
+              "task_paths": [],
+              "id": "CHECK-8c3eb66de4a0bd10"
             },
             {
               "stage": "component",
@@ -64960,8 +65848,8 @@
           "CHECK-63f0b0e8afd414f7",
           "CHECK-471c8a486ba76bfa",
           "CHECK-e3aed0733bf8077b",
-          "CHECK-e044c060ecd3ef92",
-          "CHECK-5758c49c27f76d32",
+          "CHECK-2013f10ef961e361",
+          "CHECK-3371754deb3b3b70",
           "CHECK-35e6e829fdd81e9e",
           "CHECK-cc8c9a6081f2b000",
           "CHECK-8d4a1e42f36b3a58",
@@ -64991,9 +65879,9 @@
           "CHECK-9b859ded3b043d9a",
           "CHECK-72b5aef32e277aea",
           "CHECK-0cbdfa296884fd46",
-          "CHECK-193ee37323fda519",
-          "CHECK-4383825fc9657994",
-          "CHECK-c231a7a7dd7bf8fd",
+          "CHECK-a0a0fcda474fc613",
+          "CHECK-303677d116cb2d49",
+          "CHECK-90c6c9507e098d5f",
           "CHECK-5adf215b9daf515f",
           "CHECK-2b7fac112b6edb8f",
           "CHECK-dc8eb4e53ab7bf69",
@@ -65055,8 +65943,8 @@
           "CHECK-85152af0ab16d40f",
           "CHECK-bf34e2b5818c4992",
           "CHECK-b85e50efd7825569",
-          "CHECK-1c45e03361df982a",
-          "CHECK-72e92d6cf858ed0c",
+          "CHECK-75cba967157b44c5",
+          "CHECK-cf4f9357eebdd378",
           "CHECK-a916402946a1148d",
           "CHECK-c9d999c7c877cb45",
           "CHECK-d80a94d6ed106315",
@@ -65086,9 +65974,15 @@
           {
             "field": "tarefas",
             "ids": [
+              "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+              "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+              "TAR-REVISAR-PUBLICAR-RECURSO",
               "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "labels": [
+              "Construir colaborativamente um recurso digital de História",
+              "Selecionar fatos, fontes e relações históricas para o recurso",
+              "Revisar, testar e publicar o recurso digital",
               "Comunicar ou expressar conhecimento"
             ]
           },
@@ -65117,9 +66011,9 @@
           "CHECK-69ebb7871cda6ccb",
           "CHECK-3d08fe350b0d8e8b",
           "CHECK-5e60a2ecade99b59",
-          "CHECK-548ca1305f2fa79f",
-          "CHECK-47496accda3cca22",
-          "CHECK-55c5f402722025e0",
+          "CHECK-1b469f916e0b57bc",
+          "CHECK-db936e582bf4c43c",
+          "CHECK-f788afc5ead4090e",
           "CHECK-1ddd693775f70461",
           "CHECK-f8e0b323f3e6e60c",
           "CHECK-a3f32c2c2346eb7f",
@@ -65198,12 +66092,12 @@
     "graph": {
       "nodes": [
         {
-          "id": "CTX-CASO-048337C7C1",
+          "id": "CTX-CASO-3F90800716",
           "kind": "context",
           "label": "Contexto confirmado desta execução"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-01",
+          "id": "CFG-D-GERADA-77D8039602-01",
           "label": "Estrutura persistente para organizar e retomar o conteúdo",
           "kind": "configuration"
         },
@@ -65652,7 +66546,7 @@
           "label": "TD-ORI-0400"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-02",
+          "id": "CFG-D-GERADA-77D8039602-02",
           "label": "Fala e áudio como expressão autoral revisável",
           "kind": "configuration"
         },
@@ -65690,8 +66584,8 @@
         {
           "id": "C-K42-02",
           "kind": "contribution",
-          "label": "O item preservado na extração de critérios requer que informação, estrutura e relações possam ser recuperadas programaticamente ou em texto.",
-          "verification_status": "CONFERIDA_NO_REGISTRO",
+          "label": "O requisito 1.3.1 da WCAG 2.2 exige que informações, estrutura e relações possam ser identificadas por software ou estejam disponíveis em texto.",
+          "verification_status": "CONFERIDA_NO_DOCUMENTO",
           "nature": "PARAFRASE_DE_ITEM_NORMATIVO_EXTRAIDO"
         },
         {
@@ -65795,7 +66689,7 @@
           "label": "TD-ORI-0416"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-03",
+          "id": "CFG-D-GERADA-77D8039602-03",
           "label": "Imagem e desenho explicados e acessíveis",
           "kind": "configuration"
         },
@@ -65835,7 +66729,7 @@
           "label": "TD-ORI-0003"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-04",
+          "id": "CFG-D-GERADA-77D8039602-04",
           "label": "Vídeo para processo, mudança ou contraste",
           "kind": "configuration"
         },
@@ -65904,7 +66798,7 @@
           "label": "TD-ORI-0092"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-05",
+          "id": "CFG-D-GERADA-77D8039602-05",
           "label": "Jogo curto para consolidar relações com feedback",
           "kind": "configuration"
         },
@@ -65948,7 +66842,7 @@
           "label": "Acompanhar compreensão, participação e necessidade de adaptação"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-06",
+          "id": "CFG-D-GERADA-77D8039602-06",
           "label": "Papéis, turnos e autoria combinados",
           "kind": "configuration"
         },
@@ -65968,7 +66862,7 @@
           "label": "TD-EL06"
         },
         {
-          "id": "CFG-D-GERADA-714A4A7BD1-07",
+          "id": "CFG-D-GERADA-77D8039602-07",
           "label": "Revisão compartilhada e confirmação acessível",
           "kind": "configuration"
         }
@@ -66297,7 +67191,7 @@
           "check_ids": []
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-ORGANIZAR-CONTEUDO",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -66305,7 +67199,7 @@
         },
         {
           "source": "FUN-ORGANIZAR-CONTEUDO",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -66313,8 +67207,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66331,7 +67225,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-MANTER-INFORMACAO-RECUPERAVEL",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -66339,7 +67233,7 @@
         },
         {
           "source": "FUN-MANTER-INFORMACAO-RECUPERAVEL",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -66347,8 +67241,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66365,7 +67259,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-PERMITIR-REVISAO",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -66373,7 +67267,7 @@
         },
         {
           "source": "FUN-PERMITIR-REVISAO",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -66381,8 +67275,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66400,7 +67294,7 @@
         },
         {
           "source": "K38",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -66408,8 +67302,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66595,7 +67489,7 @@
         },
         {
           "source": "K43",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -66603,8 +67497,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66664,7 +67558,7 @@
         },
         {
           "source": "K17",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -66672,8 +67566,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66698,7 +67592,7 @@
         },
         {
           "source": "K27",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -66706,8 +67600,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66753,7 +67647,7 @@
         },
         {
           "source": "K39",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -66761,8 +67655,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -66843,7 +67737,7 @@
         },
         {
           "source": "K45",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -66851,8 +67745,8 @@
             "CHECK-02000310aeb4f2f8",
             "CHECK-105df0c79f259007",
             "CHECK-e0c3652e0ec20cac",
-            "CHECK-a7a5cf1751867ba0",
-            "CHECK-2adbe2bd4b4e9223",
+            "CHECK-5973de9f05490b46",
+            "CHECK-8c3eb66de4a0bd10",
             "CHECK-cb1937c0e9e6012b",
             "CHECK-333486ed7339191a",
             "CHECK-c8fc7e10fb88b51a",
@@ -68348,7 +69242,7 @@
         },
         {
           "source": "CA02",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -68444,7 +69338,7 @@
         },
         {
           "source": "CA74",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -68548,7 +69442,7 @@
         },
         {
           "source": "CA84",
-          "target": "CFG-D-GERADA-714A4A7BD1-01",
+          "target": "CFG-D-GERADA-77D8039602-01",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -68749,7 +69643,7 @@
           "check_ids": []
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-PRESERVAR-PROTAGONISMO",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -68757,7 +69651,7 @@
         },
         {
           "source": "FUN-PRESERVAR-PROTAGONISMO",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -68765,8 +69659,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -68783,7 +69677,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-EXPRESSAR-CONHECIMENTO",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -68791,7 +69685,7 @@
         },
         {
           "source": "FUN-EXPRESSAR-CONHECIMENTO",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -68799,8 +69693,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -68818,7 +69712,7 @@
         },
         {
           "source": "FUN-PERMITIR-REVISAO",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -68826,8 +69720,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -68845,7 +69739,7 @@
         },
         {
           "source": "K42",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -68853,8 +69747,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -68949,7 +69843,7 @@
         },
         {
           "source": "K38",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -68957,8 +69851,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -68976,7 +69870,7 @@
         },
         {
           "source": "K45",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -68984,8 +69878,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -69003,7 +69897,7 @@
         },
         {
           "source": "K35",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -69011,8 +69905,8 @@
             "CHECK-30a2cd5029081b1f",
             "CHECK-ad0dcf9874b9483f",
             "CHECK-f0ed0f7ce80ca4f1",
-            "CHECK-7ac21cf5bc86a8c7",
-            "CHECK-3f2e476bce5f3fc6",
+            "CHECK-cfde5e58f9c58b8b",
+            "CHECK-1c5573c3ed04fa96",
             "CHECK-674e3cd4140934e2",
             "CHECK-7115cf543c4e9cf9",
             "CHECK-f92e92993574779d",
@@ -69506,7 +70400,7 @@
         },
         {
           "source": "CA17",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -69594,7 +70488,7 @@
         },
         {
           "source": "CA74",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -69690,7 +70584,7 @@
         },
         {
           "source": "CA88",
-          "target": "CFG-D-GERADA-714A4A7BD1-02",
+          "target": "CFG-D-GERADA-77D8039602-02",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -69778,7 +70672,7 @@
         },
         {
           "source": "FUN-EXPRESSAR-CONHECIMENTO",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -69786,9 +70680,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69804,7 +70698,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -69812,7 +70706,7 @@
         },
         {
           "source": "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -69820,9 +70714,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69839,7 +70733,7 @@
         },
         {
           "source": "FUN-ORGANIZAR-CONTEUDO",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -69847,9 +70741,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69866,7 +70760,7 @@
         },
         {
           "source": "K17",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -69874,9 +70768,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69893,7 +70787,7 @@
         },
         {
           "source": "K42",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -69901,9 +70795,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69920,7 +70814,7 @@
         },
         {
           "source": "K38",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -69928,9 +70822,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69947,7 +70841,7 @@
         },
         {
           "source": "K45",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -69955,9 +70849,9 @@
             "CHECK-6da114ac5ec99111",
             "CHECK-a277289f302f1b8b",
             "CHECK-0d629d09eb8c9b43",
-            "CHECK-aa2bcb0851c73bbb",
-            "CHECK-a8ac0dcd8f9be900",
-            "CHECK-1f1fa5f1f6e83687",
+            "CHECK-57f04a7f7781921d",
+            "CHECK-20b5bcc7b7b1a98f",
+            "CHECK-112ae6a1c5c04fb5",
             "CHECK-850eb67c315de63b",
             "CHECK-ebff6456fbce9830",
             "CHECK-9c3cd831713cc094",
@@ -69974,7 +70868,7 @@
         },
         {
           "source": "CA01",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -70070,7 +70964,7 @@
         },
         {
           "source": "CA02",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -70166,7 +71060,7 @@
         },
         {
           "source": "CA74",
-          "target": "CFG-D-GERADA-714A4A7BD1-03",
+          "target": "CFG-D-GERADA-77D8039602-03",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -70318,7 +71212,7 @@
         },
         {
           "source": "FUN-CONTEXTUALIZAR-MUDANCA",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -70326,9 +71220,9 @@
             "CHECK-58d7a5377146bd95",
             "CHECK-bb4d611e7530cfcb",
             "CHECK-d4ebc2d49cee42d0",
-            "CHECK-0f93dd21cf09fcba",
-            "CHECK-463632f512def06a",
-            "CHECK-80ad6382e178c302",
+            "CHECK-561f4c805fe0186b",
+            "CHECK-5bfe47a787b857b2",
+            "CHECK-e69ebcc7a853edca",
             "CHECK-183f75dcc91fbd88",
             "CHECK-7597fa5589b09321",
             "CHECK-bfddeebfe19a1201",
@@ -70346,7 +71240,7 @@
         },
         {
           "source": "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -70354,9 +71248,9 @@
             "CHECK-58d7a5377146bd95",
             "CHECK-bb4d611e7530cfcb",
             "CHECK-d4ebc2d49cee42d0",
-            "CHECK-0f93dd21cf09fcba",
-            "CHECK-463632f512def06a",
-            "CHECK-80ad6382e178c302",
+            "CHECK-561f4c805fe0186b",
+            "CHECK-5bfe47a787b857b2",
+            "CHECK-e69ebcc7a853edca",
             "CHECK-183f75dcc91fbd88",
             "CHECK-7597fa5589b09321",
             "CHECK-bfddeebfe19a1201",
@@ -70374,7 +71268,7 @@
         },
         {
           "source": "K42",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -70382,9 +71276,9 @@
             "CHECK-58d7a5377146bd95",
             "CHECK-bb4d611e7530cfcb",
             "CHECK-d4ebc2d49cee42d0",
-            "CHECK-0f93dd21cf09fcba",
-            "CHECK-463632f512def06a",
-            "CHECK-80ad6382e178c302",
+            "CHECK-561f4c805fe0186b",
+            "CHECK-5bfe47a787b857b2",
+            "CHECK-e69ebcc7a853edca",
             "CHECK-183f75dcc91fbd88",
             "CHECK-7597fa5589b09321",
             "CHECK-bfddeebfe19a1201",
@@ -70402,7 +71296,7 @@
         },
         {
           "source": "K36",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -70410,9 +71304,9 @@
             "CHECK-58d7a5377146bd95",
             "CHECK-bb4d611e7530cfcb",
             "CHECK-d4ebc2d49cee42d0",
-            "CHECK-0f93dd21cf09fcba",
-            "CHECK-463632f512def06a",
-            "CHECK-80ad6382e178c302",
+            "CHECK-561f4c805fe0186b",
+            "CHECK-5bfe47a787b857b2",
+            "CHECK-e69ebcc7a853edca",
             "CHECK-183f75dcc91fbd88",
             "CHECK-7597fa5589b09321",
             "CHECK-bfddeebfe19a1201",
@@ -70486,7 +71380,7 @@
         },
         {
           "source": "K43",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -70494,9 +71388,9 @@
             "CHECK-58d7a5377146bd95",
             "CHECK-bb4d611e7530cfcb",
             "CHECK-d4ebc2d49cee42d0",
-            "CHECK-0f93dd21cf09fcba",
-            "CHECK-463632f512def06a",
-            "CHECK-80ad6382e178c302",
+            "CHECK-561f4c805fe0186b",
+            "CHECK-5bfe47a787b857b2",
+            "CHECK-e69ebcc7a853edca",
             "CHECK-183f75dcc91fbd88",
             "CHECK-7597fa5589b09321",
             "CHECK-bfddeebfe19a1201",
@@ -70666,7 +71560,7 @@
         },
         {
           "source": "CA05",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -70754,7 +71648,7 @@
         },
         {
           "source": "CA17",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -70850,7 +71744,7 @@
         },
         {
           "source": "CA88",
-          "target": "CFG-D-GERADA-714A4A7BD1-04",
+          "target": "CFG-D-GERADA-77D8039602-04",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -70987,16 +71881,16 @@
         },
         {
           "source": "FUN-CONSOLIDAR-COM-FEEDBACK",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
             "CHECK-fe9129017ccd4cf8",
             "CHECK-3078644b500a36d4",
             "CHECK-a8adfca65b352239",
-            "CHECK-ae010e3ee53540c0",
-            "CHECK-2113162ab08eb6b5",
-            "CHECK-08ff5fcad40bf51c",
+            "CHECK-6c37c55f5aaea19b",
+            "CHECK-5df8fb8560570682",
+            "CHECK-2b28e8a4983012cb",
             "CHECK-53d45a4c7ab33d32",
             "CHECK-225b9d638327120b",
             "CHECK-665f8e8b164b446e",
@@ -71013,7 +71907,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-FEEDBACK-PERCEPTIVEL",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -71021,16 +71915,16 @@
         },
         {
           "source": "FUN-FEEDBACK-PERCEPTIVEL",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
             "CHECK-fe9129017ccd4cf8",
             "CHECK-3078644b500a36d4",
             "CHECK-a8adfca65b352239",
-            "CHECK-ae010e3ee53540c0",
-            "CHECK-2113162ab08eb6b5",
-            "CHECK-08ff5fcad40bf51c",
+            "CHECK-6c37c55f5aaea19b",
+            "CHECK-5df8fb8560570682",
+            "CHECK-2b28e8a4983012cb",
             "CHECK-53d45a4c7ab33d32",
             "CHECK-225b9d638327120b",
             "CHECK-665f8e8b164b446e",
@@ -71047,7 +71941,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-ACOMPANHAR-RESULTADO",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -71055,16 +71949,16 @@
         },
         {
           "source": "FUN-ACOMPANHAR-RESULTADO",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
             "CHECK-fe9129017ccd4cf8",
             "CHECK-3078644b500a36d4",
             "CHECK-a8adfca65b352239",
-            "CHECK-ae010e3ee53540c0",
-            "CHECK-2113162ab08eb6b5",
-            "CHECK-08ff5fcad40bf51c",
+            "CHECK-6c37c55f5aaea19b",
+            "CHECK-5df8fb8560570682",
+            "CHECK-2b28e8a4983012cb",
             "CHECK-53d45a4c7ab33d32",
             "CHECK-225b9d638327120b",
             "CHECK-665f8e8b164b446e",
@@ -71082,16 +71976,16 @@
         },
         {
           "source": "K37",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
             "CHECK-fe9129017ccd4cf8",
             "CHECK-3078644b500a36d4",
             "CHECK-a8adfca65b352239",
-            "CHECK-ae010e3ee53540c0",
-            "CHECK-2113162ab08eb6b5",
-            "CHECK-08ff5fcad40bf51c",
+            "CHECK-6c37c55f5aaea19b",
+            "CHECK-5df8fb8560570682",
+            "CHECK-2b28e8a4983012cb",
             "CHECK-53d45a4c7ab33d32",
             "CHECK-225b9d638327120b",
             "CHECK-665f8e8b164b446e",
@@ -71172,16 +72066,16 @@
         },
         {
           "source": "K43",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
             "CHECK-fe9129017ccd4cf8",
             "CHECK-3078644b500a36d4",
             "CHECK-a8adfca65b352239",
-            "CHECK-ae010e3ee53540c0",
-            "CHECK-2113162ab08eb6b5",
-            "CHECK-08ff5fcad40bf51c",
+            "CHECK-6c37c55f5aaea19b",
+            "CHECK-5df8fb8560570682",
+            "CHECK-2b28e8a4983012cb",
             "CHECK-53d45a4c7ab33d32",
             "CHECK-225b9d638327120b",
             "CHECK-665f8e8b164b446e",
@@ -71439,7 +72333,7 @@
         },
         {
           "source": "CA74",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -71535,7 +72429,7 @@
         },
         {
           "source": "CA84",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -71623,7 +72517,7 @@
         },
         {
           "source": "CA88",
-          "target": "CFG-D-GERADA-714A4A7BD1-05",
+          "target": "CFG-D-GERADA-77D8039602-05",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -71711,7 +72605,7 @@
         },
         {
           "source": "FUN-PRESERVAR-PROTAGONISMO",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -71719,9 +72613,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71737,7 +72631,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-COORDENAR-AUTORIA",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -71745,7 +72639,7 @@
         },
         {
           "source": "FUN-COORDENAR-AUTORIA",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -71753,9 +72647,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71771,7 +72665,7 @@
           ]
         },
         {
-          "source": "CTX-CASO-048337C7C1",
+          "source": "CTX-CASO-3F90800716",
           "target": "FUN-REDUZIR-SOBRECARGA",
           "label": "requisito informado e confirmado",
           "kind": "context_requirement",
@@ -71779,7 +72673,7 @@
         },
         {
           "source": "FUN-REDUZIR-SOBRECARGA",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -71787,9 +72681,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71806,7 +72700,7 @@
         },
         {
           "source": "K35",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -71814,9 +72708,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71833,7 +72727,7 @@
         },
         {
           "source": "K45",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -71841,9 +72735,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71860,7 +72754,7 @@
         },
         {
           "source": "K32",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -71868,9 +72762,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71915,7 +72809,7 @@
         },
         {
           "source": "K43",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -71923,9 +72817,9 @@
             "CHECK-21aaf7fde7d8e583",
             "CHECK-953b62a699d9c884",
             "CHECK-139c02d37041a37b",
-            "CHECK-476decee27bdd50a",
-            "CHECK-6dac5006fbefd43f",
-            "CHECK-cbf0912e4408485c",
+            "CHECK-ed0294d4cd014f45",
+            "CHECK-07668a76b587d3ca",
+            "CHECK-07d44a1f107527d5",
             "CHECK-59aa75cbce2a0d3b",
             "CHECK-f41740afbfc841cf",
             "CHECK-3d23c764894eabf3",
@@ -71942,7 +72836,7 @@
         },
         {
           "source": "CA74",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -72038,7 +72932,7 @@
         },
         {
           "source": "CA84",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -72142,7 +73036,7 @@
         },
         {
           "source": "CA88",
-          "target": "CFG-D-GERADA-714A4A7BD1-06",
+          "target": "CFG-D-GERADA-77D8039602-06",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -72230,7 +73124,7 @@
         },
         {
           "source": "FUN-PERMITIR-REVISAO",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -72238,9 +73132,9 @@
             "CHECK-22dab064a878871c",
             "CHECK-0c45a29084ef971d",
             "CHECK-2f3d9d0b618e0bfc",
-            "CHECK-e9e31e7adbac7a91",
-            "CHECK-d7952e4313bcc59c",
-            "CHECK-ee8f9d86e5faabab",
+            "CHECK-2e575bd9570c5ff7",
+            "CHECK-1a9a7e502d4b6b1e",
+            "CHECK-ef89b6485c5829a4",
             "CHECK-5df4cd32934f0a56",
             "CHECK-944dcb180e5877ab",
             "CHECK-e467c4735710e471",
@@ -72257,7 +73151,7 @@
         },
         {
           "source": "FUN-FEEDBACK-PERCEPTIVEL",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -72265,9 +73159,9 @@
             "CHECK-22dab064a878871c",
             "CHECK-0c45a29084ef971d",
             "CHECK-2f3d9d0b618e0bfc",
-            "CHECK-e9e31e7adbac7a91",
-            "CHECK-d7952e4313bcc59c",
-            "CHECK-ee8f9d86e5faabab",
+            "CHECK-2e575bd9570c5ff7",
+            "CHECK-1a9a7e502d4b6b1e",
+            "CHECK-ef89b6485c5829a4",
             "CHECK-5df4cd32934f0a56",
             "CHECK-944dcb180e5877ab",
             "CHECK-e467c4735710e471",
@@ -72284,7 +73178,7 @@
         },
         {
           "source": "FUN-ACOMPANHAR-RESULTADO",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "função oferecida pelo padrão",
           "kind": "offered_function",
           "check_ids": [
@@ -72292,9 +73186,9 @@
             "CHECK-22dab064a878871c",
             "CHECK-0c45a29084ef971d",
             "CHECK-2f3d9d0b618e0bfc",
-            "CHECK-e9e31e7adbac7a91",
-            "CHECK-d7952e4313bcc59c",
-            "CHECK-ee8f9d86e5faabab",
+            "CHECK-2e575bd9570c5ff7",
+            "CHECK-1a9a7e502d4b6b1e",
+            "CHECK-ef89b6485c5829a4",
             "CHECK-5df4cd32934f0a56",
             "CHECK-944dcb180e5877ab",
             "CHECK-e467c4735710e471",
@@ -72311,7 +73205,7 @@
         },
         {
           "source": "K38",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -72319,9 +73213,9 @@
             "CHECK-22dab064a878871c",
             "CHECK-0c45a29084ef971d",
             "CHECK-2f3d9d0b618e0bfc",
-            "CHECK-e9e31e7adbac7a91",
-            "CHECK-d7952e4313bcc59c",
-            "CHECK-ee8f9d86e5faabab",
+            "CHECK-2e575bd9570c5ff7",
+            "CHECK-1a9a7e502d4b6b1e",
+            "CHECK-ef89b6485c5829a4",
             "CHECK-5df4cd32934f0a56",
             "CHECK-944dcb180e5877ab",
             "CHECK-e467c4735710e471",
@@ -72338,7 +73232,7 @@
         },
         {
           "source": "K42",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -72346,9 +73240,9 @@
             "CHECK-22dab064a878871c",
             "CHECK-0c45a29084ef971d",
             "CHECK-2f3d9d0b618e0bfc",
-            "CHECK-e9e31e7adbac7a91",
-            "CHECK-d7952e4313bcc59c",
-            "CHECK-ee8f9d86e5faabab",
+            "CHECK-2e575bd9570c5ff7",
+            "CHECK-1a9a7e502d4b6b1e",
+            "CHECK-ef89b6485c5829a4",
             "CHECK-5df4cd32934f0a56",
             "CHECK-944dcb180e5877ab",
             "CHECK-e467c4735710e471",
@@ -72365,7 +73259,7 @@
         },
         {
           "source": "K45",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "sustenta configuração",
           "kind": "selected_knowledge",
           "check_ids": [
@@ -72373,9 +73267,9 @@
             "CHECK-22dab064a878871c",
             "CHECK-0c45a29084ef971d",
             "CHECK-2f3d9d0b618e0bfc",
-            "CHECK-e9e31e7adbac7a91",
-            "CHECK-d7952e4313bcc59c",
-            "CHECK-ee8f9d86e5faabab",
+            "CHECK-2e575bd9570c5ff7",
+            "CHECK-1a9a7e502d4b6b1e",
+            "CHECK-ef89b6485c5829a4",
             "CHECK-5df4cd32934f0a56",
             "CHECK-944dcb180e5877ab",
             "CHECK-e467c4735710e471",
@@ -72392,7 +73286,7 @@
         },
         {
           "source": "CA01",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -72488,7 +73382,7 @@
         },
         {
           "source": "CA02",
-          "target": "CFG-D-GERADA-714A4A7BD1-07",
+          "target": "CFG-D-GERADA-77D8039602-07",
           "label": "orienta configuração",
           "kind": "situated_support",
           "check_ids": [],
@@ -72590,8 +73484,11 @@
         "condicao_ids": [
           "REC-EDITOR-MULTIMIDIA",
           "REC-ROTEIRO-COLABORATIVO",
-          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
           "MOD-TEXTO",
           "BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE",
           "BAR-FALA-ISOLADA-NAO-PERSISTE",
@@ -72602,8 +73499,11 @@
         "condicoes": [
           "Editor de apresentação, página ou painel multimídia",
           "Quadro de papéis, etapas e fontes do trabalho",
-          "Organizar conteúdo digital",
+          "Construir colaborativamente um recurso digital de História",
+          "Selecionar fatos, fontes e relações históricas para o recurso",
+          "Revisar, testar e publicar o recurso digital",
           "Produzir conteúdo com formas complementares de expressão",
+          "Organizar conteúdo digital",
           "Texto",
           "Conteúdo não possui estrutura persistente para orientar, revisar e retomar",
           "A contribuição somente oral pode ficar extensa e não permanecer disponível para revisão",
@@ -72783,8 +73683,8 @@
           "CHECK-02000310aeb4f2f8",
           "CHECK-105df0c79f259007",
           "CHECK-e0c3652e0ec20cac",
-          "CHECK-a7a5cf1751867ba0",
-          "CHECK-2adbe2bd4b4e9223",
+          "CHECK-5973de9f05490b46",
+          "CHECK-8c3eb66de4a0bd10",
           "CHECK-cb1937c0e9e6012b",
           "CHECK-333486ed7339191a",
           "CHECK-c8fc7e10fb88b51a",
@@ -72805,8 +73705,11 @@
         "condicao_ids": [
           "REC-CELULAR-CAMERA-MICROFONE",
           "REC-MICROFONE",
-          "TAR-COMUNICAR-E-EXPRESSAR",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-COMUNICAR-E-EXPRESSAR",
           "MOD-AUDIO",
           "MOD-FALA",
           "CAR-EXPRESSAO-ORAL-AUTORAL",
@@ -72816,8 +73719,11 @@
         "condicoes": [
           "Celular com câmera e microfone",
           "Microfone",
-          "Comunicar e expressar conhecimento",
+          "Construir colaborativamente um recurso digital de História",
+          "Selecionar fatos, fontes e relações históricas para o recurso",
+          "Revisar, testar e publicar o recurso digital",
           "Produzir conteúdo com formas complementares de expressão",
+          "Comunicar e expressar conhecimento",
           "Áudio",
           "Fala",
           "Expressa e desenvolve conhecimento principalmente pela fala",
@@ -72966,8 +73872,8 @@
           "CHECK-30a2cd5029081b1f",
           "CHECK-ad0dcf9874b9483f",
           "CHECK-f0ed0f7ce80ca4f1",
-          "CHECK-7ac21cf5bc86a8c7",
-          "CHECK-3f2e476bce5f3fc6",
+          "CHECK-cfde5e58f9c58b8b",
+          "CHECK-1c5573c3ed04fa96",
           "CHECK-674e3cd4140934e2",
           "CHECK-7115cf543c4e9cf9",
           "CHECK-f92e92993574779d",
@@ -72989,8 +73895,11 @@
           "REC-CAMERA",
           "REC-DESCRICAO-TEXTUAL",
           "REC-EDITOR-MULTIMIDIA",
-          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
           "MOD-DESENHO",
           "MOD-IMAGEM",
           "CAR-EXPRESSAO-POR-DESENHO-IMAGEM",
@@ -73002,8 +73911,11 @@
           "Câmera",
           "Descrição textual",
           "Editor de apresentação, página ou painel multimídia",
-          "Organizar conteúdo digital",
+          "Construir colaborativamente um recurso digital de História",
+          "Selecionar fatos, fontes e relações históricas para o recurso",
+          "Revisar, testar e publicar o recurso digital",
           "Produzir conteúdo com formas complementares de expressão",
+          "Organizar conteúdo digital",
           "Desenho",
           "Representação visual",
           "Expressa relações também por desenho e imagem",
@@ -73152,9 +74064,9 @@
           "CHECK-6da114ac5ec99111",
           "CHECK-a277289f302f1b8b",
           "CHECK-0d629d09eb8c9b43",
-          "CHECK-aa2bcb0851c73bbb",
-          "CHECK-a8ac0dcd8f9be900",
-          "CHECK-1f1fa5f1f6e83687",
+          "CHECK-57f04a7f7781921d",
+          "CHECK-20b5bcc7b7b1a98f",
+          "CHECK-112ae6a1c5c04fb5",
           "CHECK-850eb67c315de63b",
           "CHECK-ebff6456fbce9830",
           "CHECK-9c3cd831713cc094",
@@ -73173,6 +74085,9 @@
         "id": "DEPARA-PAD-VIDEO-PROCESSO",
         "condicao_ids": [
           "REC-REPRODUTOR-VIDEO",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
           "MOD-VIDEO",
           "REC-AUDIODESCRICAO",
@@ -73182,6 +74097,9 @@
         ],
         "condicoes": [
           "REC-REPRODUTOR-VIDEO",
+          "Construir colaborativamente um recurso digital de História",
+          "Selecionar fatos, fontes e relações históricas para o recurso",
+          "Revisar, testar e publicar o recurso digital",
           "Produzir conteúdo com formas complementares de expressão",
           "Vídeo",
           "Audiodescrição",
@@ -73315,9 +74233,9 @@
           "CHECK-58d7a5377146bd95",
           "CHECK-bb4d611e7530cfcb",
           "CHECK-d4ebc2d49cee42d0",
-          "CHECK-0f93dd21cf09fcba",
-          "CHECK-463632f512def06a",
-          "CHECK-80ad6382e178c302",
+          "CHECK-561f4c805fe0186b",
+          "CHECK-5bfe47a787b857b2",
+          "CHECK-e69ebcc7a853edca",
           "CHECK-183f75dcc91fbd88",
           "CHECK-7597fa5589b09321",
           "CHECK-bfddeebfe19a1201",
@@ -73337,6 +74255,9 @@
         "id": "DEPARA-PAD-JOGO-CONSOLIDACAO-FEEDBACK",
         "condicao_ids": [
           "REC-PLATAFORMA-JOGO-QUIZ",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
           "MOD-JOGO-INTERATIVO",
           "REC-FEEDBACK-ACESSIVEL",
@@ -73345,6 +74266,9 @@
         ],
         "condicoes": [
           "REC-PLATAFORMA-JOGO-QUIZ",
+          "Construir colaborativamente um recurso digital de História",
+          "Selecionar fatos, fontes e relações históricas para o recurso",
+          "Revisar, testar e publicar o recurso digital",
           "Produzir conteúdo com formas complementares de expressão",
           "Interação em jogo digital",
           "Feedback perceptível e recuperável",
@@ -73478,9 +74402,9 @@
           "CHECK-fe9129017ccd4cf8",
           "CHECK-3078644b500a36d4",
           "CHECK-a8adfca65b352239",
-          "CHECK-ae010e3ee53540c0",
-          "CHECK-2113162ab08eb6b5",
-          "CHECK-08ff5fcad40bf51c",
+          "CHECK-6c37c55f5aaea19b",
+          "CHECK-5df8fb8560570682",
+          "CHECK-2b28e8a4983012cb",
           "CHECK-53d45a4c7ab33d32",
           "CHECK-225b9d638327120b",
           "CHECK-665f8e8b164b446e",
@@ -73501,8 +74425,11 @@
         "condicao_ids": [
           "REC-FEEDBACK-ACESSIVEL",
           "REC-ROTEIRO-COLABORATIVO",
-          "TAR-COMUNICAR-E-EXPRESSAR",
+          "TAR-CONSTRUIR-RECURSO-DIGITAL-HISTORIA",
+          "TAR-SELECIONAR-EVIDENCIAS-HISTORICAS",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
+          "TAR-COMUNICAR-E-EXPRESSAR",
           "MOD-FALA",
           "NEC-COORDENAR-AUTORIA-COLABORATIVA",
           "NEC-PRESERVAR-PROTAGONISMO",
@@ -73513,8 +74440,11 @@
         "condicoes": [
           "Feedback perceptível e recuperável",
           "Quadro de papéis, etapas e fontes do trabalho",
-          "Comunicar e expressar conhecimento",
+          "Construir colaborativamente um recurso digital de História",
+          "Selecionar fatos, fontes e relações históricas para o recurso",
+          "Revisar, testar e publicar o recurso digital",
           "Produzir conteúdo com formas complementares de expressão",
+          "Comunicar e expressar conhecimento",
           "Fala",
           "Coordenar a autoria entre estudante, professora e colegas",
           "Preservar o protagonismo e o conhecimento apresentado pelo estudante",
@@ -73662,9 +74592,9 @@
           "CHECK-21aaf7fde7d8e583",
           "CHECK-953b62a699d9c884",
           "CHECK-139c02d37041a37b",
-          "CHECK-476decee27bdd50a",
-          "CHECK-6dac5006fbefd43f",
-          "CHECK-cbf0912e4408485c",
+          "CHECK-ed0294d4cd014f45",
+          "CHECK-07668a76b587d3ca",
+          "CHECK-07d44a1f107527d5",
           "CHECK-59aa75cbce2a0d3b",
           "CHECK-f41740afbfc841cf",
           "CHECK-3d23c764894eabf3",
@@ -73684,6 +74614,7 @@
         "condicao_ids": [
           "REC-EDITOR-MULTIMIDIA",
           "REC-FEEDBACK-ACESSIVEL",
+          "TAR-REVISAR-PUBLICAR-RECURSO",
           "TAR-REVISAR-E-CONFIRMAR",
           "MOD-TEXTO",
           "NEC-FEEDBACK-E-FECHAMENTO",
@@ -73693,6 +74624,7 @@
         "condicoes": [
           "Editor de apresentação, página ou painel multimídia",
           "Feedback perceptível e recuperável",
+          "Revisar, testar e publicar o recurso digital",
           "Revisar e confirmar informação ou ação",
           "Texto",
           "Oferecer fechamento, devolutiva e possibilidade de revisão da configuração",
@@ -73834,9 +74766,9 @@
           "CHECK-22dab064a878871c",
           "CHECK-0c45a29084ef971d",
           "CHECK-2f3d9d0b618e0bfc",
-          "CHECK-e9e31e7adbac7a91",
-          "CHECK-d7952e4313bcc59c",
-          "CHECK-ee8f9d86e5faabab",
+          "CHECK-2e575bd9570c5ff7",
+          "CHECK-1a9a7e502d4b6b1e",
+          "CHECK-ef89b6485c5829a4",
           "CHECK-5df4cd32934f0a56",
           "CHECK-944dcb180e5877ab",
           "CHECK-e467c4735710e471",
@@ -73853,14 +74785,14 @@
       }
     ]
   },
-  "version": "1.4.0-rc1",
+  "version": "1.4.0-rc2",
   "example_label": "Exemplo de aplicação — organização de conteúdo persistente",
   "prepared_public_example": true,
   "selection_notice": "Uma escolha exibida; registros da execução completa preservados. Não é sessão de participante.",
   "source_hashes": {
-    "engine.py": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
+    "engine.py": "28d595f17039e71a25c61d360bf7c26fb98b9224de52edc1390b8df9ad6ad7a1",
     "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
-    "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
-    "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831"
+    "data/knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b",
+    "ontology/mado-combined.ttl": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5"
   }
 }

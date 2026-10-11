@@ -63,7 +63,8 @@ def composition_catalog():
     for name, entity_type, predicate in (("facts", V2.ContextFact, V2.requiresFact),
                                           ("resources", V2.Resource, V2.requiresResource)):
         fields[name] = [{**record(node), "used_by": [record(item)["id"] for item in
-                        sorted(set(graph.subjects(predicate, node)), key=str)], "default": None}
+                        sorted(set(graph.subjects(predicate, node)), key=str)], "default": None,
+                        "scope": str(graph.value(node, V2.scope) or "person") if name == "facts" else "resource"}
                        for node in sorted(set(graph.subjects(RDF.type, entity_type)), key=str)]
     example = json.loads((Path(HERE) / "examples" / "learning-contribution.json").read_text(encoding="utf-8"))
     return {"version": str(next(graph.objects(None, OWL.versionInfo), "")), "tasks": tasks,
@@ -76,7 +77,7 @@ def composition_catalog():
 
 def compose_context(payload):
     """Accept explicit, tri-state confirmations; never reinterpret narrative."""
-    allowed = {"id", "task", "confirmed", "resources", "facts"}
+    allowed = {"id", "task", "confirmed", "resources", "facts", "participants"}
     if set(payload) - allowed:
         raise ValueError("A composição aceita somente tarefa, condições e recursos confirmados; não interpreta texto livre.")
     identifier = payload.get("id", "WEB-COMPOSITION")
@@ -88,23 +89,51 @@ def compose_context(payload):
     if not isinstance(payload.get("task"), str) or payload["task"] not in {row["id"] for row in catalog["tasks"]}:
         raise ValueError("Escolha uma das tarefas de composição representadas.")
     context = {"id": identifier, "task": payload["task"], "confirmed": payload["confirmed"]}
-    for group in ("facts", "resources"):
-        values = payload.get(group, {})
+    def confirmed_values(values, group):
         known = {row["id"] for row in catalog[group]}
         if not isinstance(values, dict) or set(values) - known:
             raise ValueError("Há condições ou recursos não reconhecidos; confira os campos apresentados.")
         if any(value is not None and type(value) is not bool for value in values.values()):
             raise ValueError("Cada condição ou recurso deve ser Sim, Não ou Ainda não sei.")
-        context[group] = dict(values)
+        return dict(values)
+
+    for group in ("facts", "resources"):
+        context[group] = confirmed_values(payload.get(group, {}), group)
+    if "participants" in payload:
+        participants = payload["participants"]
+        if not isinstance(participants, list) or not participants or len(participants) > 50:
+            raise ValueError("Informe os participantes separadamente, sem dados pessoais.")
+        identifiers = set()
+        context["participants"] = []
+        for person in participants:
+            if not isinstance(person, dict) or set(person) - {"id", "label", "traits", "facts", "resources"}:
+                raise ValueError("Cada participante aceita identificação, descrição, condições e recursos próprios.")
+            person_id, label = person.get("id"), person.get("label", "")
+            if not isinstance(person_id, str) or not person_id.strip() or len(person_id) > 200 or person_id in identifiers:
+                raise ValueError("Use identificadores distintos para os participantes.")
+            if not isinstance(label, str) or len(label) > 2000:
+                raise ValueError("Use uma descrição curta para cada participante.")
+            traits = person.get("traits", [])
+            if not isinstance(traits, list) or any(not isinstance(trait, str) or len(trait) > 2000 for trait in traits):
+                raise ValueError("As características informadas devem permanecer separadas por participante.")
+            identifiers.add(person_id)
+            context["participants"].append({"id": person_id, "label": label, "traits": list(traits),
+                "facts": confirmed_values(person.get("facts", {}), "facts"),
+                "resources": confirmed_values(person.get("resources", {}), "resources")})
     result = composition_engine().compose(context)
     # File hashes are identical in native and browser execution; host paths are
     # not evidence and must not be exposed or affect their public comparison.
     from pathlib import Path
     from experimental.v2.composer import ROOT
-    result["fingerprints"] = {
-        Path(name).resolve().relative_to(ROOT.resolve()).as_posix(): digest
-        for name, digest in result["fingerprints"].items()
-    }
+    def public_fingerprints(record):
+        if "fingerprints" in record:
+            record["fingerprints"] = {
+                Path(name).resolve().relative_to(ROOT.resolve()).as_posix(): digest
+                for name, digest in record["fingerprints"].items()
+            }
+        for participant in record.get("participant_results", []):
+            public_fingerprints(participant["result"])
+    public_fingerprints(result)
     return result
 
 

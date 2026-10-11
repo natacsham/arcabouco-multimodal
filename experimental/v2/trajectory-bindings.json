@@ -2,6 +2,13 @@
   "version": "trajectory-pilot-1",
   "status": "PROPOSED_OPERATIONALIZATION",
   "interpretation": "Operacionalização analítica assistida da trajetória; não descoberta pelo programa nem nova conferência dos artigos originais.",
+  "contracts": {
+    "CaptureKeyboard": {"kind": "capability", "knowledge_ids": ["K41"], "primary_contribution_ids": ["CInputKeyboard", "CInputCARE"], "criterion": "CA38", "criterion_origin": "ORI-0238", "criterion_source_id": "FN-WCAG", "criterion_primary_source": "SourceKeyboard", "criterion_locator": "WCAG 2.2, 2.1.1; origem legada ORI-0238 preservada", "requires_facts": ["LearningCommunicationContext", "KeyboardEffortAcceptable", "KeyboardCompatible", "KeyboardFeedbackPerceptible"]},
+    "CaptureSpeech": {"kind": "capability", "knowledge_ids": ["K41", "K29"], "primary_contribution_ids": ["CInputCARE", "CReviewMMI"], "criterion": "CriterionInput", "requires_facts": ["LearningCommunicationContext", "SpeechEffortAcceptable", "SpeechCompatible", "SpeechFeedbackPerceptible"]},
+    "ReviewText": {"kind": "capability", "knowledge_ids": ["K28"], "primary_contribution_ids": ["CReviewWCAG", "CReviewMMI"], "criterion": "CriterionReview", "requires_facts": ["LearningCommunicationContext", "CanVerifyMeaning"]},
+    "ReviewSpeech": {"kind": "capability", "optional_extension": "audio", "knowledge_ids": ["K28", "K29"], "primary_contribution_ids": ["CAudioMMI", "CAudioReview"], "criterion": "CriterionReview", "requires_facts": ["LearningCommunicationContext", "CanVerifyMeaning"]},
+    "ProductionThenReview": {"kind": "relation", "knowledge_ids": ["K28", "K29"], "primary_contribution_ids": ["CReviewMMI", "CReviewWCAG"], "criterion": "CriterionReview", "requires_facts": ["LearningCommunicationContext", "CanVerifyMeaning"]}
+  },
   "records": {
     "knowledge": {
       "K28": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
@@ -9,10 +16,10 @@
       "K41": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470"
     },
     "sources": {
-      "F01": "50992e6ea62bcba5586433c7cee3ba237542c9fdfb69b13e36925f68c131951c",
-      "F05": "82216e257b08b59ebe65b47c5b370990b7f14916c138d48004a4893e4f822198",
-      "F08": "2d399ade0cc747e7ba4606588a0c0a4f2a6dc68aa324eb8653191d6c1a2cb559",
-      "FN-WCAG": "e9c21484a88d83ac42f269c9bab08b63d3c37f351b32cc48dc0e137311ba0eae"
+      "F01": "4156fa0647620ab531274498839d6436cb35c83e90842ce1ac05a0ecb640ab14",
+      "F05": "c217cadbfefd5c7b147baa522ef7c0980f9d6b4338d0aa72e4c16c601201c2d1",
+      "F08": "f4e735157ce34ea774f6dde3f82a5b3498734848b745b37e733c8bf873e41f2b",
+      "FN-WCAG": "4a1c2d3a581625cbab5b6e0b0da2815f916970be7f8d2a0954e09b295c945eaf"
     },
     "excerpts": {
       "TD-RC3-REF-04": "dc66d4a548bdfd40565770dc4c84a27390e10319da643855a74ae55f58f667a2",
@@ -29,7 +36,7 @@
     "criterion_origins": {"ORI-0238": "8c911b546cfa56ce957061bcbd252803d1ed38133f1504217318949e64724c07"}
   },
   "facts": {
-    "LearningCommunicationContext": {"label": "A contribuição integra uma atividade de comunicação em contexto de aprendizagem", "knowledge_ids": ["K28", "K29"]},
+    "LearningCommunicationContext": {"label": "A contribuição integra uma atividade de comunicação em contexto de aprendizagem", "scope": "context", "knowledge_ids": ["K28", "K29"]},
     "KeyboardEffortAcceptable": {"label": "O esforço e o desempenho da entrada por teclado são aceitáveis nesta tarefa", "knowledge_ids": ["K41"]},
     "KeyboardCompatible": {"label": "A interface de teclado é compatível com o dispositivo e o sistema usados", "knowledge_ids": ["K41"]},
     "KeyboardFeedbackPerceptible": {"label": "A pessoa percebe o resultado da entrada por teclado", "knowledge_ids": ["K41"]},

@@ -1,23 +1,25 @@
 # Uma combinação que não estava cadastrada como cenário completo
 
-Este teste técnico sintético foi introduzido na **1.3.0-rc1** e é reexecutado na **1.4.0-rc1**. Não é um novo caso observado com participante. A entrada usa conceitos controlados, para separar a capacidade de composição da interpretação de uma narrativa. O relatório atual registra também verificações e cobertura parcial; a descrição das alternativas não significa que foram automaticamente avaliadas.
+Este teste técnico sintético foi introduzido na **1.3.0-rc1** e é reexecutado na **1.4.0-rc2**. Não é um novo caso observado com participante. A entrada usa conceitos controlados, para separar a capacidade de composição da interpretação de uma narrativa. O relatório atual registra também verificações e cobertura parcial; a descrição das alternativas não significa que foram automaticamente avaliadas.
 
 ## Entrada e controle
 
 A entrada reuniu, no mesmo fluxo digital, **compreender o conteúdo de uma página e produzir/revisar mensagens sobre ele**, com condições de acesso não visual, teclado, leitor de tela, entrada por voz e revisão. Foram reutilizados conceitos e participações já representados. O contexto recebeu um identificador novo; nenhuma regra, configuração, fonte ou formulação foi adicionada para aprovar esse teste.
 
-O script `scripts/run_regression.py` registra a entrada e confere que os hashes da base não mudaram. Confira o objeto `combinacao_nao_cadastrada` em `evidence/regression-report.json`.
+O script `scripts/run_regression.py` registra a entrada e confere que os hashes da base não mudaram. Confira o objeto `cases.combinacao_nao_cadastrada` em `evidence/regression-report.json`.
 
 ## O que a articulação acrescentou
 
 | Recuperação isolada | Recuperação com articulações |
 | --- | --- |
-| K10, K18, K27 e K29 recuperados | Os anteriores mais K41, K42 e K43 recuperados |
+| K10, K18, K27 e K29 recuperados | Os anteriores mais K22, K41, K42 e K43 recuperados |
 | Um padrão elegível: acesso a conteúdo web equivalente | Dois padrões elegíveis: acesso equivalente e comunicação multiformato |
 | Duas funções cobertas | Quatro funções cobertas |
 | Seleção do modo pela condição e feedback ainda não cobertos | Essas duas funções passam a estar cobertas pelo segundo padrão |
 
-**Recuperação não é uso.** A decisão final empregou K10 e K42 no acesso à página, e K41 e K42 na comunicação. K43 foi recuperado, mas não foi incorporado automaticamente à decisão. Foram mobilizadas as articulações `ART-REF-03` e `ART-REF-05`.
+**Recuperação não é uso.** A decisão final empregou K10 e K42 no acesso à página, e K41 e K42 na comunicação. K22 e K43 foram recuperados, mas não foram incorporados automaticamente às configurações. A recuperação percorreu `ART-TRJ-06`, `ART-REF-03` e `ART-REF-05`; os apoios das escolhas devem ser conferidos individualmente, sem transformar todas as relações percorridas em fundamentos da mesma configuração.
+
+A saída atual é **parcial**, apesar de acrescentar uma escolha: continuam sem cobertura operacional seis funções identificadas antes da seleção — preservar acesso, organizar conteúdo, permitir revisão, expressar conhecimento, caracterizar condições e reduzir sobrecarga. O relatório distingue função necessária de função efetivamente oferecida; não completa essa diferença a partir do texto de uma recomendação.
 
 As aplicações dos critérios também são específicas:
 

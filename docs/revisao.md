@@ -1,4 +1,15 @@
-# Revisão 1.4.0-rc1 — fundamentação examinável
+# Revisão 1.4.0-rc2 — empregar a base existente e conferir o percurso
+
+- Interpretação de acesso e comunicação de conteúdo por função, sem procurar o tema da aula como cenário cadastrado.
+- Condições pessoais e respostas separadas por participante; nenhuma forma de comunicação inferida por diagnóstico.
+- Requisitos funcionais derivados de conhecimentos compatíveis antes da seleção do padrão, com o vínculo que produziu a derivação.
+- Contratos existentes de aplicação deslocados da lista fixa em Python para os registros versionados; nenhuma capacidade específica de Matemática acrescentada.
+- Citações bibliográficas recuperadas, URLs estruturadas e seis origens normativas reconferidas em seções online. Não houve leitura integral de 156 referências nem download de PDFs.
+- Catálogo, desenho documental e explicação do exemplo derivados da mesma base; relações históricas, pendentes e mobilizadas ficam distintas.
+
+O resultado efetivo e os limites são registrados nos relatórios desta revisão. Uma composição parcial não comprova cobertura integral da turma, notação matemática ou resultado educacional. A versão da tese e o repositório MADO permanecem intactos.
+
+## Histórico: 1.4.0-rc1 — fundamentação examinável
 
 O repositório independente parte do conteúdo público de `natacsham/MADO`, commit `d660b773ed08038a7a543205575a16fc22d2c1c2`. A importação é o commit raiz deste novo histórico; não altera a origem nem a tese.
 

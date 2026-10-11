@@ -48,7 +48,7 @@ v2:EditableText a v2:Resource ; rdfs:label "Campo textual editável"@pt .
 v2:Display a v2:Resource ; rdfs:label "Apresentação visual legível"@pt .
 v2:TextToSpeech a v2:Resource ; rdfs:label "Leitura em voz do texto"@pt .
 v2:AudioOutput a v2:Resource ; rdfs:label "Saída de áudio controlável"@pt .
-v2:ContentAvailable a v2:ContextFact ; rdfs:label "Há conteúdo a expressar ou revisar"@pt .
+v2:ContentAvailable a v2:ContextFact ; rdfs:label "Há conteúdo a expressar ou revisar"@pt ; v2:scope "context" .
 v2:CanUseSpeech a v2:ContextFact ; rdfs:label "A pessoa consegue e aceita usar fala nesta tarefa"@pt .
 v2:SpeechInputUsable a v2:ContextFact ; rdfs:label "Reconhecimento de fala utilizável neste ambiente e idioma"@pt .
 v2:CanUseKeyboard a v2:ContextFact ; rdfs:label "A pessoa consegue operar a interface de teclado"@pt .

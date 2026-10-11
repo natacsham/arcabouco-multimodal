@@ -3,8 +3,18 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# These files belong only to the new entry flow, not the preserved full views.
+# This exception is deliberately unavailable to unknown tests or older reports.
+UNUSED_SIMPLE_FLOW = frozenset({"index.html", "guiado.html", "simple-flow.js",
+                               "simple-flow.css", "intake.mjs", "voice.js"})
+FULL_VIEW_TESTS = {
+    "SYNTHETIC_TECHNICAL_BROWSER_CHECK": "tests/traceability-browser.mjs",
+    "SYNTHETIC_COMPOSITION_BROWSER_NOT_HUMAN_EVALUATION": "tests/composition-browser.mjs",
+}
 
 
 def read(name):
@@ -15,7 +25,72 @@ def sha(name):
     return hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
 
 
-def preserved_components(report, manifest):
+def _matches(name, digest):
+    return bool(digest) and (ROOT / name).is_file() and sha(name) == digest
+
+
+def _complete_view_scope(report, manifest, scope_report):
+    """RC2 full-view evidence: only explicitly unconsumed entry files may differ.
+
+    The original build/report is never rewritten. Shared scripts, CSS, site
+    projections, fixtures and runtime remain byte-bound; no broad exclusion of
+    frontend hashes is allowed. Unknown navigation/dependencies fail closed.
+    """
+    previous = report.get("build") or {}
+    test = FULL_VIEW_TESTS.get(scope_report.get("type"))
+    test_text = (ROOT / test).read_text(encoding="utf-8") if test and (ROOT / test).is_file() else ""
+    full_route = "base+'amado/'+(view==='index.html'?'completo.html':'completo-guiado.html')"
+    routes = {re.sub(r"\s+", "", route) for route in re.findall(r"page\.goto\((.*?)\);", test_text)}
+    allowed_routes = {"base", "base+'ontologia/'", "base+'amado/completo.html'", full_route}
+    front = previous.get("frontend_sha256") or {}
+    current_front = manifest.get("frontend_sha256") or {}
+    required_views = {"completo.html", "completo-guiado.html", "app.js", "worker.mjs", "client.mjs"}
+    used_front = {name: digest for name, digest in front.items() if name not in UNUSED_SIMPLE_FLOW}
+    site = previous.get("site_assets_sha256") or {}
+    used_inputs = {"web/amado/" + name: digest for name, digest in used_front.items()}
+    used_inputs.update({"web/" + name: digest for name, digest in site.items()})
+    used_inputs.update(previous.get("files") or {})
+    used_inputs.update({"engine.py": previous.get("core_sha256"),
+                       "web/amado/engine.py": previous.get("core_sha256"),
+                       "web/amado/bridge.py": previous.get("bridge_sha256"),
+                       "web/amado/assets/base.zip": previous.get("base_zip_sha256")})
+    used_inputs.update({"web/amado/runtime/" + name: value.get("sha256")
+                       for name, value in (previous.get("runtime") or {}).items()})
+    used_inputs.update({"web/amado/runtime/" + name: digest
+                       for name, digest in (previous.get("license_notices") or {}).items()})
+    if test:
+        used_inputs[test] = scope_report.get("test_sha256")
+    # Conservative dependency guard: fail even on a newly mentioned entry module
+    # in shared executable/style/HTML inputs instead of silently broadening reuse.
+    shared_text = "\n".join((ROOT / name).read_text(encoding="utf-8")
+                            for name in used_inputs
+                            if name.startswith("web/") and Path(name).suffix in {".html", ".js", ".mjs", ".css"}
+                            and "/runtime/" not in name and (ROOT / name).is_file())
+    ignored_modules = UNUSED_SIMPLE_FLOW - {"index.html", "guiado.html"}
+    checks = {
+        "rc2_scope": previous.get("version") == manifest.get("version") == "1.4.0-rc2",
+        "known_current_full_view_test": bool(test) and _matches(test, scope_report.get("test_sha256")),
+        "full_view_navigation": full_route in routes and routes <= allowed_routes,
+        "same_non_frontend_manifest": {k: v for k, v in previous.items() if k != "frontend_sha256"}
+            == {k: v for k, v in manifest.items() if k != "frontend_sha256"},
+        "same_frontend_inventory": set(front) == set(current_front),
+        "actual_full_view_paths_recorded": required_views <= set(used_front),
+        "only_unconsumed_entry_hashes_may_differ": all(current_front.get(name) == digest for name, digest in used_front.items()),
+        "unconsumed_modules_not_referenced": all(name not in shared_text for name in ignored_modules),
+        "used_inputs_current": bool(site) and bool(previous.get("files")) and bool(previous.get("runtime"))
+            and all(_matches(name, digest) for name, digest in used_inputs.items()),
+        "current_entry_files_match_manifest": all(_matches("web/amado/" + name, digest) for name, digest in current_front.items()),
+    }
+    return {"passed": all(checks.values()), "checks": checks,
+            "evidence_use": "REUSED_UNCHANGED_COMPONENTS",
+            "entrypoints": ["web/amado/completo.html", "web/amado/completo-guiado.html"],
+            "used_inputs": used_inputs,
+            "unconsumed_entry_changes": {"web/amado/" + name: {"tested": front.get(name), "current": current_front.get(name)}
+                for name in sorted(UNUSED_SIMPLE_FLOW) if front.get(name) != current_front.get(name)},
+            "notice": "Reúso limitado aos mesmos bytes das vistas completas e suas dependências; o manifesto original permanece no relatório. Não é uma nova execução da build global nem da entrada simplificada."}
+
+
+def preserved_components(report, manifest, scope_report=None):
     """Require the exact tested inputs, including the preserved original views.
 
     The full build cannot match after replacing the two entry pages. Only those
@@ -23,6 +98,25 @@ def preserved_components(report, manifest):
     match its recorded fingerprint. New presentation checks are required below.
     """
     previous = report.get("build") or {}
+    if previous == manifest:
+        current = {
+            "core": sha("engine.py") == manifest["core_sha256"],
+            "served_core": _matches("web/amado/engine.py", manifest["core_sha256"]),
+            "bridge": sha("web/amado/bridge.py") == manifest["bridge_sha256"],
+            "bundle": sha("web/amado/assets/base.zip") == manifest["base_zip_sha256"],
+            "base_files": all(sha(name) == value for name, value in manifest["files"].items()),
+            "frontend_files": all(sha("web/amado/" + name) == value for name, value in manifest["frontend_sha256"].items()),
+            "site_files": all(sha("web/" + name) == value for name, value in manifest["site_assets_sha256"].items()),
+            "runtime_files": bool(manifest.get("runtime")) and all(_matches("web/amado/runtime/" + name, value.get("sha256"))
+                for name, value in manifest.get("runtime", {}).items()),
+            "license_files": bool(manifest.get("license_notices")) and all(_matches("web/amado/runtime/" + name, value)
+                for name, value in manifest.get("license_notices", {}).items()),
+        }
+        return {"passed": all(current.values()), "checks": current,
+                "evidence_use": "CURRENT_BUILD_EXECUTION",
+                "notice": "Execução repetida nesta versão, com todos os arquivos vinculados ao manifesto atual."}
+    if previous.get("version") == manifest.get("version") == "1.4.0-rc2":
+        return _complete_view_scope(report, manifest, scope_report or report)
     required = ("version", "origin_commit", "core_sha256", "bridge_sha256",
                 "base_zip_sha256", "pyodide_version", "runtime", "license_notices",
                 "composition", "files")
@@ -55,6 +149,41 @@ def preserved_components(report, manifest):
             "notice": "Resultados anteriores reutilizados somente para motor, base, ambiente de execução e apresentação completa preservados. Não são novas execuções da apresentação simplificada."}
 
 
+def parity_components(report, browser, manifest):
+    """Bind the actual compared artifacts without inventing an original seal."""
+    comparison = preserved_components(report, manifest, scope_report=browser)
+    execution = preserved_components(browser, manifest)
+    browser_artifact = "tests/.artifacts/browser/decisions.json"
+    artifact_present = (ROOT / browser_artifact).is_file()
+    digest_recorded = bool(re.fullmatch(r"[a-f0-9]{64}", str(report.get("browser_sha256", ""))))
+    checks = {
+        "comparison_inputs_preserved": comparison["passed"],
+        "originating_browser_inputs_preserved": execution["passed"],
+        "originating_browser_completed": browser.get("completed") is True and not browser.get("errors")
+            and bool(browser.get("checks")) and all(browser["checks"].values()),
+        "originating_browser_test_current": _matches("tests/traceability-browser.mjs", browser.get("test_sha256")),
+        "comparator_current": _matches("tests/compare_browser.mjs", report.get("test_sha256")),
+        "native_artifact_current": _matches("evidence/native-cases.json", report.get("native_sha256")),
+        "browser_artifact_digest_recorded": digest_recorded,
+        "browser_artifact_matches_if_present": not artifact_present or _matches(browser_artifact, report.get("browser_sha256")),
+        "comparison_passed": report.get("passed") is True,
+    }
+    return {"passed": all(checks.values()), "checks": checks,
+            "evidence_use": "ARTIFACT_COMPARISON_WITH_QUALIFIED_BROWSER_PROVENANCE",
+            "originating_report": "evidence/traceability-browser.json",
+            "originating_report_sha256": sha("evidence/traceability-browser.json"),
+            "originating_execution_at": browser.get("executed_at"),
+            "originating_evidence_use": execution["evidence_use"],
+            "native_sha256": report.get("native_sha256"), "browser_sha256": report.get("browser_sha256"),
+            "browser_artifact_verification": "VERIFIED_PRESENT_ARTIFACT" if artifact_present else "RECORDED_DIGEST_WITHOUT_ARTIFACT",
+            "browser_artifact_checked_directly": artifact_present,
+            "artifact_hash_sealed_in_originating_report": False,
+            "notice": ("O artefato nativo atual, o teste exato e a execução de navegador identificada foram conferidos. "
+                       + ("O hash do artefato de navegador presente também foi conferido. " if artifact_present else
+                          "O artefato de navegador não está disponível neste ambiente: conserva-se o digest registrado pelo comparador, sem nova conferência direta do arquivo. ")
+                       + "O relatório originário não selou o hash de decisions.json; este vínculo é qualificado, não uma assinatura criptográfica histórica nem uma nova execução de navegador.")}
+
+
 def current_presentation(report, manifest):
     return (report.get("completed") is True and report.get("passed") is True
             and not report.get("errors") and bool(report.get("checks"))
@@ -75,11 +204,12 @@ def main():
     composition_trajectory = read("experimental/v2/evidence/trajectory-report.json")
     composition_reasoner = read("experimental/v2/evidence/trajectory-reasoner-report.json")
     simple = read("evidence/simple-flow-browser.json")
+    source_catalog = read("evidence/source-catalog-browser.json")
     reused = {"traceability-browser.json": preserved_components(browser, manifest),
-              "parity-report.json": preserved_components(parity, manifest),
+              "parity-report.json": parity_components(parity, browser, manifest),
               "composition-browser.json": preserved_components(composition, manifest)}
     checks = {
-        "version": manifest["version"] == "1.4.0-rc1",
+        "version": manifest["version"] == "1.4.0-rc2",
         "technical": technical.get("passed") is True,
         "reasoner": reasoner.get("passed") is True,
         "reasoner_current_graph": reasoner["input_sha256"] == sha("ontology/mado-combined.ttl"),
@@ -105,12 +235,17 @@ def main():
         "composition_model": composition_model.get("passed") is True and composition_trajectory.get("passed") is True,
         "composition_reasoner": composition_reasoner.get("passed") is True and composition_reasoner.get("input_sha256") == sha("experimental/v2/evidence/trajectory-combined.ttl"),
         "simple_flow_current_presentation": current_presentation(simple, manifest),
+        "source_catalog_browser": source_catalog.get("passed") is True and not source_catalog.get("errors")
+            and bool(source_catalog.get("checks")) and all(source_catalog["checks"].values()),
+        "source_catalog_current_build": source_catalog.get("build") == manifest,
+        "source_catalog_current_inputs": bool(source_catalog.get("hashes"))
+            and all(sha(name) == value for name, value in source_catalog.get("hashes", {}).items()),
         "current_frontend_files": bool(manifest.get("frontend_sha256")) and all(
             sha("web/amado/" + name) == value for name, value in manifest.get("frontend_sha256", {}).items()),
     }
     if not all(checks.values()):
         raise SystemExit(json.dumps(checks))
-    reports = ["technical-report.json", "reasoner-report.json", "regression-report.json", "traceability-browser.json", "parity-report.json", "distribution-audit.json", "build-manifest.json", "composition-browser.json", "simple-flow-browser.json"]
+    reports = ["technical-report.json", "reasoner-report.json", "regression-report.json", "traceability-browser.json", "parity-report.json", "distribution-audit.json", "build-manifest.json", "composition-browser.json", "simple-flow-browser.json", "source-catalog-browser.json"]
     target = ROOT / "web/evidence"
     target.mkdir(exist_ok=True)
     summary = {
@@ -123,11 +258,13 @@ def main():
                     "runtime_query_rows": technical["checks"]["runtime_main_decision_shacl_and_queries"]["query_rows"],
                     "browser_checks": simple["checks"],
                     "current_presentation": {"report": "simple-flow-browser.json", "checks": simple["checks"]},
+                    "source_catalog": {"report": "source-catalog-browser.json", "checks": source_catalog["checks"],
+                                       "scope": "Catálogo e percurso documental conferidos no navegador; não leitura integral das referências."},
                     "reused_component_evidence": reused,
-                    "legacy_browser_checks": {"evidence_use": "REUSED_UNCHANGED_COMPONENTS", "checks": browser["checks"]},
+                    "legacy_browser_checks": {"evidence_use": reused["traceability-browser.json"]["evidence_use"], "checks": browser["checks"]},
                     "composition": {"version": manifest["composition"]["version"], "browser_checks": composition["checks"],
-                                    "browser_evidence_use": "REUSED_UNCHANGED_COMPONENTS",
-                                    "scope": "Produzir ou revisar uma contribuição digital; não substitui todas as tarefas do motor anterior.",
+                                    "browser_evidence_use": reused["composition-browser.json"]["evidence_use"],
+                                    "scope": "A entrada comum usa o compositor por funções para escrita com revisão e revisão de texto. Acesso a conteúdo e demais tarefas seguem o motor existente, conforme sua cobertura; não se afirma composição completa para todas as tarefas.",
                                     "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"}},
         "limits": ["Revisão técnica dos casos existentes, não nova avaliação humana.",
                    "Conferência em registro preservado não equivale à leitura do documento original.",
@@ -135,13 +272,13 @@ def main():
                    "Alternativas textuais dos casos anteriores não são automaticamente recompostas; o módulo por funções verifica suas próprias rotas de entrada e revisão.",
                    "Testes não demonstram eficácia educacional ou aplicabilidade universal.",
                    "NVDA e VoiceOver não avaliados; não se declara conformidade WCAG integral."],
-        "reports": {}, "historical_evidence_notice": "Os resultados da apresentação anterior são reutilizados para componentes cujos hashes foram conferidos, incluindo os arquivos preservados completo.html e completo-guiado.html. A apresentação simplificada possui seu próprio relatório atual. Relatórios herdados de 1.3 não integram a aprovação desta versão."
+        "reports": {}, "historical_evidence_notice": "Os relatórios identificam individualmente execução atual ou reúso de componentes idênticos. A apresentação simplificada possui seu próprio relatório. Evidências antigas não aprovam bytes diferentes."
     }
     for name in reports:
         source = ROOT / "evidence" / name
         (target / name).write_bytes(source.read_bytes())
         summary["reports"][name] = {"url": name, "sha256": sha("evidence/" + name),
-                                    **({"evidence_use": "REUSED_UNCHANGED_COMPONENTS"} if name in reused else
+                                    **({"evidence_use": reused[name]["evidence_use"]} if name in reused else
                                        {"evidence_use": "CURRENT_PRESENTATION_EXECUTION"} if name == "simple-flow-browser.json" else {})}
     smoke_path = ROOT / "evidence/simple-flow-public.json"
     if smoke_path.exists():

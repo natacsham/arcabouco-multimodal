@@ -63,7 +63,20 @@ class ExecutionEvidenceTests(unittest.TestCase):
     def test_new_combination_uses_existing_patterns(self):
         self.assertEqual(set(self.novel["decision"]["component_ids"]),
                          {"PAD-CONTEUDO-WEB-EQUIVALENTE", "PAD-COMUNICACAO-MULTIFORMATO"})
-        self.assertEqual(self.novel["decision"]["status"], "GERADA")
+        # Existing choices remain reusable, but the functional applicability
+        # index now makes unmet design requirements explicit before selection.
+        self.assertEqual(self.novel["decision"]["status"], "GERADA_PARCIAL")
+        functions = self.novel["execution_evidence"]["functions"]
+        expected_missing = {"FUN-PRESERVAR-ACESSO", "FUN-ORGANIZAR-CONTEUDO", "FUN-PERMITIR-REVISAO",
+                            "FUN-EXPRESSAR-CONHECIMENTO", "FUN-CARACTERIZAR-CONDICOES", "FUN-REDUZIR-SOBRECARGA"}
+        self.assertEqual(set(functions["remaining"]), expected_missing)
+        self.assertEqual(set(functions["required"]) - set(functions["offered"]), expected_missing)
+        derivations = self.novel["decision"]["function_derivation"]
+        self.assertTrue(expected_missing <= {row["function_id"] for row in derivations})
+        for function in expected_missing:
+            rows = [row for row in derivations if row["function_id"] == function]
+            self.assertTrue(all(row["not_derived_from_component"] and row["source_ids"] and row["excerpt_ids"] for row in rows))
+            self.assertTrue(all(row["correspondences"] and all(witness["concept_ids"] and witness["task_paths"] for witness in row["correspondences"]) for row in rows))
 
     def test_removing_voice_reports_partial_without_inventing_alternative(self):
         self.assertEqual(self.no_voice["decision"]["component_ids"], ["PAD-CONTEUDO-WEB-EQUIVALENTE"])
@@ -104,6 +117,12 @@ class ExecutionEvidenceTests(unittest.TestCase):
         row = next(r for r in self.main["execution_evidence"]["components"] if r["component_id"] == "PAD-VIDEO-PROCESSO")
         self.assertEqual(row["selection"], "CONDITIONAL")
         self.assertEqual(row["availability_status"], "CONDICIONAL_A_CONFIRMACAO")
+        # A prepared participation's operated-resource declaration is not proof
+        # of availability when this prepared context deliberately leaves it open.
+        gate = next(check for check in self.main["execution_evidence"]["checks"]
+                    if check["subject_id"] == "PAD-VIDEO-PROCESSO" and check["rule_id"] == "core_resources")
+        self.assertIn("REC-REPRODUTOR-VIDEO", gate["missing_ids"])
+        self.assertNotIn("REC-REPRODUTOR-VIDEO", gate["observed_ids"])
 
     def test_unconfirmed_context_does_not_fabricate_component_failures(self):
         self.assertTrue(self.unconfirmed["decision"]["status"].startswith("SUSPENSA"))

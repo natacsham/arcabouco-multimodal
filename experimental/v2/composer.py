@@ -8,6 +8,7 @@ analytical synthesis is recorded in RDF, not discovered by this program.
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import itertools
 import json
@@ -134,7 +135,9 @@ class Composer:
                    "fonte tipada e nomeada, com endereço HTTPS não vazio",
                    {"url": str(url) if url is not None else None},
                    "Confere a referência registrada; não acessa o endereço nem comprova o conteúdo da fonte.")
-        return {**self._record(node), "url": str(url)} if valid else None
+        return {**self._record(node), "url": str(url),
+                **{field: self._text(node, V2[field]) for field in ("edition", "review_status", "referenceKind")
+                   if self._text(node, V2[field])}} if valid else None
 
     def _resolve(self, value: Any, entity_type: URIRef) -> URIRef | None:
         if not isinstance(value, str):
@@ -247,7 +250,9 @@ class Composer:
             if cvalid and locator is not None and statement is not None:
                 contributions.append({**self._record(contribution),
                                       "status": cstatus, "locator": str(locator), "statement": str(statement),
-                                      "excerpt": self._record(excerpt),
+                                      "excerpt": {**self._record(excerpt),
+                                                  **{field: self._text(excerpt, V2[field]) for field in ("document_url", "document_version", "document_review_status", "document_paraphrase")
+                                                     if self._text(excerpt, V2[field])}},
                                       "source": source_record,
                                       "check_ids": [row["id"] for row in checks.history[cstart:]]})
         primary = [item for item in contributions if item["status"] == "PRIMARY_CHECKED"]
@@ -398,7 +403,128 @@ class Composer:
                     "Ordem determinística não representa ranking de qualidade ou escolha ótima.",
                 ]}
 
+    def _compose_participants(self, context: dict[str, Any]) -> dict[str, Any]:
+        """Check the same task separately; one person's abilities cannot license another.
+
+        Shared equipment is availability, not operability. Only facts explicitly
+        scoped to the context in RDF are inherited by participants. Traits are
+        descriptions and never become confirmed capabilities.
+        """
+        base = {key: value for key, value in context.items() if key != "participants"}
+        empty = self.compose({**base, "confirmed": False})
+        empty["context_id"] = context.get("id")
+        empty["participant_results"] = []
+        issues = empty["input_issues"]
+        people = context.get("participants")
+        if not isinstance(people, list) or not people or len(people) > 50:
+            issues.append({"code": "INVALID_PARTICIPANTS"})
+            empty.update(status="INSUFFICIENT", proposal_status="NONE")
+            return empty
+        checks = _Checks()
+        shared_facts = self._normalize_map(base.get("facts", {}), V2.ContextFact,
+                                          "facts", checks, issues)
+        shared_resources = self._normalize_map(base.get("resources", {}), V2.Resource,
+                                              "resources", checks, issues)
+        context_facts = {key: value for key, value in shared_facts.items()
+                         if self._text(key, V2.scope) == "context"}
+        ignored = [self._record(key) for key in shared_facts if key not in context_facts]
+        participants = []
+        identifiers = set()
+        for person in people:
+            if not isinstance(person, dict) or set(person) - {"id", "label", "traits", "facts", "resources"}:
+                issues.append({"code": "INVALID_PARTICIPANT_FIELDS"})
+                continue
+            identifier = person.get("id")
+            traits = person.get("traits", [])
+            if (not isinstance(identifier, str) or not identifier.strip() or identifier in identifiers
+                    or not isinstance(person.get("label", ""), str)
+                    or not isinstance(traits, list) or any(not isinstance(item, str) for item in traits)):
+                issues.append({"code": "INVALID_PARTICIPANT_ID_OR_DESCRIPTION", "participant_id": identifier})
+                continue
+            identifiers.add(identifier)
+            facts = self._normalize_map(person.get("facts", {}), V2.ContextFact,
+                                        "participants.facts", checks, issues)
+            resources = self._normalize_map(person.get("resources", {}), V2.Resource,
+                                            "participants.resources", checks, issues)
+            for key in facts.keys() & context_facts.keys():
+                if context_facts[key] is not None and facts[key] is not context_facts[key]:
+                    issues.append({"code": "CONFLICTING_CONTEXT_FACT", "participant_id": identifier, "fact": str(key)})
+            participants.append((person, {**context_facts, **facts}, {**shared_resources, **resources}))
+        if issues:
+            empty.update(status="INSUFFICIENT", proposal_status="NONE")
+            empty["gaps"] = [{"code": "INPUT_REQUIRES_CORRECTION"}]
+            return empty
+        if base.get("confirmed") is not True:
+            return empty
+        children = []
+        for person, facts, resources in participants:
+            child_context = {**base, "id": str(base.get("id", "context")) + ":" + person["id"],
+                             "facts": {str(key): value for key, value in facts.items()},
+                             "resources": {str(key): value for key, value in resources.items()}}
+            child = self.compose(child_context)
+            # Check identifiers must remain unambiguous after merging people.
+            check_ids = {row["id"]: "check-" + _json_hash({"participant": person["id"], "check": row["id"]})[:16]
+                         for row in child.get("execution_evidence", [])}
+            def scope(value):
+                if isinstance(value, dict):
+                    for key, item in list(value.items()):
+                        if key == "id" and isinstance(item, str) and item in check_ids:
+                            value[key] = check_ids[item]
+                        elif key == "check_ids":
+                            value[key] = [check_ids.get(identifier, identifier) for identifier in item]
+                        else:
+                            scope(item)
+                elif isinstance(value, list):
+                    for item in value:
+                        scope(item)
+            scope(child)
+            for row in child.get("execution_evidence", []):
+                row["participant_id"] = person["id"]
+            children.append({"participant_id": person["id"], "label": person.get("label") or person["id"],
+                             "traits": list(person.get("traits", [])), "result": child})
+        result = copy.deepcopy(children[0]["result"])
+        for key in ("choices", "alternatives", "pending_candidates", "partial_segments", "exclusions", "gaps",
+                    "input_issues", "facts_to_confirm", "resources_to_confirm", "unavailable_conditions",
+                    "other_condition_diagnostics", "function_coverage", "missing_functions", "integration_gaps",
+                    "capability_evaluations", "relation_evaluations", "execution_evidence"):
+            result[key] = []
+        result.update(context_id=context.get("id"), participant_results=children,
+                      unscoped_personal_facts=ignored,
+                      scope="Mesma tarefa conferida separadamente para cada participante; não transfere capacidades entre pessoas.")
+        complete = all(child["result"]["status"] == "COMPOSED" for child in children)
+        for child in children:
+            person_id, person_label, individual = child["participant_id"], child["label"], child["result"]
+            for key in ("pending_candidates", "partial_segments", "exclusions", "gaps", "input_issues",
+                        "facts_to_confirm", "resources_to_confirm", "unavailable_conditions",
+                        "other_condition_diagnostics", "function_coverage", "missing_functions", "integration_gaps",
+                        "capability_evaluations", "relation_evaluations", "execution_evidence"):
+                result[key].extend({**copy.deepcopy(row), "participant_id": person_id, "participant_label": person_label}
+                                   for row in individual.get(key, []))
+            for choice in individual["choices"]:
+                proposal = {**copy.deepcopy(choice), "participant_id": person_id, "participant_label": person_label}
+                if complete:
+                    result["choices"].append(proposal)
+                else:
+                    proposal.update(state="PARTIAL", ready_for_whole_task=False,
+                                    covers_participant_task=True, covers_all_participants=False)
+                    proposal["limits"].append("Esta rota atende somente às condições deste participante; não é solução pronta para o grupo.")
+                    result["partial_segments"].append(proposal)
+        result["alternatives"] = result["choices"]
+        result["status"] = "COMPOSED" if complete else "INSUFFICIENT"
+        result["proposal_status"] = ("COMPLETE" if complete else "PARTIAL" if result["partial_segments"]
+                                     else "CONDITIONAL" if result["pending_candidates"] else "NONE")
+        result["covers_all_participants"] = complete
+        if not complete:
+            result["gaps"].append({"code": "PARTICIPANTS_NOT_ALL_COVERED",
+                                   "participant_ids": [child["participant_id"] for child in children
+                                                       if child["result"]["status"] != "COMPOSED"]})
+        if ignored:
+            result["limits"].append("Condições pessoais fornecidas no nível global não foram atribuídas automaticamente aos participantes.")
+        return result
+
     def compose(self, context: dict[str, Any]) -> dict[str, Any]:
+        if isinstance(context, dict) and "participants" in context:
+            return self._compose_participants(context)
         checks = _Checks()
         result: dict[str, Any] = {
             "status": "INSUFFICIENT", "proposal_status": "NONE",

@@ -4,11 +4,11 @@
 
 O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão deste projeto: 1.4.0-rc1 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
+**Versão deste projeto: 1.4.0-rc2 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
 
 **Este é o projeto em desenvolvimento.** As melhorias da ontologia e do AMADO são integradas aqui, em `arcabouco-multimodal`; não existe um produto separado chamado “Evolution”. O repositório `MADO` anterior permanece preservado. A versão 1.4 da base e o módulo de composição 2.0.0-alpha2 têm identificadores distintos para permitir conferir exatamente o que foi executado.
 
-No AMADO, conte um problema por texto ou ditado, responda apenas às perguntas necessárias e confira o desafio antes de gerar a orientação. Os exemplos ficam disponíveis junto do campo de entrada. A interface encaminha tarefas de escrita e revisão explicitamente reconhecidas ao compositor por funções; as demais tarefas seguem o motor existente. A interpretação é limitada e precisa de confirmação. [Como usar e o que já está coberto](docs/composicao-por-funcoes.md).
+No AMADO, conte seu desafio por texto ou ditado, responda às perguntas necessárias e confira as informações antes de gerar a orientação. Os exemplos são opcionais. Escrita com revisão e revisão de texto usam o compositor por funções; acesso a conteúdo e demais tarefas seguem o motor existente, conforme sua cobertura. Tema da aula não é chave de busca, e condições pessoais são conferidas por participante. A interpretação é limitada e precisa de confirmação. [Como usar e o que já está coberto](docs/composicao-por-funcoes.md).
 
 ## Qual problema esta pesquisa enfrenta?
 
@@ -54,6 +54,29 @@ O modelo diferencia modo de interação, recurso digital, dispositivo e respons�
 
 ## Como funciona, sem LLM
 
+### Onde estão as fontes e como entram na decisão
+
+**O AMADO não lê PDFs nem pesquisa na internet durante a consulta.** Consulta uma base preparada antes da publicação. Não é necessário copiar todos os documentos para o repositório: o endereço original, a edição e a seção ficam vinculados ao registro extraído.
+
+```text
+PREPARAÇÃO DO CONHECIMENTO (antes do uso)
+Fonte original online → extração localizada → contribuição delimitada
+                      → articulação analítica → conhecimento e condições
+                      → aplicação do critério a função/padrão existente
+
+USO DO AMADO (no navegador)
+Relato → informações a confirmar → contexto confirmado
+      → recuperação + verificações → composição → orientação e fundamentos
+```
+
+1. **Localizar:** em `data/knowledge-base.json`, `sources` identifica as fontes da trajetória e `references` conserva as referências citadas pelos artigos. URL não comprova leitura do original.
+2. **Conferir:** consultar a edição e a seção original; atualizar o registro existente em `excerpts` e sua origem em `criterion_origins`, preservando a localização anterior. Não promover toda a bibliografia a conhecimento operacional.
+3. **Articular:** `contributions` delimita o que cada trecho acrescenta; `articulations` explica a operação e a compreensão resultante; `knowledge` registra aplicabilidade e limites. A síntese analítica é anterior à execução, não descoberta pelo programa.
+4. **Operacionalizar:** adaptar os vínculos existentes em `decision_components` e nos contratos versionados de `experimental/v2/trajectory-bindings.json`. Uma função só integra a orientação se suas condições e apoios forem satisfeitos; ter uma fonte a mais não cria automaticamente uma capacidade.
+5. **Publicar:** regenerar RDF, catálogo, piloto e pacote; reexecutar as verificações; publicar somente os arquivos públicos. O navegador consome a mesma versão empacotada da base, não uma segunda planilha explicativa.
+
+O [catálogo e o desenho do percurso](https://natacsham.github.io/arcabouco-multimodal/ontologia/#fontes) são projeções desses registros. A conferência desta revisão é parcial: seis origens WCAG/MMI receberam seção e versão verificadas; outras referências permanecem citadas ou pendentes. O acesso restrito a uma norma não é tratado como leitura concluída. [O que foi conferido e como reproduzir](docs/fundamentacao-documental.md).
+
 1. O contexto é organizado em conceitos representados na base e conferido pela pessoa usuária.
 2. Consultas recuperam conhecimentos pertinentes e articulações documentadas.
 3. O motor verifica condições de aplicação, restrições, recursos e fundamentação.
@@ -64,7 +87,7 @@ O modelo diferencia modo de interação, recurso digital, dispositivo e respons�
 
 O AMADO executa Python no navegador por Pyodide, com RDF e consultas SPARQL. Não há servidor de decisões nem chamada a modelo de linguagem. A ontologia não gera prosa sozinha: o compositor emprega padrões e formulações previamente documentados. A narrativa livre também tem cobertura limitada e exige confirmação.
 
-O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A apresentação anterior continua em `amado/completo.html` e `amado/completo-guiado.html`, sem alteração dos motores.
+O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A organização anterior da interface continua em `amado/completo.html` e `amado/completo-guiado.html`, utilizando a mesma versão atual dos motores. A versão anterior completa permanece no histórico do repositório.
 
 ## Arquivos e reprodução
 
@@ -90,7 +113,7 @@ Consistência lógica, integridade dos dados, respostas às consultas, comportam
 
 Referência simples sugerida:
 
-> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.4.0-rc1. Repositório do projeto.
+> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.4.0-rc2. Repositório do projeto.
 
 Não há DOI exigido para consultar ou compreender este trabalho. Referências bibliográficas, autores de terceiros e perspectivas participantes conservam sua própria atribuição.
 

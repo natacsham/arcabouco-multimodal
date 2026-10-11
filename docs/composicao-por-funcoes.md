@@ -4,9 +4,9 @@ O endereço de uso continua sendo o AMADO do **arcabouco-multimodal**. O reposit
 
 ## O que foi conectado
 
-O campo **Conte o problema que você quer resolver** é a entrada comum do AMADO. Para tarefas de escrita ou revisão explicitamente reconhecidas em contexto de aprendizagem, a interface usa o compositor 2.0.0-alpha2. Ele examina capacidades separadas de entrada e revisão, suas condições e uma relação documentada entre elas. Não procura o identificador de um cenário completo nem copia uma orientação pronta para o par escolhido.
+O campo **Qual é o seu desafio de acessibilidade hoje?** é a entrada comum do AMADO. O compositor examina funções representadas, suas capacidades, condições e relações documentadas. Não procura o identificador de um cenário completo nem copia uma orientação pronta para o par escolhido. Os contratos de aplicação vêm dos registros versionados, não de uma lista de casos em Python.
 
-A composição ainda tem um recorte: produzir e revisar uma contribuição digital em contexto de aprendizagem, ou revisar texto já disponível. Os casos de outras tarefas continuam usando o mecanismo anterior. Não há conversão silenciosa de qualquer narrativa para estas duas tarefas.
+A entrada comum encaminha escrita com revisão e revisão de texto ao compositor por funções. Preparação e acesso a conteúdo educacional, assim como as demais tarefas, seguem o motor existente, conforme os padrões contemplados pela base. O assunto da aula não é chave de seleção. Reconhecer uma tarefa não garante que todas as funções necessárias possuam capacidade implementada.
 
 ## Como experimentar
 
@@ -31,6 +31,20 @@ Esta tela planeja uma forma de interação. Não executa o editor nem a leitura 
 - `experimental/v2/composer.py`: examina as condições e combina etapas compatíveis.
 
 O navegador carrega uma cópia verificada desses arquivos no pacote `web/amado/assets/base.zip`. Não consulta arquivos particulares, Google Drive, PDFs ou o GitHub durante a decisão. Atualizar um arquivo no repositório exige reconstruir, testar e publicar o pacote; uma referência nova sozinha não cria uma capacidade.
+
+Os documentos de origem ficam ligados por URL, edição e localização aos registros existentes. A curadoria consulta esses documentos **antes da publicação**, conserva a contribuição extraída e registra seu limite. O [catálogo e percurso da extração](https://natacsham.github.io/arcabouco-multimodal/ontologia/#fontes) não é um acervo de PDFs nem uma segunda base decisória.
+
+## Um desafio com pessoas diferentes
+
+“Ensinar um conteúdo complexo de Matemática a uma turma com dois estudantes surdos e um estudante cego” propõe uma tarefa de aprendizagem com participantes distintos. O intérprete não procura uma aula de Matemática cadastrada e não deduz Libras, leitura textual ou leitor de tela por diagnóstico.
+
+O relato inicial exige confirmar a atividade digital, recursos e formas de acesso de cada grupo. Se a tarefa identificada for ampla demais, o AMADO pergunta qual atividade operacional está envolvida, usando os conceitos existentes. Necessidades, papéis de preparação e operação dos recursos são perguntados quando exigidos pelos padrões pertinentes. Uma resposta sobre leitor de tela é ligada apenas ao participante correspondente; não é copiada para os estudantes surdos. Recursos compartilhados, como um editor disponível à professora, são diferentes de capacidades pessoais.
+
+Na rota de acesso a uma página digital, após as confirmações, o motor existente reutiliza `PAD-CONTEUDO-WEB-EQUIVALENTE`, com K10, K42, ART-REF-03 e aplicações de CA01, CA02 e CA74. Não é uma nova regra para Matemática. A articulação acrescenta nove vínculos exatos de fundamentação nessa escolha; não acrescenta outra configuração. O compositor por funções e esse motor são camadas distintas, disponíveis na mesma interface.
+
+Quando não houver relação ou capacidade operacional para toda a tarefa, conserva o apoio parcial e informa o que continua sem cobertura. Isso não significa que as fontes não contenham conhecimento útil: pode faltar sua ligação operacional verificada ao padrão. Uma pergunta pessoal ou documental pendente impede alegar cobertura completa, mas não apaga automaticamente uma parte fundamentada. Retirar uma condição nuclear, como a operação do leitor de tela nessa rota, bloqueia a configuração afetada. Não se apresenta esse apoio ao acesso como prova de ensino da notação matemática, atendimento por Libras ou melhoria da aprendizagem.
+
+Uma resposta pendente não precisa inutilizar uma rota já sustentada: os controles distinguem escolha pronta, alternativa condicional e segmento parcial. A revisão apenas adapta interpretação, correspondências e contratos existentes; não acrescenta um texto pronto específico para Matemática.
 
 ## Como conferir o fundamento
 

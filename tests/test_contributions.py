@@ -186,6 +186,84 @@ class ContributionTests(unittest.TestCase):
             self.assertEqual(row["trecho"], M[contribution["excerpt_id"]])
             self.assertEqual(row["fonte"], M[excerpts[contribution["excerpt_id"]]["fonte_id"]])
 
+    def test_documentary_link_is_annotation_not_source_promotion(self):
+        data = synthetic_data()
+        data["references"] = [{
+            "id": "REF-SYNTHETIC", "fonte_que_cita_id": "F1",
+            "referencia_exata": "Synthetic bibliography, not an examined publication.",
+            "url": "https://example.org/citation", "access_status": "NAO_CONSULTADA_NESTA_REVISAO",
+            "status": "REFERENCIA_CITADA",
+        }]
+        data["reference_audit"] = [{"reference_id": "REF-SYNTHETIC", "promotion_status": "BIBLIOGRAFIA_CITADA"}]
+        original = copy.deepcopy(data)
+        graph = Graph()
+        builder.project_documentary_metadata(graph, data)
+        ref = M["REF-SYNTHETIC"]
+        self.assertEqual(str(graph.value(ref, builder.RDFS.seeAlso)), "https://example.org/citation")
+        self.assertEqual(graph.value(ref, builder.DCT.isReferencedBy), M.F1)
+        self.assertNotIn((ref, RDF.type, M.Fonte), graph)
+        self.assertFalse(list(graph.subjects(M.derivadoDe, ref)))
+        self.assertFalse(list(graph.subjects(M.contribuicaoDoTrecho, ref)))
+        self.assertEqual(data, original)
+
+    def test_documentary_paraphrase_is_not_an_original_quote(self):
+        data = synthetic_data()
+        data["excerpts"][0].update(
+            document_url="https://example.org/source#section-2", document_version="2026-01-01",
+            document_review_status="CONFERIDO_NA_SECAO_ORIGINAL", document_review_date="2026-10-11",
+            document_paraphrase="Paráfrase sintética produzida para o teste.", localizacao_publica="Section 2",
+        )
+        graph = Graph()
+        builder.project_documentary_metadata(graph, data)
+        self.assertEqual(str(graph.value(M.T2, M.parafraseDocumental)), data["excerpts"][0]["document_paraphrase"])
+        self.assertEqual(str(graph.value(M.T2, M.versaoDocumental)), "2026-01-01")
+        self.assertEqual(str(graph.value(M.T2, M.localizacaoDocumental)), "Section 2")
+        self.assertFalse(list(graph.objects(M.T2, M.conteudoDoTrecho)))
+        self.assertFalse(list(graph.objects(M.T2, M.textoItemOriginal)))
+        self.assertFalse(list(graph.objects(M.T2, M.textoDoItemOriginal)))
+
+    def test_adding_source_url_does_not_upgrade_pending_contribution(self):
+        data = synthetic_data()
+        data["sources"][0]["url"] = "https://example.org/source"
+        data["sources"][0]["access_status"] = "SECOES_SELECIONADAS_CONSULTADAS"
+        data["contributions"][0]["verification_status"] = "PENDENTE"
+        graph = builder.build_graph(Graph(), Graph(), data)
+        self.assertEqual(str(graph.value(M.C2, M.estadoDeConferenciaDaContribuicao)), "PENDENTE")
+        self.assertEqual(data["contributions"][0]["verification_status"], "PENDENTE")
+
+    def test_documentary_metadata_removal_clears_stale_links(self):
+        data = synthetic_data()
+        data["sources"][0]["url"] = "https://example.org/old"
+        graph = Graph()
+        builder.project_documentary_metadata(graph, data)
+        data["sources"][0]["url"] = None
+        builder.project_documentary_metadata(graph, data)
+        self.assertFalse(list(graph.objects(M.F1, builder.RDFS.seeAlso)))
+
+    def test_current_section_review_has_locator_version_date_and_paraphrase(self):
+        reviewed = [r for r in self.kb["excerpts"] if r.get("document_review_status") == "CONFERIDO_NA_SECAO_ORIGINAL"]
+        self.assertTrue(reviewed)
+        for row in reviewed:
+            with self.subTest(excerpt=row["id"]):
+                for field in ("document_url", "document_version", "document_review_date", "document_paraphrase", "localizacao_publica"):
+                    self.assertTrue(row.get(field), field)
+                self.assertNotIn("trecho", row)
+        self.assertTrue(all(r["promotion_status"] == "BIBLIOGRAFIA_CITADA" for r in self.kb["reference_audit"]))
+
+    def test_current_section_metadata_and_paraphrase_are_projected_without_quotes(self):
+        graph = Graph().parse(ROOT / "ontology/mado-combined.ttl", format="turtle")
+        for collection in ("excerpts", "criterion_origins"):
+            for row in self.kb[collection]:
+                if not row.get("document_review_status"):
+                    continue
+                node = M[row["id"]]
+                with self.subTest(record=row["id"]):
+                    self.assertEqual(str(graph.value(node, builder.RDFS.seeAlso)), row["document_url"])
+                    self.assertEqual(str(graph.value(node, M.parafraseDocumental)), row["document_paraphrase"])
+                    self.assertEqual(str(graph.value(node, M.estadoDeConferenciaDocumental)), row["document_review_status"])
+                    self.assertFalse(list(graph.objects(node, M.conteudoDoTrecho)))
+                    self.assertFalse(list(graph.objects(node, M.textoItemOriginal)))
+
 
 if __name__ == "__main__":
     unittest.main()

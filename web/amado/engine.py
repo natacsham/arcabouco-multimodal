@@ -28,8 +28,8 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.4.0-rc1"
-UI_VERSION = "AMADO-web-1.4.0-rc1"
+VERSION = "1.4.0-rc2"
+UI_VERSION = "AMADO-web-1.4.0-rc2"
 PRACTICAL_COPY = {
     "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE": {
         "group": "start",
@@ -228,6 +228,11 @@ class DecisionEngine:
             {
                 "id": row["id"],
                 "papel_id": row["papel_id"],
+                "label": row.get("label") or row.get("grupo_rotulo") or self.label(row["papel_id"]),
+                "grupo_rotulo": row.get("grupo_rotulo", ""),
+                "quantidade": row.get("quantidade", 1),
+                "observacoes": row.get("observacoes", ""),
+                "apoios_informados": row.get("apoios_informados", ""),
                 "papel": self.label(row["papel_id"]),
                 "caracteristicas": [
                     {
@@ -316,6 +321,7 @@ class DecisionEngine:
             "recursos_propostos": self.labels(c.get("recursos_propostos")),
             "estado_dos_recursos": self.resource_state_payload(c),
             "funcoes_requeridas": self.labels(c.get("funcoes_requeridas_ids")),
+            "function_derivation": copy.deepcopy(c.get("function_derivation", [])),
             "restricoes": c.get("restricoes", []),
             "informacoes_ausentes": c.get("informacoes_ausentes", []),
             "baseado_em": c.get("baseado_em_contexto_ids", []),
@@ -423,6 +429,9 @@ class DecisionEngine:
             last_result.pop("query_results", None)
         return {
             "context": self.context_payload(),
+            # Internal worker contract: do not remap human labels back to IDs
+            # or lose personal declarations when answering a follow-up.
+            "participations": copy.deepcopy(self.current.get("participations", [])),
             "reported_confirmed": self.current["reported_confirmed"],
             "reported_correction": self.current.get("reported_correction", ""),
             "transfer_confirmed": self.current["transfer_confirmed"],
@@ -465,6 +474,9 @@ class DecisionEngine:
                 "premissas_do_exemplo": [],
                 "titulo_curto": "Caso informado agora",
                 "funcoes_requeridas_ids": [],
+                "function_derivation": [],
+                "natureza": "CASO_INFORMADO_PELA_PESSOA",
+                "status": "AGUARDANDO_CARACTERIZACAO",
             }
         )
         self.current["participations"] = []
@@ -512,6 +524,9 @@ class DecisionEngine:
             )
             for alias in aliases:
                 token = normalize_text(alias)
+                if field == "ambientes" and token in {"turma", "professor", "professora", "aluno", "estudante"}:
+                    # A participant or group does not establish the location.
+                    continue
                 if len(token) >= 4 and token in normalized:
                     detected[field].append(identifier)
                     evidence.append(
@@ -549,6 +564,16 @@ class DecisionEngine:
                 "\\b(desenho|imagem|mapa).{0,35}\\b(explica|organiza|representa|mostra)\\b",
                 "caracteristicas_pessoa",
                 "CAR-EXPRESSAO-VISUAL-AUTORAL",
+            ),
+            (
+                "\\b(acessar|ler|acompanhar|compreender|consultar).{0,45}\\b(conteudo|material|pagina|video|aula digital)\\b",
+                "tarefas",
+                "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+            ),
+            (
+                "\\b(ensinar|explicar|apresentar|passar).{0,45}\\b(assunto|conteudo|tema|material)\\b",
+                "tarefas",
+                "TAR-COMUNICAR-CONTEUDO-1545B38",
             ),
             (
                 "\\b(criar|produzir|construir|preparar).{0,40}\\b(recurso|conteudo|apresentacao|pagina|video|jogo)\\b",
@@ -616,7 +641,7 @@ class DecisionEngine:
                 "NEC-APOIAR-COMPREENSAO-TURMA",
             ),
             (
-                "\\b(sala de aula|turma|professora|professor)\\b",
+                "\\b(sala de aula)\\b",
                 "ambientes",
                 "AMB-SALA-DE-AULA",
             ),
@@ -774,7 +799,7 @@ class DecisionEngine:
         context["objetivo"] = objective_sentence
         roles = []
         role_cues = [
-            ("PAPEL-ESTUDANTE", "\\b(estudante|aluno|aluna)\\b"),
+            ("PAPEL-ESTUDANTE", "\\b(estudantes?|alunos?|alunas?)\\b"),
             ("PAPEL-PROFESSORA", "\\b(professora|professor|docente)\\b"),
             ("PAPEL-TURMA", "\\b(turma|colegas)\\b"),
             ("PAPEL-PESSOA-APOIADA", "\\b(pessoa|usuario|usuaria)\\b"),
@@ -811,6 +836,25 @@ class DecisionEngine:
                     }
                 )
         self.current["participations"] = roles
+        # A reported diagnosis describes a group; it never supplies its
+        # communication route, preferred mode or assistive technology.
+        groups = list(re.finditer(r"\b(?:(\d+|um|uma|dois|duas|tres|quatro)\s+)?(?:alunos?\s+|alunas?\s+|estudantes?\s+|pessoas?\s+)?(surdos?|surdas?|cegos?|cegas?)\b", normalized))
+        if groups:
+            roles = [row for row in roles if row["papel_id"] not in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
+            quantities = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "tres": 3, "quatro": 4}
+            for match in groups:
+                count, description = match.groups()
+                quantity = int(count) if count and count.isdigit() else quantities.get(count, 1)
+                label = f"{quantity} estudante(s): {description} informado no relato"
+                roles.append({"id": f"PART-CASO-{len(roles)+1:02d}-{uuid.uuid4().hex[:6].upper()}",
+                              "contexto_id": context["id"], "papel_id": "PAPEL-ESTUDANTE",
+                              "label": label, "grupo_rotulo": description, "quantidade": quantity,
+                              "caracteristica_ids": [], "tarefa_ids": copy.deepcopy(context["tarefas"]),
+                              "modalidade_ids": [], "recurso_operado_ids": [],
+                              "objetivo_participacao": match.group(0), "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"})
+            self.current["participations"] = roles
+            # An aggregate alias match cannot establish who has the condition.
+            context["caracteristicas_pessoa"] = []
         context["informacoes_ausentes"] = [
             item["question"] for item in self.missing_questions()
         ]
@@ -898,17 +942,32 @@ class DecisionEngine:
                 )
             )
         if "participations" in body:
+            if not isinstance(body["participations"], list):
+                raise ValueError("As participações devem formar uma lista.")
             rows = []
             for index, incoming in enumerate(body.get("participations") or [], 1):
                 role_id = incoming.get("papel_id")
                 if role_id not in self.concepts:
                     raise ValueError(f"Papel não reconhecido: {role_id}")
+                for field, expected_type in (("caracteristica_ids", "CARACTERISTICA_PESSOA"), ("tarefa_ids", "TAREFA"),
+                                             ("modalidade_ids", "MODALIDADE"), ("recurso_operado_ids", "RECURSO_DISPONIVEL")):
+                    values = incoming.get(field, [])
+                    if not isinstance(values, list) or any(self.concepts.get(value, {}).get("tipo") != expected_type for value in values):
+                        raise ValueError("Condição pessoal não reconhecida ou de tipo incorreto: " + field)
+                quantity = incoming.get("quantidade", 1)
+                if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 1:
+                    raise ValueError("A quantidade de participantes precisa ser um inteiro positivo.")
                 rows.append(
                     {
                         "id": incoming.get("id")
                         or f"PART-CASO-{index:02d}-{uuid.uuid4().hex[:6].upper()}",
                         "contexto_id": context["id"],
                         "papel_id": role_id,
+                        "label": str(incoming.get("label", "")).strip(),
+                        "grupo_rotulo": str(incoming.get("grupo_rotulo", "")).strip(),
+                        "quantidade": quantity,
+                        "observacoes": str(incoming.get("observacoes", "")).strip(),
+                        "apoios_informados": str(incoming.get("apoios_informados", "")).strip(),
                         "caracteristica_ids": unique(
                             incoming.get("caracteristica_ids") or []
                         ),
@@ -928,7 +987,7 @@ class DecisionEngine:
                     }
                 )
             participations = rows
-        elif "caracteristicas_pessoa" in body:
+        elif "caracteristicas_pessoa" in body and len([row for row in participations if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]) <= 1:
             for row in participations:
                 if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}:
                     row["caracteristica_ids"] = copy.deepcopy(
@@ -942,20 +1001,20 @@ class DecisionEngine:
                 ("modalidade_ids", "modalidades_disponiveis"),
                 ("recurso_operado_ids", "recursos_disponiveis"),
             ):
+                if "participations" in body and participant_field != "recurso_operado_ids":
+                    continue
                 if (
                     context_field in body
-                    or "participations" in body
                     or (
                         participant_field == "recurso_operado_ids"
                         and any((f in body for f in resource_fields))
                     )
                 ):
                     before = row.get(participant_field, [])
-                    row[participant_field] = [
-                        identifier
-                        for identifier in before
-                        if identifier in context.get(context_field, [])
-                    ]
+                    row[participant_field] = [identifier for identifier in before
+                                              if (identifier not in context.get("recursos_impedidos", [])
+                                                  if participant_field == "recurso_operado_ids" and "participations" in body
+                                                  else identifier in context.get(context_field, []))]
                     if before != row[participant_field]:
                         row["status_evidencia"] = "IDENTIFICADO_PARA_CONFIRMACAO"
         mapping_confirmed = bool(body.get("mapping_confirmed", False))
@@ -979,8 +1038,24 @@ class DecisionEngine:
         ]
         return self.current_payload()
 
+    def _task_components(self, context):
+        """Existing patterns whose task requirement has a hierarchy witness."""
+        return [component for component in self.components
+                if self.intersects(context, "tarefas", component.get("requires_all", {}).get("tarefas", []))]
+
+    def _operational_task_options(self, context):
+        # This is a question, not a conversion of the person's intention.
+        related = {kid for kid, knowledge in self.knowledge.items()
+                   if self.intersects(context, "tarefas", knowledge.get("aplicabilidade", {}).get("tarefas", []))}
+        components = [component for component in self.components
+                      if related & set(component.get("knowledge_ids", []))]
+        return unique(task for component in components
+                      for task in component.get("requires_all", {}).get("tarefas", []))
+
     def missing_questions(self):
         c, questions = (self.current["context"], [])
+        free = self.current.get("scenario_mode") == "free_narrative"
+        task_components = self._task_components(c) if free else []
         if not str(c.get("objetivo") or "").strip():
             questions.append(
                 {
@@ -995,6 +1070,11 @@ class DecisionEngine:
                     "question": "Qual atividade a pessoa precisa realizar?",
                 }
             )
+        if c.get("tarefas") and free and not task_components:
+            operational_options = self._operational_task_options(c)
+            if operational_options:
+                questions.append({"field": "tarefas", "type": "single", "concept_ids": operational_options,
+                                  "question": "Que atividade digital precisa ser acessível? Confirme a atividade, sem alterar o assunto informado."})
         if not c.get("barreiras") and (not c.get("necessidades")):
             questions.append(
                 {
@@ -1002,13 +1082,25 @@ class DecisionEngine:
                     "question": "O que está dificultando a atividade ou precisa ser apoiado?",
                 }
             )
+        elif free and task_components:
+            unmet_groups = [group for component in task_components
+                            for group in component.get("requires_any_groups", [])
+                            if not any(self.intersects(c, row["field"], row.get("ids", [])) for row in group)]
+            pending_ids = unique(identifier for group in unmet_groups for row in group
+                                 if row["field"] in {"barreiras", "necessidades"} for identifier in row.get("ids", []))
+            if pending_ids:
+                questions.append({"field": "barreira_ou_necessidade", "type": "multi", "concept_ids": pending_ids, "required": False,
+                                  "question": "O que precisa ser garantido ou está dificultando esta atividade? Marque somente o que corresponde ao caso."})
         functional_characteristics = [
             identifier
             for identifier in c.get("caracteristicas_pessoa", [])
             if self.concepts.get(identifier, {}).get("categoria_caracteristica")
             != "ESCOPO_DE_PUBLICO"
         ]
-        if not functional_characteristics:
+        supported = [row for row in self.current.get("participations", [])
+                     if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
+        scoped = len(supported) > 1 and self.current.get("scenario_mode") == "free_narrative"
+        if not functional_characteristics and not scoped:
             questions.append(
                 {
                     "field": "caracteristicas_pessoa",
@@ -1022,13 +1114,58 @@ class DecisionEngine:
                     "question": "Quem participa da atividade e quem utiliza ou controla cada recurso?",
                 }
             )
-        if not c.get("modalidades_disponiveis"):
+        if free and task_components and self.current.get("participations"):
+            available_roles = {row.get("papel_id") for row in self.current.get("participations", [])}
+            if "PAPEL-ESTUDANTE" in available_roles:
+                available_roles.add("PAPEL-PESSOA-APOIADA")
+            missing_roles = unique(role for component in task_components for role in component.get("required_role_ids", [])
+                                   if role not in available_roles)
+            if missing_roles:
+                questions.append({"field": "participantes", "type": "multi", "concept_ids": missing_roles, "required": False,
+                                  "question": "Quem pode preparar, adaptar ou apoiar o conteúdo nesta atividade? Confirme a responsabilidade; ela não é presumida pelo cargo."})
+        if not c.get("modalidades_disponiveis") and not scoped:
             questions.append(
                 {
                     "field": "modalidades_disponiveis",
                     "question": "Quais formas de interação estão realmente disponíveis?",
                 }
             )
+        if scoped:
+            relevant_characteristics = unique(identifier for component in task_components
+                                              for kid in component.get("knowledge_ids", [])
+                                              if self.intersects(c, "tarefas", self.knowledge.get(kid, {}).get("aplicabilidade", {}).get("tarefas", []))
+                                              for identifier in self.knowledge.get(kid, {}).get("aplicabilidade", {}).get("caracteristicas_pessoa", [])
+                                              if self.concepts.get(identifier, {}).get("categoria_caracteristica") != "ESCOPO_DE_PUBLICO")
+            for participant in supported:
+                label = participant.get("label") or participant.get("grupo_rotulo") or self.label(participant["papel_id"])
+                for field, answer_field, concept_type, wording in (
+                    ("modalidades_disponiveis", "modalidade_ids", "MODALIDADE", "Quais formas de interação permitem compreender o conteúdo para"),
+                    ("caracteristicas_pessoa", "caracteristica_ids", "CARACTERISTICA_PESSOA", "Quais capacidades ou dificuldades são relevantes para"),
+                ):
+                    if not participant.get(answer_field):
+                        options = relevant_characteristics if answer_field == "caracteristica_ids" else []
+                        if answer_field == "caracteristica_ids" and not options:
+                            continue
+                        questions.append({"field": field, "answer_field": answer_field,
+                                          "participant_id": participant["id"], "participant_label": label,
+                                          "type": "multi", "required": False, "concept_ids": options or [key for key, value in self.concepts.items() if value.get("tipo") == concept_type],
+                                          "question": f"{wording} {label}? Não presuma uma forma pelo diagnóstico."})
+                if not participant.get("apoios_informados"):
+                    questions.append({"field": "apoios_informados", "answer_field": "apoios_informados",
+                                      "participant_id": participant["id"], "participant_label": label, "type": "text", "required": False,
+                                      "question": f"Como {label} costuma compreender o conteúdo? Há outra forma de comunicação ou apoio que precisa ser considerada?"})
+            required_resources = unique(identifier for component in task_components
+                                        for identifier in component.get("required_resource_ids", []))
+            operation_roles = {role for component in task_components for role in component.get("required_role_ids", [])}
+            operation_roles.add("PAPEL-ESTUDANTE")
+            for participant in self.current.get("participations", []):
+                if participant.get("papel_id") not in operation_roles or participant.get("recurso_operado_ids") or not required_resources:
+                    continue
+                label = participant.get("label") or participant.get("grupo_rotulo") or self.label(participant["papel_id"])
+                questions.append({"field": "recursos_disponiveis", "answer_field": "recurso_operado_ids",
+                                  "participant_id": participant["id"], "participant_label": label,
+                                  "type": "multi", "required": False, "concept_ids": required_resources,
+                                  "question": f"Quais destes recursos {label} consegue utilizar nesta atividade? Disponibilidade no local não significa que a pessoa o utiliza."})
         if c.get("tarefas"):
             for field, question in (
                 (
@@ -1042,12 +1179,89 @@ class DecisionEngine:
                 ),
             ):
                 if not c.get(field):
-                    questions.append({"field": field, "question": question})
+                    item = {"field": field, "question": question}
+                    if free and task_components and field == "recursos_disponiveis":
+                        options = unique(identifier for component in task_components
+                                         for identifier in (component.get("required_resource_ids", []) or component.get("resource_ids", [])))
+                        if options:
+                            item.update(type="multi", concept_ids=options)
+                    questions.append(item)
         return questions
 
-    @staticmethod
-    def intersects(context, field, identifiers):
-        return bool(set(context.get(field, [])) & set(identifiers or []))
+    def available_context_values(self, context, field):
+        """Presence somewhere in this context is not an ability of every person."""
+        values = list(context.get(field, []))
+        personal = {"caracteristicas_pessoa": "caracteristica_ids",
+                    "modalidades_disponiveis": "modalidade_ids",
+                    "recursos_disponiveis": "recurso_operado_ids"}.get(field)
+        if (personal and context is self.current.get("context")
+                and self.current.get("scenario_mode") == "free_narrative"):
+            values.extend(identifier for row in self.current.get("participations", [])
+                          for identifier in row.get(personal, []))
+        return unique(values)
+
+    def matching_identifiers(self, context, field, identifiers):
+        expected = set(identifiers or [])
+        values = self.available_context_values(context, field)
+        if field == "tarefas":
+            return [value for value in values if any(self._task_path(value, target) for target in expected)]
+        return sorted(set(values) & expected)
+
+    def intersects(self, context, field, identifiers):
+        return bool(self.matching_identifiers(context, field, identifiers))
+
+    def derive_required_functions(self):
+        """Operationalize existing applicable knowledge, never selected patterns.
+
+        Only a functional witness (need, barrier or situated characteristic)
+        licenses this proposed requirement. A broad principle/task alone does
+        not turn every function in the catalogue into a context requirement.
+        Prepared thesis contexts retain their explicitly recorded requirements.
+        """
+        if self.current.get("scenario_mode") != "free_narrative":
+            return
+        context = self.current["context"]
+        previous = {row["function_id"] for row in context.get("function_derivation", [])}
+        explicit = [value for value in context.get("funcoes_requeridas_ids", []) if value not in previous]
+        context["funcoes_requeridas_ids"] = explicit
+        derivations = []
+        recording = self._record_checks
+        self._record_checks = False
+        try:
+            # The curated applicability index supplies candidate requirements,
+            # including functions of articulated products. This does not license
+            # using those products: CQ2 and curation gates still decide that.
+            for kid, knowledge in self.knowledge.items():
+                application = knowledge.get("aplicabilidade") or {}
+                task_paths = [self._task_path(observed, expected)
+                              for observed in context.get("tarefas", [])
+                              for expected in application.get("tarefas", [])
+                              if self._task_path(observed, expected)]
+                if not task_paths or self.authorize_knowledge(kid, context)[0] != "APLICAVEL":
+                    continue
+                witnesses = []
+                for field in ("necessidades", "barreiras", "caracteristicas_pessoa"):
+                    matches = self.matching_identifiers(context, field, application.get(field, []))
+                    if matches:
+                        witnesses.append({"field": field, "concept_ids": matches,
+                                          "task_paths": task_paths,
+                                          "participant_ids": [row["id"] for row in self.current.get("participations", [])
+                                                              if field == "caracteristicas_pessoa" and set(matches) & set(row.get("caracteristica_ids", []))]})
+                if not witnesses:
+                    continue
+                for function in knowledge.get("funcao_decisoria_ids", []):
+                    if function in self.concepts:
+                        derivations.append({"function_id": function, "knowledge_id": kid,
+                                            "source_ids": knowledge.get("fonte_ids", []), "excerpt_ids": knowledge.get("trecho_ids", []),
+                                            "correspondences": witnesses,
+                                            "origin": "REQUISITO_DE_PROJETO_POR_APLICABILIDADE_DOCUMENTADA",
+                                            "status": "REQUISITO_ANALITICO_PROPOSTO_NAO_RESULTADO_EMPIRICO",
+                                            "knowledge_usage_authorized_by_this_step": False,
+                                            "not_derived_from_component": True})
+        finally:
+            self._record_checks = recording
+        context["function_derivation"] = derivations
+        context["funcoes_requeridas_ids"] = unique(explicit + [row["function_id"] for row in derivations])
 
     def build_context_graph(self):
         graph = Graph()
@@ -1326,7 +1540,7 @@ class DecisionEngine:
             v
             for field in self.context_fields
             if field not in {"recursos_impedidos", "recursos_propostos"}
-            for v in context.get(field, [])
+            for v in self.available_context_values(context, field)
         }
         blocked = set(context.get("recursos_impedidos", []))
         reasons = []
@@ -1418,10 +1632,23 @@ class DecisionEngine:
                 + ", ".join(self.labels(sorted(missing_roles)))
             )
         required_resources = set(component.get("required_resource_ids", []))
+        supported_people = [row for row in self.current.get("participations", [])
+                            if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
+        if self.current.get("scenario_mode") == "free_narrative" and len(supported_people) > 1 and required_resources:
+            operation_rows = [row for row in self.current.get("participations", [])
+                              if row.get("papel_id") in set(component.get("required_role_ids", [])) | {"PAPEL-ESTUDANTE"}]
+            operated = {resource for row in operation_rows for resource in row.get("recurso_operado_ids", [])}
+            missing_operation = required_resources - operated
+            self._check("component", component["id"], "declared_resource_operation", "PENDING" if missing_operation else "PASS",
+                        "Operação declarada por um participante; disponibilidade global não comprova capacidade individual nem acesso de toda a turma.",
+                        operator="ALL_RESOURCES_HAVE_A_DECLARED_OPERATOR", expected_ids=sorted(required_resources), observed_ids=sorted(operated),
+                        missing_ids=sorted(missing_operation), participant_ids=[row["id"] for row in operation_rows if required_resources & set(row.get("recurso_operado_ids", []))])
+            if missing_operation:
+                reasons.append("quem consegue utilizar o recurso ainda não foi confirmado: " + ", ".join(self.labels(sorted(missing_operation))))
         resource_groups = component.get("required_any_resource_groups", [])
         if not required_resources and (not resource_groups):
             resource_groups = [component.get("resource_ids", [])]
-        available_resources = set(context.get("recursos_disponiveis", []))
+        available_resources = set(self.available_context_values(context, "recursos_disponiveis"))
         blocked_resources = set(context.get("recursos_impedidos", []))
         blocked_core_resources = required_resources & blocked_resources
         unknown_core_resources = (
@@ -1521,12 +1748,17 @@ class DecisionEngine:
                 reasons.append("a instrução deste padrão de vídeo exige recurso de acessibilidade impedido; sua alternativa textual não foi replanejada")
         for field, identifiers in component.get("requires_all", {}).items():
             matched = self.intersects(context, field, identifiers)
+            matching_ids = self.matching_identifiers(context, field, identifiers)
             self._check("component", component["id"], f"required_field_{field}", "PASS" if matched else "FAIL",
                         "Cada campo é obrigatório; os conceitos dentro do campo são opções alternativas.", operator="ANY_IN_FIELD",
-                        field=field, expected_ids=identifiers, observed_ids=context.get(field, []),
-                        matched_ids=sorted(set(context.get(field, [])) & set(identifiers)))
+                        field=field, expected_ids=identifiers, observed_ids=self.available_context_values(context, field),
+                        matched_ids=matching_ids,
+                        participant_ids=[row["id"] for row in self.current.get("participations", [])
+                                         if set(row.get({"caracteristicas_pessoa": "caracteristica_ids", "modalidades_disponiveis": "modalidade_ids", "recursos_disponiveis": "recurso_operado_ids"}.get(field, ""), [])) & set(matching_ids)],
+                        task_paths=[self._task_path(value, target) for value in matching_ids for target in identifiers
+                                    if field == "tarefas" and self._task_path(value, target)])
             if matched:
-                values = sorted(set(context.get(field, [])) & set(identifiers))
+                values = matching_ids
                 matches.append(
                     {"field": field, "ids": values, "labels": self.labels(values)}
                 )
@@ -1540,9 +1772,7 @@ class DecisionEngine:
             for clause in clauses:
                 if self.intersects(context, clause["field"], clause["ids"]):
                     group_match = True
-                    values = sorted(
-                        set(context.get(clause["field"], [])) & set(clause["ids"])
-                    )
+                    values = self.matching_identifiers(context, clause["field"], clause["ids"])
                     matches.append(
                         {
                             "field": clause["field"],
@@ -1556,9 +1786,9 @@ class DecisionEngine:
                 )
             self._check("component", component["id"], f"functional_group_{group_index}", "PASS" if group_match else "FAIL",
                         "Pelo menos uma condição deste grupo deve corresponder ao contexto.", operator="ANY_CLAUSE",
-                        clauses=[{"field": c["field"], "expected_ids": c["ids"], "observed_ids": context.get(c["field"], []),
-                                  "matched_ids": sorted(set(c["ids"]) & set(context.get(c["field"], [])))} for c in clauses],
-                        matched_ids=unique(v for c in clauses for v in c["ids"] if v in context.get(c["field"], [])))
+                        clauses=[{"field": c["field"], "expected_ids": c["ids"], "observed_ids": self.available_context_values(context, c["field"]),
+                                  "matched_ids": self.matching_identifiers(context, c["field"], c["ids"])} for c in clauses],
+                        matched_ids=unique(v for c in clauses for v in self.matching_identifiers(context, c["field"], c["ids"])))
         component_knowledge = [
             kid
             for kid in component["knowledge_ids"]
@@ -2417,7 +2647,13 @@ class DecisionEngine:
                 str(excerpt[k]) for k in ("pagina", "secao") if excerpt.get(k))
             row["excerpt"] = {"id": tid, "location": location,
                               "publication_notice": excerpt.get("aviso_publicacao", ""), "publication_state": excerpt.get("estado_publicacao", "")}
-            row["source"] = {"id": sid, "title": self.sources.get(sid, {}).get("titulo", sid)} if sid else None
+            row["source"] = {"id": sid, "title": self.sources.get(sid, {}).get("titulo", sid),
+                             "url": self.sources.get(sid, {}).get("url", ""),
+                             "edition": self.sources.get(sid, {}).get("edition", "")} if sid else None
+            row.setdefault("excerpt", {})
+            row["excerpt"].update({key: copy.deepcopy(excerpt[key]) for key in
+                                   ("document_url", "version", "review_status", "primary_review_status",
+                                    "document_version", "document_review_status", "document_paraphrase") if key in excerpt})
             evidence["contributions"].append(row)
         for index, cfg in enumerate(result["decision"]["configuracao_modal"], 1):
             component = selected_map[cfg["component_id"]]
@@ -2452,6 +2688,7 @@ class DecisionEngine:
         result["de_para"] = result["explanation"]["de_para"]
 
     def generate(self):
+        self.derive_required_functions()
         context = self.current["context"]
         self._evidence = ExecutionEvidence(VERSION, context["id"])
         self._record_checks = True
@@ -2465,16 +2702,17 @@ class DecisionEngine:
             ] + questions
         self._check("context", context["id"], "context_confirmation", "PASS" if self.current.get("mapping_confirmed") else "FAIL",
                     "Confirmação explícita da organização do contexto.", operator="IS_TRUE", observed=self.current.get("mapping_confirmed"))
-        self._check("context", context["id"], "minimum_context", "FAIL" if questions else "PASS",
-                    "Conferência dos campos mínimos antes de avaliar configurações.", operator="NO_MISSING_FIELDS",
-                    missing_fields=[r["field"] for r in questions])
+        blocking_questions = [row for row in questions if row.get("required", True)]
+        self._check("context", context["id"], "minimum_context", "FAIL" if blocking_questions else "PASS",
+                    "Campos mínimos conferidos; perguntas sobre rotas individuais pendentes permanecem visíveis e são avaliadas em cada configuração.", operator="NO_MISSING_ESSENTIAL_FIELDS",
+                    missing_fields=[r["field"] for r in blocking_questions], pending_questions=[row for row in questions if not row.get("required", True)])
         context_graph = self.build_context_graph()
         retrieval = self.retrieve_transfer_candidates(context_graph)
 
         def select_components(knowledge_ids, criterion_ids, record=False):
             self._record_checks = record
             selected_rows, rejected_rows = ([], [])
-            if questions:
+            if blocking_questions:
                 if record:
                     self._evidence.data["components"] = [
                         {"component_id": c["id"], "title": c["label"], "selection": "NOT_EVALUATED",
@@ -2570,7 +2808,10 @@ class DecisionEngine:
             if primary
             else "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE"
         )
-        if not primary:
+        supported_partial = bool(selected) and self.current.get("scenario_mode") == "free_narrative"
+        if not primary and supported_partial:
+            status = "GERADA_PARCIAL"
+        if not primary and not supported_partial:
             selected = []
             for row in self._evidence.data["components"]:
                 if row["selection"] in {"SELECTED", "CONDITIONAL"}:
@@ -2582,7 +2823,8 @@ class DecisionEngine:
             questions = [
                 {
                     "field": "coverage",
-                    "question": "A base não possui configuração principal verificada para esta combinação; registre a lacuna antes de decidir.",
+                    "question": ("As partes fundamentadas abaixo não cobrem toda a atividade; falta uma configuração principal verificada."
+                                 if supported_partial else "A base não possui configuração principal verificada para esta combinação; registre a lacuna antes de decidir."),
                 }
             ]
         offered_functions = unique(f for item in selected for f in item.get("function_ids", []))
@@ -2590,6 +2832,25 @@ class DecisionEngine:
         remaining_functions = [f for f in required_functions if f not in offered_functions]
         if primary and remaining_functions:
             status = "GERADA_PARCIAL"
+        if primary and any(not row.get("required", True) for row in questions):
+            status = "GERADA_PARCIAL"
+        supported_people = [row for row in self.current.get("participations", [])
+                            if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
+        participant_coverage = []
+        if len(supported_people) > 1 and self.current.get("scenario_mode") == "free_narrative":
+            for participant in supported_people:
+                declared_modes = set(participant.get("modalidade_ids", []))
+                operated = set(participant.get("recurso_operado_ids", []))
+                compatible = [item["id"] for item in selected
+                              if item.get("mode_id") in declared_modes
+                              or operated & set(item.get("selected_resource_ids", []))]
+                participant_coverage.append({"participant_id": participant["id"],
+                                             "label": participant.get("label") or participant.get("grupo_rotulo") or self.label(participant["papel_id"]),
+                                             "component_ids": compatible,
+                                             "status": "ROTA_DECLARADA_A_CONFERIR_EM_USO" if compatible else "SEM_ROTA_FUNDAMENTADA",
+                                             "meaning_or_learning_measured": False})
+            if selected and any(not row["component_ids"] for row in participant_coverage):
+                status = "GERADA_PARCIAL"
         self._evidence.data["functions"] = {
             "required": required_functions, "offered": offered_functions,
             "verified": [f for f in required_functions if f in offered_functions],
@@ -2871,6 +3132,9 @@ class DecisionEngine:
             "criterion_ids": selected_criterion_ids,
             "articulation_ids": selected_articulation_ids,
             "component_ids": [item["id"] for item in selected],
+            "participant_coverage": participant_coverage,
+            "candidate_knowledge_ids": retrieval["knowledge_ids"],
+            "function_derivation": copy.deepcopy(context.get("function_derivation", [])),
             "limite": "Decisão válida somente para o contexto, as relações confirmadas e a cobertura representada; apoia a escolha e o acompanhamento, mas não demonstra eficácia pedagógica nem constitui orientação universal.",
         }
 

@@ -26,42 +26,8 @@ PUBLIC_RECORDS = ("https://github.com/natacsham/arcabouco-multimodal/blob/"
 ALLOWED_KNOWLEDGE_STATES = {
     "CANDIDATO_RECONSTRUIDO_A_REVISAR", "CONFERIDO_PARA_O_ESCOPO_RC3"
 }
-# Curation contracts for this bridge, not scenario-selection rules. Changing an
-# invariant requires an explicit bridge revision rather than a weaker binding.
-APPLICATION_CONTRACTS = {
-    "CaptureKeyboard": {
-        "kind": "capability", "knowledge_ids": {"K41"},
-        "primary_contribution_ids": {"CInputKeyboard", "CInputCARE"},
-        "criterion": "CA38",
-        "requires_facts": {"LearningCommunicationContext", "KeyboardEffortAcceptable",
-                           "KeyboardCompatible", "KeyboardFeedbackPerceptible"},
-    },
-    "CaptureSpeech": {
-        "kind": "capability", "knowledge_ids": {"K41", "K29"},
-        "primary_contribution_ids": {"CInputCARE", "CReviewMMI"},
-        "criterion": "CriterionInput",
-        "requires_facts": {"LearningCommunicationContext", "SpeechEffortAcceptable",
-                           "SpeechCompatible", "SpeechFeedbackPerceptible"},
-    },
-    "ReviewText": {
-        "kind": "capability", "knowledge_ids": {"K28"},
-        "primary_contribution_ids": {"CReviewWCAG", "CReviewMMI"},
-        "criterion": "CriterionReview",
-        "requires_facts": {"LearningCommunicationContext", "CanVerifyMeaning"},
-    },
-    "ReviewSpeech": {
-        "kind": "capability", "knowledge_ids": {"K28", "K29"},
-        "primary_contribution_ids": {"CAudioMMI", "CAudioReview"},
-        "criterion": "CriterionReview",
-        "requires_facts": {"LearningCommunicationContext", "CanVerifyMeaning"},
-    },
-    "ProductionThenReview": {
-        "kind": "relation", "knowledge_ids": {"K28", "K29"},
-        "primary_contribution_ids": {"CReviewMMI", "CReviewWCAG"},
-        "criterion": "CriterionReview",
-        "requires_facts": {"LearningCommunicationContext", "CanVerifyMeaning"},
-    },
-}
+# Curation contracts live with the versioned bindings, not as a K/target
+# whitelist in Python. They remain independently checked against applications.
 
 
 class TrajectoryError(ValueError):
@@ -96,6 +62,9 @@ class ResearchComposer(Composer):
         self.fingerprints[str(self.bindings_path)] = self.bindings_sha256
         self.base = json.loads(raw_base.decode("utf-8-sig"))
         self.bindings = json.loads(raw_bindings.decode("utf-8-sig"))
+        self.contracts = self.bindings.get("contracts")
+        if not isinstance(self.contracts, dict) or not self.contracts:
+            raise TrajectoryError("Contratos curados da ponte ausentes.")
         self.records: dict[tuple[str, str], dict] = {}
         self.application_records: dict[str, dict] = {}
         self._validate_records()
@@ -130,7 +99,7 @@ class ResearchComposer(Composer):
                         raise TrajectoryError(f"Estado legado não admitido no piloto: {identifier}")
                     if record.get("foundation_review_status") not in (None, "PARCIAL"):
                         raise TrajectoryError(f"Estado da fundamentação não admitido: {identifier}")
-                if collection == "contributions" and record.get("verification_status") != "CONFERIDA_NO_REGISTRO":
+                if collection == "contributions" and record.get("verification_status") not in {"CONFERIDA_NO_REGISTRO", "CONFERIDA_NO_DOCUMENTO"}:
                     raise TrajectoryError(f"Contribuição não conferida no registro: {identifier}")
                 self.records[(collection, identifier)] = copy.deepcopy(record)
 
@@ -155,8 +124,15 @@ class ResearchComposer(Composer):
         source_node, excerpt_node = MADO[source_id], MADO[excerpt_id]
         self.graph.add((source_node, RDF.type, MADO.Fonte))
         self.graph.add((source_node, RDFS.label, Literal(_required_text(source, "titulo"), lang="pt")))
-        self.graph.add((source_node, V2.url, Literal(PUBLIC_RECORDS)))
-        self.graph.add((source_node, V2.referenceKind, Literal("PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT")))
+        document_url = excerpt.get("document_url") or source.get("url")
+        self.graph.add((source_node, V2.url, Literal(document_url or PUBLIC_RECORDS)))
+        self.graph.add((source_node, V2.referenceKind, Literal("DOCUMENT_LINK_RECORDED" if document_url else "PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT")))
+        for field in ("edition", "review_status"):
+            if source.get(field):
+                self.graph.add((source_node, V2[field], Literal(str(source[field]))))
+        for field in ("document_url", "document_version", "document_review_status", "document_paraphrase"):
+            if excerpt.get(field):
+                self.graph.add((excerpt_node, V2[field], Literal(str(excerpt[field]))))
         self.graph.add((excerpt_node, RDF.type, MADO.TrechoDocumental))
         self.graph.add((excerpt_node, MADO.trechoDeFonte, source_node))
         self.graph.add((excerpt_node, MADO.localizacaoDocumental,
@@ -209,6 +185,8 @@ class ResearchComposer(Composer):
                 raise TrajectoryError("Fato operacional inválido.")
             graph.add((V2[identifier], RDF.type, V2.ContextFact))
             graph.add((V2[identifier], RDFS.label, Literal(_required_text(fact, "label"), lang="pt")))
+            if fact.get("scope") == "context":
+                graph.add((V2[identifier], V2.scope, Literal("context")))
             for knowledge_id in fact.get("knowledge_ids", []):
                 self._record_from_base("knowledge", knowledge_id)
                 graph.add((V2[identifier], V2.conditionFromKnowledge, MADO[knowledge_id]))
@@ -224,15 +202,14 @@ class ResearchComposer(Composer):
                 raise TrajectoryError("Aplicação ou alvo duplicado na ponte.")
             ids.add(identifier)
             targets.add(target)
-            if target == "ReviewSpeech" and not self.include_audio:
+            if self.contracts.get(target, {}).get("optional_extension") == "audio" and not self.include_audio:
                 continue
             self._project_application(binding, primary, facts)
-        expected = {"CaptureKeyboard", "CaptureSpeech", "ReviewText", "ProductionThenReview"}
-        if self.include_audio:
-            expected.add("ReviewSpeech")
+        expected = {target for target, contract in self.contracts.items()
+                    if self.include_audio or contract.get("optional_extension") != "audio"}
         actual = {row["target"] for row in self.application_records.values()}
         if actual != expected:
-            raise TrajectoryError("A ponte deve substituir exatamente as aplicações do piloto.")
+            raise TrajectoryError("A ponte deve cumprir exatamente os contratos curados publicados.")
 
     def _project_application(self, binding: dict, primary: dict, facts: dict) -> None:
         graph = self.graph
@@ -241,7 +218,7 @@ class ResearchComposer(Composer):
         kind = binding.get("kind")
         if binding.get("status") != "PROPOSED_OPERATIONALIZATION" or kind not in ("capability", "relation"):
             raise TrajectoryError(f"Aplicação pendente ou inválida: {identifier}")
-        contract = APPLICATION_CONTRACTS.get(target_name)
+        contract = self.contracts.get(target_name)
         if contract is None or kind != contract["kind"] or binding.get("criterion") != contract["criterion"]:
             raise TrajectoryError(f"Alvo, função do vínculo ou critério fora do contrato: {identifier}")
         for field in ("knowledge_ids", "primary_contribution_ids", "requires_facts"):
@@ -251,7 +228,7 @@ class ResearchComposer(Composer):
                     or len(values) != len(set(values))):
                 raise TrajectoryError(f"Lista de fundamento/condição inválida: {identifier}/{field}")
             actual_values = set(values)
-            expected_values = contract[field]
+            expected_values = set(contract[field])
             valid = (expected_values <= actual_values if field == "requires_facts"
                      else expected_values == actual_values)
             if not valid:
@@ -324,27 +301,30 @@ class ResearchComposer(Composer):
             graph.add((cnode, V2.statement, template["statement"]))
             graph.add((cnode, V2.status, Literal("PRIMARY_CHECKED")))
         criterion_id = _required_text(binding, "criterion")
-        if criterion_id == "CA38":
-            if target_name != "CaptureKeyboard":
-                raise TrajectoryError("CA38 só fundamenta entrada por teclado nesta ponte.")
+        if binding.get("criterion_origin"):
             criterion = self._record_from_base("criteria", criterion_id)
             origin = self._record_from_base("criterion_origins", binding.get("criterion_origin"))
-            if origin.get("criterio_id") != criterion_id or origin.get("fonte_id") != "FN-WCAG":
-                raise TrajectoryError("Origem de CA38 incompatível com a aplicação primária.")
+            if (origin.get("criterio_id") != criterion_id
+                    or binding.get("criterion_origin") != contract.get("criterion_origin")
+                    or origin.get("fonte_id") != contract.get("criterion_source_id")):
+                raise TrajectoryError("Origem do critério incompatível com o contrato curado.")
             used.update(self._project_source_excerpt(origin["trecho_id"]))
             used.update({("criteria", criterion_id), ("criterion_origins", origin["id"])})
             criterion_node = MADO[criterion_id]
             graph.add((criterion_node, RDF.type, MADO.CriterioDeDecisaoMultimodal))
             graph.add((criterion_node, RDFS.label, Literal(_required_text(criterion, "enunciado"), lang="pt")))
-            graph.add((criterion_node, V2.source, V2.SourceKeyboard))
-            graph.add((criterion_node, V2.locator, Literal("WCAG 2.2, 2.1.1; origem legada ORI-0238 preservada")))
+            primary_source = V2[_required_text(contract, "criterion_primary_source")]
+            if (primary_source, RDF.type, MADO.Fonte) not in graph:
+                raise TrajectoryError("Fonte primária do critério não declarada.")
+            graph.add((criterion_node, V2.source, primary_source))
+            graph.add((criterion_node, V2.locator, Literal(_required_text(contract, "criterion_locator"))))
             graph.add((criterion_node, V2.justification, Literal(_required_text(binding, "justification"))))
             self._keep_record("criteria", criterion_id, criterion_node)
             self._keep_record("criterion_origins", origin["id"], MADO[origin["id"]])
         else:
-            if criterion_id not in {"CriterionInput", "CriterionReview"}:
-                raise TrajectoryError("Critério não autorizado; CA02/CA88 não cobrem esta função por associação genérica.")
             criterion_node = V2[criterion_id]
+            if (criterion_node, RDF.type, MADO.CriterioDeDecisaoMultimodal) not in graph:
+                raise TrajectoryError("Critério não declarado no grafo; não se presume fundamentação por associação genérica.")
         if kind == "capability":
             graph.add((node, RDF.type, V2.GroundingApplication))
             graph.add((node, V2.capability, target))

@@ -15,10 +15,12 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(ROOT / "vendor"))
-from rdflib import BNode, Graph, Literal, Namespace, OWL, RDF, XSD
+from rdflib import BNode, Graph, Literal, Namespace, OWL, RDF, RDFS, URIRef, XSD
+from urllib.parse import urlsplit
 from rdflib.compare import to_canonical_graph
 
 M = Namespace("https://w3id.org/mado#")
+DCT = Namespace("http://purl.org/dc/terms/")
 STATES = {"CONFERIDA_NO_DOCUMENTO", "CONFERIDA_NO_REGISTRO", "PENDENTE"}
 ART_TEXT = {
     "operation_explanation": M.explicacaoDaOperacaoAnalitica,
@@ -79,6 +81,41 @@ def replace_values(graph, subject, predicate, values):
         graph.add((subject, predicate, value))
 
 
+def project_documentary_metadata(graph, data):
+    """Links and conference states are annotations, not approval conditions.
+
+    Uses only existing records. No original is fetched, no quotation restored,
+    and no bibliographic reference is promoted to operational knowledge.
+    """
+    for collection in ("sources", "references", "excerpts", "criterion_origins"):
+        for row in data.get(collection, []):
+            node = M[row["id"]]
+            url = row.get("document_url") or row.get("url")
+            replace_values(graph, node, RDFS.seeAlso,
+                           [URIRef(url)] if url and urlsplit(url).scheme in {"http", "https"}
+                           and urlsplit(url).netloc else [])
+            for field, predicate in (("document_version", M.versaoDocumental),
+                                     ("document_review_status", M.estadoDeConferenciaDocumental),
+                                     ("document_review_date", M.dataDaConsultaDocumental),
+                                     ("document_paraphrase", M.parafraseDocumental)):
+                value = row.get(field)
+                if field == "document_version":
+                    value = value or row.get("edition")
+                elif field == "document_review_status":
+                    value = value or row.get("access_status") or row.get("status_localizacao")
+                elif field == "document_review_date":
+                    value = value or row.get("consulted_at")
+                replace_values(graph, node, predicate, [Literal(value)] if value else [])
+            if row.get("localizacao_publica"):
+                replace_values(graph, node, M.localizacaoDocumental,
+                               [Literal(row["localizacao_publica"])])
+            if collection == "references":
+                replace_values(graph, node, DCT.bibliographicCitation,
+                               [Literal(row["referencia_exata"])] if row.get("referencia_exata") else [])
+                replace_values(graph, node, DCT.isReferencedBy,
+                               [M[row["fonte_que_cita_id"]]] if row.get("fonte_que_cita_id") else [])
+
+
 def build_graph(base, tbox, data):
     """Return a new graph; never mutate the caller's graphs or JSON."""
     validate_contributions(data)
@@ -107,6 +144,7 @@ def build_graph(base, tbox, data):
     graph.remove((None, M.aplicacaoMobilizaContribuicao, None))
     for triple in tbox:
         graph.add(triple)
+    project_documentary_metadata(graph, data)
 
     for row in data["knowledge"]:
         node = M[row["id"]]

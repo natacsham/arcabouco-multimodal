@@ -1,14 +1,14 @@
 {
-  "checked_at_utc": "2026-10-08T04:25:59.428308+00:00",
+  "checked_at_utc": "2026-10-11T06:41:37.966665+00:00",
   "input": "ontology\\mado-combined.ttl",
-  "input_sha256": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
-  "input_snapshot": "tmp\\reasoner\\20261008T042559Z-3e8972af\\input.ttl",
+  "input_sha256": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5",
+  "input_snapshot": "tmp\\reasoner\\20261011T064137Z-aea34c0d\\input.ttl",
   "robot_sha256": "16a73c074f3df359a7338a84b4e0788785fe06117f931bb9796e9619ea776105",
   "scope": "OWL_2_DL_PROFILE_AND_HERMIT_CONSISTENCY",
   "limit": "Does not establish applicability, correctness of source interpretation, accessibility, or human/educational outcomes.",
-  "intermediate_directory": "tmp\\reasoner\\20261008T042559Z-3e8972af",
+  "intermediate_directory": "tmp\\reasoner\\20261011T064137Z-aea34c0d",
   "java": {
-    "started_at_utc": "2026-10-08T04:25:59.638756+00:00",
+    "started_at_utc": "2026-10-11T06:41:38.250961+00:00",
     "command": [
       "<JAVA>",
       "-version"
@@ -18,7 +18,7 @@
     "stderr": "openjdk version \"11.0.25\" 2024-10-15\nOpenJDK Runtime Environment Temurin-11.0.25+9 (build 11.0.25+9)\nOpenJDK 64-Bit Server VM Temurin-11.0.25+9 (build 11.0.25+9, mixed mode)\n"
   },
   "robot": {
-    "started_at_utc": "2026-10-08T04:25:59.741728+00:00",
+    "started_at_utc": "2026-10-11T06:41:38.398406+00:00",
     "command": [
       "<JAVA>",
       "-jar",
@@ -30,7 +30,7 @@
     "stderr": ""
   },
   "profile": {
-    "started_at_utc": "2026-10-08T04:26:00.517187+00:00",
+    "started_at_utc": "2026-10-11T06:41:39.515573+00:00",
     "command": [
       "<JAVA>",
       "-jar",
@@ -39,9 +39,9 @@
       "--profile",
       "DL",
       "--input",
-      "tmp\\reasoner\\20261008T042559Z-3e8972af\\input.ttl",
+      "tmp\\reasoner\\20261011T064137Z-aea34c0d\\input.ttl",
       "--output",
-      "tmp\\reasoner\\20261008T042559Z-3e8972af\\owl2-dl-profile.txt"
+      "tmp\\reasoner\\20261011T064137Z-aea34c0d\\owl2-dl-profile.txt"
     ],
     "exit_code": 0,
     "stdout": "",
@@ -49,7 +49,7 @@
     "result": "OWL 2 DL Profile Report: [Ontology and imports closure in profile]\n"
   },
   "hermit": {
-    "started_at_utc": "2026-10-08T04:26:03.152114+00:00",
+    "started_at_utc": "2026-10-11T06:41:43.963196+00:00",
     "command": [
       "<JAVA>",
       "-jar",
@@ -58,18 +58,18 @@
       "--reasoner",
       "HermiT",
       "--input",
-      "tmp\\reasoner\\20261008T042559Z-3e8972af\\input.ttl",
+      "tmp\\reasoner\\20261011T064137Z-aea34c0d\\input.ttl",
       "--axiom-generators",
       "ClassAssertion",
       "--include-indirect",
       "true",
       "--output",
-      "tmp\\reasoner\\20261008T042559Z-3e8972af\\hermit-inferred.owl"
+      "tmp\\reasoner\\20261011T064137Z-aea34c0d\\hermit-inferred.owl"
     ],
     "exit_code": 0,
     "stdout": "",
     "stderr": "",
-    "output_sha256": "fd5b84b59065e0b580602790bab46260cd17995182b6d3ab2248cce88faf0ab7"
+    "output_sha256": "2cdc5d17234179482b9f5d85bcf914ce5134e415d33707a62778f8e587cba549"
   },
   "profile_passed": true,
   "consistency_passed": true,
@@ -80,5 +80,5 @@
     "policy": "Local executable paths are <JAVA>/<ROBOT>; project paths are relative. Hashes, dates, exit codes and measured results are unchanged.",
     "private_original": "evidence/private/ (excluded from version control)"
   },
-  "private_original_sha256": "6031df8b5581acb4db6d1eb2edbba72c08f6108801b4ca4e4a1b1c27ff88fc15"
+  "private_original_sha256": "619f0037c1ddbec4a8d4f1f2b3f06cd52bbe41bf6d8ae4b81988ccee535627f4"
 }

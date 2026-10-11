@@ -34,6 +34,65 @@ assert.equal(resources.impedimentos_verificados, false);
 assert.deepEqual(legacyAnswer(current, questions[0], null).tarefas, ['T1']);
 assert.deepEqual(current, original);
 assert(legacySummary(current).some(row => row.label === 'Pessoas' && row.value === 'Pessoa apoiada'));
+const groupCurrent = {context: {raw:{modalidades_disponiveis:[]}, participantes:[
+  {id:'DEAF',label:'Estudantes surdos (2)',papel:'Estudante',modalidades:[]},
+  {id:'BLIND',label:'Estudante cego (1)',papel:'Estudante',modalidades:[]} ]},
+  participations:[{id:'DEAF',label:'Estudantes surdos (2)',quantidade:2,papel_id:'P1',modalidade_ids:[],caracteristica_ids:[]},
+    {id:'BLIND',label:'Estudante cego (1)',papel_id:'P1',modalidade_ids:[],caracteristica_ids:[]}],
+  questions:[{field:'modalidades_disponiveis',participant_id:'DEAF',participant_label:'Estudantes surdos (2)',
+    answer_field:'modalidade_ids',concept_ids:['M1'],question:'Como este grupo acompanha a atividade?'}]};
+const groupQuestion = legacyQuestions(groupCurrent,catalog)[0];
+assert.equal(groupQuestion.id,'modalidades_disponiveis:DEAF');
+assert.equal(groupQuestion.label,'Como este grupo acompanha o conteúdo?');
+assert.deepEqual(groupQuestion.options.map(row=>row.id),['M1']);
+const groupAnswer = legacyAnswer(groupCurrent,groupQuestion,['M1']);
+assert.deepEqual(groupAnswer.participations[0].modalidade_ids,['M1']);
+assert.deepEqual(groupAnswer.participations[1].modalidade_ids,[]);
+assert.deepEqual(groupAnswer.modalidades_disponiveis,[]);
+const noteAnswer = legacyAnswer(groupCurrent,groupQuestion,[],'Usam Libras com apoio de intérprete.');
+assert.equal(noteAnswer.participations[0].apoios_informados,'Usam Libras com apoio de intérprete.');
+assert.deepEqual(noteAnswer.participations[0].modalidade_ids,[],'A note is not promoted to an executable concept');
+assert(legacySummary(groupCurrent).find(row=>row.label==='Pessoas').value.includes('Estudante cego (1)'));
+assert.deepEqual(groupCurrent.participations[0].modalidade_ids,[],'Participant answers are immutable');
+// The real worker can return a labelled context projection without a raw
+// participations property. Answers must preserve labels, counts and earlier IDs.
+const projectedGroup = structuredClone(groupCurrent);
+delete projectedGroup.participations;
+Object.assign(projectedGroup.context.participantes[0], {papel_id:'P1',quantidade:2,
+  tarefas:['Ler uma página'],modalidades:['Texto'],observacoes:'Grupo confirmado',apoios_informados:'Apoio anterior'});
+Object.assign(projectedGroup.context.participantes[1], {papel_id:'P1',quantidade:1,modalidades:[]});
+projectedGroup.questions[0] = {...projectedGroup.questions[0],participant_id:'BLIND',participant_label:'Estudante cego (1)'};
+const projectedQuestion = legacyQuestions(projectedGroup,catalog)[0];
+const projectedAnswer = legacyAnswer(projectedGroup,projectedQuestion,['M1']);
+assert.deepEqual(projectedAnswer.participations[0].modalidade_ids,['M1']);
+assert.deepEqual(projectedAnswer.participations[0].tarefa_ids,['T1']);
+assert.equal(projectedAnswer.participations[0].quantidade,2);
+assert.equal(projectedAnswer.participations[0].label,'Estudantes surdos (2)');
+assert.equal(projectedAnswer.participations[0].apoios_informados,'Apoio anterior');
+assert.deepEqual(projectedAnswer.participations[1].modalidade_ids,['M1']);
+const requirementCatalog=structuredClone(catalog);
+requirementCatalog.concepts.RECURSO_DISPONIVEL.push({...item('R2','Editor para preparar conteúdo'),curated:false});
+const requirementQuestion=legacyQuestions({...groupCurrent,questions:[{field:'recursos_disponiveis',
+  participant_id:'DEAF',participant_label:'Grupo',answer_field:'recurso_operado_ids',concept_ids:['R2'],
+  question:'Quem prepara o conteúdo pode usar um editor?'}]},requirementCatalog)[0];
+assert.deepEqual(requirementQuestion.options.map(row=>row.id),['R2'],
+  'A specific existing capability requirement must be answerable even if hidden in the general catalogue');
+const specificRole=legacyQuestions({...current,questions:[{field:'participantes',concept_ids:['P2'],
+  question:'Quem pode preparar ou adaptar o conteúdo?'}]},catalog)[0];
+assert.equal(specificRole.label,'Quem pode preparar ou adaptar o conteúdo?');
+assert.deepEqual(specificRole.options.map(row=>row.id),['P2']);
+const multiSupported=structuredClone(groupCurrent);
+multiSupported.participations.forEach(person=>person.papel_id='PAPEL-ESTUDANTE');
+multiSupported.participations[0].modalidade_ids=['M1'];
+multiSupported.questions=[{field:'recursos_disponiveis',question:'Quais equipamentos estão disponíveis?'}];
+const globalEquipment=legacyAnswer(multiSupported,legacyQuestions(multiSupported,catalog)[0],['R1']);
+assert.deepEqual(globalEquipment.participations,multiSupported.participations,
+  'A global equipment answer must preserve different personal answers, not remap them to empty global modalities');
+const preciseTask=legacyQuestions({...current,questions:[{field:'tarefas',type:'single',concept_ids:['T1'],
+  question:'Que atividade digital precisa ser acessível?'}]},catalog)[0];
+const broaderTask=structuredClone(current);broaderTask.context.raw.tarefas=['BROAD-TASK'];
+assert.deepEqual(legacyAnswer(broaderTask,preciseTask,'T1').tarefas,['T1'],
+  'A radio-confirmed operational activity replaces the broad extraction hypothesis instead of adding another task');
 
 const composition = {tasks: [{id: 'TaskCreateReviewedText', label: 'Escrever e revisar', required_functions: [item('Expression'), item('Review')]},
   {id: 'TaskReviewExistingText', label: 'Revisar texto', required_functions: [item('Review')]}],
@@ -51,6 +110,7 @@ assert.equal(detectCompositionTask('Uma pessoa cega quer escrever e revisar um t
 assert.equal(detectCompositionTask('A professora quer construir um vídeo com a turma.'), null);
 assert.equal(detectCompositionTask('A professora não vai escrever, apenas conferir um texto.'), null);
 assert.equal(detectCompositionTask('O aluno vai escrever e revisar um texto fora do contexto escolar.'), null);
+assert.equal(detectCompositionTask('Os estudantes surdos e um estudante cego vão escrever uma resposta e revisar o texto na aula.'),null);
 const unknown = compositionDraft('Uma estudante cega quer escrever e revisar um texto.', composition);
 assert.equal(unknown.facts.CanReviewVisualText, null);
 assert.equal(unknown.facts.CanUseKeyboard, null);
@@ -79,4 +139,25 @@ const review = {...route, task: 'TaskReviewExistingText'};
 assert(!compositionQuestions(review, composition).some(row => row.concept_id === 'Keyboard'));
 assert(!compositionQuestions(review, composition).some(row => row.concept_id === 'ControlsCompletion'));
 assert(compositionSummary(explicit, composition).some(row => row.label === 'Recursos disponíveis' && row.value === 'Keyboard'));
+assert.equal(compositionDraft('O aluno usa computador e teclado para escrever e revisar uma resposta.',composition).resources.Keyboard,true);
+assert.equal(compositionDraft('O aluno não usa teclado para escrever e revisar uma resposta.',composition).resources.Keyboard,false);
+const naturalDraft = compositionDraft('O aluno usa computador e teclado para escrever uma resposta e revisar o texto.',composition);
+const naturalQuestions = compositionQuestions(naturalDraft,composition);
+assert(!naturalQuestions.some(row=>row.concept_id==='Microphone'),'Do not ask for every alternative route');
+assert(naturalQuestions.every(row=>row.label.endsWith('?')),'Questions use actionable language rather than RDF labels');
+const completeVisualRoute={task:'TaskCreateReviewedText',facts:{ContentAvailable:true,CanUseKeyboard:true,KeyboardEffortAcceptable:true,
+  CanReviewVisualText:true,CanCorrect:true,ControlsCompletion:true},resources:{Keyboard:true,EditableText:true,Display:true}};
+assert.deepEqual(compositionQuestions(completeVisualRoute,composition),[],'A complete route does not require surveying unused alternatives');
+assert(compositionQuestions({...naturalDraft,resources:{...naturalDraft.resources,Keyboard:false}},composition)
+  .some(row=>row.concept_id==='Microphone'),'A blocked route allows another represented route to be considered');
+const groupComposition={...composition,facts:composition.facts.map(row=>({...row,scope:row.id==='LearningCommunicationContext'?'context':'person'}))};
+const scopedDraft={task:'TaskCreateReviewedText',facts:{LearningCommunicationContext:true,CanReviewVisualText:true},
+  resources:{Keyboard:true,EditableText:true,Display:true,Microphone:false},participants:[
+    {id:'A',label:'Grupo A',facts:{ContentAvailable:true,CanUseKeyboard:true,KeyboardEffortAcceptable:true,CanReviewVisualText:true,CanCorrect:true,ControlsCompletion:true}},
+    {id:'B',label:'Grupo B',facts:{ContentAvailable:true,CanUseKeyboard:true,KeyboardEffortAcceptable:true,CanReviewVisualText:false,CanReviewSpeech:true,CanCorrect:true,ControlsCompletion:true}}]};
+const scopedQuestions=compositionQuestions(scopedDraft,groupComposition);
+assert(scopedQuestions.every(row=>row.participant_id==='B'));
+assert(scopedQuestions.every(row=>row.id.endsWith(':B')));
+assert(!scopedQuestions.some(row=>row.concept_id==='CanReviewVisualText'),'Global visual ability must not overwrite individual negative condition');
+assert(compositionSummary(scopedDraft,groupComposition).filter(row=>row.label==='Participante').length===2);
 console.log('Intake: verified missing-field questions, immutable updates, participant preservation, explicit extraction, negation and viable-route questions.');

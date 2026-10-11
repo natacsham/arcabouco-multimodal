@@ -24,35 +24,36 @@
 <https://w3id.org/mado#F01> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#Fonte> .
 <https://w3id.org/mado#F01> <http://www.w3.org/2000/01/rdf-schema#label> "An application of mobility aids for the visually impaired"@pt .
 <https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#legacyCollection> "sources" .
-<https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "50992e6ea62bcba5586433c7cee3ba237542c9fdfb69b13e36925f68c131951c" .
+<https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "4156fa0647620ab531274498839d6436cb35c83e90842ce1ac05a0ecb640ab14" .
 <https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#legacyRecordId> "F01" .
-<https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"arquivo\":\"MUM'14 - p180-raposo.pdf\",\"estudo_ids\":[\"EST01\"],\"id\":\"F01\",\"status\":\"DOCUMENTADO_NO_CORPUS\",\"tipo\":\"ARTIGO_CIENTIFICO\",\"titulo\":\"An application of mobility aids for the visually impaired\"}" .
+<https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"access_status\":\"NAO_CONSULTADA_NESTA_REVISAO\",\"arquivo\":\"MUM'14 - p180-raposo.pdf\",\"consulted_at\":null,\"doi\":null,\"edition\":null,\"edition_status\":\"NAO_IDENTIFICADA\",\"estudo_ids\":[\"EST01\"],\"id\":\"F01\",\"metadata_origin\":\"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE\",\"status\":\"DOCUMENTADO_NO_CORPUS\",\"tipo\":\"ARTIGO_CIENTIFICO\",\"titulo\":\"An application of mobility aids for the visually impaired\",\"url\":null,\"url_candidates\":[],\"urls\":[]}" .
 <https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#referenceKind> "PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT" .
 <https://w3id.org/mado#F01> <https://w3id.org/mado/experimental/v2#url> "https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json" .
 <https://w3id.org/mado#F05> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#Fonte> .
 <https://w3id.org/mado#F05> <http://www.w3.org/2000/01/rdf-schema#label> "Enhancing interaction of people with quadriplegia"@pt .
 <https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#legacyCollection> "sources" .
-<https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "82216e257b08b59ebe65b47c5b370990b7f14916c138d48004a4893e4f822198" .
+<https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "c217cadbfefd5c7b147baa522ef7c0980f9d6b4338d0aa72e4c16c601201c2d1" .
 <https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#legacyRecordId> "F05" .
-<https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"arquivo\":\"PETRA_22_paper_38.pdf\",\"estudo_ids\":[\"EST04\"],\"id\":\"F05\",\"status\":\"DOCUMENTADO_NO_CORPUS\",\"tipo\":\"ARTIGO_CIENTIFICO\",\"titulo\":\"Enhancing interaction of people with quadriplegia\"}" .
+<https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"access_status\":\"NAO_CONSULTADA_NESTA_REVISAO\",\"arquivo\":\"PETRA_22_paper_38.pdf\",\"consulted_at\":null,\"doi\":null,\"edition\":null,\"edition_status\":\"NAO_IDENTIFICADA\",\"estudo_ids\":[\"EST04\"],\"id\":\"F05\",\"metadata_origin\":\"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE\",\"status\":\"DOCUMENTADO_NO_CORPUS\",\"tipo\":\"ARTIGO_CIENTIFICO\",\"titulo\":\"Enhancing interaction of people with quadriplegia\",\"url\":null,\"url_candidates\":[],\"urls\":[]}" .
 <https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#referenceKind> "PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT" .
 <https://w3id.org/mado#F05> <https://w3id.org/mado/experimental/v2#url> "https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json" .
 <https://w3id.org/mado#F08> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#Fonte> .
 <https://w3id.org/mado#F08> <http://www.w3.org/2000/01/rdf-schema#label> "Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos"@pt .
 <https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#legacyCollection> "sources" .
-<https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "2d399ade0cc747e7ba4606588a0c0a4f2a6dc68aa324eb8653191d6c1a2cb559" .
+<https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "f4e735157ce34ea774f6dde3f82a5b3498734848b745b37e733c8bf873e41f2b" .
 <https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#legacyRecordId> "F08" .
-<https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"arquivo\":\"50-248883.pdf\",\"estudo_ids\":[\"EST07\"],\"id\":\"F08\",\"status\":\"DOCUMENTADO_NO_CORPUS\",\"tipo\":\"ARTIGO_CIENTIFICO\",\"titulo\":\"Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos\"}" .
+<https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"access_status\":\"NAO_CONSULTADA_NESTA_REVISAO\",\"arquivo\":\"50-248883.pdf\",\"consulted_at\":null,\"doi\":null,\"edition\":null,\"edition_status\":\"NAO_IDENTIFICADA\",\"estudo_ids\":[\"EST07\"],\"id\":\"F08\",\"metadata_origin\":\"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE\",\"status\":\"DOCUMENTADO_NO_CORPUS\",\"tipo\":\"ARTIGO_CIENTIFICO\",\"titulo\":\"Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos\",\"url\":null,\"url_candidates\":[],\"urls\":[]}" .
 <https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#referenceKind> "PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT" .
 <https://w3id.org/mado#F08> <https://w3id.org/mado/experimental/v2#url> "https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json" .
 <https://w3id.org/mado#FN-WCAG> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#Fonte> .
 <https://w3id.org/mado#FN-WCAG> <http://www.w3.org/2000/01/rdf-schema#label> "Web Content Accessibility Guidelines"@pt .
+<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#edition> "WCAG 2.2 — W3C Recommendation, 2023-10-05" .
 <https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#legacyCollection> "sources" .
-<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "e9c21484a88d83ac42f269c9bab08b63d3c37f351b32cc48dc0e137311ba0eae" .
+<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#legacyRecordHash> "4a1c2d3a581625cbab5b6e0b0da2815f916970be7f8d2a0954e09b295c945eaf" .
 <https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#legacyRecordId> "FN-WCAG" .
-<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"arquivo\":null,\"estudo_ids\":[\"EST07\"],\"id\":\"FN-WCAG\",\"status\":\"ITENS_PRESERVADOS_NA_PLANILHA\",\"tipo\":\"NORMA_OU_DIRETRIZ\",\"titulo\":\"Web Content Accessibility Guidelines\"}" .
-<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#referenceKind> "PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT" .
-<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#url> "https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json" .
+<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#legacyRecordJSON> "{\"access_status\":\"SECOES_SELECIONADAS_CONSULTADAS\",\"arquivo\":null,\"consulted_at\":\"2026-10-11\",\"doi\":null,\"edition\":\"WCAG 2.2 — W3C Recommendation, 2023-10-05\",\"edition_status\":\"EDICAO_LOCALIZADA_NO_ORIGINAL\",\"estudo_ids\":[\"EST07\"],\"id\":\"FN-WCAG\",\"metadata_origin\":\"CONSULTA_ONLINE_PRIMARIA_DE_SECOES_IDENTIFICADAS\",\"status\":\"ITENS_PRESERVADOS_NA_PLANILHA\",\"tipo\":\"NORMA_OU_DIRETRIZ\",\"titulo\":\"Web Content Accessibility Guidelines\",\"url\":\"https://www.w3.org/TR/2023/REC-WCAG22-20231005/\",\"url_candidates\":[],\"urls\":[\"https://www.w3.org/TR/2023/REC-WCAG22-20231005/\"]}" .
+<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#referenceKind> "DOCUMENT_LINK_RECORDED" .
+<https://w3id.org/mado#FN-WCAG> <https://w3id.org/mado/experimental/v2#url> "https://www.w3.org/TR/2023/REC-WCAG22-20231005/" .
 <https://w3id.org/mado#Fonte> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/mado#K28> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#ConhecimentoMultimodalArticulado> .
 <https://w3id.org/mado#K28> <http://www.w3.org/2000/01/rdf-schema#label> "Em formulários e comunicação digital, acessibilidade depende de uma sequência operacional compreensível: rótulos/instruções, foco e teclado, identificação de erros, confirmação e feedback de status precisam funcionar de forma coordenada."@pt .
@@ -188,6 +189,7 @@
 <https://w3id.org/mado/experimental/v2#CaptureSpeech> <https://w3id.org/mado/experimental/v2#requiresResource> <https://w3id.org/mado/experimental/v2#SpeechRecognition> .
 <https://w3id.org/mado/experimental/v2#ContentAvailable> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado/experimental/v2#ContextFact> .
 <https://w3id.org/mado/experimental/v2#ContentAvailable> <http://www.w3.org/2000/01/rdf-schema#label> "Há conteúdo a expressar ou revisar"@pt .
+<https://w3id.org/mado/experimental/v2#ContentAvailable> <https://w3id.org/mado/experimental/v2#scope> "context" .
 <https://w3id.org/mado/experimental/v2#ContextFact> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://w3id.org/mado/experimental/v2#ContextFact> <http://www.w3.org/2000/01/rdf-schema#label> "Condição a confirmar"@pt .
 <https://w3id.org/mado/experimental/v2#Contribution> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
@@ -245,6 +247,7 @@
 <https://w3id.org/mado/experimental/v2#LearningCommunicationContext> <http://www.w3.org/2000/01/rdf-schema#label> "A contribuição integra uma atividade de comunicação em contexto de aprendizagem"@pt .
 <https://w3id.org/mado/experimental/v2#LearningCommunicationContext> <https://w3id.org/mado/experimental/v2#conditionFromKnowledge> <https://w3id.org/mado#K28> .
 <https://w3id.org/mado/experimental/v2#LearningCommunicationContext> <https://w3id.org/mado/experimental/v2#conditionFromKnowledge> <https://w3id.org/mado#K29> .
+<https://w3id.org/mado/experimental/v2#LearningCommunicationContext> <https://w3id.org/mado/experimental/v2#scope> "context" .
 <https://w3id.org/mado/experimental/v2#Microphone> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado/experimental/v2#Resource> .
 <https://w3id.org/mado/experimental/v2#Microphone> <http://www.w3.org/2000/01/rdf-schema#label> "Microfone"@pt .
 <https://w3id.org/mado/experimental/v2#Mode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
@@ -584,6 +587,16 @@
 <https://w3id.org/mado/experimental/v2#criterion> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/mado/experimental/v2#criterion> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/mado#CriterioDeDecisaoMultimodal> .
 <https://w3id.org/mado/experimental/v2#derivedFromLegacy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/mado/experimental/v2#document_paraphrase> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#document_paraphrase> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/mado/experimental/v2#document_review_status> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#document_review_status> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/mado/experimental/v2#document_url> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#document_url> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/mado/experimental/v2#document_version> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#document_version> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/mado/experimental/v2#edition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#edition> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
 <https://w3id.org/mado/experimental/v2#epistemicStatus> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
 <https://w3id.org/mado/experimental/v2#epistemicStatus> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
 <https://w3id.org/mado/experimental/v2#excerpt> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
@@ -632,6 +645,7 @@
 <https://w3id.org/mado/experimental/v2#provides> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/mado/experimental/v2#Capability> .
 <https://w3id.org/mado/experimental/v2#provides> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/mado/experimental/v2#Function> .
 <https://w3id.org/mado/experimental/v2#referenceKind> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#referenceKind> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
 <https://w3id.org/mado/experimental/v2#relationKind> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
 <https://w3id.org/mado/experimental/v2#relationKind> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/mado/experimental/v2#RelationRule> .
 <https://w3id.org/mado/experimental/v2#relationKind> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
@@ -643,6 +657,11 @@
 <https://w3id.org/mado/experimental/v2#requiresResource> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/mado/experimental/v2#requiresResource> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/mado/experimental/v2#Capability> .
 <https://w3id.org/mado/experimental/v2#requiresResource> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/mado/experimental/v2#Resource> .
+<https://w3id.org/mado/experimental/v2#review_status> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#review_status> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://w3id.org/mado/experimental/v2#scope> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://w3id.org/mado/experimental/v2#scope> <http://www.w3.org/2000/01/rdf-schema#comment> "context identifica fatos compartilhados; condições pessoais não são herdadas por outro participante."@pt .
+<https://w3id.org/mado/experimental/v2#scope> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
 <https://w3id.org/mado/experimental/v2#sharedType> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/mado/experimental/v2#sharedType> <http://www.w3.org/2000/01/rdf-schema#domain> <https://w3id.org/mado/experimental/v2#RelationRule> .
 <https://w3id.org/mado/experimental/v2#sharedType> <http://www.w3.org/2000/01/rdf-schema#range> <https://w3id.org/mado/experimental/v2#Representation> .

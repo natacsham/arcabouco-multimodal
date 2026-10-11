@@ -22,7 +22,7 @@
         "PAD-PAPEIS-TURNOS-AUTORIA",
         "PAD-REVISAO-CONFIRMACAO"
       ],
-      "seconds": 20.223,
+      "seconds": 33.249,
       "query_rows": {
         "CQ-001": 99,
         "CQ-002": 1068,
@@ -44,7 +44,7 @@
         "PAD-PAPEIS-TURNOS-AUTORIA",
         "PAD-REVISAO-CONFIRMACAO"
       ],
-      "seconds": 20.422,
+      "seconds": 36.039,
       "query_rows": {
         "CQ-001": 100,
         "CQ-002": 1068,
@@ -61,7 +61,7 @@
       "components": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
-      "seconds": 8.873,
+      "seconds": 10.571,
       "query_rows": {
         "CQ-001": 33,
         "CQ-002": 27,
@@ -79,7 +79,7 @@
         "PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
         "PAD-RETORNO-HAPTICO-RUIDO"
       ],
-      "seconds": 9.138,
+      "seconds": 10.219,
       "query_rows": {
         "CQ-001": 28,
         "CQ-002": 14,
@@ -96,7 +96,7 @@
       "components": [
         "PAD-COMUNICACAO-MULTIFORMATO"
       ],
-      "seconds": 9.425,
+      "seconds": 10.876,
       "query_rows": {
         "CQ-001": 40,
         "CQ-002": 16,
@@ -111,7 +111,7 @@
     "diagnostico_isolado": {
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "components": [],
-      "seconds": 6.027,
+      "seconds": 8.854,
       "query_rows": {
         "CQ-001": 8,
         "CQ-002": 0,
@@ -126,7 +126,7 @@
     "sem_confirmacao": {
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "components": [],
-      "seconds": 9.969,
+      "seconds": 13.343,
       "query_rows": {
         "CQ-001": 120,
         "CQ-002": 1068,
@@ -139,7 +139,7 @@
       }
     },
     "combinacao_nao_cadastrada": {
-      "status": "GERADA",
+      "status": "GERADA_PARCIAL",
       "components": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE",
         "PAD-COMUNICACAO-MULTIFORMATO"
@@ -170,7 +170,13 @@
           ],
           "remaining_function_ids": [
             "FUN-SELECIONAR-MODO-POR-CONDICAO",
-            "FUN-FEEDBACK-PERCEPTIVEL"
+            "FUN-FEEDBACK-PERCEPTIVEL",
+            "FUN-PRESERVAR-ACESSO",
+            "FUN-ORGANIZAR-CONTEUDO",
+            "FUN-PERMITIR-REVISAO",
+            "FUN-EXPRESSAR-CONHECIMENTO",
+            "FUN-CARACTERIZAR-CONDICOES",
+            "FUN-REDUZIR-SOBRECARGA"
           ],
           "modalities": [
             "Texto"
@@ -185,6 +191,7 @@
             "K18",
             "K27",
             "K29",
+            "K22",
             "K41",
             "K42",
             "K43"
@@ -205,7 +212,14 @@
             "Selecionar formas de interação pela tarefa e pelas condições funcionais",
             "Oferecer feedback perceptível, persistente e compatível"
           ],
-          "remaining_function_ids": [],
+          "remaining_function_ids": [
+            "FUN-PRESERVAR-ACESSO",
+            "FUN-ORGANIZAR-CONTEUDO",
+            "FUN-PERMITIR-REVISAO",
+            "FUN-EXPRESSAR-CONHECIMENTO",
+            "FUN-CARACTERIZAR-CONDICOES",
+            "FUN-REDUZIR-SOBRECARGA"
+          ],
           "modalities": [
             "Texto",
             "Comando ou entrada por voz"
@@ -216,11 +230,13 @@
           ]
         },
         "added_knowledge_ids": [
+          "K22",
           "K41",
           "K42",
           "K43"
         ],
         "articulation_ids": [
+          "ART-TRJ-06",
           "ART-REF-05",
           "ART-REF-03"
         ],
@@ -239,12 +255,12 @@
           "Manter teclado, acionador ou apoio humano para registrar a mensagem, sempre com revisão e confirmação pela pessoa."
         ],
         "added_configuration_ids": [
-          "CFG-D-GERADA-BAC46D8E85-02"
+          "CFG-D-GERADA-1CCF6A4133-02"
         ],
         "evidence_delta": [
           {
             "component_id": "PAD-CONTEUDO-WEB-EQUIVALENTE",
-            "configuration_id": "CFG-D-GERADA-BAC46D8E85-01",
+            "configuration_id": "CFG-D-GERADA-1CCF6A4133-01",
             "configuration_added": false,
             "added_support_pairs": [
               {
@@ -303,6 +319,31 @@
                 "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
                 "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
                 "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-ORGANIZAR-CONTEUDO",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "id": "WIT-3dadb8361ec632c3",
+                "check_ids": [
+                  "CHECK-4a3689b08b531766",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
                 "required_function_id": "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
                 "task_path": [
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
@@ -312,10 +353,35 @@
                 "check_ids": [
                   "CHECK-5f1c1fbd6a96a997",
                   "CHECK-dae816f8518203dc",
-                  "CHECK-faf075bff274467f",
+                  "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
                   "CHECK-a2d256ba270886d5",
-                  "CHECK-aa8ca9ba85eb8117",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-REDUZIR-SOBRECARGA",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "id": "WIT-b305274c89bdd144",
+                "check_ids": [
+                  "CHECK-a56ad2b7e57981ad",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
                   "CHECK-436b78671c9165fe"
                 ]
               }
@@ -324,7 +390,7 @@
           },
           {
             "component_id": "PAD-COMUNICACAO-MULTIFORMATO",
-            "configuration_id": "CFG-D-GERADA-BAC46D8E85-02",
+            "configuration_id": "CFG-D-GERADA-1CCF6A4133-02",
             "configuration_added": true,
             "added_support_pairs": [
               {
@@ -392,10 +458,10 @@
                 "check_ids": [
                   "CHECK-38deb98b26ecbfb2",
                   "CHECK-bd1bb348c3911cd3",
-                  "CHECK-e11d439a6c1a5c9b",
+                  "CHECK-96592258d17ac8a6",
                   "CHECK-fd3617db7a30ea83",
                   "CHECK-b40afe3b6222882f",
-                  "CHECK-ba62049217f440fe",
+                  "CHECK-b5bd054cb97c7b3b",
                   "CHECK-fd462ccf68f88501"
                 ]
               },
@@ -417,11 +483,36 @@
                 "check_ids": [
                   "CHECK-38ae25537e495560",
                   "CHECK-bd1bb348c3911cd3",
-                  "CHECK-e11d439a6c1a5c9b",
+                  "CHECK-96592258d17ac8a6",
                   "CHECK-fd3617db7a30ea83",
                   "CHECK-b40afe3b6222882f",
-                  "CHECK-ba62049217f440fe",
+                  "CHECK-b5bd054cb97c7b3b",
                   "CHECK-fd462ccf68f88501"
+                ]
+              },
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-ORGANIZAR-CONTEUDO",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "id": "WIT-3dadb8361ec632c3",
+                "check_ids": [
+                  "CHECK-4a3689b08b531766",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
                 ]
               },
               {
@@ -442,10 +533,35 @@
                 "check_ids": [
                   "CHECK-5f1c1fbd6a96a997",
                   "CHECK-dae816f8518203dc",
-                  "CHECK-faf075bff274467f",
+                  "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
                   "CHECK-a2d256ba270886d5",
-                  "CHECK-aa8ca9ba85eb8117",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-REDUZIR-SOBRECARGA",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "id": "WIT-b305274c89bdd144",
+                "check_ids": [
+                  "CHECK-a56ad2b7e57981ad",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
                   "CHECK-436b78671c9165fe"
                 ]
               }
@@ -590,6 +706,6 @@
   },
   "base_sha256": {
     "interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
-    "knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6"
+    "knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b"
   }
 }

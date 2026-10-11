@@ -28,7 +28,7 @@
         "description": "Representação semântica de conhecimentos, articulações, critérios, contextos e decisões de acessibilidade multimodal.",
         "genre": "Ontologia",
         "inLanguage": "pt-BR",
-        "version": "1.4.0-rc1",
+        "version": "1.4.0-rc2",
         "author": { "@id": "https://natacsham.github.io/arcabouco-multimodal/ontologia/#autoria" },
         "isPartOf": { "@id": "https://natacsham.github.io/arcabouco-multimodal/#site" }
       },
@@ -71,7 +71,7 @@
       <div class="page-title">
         <h1>Documentação técnica da MADO</h1>
         <p class="lead">Consulte os conceitos, as relações, os arquivos e as verificações da MADO (<span lang="en">Multimodal Accessibility Decision Ontology</span>), a estrutura de conhecimento consultada pelo AMADO.</p>
-        <span class="version">MADO 1.4.0-rc1 · versão candidata</span>
+        <span class="version">MADO 1.4.0-rc2 · versão candidata</span>
         <nav aria-label="Nesta página"><ul class="link-list"><li><a href="#modelo">Modelo</a></li><li><a href="#camadas">Implementação</a></li><li><a href="#arquivos">Arquivos e verificações</a></li><li><a href="#autoria">Autoria</a></li></ul></nav>
       </div>
     </div>
@@ -104,9 +104,25 @@
 
     <section class="section" id="camadas" aria-labelledby="camadas-titulo"><div class="wrap">
       <div class="section-head"><h2 id="camadas-titulo">Da descrição do caso à orientação multimodal</h2><p>A pessoa informa e confirma o contexto. O motor do AMADO consulta a base estruturada pela MADO, verifica os fundamentos e compõe a orientação ou informa insuficiência.</p></div>
-      <details class="curation-note">
+      <details class="curation-note" id="fontes">
         <summary>Como o conhecimento foi construído antes da consulta</summary>
         <p>A análise de fontes, estudos, artefatos, personas e resultados produziu conhecimentos articulados, critérios e condições de aplicação. A curadoria registra origem, confirmação e limites, definindo quais relações podem orientar a composição. Os padrões de composição também foram definidos antes do uso. O clique não cria as articulações nem incorpora o caso à base.</p><p>Para conferir esse trabalho, é necessário distinguir a contribuição de cada fonte, a operação que relaciona os conteúdos, o conhecimento resultante e seus limites. Uma ligação entre documentos, por si só, não explica essa transformação. No AMADO, cada escolha permite examinar a construção registrada e o motivo de seu uso no caso.</p>
+        <ol class="source-stages" aria-label="Preparação da base, antes do uso do AMADO">
+          <li><strong>Fonte original</strong><span>Documento de origem, com versão, localização e estado de conferência.</span></li>
+          <li><strong>Contribuição extraída</strong><span>Conteúdo pertinente e o que ele acrescenta: função, condição ou limite.</span></li>
+          <li><strong>Articulação</strong><span>Operação analítica que relaciona as contribuições.</span></li>
+          <li><strong>Conhecimento</strong><span>Compreensão resultante, com condições de emprego.</span></li>
+          <li><strong>Aplicação de critério</strong><span>Vínculo exato que sustenta uma operação admissível.</span></li>
+        </ol>
+        <p>As fontes não são pesquisadas durante a geração. Os links permitem conferir os originais; os conteúdos extraídos e curados alimentam a base publicada.</p>
+      </details>
+      <details data-source-path-details>
+        <summary>Ver essa transformação em uma escolha real da base</summary>
+        <div data-source-path role="region" aria-label="Das contribuições documentais à escolha apresentada"><p>Abra para carregar os registros públicos do exemplo.</p></div>
+      </details>
+      <details data-source-catalog-details>
+        <summary>Consultar as fontes e referências já registradas</summary>
+        <div data-source-catalog><p>Abra para consultar o catálogo de links. Não contém cópias dos documentos.</p></div>
       </details>
       <figure class="uml-sequence" aria-labelledby="sequencia-titulo">
         <figcaption id="sequencia-titulo"><strong>Diagrama de sequência UML</strong><span>Fluxo de consulta e composição, de cima para baixo.</span></figcaption>
@@ -198,11 +214,12 @@
     <section class="section" id="autoria" aria-labelledby="autoria-titulo"><div class="wrap reading">
       <h2 id="autoria-titulo">Autoria e disponibilização</h2>
       <p><strong>Natacsha Ordones Raposo de Melo</strong><br>Projeto de pesquisa de doutorado <em>Arcabouço Multimodal para Acessibilidade Digital</em>.</p>
-      <details><summary>Referência e condições de uso</summary><p>MELO, Natacsha Ordones Raposo de. <em>MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital: ontologia e instrumento AMADO.</em> Versão 1.4.0-rc1. Repositório do projeto.</p><p>Ao citar uma execução, registre a versão e o relatório. Não há licença aberta de reutilização concedida nesta etapa; fontes e dependências conservam suas atribuições e condições próprias.</p></details>
+      <details><summary>Referência e condições de uso</summary><p>MELO, Natacsha Ordones Raposo de. <em>MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital: ontologia e instrumento AMADO.</em> Versão 1.4.0-rc2. Repositório do projeto.</p><p>Ao citar uma execução, registre a versão e o relatório. Não há licença aberta de reutilização concedida nesta etapa; fontes e dependências conservam suas atribuições e condições próprias.</p></details>
       <details><summary>Privacidade no AMADO</summary><p>O caso fica na memória da página e é descartado ao limpar, atualizar, fechar ou trocar de aba do instrumento. Não exige cadastro e não é incorporado automaticamente à base.</p><p>Evite dados identificáveis. A hospedagem pode manter registros técnicos de acesso, mas o AMADO não envia o conteúdo do caso. Incorporar conhecimento exige curadoria documentada em outra versão.</p></details>
     </div></section>
   </main>
   <footer class="site-footer"><div class="wrap footer-grid"><div><p>Projeto de pesquisa de doutorado de Natacsha Ordones Raposo de Melo.</p><a class="back-top" href="#inicio" data-site-top>↑ Voltar ao topo</a></div><nav aria-label="Próximos caminhos"><a href="../">Voltar à apresentação</a><br><a href="../amado/">Experimentar o AMADO</a></nav></div></footer>
   <script defer src="../site.js"></script>
+  <script type="module" src="../source-path.js"></script>
 </body>
 </html>

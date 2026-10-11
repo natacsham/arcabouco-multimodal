@@ -30,6 +30,7 @@ const report={type:'SYNTHETIC_COMPOSITION_BROWSER_NOT_HUMAN_EVALUATION',executed
 const check=(name,value)=>{report.checks[name]=Boolean(value);assert(value,name);};
 const sha=value=>crypto.createHash('sha256').update(value).digest('hex');
 report.build=JSON.parse(await fs.readFile(path.join(web,'amado/manifest.json'),'utf8'));
+report.version=report.build.version;
 report.test_sha256=sha(await fs.readFile(fileURLToPath(import.meta.url)));
 const example=JSON.parse(await fs.readFile(path.join(root,'experimental/v2/examples/learning-contribution.json'),'utf8'));
 const fixtures={};
@@ -61,7 +62,7 @@ try{
   report.cases={};
   for(const view of ['index.html','guiado.html']){
     const page=await context.newPage();page.on('pageerror',error=>report.errors.push(error.message));
-    await page.goto(base+'amado/'+view);
+    await page.goto(base+'amado/'+(view==='index.html'?'completo.html':'completo-guiado.html'));
     await page.waitForFunction(()=>document.querySelector('#health')?.dataset.state==='ready'&&document.querySelector('#main')?.getAttribute('aria-busy')==='false',{}, {timeout:180000});
     const catalog=await page.evaluate(async()=>{const {request}=await import('./client.mjs');return request('catalog_composition');});
     check(view+'_catalog_from_rdf',catalog.tasks.length===2&&catalog.facts.every(x=>x.default===null));

@@ -9,14 +9,20 @@
 skos:broader a owl:ObjectProperty .
 
 <https://w3id.org/mado> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/1.4.0-rc1> ;
-  owl:versionInfo "1.4.0-rc1" ;
-  owl:priorVersion <https://w3id.org/mado/1.3.0-rc1> ;
+  owl:versionIRI <https://w3id.org/mado/1.4.0-rc2> ;
+  owl:versionInfo "1.4.0-rc2" ;
+  owl:priorVersion <https://w3id.org/mado/1.4.0-rc1> ;
   dcterms:creator "Natacsha Ordones Raposo de Melo" ;
   rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
   rdfs:comment "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .
 
 dcterms:creator a owl:AnnotationProperty .
+dcterms:bibliographicCitation a owl:AnnotationProperty .
+dcterms:isReferencedBy a owl:AnnotationProperty .
+mado:versaoDocumental a owl:AnnotationProperty ; rdfs:label "versão documental identificada"@pt-BR .
+mado:estadoDeConferenciaDocumental a owl:AnnotationProperty ; rdfs:label "estado da consulta documental"@pt-BR ; rdfs:comment "Estado de conferência de uma fonte ou seção; não autoriza automaticamente seu uso operacional."@pt-BR .
+mado:dataDaConsultaDocumental a owl:AnnotationProperty ; rdfs:label "data civil da consulta documental"@pt-BR .
+mado:parafraseDocumental a owl:AnnotationProperty ; rdfs:label "paráfrase da seção conferida"@pt-BR ; rdfs:comment "Síntese localizada; não é redistribuição do original nem formulação automaticamente criada durante a consulta."@pt-BR .
 
 # Declarações locais mínimas dos termos SKOS usados, mantendo a ontologia autocontida para validação de perfil.
 skos:Concept a owl:Class .

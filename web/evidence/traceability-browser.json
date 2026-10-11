@@ -1,8 +1,8 @@
 {
-  "version": "1.4.0-rc1",
+  "version": "1.4.0-rc2",
   "type": "SYNTHETIC_TECHNICAL_BROWSER_CHECK",
   "execution_target": "LOCAL_SUBPATH",
-  "executed_at": "2026-10-11T04:22:05.371Z",
+  "executed_at": "2026-10-11T07:21:19.668Z",
   "checks": {
     "served_manifest_matches_current_build": true,
     "home_pilot_derived_choice_loaded": true,
@@ -226,6 +226,7 @@
     "GET",
     "GET",
     "GET",
+    "GET",
     "GET"
   ],
   "limitations": [
@@ -234,14 +235,14 @@
     "Tempos de laboratório; sem garantia de desempenho em dispositivos móveis."
   ],
   "build": {
-    "version": "1.4.0-rc1",
+    "version": "1.4.0-rc2",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
-    "bridge_sha256": "dc16de38e285da9ce3205fa6a2f56bb6c4468390c09366183ed773a985278336",
-    "base_zip_sha256": "e0c73ff47c6894ec6dfab15845d4f50c4d30b06f16aa103052bf50c089073c24",
+    "core_sha256": "28d595f17039e71a25c61d360bf7c26fb98b9224de52edc1390b8df9ad6ad7a1",
+    "bridge_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
+    "base_zip_sha256": "94bd6531c09196147194462e3f48ef7bd7859e7cf6fbf26bf0ea8231c54bd493",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -283,45 +284,53 @@
       "implementation": "ResearchComposer",
       "case_storage": false,
       "files": {
-        "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
-        "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
-        "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
-        "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+        "experimental/v2/composer.py": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
+        "experimental/v2/trajectory.py": "a4136772e09e27b69dcdb1477953894a741bdc4e526d46422049b450b3b0e369",
+        "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+        "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
         "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-        "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+        "experimental/v2/trajectory-bindings.json": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
         "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
       }
     },
     "frontend_sha256": {
-      "index.html": "a7aa3f6763acb5a86f1aadfd9a1c685a26fe4b0dd0ecb2971f2e051df4e55d37",
+      "index.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
       "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
       "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
       "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
       "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "1b32dd18123b53a5971628f30bb66d0a062d4cbc926997ed3fc94809a642511a",
+      "guiado.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
-      "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425"
+      "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
+      "simple-flow.js": "703a17bae6c5ac287c4724c43f2750aad398fa66e642ec503068db0517ed94bf",
+      "simple-flow.css": "a8eacc68301ea270f466ec80adccb178aa9d4d8e5137d382cb933fb27f238dd6",
+      "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
+      "intake.mjs": "98a08a564804c6d4c469e5f24b2bf6e2114c382d05a832bf065cf9a7d19ed027",
+      "completo.html": "3c6fc3e388b6df3e3d3284342a10025437d813cfe10d3b51313d4f648649d7a2",
+      "completo-guiado.html": "fcad9bab6756d0fdcb2e816e64c85fcfa4564be46ece4de80ae26826b6d15b55"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
-      "ontologia/index.html": "43c7037f08becaaaa5d6846f5b14e9a5807a80dc48dc369c2cf49860ecf3f768",
-      "site.css": "b2f8e4240650eaf41c1292fa48993597eb382a0c49d26588b69df5aa7deb1fc8",
+      "ontologia/index.html": "d41b5253e9cee104324bceebd6117ed1bb6dc8776b3d97d657087df202dc839a",
+      "site.css": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
-      "explanation.js": "60f4bbb76c92740838d4521145e1b65b8bd84305a3a07982ad9ef44bdf0f9948",
+      "explanation.js": "99ed5c901099216983a26bbd3a4afa92de2993f3810982081bdcca1147f6d57c",
       "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
       "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
-      "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
+      "assets/explanation-pilot.json": "2db2610d8de415e81833c80e1d650842f2a513de82413cf8b6be97af023aa704",
+      "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
+      "assets/source-catalog.json": "0b4faeb7190b5a6a46e721a63afaf8f19c875df8c6b9d7c30e637aee1e367ddc"
     },
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
-      "data/knowledge-base.json": "f25f304c4f94827be9fad955fdea6236f5fc0bb56769dfafcc8ab780a0d395f6",
+      "data/knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b",
       "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
-      "ontology/mado-combined.ttl": "dcad4aba1186b414345571e7403142fe37c1d6274659d63dd8596ee4f2f66831",
+      "ontology/mado-combined.ttl": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -330,17 +339,17 @@
       "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
       "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
       "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
-      "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
-      "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
-      "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
-      "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+      "experimental/v2/composer.py": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
+      "experimental/v2/trajectory.py": "a4136772e09e27b69dcdb1477953894a741bdc4e526d46422049b450b3b0e369",
+      "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+      "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
       "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-      "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+      "experimental/v2/trajectory-bindings.json": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "test_sha256": "b4a33d1395de85d6f007d1baf97b00adba32ef5ac7d05fb73c34df905dcc0a55",
-  "browser": "154.0.8037.98",
+  "test_sha256": "21f55a26e93d5041199fbed5d6840f9fb086e2d69e9941ab1b2f9ddfe3460494",
+  "browser": "155.0.8059.39",
   "contrast": {
     "index.html": [
       {
