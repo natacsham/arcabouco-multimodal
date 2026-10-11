@@ -3,15 +3,109 @@ import json
 import sys
 
 ENGINE = None
+COMPOSER = None
 
 
 def initialize():
-    global ENGINE
+    global ENGINE, COMPOSER
     from engine import DecisionEngine, VERSION
     ENGINE = DecisionEngine()
+    COMPOSER = None
     return {"python": sys.version.split()[0], "rdflib": __import__("rdflib").__version__,
             "triples": len(ENGINE.graph), "engine_version": VERSION,
             "execution": "BROWSER_WEB_WORKER", "case_storage": False}
+
+
+def composition_engine():
+    """Load the reviewed composition extension, never an arbitrary input path."""
+    global COMPOSER
+    if COMPOSER is None:
+        from experimental.v2.trajectory import ResearchComposer
+        COMPOSER = ResearchComposer()
+    return COMPOSER
+
+
+def composition_catalog():
+    """Project labels and actual requirements from the same RDF used to compose."""
+    from pathlib import Path
+    from rdflib import RDF, RDFS
+    from rdflib.namespace import OWL
+    from experimental.v2.composer import V2
+    from experimental.v2.trajectory import HERE
+
+    graph = composition_engine().graph
+
+    def record(node):
+        return {"id": str(node).rsplit("#", 1)[-1], "iri": str(node),
+                "label": str(graph.value(node, RDFS.label) or node),
+                "description": str(graph.value(node, RDFS.comment) or "")}
+
+    def values(node, predicate):
+        return [record(item)["id"] for item in sorted(set(graph.objects(node, predicate)), key=str)]
+
+    def ordered_functions(node):
+        return sorted(set(graph.objects(node, V2.requiresFunction)),
+                      key=lambda item: (int(graph.value(item, V2.order) or 0), str(item)))
+
+    tasks = [{**record(node), "required_functions": [record(item) for item in ordered_functions(node)],
+              "input": record(graph.value(node, V2.inputType)),
+              "output": record(graph.value(node, V2.outputType))}
+             for node in sorted(set(graph.subjects(RDF.type, V2.Task)), key=str)]
+    capabilities = [{**record(node), "function_id": record(graph.value(node, V2.provides))["id"],
+                     "required_facts": values(node, V2.requiresFact),
+                     "required_resources": values(node, V2.requiresResource)}
+                    for node in sorted(set(graph.subjects(RDF.type, V2.Capability)), key=str)]
+    relations = [{**record(node), "from_function": record(graph.value(node, V2.fromFunction))["id"],
+                  "to_function": record(graph.value(node, V2.toFunction))["id"],
+                  "required_facts": values(node, V2.requiresFact)}
+                 for node in sorted(set(graph.subjects(RDF.type, V2.RelationRule)), key=str)]
+    fields = {}
+    for name, entity_type, predicate in (("facts", V2.ContextFact, V2.requiresFact),
+                                          ("resources", V2.Resource, V2.requiresResource)):
+        fields[name] = [{**record(node), "used_by": [record(item)["id"] for item in
+                        sorted(set(graph.subjects(predicate, node)), key=str)], "default": None}
+                       for node in sorted(set(graph.subjects(RDF.type, entity_type)), key=str)]
+    example = json.loads((Path(HERE) / "examples" / "learning-contribution.json").read_text(encoding="utf-8"))
+    return {"version": str(next(graph.objects(None, OWL.versionInfo), "")), "tasks": tasks,
+            **fields, "capabilities": capabilities, "relations": relations,
+            "labels": {str(node): str(label) for node, label in sorted(graph.subject_objects(RDFS.label), key=lambda pair: str(pair[0]))},
+            "values": [None, True, False], "case_storage": False,
+            "scope": "Produzir ou revisar uma contribuição digital em contexto de aprendizagem; não verifica envio nem resultados de uso.",
+            "synthetic_example": {"kind": "SYNTHETIC", "label": "Escrever e conferir pela leitura em voz", "context": example}}
+
+
+def compose_context(payload):
+    """Accept explicit, tri-state confirmations; never reinterpret narrative."""
+    allowed = {"id", "task", "confirmed", "resources", "facts"}
+    if set(payload) - allowed:
+        raise ValueError("A composição aceita somente tarefa, condições e recursos confirmados; não interpreta texto livre.")
+    identifier = payload.get("id", "WEB-COMPOSITION")
+    if not isinstance(identifier, str) or not identifier.strip() or len(identifier) > 200:
+        raise ValueError("Use um identificador de caso com até 200 caracteres, sem dados pessoais.")
+    if type(payload.get("confirmed")) is not bool:
+        raise ValueError("Informe explicitamente se as condições do caso foram conferidas.")
+    catalog = composition_catalog()
+    if not isinstance(payload.get("task"), str) or payload["task"] not in {row["id"] for row in catalog["tasks"]}:
+        raise ValueError("Escolha uma das tarefas de composição representadas.")
+    context = {"id": identifier, "task": payload["task"], "confirmed": payload["confirmed"]}
+    for group in ("facts", "resources"):
+        values = payload.get(group, {})
+        known = {row["id"] for row in catalog[group]}
+        if not isinstance(values, dict) or set(values) - known:
+            raise ValueError("Há condições ou recursos não reconhecidos; confira os campos apresentados.")
+        if any(value is not None and type(value) is not bool for value in values.values()):
+            raise ValueError("Cada condição ou recurso deve ser Sim, Não ou Ainda não sei.")
+        context[group] = dict(values)
+    result = composition_engine().compose(context)
+    # File hashes are identical in native and browser execution; host paths are
+    # not evidence and must not be exposed or affect their public comparison.
+    from pathlib import Path
+    from experimental.v2.composer import ROOT
+    result["fingerprints"] = {
+        Path(name).resolve().relative_to(ROOT.resolve()).as_posix(): digest
+        for name, digest in result["fingerprints"].items()
+    }
+    return result
 
 
 def dispatch(request):
@@ -23,6 +117,11 @@ def dispatch(request):
     payload = request.get("payload", {})
     if not isinstance(payload, dict):
         raise ValueError("As informações devem ser enviadas como um objeto.")
+    # Composition has its own confirmed context and must not reuse ENGINE.current.
+    if operation == "catalog_composition":
+        return composition_catalog()
+    if operation == "compose":
+        return compose_context(payload)
     if operation == "catalog":
         return ENGINE.catalog_payload()
     if operation == "start":

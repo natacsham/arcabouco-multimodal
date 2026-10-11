@@ -22,7 +22,7 @@
         "PAD-PAPEIS-TURNOS-AUTORIA",
         "PAD-REVISAO-CONFIRMACAO"
       ],
-      "seconds": 13.016,
+      "seconds": 20.223,
       "query_rows": {
         "CQ-001": 99,
         "CQ-002": 1068,
@@ -44,7 +44,7 @@
         "PAD-PAPEIS-TURNOS-AUTORIA",
         "PAD-REVISAO-CONFIRMACAO"
       ],
-      "seconds": 12.685,
+      "seconds": 20.422,
       "query_rows": {
         "CQ-001": 100,
         "CQ-002": 1068,
@@ -61,7 +61,7 @@
       "components": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
-      "seconds": 5.051,
+      "seconds": 8.873,
       "query_rows": {
         "CQ-001": 33,
         "CQ-002": 27,
@@ -79,7 +79,7 @@
         "PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
         "PAD-RETORNO-HAPTICO-RUIDO"
       ],
-      "seconds": 4.955,
+      "seconds": 9.138,
       "query_rows": {
         "CQ-001": 28,
         "CQ-002": 14,
@@ -96,7 +96,7 @@
       "components": [
         "PAD-COMUNICACAO-MULTIFORMATO"
       ],
-      "seconds": 5.627,
+      "seconds": 9.425,
       "query_rows": {
         "CQ-001": 40,
         "CQ-002": 16,
@@ -111,7 +111,7 @@
     "diagnostico_isolado": {
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "components": [],
-      "seconds": 4.225,
+      "seconds": 6.027,
       "query_rows": {
         "CQ-001": 8,
         "CQ-002": 0,
@@ -126,7 +126,7 @@
     "sem_confirmacao": {
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "components": [],
-      "seconds": 6.881,
+      "seconds": 9.969,
       "query_rows": {
         "CQ-001": 120,
         "CQ-002": 1068,
@@ -239,12 +239,12 @@
           "Manter teclado, acionador ou apoio humano para registrar a mensagem, sempre com revisão e confirmação pela pessoa."
         ],
         "added_configuration_ids": [
-          "CFG-D-GERADA-3664CE2A09-02"
+          "CFG-D-GERADA-BAC46D8E85-02"
         ],
         "evidence_delta": [
           {
             "component_id": "PAD-CONTEUDO-WEB-EQUIVALENTE",
-            "configuration_id": "CFG-D-GERADA-3664CE2A09-01",
+            "configuration_id": "CFG-D-GERADA-BAC46D8E85-01",
             "configuration_added": false,
             "added_support_pairs": [
               {
@@ -324,7 +324,7 @@
           },
           {
             "component_id": "PAD-COMUNICACAO-MULTIFORMATO",
-            "configuration_id": "CFG-D-GERADA-3664CE2A09-02",
+            "configuration_id": "CFG-D-GERADA-BAC46D8E85-02",
             "configuration_added": true,
             "added_support_pairs": [
               {

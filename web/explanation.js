@@ -43,6 +43,56 @@ const technical = values => {
 const graphCleanups = new WeakMap();
 let graphPresentationNumber = 0;
 
+// Pure projection: no selection, inferred needs, ranking, or new knowledge.
+// The references remain available so every sentence can be checked against the return.
+export function projectConfiguration(result, config) {
+  const evidence = result?.execution_evidence || {};
+  const application = config?.application || {};
+  const byCheck = new Map(array(evidence.checks).map(row => [row.id, row]));
+  const recordedChecks = array(application.check_ids).map(id => byCheck.get(id)).filter(Boolean);
+  const checked = recordedChecks.length ? recordedChecks : array(application.checks);
+  const supports = array(application.supports);
+  const knowledgeIds = new Set(supports.flatMap(row => array(row.knowledge_ids)));
+  for (const row of array(config.construction?.knowledge)) if (row.id) knowledgeIds.add(row.id);
+  const witnesses = Array.isArray(evidence.retrieval)
+    ? evidence.retrieval.filter(row => knowledgeIds.has(row.knowledge_id) && row.authorization !== 'EXCLUIDO')
+    : array(application.retrieval_witnesses);
+  const grouped = new Map();
+  for (const row of witnesses) {
+    const key = JSON.stringify([row.knowledge_id, row.input_knowledge_id, row.articulation_id, row.match_predicate]);
+    if (!grouped.has(key)) grouped.set(key, {knowledge_id:row.knowledge_id, input_knowledge_id:row.input_knowledge_id,
+      articulation_id:row.articulation_id, match_predicate:row.match_predicate, concept_ids:[], required_function_ids:[], authorizations:[],
+      task_paths:[], witness_ids:[], check_ids:[]});
+    const group = grouped.get(key);
+    for (const [field, value] of [['concept_ids',row.context_concept_id],['required_function_ids',row.required_function_id],['witness_ids',row.id],['authorizations',row.authorization]]) {
+      if (value && !group[field].includes(value)) group[field].push(value);
+    }
+    const path = array(row.task_path);
+    if (path.length && !group.task_paths.some(old => JSON.stringify(old) === JSON.stringify(path))) group.task_paths.push(path);
+    for (const id of array(row.check_ids)) if (!group.check_ids.includes(id)) group.check_ids.push(id);
+  }
+  const construction = {mobilized:[], historical:[], unconfirmed:[]};
+  for (const row of array(config.construction?.articulations)) {
+    const blocked = ['NAO_CONFIRMADA','BLOQUEADA'].includes(row.nivel_confirmacao) || row.habilitada_para_decisao === false;
+    construction[blocked ? 'unconfirmed' : row.mobilized_in_execution === true ? 'mobilized' : 'historical'].push(row);
+  }
+  const comparison = result?.articulation_comparison;
+  const isolated = comparison?.isolated?.component_ids;
+  const articulated = comparison?.articulated?.component_ids;
+  const delta = array(comparison?.evidence_delta).find(row => row.component_id === config.component_id);
+  let kind = 'NOT_EXECUTED';
+  if (Array.isArray(isolated) && Array.isArray(articulated) && articulated.includes(config.component_id)) {
+    kind = !isolated.includes(config.component_id) ? 'NEW_CHOICE'
+      : array(delta?.added_support_pairs).length ? 'EXPANDED_FOUNDATION' : 'UNCHANGED';
+  }
+  return {
+    componentId:config.component_id, matches:array(application.context_conditions), checks:checked,
+    retrievalGroups:[...grouped.values()], supports, construction,
+    effect:{kind, addedSupportPairs:array(delta?.added_support_pairs)},
+    foundationIncomplete:array(config.construction?.knowledge).filter(row => ['PARCIAL','PENDENTE'].includes(row.foundation_review_status)),
+  };
+}
+
 function contribution(row) {
   const statement = row.statement || row.contribution;
   const source = row.source || {};
@@ -59,6 +109,9 @@ function makePresenter(result) {
   const checks = new Map(array(result.execution_evidence?.checks).map(row => [row.id,row]));
   const nodes = new Map(array(result.explanation?.graph?.nodes).map(row => [row.id,row]));
   const known = new Map([...Object.entries(result.execution_evidence?.entities || {}), ...knowledge, ...criteria, ...nodes]);
+  for (const row of array(result.context?.participantes)) {
+    if (row.papel_id && row.papel) known.set(row.papel_id,{id:row.papel_id,title:row.papel});
+  }
   for (const config of array(result.explanation?.configurations)) {
     for (const row of array(config.construction?.knowledge)) if (row.id) known.set(row.id,row);
     for (const row of array(config.construction?.articulations)) if (row.id) known.set(row.id,row);
@@ -79,18 +132,90 @@ function makePresenter(result) {
 
   function construction(config) {
     const data = config.construction || {};
-    return `<details class="explanation-reading" data-explanation-reading="construction"><summary>Como este conhecimento foi construído</summary><div class="explanation-reading-body"><p class="explanation-note">Estas relações foram registradas antes da consulta. O AMADO não produziu essa síntese intelectual ao gerar a orientação.</p><h4>O que cada fonte contribuiu</h4>${array(data.contributions).length ? `<ul class="explanation-records">${data.contributions.map(contribution).join('')}</ul>` : '<p class="explanation-gap">Não há contribuição individual de fonte detalhada para esta escolha. Uma lista de referências não preenche essa lacuna.</p>'}<h4>Como os conteúdos foram relacionados</h4>${array(data.articulations).length ? `<ul class="explanation-records">${data.articulations.map(row => `<li>${field('Relação registrada', row.rotulo || row.title || row.label || row.statement)}${field('Tipo de relação', human(row.tipo_articulacao || row.operation), 'O tipo não foi detalhado neste registro.')}${field('Como a articulação foi realizada', row.operation_explanation, 'O procedimento desta articulação ainda não foi detalhado; o nome da relação não o substitui.')}${field('O que essa relação acrescentou', row.added_understanding, 'O entendimento acrescentado ainda não foi detalhado neste registro.')}${documentarySupport(row)}${field('Conhecimentos de partida', refs(row.conhecimento_entrada_ids || row.input_knowledge_ids))}${field('Conhecimento produzido ou refinado', refs(row.conhecimento_resultante_ids || row.output_knowledge_ids))}${field('Condição e limite desta relação', [row.condicao || row.condition,row.limite || row.limit])}${typeof row.mobilized_in_execution === 'boolean' ? `<p class="explanation-note">${row.mobilized_in_execution ? 'Esta relação foi percorrida na recuperação desta execução.' : 'Esta relação documenta a construção do conhecimento; não foi percorrida na recuperação desta execução.'}</p>` : ''}${row.nivel_confirmacao ? field('Origem da confirmação', human(row.nivel_confirmacao)) : ''}${technical([row.id])}</li>`).join('')}</ul>` : '<p class="explanation-gap">Nenhuma operação de articulação foi detalhada para esta escolha.</p>'}<h4>O entendimento registrado</h4>${array(data.knowledge).length ? `<ul class="explanation-records">${data.knowledge.map(row => `<li>${field('Conhecimento', text(row))}${field('Como foi articulado', row.articulacao || row.articulation, 'A síntese analítica não foi detalhada neste retorno.')}${field('Limite de aplicação', row.limite || row.limit)}${documentarySupport(row)}${technical([row.id])}</li>`).join('')}</ul>` : '<p class="explanation-gap">O conhecimento resultante não foi detalhado neste retorno.</p>'}</div></details>`;
+    const view = projectConfiguration(result,config);
+    const relation = row => {
+      const contributions = array(data.contributions).filter(item => item.articulation_id === row.id);
+      const outputIds = new Set([...array(row.conhecimento_resultante_ids || row.output_knowledge_ids), ...contributions.map(item => item.knowledge_id)]);
+      const outputs = array(data.knowledge).filter(item => outputIds.has(item.id));
+      return `<details data-construction-articulation="${escape(row.id)}"><summary>${escape(text(row) || 'Articulação registrada')}</summary>
+        <ol class="explanation-construction-sequence"><li><strong>Contribuições das fontes</strong>${contributions.length ? `<ul class="explanation-records">${contributions.map(contribution).join('')}</ul>` : '<p class="explanation-gap">As contribuições individuais não estão detalhadas neste retorno.</p>'}</li>
+        <li>${field('Operação registrada',row.operation_explanation,'O procedimento não está detalhado; o nome da relação não o substitui.')}${field('Conhecimentos de partida',refs(row.conhecimento_entrada_ids || row.input_knowledge_ids))}</li>
+        <li>${field('Entendimento acrescentado',row.added_understanding,'O entendimento acrescentado não foi detalhado.')}${outputs.length ? `<ul class="explanation-records">${outputs.map(item => `<li>${field('Conhecimento produzido ou refinado',text(item))}${documentarySupport(item)}${technical(item.id)}</li>`).join('')}</ul>` : ''}</li>
+        <li>${field('Condição e limite', [row.condicao || row.condition,row.limite || row.limit])}${documentarySupport(row)}${row.nivel_confirmacao ? field('Estado documental',human(row.nivel_confirmacao)) : ''}</li></ol>${technical(row.id)}</details>`;
+    };
+    const group = (key,label,note) => view.construction[key].length ? `<section data-construction-group="${key}"><h4>${label}</h4><p class="explanation-note">${note}</p>${view.construction[key].map(relation).join('')}</section>` : '';
+    return `<details class="explanation-reading" data-explanation-reading="construction"><summary>Como esse conhecimento foi construído</summary><div class="explanation-reading-body"><p class="explanation-note">As fontes foram relacionadas antes desta consulta. A síntese é um registro da pesquisa, não uma interpretação criada pelo AMADO agora.</p>
+      ${group('mobilized','Articulações percorridas nesta consulta','Estas relações participaram da recuperação do conhecimento para este caso.')}
+      ${group('historical','Construção anterior, não percorrida agora','Estas relações documentam a trajetória. Sua presença não significa que tenham participado da seleção desta vez.')}
+      ${group('unconfirmed','Relações não confirmadas ou bloqueadas','São registros para conferência, não apoios confirmados da escolha.')}
+      ${!array(data.articulations).length ? '<p class="explanation-gap">Nenhuma operação de articulação foi detalhada para esta escolha.</p>' : ''}
+      <details><summary>Consultar todos os conhecimentos desta escolha</summary>${array(data.knowledge).length ? `<ul class="explanation-records">${data.knowledge.map(row => `<li>${field('Conhecimento registrado',text(row))}${row.articulacao || row.articulation ? field('Articulação registrada',row.articulacao || row.articulation) : ''}${field('Limite',row.limite || row.limit)}${documentarySupport(row)}${technical(row.id)}</li>`).join('')}</ul>` : '<p class="explanation-gap">Não há conhecimento detalhado neste retorno.</p>'}</details></div></details>`;
   }
 
   function application(config) {
     const data = config.application || {};
-    const relevantChecks = checkRows(data.check_ids);
-    return `<details class="explanation-reading" data-explanation-reading="application"><summary>Por que foi usado aqui</summary><div class="explanation-reading-body">${field('Condições consideradas neste caso', refs(data.context_conditions))}${field('O que a orientação precisa garantir', refs(data.required_functions))}<h4>Fundamento da escolha</h4>${array(data.supports).length ? `<ul class="explanation-records">${data.supports.map(support).join('')}</ul>` : '<p class="explanation-gap">Nenhum apoio situado de critério foi detalhado para esta configuração.</p>'}${field('Função das formas de interação', config.function)}${field('Como usar', config.actions)}${field('Recursos e disponibilidade', array(config.resource_options).map(resource => `${text(resource)} — ${human(resource.estado || 'NAO_CONFIRMADO')}${resource.opcional ? ' (opcional)' : ''}`))}${field('Aplicar quando', config.conditions)}${field('Alternativa', config.alternative)}${field('Como acompanhar', config.monitoring)}${field('Limites e informações a conferir', [config.limit,...array(data.limitations).map(documentaryText)])}${relevantChecks.length ? `<details class="explanation-checks"><summary>O que o motor verificou nesta escolha</summary><p class="explanation-note">São verificações da composição. Não comprovam eficácia nem resultado de aprendizagem.</p><ul>${relevantChecks.map(row => `<li><strong>${escape(human(row.outcome))}:</strong> ${escape(row.message || row.title || 'Verificação sem explicação textual.')}${technical([row.id,row.rule_id])}</li>`).join('')}</ul></details>` : '<p class="explanation-gap">Não foram retornadas verificações executáveis específicas para esta escolha.</p>'}</div></details>`;
+    const view = projectConfiguration(result,config);
+    const functional = view.checks.filter(row => row.rule_id?.startsWith('functional_group_') || row.rule_id === 'required_field_tarefas');
+    const operational = view.checks.filter(row => row.rule_id === 'required_roles' || row.rule_id?.startsWith('resource_option_group_') || row.rule_id === 'core_resources' || row.field === 'modalidades_disponiveis');
+    const conditionText = row => {
+      const role = row.rule_id === 'required_roles';
+      const ids = role ? array(row.expected_ids) : array(row.matched_ids);
+      const groupMeaning = {ANY_CLAUSE:'Este grupo pede ao menos uma correspondência, não todas.',ANY_IN_FIELD:'As opções deste campo são alternativas; basta uma correspondência.',ANY:'Ao menos uma opção deve estar disponível.',ALL:'Todos os itens exigidos neste teste são conferidos.'}[row.operator] || '';
+      return `<li data-check-id="${escape(row.id)}"><strong>${escape(role ? 'Participação exigida' : human(row.outcome))}:</strong> ${escape(refs(ids).join('; ') || 'Nenhum item correspondente registrado.')}${role ? `<span> — ${escape(human(row.outcome))}.</span>` : ''}${groupMeaning ? `<p class="explanation-note">${escape(groupMeaning)}</p>` : ''}${technical([row.id])}</li>`;
+    };
+    const withItems = rows => rows.filter(row => array(row.expected_ids).length || array(row.matched_ids).length || array(row.clauses).length);
+    const knowledgeIds = [...new Set(view.supports.flatMap(row => array(row.knowledge_ids)))];
+    const addedIds = view.effect.addedSupportPairs.map(row => row.knowledge_id).filter(id => knowledgeIds.includes(id));
+    const visibleKnowledgeIds = [...new Set([...addedIds,...knowledgeIds])].slice(0,2);
+    const taskIds = [...new Set(functional.filter(row => row.field === 'tarefas').flatMap(row => array(row.matched_ids)))];
+    const conditionIds = [...new Set(functional.filter(row => row.rule_id?.startsWith('functional_group_')).flatMap(row => array(row.matched_ids)))];
+    const visibleConditions = conditionIds.slice(0,2);
+    const operationalItems = withItems(operational).map(row => ({row,ids:row.rule_id === 'required_roles' ? array(row.expected_ids) : array(row.matched_ids)}));
+    const retrieval = kid => {
+      const groups = view.retrievalGroups.filter(row => row.knowledge_id === kid);
+      return groups.length ? `<details><summary>Conferir como este conhecimento foi recuperado</summary><p class="explanation-note">As correspondências abaixo ocorreram na consulta. Elas não provam que uma característica causou a escolha, nem identificam por si só a pessoa responsável por ela.</p>${groups.map(group => `<div class="explanation-witness" data-witness-id="${escape(group.witness_ids[0] || '')}">${group.authorizations.some(state => ['CONDICIONAL','CONDITIONAL'].includes(state)) ? '<p class="explanation-gap" data-retrieval-conditional>Conhecimento com uso condicional neste caminho. A recuperação preserva condições pendentes; não equivale a autorização sem ressalvas.</p>' : ''}${field('Estado registrado da recuperação',group.authorizations.map(human))}${field('Conhecimento de entrada',refs(group.input_knowledge_id))}${group.articulation_id ? field('Articulação percorrida',refs(group.articulation_id)) : '<p>Recuperação direta, sem expansão por articulação neste caminho.</p>'}${group.concept_ids.length ? field('Condições do caso que corresponderam',refs(group.concept_ids)) : '<p>Este caminho usa um princípio geral com tarefa compatível; não registra uma característica individual correspondente.</p>'}${field('Caminho de compatibilidade entre tarefas',group.task_paths.map(path => refs(path).join(' → ')))}${group.required_function_ids.length ? field('Funções já informadas no contexto que habilitaram a articulação',refs(group.required_function_ids)) : ''}${technical([...group.witness_ids,...group.check_ids])}</div>`).join('')}</details>` : '<p class="explanation-gap">Não há testemunha de recuperação detalhada para este conhecimento no retorno.</p>';
+    };
+    const criteriaHtml = view.supports.length ? `<details><summary>Conferir os ${view.supports.length} critérios, conhecimentos ligados e origens</summary><ul class="explanation-records">${view.supports.map(row => `<li data-support-id="${escape(row.id)}"><ul class="explanation-records">${support(row)}</ul></li>`).join('')}</ul></details>` : '<p class="explanation-gap">Nenhum apoio situado foi detalhado.</p>';
+    return `<details class="explanation-reading" data-explanation-reading="application" open><summary>Por que neste caso</summary><div class="explanation-reading-body" data-explanation-reasons>
+      <ol class="explanation-reason-sequence">
+        <li data-reason-step="context"><h4>O que correspondeu ao caso</h4>${taskIds.length ? field('Tarefa',refs(taskIds)) : ''}${visibleConditions.length ? list(refs(visibleConditions)) : '<p>Não há condição funcional detalhada neste grupo de testes.</p>'}${conditionIds.length ? '<p class="explanation-note">O grupo pede ao menos uma correspondência, não todas.</p>' : ''}${withItems(functional).length ? `<details><summary>Conferir todas as correspondências e a regra do grupo</summary><ul class="explanation-checked">${withItems(functional).map(conditionText).join('')}</ul></details>` : '<p class="explanation-gap">O retorno não detalha uma correspondência de tarefa ou condição para este padrão.</p>'}</li>
+        <li data-reason-step="checks"><h4>O que permitiu usar esta opção</h4>${operationalItems.length ? `<ul class="explanation-checked">${operationalItems.map(({row,ids}) => `<li data-check-id="${escape(row.id)}"><strong>${escape(row.rule_id === 'required_roles' ? 'Participação exigida' : row.field === 'modalidades_disponiveis' ? 'Forma de interação' : 'Recurso disponível')}:</strong> ${escape(refs(ids).join('; ') || 'Não confirmado')} — ${escape(human(row.outcome))}.${row.operator === 'ANY' ? '<span class="explanation-note"> Basta uma das opções deste grupo.</span>' : ''}</li>`).join('')}</ul>` : '<p>Não há testes de participação, modalidade ou recurso detalhados.</p>'}</li>
+        <li data-reason-step="knowledge"><h4>O que o conhecimento acrescenta</h4>${visibleKnowledgeIds.length ? `<ul class="explanation-knowledge-brief">${visibleKnowledgeIds.map(kid => `<li data-knowledge-brief="${escape(kid)}">${escape(resolve(kid))}${addedIds.includes(kid) ? '<span class="explanation-note"> Apoio acrescentado com as articulações.</span>' : ''}</li>`).join('')}</ul>` : '<p class="explanation-gap">O retorno não detalhou conhecimentos ligados aos critérios.</p>'}<p class="explanation-note">São entendimentos registrados na base. Recuperação não equivale a confirmação integral.</p>${knowledgeIds.length ? `<details><summary>Consultar os ${knowledgeIds.length} conhecimentos e como foram recuperados</summary>${knowledgeIds.map(kid => `<section class="explanation-knowledge" data-knowledge-id="${escape(kid)}">${field('Entendimento registrado',refs(kid))}${documentarySupport(known.get(kid) || {})}${retrieval(kid)}${technical(kid)}</section>`).join('')}</details>` : ''}</li>
+        <li data-reason-step="criteria"><h4>Por que esses critérios se aplicam</h4>${list(view.supports.map(row => row.justification || row.justificativa),'A justificativa situada não foi detalhada. A presença de critérios não preenche essa lacuna.')}${criteriaHtml}</li>
+        <li data-reason-step="choice"><h4>O que ainda precisa ser conferido</h4>${list(config.conditions,'Não foi registrada uma condição textual de aplicação.')}<p class="explanation-note">Essas condições foram escritas no padrão; não foram comprovadas automaticamente.</p>${array(data.required_functions).length ? `<details><summary>Conferir funções requeridas e oferecidas</summary>${list(refs(data.required_functions))}<p class="explanation-note">Essas funções já estavam informadas no contexto e correspondem às oferecidas pelo padrão. A interface não as deduziu das barreiras ou do objetivo.</p></details>` : '<p class="explanation-note">Não foi registrada uma função requerida correspondente. A função da escolha é a oferecida pelo padrão.</p>'}</li>
+      </ol></div></details>`;
   }
 
-  function configuration(config) {
+  function conditions(config) {
+    return `<details class="explanation-reading" data-explanation-reading="conditions"><summary>Condições, alternativa e acompanhamento</summary><div class="explanation-reading-body">${field('Recursos e disponibilidade',array(config.resource_options).map(resource => `${text(resource)} — ${human(resource.estado || 'NAO_CONFIRMADO')}${resource.opcional ? ' (opcional)' : ''}`))}${field('Condições de aplicação registradas',config.conditions)}<p class="explanation-note">Uma condição documental não é uma verificação automática. A confirmação do objetivo e a adequação da aplicação continuam exigindo conferência humana.</p>${field('Alternativa registrada',config.alternative)}<p class="explanation-note">Esta alternativa está documentada; não foi replanejada nem testada nesta execução.</p>${field('Como acompanhar',config.monitoring)}${field('Limites',config.limit)}${array(config.application?.limitations).length ? `<details><summary>Conferências documentais ainda pendentes</summary>${list(config.application.limitations.map(documentaryText))}</details>` : ''}</div></details>`;
+  }
+
+  function effect(config) {
+    const view = projectConfiguration(result,config);
+    const wording = {
+      NEW_CHOICE:['Escolha acrescentada pela articulação','Esta opção não estava na execução isolada e foi selecionada quando as articulações foram habilitadas.'],
+      EXPANDED_FOUNDATION:['Fundamentação ampliada','Esta opção já era selecionada sem articulações. A articulação acrescentou apoios; não foi responsável por criar esta escolha.'],
+      UNCHANGED:['Sem diferença registrada para esta escolha','A comparação não registra uma nova escolha nem novos pares de apoio para este padrão.'],
+      NOT_EXECUTED:['Comparação não disponível','Este retorno não permite comparar a seleção isolada com a seleção que usa articulações. Nenhum efeito foi presumido.'],
+    }[view.effect.kind];
+    const pairKeys = new Set();
+    const pairs = view.effect.addedSupportPairs.filter(pair => { const key = `${pair.criterion_id}|${pair.knowledge_id}`; if (pairKeys.has(key)) return false; pairKeys.add(key); return true; });
+    return `<aside class="explanation-effect" data-articulation-effect="${view.effect.kind}"><strong>${wording[0]}</strong><p>${wording[1]}</p>${pairs.length ? `<details><summary>Conferir os apoios acrescentados nesta comparação</summary><ul>${pairs.map(pair => `<li>${field('Critério',refs(pair.criterion_id))}${field('Conhecimento acrescentado a este apoio',refs(pair.knowledge_id))}${technical([pair.criterion_id,pair.knowledge_id,...view.effect.addedSupportPairs.filter(p => p.criterion_id === pair.criterion_id && p.knowledge_id === pair.knowledge_id).map(p => p.origin_id)])}</li>`).join('')}</ul></details>` : ''}</aside>`;
+  }
+
+  function technicalChecks(config) {
+    const view = projectConfiguration(result,config);
+    return `<details class="explanation-checks"><summary>Verificações técnicas desta escolha</summary><p class="explanation-note">São verificações da composição, não comprovação de aprendizagem ou eficácia.</p>${view.checks.length ? `<ul>${view.checks.map(row => `<li data-technical-check-id="${escape(row.id)}"><strong>${escape(human(row.outcome))}:</strong> ${escape(row.message || 'Verificação sem descrição.')}${array(row.expected_ids).length ? field('Itens esperados',refs(row.expected_ids)) : ''}${array(row.matched_ids).length ? field('Correspondências',refs(row.matched_ids)) : ''}${array(row.missing_ids).length ? field('Itens ausentes',refs(row.missing_ids)) : ''}${technical([row.id,row.rule_id])}</li>`).join('')}</ul>` : '<p>Não há verificações detalhadas.</p>'}${technical(config.component_id)}</details>`;
+  }
+
+  function configuration(config, index = 0) {
     const viewName = `explanation-view-${presentationId}-${localGraphs.size}`;
-    return `<details class="explanation-choice" data-explanation-component="${escape(config.component_id || '')}"><summary><span class="explanation-title">${escape(config.title || config.function || 'Escolha multimodal')}</span><span class="explanation-purpose">${escape(config.function || 'Função ainda não detalhada.')}</span><span class="explanation-modalities">${escape(array(config.modalities).map(text).join(' · '))}</span><span class="explanation-state">${escape(human(config.selection || 'SELECTED'))}</span></summary><div class="explanation-choice-body"><details name="${viewName}" data-explanation-reading="textual" open><summary>Leitura textual</summary>${construction(config)}${application(config)}</details>${localGraph(config, viewName)}${technical([config.component_id])}</div></details>`;
+    const view = projectConfiguration(result,config);
+    const original = array(result.decision?.configuracao_modal).find(row => row.component_id === config.component_id);
+    return `<details class="explanation-choice" data-explanation-component="${escape(config.component_id || '')}"${index === 0 ? ' open' : ''}><summary><span class="explanation-title">${index + 1}. ${escape(config.title || config.function || 'Escolha multimodal')}</span><span class="explanation-purpose">${escape(config.function || 'Função não detalhada.')}</span><span class="explanation-modalities">${escape(array(config.modalities).map(text).join(' · '))}</span><span class="explanation-state">${escape(human(config.selection || 'SELECTED'))} · ${escape(human(config.availability_status || 'NAO_CONFIRMADO'))}</span></summary><div class="explanation-choice-body">
+      <section class="explanation-action" data-explanation-action><h3>O que fazer</h3>${list(config.actions,'A ação não foi detalhada neste retorno.')}${field('Para que serve esta forma de interação',config.function)}${original?.responsavel ? field('Responsável registrado',original.responsavel) : ''}</section>
+      ${view.foundationIncomplete.length ? '<p class="explanation-gap" data-foundation-warning>Parte da fundamentação documental ainda requer conferência. Os apoios e limites estão explicitados abaixo; seleção não significa validação completa.</p>' : ''}
+      ${effect(config)}${application(config)}${conditions(config)}${construction(config)}${localGraph(config, viewName)}${technicalChecks(config)}</div></details>`;
   }
 
   function localGraph(config, viewName) {

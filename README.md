@@ -6,6 +6,10 @@ O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação
 
 **Versão deste projeto: 1.4.0-rc1 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
 
+**Este é o projeto em desenvolvimento.** As melhorias da ontologia e do AMADO são integradas aqui, em `arcabouco-multimodal`; não existe um produto separado chamado “Evolution”. O repositório `MADO` anterior permanece preservado. A versão 1.4 da base e o módulo de composição 2.0.0-alpha2 têm identificadores distintos para permitir conferir exatamente o que foi executado.
+
+No mesmo AMADO, **Combinar formas de escrever e revisar** permite explorar o novo compositor por funções. Ele consulta registros da pesquisa e fundamentos multimodais para ligar uma forma viável de produzir conteúdo a uma forma viável de revisá-lo. Os demais casos continuam disponíveis no fluxo existente. [Como usar e o que já está coberto](docs/composicao-por-funcoes.md).
+
 ## Qual problema esta pesquisa enfrenta?
 
 Conhecimentos úteis ficam distribuídos entre normas, publicações, estudos, artefatos, personas e resultados. Encontrar esses documentos não basta para decidir **como combinar formas de interação para uma pessoa, uma tarefa e determinadas condições**.

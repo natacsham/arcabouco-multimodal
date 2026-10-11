@@ -44,50 +44,8 @@ function showStage(next, focus = false) {
   });
 }
 
-// Move the original content into disclosures, retaining every text node and
-// resource status. No summary or recommendation is rewritten by this adapter.
-function organizeConfigurations() {
-  $$('#practical-steps > article.practical-step').forEach((article, index) => {
-    const disclosure = document.createElement('details');
-    disclosure.className = 'practical-step guide-configuration';
-    const summary = document.createElement('summary');
-    const title = article.querySelector('h4');
-    const titleText = document.createElement('span');
-    titleText.className = 'guide-config-title';
-    titleText.textContent = `${index + 1}. ${title?.textContent || 'Forma de apoiar a atividade'}`;
-    title?.remove();
-    summary.append(titleText);
-    const modes = article.querySelector('.mode-pills');
-    if (modes) {
-      const span = document.createElement('span');
-      span.className = 'mode-pills'; span.append(...modes.childNodes);
-      modes.remove(); summary.append(span);
-    }
-    const purpose = article.querySelector('p');
-    if (purpose) {
-      const span = document.createElement('span');
-      span.className = 'guide-config-purpose';
-      span.append(...purpose.childNodes);
-      purpose.remove(); summary.append(span);
-    }
-    const availability = article.querySelector('.availability');
-    if (availability) {
-      const span = document.createElement('span');
-      span.className = 'guide-config-availability';
-      span.append(...availability.childNodes);
-      availability.remove(); summary.append(span);
-    }
-    const body = document.createElement('div');
-    body.className = 'guide-config-body';
-    body.append(...article.childNodes);
-    disclosure.append(summary, body);
-    article.replaceWith(disclosure);
-  });
-}
-
 function synchronize() {
   scheduled = false;
-  organizeConfigurations();
   const nowBusy = busy();
   const mode = free() ? 'free' : 'known';
   if (mode !== lastMode) { lastMode = mode; knownReviewed = false; showStage(1); }
@@ -153,12 +111,12 @@ $$('[data-guide-step]').forEach(button => button.addEventListener('click', () =>
   showStage(Number(button.dataset.guideStep), true);
 }));
 $('#guide-expand').addEventListener('click', () => {
-  $$('#practical-steps > details').forEach(item => { item.open = true; });
-  $('#guide-status').textContent = 'Blocos da orientação abertos.';
+  $$('#shared-explanation .explanation-choice').forEach(item => { item.open = true; });
+  $('#guide-status').textContent = 'Escolhas abertas. Os aprofundamentos documentais continuam opcionais.';
 });
 $('#guide-collapse').addEventListener('click', () => {
-  $$('#practical-steps > details').forEach(item => { item.open = false; });
-  $('#guide-status').textContent = 'Blocos recolhidos. Modos, função e situação dos recursos continuam visíveis.';
+  $$('#shared-explanation .explanation-choice').forEach(item => { item.open = false; });
+  $('#guide-status').textContent = 'Escolhas recolhidas. Seus títulos, modos e estados continuam visíveis.';
 });
 
 // Keep the speech stop action available even when another step is visible.
@@ -168,7 +126,8 @@ observer.observe(main, {attributes: true, attributeFilter: ['aria-busy']});
 for (const selector of ['#saida', '#free-interpretation', '#known-tab', '#free-tab']) {
   observer.observe($(selector), {attributes: true, attributeFilter: ['hidden', 'aria-selected']});
 }
-observer.observe($('#practical-steps'), {childList: true});
+// Observe only presenter replacement, not its internal graph/disclosure updates.
+observer.observe($('#shared-explanation'), {childList: true});
 observer.observe($('#reported-status'), {childList: true});
 $('#guide-progress').hidden = false;
 showStage(1);

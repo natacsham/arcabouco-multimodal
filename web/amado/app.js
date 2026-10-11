@@ -137,9 +137,19 @@ function list(selector, values, empty = "Nenhum item informado.") {
   element.innerHTML = (values?.length ? values : [empty]).map((value) => `<li>${escapeHtml(value)}</li>`).join("");
 }
 
-function summaryCard(label, values, empty = "Não informado.") {
-  const content = Array.isArray(values) ? values : [values];
-  return `<article><h3>${escapeHtml(label)}</h3>${content.filter(Boolean).length ? content.filter(Boolean).map((value) => `<p>${escapeHtml(value)}</p>`).join("") : `<p>${escapeHtml(empty)}</p>`}</article>`;
+function contextValues(values) {
+  return (Array.isArray(values) ? values : [values]).filter(Boolean).map(value => typeof value === "object" ? value.label || value.papel || "" : String(value)).filter(Boolean);
+}
+
+function contextField(label, values) {
+  const items = contextValues(values);
+  return `<div><dt>${escapeHtml(label)}</dt><dd>${items.length ? items.map(value => `<p>${escapeHtml(value)}</p>`).join("") : '<p class="context-unknown">Não informado.</p>'}</dd></div>`;
+}
+
+function contextGroup(id, title, previewValues, fields) {
+  const preview = contextValues(previewValues);
+  const short = preview.slice(0, 2).join(" · ") + (preview.length > 2 ? ` · e mais ${preview.length - 2} itens` : "");
+  return `<details class="context-group" data-context-group="${id}"><summary><span class="context-group-title">${escapeHtml(title)}</span><span class="context-group-preview">${escapeHtml(short || "Confira o que está registrado e o que falta informar.")}</span></summary><dl class="context-fields">${fields.join("")}</dl></details>`;
 }
 
 function contextCards(context) {
@@ -151,24 +161,36 @@ function contextCards(context) {
     const tasks = (person.tarefas || []).join("; ") || "atividade não atribuída";
     const resources = (person.recursos_operados || []).join("; ") || "operação de dispositivos e apoios não atribuída";
     const modes = (person.modalidades || []).join("; ") || "formas de interação não atribuídas";
-    return `${person.papel || "Papel não informado"}. Atividade: ${tasks}. Opera: ${resources}. Interage por: ${modes}.`;
+    const characteristics = contextValues(person.caracteristicas);
+    return `${person.papel || "Papel não informado"}. Atividade: ${tasks}. Opera: ${resources}. Interage por: ${modes}.${characteristics.length ? ` Características atribuídas a esta pessoa: ${characteristics.join("; ")}.` : ""}`;
   });
+  const roles = (context.participantes || []).map(person => person.papel).filter(Boolean);
+  const tasks = contextValues(context.tarefas);
+  const framing = [
+    roles.length ? `<strong>Participação:</strong> ${escapeHtml(roles.join("; "))}.` : "",
+    tasks.length ? `<strong>Atividade informada:</strong> ${escapeHtml(tasks[0])}.${tasks.length > 1 ? " Outras atividades estão no grupo Atividade e objetivo." : ""}` : "",
+    context.objetivo ? `<strong>Objetivo informado:</strong> ${escapeHtml(context.objetivo)}` : "",
+  ].filter(Boolean).join(" ");
   return [
-    summaryCard("Características relevantes da pessoa", context.caracteristicas_relevantes),
-    summaryCard("Participantes e responsabilidades", participants),
-    summaryCard("Atividade", context.tarefas),
-    summaryCard("Objetivo", context.objetivo),
-    summaryCard("Dificuldade observada", context.barreiras),
-    summaryCard("O que precisa ser apoiado", context.necessidades),
-    summaryCard("O que a orientação precisa garantir (requisitos a conferir)", context.funcoes_requeridas),
-    summaryCard("Formas de interação", context.modalidades_disponiveis),
-    summaryCard("Aplicativo ou conteúdo utilizado", context.recursos_digitais),
-    summaryCard("Como o aplicativo ou conteúdo é operado", context.operacao_do_recurso),
-    summaryCard("Dispositivos e apoios disponíveis", context.recursos_disponiveis),
-    summaryCard("Recursos propostos (a preparar)", context.recursos_propostos),
-    summaryCard("Recursos que não podem ser usados", blockedSummary),
-    summaryCard("Condições ou restrições importantes", context.restricoes),
-    summaryCard("Onde ocorre", context.ambientes),
+    `<p class="context-overview" data-context-summary>${framing || "Ainda não há atividade, objetivo ou participantes informados. Abra os grupos para conferir o caso."}</p>`,
+    contextGroup("person", "Pessoas e participação", roles.length ? roles : context.caracteristicas_relevantes, [
+      contextField("Participantes e responsabilidades registradas", participants),
+      contextField("Características registradas no caso", context.caracteristicas_relevantes),
+    ]),
+    contextGroup("activity", "Atividade e objetivo", context.tarefas, [
+      contextField("Atividade", context.tarefas), contextField("Objetivo informado", context.objetivo),
+      contextField("Onde ocorre", context.ambientes),
+    ]),
+    contextGroup("support", "Dificuldades e apoio necessário", context.barreiras, [
+      contextField("Dificuldade observada", context.barreiras), contextField("O que precisa ser apoiado", context.necessidades),
+      contextField("O que a orientação precisa garantir (requisitos a conferir)", context.funcoes_requeridas),
+    ]),
+    contextGroup("resources", "Recursos e condições", context.recursos_disponiveis, [
+      contextField("Formas de interação", context.modalidades_disponiveis), contextField("Aplicativo ou conteúdo utilizado", context.recursos_digitais),
+      contextField("Como o aplicativo ou conteúdo é operado", context.operacao_do_recurso),
+      contextField("Dispositivos e apoios disponíveis", context.recursos_disponiveis), contextField("Recursos propostos (a preparar)", context.recursos_propostos),
+      contextField("Recursos que não podem ser usados", blockedSummary), contextField("Condições ou restrições importantes", context.restricoes),
+    ]),
   ].join("");
 }
 
@@ -212,7 +234,10 @@ function draftContext(free) {
 
 function refreshDraftPreview(free) {
   const context = draftContext(free);
-  $(free ? "#free-summary" : "#context-summary").innerHTML = contextCards(context);
+  const targetSummary = $(free ? "#free-summary" : "#context-summary");
+  const openGroups = new Set([...targetSummary.querySelectorAll("details[open][data-context-group]")].map(node => node.dataset.contextGroup));
+  targetSummary.innerHTML = contextCards(context);
+  targetSummary.querySelectorAll("[data-context-group]").forEach(node => { node.open = openGroups.has(node.dataset.contextGroup); });
   if (!free) $("#organized-text").textContent = context.descricao_do_contexto;
   const assumptions = context.premissas_do_exemplo || [];
   const target = free ? "#free-assumptions" : "#known-assumptions";
@@ -234,12 +259,7 @@ function showResourceReview(free, visible) {
 function renderReported() {
   const reported = catalog.reported;
   $("#reported-text").textContent = reported.texto_curto;
-  $("#reported-summary").innerHTML = [
-    summaryCard("Pessoa", reported.caracteristicas_relevantes),
-    summaryCard("Como participava", [...reported.modalidades_disponiveis, ...reported.tarefas]),
-    summaryCard("O que precisava ser preservado", reported.necessidades),
-    summaryCard("Contexto", reported.ambientes),
-  ].join("");
+  $("#reported-summary").innerHTML = contextCards(reported);
 }
 
 function checkedValues(container, field) {
@@ -399,22 +419,16 @@ const TRACE_STEPS = [
   {kind: "configuration", label: "Configuração multimodal", description: "Uma parte concreta da orientação: qual modo usar, para quê, com qual recurso, por quem e em quais condições. As configurações selecionadas compõem a decisão e explicitam alternativas e acompanhamento; cada cartão pode tratar de um modo dessa combinação."},
   {kind: "source", label: "Fonte", description: "O documento ou registro que sustenta o conhecimento ou a origem de um critério. Permite conferir o fundamento; sua presença não comprova que a orientação já foi aplicada com sucesso."},
 ];
-const originalDeparaOrder = $("#depara-reading-order").textContent;
 
 function renderRationaleGuide() {
   $("#free-rationale-terms").innerHTML = TRACE_STEPS.map((step) => `<li data-trace-kind="${step.kind}"><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.description)}</p></li>`).join("");
 }
 
-function renderTraceGraph(graph, result = {}) {
-  // Both modes and views read the same explanatory projection. Legacy graph
-  // groupings are not substituted for missing evidence in the new contract.
-  $("#trace-reading-order").textContent = "Abra uma escolha: confira como seu conhecimento foi construído e por que foi empregado neste caso.";
-  $("#free-trace-overview").hidden = true;
-  $("#free-trace-overview").replaceChildren();
-  $("#free-trace-explanation").hidden = true;
-  $("#free-trace-explanation").replaceChildren();
-  $("#trace-table").replaceChildren();
-  renderExplanation($("#trace-graph"), result);
+function renderChoices(result) {
+  // One explanatory projection and one collection of choices in both views.
+  // The presenter retains source, execution and graph details within it.
+  $("#trace-details").open = true;
+  renderExplanation($("#shared-explanation"), result);
 }
 
 function renderComparison(result) {
@@ -453,18 +467,6 @@ function renderComparison(result) {
   $("#articulated-comparison").innerHTML = `<p><strong>${(comparison.added_knowledge_ids || []).length}</strong> conhecimentos foram acrescentados por <strong>${(comparison.articulation_ids || []).length}</strong> relações documentadas.</p><p>As configurações selecionadas apresentam: ${escapeHtml((articulated.modalities || []).join(", ") || 'nenhuma modalidade')}. Foram selecionadas ${(articulated.component_ids || []).length} configurações, com condições e limites próprios.</p><details data-articulation-delta><summary>O que a articulação acrescentou a cada escolha</summary><p>A comparação distingue uma configuração nova de um apoio adicional para uma configuração já presente. Não demonstra resultado de uma aplicação.</p>${details}</details>`;
 }
 
-function renderDePara(rows) {
-  const target = $("#depara-table");
-  $("#depara-reading-order").textContent = "Condição do caso → interpretação registrada no padrão → função oferecida → configuração → alternativa e limite. Os requisitos confirmados e as verificações estão no percurso de fundamentação; uma função oferecida não cria um requisito do contexto.";
-  if (!rows?.length) {
-    target.innerHTML = activeTab === "free"
-      ? "<p>Esta execução não retornou uma matriz de transformação das condições. Isso, isoladamente, não informa o motivo: confira o estado da decisão, as lacunas e o caminho da orientação.</p>"
-      : "<p>Não foi retornada uma transformação estruturada para este caso. Confira o estado da orientação e as lacunas; nenhuma transformação foi presumida.</p>";
-    return;
-  }
-  target.innerHTML = `<div class="table-scroll"><table><caption>Condições consideradas e funções oferecidas na orientação</caption><thead><tr><th>Condição</th><th>Interpretação registrada no padrão</th><th>Função oferecida</th><th>Como foi configurado</th><th>Alternativa e limite</th></tr></thead><tbody>${rows.map((row) => `<tr><td>${escapeHtml(row.condicoes.join("; "))}</td><td>${escapeHtml(row.abstracao_funcional)}</td><td>${escapeHtml(row.implicacao_decisoria)}</td><td>${row.configuracao_multimodal.map((item) => `<strong>${escapeHtml(item.modo)}</strong>: ${escapeHtml(item.funcao)} <small>(${escapeHtml(item.responsavel)})</small>`).join("<br>")}</td><td>${escapeHtml(row.alternativa)}<br><small>${escapeHtml(row.condicao_limite)}</small></td></tr>`).join("")}</tbody></table></div>`;
-}
-
 function renderPracticalSummary(decision) {
   const summary = decision.sintese_pratica || {
     titulo: "Sugestão para este caso",
@@ -474,23 +476,6 @@ function renderPracticalSummary(decision) {
   };
   $("#practical-title").textContent = summary.titulo;
   $("#practical-headline").textContent = summary.texto;
-  $("#practical-steps").innerHTML = (summary.etapas || []).map((step) => {
-    const items = step.itens || [];
-    const structuredResources = Array.isArray(step.recursos_estruturados) ? step.recursos_estruturados
-      : (step.recursos || []).map((label) => ({label, estado: "NAO_CONFIRMADO"}));
-    const resources = structuredResources.filter((resource) => resource.estado !== "IMPEDIDO").map(renderResourceOption).join("; ");
-    const preparation = (step.estado_recurso || []).map(availabilityLabel).join("; ");
-    const modes = (step.modos || []).map((mode) => `<span class="mode-pill">${escapeHtml(mode)}</span>`).join("");
-    const actions = items.length > 1
-      ? `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`
-      : `<p>${escapeHtml(items[0] || "")}</p>`;
-    const details = [
-      ...(step.condicoes || []).map((value) => `<p><strong>Usar quando:</strong> ${escapeHtml(value)}</p>`),
-      ...(step.alternativas || []).map((value) => `<p><strong>Se não puder usar:</strong> ${escapeHtml(value)}</p>`),
-      ...(step.acompanhamento || []).map((value) => `<p><strong>Observar:</strong> ${escapeHtml(value)}</p>`),
-    ].join("");
-    return `<article class="practical-step"><div class="mode-pills">${modes}</div><h4>${escapeHtml(step.titulo)}</h4><p><strong>Função:</strong> ${escapeHtml(step.funcao || "")}</p><p><strong>Como se complementa:</strong> ${escapeHtml(step.como_combinar || "")}</p>${actions}<p class="availability"><strong>Recursos:</strong> ${resources || "sem recurso específico"}${preparation ? `<br><strong>Situação da adaptação:</strong> ${escapeHtml(preparation)}` : ""}</p>${details ? `<details class="summary-more"><summary>Condição, alternativa e acompanhamento</summary>${details}</details>` : ""}</article>`;
-  }).join("");
   $("#expected-result").textContent = summary.resultado_esperado || decision.resultado_esperado || "";
   $("#expected-result-note").textContent = summary.aviso_resultado || "Este resultado é uma expectativa para acompanhamento, não uma garantia de eficácia.";
 }
@@ -530,13 +515,6 @@ function renderDecision(result) {
   $("#orientation").textContent = decision.orientacao_principal;
   $("#rationale").textContent = decision.justificativa;
   renderComparison(result);
-  renderDePara(result.de_para || []);
-  $("#modal-configuration").innerHTML = decision.configuracao_modal.map((item) => `<article class="mode-card"><span class="role">${escapeHtml(item.papel_modal)}</span><h3>${escapeHtml(item.modo)}</h3><p><strong>Para quê:</strong> ${escapeHtml(item.funcao)}</p><p><strong>Como usar:</strong> ${escapeHtml(item.acao)}</p><p><strong>Responsável:</strong> ${escapeHtml(item.responsavel)}</p><p><strong>Recursos:</strong> ${(item.resource_options || []).map(renderResourceOption).join("; ") || "sem recurso específico"}</p><details class="mode-more"><summary>Condições, alternativa e acompanhamento</summary><p><strong>Aplicar quando:</strong> ${escapeHtml((item.conditions || []).join(" "))}</p><p><strong>Se não funcionar:</strong> ${escapeHtml(item.alternative)}</p><p><strong>Observar:</strong> ${escapeHtml(item.monitoring)}</p><p><strong>Limite:</strong> ${escapeHtml(item.limit)}</p></details><small>${escapeHtml(contributionLabel(item.contribution_status))} · ${escapeHtml(availabilityLabel(item.availability_status))}</small></article>`).join("");
-  list("#resources", decision.recursos);
-  list("#conditional-resources", decision.recursos_condicionais, "Nenhum recurso precisa de confirmação.");
-  list("#conditions", decision.condicoes);
-  list("#alternatives", decision.alternativas);
-  list("#monitoring", decision.acompanhamento);
   list("#missing", decision.informacoes_ausentes);
   $("#missing-box").hidden = !decision.informacoes_ausentes.length;
   $("#limit").textContent = decision.limite;
@@ -544,7 +522,7 @@ function renderDecision(result) {
   renderCriteria(result.traceability.criteria);
   renderKnowledge(result.traceability.knowledge);
   $("#rejected").innerHTML = result.traceability.rejected_candidates.length ? `<ul>${result.traceability.rejected_candidates.map((row) => `<li><strong>${escapeHtml(row.label)}</strong>: ${escapeHtml(row.reasons.join("; "))}</li>`).join("")}</ul>` : "<p>Nenhuma possibilidade foi excluída.</p>";
-  renderTraceGraph(result.trace_graph, result);
+  renderChoices(result);
   $("#saida").scrollIntoView({behavior: scrollBehavior(), block: "start"});
   $("#decision-title").focus({preventScroll:true});
 }
@@ -563,6 +541,7 @@ async function generate(container, free, statusTarget) {
   if (free && normalizeNarrative($("#free-narrative").value) !== organizedNarrative) {
     throw new Error("A descrição mudou. Clique em Organizar as informações e confirme a nova organização antes de gerar.");
   }
+  window.dispatchEvent(new CustomEvent('amado-context-cleared'));
   $(statusTarget).textContent = "Consultando conhecimentos e critérios…";
   const payload = gatherContext(container, free);
   currentCase = await api("/api/context", {method: "POST", body: JSON.stringify(payload)});
@@ -583,6 +562,10 @@ $("#confirm-reported").addEventListener("click", () => runBusy('#reported-status
     $("#organized-step").scrollIntoView({behavior: scrollBehavior(), block: "start"});
 }));
 
+$$("input[name='reported-confirmation']").forEach(input => input.addEventListener("change", () => {
+  $("#reported-correction-details").open = input.value === "no";
+}));
+
 $("#generate-known").addEventListener("click", () => runBusy("#known-status", () => generate("#controlled-fields", false, "#known-status")));
 
 $("#organize-narrative").addEventListener("click", () => runBusy("#narrative-status", async () => {
@@ -601,6 +584,7 @@ $("#organize-narrative").addEventListener("click", () => runBusy("#narrative-sta
       return;
     }
     invalidateDecision(true);
+    window.dispatchEvent(new CustomEvent('amado-context-cleared'));
     const response = await api("/api/analyze-narrative", {method: "POST", body: JSON.stringify({narrative, input_modality: "text"})});
     currentCase = response.current;
     organizedNarrative = narrative;
@@ -613,6 +597,7 @@ $("#generate-free").addEventListener("click", () => runBusy("#free-status", () =
 
 $("#template-select").addEventListener("change", (eventObject) => runBusy("#narrative-status", async () => {
   if (!eventObject.target.value) return;
+  window.dispatchEvent(new CustomEvent('amado-context-cleared'));
   invalidateDecision(true);
   currentCase = await request('start', {template:eventObject.target.value});
   $("#free-narrative").value = currentCase.context.texto_curto;
@@ -730,15 +715,17 @@ async function load() {
 }
 
 function clearInputAndResult() {
+  window.dispatchEvent(new CustomEvent('amado-context-cleared'));
   currentCase = null; lastResult = null; organizedNarrative = null;
   if ('speechSynthesis' in window) speechSynthesis.cancel();
   $$('textarea').forEach(node => { node.value = ''; });
   $$('input[type="checkbox"], input[type="radio"]').forEach(node => { node.checked = false; });
   $('#template-select').value = '';
   $('#saida').hidden = true; $('#free-interpretation').hidden = true;
-  ['#free-controlled-fields','#controlled-fields','#free-summary','#context-summary','#practical-steps','#orientation','#rationale','#modal-configuration','#depara-table','#trace-graph','#trace-table','#free-trace-overview','#free-trace-explanation','#criteria','#knowledge','#rejected','#practical-headline','#expected-result','#expected-result-note','#resources','#conditional-resources','#conditions','#alternatives','#monitoring','#missing','#isolated-comparison','#articulated-comparison','#technical-summary','#limit','#free-missing ul','#free-assumptions ul','#known-assumptions ul'].forEach(selector => $(selector).replaceChildren());
+  ['#free-controlled-fields','#controlled-fields','#free-summary','#context-summary','#shared-explanation','#orientation','#rationale','#criteria','#knowledge','#rejected','#practical-headline','#expected-result','#expected-result-note','#missing','#isolated-comparison','#articulated-comparison','#technical-summary','#limit','#free-missing ul','#free-assumptions ul','#known-assumptions ul'].forEach(selector => $(selector).replaceChildren());
   $('#organized-text').textContent = '';
   $('#reported-correction').value = '';
+  $('#reported-correction-details').open = false;
   ['#reported-status','#known-status','#free-status','#narrative-status','#speech-status','#runtime-error'].forEach(selector => { $(selector).textContent = ''; });
   $('#reported-step').open = true; $('#organized-step').open = false;
   $('#free-narrative-block').open = true;
@@ -757,6 +744,11 @@ $('#clear-case').addEventListener('click', () => {
   $('#main').setAttribute('aria-busy','false');
   $('#health').textContent = 'Caso descartado. Reiniciando o ambiente de execução…';
   runBusy('#health', load);
+});
+window.addEventListener('amado-composition-start', () => {
+  lastResult = null;
+  $('#saida').hidden = true;
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 });
 window.addEventListener('amado-progress', e => {
   $('#health').dataset.state = 'loading';

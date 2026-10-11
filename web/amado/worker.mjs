@@ -2,7 +2,7 @@ import { loadPyodide } from './runtime/pyodide.mjs';
 
 let pyodide, ready;
 let queue = Promise.resolve();
-const allowed = new Set(['initialize','catalog','start','update','analyze','confirm','generate','clear']);
+const allowed = new Set(['initialize','catalog','start','update','analyze','confirm','generate','clear','catalog_composition','compose']);
 
 async function bytes(relative) {
   const response = await fetch(new URL(relative, import.meta.url));

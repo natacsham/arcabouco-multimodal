@@ -107,6 +107,9 @@ for (const id of Object.keys(native).filter(key=>key in browser)) {
   report.cases[id]={equal:mismatch.length===0,status:native[id].decision.status,configurations:native[id].decision.component_ids,query_rows:native[id].query_summary,native_canonical_sha256:digest(left),browser_canonical_sha256:digest(right),differences:mismatch};
 }
 report.passed=report.missing_in_browser.length===0 && report.unexpected_in_browser.length===0 && Object.values(report.cases).every(row=>row.equal) && Object.values(report.comparator_self_checks).every(Boolean);
-await fs.writeFile(path.join(root,'evidence/parity-report.json'),JSON.stringify(report,null,2));
+const reportPath=path.resolve(root,process.env.PARITY_REPORT_PATH||'evidence/parity-report.json');
+if (!reportPath.startsWith(root+path.sep)) throw new Error('Parity report must stay inside the project.');
+await fs.mkdir(path.dirname(reportPath),{recursive:true});
+await fs.writeFile(reportPath,JSON.stringify(report,null,2));
 console.log(JSON.stringify({passed:report.passed,cases:Object.fromEntries(Object.entries(report.cases).map(([id,row])=>[id,{equal:row.equal,differences:row.differences.slice(0,2)}])),missing:report.missing_in_browser},null,2));
 if (!report.passed) process.exitCode=1;

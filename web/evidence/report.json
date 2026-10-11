@@ -2,7 +2,7 @@
   "version": "1.4.0-rc1",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-08T05:14:57.745885+00:00",
+  "compiled_at_utc": "2026-10-11T04:31:18.345556+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -24,10 +24,15 @@
     "parity_current_native": true,
     "parity_current_test": true,
     "distribution": true,
-    "distribution_files_current": true
+    "distribution_files_current": true,
+    "composition_browser": true,
+    "composition_current_build": true,
+    "composition_current_test": true,
+    "composition_model": true,
+    "composition_reasoner": true
   },
   "results": {
-    "unit_tests": 99,
+    "unit_tests": 111,
     "ontology_triples": 13951,
     "owl_2_dl": true,
     "hermit_consistency": true,
@@ -57,11 +62,21 @@
       "download_mado.owl": true,
       "download_main.shacl.ttl": true,
       "index.html_ready": true,
+      "index.html_four_connected_context_groups": true,
       "index.html_generation_no_error": true,
       "index.html_explicit_partial_coverage": true,
+      "index.html_one_card_per_configuration": true,
+      "index.html_first_choice_open": true,
+      "index.html_remaining_choices_recollected": true,
+      "index.html_keyboard_choice_closes": true,
       "index.html_keyboard_choice": true,
+      "index.html_action_and_reason_together": true,
+      "index.html_articulation_expands_foundation": true,
+      "index.html_duplicate_depara_not_shown": true,
       "index.html_construction_visible": true,
       "index.html_documentary_status_not_overstated": true,
+      "index.html_reason_shows_recorded_role": true,
+      "index.html_reason_retains_witness_links": true,
       "index.html_graph_keyboard_open": true,
       "index.html_graph_only_recorded_relations": true,
       "index.html_graph_details_at_node": true,
@@ -77,11 +92,21 @@
       "index.html_clear_discards_decision": true,
       "index.html_graph_listeners_released_on_clear": true,
       "guiado.html_ready": true,
+      "guiado.html_four_connected_context_groups": true,
       "guiado.html_generation_no_error": true,
       "guiado.html_explicit_partial_coverage": true,
+      "guiado.html_one_card_per_configuration": true,
+      "guiado.html_first_choice_open": true,
+      "guiado.html_remaining_choices_recollected": true,
+      "guiado.html_keyboard_choice_closes": true,
       "guiado.html_keyboard_choice": true,
+      "guiado.html_action_and_reason_together": true,
+      "guiado.html_articulation_expands_foundation": true,
+      "guiado.html_duplicate_depara_not_shown": true,
       "guiado.html_construction_visible": true,
       "guiado.html_documentary_status_not_overstated": true,
+      "guiado.html_reason_shows_recorded_role": true,
+      "guiado.html_reason_retains_witness_links": true,
       "guiado.html_graph_keyboard_open": true,
       "guiado.html_graph_only_recorded_relations": true,
       "guiado.html_graph_details_at_node": true,
@@ -108,20 +133,83 @@
       "no_browser_case_storage": true,
       "no_case_transmission": true,
       "no_javascript_errors": true
+    },
+    "composition": {
+      "version": "2.0.0-alpha2",
+      "browser_checks": {
+        "index.html_catalog_from_rdf": true,
+        "index.html_keyboard_audio_native_parity": true,
+        "index.html_audio_blocked_native_parity": true,
+        "index.html_visual_alternative_native_parity": true,
+        "index.html_unknown_effort_native_parity": true,
+        "index.html_no_correction_native_parity": true,
+        "index.html_review_only_native_parity": true,
+        "index.html_not_confirmed_native_parity": true,
+        "index.html_complete": true,
+        "index.html_blocked_audio_not_ready": true,
+        "index.html_recomposes_visual": true,
+        "index.html_unknown_not_approved": true,
+        "index.html_unconfirmed_not_approved": true,
+        "index.html_example_unconfirmed": true,
+        "index.html_real_ui_complete": true,
+        "index.html_meaningful_result": true,
+        "index.html_revoked_confirmation_hides_result": true,
+        "index.html_ui_partial_not_ready": true,
+        "index.html_input_change_revokes_confirmation": true,
+        "index.html_ui_visual_recomposition": true,
+        "index.html_question_focuses_missing_field": true,
+        "index.html_partial_documentary_status_visible_in_dom": true,
+        "index.html_reflow_320": true,
+        "index.html_text_200": true,
+        "index.html_reset_clears_error_and_task_help": true,
+        "index.html_clear_discards": true,
+        "index.html_no_storage": true,
+        "guiado.html_catalog_from_rdf": true,
+        "guiado.html_keyboard_audio_native_parity": true,
+        "guiado.html_audio_blocked_native_parity": true,
+        "guiado.html_visual_alternative_native_parity": true,
+        "guiado.html_unknown_effort_native_parity": true,
+        "guiado.html_no_correction_native_parity": true,
+        "guiado.html_review_only_native_parity": true,
+        "guiado.html_not_confirmed_native_parity": true,
+        "guiado.html_complete": true,
+        "guiado.html_blocked_audio_not_ready": true,
+        "guiado.html_recomposes_visual": true,
+        "guiado.html_unknown_not_approved": true,
+        "guiado.html_unconfirmed_not_approved": true,
+        "guiado.html_example_unconfirmed": true,
+        "guiado.html_real_ui_complete": true,
+        "guiado.html_meaningful_result": true,
+        "guiado.html_revoked_confirmation_hides_result": true,
+        "guiado.html_ui_partial_not_ready": true,
+        "guiado.html_input_change_revokes_confirmation": true,
+        "guiado.html_ui_visual_recomposition": true,
+        "guiado.html_question_focuses_missing_field": true,
+        "guiado.html_partial_documentary_status_visible_in_dom": true,
+        "guiado.html_reflow_320": true,
+        "guiado.html_text_200": true,
+        "guiado.html_reset_clears_error_and_task_help": true,
+        "guiado.html_clear_discards": true,
+        "guiado.html_no_storage": true,
+        "no_external_case_requests": true,
+        "no_page_errors": true
+      },
+      "scope": "Produzir ou revisar uma contribuição digital; não substitui todas as tarefas do motor anterior.",
+      "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"
     }
   },
   "limits": [
     "Revisão técnica dos casos existentes, não nova avaliação humana.",
     "Conferência em registro preservado não equivale à leitura do documento original.",
     "Apoios parciais, pendências e verificações não executadas permanecem explícitos.",
-    "Alternativas textuais não são automaticamente avaliadas ou recompostas.",
+    "Alternativas textuais dos casos anteriores não são automaticamente recompostas; o módulo por funções verifica suas próprias rotas de entrada e revisão.",
     "Testes não demonstram eficácia educacional ou aplicabilidade universal.",
     "NVDA e VoiceOver não avaliados; não se declara conformidade WCAG integral."
   ],
   "reports": {
     "technical-report.json": {
       "url": "technical-report.json",
-      "sha256": "b28bb4cc883314d9e469fa3864a15e7be46762b9e2828ca12da02d4d994b34c4"
+      "sha256": "ee835afbe5cc1c2fa0e0ad247f649c05ccf145155e70fc0c45e3d95967952d27"
     },
     "reasoner-report.json": {
       "url": "reasoner-report.json",
@@ -129,29 +217,29 @@
     },
     "regression-report.json": {
       "url": "regression-report.json",
-      "sha256": "3c53e870f8a72bc5f2eb4d70a4641e66a64d16f160261b2b3677d0be89a98e6b"
+      "sha256": "c514e03b67200803183421d53e2b23be7755d1bad92d61eeb90cdbca8653ee5f"
     },
     "traceability-browser.json": {
       "url": "traceability-browser.json",
-      "sha256": "8983bcb5c4adf53264aec2937f0c721fd5cc682cdbe109249468b8e628f7e67b"
+      "sha256": "aca6604a9f9a0628c8e131ff4def7aac6f3d63fa358c7dc83748a63030e2b84d"
     },
     "parity-report.json": {
       "url": "parity-report.json",
-      "sha256": "48ff7be23d9b516cc2cbd6a9f707e30d6f4f4933695f29ea73a8cb4813321392"
+      "sha256": "4d3c0e20d90498db95fa89575a688404564d201338812d08c8ec75f239bcc256"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "c7eab7f6a736f4c066cf0a0d632a5d7358468bfc937c10d266adc88ced064ee9"
+      "sha256": "7fde307e3ed0435395f923a8e4306d9a51c2b9e5550bcc151e465cb5ba8be43b"
     },
     "build-manifest.json": {
       "url": "build-manifest.json",
-      "sha256": "7c98b721216e1ae3926f509ac86f9595c587ca0908967c4c286b1183eff1bba5"
+      "sha256": "a09bfd064ef88ef0522c0587de980ba19742798d9cd6375d2627626a78bc6fdf"
     },
-    "traceability-public.json": {
-      "url": "traceability-public.json",
-      "sha256": "f011830f92e913f7cb508840b9b9d9c50bd3d9b293f7946265016d4965f4d2dd"
+    "composition-browser.json": {
+      "url": "composition-browser.json",
+      "sha256": "cc5a7493453189793b5f4b68a0bd2352619bc9e15284ab3b88efc0cbca6b628b"
     }
   },
   "historical_evidence_notice": "Outros relatórios herdados de 1.3 permanecem no histórico; não integram a aprovação desta versão.",
-  "public_smoke_status": "VERIFIED_CURRENT_BUILD"
+  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
 }

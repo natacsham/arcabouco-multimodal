@@ -1,0 +1,22 @@
+/* Reuse the AMADO surface, disclosure and reading-control design. */
+#composition-panel { min-width: 0; }
+#composition-panel > summary { font-size: 1.125rem; font-weight: 700; cursor: pointer; }
+#composition-panel > .composition-content { padding-top: 1rem; }
+#composition-panel p, #composition-panel li { font-size: 1rem; font-weight: 400; }
+#composition-panel select { width: 100%; }
+#composition-panel fieldset { min-width: 0; border: 0; padding: .6rem 0; margin: 0; }
+.composition-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem 1.5rem; }
+.composition-field label { display: block; margin: 0 0 .4rem; }
+.composition-field-group [data-field-count] { font-weight: 400; }
+.composition-steps { padding-left: 1.5rem; }
+.composition-steps > li + li, .composition-sources > li + li { margin-top: 1rem; }
+.composition-steps h4 { margin-bottom: .4rem; }
+.composition-choice, .composition-foundation, .composition-connection, #composition-result { min-width: 0; overflow-wrap: anywhere; }
+.composition-connection { border-left: .25rem solid var(--primary); padding: .4rem 1rem; margin: 1rem 0; }
+.composition-badge { display: inline-block; padding: .15rem .5rem; margin-left: .3rem; border: 1px solid currentColor; border-radius: .3rem; font-size: .875rem; font-weight: 400; }
+#composition-result { border-top: 2px solid var(--border); margin-top: 1.25rem; padding-top: 1.25rem; }
+#composition-error:not(:empty) { color: #7d1818; background: #fff4f4; border: 2px solid #a32929; padding: .75rem; }
+#composition-error:empty, #composition-status:empty { display: none; }
+.composition-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 45rem) { .composition-fields { grid-template-columns: minmax(0,1fr); } #composition-panel { padding: 1rem; } }
+@media (forced-colors: active) { #composition-error:not(:empty) { color: CanvasText; background: Canvas; border-color: CanvasText; } .composition-connection { border-color: CanvasText; } }

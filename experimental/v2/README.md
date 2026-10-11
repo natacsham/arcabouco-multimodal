@@ -1,6 +1,6 @@
 # MADO V2 — composição fundamentada de formas de interação
 
-**Versão experimental `2.0.0-alpha2`.** Este diretório implementa uma evolução isolada da MADO. O site, o motor público, a base anterior e a versão da tese não são substituídos. Origem preservada: commit `73013190f26cf8806e7f647dbb3fa36a8c07a3c3`. O primeiro piloto (`alpha1`) permanece no histórico.
+**Versão experimental `2.0.0-alpha2`.** Este diretório contém o módulo de composição integrado ao AMADO do `arcabouco-multimodal`. Não é outro repositório ou site. A base anterior, seus casos e a versão da tese não são substituídos. Origem preservada: commit `73013190f26cf8806e7f647dbb3fa36a8c07a3c3`. O primeiro piloto (`alpha1`) permanece no histórico.
 
 A `alpha2` acrescenta uma ponte com **os registros reais da pesquisa** e separa proposta completa, condicional e parcial. [Veja o que cada conhecimento acrescenta e onde está a base consultada](docs/reutilizacao-da-trajetoria.md).
 
@@ -106,7 +106,7 @@ As contribuições são paráfrases acompanhadas de fontes e localizações; PDF
 
 `CURATED_FOR_PILOT` significa habilitação técnica nesta proposta de modelagem assistida, **não aprovação semântica pela autora ou especialista**. Os conhecimentos são sínteses de projeto (`DESIGN_SYNTHESIS_NOT_EMPIRICAL`), não resultados empíricos. A autora ainda deve conferir a síntese, suas condições e sua adequação à trajetória da tese.
 
-No piloto genérico, os critérios analíticos são identificados separadamente; não foram renomeados como CA01–CA88. A ponte da trajetória mantém os identificadores reais que emprega, como CA38, e explicita as novas aplicações como propostas. K28/K29 continuam candidatos reconstruídos e K41 permanece documentalmente parcial. A integração ampla à base e à interface exigirá revisão semântica e regressão próprias.
+No piloto genérico, os critérios analíticos são identificados separadamente; não foram renomeados como CA01–CA88. A ponte da trajetória mantém os identificadores reais que emprega, como CA38, e explicita as novas aplicações como propostas. K28/K29 continuam candidatos reconstruídos e K41 permanece documentalmente parcial. A interface oferece explicitamente as duas tarefas deste módulo; não transforma automaticamente qualquer caso em uma delas.
 
 ## Limites que permanecem
 
@@ -116,4 +116,4 @@ No piloto genérico, os critérios analíticos são identificados separadamente;
 - A busca também limita a enumeração a 4.096 tentativas por fase e registra interrupção. Esse controle não demonstra escalabilidade para grandes catálogos; se o limite for atingido, ausência de resultado não comprova inexistência de outra combinação.
 - A matriz de alternativas não foi avaliada com participantes, leitor de tela ou tarefa real.
 - Nenhuma alegação de melhoria da aprendizagem, acessibilidade universal ou escolha ótima é feita.
-- Esta V2 não está conectada à página pública. A página continua usando sua versão preservada.
+- A integração no mesmo AMADO utiliza operações próprias de catálogo e composição; os casos anteriores mantêm seu executor. Veja o escopo em [Composição por funções](../../docs/composicao-por-funcoes.md). Disponibilidade no endereço público depende da publicação e da verificação registradas na entrega.

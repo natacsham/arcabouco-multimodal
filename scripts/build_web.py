@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 import shutil
 import zipfile
 from pathlib import Path
@@ -9,6 +10,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "web"
 APP = WEB / "amado"
+COMPOSITION_FILES = (
+    "experimental/v2/composer.py",
+    "experimental/v2/trajectory.py",
+    "experimental/v2/schema.ttl",
+    "experimental/v2/base.ttl",
+    "experimental/v2/extensions/audio-review.ttl",
+    "experimental/v2/trajectory-bindings.json",
+    "experimental/v2/examples/learning-contribution.json",
+)
 
 
 def sha(path):
@@ -32,6 +42,13 @@ def build():
         ROOT / "data/interface-vocabulary.json",
         ROOT / "ontology/mado-combined.ttl",
     ] + sorted((ROOT / "queries").glob("CQ-*.rq"))
+    # Explicit public allowlist: no reports, private records or runtime cases.
+    # Preserve this directory structure: the composer resolves its base from it.
+    paths += [ROOT / name for name in COMPOSITION_FILES]
+    version_match = re.search(r'owl:versionInfo\s+"([^"]+)"',
+                              (ROOT / "experimental/v2/schema.ttl").read_text(encoding="utf-8"))
+    if not version_match:
+        raise RuntimeError("Composition schema must declare its own version.")
     for package in ("rdflib", "pyparsing", "html5rdf"):
         paths += [
             p
@@ -77,9 +94,15 @@ def build():
         },
         "case_history": False,
         "llm": False,
+        "composition": {
+            "version": version_match.group(1),
+            "implementation": "ResearchComposer",
+            "case_storage": False,
+            "files": {name: sha(ROOT / name) for name in COMPOSITION_FILES},
+        },
         "frontend_sha256": {
             name: sha(APP / name)
-            for name in ("index.html", "app.js", "styles.css", "worker.mjs", "client.mjs", "guiado.html", "guided.js", "guided.css", "views.css")
+            for name in ("index.html", "app.js", "styles.css", "worker.mjs", "client.mjs", "guiado.html", "guided.js", "guided.css", "views.css", "composition.js", "composition.css")
         },
         "site_assets_sha256": {
             name: sha(WEB / name)

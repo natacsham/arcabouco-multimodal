@@ -31,7 +31,7 @@
 .guided-view #prepared-scenarios p { max-width: 80ch; }
 .guided-view .guide-help { padding: .7rem; border: 1px solid #a8bcba; border-radius: .6rem; background: #fff; }
 .guided-view .guide-help > summary { cursor: pointer; min-height: 2.75rem; padding: .4rem; font-weight: 700; color: #164f53; }
-.guided-view .summary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+.guided-view .summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
 .guided-view .summary-grid > article { border: 0; border-left: 3px solid #89a8a0; background: #f6f9f7; padding: .85rem 1rem; border-radius: .2rem; }
 .guided-view .summary-grid h3 { margin-top: 0; font-size: 1.125rem; }
 .guided-view .summary-grid p { margin-block: .45rem; font-size: 1rem; font-weight: 400; }

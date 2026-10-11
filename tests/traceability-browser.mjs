@@ -11,6 +11,9 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const web=path.join(root,'web'), prefix='/arcabouco-multimodal/';
 const artifacts=path.join(root,'tests/.artifacts/browser');
 await fs.mkdir(artifacts,{recursive:true});
+const reports=path.resolve(root,process.env.TRACE_REPORT_DIR||'evidence');
+assert(reports.startsWith(root+path.sep),'Report directory must stay inside the project.');
+await fs.mkdir(reports,{recursive:true});
 const modules=process.env.AMADO_NODE_MODULES||path.join(process.env.USERPROFILE,'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules');
 const {chromium}=await import(pathToFileURL(path.join(modules,'playwright/index.mjs')).href);
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.wasm':'application/wasm','.zip':'application/zip'};
@@ -117,19 +120,29 @@ try{
     const resizeBaseline=await page.evaluate(()=>window.__traceProbe.resizeListeners.size);
     await page.locator('#reported-step input[value="yes"]').check();
     await page.locator('#confirm-reported').click();await idle(page);
+    check(view+'_four_connected_context_groups',await page.locator('#context-summary [data-context-group]').count()===4);
     await page.locator('#mapping-confirmed').check();
     await page.locator('#generate-known').click();await idle(page);
     check(view+'_generation_no_error',!(await page.locator('#runtime-error').textContent()).trim());
     check(view+'_explicit_partial_coverage',(await page.locator('#decision-status').textContent()).includes('parcial'));
     const choice=page.locator('[data-explanation-component]').first();
-    await openAncestors(choice);await choice.locator(':scope > summary').focus();
+    check(view+'_one_card_per_configuration',await page.locator('#saida [data-explanation-component]').count()===7);
+    check(view+'_first_choice_open',await choice.getAttribute('open')!==null);
+    check(view+'_remaining_choices_recollected',await page.locator('#saida [data-explanation-component][open]').count()===1);
+    await openAncestors(choice);await choice.locator(':scope > summary').click();
+    check(view+'_keyboard_choice_closes',await choice.getAttribute('open')===null);
+    await choice.locator(':scope > summary').focus();
     await page.keyboard.press('Enter');check(view+'_keyboard_choice',await choice.getAttribute('open')!==null);
+    check(view+'_action_and_reason_together',await choice.locator('[data-explanation-action]').isVisible()&&await choice.locator('[data-explanation-reasons]').isVisible());
+    check(view+'_articulation_expands_foundation',await choice.locator('[data-articulation-effect]').getAttribute('data-articulation-effect')==='EXPANDED_FOUNDATION');
+    check(view+'_duplicate_depara_not_shown',!await page.locator('#depara-details').isVisible());
     const build=choice.locator('[data-explanation-reading="construction"]');
     await build.locator(':scope > summary').focus();await page.keyboard.press('Enter');
     check(view+'_construction_visible',await build.getAttribute('open')!==null);
     check(view+'_documentary_status_not_overstated',(await page.locator('.explanation').innerText()).includes('registro'));
     const use=choice.locator('[data-explanation-reading="application"]');
-    await use.locator(':scope > summary').click();
+    check(view+'_reason_shows_recorded_role',(await use.textContent()).toLocaleLowerCase('pt-BR').includes('professora'));
+    check(view+'_reason_retains_witness_links',await use.locator('[data-witness-id]').count()>0);
     const graph=choice.locator('[data-explanation-reading="graph"]');
     const operationsBefore=await page.evaluate(()=>JSON.stringify(window.__traceProbe.operations));
     await graph.locator(':scope > summary').focus();await page.keyboard.press('Enter');
@@ -149,9 +162,8 @@ try{
     check(view+'_graph_details_at_node',await graphNode.getAttribute('open')!==null);
     check(view+'_graph_no_new_execution',await page.evaluate(()=>JSON.stringify(window.__traceProbe.operations))===operationsBefore);
     const content=await page.locator('.explanation').first().textContent();displayed.push(content);
-    check(view+'_two_readings_present',content.includes('Como este conhecimento foi construído')&&content.includes('Por que foi usado aqui'));
-    const focus=await use.locator(':scope > summary').evaluate(el=>({style:getComputedStyle(el).outlineStyle,width:getComputedStyle(el).outlineWidth}));
-    await use.locator(':scope > summary').focus();await page.keyboard.press('Tab');
+    check(view+'_two_readings_present',content.includes('Como esse conhecimento foi construído')&&content.includes('Por que neste caso'));
+    await choice.locator(':scope > summary').focus();await page.keyboard.press('Tab');
     check(view+'_focusable_disclosures',await page.locator('.explanation summary').count()>3);
     report.contrast??={};report.contrast[view]=await contrastSamples();
     check(view+'_sampled_contrast',report.contrast[view].every(s=>s.ratio>=s.minimum));
@@ -220,7 +232,7 @@ try{
 }catch(error){report.failure=String(error.stack||error).replaceAll(root,'<PROJECT>').replaceAll(root.replaceAll('\\','/'),'<PROJECT>');process.exitCode=1;await page.screenshot({path:path.join(artifacts,'traceability-failure.png'),fullPage:true}).catch(()=>{});}
 finally{
   const name=process.env.TRACE_PUBLIC_URL?'traceability-public.json':'traceability-browser.json';
-  await fs.writeFile(path.join(root,'evidence',name),JSON.stringify(report,null,2));
+  await fs.writeFile(path.join(reports,name),JSON.stringify(report,null,2));
   await browser.close();await new Promise(resolve=>server.close(resolve));
   console.log(JSON.stringify({completed:report.completed,checks:report.checks,failure:report.failure},null,2));
 }

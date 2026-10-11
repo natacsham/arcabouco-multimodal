@@ -45,6 +45,17 @@ O piloto é uma projeção de uma execução técnica preparada, não uma sessã
 
 ## Navegador
 
+A composição por funções também está no mesmo AMADO, na seção **Combinar formas de escrever e revisar**. Use o exemplo sintético ou confira as condições explicitamente. Seu catálogo e suas decisões são calculados pelo módulo `experimental/v2`, empacotado junto da base pública. [Escopo e percurso dos dados](composicao-por-funcoes.md).
+
+Para verificar separadamente esse módulo:
+
+```text
+python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
+python -B experimental/v2/verify.py
+python -B -m unittest discover -s tests -p test_composition_bridge.py
+node tests/composition-browser.mjs
+```
+
 Os testes usam Playwright e Chromium. Configure `AMADO_NODE_MODULES` com a pasta que contém Playwright e `AMADO_CHROMIUM` com o executável do navegador. Execute:
 
 ```text

@@ -90,6 +90,35 @@ h4 { font-size: 1rem; }
 .summary-grid article, .result-grid article, .delta-grid > article, .mode-card { border: 1px solid var(--border); border-radius: 12px; padding: 15px; background: #fff; }
 .summary-grid h3 { margin: .1rem 0 .55rem; color: var(--primary-dark); }
 .summary-grid p { margin: .25rem 0; }
+/* The review is grouped by the user's questions, without changing its fields. */
+.summary-grid > .context-overview { grid-column: 1 / -1; margin: 0 0 .35rem; padding: .8rem 0; line-height: 1.65; }
+.context-group { min-width: 0; align-self: start; padding: 0; border: 1px solid #819f9f; border-radius: .7rem; background: #fff; overflow-wrap: anywhere; }
+.context-group > summary { padding: .85rem 1rem; min-height: 44px; cursor: pointer; color: #183e43; }
+.context-group > summary:hover { background: #edf5f2; border-radius: .7rem; }
+.context-group > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.context-group-title { font-size: 1.125rem; font-weight: 700; }
+.context-group-preview { display: block; margin-top: .35rem; color: #405c64; font-size: 1rem; font-weight: 400; line-height: 1.5; }
+.context-fields { padding: .75rem 1rem 1rem; margin: 0; border-top: 1px solid #bacdca; }
+.context-fields > div + div { margin-top: 1rem; }
+.context-fields dt { font-weight: 700; color: #183e43; }
+.context-fields dd { margin: .25rem 0 0; }
+.context-fields dd p + p { margin-top: .55rem; }
+.context-unknown { color: #405c64; }
+#practical-steps, #trace-graph, #shared-explanation { min-width: 0; width: 100%; }
+#practical-steps { display: block; }
+.choices-section > .choices-help { font-size: 1rem; margin-block: .8rem 1rem; }
+.context-description { margin-bottom: 1rem; }
+@media (max-width: 40rem) {
+  .summary-grid { grid-template-columns: minmax(0, 1fr); }
+  .context-group > summary, .context-fields { padding: 10px; }
+  .summary-grid > .context-overview { padding-inline: 0; }
+  #trace-details.choices-section { padding-inline: 10px; }
+}
+@media (forced-colors: active) {
+  .context-group, .context-fields { border-color: CanvasText; background: Canvas; }
+  .context-group > summary, .context-group-preview, .context-fields dt, .context-unknown { color: CanvasText; }
+  .context-group > summary:hover { background: Canvas; }
+}
 .delta-grid { margin: 22px 0; }
 .delta-grid > .added { background: var(--added); border-color: #a88fcf; }
 .delta-item { border-top: 1px solid var(--border); padding: 10px 0; }

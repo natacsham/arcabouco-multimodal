@@ -2,7 +2,7 @@
   "version": "1.4.0-rc1",
   "type": "SYNTHETIC_TECHNICAL_BROWSER_CHECK",
   "execution_target": "LOCAL_SUBPATH",
-  "executed_at": "2026-10-08T05:03:25.367Z",
+  "executed_at": "2026-10-11T04:22:05.371Z",
   "checks": {
     "served_manifest_matches_current_build": true,
     "home_pilot_derived_choice_loaded": true,
@@ -14,11 +14,21 @@
     "download_mado.owl": true,
     "download_main.shacl.ttl": true,
     "index.html_ready": true,
+    "index.html_four_connected_context_groups": true,
     "index.html_generation_no_error": true,
     "index.html_explicit_partial_coverage": true,
+    "index.html_one_card_per_configuration": true,
+    "index.html_first_choice_open": true,
+    "index.html_remaining_choices_recollected": true,
+    "index.html_keyboard_choice_closes": true,
     "index.html_keyboard_choice": true,
+    "index.html_action_and_reason_together": true,
+    "index.html_articulation_expands_foundation": true,
+    "index.html_duplicate_depara_not_shown": true,
     "index.html_construction_visible": true,
     "index.html_documentary_status_not_overstated": true,
+    "index.html_reason_shows_recorded_role": true,
+    "index.html_reason_retains_witness_links": true,
     "index.html_graph_keyboard_open": true,
     "index.html_graph_only_recorded_relations": true,
     "index.html_graph_details_at_node": true,
@@ -34,11 +44,21 @@
     "index.html_clear_discards_decision": true,
     "index.html_graph_listeners_released_on_clear": true,
     "guiado.html_ready": true,
+    "guiado.html_four_connected_context_groups": true,
     "guiado.html_generation_no_error": true,
     "guiado.html_explicit_partial_coverage": true,
+    "guiado.html_one_card_per_configuration": true,
+    "guiado.html_first_choice_open": true,
+    "guiado.html_remaining_choices_recollected": true,
+    "guiado.html_keyboard_choice_closes": true,
     "guiado.html_keyboard_choice": true,
+    "guiado.html_action_and_reason_together": true,
+    "guiado.html_articulation_expands_foundation": true,
+    "guiado.html_duplicate_depara_not_shown": true,
     "guiado.html_construction_visible": true,
     "guiado.html_documentary_status_not_overstated": true,
+    "guiado.html_reason_shows_recorded_role": true,
+    "guiado.html_reason_retains_witness_links": true,
     "guiado.html_graph_keyboard_open": true,
     "guiado.html_graph_only_recorded_relations": true,
     "guiado.html_graph_details_at_node": true,
@@ -198,6 +218,14 @@
     "GET",
     "GET",
     "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
+    "GET",
     "GET"
   ],
   "limitations": [
@@ -212,8 +240,8 @@
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
     "core_sha256": "ba144a55c80add31a054da52949027f3109792cb2950aadbe1a667ba46d4c6ab",
-    "bridge_sha256": "22fecd9b9b9c1268449b988446e33422f6d9e3b530449a2df3210a5d15a5b2a9",
-    "base_zip_sha256": "10662ab67590701418b0fb72f4253737b1c614aeb5dfa57865ae022ea8f3f84d",
+    "bridge_sha256": "dc16de38e285da9ce3205fa6a2f56bb6c4468390c09366183ed773a985278336",
+    "base_zip_sha256": "e0c73ff47c6894ec6dfab15845d4f50c4d30b06f16aa103052bf50c089073c24",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -250,16 +278,32 @@
     },
     "case_history": false,
     "llm": false,
+    "composition": {
+      "version": "2.0.0-alpha2",
+      "implementation": "ResearchComposer",
+      "case_storage": false,
+      "files": {
+        "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
+        "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
+        "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
+        "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+        "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
+        "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+        "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
+      }
+    },
     "frontend_sha256": {
-      "index.html": "9f3aadfb6bf307f2114ef83f69aa5b5105591afab1d6d935ac87063ad418acad",
-      "app.js": "073d7d7796e70d0e040df43d78efbde1a47eca43c870b2f463b1e823b0248f5c",
-      "styles.css": "aa9e6edcf5c40dc0fd3dcb2e9e53a1c5be560825cabbc911aae8a7d1d1596424",
-      "worker.mjs": "c19d8ca179d3392399389b066d473a39ffe1b764ea3e930225a5a9d0f158939f",
+      "index.html": "a7aa3f6763acb5a86f1aadfd9a1c685a26fe4b0dd0ecb2971f2e051df4e55d37",
+      "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
+      "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
+      "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
       "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "a20158ccc0bb2902747b8cb16cd8bf21d03bc0cc68bbff9cc0bf8fc7d6dce5ca",
-      "guided.js": "3dcaf686742a9af2cd65c37b215a4d341f7ce1ec720f42d0701352535e661236",
-      "guided.css": "339c66c48dcb8c9aabd4320084f0d2de81222c3988e05bc5cd4b9f6f59fa1e6f",
-      "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564"
+      "guiado.html": "1b32dd18123b53a5971628f30bb66d0a062d4cbc926997ed3fc94809a642511a",
+      "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
+      "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
+      "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+      "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
+      "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
@@ -268,8 +312,8 @@
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
-      "explanation.js": "320ac8da992c11fe352740585cb25781d2df7f0b9b2c5271b749acb4413fef04",
-      "explanation.css": "033b902338cf3aaf18dd7eec4e2612feaab45d2e45d6c791858207eafd9fb5b7",
+      "explanation.js": "60f4bbb76c92740838d4521145e1b65b8bd84305a3a07982ad9ef44bdf0f9948",
+      "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
       "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
       "assets/explanation-pilot.json": "1ea639db54ea2b8dfe765cdebd86bb4a3aa69e194e501bb1a94a65c28de59666"
     },
@@ -285,17 +329,24 @@
       "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
       "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
       "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
-      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+      "experimental/v2/composer.py": "d94100e045ea42eddf7016845ffcfb5e94bfdb8120bf6ca2d17ba50d52e42b3e",
+      "experimental/v2/trajectory.py": "207bf4824cc78485be375f54f9e6440898febc44fccecb998837672dfb7158f9",
+      "experimental/v2/schema.ttl": "fdce8d71bcdb78bbd81be7261a4ce3802b7a9233811a4af1d1cd256e30adfebb",
+      "experimental/v2/base.ttl": "e5222061d26db4efeec2401ceba2940e279fb73cc6067067c72c809dcbb16bec",
+      "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
+      "experimental/v2/trajectory-bindings.json": "b315a3e5c7b446fe61a00b943df3a323f430cad997b9fb77cca0af2b2cc129b2",
+      "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "test_sha256": "a1ddfbaffc27d0392c8141a719af6cc276860227d523aa914c9d8493d7bca110",
+  "test_sha256": "b4a33d1395de85d6f007d1baf97b00adba32ef5ac7d05fb73c34df905dcc0a55",
   "browser": "154.0.8037.98",
   "contrast": {
     "index.html": [
       {
         "selector": ".explanation p",
         "text": "Percurso das verificações registradas, com construção documental ",
-        "ratio": 11.600435029658607,
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -306,26 +357,26 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
+        "text": "Parte da fundamentação documental ainda requer conferência. Os ap",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Esta opção já era selecionada sem articulações. A articulação acr",
+        "ratio": 10.723331613570922,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "O grupo pede ao menos uma correspondência, não todas.",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Registro em foco",
-        "ratio": 12.0623549832488,
+        "text": "São entendimentos registrados na base. Recuperação não equivale a",
+        "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
@@ -336,32 +387,32 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "text": "1. Estrutura persistente para organizar e retomar o conteúdoorgan",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Leitura textual",
+        "text": "Conferir os apoios acrescentados nesta comparação",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Grafo local desta escolha",
+        "text": "Por que neste caso",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
-        "ratio": 10.723331613570922,
+        "text": "Conferir todas as correspondências e a regra do grupo",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
-        "ratio": 10.723331613570922,
+        "text": "Consultar os 5 conhecimentos e como foram recuperados",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -372,13 +423,31 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Descrição completa",
+        "text": "Para que serve esta forma de interação",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Responsável registrado",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fundamentação ampliada",
         "ratio": 10.723331613570922,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "função oferecida pelo padrão",
+        "text": "Tarefa",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Participação exigida:",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -402,8 +471,20 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Organizar relações históricas e reduzir competição entre formatos",
-        "ratio": 10.723331613570922,
+        "text": "criar blocos curtos com uma ideia central, autoria identificada, ",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "organizar unidades curtas, autoria, sequência e pontos de revisão",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Professora",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -453,7 +534,7 @@
       {
         "selector": ".explanation p",
         "text": "Percurso das verificações registradas, com construção documental ",
-        "ratio": 11.600435029658607,
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -464,26 +545,26 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
+        "text": "Parte da fundamentação documental ainda requer conferência. Os ap",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Esta opção já era selecionada sem articulações. A articulação acr",
+        "ratio": 10.77794504543097,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "O grupo pede ao menos uma correspondência, não todas.",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Registro em foco",
-        "ratio": 12.0623549832488,
+        "text": "São entendimentos registrados na base. Recuperação não equivale a",
+        "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
@@ -494,32 +575,32 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "text": "1. Estrutura persistente para organizar e retomar o conteúdoorgan",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Leitura textual",
+        "text": "Conferir os apoios acrescentados nesta comparação",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Grafo local desta escolha",
+        "text": "Por que neste caso",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
-        "ratio": 10.77794504543097,
+        "text": "Conferir todas as correspondências e a regra do grupo",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
-        "ratio": 10.77794504543097,
+        "text": "Consultar os 5 conhecimentos e como foram recuperados",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -530,13 +611,31 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Descrição completa",
+        "text": "Para que serve esta forma de interação",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Responsável registrado",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fundamentação ampliada",
         "ratio": 10.77794504543097,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "função oferecida pelo padrão",
+        "text": "Tarefa",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Participação exigida:",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -560,8 +659,20 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Organizar relações históricas e reduzir competição entre formatos",
-        "ratio": 10.77794504543097,
+        "text": "criar blocos curtos com uma ideia central, autoria identificada, ",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "organizar unidades curtas, autoria, sequência e pontos de revisão",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Professora",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -611,7 +722,7 @@
       {
         "selector": ".explanation p",
         "text": "Percurso das verificações registradas, com construção documental ",
-        "ratio": 11.600435029658607,
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -622,26 +733,26 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
+        "text": "Parte da fundamentação documental ainda requer conferência. Os ap",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Esta opção já era selecionada sem articulações. A articulação acr",
+        "ratio": 10.881409692860425,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "O grupo pede ao menos uma correspondência, não todas.",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Registro em foco",
-        "ratio": 12.0623549832488,
+        "text": "São entendimentos registrados na base. Recuperação não equivale a",
+        "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
@@ -652,32 +763,32 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "text": "1. Estrutura persistente para organizar e retomar o conteúdoorgan",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Leitura textual",
+        "text": "Conferir os apoios acrescentados nesta comparação",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Grafo local desta escolha",
+        "text": "Por que neste caso",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
-        "ratio": 10.881409692860425,
+        "text": "Conferir todas as correspondências e a regra do grupo",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
-        "ratio": 10.881409692860425,
+        "text": "Consultar os 5 conhecimentos e como foram recuperados",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -688,13 +799,31 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Descrição completa",
+        "text": "Para que serve esta forma de interação",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Responsável registrado",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fundamentação ampliada",
         "ratio": 10.881409692860425,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "função oferecida pelo padrão",
+        "text": "Tarefa",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Participação exigida:",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -718,8 +847,20 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Organizar relações históricas e reduzir competição entre formatos",
-        "ratio": 10.881409692860425,
+        "text": "criar blocos curtos com uma ideia central, autoria identificada, ",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "organizar unidades curtas, autoria, sequência e pontos de revisão",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Professora",
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -769,7 +910,7 @@
       {
         "selector": ".explanation p",
         "text": "Percurso das verificações registradas, com construção documental ",
-        "ratio": 11.600435029658607,
+        "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
@@ -780,26 +921,26 @@
       },
       {
         "selector": ".explanation p",
-        "text": "Escolha um registro para ver as relações diretamente ligadas a el",
+        "text": "Parte da fundamentação documental ainda requer conferência. Os ap",
+        "ratio": 11.29549625064439,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "Esta opção já era selecionada sem articulações. A articulação acr",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation p",
+        "text": "O grupo pede ao menos uma correspondência, não todas.",
         "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
         "selector": ".explanation p",
-        "text": "— Uso ou correspondência nesta execução┄ Relação documental preex",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Relações 1 a 1 de 1 ligadas ao foco.",
-        "ratio": 12.0623549832488,
-        "minimum": 4.5
-      },
-      {
-        "selector": ".explanation p",
-        "text": "Registro em foco",
-        "ratio": 12.0623549832488,
+        "text": "São entendimentos registrados na base. Recuperação não equivale a",
+        "ratio": 7.1033501023516665,
         "minimum": 4.5
       },
       {
@@ -810,31 +951,31 @@
       },
       {
         "selector": ".explanation summary",
-        "text": "Estrutura persistente para organizar e retomar o conteúdoorganiza",
+        "text": "1. Estrutura persistente para organizar e retomar o conteúdoorgan",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Leitura textual",
+        "text": "Conferir os apoios acrescentados nesta comparação",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Grafo local desta escolha",
+        "text": "Por que neste caso",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "FunçãoOrganizar relações históricas e reduzir competição entre fo",
+        "text": "Conferir todas as correspondências e a regra do grupo",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation summary",
-        "text": "Identificadores para conferência",
+        "text": "Consultar os 5 conhecimentos e como foram recuperados",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -846,13 +987,31 @@
       },
       {
         "selector": ".explanation strong",
-        "text": "Descrição completa",
+        "text": "Para que serve esta forma de interação",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
       {
         "selector": ".explanation strong",
-        "text": "função oferecida pelo padrão",
+        "text": "Responsável registrado",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Fundamentação ampliada",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Tarefa",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation strong",
+        "text": "Participação exigida:",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },
@@ -876,7 +1035,19 @@
       },
       {
         "selector": ".explanation li",
-        "text": "Organizar relações históricas e reduzir competição entre formatos",
+        "text": "criar blocos curtos com uma ideia central, autoria identificada, ",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "organizar unidades curtas, autoria, sequência e pontos de revisão",
+        "ratio": 12.0623549832488,
+        "minimum": 4.5
+      },
+      {
+        "selector": ".explanation li",
+        "text": "Professora",
         "ratio": 12.0623549832488,
         "minimum": 4.5
       },

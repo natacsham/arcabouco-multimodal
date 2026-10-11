@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="./views.css">
   <link rel="stylesheet" href="../explanation.css">
   <link rel="stylesheet" href="./guided.css">
+  <link rel="stylesheet" href="./composition.css">
 </head>
 <body class="guided-view">
   <a class="skip" href="#main">Ir para o conteúdo</a>
@@ -73,6 +74,29 @@
       </ol>
     </nav>
     <p id="guide-status" class="guide-status" role="status" aria-atomic="true"></p>
+    <details id="composition-panel" class="card">
+      <summary>Combinar formas de escrever e revisar</summary>
+      <div class="composition-content">
+        <p>Explore uma contribuição escrita em uma atividade de aprendizagem. A base combina etapas de entrada e revisão conforme as condições que você confirmar, sem exigir um cenário completo previamente cadastrado.</p>
+        <p class="field-help">Este percurso cobre produzir e conferir um texto, não todas as atividades digitais. É independente dos casos apresentados nas abas abaixo. As respostas ficam somente na memória desta página.</p>
+        <button id="composition-load" class="secondary" type="button">Carregar condições da base</button>
+        <p id="composition-status" role="status" aria-atomic="true"></p>
+        <p id="composition-error" role="alert"></p>
+        <form id="composition-form" hidden>
+          <label for="composition-task">O que precisa ser feito?</label>
+          <select id="composition-task" aria-describedby="composition-task-help"></select>
+          <p id="composition-task-help" class="field-help"></p>
+          <div class="actions"><button id="composition-example" class="secondary" type="button">Preencher um exemplo sintético</button><button id="composition-reset" class="secondary" type="button">Limpar esta exploração</button></div>
+          <p id="composition-example-note" class="notice" hidden></p>
+          <p>Abra os grupos e indique <strong>sim</strong>, <strong>não</strong> ou <strong>ainda não sei</strong>. Não é necessário informar um diagnóstico. Condições desconhecidas não serão tratadas como atendidas.</p>
+          <div id="composition-fields"></div>
+          <label class="confirmation"><input id="composition-confirmed" type="checkbox"> Conferi as respostas; o que ainda não sei está indicado como desconhecido.</label>
+          <div class="actions"><button id="composition-generate" type="submit">Construir combinações fundamentadas</button></div>
+        </form>
+        <button id="composition-cancel" class="secondary" type="button" hidden>Cancelar e limpar o caso</button>
+        <section id="composition-result" aria-labelledby="composition-result-title" hidden></section>
+      </div>
+    </details>
     <div class="tabs" role="tablist" aria-label="Forma de uso">
       <button id="known-tab" type="button" role="tab" aria-selected="true" aria-controls="known-panel">Partir do caso da pesquisa</button>
       <button id="free-tab" type="button" role="tab" aria-selected="false" aria-controls="free-panel" tabindex="-1">Descrever ou escolher outro caso</button>
@@ -94,9 +118,12 @@
             <label><input type="radio" name="reported-confirmation" value="yes"> Li a adaptação e quero manter o exemplo</label>
             <label><input type="radio" name="reported-confirmation" value="no"> Quero anotar uma diferença para esta exploração</label>
           </fieldset>
-          <label for="reported-correction">O que seria diferente no caso que você quer explorar?</label>
-          <div class="input-with-action"><textarea id="reported-correction" rows="3"></textarea><button class="dictate secondary" type="button" data-target="reported-correction">Ditar</button></div>
-          <p class="dictation-status" aria-live="polite"></p>
+          <details id="reported-correction-details" class="foundation">
+            <summary>Anotar uma diferença no caso</summary>
+            <label for="reported-correction">O que seria diferente no caso que você quer explorar?</label>
+            <div class="input-with-action"><textarea id="reported-correction" rows="3"></textarea><button class="dictate secondary" type="button" data-target="reported-correction">Ditar</button></div>
+            <p class="dictation-status" aria-live="polite"></p>
+          </details>
           <div class="actions"><button id="confirm-reported" type="button">Conferir e continuar</button><span id="reported-status" role="status"></span></div>
         </div>
       </details>
@@ -105,11 +132,11 @@
         <summary><span class="step-number">2</span><span><strong>Uma nova situação construída a partir desse caso</strong><small>A pessoa é a mesma, mas a tarefa é diferente: construir coletivamente um recurso digital de História.</small></span></summary>
         <div class="step-content">
           <p class="notice"><strong>O que mudou:</strong> em vez de repetir a apresentação oral do exemplo, esta situação propõe uma produção digital com professora e colegas. A tarefa foi formulada na pesquisa, não criada automaticamente pelo agente. A orientação será construída após a confirmação das condições.</p>
-          <p id="organized-text" class="lead"></p>
+          <details class="foundation context-description"><summary>Ler a descrição integral da situação</summary><p id="organized-text" class="lead"></p></details>
           <div id="context-summary" class="summary-grid"></div>
           <aside id="known-assumptions" class="notice example-assumptions" hidden><h2>Premissas do exemplo sintético</h2><p>Condições usadas para preparar o exemplo; não são observações de uso. Confira sua pertinência para o caso.</p><ul></ul></aside>
           <label class="confirmation"><input id="mapping-confirmed" type="checkbox"> Esta nova situação é coerente com as características da pessoa e apresenta corretamente a nova atividade, o objetivo, as dificuldades e os recursos disponíveis.</label>
-          <details class="foundation">
+          <details class="foundation" data-context-corrections>
             <summary>Corrigir ou completar a organização</summary>
             <label for="context-description">Descrição confirmada do caso</label>
             <div class="input-with-action"><textarea id="context-description" rows="4"></textarea><button class="dictate secondary" type="button" data-target="context-description">Ditar</button></div>
@@ -166,7 +193,7 @@
         <p class="field-help">A síntese acompanha suas correções. As funções indicam o que a orientação precisa garantir. São requisitos estruturados para conferência; não são transcrição literal nem interpretação automática completa.</p>
         <div id="free-missing" class="warning" hidden><h3>O que ainda precisa ser informado</h3><ul></ul></div>
         <label class="confirmation"><input id="free-confirmed" type="checkbox"> A organização representa corretamente o caso descrito.</label>
-        <details class="foundation"><summary>Corrigir ou completar a organização</summary>
+        <details class="foundation" data-context-corrections><summary>Corrigir ou completar a organização</summary>
           <label for="free-objective">O que se espera alcançar?</label>
           <textarea id="free-objective" rows="3"></textarea>
           <label for="free-operation">Como a pessoa opera o aplicativo ou conteúdo?</label>
@@ -194,42 +221,24 @@
       <section id="practical-summary" class="practical-summary" aria-labelledby="practical-title">
         <h3 id="practical-title">Sugestão para este caso</h3>
         <p id="practical-headline" class="practical-headline"></p>
-        <p class="guide-result-help">Cada bloco mostra uma forma de apoiar a atividade. Confira sua função e a situação dos recursos. Abra para ver como combinar os modos, as condições e as alternativas.</p><div class="guide-expand-tools"><button type="button" id="guide-expand" class="secondary">Abrir todos os blocos</button><button type="button" id="guide-collapse" class="secondary">Recolher todos os blocos</button></div><div id="practical-steps" class="practical-steps"></div>
-        <aside class="expected-result" aria-labelledby="expected-title">
-          <h4 id="expected-title">O que observar depois da aplicação</h4>
-          <p id="expected-result"></p>
-          <p id="expected-result-note" class="expected-note"></p>
-        </aside>
       </section>
-
+      <div id="missing-box" class="warning"><h3>Informações e ligações a conferir</h3><ul id="missing"></ul></div>
+      <details id="trace-details" class="foundation choices-section" open>
+        <summary>Escolhas e fundamentos</summary>
+        <p class="choices-help">Cada escolha reúne o que fazer, as condições consideradas e os conhecimentos que a fundamentam. Abra as demais escolhas quando precisar; os detalhes documentais e o grafo ficam dentro desta mesma leitura.</p>
+        <div class="guide-expand-tools"><button type="button" id="guide-expand" class="secondary">Abrir todas as escolhas</button><button type="button" id="guide-collapse" class="secondary">Recolher todas as escolhas</button></div>
+        <div id="practical-steps" class="practical-steps"><div id="trace-graph"><div id="shared-explanation"></div></div></div>
+      </details>
       <details id="orientation-details" class="foundation detailed-orientation">
-        <summary>Consultar a orientação completa</summary>
+        <summary>Ler a orientação integral em texto</summary>
         <div class="detail-actions"><button id="speak-detailed-button" class="secondary" type="button">Ouvir versão detalhada</button></div>
         <p id="orientation" class="orientation"></p>
         <p id="rationale"></p>
-
-        <h3>Como combinar as formas de interação</h3>
-        <div id="modal-configuration" class="mode-cards"></div>
-        <div class="result-grid">
-          <article><h3>Recursos confirmados</h3><ul id="resources"></ul></article>
-          <article><h3>Recursos a confirmar</h3><ul id="conditional-resources"></ul></article>
-          <article><h3>Condições</h3><ul id="conditions"></ul></article>
-          <article><h3>Alternativas</h3><ul id="alternatives"></ul></article>
-          <article><h3>Como acompanhar</h3><ul id="monitoring"></ul></article>
-        </div>
       </details>
-      <div id="missing-box" class="warning"><h3>Informações e ligações a conferir</h3><ul id="missing"></ul></div>
-
-      <details id="depara-details" class="foundation"><summary>Por que estas escolhas fazem sentido para o caso?</summary>
-        <p id="depara-reading-order">Condição → significado funcional → articulação → conhecimento → critério → configuração multimodal.</p>
-        <div id="depara-table"></div>
-      </details>
-      <details id="trace-details" class="foundation"><summary>Como o conhecimento fundamenta cada escolha</summary>
-        <p id="trace-reading-order">Contexto → função exigida → articulação confirmada → conhecimento → critério → configuração → fonte.</p>
-        <div id="free-trace-overview" hidden></div>
-        <div id="free-trace-explanation" class="rationale-guide" hidden></div>
-        <div class="graph-scroll"><div id="trace-graph"></div></div>
-        <div id="trace-table"></div>
+      <details class="foundation expected-result">
+        <summary>O que observar depois da aplicação</summary>
+        <p id="expected-result"></p>
+        <p id="expected-result-note" class="expected-note"></p>
       </details>
       <details class="technical"><summary>Aprofundar a análise técnica</summary>
         <p id="technical-summary"></p>
@@ -253,6 +262,7 @@
   </footer>
   <noscript><p>O AMADO precisa de JavaScript e WebAssembly para executar as consultas. Você ainda pode <a href="../">ler a explicação da pesquisa</a>.</p></noscript>
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./composition.js"></script>
   <script type="module" src="./guided.js"></script>
   <script defer src="../site.js"></script>
 </body>
