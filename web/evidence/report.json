@@ -3,7 +3,7 @@
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
   "executor_version": "AMADO-web-1.4.0-rc3-intake1",
-  "compiled_at_utc": "2026-10-12T03:16:39.013242+00:00",
+  "compiled_at_utc": "2026-10-12T03:22:50.402235+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -659,28 +659,28 @@
       "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"
     },
     "public_smoke": {
-      "passed": false,
+      "passed": true,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": false,
-        "exact_manifest": false,
+        "exact_test": true,
+        "exact_manifest": true,
         "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": false,
+        "current_asset_bytes": true,
         "current_base_inputs": true,
         "current_native_engine": true
       },
-      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-12T01:55:15.926Z",
-      "expected_commit": "0bc0e192031f7fbcf5e9c0278f60d66002fcb360",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "checked_at": "2026-10-12T03:21:10.143Z",
+      "expected_commit": "2e4731d5e01b23e4c2a34aba336cf3027cd6f12a",
       "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
-      "test_sha256": "428aa8dae27996e4226dc93d36cd01aee3d40ef498044dfb8f7a2a8ec0ba907d",
-      "public_manifest_sha256": "ed301fa125f4db9c30b2f30fb7202bf2bdffe7dc717b204e266084cd5f2b701f",
-      "check_count": 51,
+      "test_sha256": "029c84ac3627bfacccf134abfe0e9fc981cff5faeb5362c6b75f826b8fd78b5f",
+      "public_manifest_sha256": "cf58d511d71afa33f41b66263e7b2c10c0e702381b6139f97005629ae944cde0",
+      "check_count": 61,
       "asset_count": 37,
       "scope": "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana.",
       "limits": [
@@ -749,8 +749,14 @@
     "source-catalog-browser.json": {
       "url": "source-catalog-browser.json",
       "sha256": "02fa16d0a6440c55c8b0e0ea51867650dcfeef2f904f9f4e529e7201fb7c6b99"
+    },
+    "public-smoke.json": {
+      "url": "public-smoke.json",
+      "sha256": "aacec081fb3902060515a12d2bd9aece6f444bae6aef84ca7eefaa602fe7646d",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "expected_commit": "2e4731d5e01b23e4c2a34aba336cf3027cd6f12a"
     }
   },
   "historical_evidence_notice": "Os relatórios identificam individualmente execução atual ou reúso de componentes idênticos. A apresentação simplificada possui seu próprio relatório. Evidências antigas não aprovam bytes diferentes.",
-  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE"
 }

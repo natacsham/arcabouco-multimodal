@@ -1,10 +1,10 @@
 {
   "type": "SYNTHETIC_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
   "url": "https://natacsham.github.io/arcabouco-multimodal/",
-  "checked_at": "2026-10-12T01:55:15.926Z",
-  "expected_commit": "0bc0e192031f7fbcf5e9c0278f60d66002fcb360",
+  "checked_at": "2026-10-12T03:21:10.143Z",
+  "expected_commit": "2e4731d5e01b23e4c2a34aba336cf3027cd6f12a",
   "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
-  "test_sha256": "428aa8dae27996e4226dc93d36cd01aee3d40ef498044dfb8f7a2a8ec0ba907d",
+  "test_sha256": "029c84ac3627bfacccf134abfe0e9fc981cff5faeb5362c6b75f826b8fd78b5f",
   "checks": {
     "public_manifest_http_200": true,
     "public_manifest_matches_current_build": true,
@@ -31,6 +31,11 @@
     "index.html_numbered_steps_stay_inside_each_configuration": true,
     "index.html_pending_status_precedes_the_instructions": true,
     "index.html_foundation_records_render_the_actual_selected_support": true,
+    "index.html_real_request_progress": true,
+    "index.html_linked_sources_actually_used": true,
+    "index.html_correction_preserves_context_without_reparse": true,
+    "index.html_forms_recognized_without_teacher_assumption": true,
+    "index.html_forms_missing_information_is_editable": true,
     "index.html_reload_discards_case": true,
     "index.html_no_case_storage": true,
     "guiado.html_real_worker_ready": true,
@@ -53,6 +58,11 @@
     "guiado.html_numbered_steps_stay_inside_each_configuration": true,
     "guiado.html_pending_status_precedes_the_instructions": true,
     "guiado.html_foundation_records_render_the_actual_selected_support": true,
+    "guiado.html_real_request_progress": true,
+    "guiado.html_linked_sources_actually_used": true,
+    "guiado.html_correction_preserves_context_without_reparse": true,
+    "guiado.html_forms_recognized_without_teacher_assumption": true,
+    "guiado.html_forms_missing_information_is_editable": true,
     "guiado.html_reload_discards_case": true,
     "guiado.html_no_case_storage": true,
     "no_page_javascript_errors": true,
@@ -60,9 +70,9 @@
   },
   "assets": {
     "amado/index.html": {
-      "bytes": 8460,
-      "expected_sha256": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
-      "served_sha256": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
+      "bytes": 9882,
+      "expected_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
+      "served_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "passed": true
     },
     "amado/app.js": {
@@ -78,21 +88,21 @@
       "passed": true
     },
     "amado/worker.mjs": {
-      "bytes": 3415,
-      "expected_sha256": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
-      "served_sha256": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
+      "bytes": 4531,
+      "expected_sha256": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
+      "served_sha256": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
       "passed": true
     },
     "amado/client.mjs": {
-      "bytes": 1568,
-      "expected_sha256": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "served_sha256": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
+      "bytes": 2243,
+      "expected_sha256": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
+      "served_sha256": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
       "passed": true
     },
     "amado/guiado.html": {
-      "bytes": 8460,
-      "expected_sha256": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
-      "served_sha256": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
+      "bytes": 9882,
+      "expected_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
+      "served_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "passed": true
     },
     "amado/guided.js": {
@@ -126,15 +136,15 @@
       "passed": true
     },
     "amado/simple-flow.js": {
-      "bytes": 38094,
-      "expected_sha256": "af74e4f509a07293217bb8afa8ef7af9300ebacde5d7036c12a49e31263ef419",
-      "served_sha256": "af74e4f509a07293217bb8afa8ef7af9300ebacde5d7036c12a49e31263ef419",
+      "bytes": 47188,
+      "expected_sha256": "aba2f073907bfa8093ea46087834450b08258b44d78e28b18abac850a61b023a",
+      "served_sha256": "aba2f073907bfa8093ea46087834450b08258b44d78e28b18abac850a61b023a",
       "passed": true
     },
     "amado/simple-flow.css": {
-      "bytes": 8307,
-      "expected_sha256": "61bc7df7141eb575c59c7e6b7c5a8fcee570eaff3f5020404813c8d8a1e64de5",
-      "served_sha256": "61bc7df7141eb575c59c7e6b7c5a8fcee570eaff3f5020404813c8d8a1e64de5",
+      "bytes": 9644,
+      "expected_sha256": "36259d35a26afc8e4de7fdfe15dcfd77758ab5ac0426c18ada3069414c30c845",
+      "served_sha256": "36259d35a26afc8e4de7fdfe15dcfd77758ab5ac0426c18ada3069414c30c845",
       "passed": true
     },
     "amado/voice.js": {
@@ -144,9 +154,9 @@
       "passed": true
     },
     "amado/intake.mjs": {
-      "bytes": 25483,
-      "expected_sha256": "74a716616410b75f0f96b9ed1c16d777c0fcede03e0cf887940dfc3c4f3cb56b",
-      "served_sha256": "74a716616410b75f0f96b9ed1c16d777c0fcede03e0cf887940dfc3c4f3cb56b",
+      "bytes": 36866,
+      "expected_sha256": "f868f233be38d2d1555c1ef6cd7fdc95b5813291607ba5119c8c946da0ded2dc",
+      "served_sha256": "f868f233be38d2d1555c1ef6cd7fdc95b5813291607ba5119c8c946da0ded2dc",
       "passed": true
     },
     "amado/completo.html": {
@@ -264,21 +274,21 @@
       "passed": true
     },
     "amado/engine.py": {
-      "bytes": 192750,
-      "expected_sha256": "b72c774b99038340e4bf773ff580858bb46be2e49a0c0b9bb360af1814adecd8",
-      "served_sha256": "b72c774b99038340e4bf773ff580858bb46be2e49a0c0b9bb360af1814adecd8",
+      "bytes": 205633,
+      "expected_sha256": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
+      "served_sha256": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
       "passed": true
     },
     "amado/bridge.py": {
-      "bytes": 10603,
-      "expected_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
-      "served_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
+      "bytes": 11544,
+      "expected_sha256": "227811d568fedbf3fed1ff4ef70ce2720c36c26ac0a01e30686044e28ca046f1",
+      "served_sha256": "227811d568fedbf3fed1ff4ef70ce2720c36c26ac0a01e30686044e28ca046f1",
       "passed": true
     },
     "amado/assets/base.zip": {
-      "bytes": 1184465,
-      "expected_sha256": "f45d2e26e62ee172eec30fa7c98155cbe1e85fd11c21e52a59bec0971db892a1",
-      "served_sha256": "f45d2e26e62ee172eec30fa7c98155cbe1e85fd11c21e52a59bec0971db892a1",
+      "bytes": 1184480,
+      "expected_sha256": "1af0ee6a7e999257d4e6c1fb82a1637530691df44d53c9bd87bb6bd29b6f5821",
+      "served_sha256": "1af0ee6a7e999257d4e6c1fb82a1637530691df44d53c9bd87bb6bd29b6f5821",
       "passed": true
     }
   },
@@ -287,26 +297,26 @@
       "topic": "matemática",
       "questions": [
         {
+          "id": "requester_relation",
+          "label": "Como você participa desse desafio?",
+          "participant_label": "",
+          "values": [
+            "unknown"
+          ],
+          "progress": "Pergunta 1 de até 3"
+        },
+        {
           "id": "tarefas",
           "label": "No desafio que você descreveu, o que precisa ficar acessível?",
           "participant_label": "",
           "values": [
             "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
           ],
-          "progress": "Pergunta 1 de até 3"
-        },
-        {
-          "id": "recursos_digitais",
-          "label": "Em que material, aplicativo ou equipamento esse desafio acontece?",
-          "participant_label": "",
-          "values": [
-            "unknown"
-          ],
           "progress": "Pergunta 2 de até 3"
         },
         {
-          "id": "recursos_disponiveis",
-          "label": "Quais destes recursos estão disponíveis para essa atividade?",
+          "id": "recursos_digitais",
+          "label": "Que material ou aplicativo será usado nessa atividade?",
           "participant_label": "",
           "values": [
             "unknown"
@@ -316,8 +326,8 @@
       ],
       "participants": [
         {
-          "id": "PART-CASO-03-81E3FC",
-          "contexto_id": "CTX-CASO-FAB629291E",
+          "id": "PART-CASO-03-92562C",
+          "contexto_id": "CTX-CASO-026F682220",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -339,8 +349,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-0CA631",
-          "contexto_id": "CTX-CASO-FAB629291E",
+          "id": "PART-CASO-04-08AA4F",
+          "contexto_id": "CTX-CASO-026F682220",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -365,7 +375,7 @@
       "access_requirements": [
         {
           "matrix_id": "MF-01",
-          "participant_id": "PART-CASO-04-0CA631",
+          "participant_id": "PART-CASO-04-08AA4F",
           "participant_label": "1 estudante(s): cego informado no relato",
           "trigger": [
             "cego"
@@ -406,7 +416,7 @@
         },
         {
           "matrix_id": "MF-11",
-          "participant_id": "PART-CASO-03-81E3FC",
+          "participant_id": "PART-CASO-03-92562C",
           "participant_label": "2 estudante(s): surdos informado no relato",
           "trigger": [
             "surdos"
@@ -455,8 +465,8 @@
           "ART-REF-03"
         ],
         "limitations": [
-          "Em que material, aplicativo ou equipamento esse desafio acontece?",
-          "Quais destes recursos estão disponíveis para essa atividade?",
+          "Que material ou aplicativo será usado nessa atividade?",
+          "Quais equipamentos ou apoios estão disponíveis nessa atividade?",
           "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
           "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
           "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
@@ -466,7 +476,7 @@
         "checks_executed": 253,
         "participant_coverage": [
           {
-            "participant_id": "PART-CASO-03-81E3FC",
+            "participant_id": "PART-CASO-03-92562C",
             "label": "2 estudante(s): surdos informado no relato",
             "component_ids": [],
             "conditional_component_ids": [],
@@ -474,7 +484,7 @@
             "meaning_or_learning_measured": false
           },
           {
-            "participant_id": "PART-CASO-04-0CA631",
+            "participant_id": "PART-CASO-04-08AA4F",
             "label": "1 estudante(s): cego informado no relato",
             "component_ids": [],
             "conditional_component_ids": [
@@ -509,7 +519,7 @@
       },
       "configuration_groundings": [
         {
-          "id": "CFG-D-GERADA-458F88A80C-01",
+          "id": "CFG-D-GERADA-2EE3DA6EA9-01",
           "supports": [
             {
               "id": "SUP-PAD-CONTEUDO-WEB-EQUIVALENTE-01",
@@ -704,26 +714,26 @@
       "topic": "astronomia",
       "questions": [
         {
+          "id": "requester_relation",
+          "label": "Como você participa desse desafio?",
+          "participant_label": "",
+          "values": [
+            "unknown"
+          ],
+          "progress": "Pergunta 1 de até 3"
+        },
+        {
           "id": "tarefas",
           "label": "No desafio que você descreveu, o que precisa ficar acessível?",
           "participant_label": "",
           "values": [
             "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
           ],
-          "progress": "Pergunta 1 de até 3"
-        },
-        {
-          "id": "recursos_digitais",
-          "label": "Em que material, aplicativo ou equipamento esse desafio acontece?",
-          "participant_label": "",
-          "values": [
-            "unknown"
-          ],
           "progress": "Pergunta 2 de até 3"
         },
         {
-          "id": "recursos_disponiveis",
-          "label": "Quais destes recursos estão disponíveis para essa atividade?",
+          "id": "recursos_digitais",
+          "label": "Que material ou aplicativo será usado nessa atividade?",
           "participant_label": "",
           "values": [
             "unknown"
@@ -733,8 +743,8 @@
       ],
       "participants": [
         {
-          "id": "PART-CASO-03-295B8C",
-          "contexto_id": "CTX-CASO-6D73638F61",
+          "id": "PART-CASO-03-72D628",
+          "contexto_id": "CTX-CASO-335E96C088",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -756,8 +766,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-3B8561",
-          "contexto_id": "CTX-CASO-6D73638F61",
+          "id": "PART-CASO-04-F9C531",
+          "contexto_id": "CTX-CASO-335E96C088",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -782,7 +792,7 @@
       "access_requirements": [
         {
           "matrix_id": "MF-01",
-          "participant_id": "PART-CASO-04-3B8561",
+          "participant_id": "PART-CASO-04-F9C531",
           "participant_label": "1 estudante(s): cego informado no relato",
           "trigger": [
             "cego"
@@ -823,7 +833,7 @@
         },
         {
           "matrix_id": "MF-11",
-          "participant_id": "PART-CASO-03-295B8C",
+          "participant_id": "PART-CASO-03-72D628",
           "participant_label": "2 estudante(s): surdos informado no relato",
           "trigger": [
             "surdos"
@@ -872,8 +882,8 @@
           "ART-REF-03"
         ],
         "limitations": [
-          "Em que material, aplicativo ou equipamento esse desafio acontece?",
-          "Quais destes recursos estão disponíveis para essa atividade?",
+          "Que material ou aplicativo será usado nessa atividade?",
+          "Quais equipamentos ou apoios estão disponíveis nessa atividade?",
           "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
           "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
           "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
@@ -883,7 +893,7 @@
         "checks_executed": 253,
         "participant_coverage": [
           {
-            "participant_id": "PART-CASO-03-295B8C",
+            "participant_id": "PART-CASO-03-72D628",
             "label": "2 estudante(s): surdos informado no relato",
             "component_ids": [],
             "conditional_component_ids": [],
@@ -891,7 +901,7 @@
             "meaning_or_learning_measured": false
           },
           {
-            "participant_id": "PART-CASO-04-3B8561",
+            "participant_id": "PART-CASO-04-F9C531",
             "label": "1 estudante(s): cego informado no relato",
             "component_ids": [],
             "conditional_component_ids": [
@@ -926,7 +936,7 @@
       },
       "configuration_groundings": [
         {
-          "id": "CFG-D-GERADA-3F113B87FC-01",
+          "id": "CFG-D-GERADA-43B68F7E23-01",
           "supports": [
             {
               "id": "SUP-PAD-CONTEUDO-WEB-EQUIVALENTE-01",
@@ -1129,7 +1139,7 @@
     "This smoke verifies a maximum-three-question initial round and a conditional partial output in each presentation; it does not replace the full local regression."
   ],
   "browser": "155.0.8059.39",
-  "public_manifest_sha256": "ed301fa125f4db9c30b2f30fb7202bf2bdffe7dc717b204e266084cd5f2b701f",
+  "public_manifest_sha256": "cf58d511d71afa33f41b66263e7b2c10c0e702381b6139f97005629ae944cde0",
   "version": "1.4.0-rc3",
   "source_catalog": {
     "version": "1.4.0-rc3",
@@ -1148,5 +1158,5 @@
   },
   "completed": true,
   "passed": true,
-  "finished_at": "2026-10-12T01:56:11.185Z"
+  "finished_at": "2026-10-12T03:22:09.559Z"
 }
