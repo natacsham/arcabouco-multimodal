@@ -2,7 +2,7 @@
   "version": "1.4.0-rc3",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-12T01:49:11.434580+00:00",
+  "compiled_at_utc": "2026-10-12T01:56:26.472687+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -589,37 +589,37 @@
       "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"
     },
     "public_smoke": {
-      "passed": false,
+      "passed": true,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": false,
-        "exact_manifest": false,
-        "version": false,
+        "exact_test": true,
+        "exact_manifest": true,
+        "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": false,
+        "current_asset_bytes": true,
         "current_base_inputs": true,
         "current_native_engine": true
       },
-      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-12T00:00:29.417Z",
-      "expected_commit": "072b7077db3ed5d597a515031a19d517e94d3cd2",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "checked_at": "2026-10-12T01:55:15.926Z",
+      "expected_commit": "0bc0e192031f7fbcf5e9c0278f60d66002fcb360",
       "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
-      "test_sha256": "c9d6aea4a5200e7e32c1d6aaaf9655da38d173f2302ce16d451a914444b407bc",
-      "public_manifest_sha256": "19233389619c9ea8f6f4f1c86c8b6e93e6aade36b2a5498bb8f4a2fd517e408b",
-      "check_count": 33,
+      "test_sha256": "428aa8dae27996e4226dc93d36cd01aee3d40ef498044dfb8f7a2a8ec0ba907d",
+      "public_manifest_sha256": "ed301fa125f4db9c30b2f30fb7202bf2bdffe7dc717b204e266084cd5f2b701f",
+      "check_count": 51,
       "asset_count": 37,
       "scope": "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana.",
       "limits": [
-        "Synthetic explicit follow-up answers; not an expert session or learning evaluation.",
-        "The mathematics topic is contextual. The confirmed operational task is accessible digital-content access, not a complete mathematics-teaching method.",
+        "Synthetic task confirmation and unknown follow-up answers; not an expert session or learning evaluation.",
+        "Mathematics and astronomy are contextual subjects. The confirmed operational task is digital-content access, not a complete teaching method for either subject.",
         "GERADA_PARCIAL does not establish coverage of every participant or guarantee educational benefit.",
         "Microphone accuracy, screen readers, comprehension with users and full WCAG conformance were not tested in this public smoke.",
-        "Negative resource phrases in narrative are not treated as verified parser support; the local variant tested unconfirmed reader availability and operation.",
-        "This smoke verifies a short partial-answer regression and one complete flow in each presentation; it does not replace the full local regression."
+        "Unknown reader availability and operation stay pending; this smoke does not establish personal skills from a reported disability.",
+        "This smoke verifies a maximum-three-question initial round and a conditional partial output in each presentation; it does not replace the full local regression."
       ]
     }
   },
@@ -675,8 +675,14 @@
     "source-catalog-browser.json": {
       "url": "source-catalog-browser.json",
       "sha256": "a36a4037cd4454888ebd51ffab4649907cff2260bc629a428cd52751badb474a"
+    },
+    "public-smoke.json": {
+      "url": "public-smoke.json",
+      "sha256": "bb6c8cabd80d2804e6bc43280198af4584be69a8571e126fcbf60d30bf3d8197",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "expected_commit": "0bc0e192031f7fbcf5e9c0278f60d66002fcb360"
     }
   },
   "historical_evidence_notice": "Os relatórios identificam individualmente execução atual ou reúso de componentes idênticos. A apresentação simplificada possui seu próprio relatório. Evidências antigas não aprovam bytes diferentes.",
-  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE"
 }
