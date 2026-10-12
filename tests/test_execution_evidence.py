@@ -61,14 +61,23 @@ class ExecutionEvidenceTests(unittest.TestCase):
                          {"FUN-CARACTERIZAR-CONDICOES", "FUN-PRESERVAR-ACESSO", "FUN-SELECIONAR-MODO-POR-CONDICAO"})
 
     def test_new_combination_uses_existing_patterns(self):
-        self.assertEqual(set(self.novel["decision"]["component_ids"]),
+        configurations = self.novel["decision"]["configuracao_modal"]
+        self.assertEqual({row["component_id"] for row in configurations if row["availability_status"] != "CONDICIONAL_A_CONFIRMACAO"},
                          {"PAD-CONTEUDO-WEB-EQUIVALENTE", "PAD-COMUNICACAO-MULTIFORMATO"})
+        self.assertEqual({row["component_id"] for row in configurations if row["availability_status"] == "CONDICIONAL_A_CONFIRMACAO"},
+                         {"PAD-ORGANIZAR-CONTEUDO-PERSISTENTE", "PAD-REPRESENTACAO-VISUAL-EXPLICADA"})
         # Existing choices remain reusable, but the functional applicability
         # index now makes unmet design requirements explicit before selection.
         self.assertEqual(self.novel["decision"]["status"], "GERADA_PARCIAL")
         functions = self.novel["execution_evidence"]["functions"]
-        expected_missing = {"FUN-PRESERVAR-ACESSO", "FUN-ORGANIZAR-CONTEUDO", "FUN-PERMITIR-REVISAO",
-                            "FUN-EXPRESSAR-CONHECIMENTO", "FUN-CARACTERIZAR-CONDICOES", "FUN-REDUZIR-SOBRECARGA"}
+        expected_missing = {"FUN-PRESERVAR-ACESSO", "FUN-CARACTERIZAR-CONDICOES", "FUN-REDUZIR-SOBRECARGA"}
+        self.assertEqual(set(functions["conditional"]), {"FUN-ORGANIZAR-CONTEUDO", "FUN-PERMITIR-REVISAO", "FUN-EXPRESSAR-CONHECIMENTO"})
+        self.assertFalse(set(functions["conditional"]) & set(functions["verified"]))
+        for row in configurations:
+            if row["availability_status"] == "CONDICIONAL_A_CONFIRMACAO":
+                self.assertTrue(row["criterion_support"] and row["knowledge_ids"])
+                self.assertTrue(set(row["function_ids"]) & set(functions["required"]))
+                self.assertTrue(any("Antes de aplicar" in condition for condition in row["conditions"]))
         self.assertEqual(set(functions["remaining"]), expected_missing)
         self.assertEqual(set(functions["required"]) - set(functions["offered"]), expected_missing)
         derivations = self.novel["decision"]["function_derivation"]
@@ -79,7 +88,10 @@ class ExecutionEvidenceTests(unittest.TestCase):
             self.assertTrue(all(row["correspondences"] and all(witness["concept_ids"] and witness["task_paths"] for witness in row["correspondences"]) for row in rows))
 
     def test_removing_voice_reports_partial_without_inventing_alternative(self):
-        self.assertEqual(self.no_voice["decision"]["component_ids"], ["PAD-CONTEUDO-WEB-EQUIVALENTE"])
+        configurations = self.no_voice["decision"]["configuracao_modal"]
+        self.assertEqual([row["component_id"] for row in configurations if row["availability_status"] != "CONDICIONAL_A_CONFIRMACAO"], ["PAD-CONTEUDO-WEB-EQUIVALENTE"])
+        self.assertEqual({row["component_id"] for row in configurations if row["availability_status"] == "CONDICIONAL_A_CONFIRMACAO"},
+                         {"PAD-ORGANIZAR-CONTEUDO-PERSISTENTE", "PAD-REPRESENTACAO-VISUAL-EXPLICADA", "PAD-REVISAO-CONFIRMACAO"})
         self.assertEqual(self.no_voice["decision"]["status"], "GERADA_PARCIAL")
         rejected = next(r for r in self.no_voice["explanation"]["rejected"] if r["component_id"] == "PAD-COMUNICACAO-MULTIFORMATO")
         checks = {r["id"]: r for r in self.no_voice["execution_evidence"]["checks"]}

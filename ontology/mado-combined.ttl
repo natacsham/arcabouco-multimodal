@@ -5931,6 +5931,7 @@
 <https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelANecessidade> <https://w3id.org/mado#NEC-SINALIZAR-AUSENCIA-IMAGEM> .
 <https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelARecursoDigital> <https://w3id.org/mado#RED-APRESENTACAO-DIGITAL> .
 <https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelARecursoDigital> <https://w3id.org/mado#RED-IMAGEM-DIGITAL> .
+<https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelARecursoDigital> <https://w3id.org/mado#RED-PAGINA-WEB> .
 <https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelARecursoDisponivel> <https://w3id.org/mado#REC-TEXTO-DESCRITIVO-SINTESE-POR-LEITOR-DE-TELA-CD10406> .
 <https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelATarefa> <https://w3id.org/mado#TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL> .
 <https://w3id.org/mado#K10> <https://w3id.org/mado#aplicavelATarefa> <https://w3id.org/mado#TAR-ACESSAR-CONTEUDO-WEB-E80BA3E> .
@@ -8247,11 +8248,15 @@
 <https://w3id.org/mado#ORI-0141> <https://w3id.org/mado#origemSustentadaPorTrecho> <https://w3id.org/mado#TD-ORI-0141> .
 <https://w3id.org/mado#ORI-0142> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#RelacaoDeOrigemDoCriterio> .
 <https://w3id.org/mado#ORI-0142> <http://www.w3.org/2000/01/rdf-schema#label> "ORI-0142"@pt-BR .
-<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#estadoDeConferenciaDocumental> "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA" .
+<https://w3id.org/mado#ORI-0142> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded> .
+<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#dataDaConsultaDocumental> "2026-10-11" .
+<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#estadoDeConferenciaDocumental> "SECAO_ORIGINAL_CONFERIDA" .
 <https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#identificador> "ORI-0142"^^<http://www.w3.org/2001/XMLSchema#string> .
-<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#localizacaoDocumental> "AT16 · WCAG" .
+<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#localizacaoDocumental> "1.2.1 — Audio-only and Video-only (Prerecorded)" .
 <https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#origemEmFonte> <https://w3id.org/mado#FN-WCAG> .
 <https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#origemSustentadaPorTrecho> <https://w3id.org/mado#TD-ORI-0142> .
+<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#parafraseDocumental> "Alternativas a áudio ou vídeo isolados gravados devem preservar a informação. O registro histórico CA16 é mais amplo; a operacionalização fica limitada à seção consultada e às suas exceções." .
+<https://w3id.org/mado#ORI-0142> <https://w3id.org/mado#versaoDocumental> "2023-10-05" .
 <https://w3id.org/mado#ORI-0143> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#RelacaoDeOrigemDoCriterio> .
 <https://w3id.org/mado#ORI-0143> <http://www.w3.org/2000/01/rdf-schema#label> "ORI-0143"@pt-BR .
 <https://w3id.org/mado#ORI-0143> <https://w3id.org/mado#estadoDeConferenciaDocumental> "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA" .
@@ -12794,11 +12799,16 @@
 <https://w3id.org/mado#TD-ORI-0141> <https://w3id.org/mado#trechoDeFonte> <https://w3id.org/mado#FN-ABNT-WEB> .
 <https://w3id.org/mado#TD-ORI-0142> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#TrechoDocumental> .
 <https://w3id.org/mado#TD-ORI-0142> <http://www.w3.org/2000/01/rdf-schema#label> "Referência ao trecho TD-ORI-0142"@pt-BR .
+<https://w3id.org/mado#TD-ORI-0142> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded> .
+<https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#dataDaConsultaDocumental> "2026-10-11" .
+<https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#estadoDeConferenciaDocumental> "CONFERIDO_NA_SECAO_ORIGINAL" .
 <https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#estadoDePublicacaoDoTrecho> "TEXTO_NAO_REDISTRIBUIDO" .
 <https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#identificador> "TD-ORI-0142"^^<http://www.w3.org/2001/XMLSchema#string> .
-<https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#localizacaoDocumental> "PLANILHA_FINAL_DE_EXTRACAO" .
+<https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#localizacaoDocumental> "1.2.1 — Audio-only and Video-only (Prerecorded)" .
 <https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#natureza> "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA" .
+<https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#parafraseDocumental> "Áudio gravado requer alternativa equivalente; vídeo sem áudio admite alternativa ou trilha sonora equivalente. Há exceção para mídia identificada como alternativa ao texto. Esta seção não exige audiodescrição em todo vídeo nem cobre conteúdo ao vivo." .
 <https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#trechoDeFonte> <https://w3id.org/mado#FN-WCAG> .
+<https://w3id.org/mado#TD-ORI-0142> <https://w3id.org/mado#versaoDocumental> "2023-10-05" .
 <https://w3id.org/mado#TD-ORI-0143> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/mado#TrechoDocumental> .
 <https://w3id.org/mado#TD-ORI-0143> <http://www.w3.org/2000/01/rdf-schema#label> "Referência ao trecho TD-ORI-0143"@pt-BR .
 <https://w3id.org/mado#TD-ORI-0143> <https://w3id.org/mado#estadoDePublicacaoDoTrecho> "TEXTO_NAO_REDISTRIBUIDO" .
@@ -15387,9 +15397,9 @@
 <https://w3id.org/mado> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
 <https://w3id.org/mado> <http://www.w3.org/2000/01/rdf-schema#comment> "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .
 <https://w3id.org/mado> <http://www.w3.org/2000/01/rdf-schema#label> "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR .
-<https://w3id.org/mado> <http://www.w3.org/2002/07/owl#priorVersion> <https://w3id.org/mado/1.4.0-rc1> .
-<https://w3id.org/mado> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/mado/1.4.0-rc2> .
-<https://w3id.org/mado> <http://www.w3.org/2002/07/owl#versionInfo> "1.4.0-rc2" .
+<https://w3id.org/mado> <http://www.w3.org/2002/07/owl#priorVersion> <https://w3id.org/mado/1.4.0-rc2> .
+<https://w3id.org/mado> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/mado/1.4.0-rc3> .
+<https://w3id.org/mado> <http://www.w3.org/2002/07/owl#versionInfo> "1.4.0-rc3" .
 _:cb0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/mado#Fonte> .
 _:cb0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:cb911aa2ab972053202c4d5b9a675397caf93509d0d083be9f66a11a000e1a6817 .
 _:cb394fe22b1ba2ac2d7dfa7ae57381ad078729b6e39f2bbc8ff68e7a186521fadb <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://w3id.org/mado#CriterioDeDecisaoMultimodal> .

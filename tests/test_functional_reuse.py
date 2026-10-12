@@ -94,20 +94,18 @@ class FunctionalReuseTests(unittest.TestCase):
 
         self.assertEqual(self.engine.current["context"]["tarefas"], ["TAR-COMUNICAR-CONTEUDO-1545B38"])
         answer("tarefas", ["TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"])
-        answer("barreira_ou_necessidade", ["NEC-ACESSO-EQUIVALENTE", "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"])
+        # The matrix supplies design needs with documentary witnesses, rather
+        # than making the person re-enter a general accessibility principle.
+        self.assertFalse(any(row["field"] == "barreira_ou_necessidade" for row in self.engine.missing_questions()))
+        self.assertTrue(self.engine.current["context"]["access_requirements"])
+        answer("recursos_digitais", ["RED-PAGINA-WEB"])
+        answer("recursos_disponiveis", ["REC-LEITOR-DE-TELA", "REC-EDITOR-MULTIMIDIA"])
         answer("participantes", ["PAPEL-RESPONSAVEL-ADAPTACAO"])
         students = [row for row in self.engine.current["participations"] if row["papel_id"] == "PAPEL-ESTUDANTE"]
-        answer("modalidades_disponiveis", ["MOD-TEXTO", "MOD-IMAGEM"], students[0]["id"])
-        answer("apoios_informados", "Texto e imagens são compreendidos; outra forma de comunicação deve ser conferida.", students[0]["id"])
+        self.assertFalse(any(row.get("participant_id") == students[0]["id"] for row in self.engine.missing_questions()))
         answer("modalidades_disponiveis", ["MOD-AUDIO"], students[1]["id"])
-        # Answering modes does not erase the question about functional access.
-        answer("caracteristicas_pessoa", ["CAR-INTERACAO-NAO-VISUAL"], students[1]["id"])
-        answer("apoios_informados", "Usa seu leitor de tela; compreensão do conteúdo precisa ser acompanhada.", students[1]["id"])
         answer("recursos_disponiveis", ["REC-LEITOR-DE-TELA"], students[1]["id"])
         answer("recursos_disponiveis", ["REC-EDITOR-MULTIMIDIA"], "RESP-CONFIRMADO")
-        answer("recursos_digitais", ["RED-PAGINA-WEB"])
-        answer("ambientes", ["AMB-SALA-DE-AULA"])
-        answer("recursos_disponiveis", ["REC-LEITOR-DE-TELA", "REC-EDITOR-MULTIMIDIA"])
         self.engine.update_context({"mapping_confirmed": True, "transfer_confirmed": True})
         decision = self.engine.generate()["decision"]
         self.assertEqual(decision["status"], "GERADA_PARCIAL")
@@ -117,8 +115,7 @@ class FunctionalReuseTests(unittest.TestCase):
         students = [row for row in self.engine.current["participations"] if row["papel_id"] == "PAPEL-ESTUDANTE"]
         self.assertEqual(students[0]["recurso_operado_ids"], [])
         self.assertNotIn("CAR-INTERACAO-NAO-VISUAL", students[0]["caracteristica_ids"])
-        self.assertTrue(any(row.get("participant_id") == students[0]["id"] and row["field"] == "caracteristicas_pessoa"
-                            for row in self.engine.missing_questions()))
+        self.assertFalse(any(row.get("participant_id") == students[0]["id"] for row in self.engine.missing_questions()))
 
     def test_global_equipment_does_not_prove_individual_operation(self):
         classroom(self.engine)
@@ -127,7 +124,9 @@ class FunctionalReuseTests(unittest.TestCase):
             row["recurso_operado_ids"] = []
         self.engine.update_context({"participations": rows, "mapping_confirmed": True, "transfer_confirmed": True})
         result = self.engine.generate()
-        self.assertEqual(result["decision"]["component_ids"], [])
+        self.assertEqual(result["decision"]["component_ids"], ["PAD-CONTEUDO-WEB-EQUIVALENTE"])
+        self.assertEqual(result["decision"]["configuracao_modal"][0]["availability_status"], "CONDICIONAL_A_CONFIRMACAO")
+        self.assertTrue(all(not row["component_ids"] for row in result["decision"]["participant_coverage"]))
         checks = result["execution_evidence"]["checks"]
         operation = [row for row in checks if row["rule_id"] == "declared_resource_operation"
                      and row["subject_id"] == "PAD-CONTEUDO-WEB-EQUIVALENTE"]

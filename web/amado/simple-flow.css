@@ -65,6 +65,11 @@ body.simple-view main {max-width:86rem;gap:1rem;margin:1.5rem auto}
 .orientation-group > h4 {font-size:1.25rem}
 .orientation-step p {margin:.5rem 0}
 .orientation-step .step-action {margin:.75rem 0;line-height:1.6}
+.action-instructions {padding-left:1.5rem;margin:.5rem 0 1rem}
+.action-instructions > li {padding-left:.3rem}
+.action-instructions > li::marker {font-weight:700;color:var(--primary-dark)}
+.instruction-label {font-weight:600}
+.step-conditional {padding:.6rem .75rem;border-left:3px solid var(--primary);background:var(--soft);font-size:.9375rem}
 .step-action + .step-action {padding-top:.6rem;border-top:1px solid var(--border)}
 .step-combination {padding:.75rem;background:var(--soft);border-radius:.4rem;margin:1rem 0}
 .step-combination p:first-child {margin-top:0}

@@ -1,6 +1,12 @@
 # Verificação, evidências e limites
 
-**Versão alvo: MADO 1.4.0-rc2.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios de outras versões não comprovam esta revisão.
+**Versão alvo: MADO 1.4.0-rc3.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios de outras versões não comprovam esta revisão.
+
+## Controles acrescentados na RC3
+
+`tests/test_contextual_questions.py` confere aproveitamento da matriz, origem dos requisitos, escopo dos participantes, diferenças funcionais e percursos de esclarecimento. `tests/test_practical_summary.py` confere um cartão por configuração e passos rastreáveis à ação selecionada. `tests/focused-dialogue-browser.mjs` verifica a nova rodada de perguntas e a apresentação com o motor real no navegador; a suíte completa permanece em `tests/simple-flow-browser.mjs`.
+
+Estes são testes técnicos sintéticos, não registros da especialista. O estado desconhecido pode permitir uma opção explicitamente condicional, mas não aprova sua aplicação. Relatórios anteriores citados abaixo conservam seu escopo histórico; o índice atual deve identificar as execuções novas.
 
 Além das verificações anteriores, `tests/test_contributions.py` examina a contribuição documental e `tests/test_execution_evidence.py` testa a fidelidade da explicação ao que o motor executou. `tests/traceability-browser.mjs` executa as duas apresentações e os mesmos casos estruturados no navegador. `evidence/parity-report.json` compara o conteúdo produzido em Python local e Pyodide.
 

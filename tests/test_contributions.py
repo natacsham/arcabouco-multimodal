@@ -264,6 +264,15 @@ class ContributionTests(unittest.TestCase):
                     self.assertFalse(list(graph.objects(node, M.conteudoDoTrecho)))
                     self.assertFalse(list(graph.objects(node, M.textoItemOriginal)))
 
+    def test_operational_digital_resource_index_matches_queryable_rdf(self):
+        graph = Graph().parse(ROOT / "ontology/mado-combined.ttl", format="turtle")
+        for row in self.kb["knowledge"]:
+            if "recursos_digitais" not in row.get("aplicabilidade", {}):
+                continue
+            self.assertEqual(set(graph.objects(M[row["id"]], M.aplicavelARecursoDigital)),
+                             {M[value] for value in row["aplicabilidade"]["recursos_digitais"]}, row["id"])
+        self.assertIn((M.K10, M.aplicavelARecursoDigital, M["RED-PAGINA-WEB"]), graph)
+
 
 if __name__ == "__main__":
     unittest.main()

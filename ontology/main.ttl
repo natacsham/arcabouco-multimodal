@@ -9,9 +9,9 @@
 skos:broader a owl:ObjectProperty .
 
 <https://w3id.org/mado> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/1.4.0-rc2> ;
-  owl:versionInfo "1.4.0-rc2" ;
-  owl:priorVersion <https://w3id.org/mado/1.4.0-rc1> ;
+  owl:versionIRI <https://w3id.org/mado/1.4.0-rc3> ;
+  owl:versionInfo "1.4.0-rc3" ;
+  owl:priorVersion <https://w3id.org/mado/1.4.0-rc2> ;
   dcterms:creator "Natacsha Ordones Raposo de Melo" ;
   rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
   rdfs:comment "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .

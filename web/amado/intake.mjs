@@ -51,6 +51,17 @@ function activityContext(current, catalog) {
     (String(value).startsWith('TAR-') ? '' : value)).filter(Boolean);
   return known.length ? 'Atividade informada: ' + uniq(known).join('; ') : '';
 }
+// A round is a short clarification, not a survey of every represented route.
+// Answered/unknown fields stay completed as conversation steps; this does not
+// turn their semantic requirements into confirmed facts.
+export function questionRound(pending, answered = new Set(), handled = new Set(), count = 0, limit = 3) {
+  const remaining = pending.filter(question => !answered.has(question.id) && !handled.has(question.id));
+  const available = Math.max(0, limit - count);
+  return {questions: remaining.slice(0, available), remaining: remaining.length,
+    // A task answer may expose a useful follow-up. State the stable upper bound
+    // instead of promising "one of one" and subsequently increasing the total.
+    current: Math.min(count + 1, limit), total: remaining.length ? limit : count};
+}
 export function legacyQuestions(current, catalog) {
   const raw = current.context?.raw || {};
   const people = participants(current, catalog);
@@ -60,38 +71,43 @@ export function legacyQuestions(current, catalog) {
     const field = item.field;
     const person = item.participant_id && people.find(row => row.id === item.participant_id);
     const selected = person && item.answer_field ? person[item.answer_field] || [] : raw[field] || [];
-    const question = {...item, id: item.participant_id ? field+':'+item.participant_id : field,
+    const contextLabel = item.context_label || activityContext(current, catalog);
+    const activity = contextLabel.replace(/^Atividade informada:\s*/i, '');
+    const scope = activity ? 'Para “'+activity+'”, ' : 'No desafio que você descreveu, ';
+    const personLabel = item.participant_id ? participantName(person, item.participant_label) : '';
+    const contextual = label => item.label || item.question || scope+label.charAt(0).toLowerCase()+label.slice(1);
+    const question = {...item, id: item.id || (item.participant_id ? field+':'+item.participant_id : field),
       field, label: item.question, type: item.type || 'multi', options: [],
-      context_label: activityContext(current, catalog),
-      participant_label: item.participant_id ? participantName(person, item.participant_label) : '',
-      help: 'Marque apenas o que corresponde ao seu caso.', existingParticipations: people};
-    if (field === 'objetivo') return {...question, type: 'text', label: 'O que você espera alcançar?', help: ''};
-    if (field === 'barreira_ou_necessidade') return {...question, label: 'Quais dificuldades ou necessidades você percebe?',
-      help: 'Pode marcar uma ou mais respostas. Não é preciso marcar todas.',
+      context_label: contextLabel,
+      participant_label: personLabel,
+      help: item.help || item.reason || 'Marque apenas o que corresponde ao seu caso.', existingParticipations: people};
+    if (field === 'objetivo') return {...question, type: 'text', label: contextual('O que você espera que as pessoas consigam fazer?')};
+    if (field === 'barreira_ou_necessidade') return {...question, label: contextual('O que dificulta acessar, compreender ou utilizar o conteúdo ou recurso?'),
+      help: item.help || item.reason || 'Pode marcar uma ou mais respostas. Não é preciso marcar todas.',
       options: [...options(catalog, 'BARREIRA', raw.barreiras, 'barreiras', item.concept_ids), ...options(catalog, 'NECESSIDADE', raw.necessidades, 'necessidades', item.concept_ids)]};
     if (field === 'participantes') return {...question,
-      label: item.concept_ids ? 'Quem pode ajudar a preparar ou adaptar o conteúdo?' : 'Quem participa desse desafio?',
-      help: item.concept_ids ? 'Selecione quem poderá assumir esse apoio.' : 'Inclua quem precisa do apoio e quem pode ajudar.',
+      label: contextual(item.concept_ids ? 'Quem pode preparar ou adaptar o conteúdo ou recurso?' : 'Quem precisa do apoio e quem pode participar?'),
+      help: item.help || item.reason || (item.concept_ids ? 'Selecione quem poderá assumir esse apoio.' : 'Inclua quem precisa do apoio e quem pode ajudar.'),
       options: options(catalog, 'PAPEL_NO_CONTEXTO', [], undefined, item.concept_ids)};
     if (field === 'apoios_informados') return {...question, type: 'text',
-      label: 'Há alguma outra forma de comunicação ou apoio?',
-      help: 'Se souber, descreva o que já é usado pelas pessoas indicadas. Você pode continuar sem preencher.'};
+      label: contextual('Que forma de comunicação ou apoio '+(personLabel ? 'já é usada por '+personLabel : 'já é utilizada')+'?'),
+      help: item.help || item.reason || 'Se souber, descreva o que já é usado. Você pode continuar sem preencher.'};
     const config = fields[field];
-    const personalLabels = {caracteristicas_pessoa:'O que facilita ou dificulta a participação?',
-      modalidades_disponiveis:'Como acessa e acompanha o conteúdo?', recursos_disponiveis:'Quais destes recursos já consegue usar?'};
-    if (!config) return {...question, type: 'text'};
-    const projected = {...question, label: item.participant_id ? personalLabels[field] || config[1] : config[1],
+    const personalLabels = {caracteristicas_pessoa:'O que facilita ou dificulta o acesso de '+personLabel+' ao conteúdo ou recurso?',
+      modalidades_disponiveis:'Que formas de acesso ao conteúdo '+personLabel+' já utiliza?', recursos_disponiveis:'Quais destes recursos '+personLabel+' já consegue utilizar?'};
+    if (!config) return {...question, label: contextual('Qual informação precisa ser considerada?'), type: 'text'};
+    const projected = {...question, label: contextual(item.participant_id ? personalLabels[field] || config[1] : config[1]),
       options: options(catalog, config[0], selected, undefined, item.concept_ids)};
-    if (field === 'tarefas') projected.help = 'Pense no que precisa ser feito, como acessar um material, escrever ou participar de uma apresentação.';
+    if (field === 'tarefas' && !item.help && !item.reason) projected.help = 'Pense no que precisa ser feito, como acessar um material, escrever ou participar de uma apresentação.';
     if (item.participant_id && field === 'modalidades_disponiveis') {
       // A game may contain several access modes. It cannot, by itself, answer
       // how a person perceives the content. Keep it in resources and decisions.
       projected.options = projected.options.filter(option => option.id !== 'MOD-JOGO-INTERATIVO');
-      projected.help = 'Marque as formas que as pessoas indicadas já usam. Pode escolher mais de uma.';
+      projected.help = item.help || item.reason || 'Marque as formas que as pessoas indicadas já usam. Pode escolher mais de uma.';
       projected.note_label = 'Outra forma de comunicação ou apoio (opcional)';
       projected.handles_ids = ['apoios_informados:' + item.participant_id];
     } else if (item.participant_id && field === 'recursos_disponiveis') {
-      projected.help = 'Marque os recursos que as pessoas indicadas sabem utilizar.';
+      projected.help = item.help || item.reason || 'Marque os recursos que as pessoas indicadas sabem utilizar.';
     }
     return projected;
   });
@@ -152,6 +168,16 @@ export function legacySummary(current) {
     if (details.length) rows.push(['Sobre '+personName(person), details]);
   }
   return rows.map(([label, value]) => ({label, value: Array.isArray(value) ? value.join('; ') : value || ''})).filter(row => row.value);
+}
+export function accessRequirementSummary(current) {
+  return (current.context?.access_requirements || []).map(row => ({
+    participant: row.participant_label || 'Relato sem atribuição a uma pessoa',
+    requirements: uniq(row.requirement_labels || []),
+    description: row.description || '', matchedText: row.matched_text || '',
+    conditions: row.conditions || '', limit: row.limit || '',
+    needsConfirmation: row.status === 'CONFLITO_A_CONFIRMAR',
+    sourceIds: row.source_ids || [], excerptIds: row.excerpt_ids || [], matrixId: row.matrix_id || '',
+  }));
 }
 export function detectCompositionTask(narrative) {
   const text = norm(narrative).replace(/\bnao (?:vai|precisa|quer|deve) (?:escrever|redigir|digitar|revisar|conferir|corrigir)\b/g, '');

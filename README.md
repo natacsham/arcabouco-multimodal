@@ -4,7 +4,7 @@
 
 O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão deste projeto: 1.4.0-rc2 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
+**Versão deste projeto: 1.4.0-rc3 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
 
 **Este é o projeto em desenvolvimento.** As melhorias da ontologia e do AMADO são integradas aqui, em `arcabouco-multimodal`; não existe um produto separado chamado “Evolution”. O repositório `MADO` anterior permanece preservado. A versão 1.4 da base e o módulo de composição 2.0.0-alpha2 têm identificadores distintos para permitir conferir exatamente o que foi executado.
 
@@ -75,7 +75,7 @@ Relato → informações a confirmar → contexto confirmado
 4. **Operacionalizar:** adaptar os vínculos existentes em `decision_components` e nos contratos versionados de `experimental/v2/trajectory-bindings.json`. Uma função só integra a orientação se suas condições e apoios forem satisfeitos; ter uma fonte a mais não cria automaticamente uma capacidade.
 5. **Publicar:** regenerar RDF, catálogo, piloto e pacote; reexecutar as verificações; publicar somente os arquivos públicos. O navegador consome a mesma versão empacotada da base, não uma segunda planilha explicativa.
 
-O [catálogo e o desenho do percurso](https://natacsham.github.io/arcabouco-multimodal/ontologia/#fontes) são projeções desses registros. A conferência desta revisão é parcial: seis origens WCAG/MMI receberam seção e versão verificadas; outras referências permanecem citadas ou pendentes. O acesso restrito a uma norma não é tratado como leitura concluída. [O que foi conferido e como reproduzir](docs/fundamentacao-documental.md).
+O [catálogo e o desenho do percurso](https://natacsham.github.io/arcabouco-multimodal/ontologia/#fontes) são projeções desses registros. A conferência desta revisão é parcial: sete origens WCAG/MMI receberam seção e versão verificadas; outras referências permanecem citadas ou pendentes. O acesso restrito a uma norma não é tratado como leitura concluída. [O que foi conferido e como reproduzir](docs/fundamentacao-documental.md).
 
 1. O contexto é organizado em conceitos representados na base e conferido pela pessoa usuária.
 2. Consultas recuperam conhecimentos pertinentes e articulações documentadas.
@@ -89,13 +89,33 @@ O AMADO executa Python no navegador por Pyodide, com RDF e consultas SPARQL. Nã
 
 O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A organização anterior da interface continua em `amado/completo.html` e `amado/completo-guiado.html`, utilizando a mesma versão atual dos motores. A versão anterior completa permanece no histórico do repositório.
 
+### Da descrição à ação: o que foi adaptado na RC3
+
+Não foi criada outra matriz nem uma resposta pronta para um assunto. O motor passa a consumir `functional_matrix`, dentro de `data/knowledge-base.json`, junto aos conhecimentos, critérios e articulações já existentes. A matriz é uma camada operacional curada; o reasoner OWL não interpreta o texto livre nem presume capacidades individuais.
+
+| Etapa | O que o programa faz | Registro para conferir |
+|---|---|---|
+| **Relato** | Identifica termos controlados, participantes e fatos mencionados; solicita conferência | Contexto organizado e texto informado |
+| **Conhecimento recuperado** | Reconhece sinais funcionais mapeados na matriz e recupera requisitos e conhecimentos vinculados | `access_requirements`: matriz, participante, sinal, fontes e trechos |
+| **Condições** | Confronta as rotas existentes com recursos, papéis e impedimentos; prioriza percursos pertinentes que precisam de menos esclarecimentos | Verificações satisfeitas, pendentes ou incompatíveis |
+| **Combinação** | Emprega os padrões existentes e suas aplicações exatas de critérios; desconhecido não significa disponível | Configuração selecionada ou condicional, conhecimentos e articulações utilizados |
+| **Ação explicada** | Mostra um cartão por configuração e passos ligados à sua instrução original | `sintese_pratica.etapas[].passos`, componente, campo e fragmento de origem |
+
+Por exemplo, uma descrição de acesso não visual pode recuperar **MF-01 → K10/K42** e os requisitos de acesso equivalente. Isso não preenche “usa leitor de tela”. Uma referência a dificuldade de ouvir mobiliza o registro auditivo **MF-11**, operacionalizado nesta mesma matriz com origens já existentes de **CA16/CA17**; não preenche “usa Libras” ou “compreende texto”. **MF-02** liga barreiras de operação explicitamente relatadas à necessidade de entrada alternativa. Os demais registros continuam na base, mas não são anunciados como reconhecedores de qualquer narrativa.
+
+Os vínculos auditivos são delimitados pelas seções conferidas: alternativa para áudio gravado e legenda para áudio em vídeo gravado. Não comprovam uma solução para toda comunicação ao vivo. O padrão de acesso por leitor de tela não deve ser escolhido apenas porque uma pessoa surda precisa de alternativa à informação sonora. Em grupos mistos, os requisitos conservam seus participantes; uma rota não é apresentada como atendimento de todos.
+
+Foi corrigida também uma omissão no índice de K10: **página web** não aparecia entre seus recursos digitais, embora o próprio conhecimento e seus registros WABlind tratem de conteúdo web. O vínculo existente foi completado no JSON e projetado no RDF, para não restringir a pergunta a apresentação ou imagem digital. Isso não cria outro conhecimento nem altera o tema da tarefa.
+
+O tema — Matemática, História ou outro — contextualiza a atividade, não seleciona uma resposta cadastrada. Uma combinação desconhecida pode reutilizar um padrão existente. Isso não significa que toda tarefa esteja coberta: se faltam funções ou uma rota não está conferida, o apoio é parcial ou condicional, com a lacuna indicada.
+
 ### Como as perguntas avançam e como ler o resultado
 
-Cada pergunta identifica a atividade e, quando necessário, a pessoa ou o grupo a que se refere. Uma resposta encerra essa pergunta no diálogo: não é necessário marcar todas as opções. “Ainda não sei” permite continuar sem transformar ausência de informação em confirmação. O indicador mostra a posição e o total previsto, que pode mudar conforme as respostas.
+Cada pergunta identifica a atividade e, quando necessário, a pessoa ou o grupo a que se refere. A primeira rodada contém até três perguntas, podendo conter nenhuma. Uma resposta encerra essa pergunta no diálogo: não é necessário marcar todas as opções. “Ainda não sei” permite continuar sem transformar ausência de informação em confirmação. O indicador mostra a posição e o total da rodada; esclarecimentos adicionais são opcionais.
 
-Esse controle pertence à interface (`web/amado/simple-flow.js`); não altera a verificação das condições pelo motor. Por exemplo, escolher uma dificuldade não confirma as demais. O botão **Completar as informações que faltam** permite retomar explicitamente os pontos pendentes, sem repetir perguntas automaticamente.
+O limite da rodada pertence à interface (`web/amado/simple-flow.js`); a seleção das perguntas considera os percursos no motor e em `intake.mjs`. Não se reúnem automaticamente as exigências de todos os padrões. Escolher uma dificuldade não confirma as demais. O refinamento permite retomar pontos pendentes sem repetir automaticamente perguntas já respondidas.
 
-A orientação usa os mesmos dados de execução: cada cartão começa pela ação, explica a combinação modal e mostra as condições essenciais. Alternativas, acompanhamento e limites ficam disponíveis no próprio cartão. Quando há apoio parcial, ele aparece antes das lacunas; quando não há configuração fundamentada, a interface informa o que falta, sem apresentar uma recomendação fictícia. A fundamentação continua consultável. [Fluxo de leitura e verificações](docs/visao-guiada.md).
+A orientação começa por **O que você pode fazer**: uma ação por configuração, seus passos e as condições antes de aplicar. A ordem interna dos passos não transforma configurações independentes em um procedimento obrigatório. Cada passo conserva o fragmento da ação que o sustenta; a impressão digital da ação impede reaproveitar uma simplificação antiga após mudança da base. Não se acrescentam modalidades de outros cartões. Alternativas, acompanhamento, limites e fundamentos ficam no próprio bloco. Apoio parcial ou condicional continua identificado; não equivale a uma solução completa. [Fluxo de leitura e verificações](docs/visao-guiada.md).
 
 ## Arquivos e reprodução
 
@@ -121,7 +141,7 @@ Consistência lógica, integridade dos dados, respostas às consultas, comportam
 
 Referência simples sugerida:
 
-> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.4.0-rc2. Repositório do projeto.
+> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.4.0-rc3. Repositório do projeto.
 
 Não há DOI exigido para consultar ou compreender este trabalho. Referências bibliográficas, autores de terceiros e perspectivas participantes conservam sua própria atribuição.
 

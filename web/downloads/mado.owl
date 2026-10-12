@@ -31,9 +31,9 @@
 <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology" />
 <ns1:comment xml:lang="pt-BR">Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado.</ns1:comment>
 <ns1:label xml:lang="pt-BR">MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital</ns1:label>
-<ns3:priorVersion rdf:resource="https://w3id.org/mado/1.4.0-rc1" />
-<ns3:versionIRI rdf:resource="https://w3id.org/mado/1.4.0-rc2" />
-<ns3:versionInfo>1.4.0-rc2</ns3:versionInfo>
+<ns3:priorVersion rdf:resource="https://w3id.org/mado/1.4.0-rc2" />
+<ns3:versionIRI rdf:resource="https://w3id.org/mado/1.4.0-rc3" />
+<ns3:versionInfo>1.4.0-rc3</ns3:versionInfo>
 </rdf:Description>
 <rdf:Description rdf:about="https://w3id.org/mado#A01">
 <rdf:type rdf:resource="https://w3id.org/mado#Artefato" />
@@ -6976,6 +6976,7 @@
 <ns4:aplicavelANecessidade rdf:resource="https://w3id.org/mado#NEC-SINALIZAR-AUSENCIA-IMAGEM" />
 <ns4:aplicavelARecursoDigital rdf:resource="https://w3id.org/mado#RED-APRESENTACAO-DIGITAL" />
 <ns4:aplicavelARecursoDigital rdf:resource="https://w3id.org/mado#RED-IMAGEM-DIGITAL" />
+<ns4:aplicavelARecursoDigital rdf:resource="https://w3id.org/mado#RED-PAGINA-WEB" />
 <ns4:aplicavelARecursoDisponivel rdf:resource="https://w3id.org/mado#REC-TEXTO-DESCRITIVO-SINTESE-POR-LEITOR-DE-TELA-CD10406" />
 <ns4:aplicavelATarefa rdf:resource="https://w3id.org/mado#TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL" />
 <ns4:aplicavelATarefa rdf:resource="https://w3id.org/mado#TAR-ACESSAR-CONTEUDO-WEB-E80BA3E" />
@@ -9710,11 +9711,15 @@
 <rdf:Description rdf:about="https://w3id.org/mado#ORI-0142">
 <rdf:type rdf:resource="https://w3id.org/mado#RelacaoDeOrigemDoCriterio" />
 <ns1:label xml:lang="pt-BR">ORI-0142</ns1:label>
-<ns4:estadoDeConferenciaDocumental>ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA</ns4:estadoDeConferenciaDocumental>
+<ns1:seeAlso rdf:resource="https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded" />
+<ns4:dataDaConsultaDocumental>2026-10-11</ns4:dataDaConsultaDocumental>
+<ns4:estadoDeConferenciaDocumental>SECAO_ORIGINAL_CONFERIDA</ns4:estadoDeConferenciaDocumental>
 <ns4:identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ORI-0142</ns4:identificador>
-<ns4:localizacaoDocumental>AT16 · WCAG</ns4:localizacaoDocumental>
+<ns4:localizacaoDocumental>1.2.1 — Audio-only and Video-only (Prerecorded)</ns4:localizacaoDocumental>
 <ns4:origemEmFonte rdf:resource="https://w3id.org/mado#FN-WCAG" />
 <ns4:origemSustentadaPorTrecho rdf:resource="https://w3id.org/mado#TD-ORI-0142" />
+<ns4:parafraseDocumental>Alternativas a áudio ou vídeo isolados gravados devem preservar a informação. O registro histórico CA16 é mais amplo; a operacionalização fica limitada à seção consultada e às suas exceções.</ns4:parafraseDocumental>
+<ns4:versaoDocumental>2023-10-05</ns4:versaoDocumental>
 </rdf:Description>
 <rdf:Description rdf:about="https://w3id.org/mado#ORI-0143">
 <rdf:type rdf:resource="https://w3id.org/mado#RelacaoDeOrigemDoCriterio" />
@@ -15603,11 +15608,16 @@
 <rdf:Description rdf:about="https://w3id.org/mado#TD-ORI-0142">
 <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental" />
 <ns1:label xml:lang="pt-BR">Referência ao trecho TD-ORI-0142</ns1:label>
+<ns1:seeAlso rdf:resource="https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded" />
+<ns4:dataDaConsultaDocumental>2026-10-11</ns4:dataDaConsultaDocumental>
+<ns4:estadoDeConferenciaDocumental>CONFERIDO_NA_SECAO_ORIGINAL</ns4:estadoDeConferenciaDocumental>
 <ns4:estadoDePublicacaoDoTrecho>TEXTO_NAO_REDISTRIBUIDO</ns4:estadoDePublicacaoDoTrecho>
 <ns4:identificador rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TD-ORI-0142</ns4:identificador>
-<ns4:localizacaoDocumental>PLANILHA_FINAL_DE_EXTRACAO</ns4:localizacaoDocumental>
+<ns4:localizacaoDocumental>1.2.1 — Audio-only and Video-only (Prerecorded)</ns4:localizacaoDocumental>
 <ns4:natureza>ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA</ns4:natureza>
+<ns4:parafraseDocumental>Áudio gravado requer alternativa equivalente; vídeo sem áudio admite alternativa ou trilha sonora equivalente. Há exceção para mídia identificada como alternativa ao texto. Esta seção não exige audiodescrição em todo vídeo nem cobre conteúdo ao vivo.</ns4:parafraseDocumental>
 <ns4:trechoDeFonte rdf:resource="https://w3id.org/mado#FN-WCAG" />
+<ns4:versaoDocumental>2023-10-05</ns4:versaoDocumental>
 </rdf:Description>
 <rdf:Description rdf:about="https://w3id.org/mado#TD-ORI-0143">
 <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental" />

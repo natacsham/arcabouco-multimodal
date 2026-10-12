@@ -101,10 +101,10 @@ await context.route('**/*',route=>{
 const ready=page=>page.waitForFunction(()=>document.querySelector('#health')?.dataset.state==='ready'&&document.querySelector('#main')?.getAttribute('aria-busy')==='false',{}, {timeout:180000});
 async function questionProgress(page){
   const text=await page.locator('#question-progress').innerText();
-  const match=text.match(/(\d+)\s+de\s+(\d+)/i);
+  const match=text.match(/(\d+)\s+de\s+(?:at[eé]\s+)?(\d+)/i);
   assert(match,'Question progress exposes current and currently estimated total: '+text);
   const current=Number(match[1]),total=Number(match[2]);
-  assert(current>0&&total>=current,'Consistent current/total question count');
+  assert(current>0&&total>=current&&total<=3,'Consistent current/total question count in a round of at most three');
   return {current,total,text};
 }
 async function contrastSamples(page){
@@ -193,11 +193,23 @@ try{
       const control=row.locator('input[value="true"]');
       if(await control.count())await control.check();else await row.locator('select').selectOption('true');
       await page.locator('#answer-questions').click();compositionAnswers++;
-      assert(compositionAnswers<=4,'Question must advance after an explicit answer');
+      assert(compositionAnswers<=3,'First clarification round must finish after at most three questions');
       await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
     }
-    check(key('only_four_unstated_composition_conditions'),compositionAnswers===4);
+    check(key('composition_first_round_limited_to_three'),compositionAnswers===3);
     await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
+    await page.locator('#case-confirmed').check();await page.locator('#generate-orientation').click();
+    await page.locator('#orientation-result').waitFor({state:'visible',timeout:180000});
+    check(key('optional_refinement_offered'),await page.locator('#complete-information').isVisible());
+    await page.locator('#complete-information').click();
+    while(await page.locator('#case-questions').isVisible()){
+      const row=page.locator('#questions-form [data-question]'),question=await row.getAttribute('data-question');
+      assert(['facts:KeyboardEffortAcceptable','facts:KeyboardCompatible','facts:KeyboardFeedbackPerceptible','facts:AudioUsable'].includes(question));
+      await row.locator('input[value="true"]').check();await page.locator('#answer-questions').click();compositionAnswers++;
+      assert(compositionAnswers<=4,'Explicit refinement asks the remaining fact, not earlier answers');
+      await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
+    }
+    check(key('only_four_unstated_conditions_across_opt_in_rounds'),compositionAnswers===4);
     await page.locator('#case-confirmed').check();await page.locator('#generate-orientation').click();
     await page.locator('#orientation-result').waitFor({state:'visible',timeout:180000});
     const composed=await page.evaluate(()=>window.__simpleProbe.generated);
@@ -218,7 +230,7 @@ try{
       const field=question.split(':')[0],person=await page.locator('#question-person').innerText();
       const progress=await questionProgress(page);sparseProgress.push(progress);
       assert(!sparseAnswers.some(answer=>answer.id===question),'A completed partial/unknown answer must not be re-asked: '+question);
-      assert(sparseAnswers.length<22,'Partial/unknown answers must terminate without skip-all');
+      assert(sparseAnswers.length<3,'Partial/unknown answers must reach confirmation after at most three questions');
       if(field==='tarefas')await row.locator('input[value="TAR-ORGANIZAR-CONTEUDO-DIGITAL"]').check();
       else if(field==='barreira_ou_necessidade'){
         const control=row.locator('input[value="BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"]');
@@ -229,7 +241,11 @@ try{
         check(key('whole_option_click_selects_single_barrier'),await control.isChecked()&&await row.locator('input:checked').count()===1);
       }else if(field==='apoios_informados')await row.locator('textarea').fill('não sei');
       else if(field==='objetivo')await row.locator('textarea').fill('Ainda não sei');
-      else await row.locator('input[value="unknown"]').check();
+      else {
+        const unknownControl=row.locator('input[value="unknown"]'),label=unknownControl.locator('xpath=ancestor::label[1]');
+        check(key('whole_unknown_option_has_pointer'),await label.evaluate(element=>getComputedStyle(element).cursor)==='pointer');
+        await label.click();
+      }
       if(field==='modalidades_disponiveis'&&person){
         check(key('group_access_has_named_participant'),/estudante/i.test(person)&&/surd|ceg/i.test(person));
         check(key('group_question_programmatically_names_context'),await row.evaluate(element=>{
@@ -246,20 +262,21 @@ try{
         if(!sparseAnswers.some(answer=>answer.id.startsWith('modalidades_disponiveis:')))
           await page.screenshot({path:path.join(artifacts,view+'-question-progress.png'),fullPage:true});
       }
-      if(field!=='tarefas')assert((await page.locator('#question-context').innerText()).includes('Organizar'),'Follow-up identifies the selected activity');
+      if(field!=='tarefas')assert((await page.locator('#question-context').innerText()).trim().length>0,'Follow-up identifies the selected activity');
       sparseAnswers.push({id:question,participant:person,answer:field==='tarefas'?'TAR-ORGANIZAR-CONTEUDO-DIGITAL':field==='barreira_ou_necessidade'?'BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE':'unknown'});
       await page.locator('#answer-questions').click();
       await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:20000});
     }
     const sparseState=await page.evaluate(()=>window.__simpleProbe.state);
-    check(key('partial_and_unknown_answers_advance_once'),sparseAnswers.some(answer=>answer.id==='barreira_ou_necessidade')&&new Set(sparseAnswers.map(answer=>answer.id)).size===sparseAnswers.length);
+    check(key('partial_and_unknown_answers_advance_once'),sparseAnswers.length<=3&&new Set(sparseAnswers.map(answer=>answer.id)).size===sparseAnswers.length);
     check(key('question_progress_increases'),sparseProgress.every((progress,index)=>index===0||progress.current>sparseProgress[index-1].current));
     check(key('unknown_free_text_is_not_support_fact'),(sparseState.participations||[]).every(person=>!/^\s*(?:ainda )?n[aã]o sei[.!]?\s*$/i.test(person.apoios_informados||'')));
-    check(key('single_barrier_does_not_assert_all_needs'),
-      JSON.stringify([...sparseState.context.raw.barreiras].sort())===JSON.stringify([...new Set([...sparseInitial.context.raw.barreiras,'BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE'])].sort())&&
-      JSON.stringify(sparseState.context.raw.necessidades)===JSON.stringify(sparseInitial.context.raw.necessidades));
+    check(key('unknown_answers_do_not_confirm_personal_capabilities'),
+      (sparseState.participations||[]).every(person=>(person.modalidade_ids||[]).length===0&&(person.recurso_operado_ids||[]).length===0));
+    check(key('base_requirements_retrieved_without_generic_barrier_question'),
+      sparseState.context.access_requirements.length>0&&!sparseAnswers.some(answer=>answer.id==='barreira_ou_necessidade'));
     report.partial_answer_regression??={};report.partial_answer_regression[view]={answers:sparseAnswers,progress:sparseProgress,raw:sparseState.context.raw,
-      note:'This regression uses one offered barrier and unknown answers. The historical published flow repeated that barrier question after the first selection.'};
+      note:'This regression limits initial clarification to three steps, preserves unknown answers, and distinguishes source-derived requirements from personal capabilities.'};
     await page.locator('#new-case').click();await ready(page);
     // A collective teaching challenge must not collapse different participants
     // into the single-person writing pilot or infer an assistive technology.
@@ -286,7 +303,7 @@ try{
         field==='participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
         field==='modalidades_disponiveis' ? /surd/i.test(questionPerson) ? ['MOD-TEXTO','MOD-IMAGEM'] : /ceg/i.test(questionPerson) ? ['MOD-AUDIO'] : ['MOD-TEXTO'] :
         field==='caracteristicas_pessoa' ? /ceg/i.test(questionPerson) ? ['CAR-INTERACAO-NAO-VISUAL'] : ['unknown'] :
-        field==='recursos_digitais' ? ['RED-PAGINA-WEB'] : field==='ambientes' ? ['AMB-SALA-DE-AULA'] :
+        field==='recursos_digitais' ? ['RED-APRESENTACAO-DIGITAL'] : field==='ambientes' ? ['AMB-SALA-DE-AULA'] :
         field==='recursos_disponiveis' ? questionPerson ? /ceg/i.test(questionPerson) ? ['REC-LEITOR-DE-TELA'] :
           /adapta/i.test(questionPerson) ? ['REC-EDITOR-MULTIMIDIA'] : ['unknown'] : [] :
         field==='apoios_informados' ? [/surd/i.test(questionPerson) ? 'O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.' :
@@ -320,7 +337,7 @@ try{
       groupAnswers.push({question,participant_label:questionPerson,values});
       assert.equal(new Set(groupAnswers.map(item=>item.question)).size,groupAnswers.length,
         'Teaching questions must advance, not repeat a group answer');
-      assert(groupAnswers.length<=20,'Teaching intake must terminate');
+      assert(groupAnswers.length<=3,'Teaching intake must reach confirmation within three questions');
       await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||
         document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
     }
@@ -329,11 +346,15 @@ try{
     const scopedGroups=teachingAnswered.participations.filter(group=>group.papel_id==='PAPEL-ESTUDANTE');
     const deaf=scopedGroups.find(group=>/surd/i.test(group.label)),blind=scopedGroups.find(group=>/ceg/i.test(group.label));
     check(key('answers_preserve_group_counts_and_separation'),deaf.quantidade===2&&blind.quantidade===1&&
-      JSON.stringify([...deaf.modalidade_ids].sort())===JSON.stringify(['MOD-IMAGEM','MOD-TEXTO'])&&JSON.stringify(blind.modalidade_ids)===JSON.stringify(['MOD-AUDIO'])&&
-      teachingAnswered.context.raw.modalidades_disponiveis.length===0&&
+      deaf.id!==blind.id&&teachingAnswered.context.raw.modalidades_disponiveis.length===0&&
       deaf.tarefa_ids.length>0&&blind.tarefa_ids.length>0);
-    check(key('groups_answered_individually'),groupAnswers.filter(item=>item.question.startsWith('modalidades_disponiveis:')).length===2&&
-      groupAnswers.some(item=>/surd/i.test(item.participant_label))&&groupAnswers.some(item=>/ceg/i.test(item.participant_label)));
+    for(const person of [deaf,blind]){
+      const answer=groupAnswers.find(item=>item.question==='modalidades_disponiveis:'+person.id);
+      assert.deepEqual([...(person.modalidade_ids||[])].sort(),[...(answer?.values||[])].filter(id=>id!=='unknown').sort(),
+        'Only explicit personal answers can confirm access modes');
+    }
+    check(key('requirements_keep_personal_attribution'),teachingAnswered.context.access_requirements.every(item=>
+      item.participant_id&&item.capabilities_inferred===false&&item.source_ids.length>0));
     const teachingSummary=await page.locator('#review-summary').innerText();
     check(key('short_review_preserves_groups'),/surd/i.test(teachingSummary)&&/ceg/i.test(teachingSummary)&&
       teachingSummary.length<650&&!teachingSummary.includes('Para a orientação, consideraremos'));
@@ -349,10 +370,9 @@ try{
       articulation_ids:teachingResult.decision.articulation_ids,
       limitations:teachingResult.decision.informacoes_ausentes,
       note:'This checks the real public intake and explicit synthetic follow-up answers, not a pre-registered mathematics response. The partial coverage and unresolved personal conditions remain visible.'};
-    check(key('teaching_reuses_existing_pattern_with_partial_limit'),teachingResult.decision.status==='GERADA_PARCIAL'&&
-      JSON.stringify(teachingResult.decision.component_ids)===JSON.stringify(['PAD-CONTEUDO-WEB-EQUIVALENTE'])&&
-      JSON.stringify([...teachingResult.decision.knowledge_ids].sort())===JSON.stringify(['K10','K42'])&&
-      JSON.stringify(teachingResult.decision.articulation_ids)===JSON.stringify(['ART-REF-03']));
+    check(key('teaching_reuses_grounded_patterns_with_partial_limit'),teachingResult.decision.status==='GERADA_PARCIAL'&&
+      teachingResult.decision.component_ids.length>0&&teachingResult.decision.knowledge_ids.length>0&&
+      teachingResult.decision.configuracao_modal.every(item=>item.knowledge_ids.length>0&&item.criterion_ids.length>0));
     check(key('partial_orientation_starts_with_supported_action'),
       (await page.locator('#orientation-main').innerText()).trim().length>0&&
       !/^\s*Faltam informa[cç][oõ]es e apoios verificados/i.test(await page.locator('#orientation-main').innerText())&&
@@ -378,7 +398,7 @@ try{
           field==='participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
           field==='modalidades_disponiveis' ? /surd/i.test(person) ? ['MOD-TEXTO','MOD-IMAGEM'] : ['MOD-AUDIO'] :
           field==='caracteristicas_pessoa' ? /ceg/i.test(person) ? ['CAR-INTERACAO-NAO-VISUAL'] : ['unknown'] :
-          field==='recursos_digitais' ? ['RED-PAGINA-WEB'] : field==='ambientes' ? ['AMB-SALA-DE-AULA'] :
+          field==='recursos_digitais' ? ['RED-APRESENTACAO-DIGITAL'] : field==='ambientes' ? ['AMB-SALA-DE-AULA'] :
           field==='recursos_disponiveis' ? !person||/adapta/i.test(person) ? ['REC-EDITOR-MULTIMIDIA'] : ['unknown'] : [];
         assert(wanted.length,'Unexpected resource variant question: '+question);
         for(const value of wanted){
@@ -395,7 +415,7 @@ try{
       }
       await page.locator('#answer-questions').click();variantAnswers.push(question);
       assert.equal(new Set(variantAnswers).size,variantAnswers.length,'Resource variant questions must not repeat');
-      assert(variantAnswers.length<=20,'Resource variant intake must terminate');
+      assert(variantAnswers.length<=3,'Resource variant must reach confirmation within three questions');
       await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||
         document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
     }
@@ -410,10 +430,12 @@ try{
       status:changedTeaching.decision.status,component_ids:changedTeaching.decision.component_ids,
       information_missing:changedTeaching.decision.informacoes_ausentes,
       note:'Same narrative; the reader availability and personal operation were not confirmed in the follow-up answers. This checks absence of support, not recognition of a textual prohibition.'};
-    check(key('unconfirmed_reader_changes_teaching_decision'),changedTeaching.decision.status.startsWith('SUSPENSA')&&
-      changedTeaching.decision.component_ids.length===0&&await page.locator('#orientation-result').isVisible());
-    check(key('suspended_output_has_no_invented_action'),await page.locator('#orientation-main .orientation-step').count()===0&&
-      (await page.locator('#orientation-main').innerText()).trim().length>0);
+    check(key('unconfirmed_reader_preserves_conditional_support'),changedTeaching.decision.status==='GERADA_PARCIAL'&&
+      changedTeaching.decision.configuracao_modal.some(item=>item.availability_status==='CONDICIONAL_A_CONFIRMACAO')&&
+      await page.locator('#orientation-result').isVisible());
+    check(key('unknown_resources_have_visible_application_conditions'),await page.locator('#orientation-main .orientation-step').count()>0&&
+      await page.locator('#orientation-main .step-conditions').count()>0&&
+      /condicionad|confirme|confirmar/i.test(await page.locator('#orientation-main').innerText()));
     await page.locator('#new-case').click();await ready(page);
     // Dictation is explicit and requires confirmation before a remote browser service.
     await page.locator('#dictate-case').focus();await page.keyboard.press('Enter');
@@ -452,7 +474,16 @@ try{
     await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
     const before=await page.evaluate(()=>window.__simpleProbe.state);
     check(key('only_missing_questions'),await page.locator('#questions-form [data-question]').count()>0&&!await page.locator('#orientation-result').isVisible());
-    const objective=page.locator('#questions-form [name="objetivo"]');assert(await objective.count()===1,'Incomplete narrative must ask for an objective');
+    let objective=page.locator('#questions-form [name="objetivo"]');
+    if(!await objective.count()){
+      const task=page.locator('#questions-form [name="tarefas"][value="TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"]');
+      assert(await task.count()===1,'A missing task precedes the contextual objective question');
+      await task.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+      await task.check();await page.locator('#answer-questions').click();
+      await page.locator('#questions-form [name="objetivo"]').waitFor({state:'visible',timeout:180000});
+      objective=page.locator('#questions-form [name="objetivo"]');
+    }
+    assert(await objective.count()===1,'Incomplete narrative must ask for an objective within the short round');
     await objective.fill('Compreender a informação das imagens e continuar a atividade.');
     await page.locator('#answer-questions').click();
     await page.waitForFunction(()=>window.__simpleProbe.state?.context?.objetivo==='Compreender a informação das imagens e continuar a atividade.',{}, {timeout:180000});

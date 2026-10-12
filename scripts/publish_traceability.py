@@ -260,7 +260,7 @@ def main():
               "parity-report.json": parity_components(parity, browser, manifest),
               "composition-browser.json": preserved_components(composition, manifest)}
     checks = {
-        "version": manifest["version"] == "1.4.0-rc2",
+        "version": manifest["version"] == read("data/knowledge-base.json")["metadata"]["version"] == "1.4.0-rc3",
         "technical": technical.get("passed") is True,
         "reasoner": reasoner.get("passed") is True,
         "reasoner_current_graph": reasoner["input_sha256"] == sha("ontology/mado-combined.ttl"),

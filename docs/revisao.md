@@ -1,4 +1,17 @@
-# Revisão 1.4.0-rc2 — empregar a base existente e conferir o percurso
+# Revisão 1.4.0-rc3 — usar a matriz existente e explicar ações
+
+## Alterações desta revisão
+
+- Consumo operacional da matriz funcional existente, com requisitos derivados separados dos fatos relatados e das capacidades individuais desconhecidas.
+- Vínculos de MF-01/MF-02 e operacionalização auditiva MF-11 sobre origens já existentes, com limites documentais e de participante.
+- Escolha de percursos pertinentes para esclarecimento, em vez da união de todas as exigências; primeira rodada de até três perguntas, refinamento opcional e desconhecidos não repetidos.
+- Um cartão por configuração, com passos ligados ao texto de ação selecionado. Nenhuma modalidade é acrescentada apenas pelo título genérico do caso da entrevista.
+- Apoios condicionais distinguem condição não confirmada de recurso impedido; não se apresentam como prontos nem como atendimento integral do grupo.
+- Versionamento e regressão próprios. Nenhum arquivo do repositório MADO ou da tese é alterado.
+
+Os relatórios em `evidence/` identificam quais verificações desta revisão foram executadas. Não há nova avaliação humana.
+
+## Histórico da RC2
 
 - Interpretação de acesso e comunicação de conteúdo por função, sem procurar o tema da aula como cenário cadastrado.
 - Condições pessoais e respostas separadas por participante; nenhuma forma de comunicação inferida por diagnóstico.

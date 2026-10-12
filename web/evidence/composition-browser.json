@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_COMPOSITION_BROWSER_NOT_HUMAN_EVALUATION",
-  "executed_at": "2026-10-11T07:30:11.145Z",
+  "executed_at": "2026-10-12T01:40:39.074Z",
   "target": "LOCAL_SUBPATH",
   "checks": {
     "index.html_catalog_from_rdf": true,
@@ -67,14 +67,14 @@
     "NVDA and VoiceOver not tested; no full WCAG conformance claim."
   ],
   "build": {
-    "version": "1.4.0-rc2",
+    "version": "1.4.0-rc3",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "28d595f17039e71a25c61d360bf7c26fb98b9224de52edc1390b8df9ad6ad7a1",
+    "core_sha256": "b72c774b99038340e4bf773ff580858bb46be2e49a0c0b9bb360af1814adecd8",
     "bridge_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
-    "base_zip_sha256": "94bd6531c09196147194462e3f48ef7bd7859e7cf6fbf26bf0ea8231c54bd493",
+    "base_zip_sha256": "f45d2e26e62ee172eec30fa7c98155cbe1e85fd11c21e52a59bec0971db892a1",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -126,27 +126,27 @@
       }
     },
     "frontend_sha256": {
-      "index.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
+      "index.html": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
       "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
       "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
       "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
       "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
+      "guiado.html": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-      "simple-flow.js": "703a17bae6c5ac287c4724c43f2750aad398fa66e642ec503068db0517ed94bf",
-      "simple-flow.css": "f98d1047d42eba688a50ad4891ae1aba64c953ea5c28caf3b7067335304f8431",
+      "simple-flow.js": "af74e4f509a07293217bb8afa8ef7af9300ebacde5d7036c12a49e31263ef419",
+      "simple-flow.css": "61bc7df7141eb575c59c7e6b7c5a8fcee570eaff3f5020404813c8d8a1e64de5",
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
-      "intake.mjs": "98a08a564804c6d4c469e5f24b2bf6e2114c382d05a832bf065cf9a7d19ed027",
+      "intake.mjs": "74a716616410b75f0f96b9ed1c16d777c0fcede03e0cf887940dfc3c4f3cb56b",
       "completo.html": "3c6fc3e388b6df3e3d3284342a10025437d813cfe10d3b51313d4f648649d7a2",
       "completo-guiado.html": "fcad9bab6756d0fdcb2e816e64c85fcfa4564be46ece4de80ae26826b6d15b55"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
-      "ontologia/index.html": "d41b5253e9cee104324bceebd6117ed1bb6dc8776b3d97d657087df202dc839a",
+      "ontologia/index.html": "39e03fa7f7324a0339863bde6598a183e64b5db0a7e6c67ba3868459f0304b1c",
       "site.css": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
@@ -154,15 +154,15 @@
       "explanation.js": "99ed5c901099216983a26bbd3a4afa92de2993f3810982081bdcca1147f6d57c",
       "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
       "explanation-pilot.js": "a4a134b44b1254a429ede307f8302cfc277a4abf957434855748a82532bae1d0",
-      "assets/explanation-pilot.json": "2db2610d8de415e81833c80e1d650842f2a513de82413cf8b6be97af023aa704",
+      "assets/explanation-pilot.json": "2aa1f8c2d674c3c4c008bceba1876bf98cf0eaad6eb5e36788e1b4b63ec2b07a",
       "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
-      "assets/source-catalog.json": "0b4faeb7190b5a6a46e721a63afaf8f19c875df8c6b9d7c30e637aee1e367ddc"
+      "assets/source-catalog.json": "d86bd542209f4baef3f8da4ba855bf733865621f0549a182ced7242f9dea64cf"
     },
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
-      "data/knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b",
+      "data/knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
       "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
-      "ontology/mado-combined.ttl": "15b69ac0226b48e04b2e43a82351622bf1a8aafd38dbad7c0448d884bcc5f6a5",
+      "ontology/mado-combined.ttl": "7b37cec86bfe8f6fa4004b6ffecf50ba60ecb1c6769eed997391c6986a1ed52d",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -180,7 +180,7 @@
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "version": "1.4.0-rc2",
+  "version": "1.4.0-rc3",
   "test_sha256": "27bbb996bbf393febf4365cea0b8beb3d09060ffe658750423b4221174118601",
   "cases": {
     "index.html/keyboard_audio": {
@@ -191,12 +191,12 @@
           "https://w3id.org/mado/experimental/v2#ReviewSpeech"
         ]
       ],
-      "result_sha256": "0cfdf412641020368a8140956ce64227003bb53543dc256fd7bd29f11c9b87b4"
+      "result_sha256": "3913945fc842926b640644ab970b045e34765e0ec472f22d1104ad8628891098"
     },
     "index.html/audio_blocked": {
       "status": "PARTIAL",
       "choices": [],
-      "result_sha256": "b1375aff6ec90395e5375a642cf4da29f08cf9e5070ceb242d35125b68c1f128"
+      "result_sha256": "c9920b2d5a5c1f0a1feefa2ceca76a1c5d00cdf90f26ab21174015f4f2229e84"
     },
     "index.html/visual_alternative": {
       "status": "COMPLETE",
@@ -206,17 +206,17 @@
           "https://w3id.org/mado/experimental/v2#ReviewText"
         ]
       ],
-      "result_sha256": "6b463d9c93802eac169178fdca7e7bddd7912dd652e1e8991c05dc8bbd4b9a1a"
+      "result_sha256": "28215074ef8445e7cf95bbd04ccde15583a086a43fcf44375a2e69a456ed345f"
     },
     "index.html/unknown_effort": {
       "status": "CONDITIONAL",
       "choices": [],
-      "result_sha256": "f99309e6f08223a6c8f8d31d20788d6fde13c542fff16c43b30efabdff1b0176"
+      "result_sha256": "c37993c64d537a024e70cb05abb4c8321a83fdfca06841ae2d556498cb0a96d4"
     },
     "index.html/no_correction": {
       "status": "PARTIAL",
       "choices": [],
-      "result_sha256": "9617ea70245e247215c35940cfe8dc242da3df0948a73e31dd2c64441116c965"
+      "result_sha256": "fdd825116a161959019c801c0445c834bf6669605e24aef6ae3f99ea4c25d7d2"
     },
     "index.html/review_only": {
       "status": "COMPLETE",
@@ -225,12 +225,12 @@
           "https://w3id.org/mado/experimental/v2#ReviewSpeech"
         ]
       ],
-      "result_sha256": "575d520a8bf2f081e103e938bb16beb7b0d973c0c8152fa64dab170a8985ed35"
+      "result_sha256": "4888dd73defd731d8505c815166d4fb3ca331e0e539aaeadb7c3f1ab4123b2e1"
     },
     "index.html/not_confirmed": {
       "status": "UNCONFIRMED",
       "choices": [],
-      "result_sha256": "a2ea365da027bef2de9414e3e3cb1aec8bf886f86654b61c56d968a37221503a"
+      "result_sha256": "f96f53d7e9f7a28329052df99246c5cfa41724b0760e85c51014d027016b6205"
     },
     "guiado.html/keyboard_audio": {
       "status": "COMPLETE",
@@ -240,12 +240,12 @@
           "https://w3id.org/mado/experimental/v2#ReviewSpeech"
         ]
       ],
-      "result_sha256": "0cfdf412641020368a8140956ce64227003bb53543dc256fd7bd29f11c9b87b4"
+      "result_sha256": "3913945fc842926b640644ab970b045e34765e0ec472f22d1104ad8628891098"
     },
     "guiado.html/audio_blocked": {
       "status": "PARTIAL",
       "choices": [],
-      "result_sha256": "b1375aff6ec90395e5375a642cf4da29f08cf9e5070ceb242d35125b68c1f128"
+      "result_sha256": "c9920b2d5a5c1f0a1feefa2ceca76a1c5d00cdf90f26ab21174015f4f2229e84"
     },
     "guiado.html/visual_alternative": {
       "status": "COMPLETE",
@@ -255,17 +255,17 @@
           "https://w3id.org/mado/experimental/v2#ReviewText"
         ]
       ],
-      "result_sha256": "6b463d9c93802eac169178fdca7e7bddd7912dd652e1e8991c05dc8bbd4b9a1a"
+      "result_sha256": "28215074ef8445e7cf95bbd04ccde15583a086a43fcf44375a2e69a456ed345f"
     },
     "guiado.html/unknown_effort": {
       "status": "CONDITIONAL",
       "choices": [],
-      "result_sha256": "f99309e6f08223a6c8f8d31d20788d6fde13c542fff16c43b30efabdff1b0176"
+      "result_sha256": "c37993c64d537a024e70cb05abb4c8321a83fdfca06841ae2d556498cb0a96d4"
     },
     "guiado.html/no_correction": {
       "status": "PARTIAL",
       "choices": [],
-      "result_sha256": "9617ea70245e247215c35940cfe8dc242da3df0948a73e31dd2c64441116c965"
+      "result_sha256": "fdd825116a161959019c801c0445c834bf6669605e24aef6ae3f99ea4c25d7d2"
     },
     "guiado.html/review_only": {
       "status": "COMPLETE",
@@ -274,12 +274,12 @@
           "https://w3id.org/mado/experimental/v2#ReviewSpeech"
         ]
       ],
-      "result_sha256": "575d520a8bf2f081e103e938bb16beb7b0d973c0c8152fa64dab170a8985ed35"
+      "result_sha256": "4888dd73defd731d8505c815166d4fb3ca331e0e539aaeadb7c3f1ab4123b2e1"
     },
     "guiado.html/not_confirmed": {
       "status": "UNCONFIRMED",
       "choices": [],
-      "result_sha256": "a2ea365da027bef2de9414e3e3cb1aec8bf886f86654b61c56d968a37221503a"
+      "result_sha256": "f96f53d7e9f7a28329052df99246c5cfa41724b0760e85c51014d027016b6205"
     }
   },
   "passed": true

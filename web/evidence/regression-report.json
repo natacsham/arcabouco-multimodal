@@ -22,7 +22,7 @@
         "PAD-PAPEIS-TURNOS-AUTORIA",
         "PAD-REVISAO-CONFIRMACAO"
       ],
-      "seconds": 33.249,
+      "seconds": 23.079,
       "query_rows": {
         "CQ-001": 99,
         "CQ-002": 1068,
@@ -44,7 +44,7 @@
         "PAD-PAPEIS-TURNOS-AUTORIA",
         "PAD-REVISAO-CONFIRMACAO"
       ],
-      "seconds": 36.039,
+      "seconds": 35.503,
       "query_rows": {
         "CQ-001": 100,
         "CQ-002": 1068,
@@ -61,7 +61,7 @@
       "components": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
-      "seconds": 10.571,
+      "seconds": 18.066,
       "query_rows": {
         "CQ-001": 33,
         "CQ-002": 27,
@@ -79,7 +79,7 @@
         "PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
         "PAD-RETORNO-HAPTICO-RUIDO"
       ],
-      "seconds": 10.219,
+      "seconds": 12.722,
       "query_rows": {
         "CQ-001": 28,
         "CQ-002": 14,
@@ -96,7 +96,7 @@
       "components": [
         "PAD-COMUNICACAO-MULTIFORMATO"
       ],
-      "seconds": 10.876,
+      "seconds": 15.506,
       "query_rows": {
         "CQ-001": 40,
         "CQ-002": 16,
@@ -111,7 +111,7 @@
     "diagnostico_isolado": {
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "components": [],
-      "seconds": 8.854,
+      "seconds": 11.035,
       "query_rows": {
         "CQ-001": 8,
         "CQ-002": 0,
@@ -126,7 +126,7 @@
     "sem_confirmacao": {
       "status": "SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE",
       "components": [],
-      "seconds": 13.343,
+      "seconds": 19.304,
       "query_rows": {
         "CQ-001": 120,
         "CQ-002": 1068,
@@ -141,10 +141,14 @@
     "combinacao_nao_cadastrada": {
       "status": "GERADA_PARCIAL",
       "components": [
+        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
         "PAD-CONTEUDO-WEB-EQUIVALENTE",
         "PAD-COMUNICACAO-MULTIFORMATO"
       ],
       "knowledge": [
+        "K27",
+        "K43",
         "K10",
         "K42",
         "K41"
@@ -158,30 +162,38 @@
             "K29"
           ],
           "component_ids": [
+            "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+            "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
             "PAD-CONTEUDO-WEB-EQUIVALENTE"
           ],
           "covered_function_ids": [
-            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
-            "FUN-MANTER-INFORMACAO-RECUPERAVEL"
-          ],
-          "covered_functions": [
-            "Preservar o significado entre formas de representação",
-            "Manter informação persistente e recuperável"
-          ],
-          "remaining_function_ids": [
-            "FUN-SELECIONAR-MODO-POR-CONDICAO",
-            "FUN-FEEDBACK-PERCEPTIVEL",
-            "FUN-PRESERVAR-ACESSO",
             "FUN-ORGANIZAR-CONTEUDO",
+            "FUN-MANTER-INFORMACAO-RECUPERAVEL",
             "FUN-PERMITIR-REVISAO",
             "FUN-EXPRESSAR-CONHECIMENTO",
+            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS"
+          ],
+          "covered_functions": [
+            "Organizar relações históricas e reduzir competição entre formatos",
+            "Manter informação persistente e recuperável",
+            "Permitir retomada, revisão e correção do conteúdo",
+            "Permitir expressão autoral por formas compatíveis com a participação",
+            "Preservar o significado entre formas de representação"
+          ],
+          "remaining_function_ids": [
+            "FUN-PRESERVAR-ACESSO",
             "FUN-CARACTERIZAR-CONDICOES",
+            "FUN-SELECIONAR-MODO-POR-CONDICAO",
+            "FUN-FEEDBACK-PERCEPTIVEL",
             "FUN-REDUZIR-SOBRECARGA"
           ],
           "modalities": [
-            "Texto"
+            "Texto",
+            "Imagem"
           ],
           "alternatives": [
+            "Usar cartões, quadro ou folha com a mesma sequência e digitalizar somente após a revisão.",
+            "Usar desenho em papel, objeto ou explicação oral e registrar a mesma relação em texto curto.",
             "Disponibilizar uma versão textual estruturada ou explicação em áudio com a mesma informação e navegação equivalente."
           ]
         },
@@ -197,34 +209,42 @@
             "K43"
           ],
           "component_ids": [
+            "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+            "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
             "PAD-CONTEUDO-WEB-EQUIVALENTE",
             "PAD-COMUNICACAO-MULTIFORMATO"
           ],
           "covered_function_ids": [
-            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+            "FUN-ORGANIZAR-CONTEUDO",
             "FUN-MANTER-INFORMACAO-RECUPERAVEL",
+            "FUN-PERMITIR-REVISAO",
+            "FUN-EXPRESSAR-CONHECIMENTO",
+            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
             "FUN-SELECIONAR-MODO-POR-CONDICAO",
             "FUN-FEEDBACK-PERCEPTIVEL"
           ],
           "covered_functions": [
-            "Preservar o significado entre formas de representação",
+            "Organizar relações históricas e reduzir competição entre formatos",
             "Manter informação persistente e recuperável",
+            "Permitir retomada, revisão e correção do conteúdo",
+            "Permitir expressão autoral por formas compatíveis com a participação",
+            "Preservar o significado entre formas de representação",
             "Selecionar formas de interação pela tarefa e pelas condições funcionais",
             "Oferecer feedback perceptível, persistente e compatível"
           ],
           "remaining_function_ids": [
             "FUN-PRESERVAR-ACESSO",
-            "FUN-ORGANIZAR-CONTEUDO",
-            "FUN-PERMITIR-REVISAO",
-            "FUN-EXPRESSAR-CONHECIMENTO",
             "FUN-CARACTERIZAR-CONDICOES",
             "FUN-REDUZIR-SOBRECARGA"
           ],
           "modalities": [
             "Texto",
+            "Imagem",
             "Comando ou entrada por voz"
           ],
           "alternatives": [
+            "Usar cartões, quadro ou folha com a mesma sequência e digitalizar somente após a revisão.",
+            "Usar desenho em papel, objeto ou explicação oral e registrar a mesma relação em texto curto.",
             "Disponibilizar uma versão textual estruturada ou explicação em áudio com a mesma informação e navegação equivalente.",
             "Manter teclado, acionador ou apoio humano para registrar a mensagem, sempre com revisão e confirmação pela pessoa."
           ]
@@ -255,12 +275,263 @@
           "Manter teclado, acionador ou apoio humano para registrar a mensagem, sempre com revisão e confirmação pela pessoa."
         ],
         "added_configuration_ids": [
-          "CFG-D-GERADA-1CCF6A4133-02"
+          "CFG-D-GERADA-ACBC027ED8-04"
         ],
         "evidence_delta": [
           {
+            "component_id": "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+            "configuration_id": "CFG-D-GERADA-ACBC027ED8-01",
+            "configuration_added": false,
+            "added_support_pairs": [
+              {
+                "criterion_id": "CA02",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0012"
+              },
+              {
+                "criterion_id": "CA02",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0013"
+              },
+              {
+                "criterion_id": "CA02",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0014"
+              },
+              {
+                "criterion_id": "CA74",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0362"
+              },
+              {
+                "criterion_id": "CA74",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0363"
+              },
+              {
+                "criterion_id": "CA74",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0364"
+              },
+              {
+                "criterion_id": "CA84",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0398"
+              },
+              {
+                "criterion_id": "CA84",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0399"
+              },
+              {
+                "criterion_id": "CA84",
+                "knowledge_id": "K43",
+                "origin_id": "ORI-0400"
+              }
+            ],
+            "retrieval_witnesses": [
+              {
+                "knowledge_id": "K43",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-ORGANIZAR-CONTEUDO",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "access_requirement_witnesses": [],
+                "id": "WIT-72ed02c200eaaa8f",
+                "check_ids": [
+                  "CHECK-1f2214f0e44483b0",
+                  "CHECK-97f51539dec8f05a",
+                  "CHECK-8ebdff0b2c0ac6f9",
+                  "CHECK-bf074c3c6ba567c2",
+                  "CHECK-046defc9ce22ccc8",
+                  "CHECK-7aa7f59d5973d3e7",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K43",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "access_requirement_witnesses": [],
+                "id": "WIT-aeab15f746639cb2",
+                "check_ids": [
+                  "CHECK-e357f3266ecd2af5",
+                  "CHECK-97f51539dec8f05a",
+                  "CHECK-8ebdff0b2c0ac6f9",
+                  "CHECK-bf074c3c6ba567c2",
+                  "CHECK-046defc9ce22ccc8",
+                  "CHECK-7aa7f59d5973d3e7",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K43",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-REDUZIR-SOBRECARGA",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "access_requirement_witnesses": [],
+                "id": "WIT-793e1e076db0a170",
+                "check_ids": [
+                  "CHECK-db0fcfff9db1480d",
+                  "CHECK-97f51539dec8f05a",
+                  "CHECK-8ebdff0b2c0ac6f9",
+                  "CHECK-bf074c3c6ba567c2",
+                  "CHECK-046defc9ce22ccc8",
+                  "CHECK-7aa7f59d5973d3e7",
+                  "CHECK-436b78671c9165fe"
+                ]
+              }
+            ],
+            "interpretation": "Diferença de escolha e suporte nesta execução determinística, não evidência de eficácia em uso."
+          },
+          {
+            "component_id": "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
+            "configuration_id": "CFG-D-GERADA-ACBC027ED8-02",
+            "configuration_added": false,
+            "added_support_pairs": [
+              {
+                "criterion_id": "CA01",
+                "knowledge_id": "K42",
+                "origin_id": "ORI-0001"
+              },
+              {
+                "criterion_id": "CA01",
+                "knowledge_id": "K42",
+                "origin_id": "ORI-0002"
+              },
+              {
+                "criterion_id": "CA01",
+                "knowledge_id": "K42",
+                "origin_id": "ORI-0003"
+              },
+              {
+                "criterion_id": "CA02",
+                "knowledge_id": "K42",
+                "origin_id": "ORI-0012"
+              },
+              {
+                "criterion_id": "CA02",
+                "knowledge_id": "K42",
+                "origin_id": "ORI-0013"
+              },
+              {
+                "criterion_id": "CA02",
+                "knowledge_id": "K42",
+                "origin_id": "ORI-0014"
+              }
+            ],
+            "retrieval_witnesses": [
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-ORGANIZAR-CONTEUDO",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "access_requirement_witnesses": [],
+                "id": "WIT-1a4549ae3af05ddd",
+                "check_ids": [
+                  "CHECK-ff5800f4d87953a1",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "access_requirement_witnesses": [],
+                "id": "WIT-3744a6352b3ec729",
+                "check_ids": [
+                  "CHECK-3c17a6f44cfdf151",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
+                ]
+              },
+              {
+                "knowledge_id": "K42",
+                "mode": "POR_ARTICULACAO",
+                "articulation_id": "ART-REF-03",
+                "input_knowledge_id": "K10",
+                "context_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "knowledge_task_id": "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
+                "context_concept_id": "BAR-ELEMENTOS-SEM-REPRESENTACAO-ADEQUADA-F915D33",
+                "match_predicate": "aplicavelABarreira",
+                "required_function_id": "FUN-REDUZIR-SOBRECARGA",
+                "task_path": [
+                  "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
+                ],
+                "authorization": "APLICAVEL",
+                "access_requirement_witnesses": [],
+                "id": "WIT-98b1ba8dbe0335ea",
+                "check_ids": [
+                  "CHECK-0800265da7f02848",
+                  "CHECK-dae816f8518203dc",
+                  "CHECK-87d111d62b84022c",
+                  "CHECK-a3bd35f112c3b4fd",
+                  "CHECK-a2d256ba270886d5",
+                  "CHECK-b689a23156e5ef8a",
+                  "CHECK-436b78671c9165fe"
+                ]
+              }
+            ],
+            "interpretation": "Diferença de escolha e suporte nesta execução determinística, não evidência de eficácia em uso."
+          },
+          {
             "component_id": "PAD-CONTEUDO-WEB-EQUIVALENTE",
-            "configuration_id": "CFG-D-GERADA-1CCF6A4133-01",
+            "configuration_id": "CFG-D-GERADA-ACBC027ED8-03",
             "configuration_added": false,
             "added_support_pairs": [
               {
@@ -324,9 +595,10 @@
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-3dadb8361ec632c3",
+                "access_requirement_witnesses": [],
+                "id": "WIT-1a4549ae3af05ddd",
                 "check_ids": [
-                  "CHECK-4a3689b08b531766",
+                  "CHECK-ff5800f4d87953a1",
                   "CHECK-dae816f8518203dc",
                   "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
@@ -349,9 +621,10 @@
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-a28f2a14f149708b",
+                "access_requirement_witnesses": [],
+                "id": "WIT-3744a6352b3ec729",
                 "check_ids": [
-                  "CHECK-5f1c1fbd6a96a997",
+                  "CHECK-3c17a6f44cfdf151",
                   "CHECK-dae816f8518203dc",
                   "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
@@ -374,9 +647,10 @@
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-b305274c89bdd144",
+                "access_requirement_witnesses": [],
+                "id": "WIT-98b1ba8dbe0335ea",
                 "check_ids": [
-                  "CHECK-a56ad2b7e57981ad",
+                  "CHECK-0800265da7f02848",
                   "CHECK-dae816f8518203dc",
                   "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
@@ -390,7 +664,7 @@
           },
           {
             "component_id": "PAD-COMUNICACAO-MULTIFORMATO",
-            "configuration_id": "CFG-D-GERADA-1CCF6A4133-02",
+            "configuration_id": "CFG-D-GERADA-ACBC027ED8-04",
             "configuration_added": true,
             "added_support_pairs": [
               {
@@ -454,9 +728,10 @@
                   "TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-1cd9522aaab3c54f",
+                "access_requirement_witnesses": [],
+                "id": "WIT-96b44d9133e6b605",
                 "check_ids": [
-                  "CHECK-38deb98b26ecbfb2",
+                  "CHECK-88cd794bfa1a1ac6",
                   "CHECK-bd1bb348c3911cd3",
                   "CHECK-96592258d17ac8a6",
                   "CHECK-fd3617db7a30ea83",
@@ -479,9 +754,10 @@
                   "TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-5683dca7ffd4e1e4",
+                "access_requirement_witnesses": [],
+                "id": "WIT-e2a484c6e96f0f26",
                 "check_ids": [
-                  "CHECK-38ae25537e495560",
+                  "CHECK-8083e476bb9b10b9",
                   "CHECK-bd1bb348c3911cd3",
                   "CHECK-96592258d17ac8a6",
                   "CHECK-fd3617db7a30ea83",
@@ -504,9 +780,10 @@
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-3dadb8361ec632c3",
+                "access_requirement_witnesses": [],
+                "id": "WIT-1a4549ae3af05ddd",
                 "check_ids": [
-                  "CHECK-4a3689b08b531766",
+                  "CHECK-ff5800f4d87953a1",
                   "CHECK-dae816f8518203dc",
                   "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
@@ -529,9 +806,10 @@
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-a28f2a14f149708b",
+                "access_requirement_witnesses": [],
+                "id": "WIT-3744a6352b3ec729",
                 "check_ids": [
-                  "CHECK-5f1c1fbd6a96a997",
+                  "CHECK-3c17a6f44cfdf151",
                   "CHECK-dae816f8518203dc",
                   "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
@@ -554,9 +832,10 @@
                   "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
                 ],
                 "authorization": "APLICAVEL",
-                "id": "WIT-b305274c89bdd144",
+                "access_requirement_witnesses": [],
+                "id": "WIT-98b1ba8dbe0335ea",
                 "check_ids": [
-                  "CHECK-a56ad2b7e57981ad",
+                  "CHECK-0800265da7f02848",
                   "CHECK-dae816f8518203dc",
                   "CHECK-87d111d62b84022c",
                   "CHECK-a3bd35f112c3b4fd",
@@ -700,12 +979,15 @@
     "combinacao_sem_voz": {
       "status": "GERADA_PARCIAL",
       "components": [
+        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
+        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
+        "PAD-REVISAO-CONFIRMACAO",
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ]
     }
   },
   "base_sha256": {
     "interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
-    "knowledge-base.json": "d62f0a99693574763831d7449a14cc0e5d1479ca2b5d2621c40808acd7014e1b"
+    "knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444"
   }
 }

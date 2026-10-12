@@ -1,6 +1,8 @@
 # Percurso de perguntas e leitura do AMADO
 
-## Entrada atual — 1.4.0-rc2
+## Entrada atual — 1.4.0-rc3
+
+A rodada inicial limita-se a três esclarecimentos relevantes. O entendimento separa o que foi relatado dos requisitos recuperados na base, sem afirmar capacidades individuais. Em **O que você pode fazer**, cada configuração possui seus próprios passos e condições, sem transformar todas as sugestões numa sequência obrigatória. Refinamentos adicionais e fundamentos continuam opcionais.
 
 `web/amado/index.html` e `web/amado/guiado.html` compartilham a entrada simplificada,
 implementada em `simple-flow.js` com projeções de perguntas em `intake.mjs`.

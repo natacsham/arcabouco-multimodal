@@ -340,23 +340,23 @@
     }
   ],
   "metadata": {
-    "title": "Base pública do Arcabouço Multimodal — fundamentação 1.4.0-rc2",
-    "version": "1.4.0-rc2",
+    "title": "Base pública do Arcabouço Multimodal — fundamentação 1.4.0-rc3",
+    "version": "1.4.0-rc3",
     "generated_at": "2026-10-11",
     "note": "Projeção pública posterior à tese; texto original dos trechos não redistribuído.",
-    "migration_note": "Derivação técnica FIX2: explicita premissas dos três exemplos sintéticos, responsabilidades e recursos atuais/propostos. Conhecimentos, critérios, articulações, entrevista e estudos preservados.",
+    "migration_note": "RC3: operacionaliza a matriz funcional existente, separa requisitos fundamentados de capacidades individuais, localiza a origem WCAG 1.2.1 e delimita a rota auditiva. Preserva os conhecimentos e padrões existentes; não acrescenta resposta específica por tema.",
     "execution_scope": "TRANSFERENCIA_SITUADA_COM_REFERENCIAS_E_CONFIGURACAO_RASTREAVEL_SEM_LLM",
     "central_boundary": "A MADO apoia a construção e o acompanhamento de uma decisão situada. Recursos não confirmados podem permanecer condicionais; recursos explicitamente impedidos são excluídos. A saída não demonstra eficácia pedagógica nem generalização universal.",
     "decision_component_count": 32,
     "knowledge_count": 45,
     "articulation_count": 17,
     "transfer_mapping_count": 5,
-    "functional_matrix_count": 10,
+    "functional_matrix_count": 11,
     "active_decision_pattern_count": 11,
     "criterion_origin_count": 416,
     "resource_state_model": "DISPONIVEL_CONFIRMADO|PROPOSTO_A_PREPARAR|NAO_CONFIRMADO|IMPEDIDO",
-    "interface_version": "AMADO-web-1.4.0-rc2",
-    "derived_from_version": "1.4.0-rc1",
+    "interface_version": "AMADO-web-1.4.0-rc3",
+    "derived_from_version": "1.4.0-rc2",
     "public_projection": true
   },
   "studies": [
@@ -7533,9 +7533,15 @@
       "natureza": "ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA",
       "classificacao": "TRECHO_DOCUMENTAL",
       "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-      "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+      "localizacao_publica": "1.2.1 — Audio-only and Video-only (Prerecorded)",
       "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-      "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas."
+      "aviso_publicacao": "Texto original não redistribuído. Consulte a fonte e a localização indicadas.",
+      "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded",
+      "document_version": "2023-10-05",
+      "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+      "document_review_date": "2026-10-11",
+      "document_paraphrase": "Áudio gravado requer alternativa equivalente; vídeo sem áudio admite alternativa ou trilha sonora equivalente. Há exceção para mídia identificada como alternativa ao texto. Esta seção não exige audiodescrição em todo vídeo nem cobre conteúdo ao vivo.",
+      "record_locator": "PLANILHA_FINAL_DE_EXTRACAO"
     },
     {
       "id": "TD-ORI-0143",
@@ -11284,6 +11290,7 @@
           "CAR-BAIXA-VISAO"
         ],
         "recursos_digitais": [
+          "RED-PAGINA-WEB",
           "RED-APRESENTACAO-DIGITAL",
           "RED-IMAGEM-DIGITAL"
         ]
@@ -18995,10 +19002,15 @@
       "fonte_id": "FN-WCAG",
       "fonte_item": "WCAG",
       "trecho_id": "TD-ORI-0142",
-      "status_localizacao": "ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA",
+      "status_localizacao": "SECAO_ORIGINAL_CONFERIDA",
       "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
-      "localizacao_publica": "AT16 · WCAG",
-      "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada."
+      "localizacao_publica": "1.2.1 — Audio-only and Video-only (Prerecorded)",
+      "aviso_publicacao": "Texto do item original não redistribuído; referência documental preservada.",
+      "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded",
+      "document_version": "2023-10-05",
+      "document_review_date": "2026-10-11",
+      "document_paraphrase": "Alternativas a áudio ou vídeo isolados gravados devem preservar a informação. O registro histórico CA16 é mais amplo; a operacionalização fica limitada à seção consultada e às suas exceções.",
+      "record_locator": "AT16 · WCAG"
     },
     {
       "id": "ORI-0143",
@@ -28137,6 +28149,7 @@
     },
     {
       "id": "PAD-VIDEO-PROCESSO",
+      "access_requirement_matrix_ids": ["MF-01", "MF-11"],
       "role": "condicional",
       "label": "Vídeo para processo, mudança ou contraste",
       "requires_all": {
@@ -28804,6 +28817,7 @@
     },
     {
       "id": "PAD-CONTEUDO-WEB-EQUIVALENTE",
+      "access_requirement_matrix_ids": ["MF-01"],
       "role": "principal",
       "label": "Conteúdo visual com significado acessível por leitor de tela",
       "requires_all": {
@@ -31904,6 +31918,11 @@
     {
       "id": "MF-01",
       "categoria": "PERCEPCAO_E_ACESSO",
+      "sinais_relato": ["cego", "cega", "cegos", "cegas", "cegueira", "não enxerga", "não consegue enxergar", "sem enxergar", "acesso não visual", "interação não visual", "baixa visão", "dificuldade para enxergar", "dificuldade de enxergar"],
+      "requisito_ids": ["NEC-ACESSO-EQUIVALENTE", "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"],
+      "funcao_ids": ["FUN-PRESERVAR-ACESSO", "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS"],
+      "knowledge_ids": ["K10", "K42"],
+      "limite_inferencia": "Recupera requisitos de acesso à informação visual; não afirma ausência total de visão, domínio de leitura, uso de leitor de tela nem percepção de áudio.",
       "caracteristica_ids": [
         "CAR-INTERACAO-NAO-VISUAL"
       ],
@@ -31941,6 +31960,10 @@
     {
       "id": "MF-02",
       "categoria": "OPERACAO_E_CONTROLE",
+      "sinais_relato": ["não consegue usar o mouse", "não consegue operar o mouse", "dificuldade para usar o mouse", "não consegue digitar", "dificuldade para digitar", "não consegue usar o teclado", "dificuldade para tocar na tela"],
+      "requisito_ids": ["NEC-ENTRADA-ALTERNATIVA"],
+      "knowledge_ids": ["K41"],
+      "limite_inferencia": "Uma barreira de operação exige examinar alternativas; não confirma capacidade de fala, toque, olhar ou teclado.",
       "caracteristica_ids": [
         "CAR-OPERACAO-NAO-CONVENCIONAL"
       ],
@@ -32224,6 +32247,30 @@
         "TD-RC3-REF-05"
       ],
       "estado": "CONFERIDO_RC3"
+    },
+    {
+      "id": "MF-11",
+      "categoria": "PERCEPCAO_E_ACESSO",
+      "caracteristica_ids": [],
+      "sinais_relato": ["surdo", "surda", "surdos", "surdas", "surdez", "não ouve", "não consegue ouvir", "dificuldade para ouvir", "dificuldade de ouvir", "perda auditiva", "deficiência auditiva"],
+      "requisito_ids": ["NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE", "NEC-ALTERNATIVAS-DE-ACESSO-AO-RECURSO"],
+      "funcao_ids": ["FUN-PRESERVAR-ACESSO", "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS"],
+      "knowledge_ids": ["K42"],
+      "descricao_simples": "A informação necessária não deve depender exclusivamente da percepção do som.",
+      "efeito_na_tarefa": "Falas e sons relevantes podem precisar de uma representação alternativa que preserve seu significado.",
+      "modos_que_podem_apoiar": ["MOD-TEXTO", "MOD-IMAGEM"],
+      "modos_com_risco": ["MOD-AUDIO"],
+      "recurso_ids": ["REC-LEGENDAS", "REC-DESCRICAO-TEXTUAL"],
+      "condicoes": "Para áudio gravado, preparar alternativa equivalente; para áudio em vídeo gravado, legendas sincronizadas. Confirmar a forma de acesso compreendida pela pessoa antes de considerar a rota individual atendida.",
+      "contraindicacoes": "Não presumir Libras, compreensão de texto, visão disponível ou que legenda substitua todas as formas de comunicação. As origens conferidas não cobrem automaticamente conteúdo ao vivo.",
+      "limite_inferencia": "Deriva um requisito de acesso; não converte diagnóstico em habilidade, tecnologia disponível ou decisão autorizada.",
+      "fonte_ids": ["FN-WCAG"],
+      "trecho_ids": ["TD-ORI-0142", "TD-ORI-0148"],
+      "criterion_ids": ["CA16", "CA17"],
+      "origin_ids": ["ORI-0142", "ORI-0148"],
+      "estado": "CONFERIDO_NA_SECAO_ORIGINAL",
+      "origem_adaptacao": "Operacionalização delimitada de registros já presentes na base; não promove ligações históricas globais dos critérios nem confirma uma rota individual.",
+      "data_conferencia": "2026-10-11"
     }
   ],
   "import_audit": [

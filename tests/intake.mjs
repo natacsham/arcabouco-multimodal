@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {legacyQuestions, legacyAnswer, legacySummary, detectCompositionTask, compositionDraft, compositionQuestions, compositionSummary} from '../web/amado/intake.mjs';
+import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, questionRound, detectCompositionTask, compositionDraft, compositionQuestions, compositionSummary} from '../web/amado/intake.mjs';
 
 const item = (id, label = id) => ({id, label, curated: true});
 const catalog = {concepts: {TAREFA: [item('T1', 'Ler uma página')], BARREIRA: [item('B1', 'Imagem sem descrição')],
@@ -43,7 +43,7 @@ const groupCurrent = {context: {raw:{modalidades_disponiveis:[]}, participantes:
     answer_field:'modalidade_ids',concept_ids:['M1'],question:'Como este grupo acompanha a atividade?'}]};
 const groupQuestion = legacyQuestions(groupCurrent,catalog)[0];
 assert.equal(groupQuestion.id,'modalidades_disponiveis:DEAF');
-assert.equal(groupQuestion.label,'Como acessa e acompanha o conteúdo?');
+assert.equal(groupQuestion.label,'Como este grupo acompanha a atividade?');
 assert.equal(groupQuestion.participant_label,'Estudantes surdos (2)');
 assert.equal(groupQuestion.note_label,'Outra forma de comunicação ou apoio (opcional)');
 assert.deepEqual(groupQuestion.handles_ids,['apoios_informados:DEAF']);
@@ -82,7 +82,7 @@ assert.deepEqual(requirementQuestion.options.map(row=>row.id),['R2'],
   'A specific existing capability requirement must be answerable even if hidden in the general catalogue');
 const specificRole=legacyQuestions({...current,questions:[{field:'participantes',concept_ids:['P2'],
   question:'Quem pode preparar ou adaptar o conteúdo?'}]},catalog)[0];
-assert.equal(specificRole.label,'Quem pode ajudar a preparar ou adaptar o conteúdo?');
+assert.equal(specificRole.label,'Quem pode preparar ou adaptar o conteúdo?');
 assert.equal(specificRole.context_label,'Atividade informada: Ler uma página');
 assert.deepEqual(specificRole.options.map(row=>row.id),['P2']);
 const multiSupported=structuredClone(groupCurrent);
@@ -130,12 +130,41 @@ assert(legacyQuestions({...current,questions:[{field:'recursos_digitais'}]},mode
   .some(row=>row.id==='RD-JOGO'),'A game remains a possible digital resource');
 const supportOnly=legacyQuestions({...modeCase,questions:[modeCase.questions[1]]},modeCatalog)[0];
 assert.equal(supportOnly.type,'text');
-assert.equal(supportOnly.label,'Há alguma outra forma de comunicação ou apoio?');
+assert.match(supportOnly.label,/forma de comunicação ou apoio/);
 assert.equal(supportOnly.note_label,undefined,'The standalone support question has only its own textarea');
 const unknownActivity=legacyQuestions({context:{raw:{}},questions:[{field:'participantes',concept_ids:['P2']}]},catalog)[0];
 assert.equal(unknownActivity.context_label,'','An absent activity must not be fabricated from an example or role');
 assert(!unknownActivity.label.includes('nesta atividade'));
 assert(questions[0].help.includes('Não é preciso marcar todas'));
+
+const contextualQuestions=legacyQuestions({...current,questions:[{field:'barreira_ou_necessidade',
+  label:'Ao ler a página, qual informação está inacessível?',question:'Old generic wording',
+  context_label:'Atividade informada: Ler a página',reason:'A resposta diferencia descrição visual de organização do texto.',
+  candidate_component_ids:['OPTION1'],priority:1}]},catalog);
+assert.equal(contextualQuestions[0].label,'Ao ler a página, qual informação está inacessível?');
+assert.equal(contextualQuestions[0].help,'A resposta diferencia descrição visual de organização do texto.');
+assert.deepEqual(contextualQuestions[0].candidate_component_ids,['OPTION1']);
+const fallbackQuestion=legacyQuestions({...current,questions:[{field:'barreira_ou_necessidade'}]},catalog)[0];
+assert.match(fallbackQuestion.label,/Ler uma página/,'A fallback question still identifies the activity');
+assert.doesNotMatch(fallbackQuestion.label,/Quais dificuldades ou necessidades você percebe/);
+const pending=Array.from({length:11},(_,index)=>({id:'Q'+index}));
+assert.equal(questionRound(pending).questions.length,3,'First round never becomes an eleven-question survey');
+const completed=new Set(['Q0','Q1','Q2']);
+assert.equal(questionRound(pending,completed,new Set(),3).questions.length,0,'Third answer leads to confirmation');
+assert.deepEqual(questionRound(pending,completed,new Set(),0).questions.map(row=>row.id),['Q3','Q4','Q5'],
+  'Optional refinement preserves earlier answers including unknown steps');
+assert.equal(questionRound([],new Set()).questions.length,0,'Known contexts can proceed without questions');
+assert.deepEqual(questionRound(pending,new Set(['Q0']),new Set(['Q1']),1).questions.map(row=>row.id),['Q2','Q3']);
+const accessCurrent={context:{access_requirements:[{matrix_id:'MF1',participant_id:'PERSON',participant_label:'Pessoa informada',
+  description:'Acesso sem depender da visão.',requirement_labels:['Alternativa não visual'],source_ids:['F1'],excerpt_ids:['T1'],
+  matched_text:'pessoa cega',status:'DERIVADO_DA_BASE_PARA_CONFIRMACAO',capabilities_inferred:false}]}};
+const accessCopy=structuredClone(accessCurrent),requirements=accessRequirementSummary(accessCurrent);
+assert.equal(requirements[0].participant,'Pessoa informada');
+assert.deepEqual(requirements[0].requirements,['Alternativa não visual']);
+assert.equal(requirements[0].needsConfirmation,false);
+assert.deepEqual(requirements[0].sourceIds,['F1']);
+assert(!JSON.stringify(requirements).includes('leitor de tela'),'A requirement never invents individual assistive technology use');
+assert.deepEqual(accessCurrent,accessCopy);
 
 const composition = {tasks: [{id: 'TaskCreateReviewedText', label: 'Escrever e revisar', required_functions: [item('Expression'), item('Review')]},
   {id: 'TaskReviewExistingText', label: 'Revisar texto', required_functions: [item('Review')]}],

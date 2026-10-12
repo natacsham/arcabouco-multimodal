@@ -148,6 +148,12 @@ def build_graph(base, tbox, data):
 
     for row in data["knowledge"]:
         node = M[row["id"]]
+        # Keep the operational resource index and the queryable relation in
+        # sync. An existing source-backed applicability correction must not
+        # appear in the dialogue while remaining absent from the RDF.
+        if "recursos_digitais" in row.get("aplicabilidade", {}):
+            replace_values(graph, node, M.aplicavelARecursoDigital,
+                           (M[value] for value in row["aplicabilidade"]["recursos_digitais"]))
         for key, predicate in (("fonte_ids", M.derivadoDe), ("trecho_ids", M.sustentadoPorTrecho)):
             replace_values(graph, node, predicate, (M[value] for value in row.get(key, [])))
         for key, predicate in (("enunciado", M.enunciado), ("articulacao", M.articulacao)):

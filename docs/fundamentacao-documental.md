@@ -1,6 +1,6 @@
 # Fundamentação documental da articulação
 
-Esta revisão pertence ao repositório independente **Arcabouço Multimodal**, versão `1.4.0-rc2`. Não modifica a MADO `1.3.0-rc1` publicada nem reescreve a avaliação da tese. O acréscimo torna inspecionável **qual parcela de cada registro foi empregada numa articulação**; não transforma uma referência bibliográfica em prova de toda a decisão.
+Esta revisão pertence ao repositório independente **Arcabouço Multimodal**, versão `1.4.0-rc3`. Não modifica a MADO `1.3.0-rc1` publicada nem reescreve a avaliação da tese. O acréscimo torna inspecionável **qual parcela de cada registro foi empregada numa articulação**; não transforma uma referência bibliográfica em prova de toda a decisão.
 
 ## Três percursos diferentes
 
@@ -44,11 +44,14 @@ O responsável registrado é a assistência computacional que realizou esta conf
 | Registros existentes | Original e seção consultados | Alcance |
 |---|---|---|
 | ORI-0001, ORI-0014, ORI-0090, ORI-0148 e respectivos trechos | [WCAG 2.2, Recommendation de 05/10/2023](https://www.w3.org/TR/2023/REC-WCAG22-20231005/): 1.1.1, 1.3.1, 1.2.5, 1.2.2 | Paráfrase, localização, edição, URL e data das seções; não aprovação de todas as extrações WCAG |
+| ORI-0142 e TD-ORI-0142, acrescentados à conferência nesta RC3 | WCAG 2.2, mesma edição, 1.2.1 | Alternativa equivalente a áudio gravado; vídeo sem áudio admite alternativa ou faixa de áudio. Exceções e escopo gravado preservados; não se generaliza para toda mídia ou comunicação ao vivo |
 | ORI-0012, ORI-0013 e respectivos trechos | [MMI Requirements, Note de 08/01/2003](https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/): 1.9 (MMI-G16), 2.1 (MMI-I1) | Localização e paráfrase dos requisitos existentes; não dedução de solução pedagógica |
 | FN-AAG | [Página oficial de acessibilidade Android](https://developer.android.com/guide/topics/ui/accessibility) | Página atual consultada; edição histórica das extrações não reconferida |
 | FN-ABNT-WEB | Endereço ABNT citado pela publicação | Redirecionamento para acesso restrito; conteúdo integral não consultado |
 
 Nenhum PDF foi baixado. As referências E06-F15 e E06-F17 agora apontam para as edições identificadas e para suas fontes operacionais existentes; continuam como bibliografia citada na auditoria, sem promoção indiscriminada. Citações de outras publicações não foram consideradas documentos integralmente examinados.
+
+A RC3 usa essas origens na matriz funcional já existente: **MF-11** explicita o requisito de acesso à informação sonora, com ligação a ORI-0142/0148. É uma operacionalização analítica delimitada; não uma nova validação das capacidades de uma pessoa. O enunciado histórico de CA16 não foi silenciosamente substituído pela paráfrase: permanecem distinguíveis o registro anterior e a seção efetivamente conferida. **MF-01 e MF-02** receberam ligações operacionais aos conhecimentos e requisitos já representados. A matriz não declara leitura integral de ABNT nem domínio individual de leitor de tela, voz, Libras ou texto.
 
 O filtro anterior confundia `https://` com caminhos Windows: 73 citações foram restauradas por ID a partir do registro preservado da RC3, com hashes de procedência. O catálogo identifica endereços completos, reparos candidatos e seis grupos candidatos a duplicação, sem excluir IDs nem declarar leitura pela simples existência de um link. Esta correção bibliográfica não acrescenta conhecimentos ou padrões decisórios.
 

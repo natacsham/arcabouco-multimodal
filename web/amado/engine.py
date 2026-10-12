@@ -28,81 +28,119 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.4.0-rc2"
-UI_VERSION = "AMADO-web-1.4.0-rc2"
+VERSION = "1.4.0-rc3"
+UI_VERSION = "AMADO-web-1.4.0-rc3"
 PRACTICAL_COPY = {
     "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE": {
-        "group": "start",
-        "title": "Texto para organizar e permitir retomada",
-        "text": "Divida o material digital em partes curtas e registre a ideia principal, a autoria e o que ainda precisa ser revisto.",
+        "title": "Organize o material em blocos que possam ser revisados",
+        "action_sha256": "e98ea6a0f0c762ce245ddfc5654676e62ea15753a3d1d02f626c0b464afcf698",
+        "steps": [
+            ("Crie blocos curtos, cada um com uma ideia central.", "criar blocos curtos com uma ideia central"),
+            ("Identifique a autoria e inclua uma fonte ou exemplo.", "autoria identificada, fonte ou exemplo"),
+            ("Reserve um ponto de revisão antes de publicar.", "um ponto explícito de revisão antes de publicar"),
+        ],
         "relation": "O texto organiza o que foi dito, desenhado ou mostrado e permite que a informação seja retomada sem depender da memória da fala.",
     },
     "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO": {
-        "group": "combine",
-        "title": "Fala e áudio para preservar a autoria",
-        "text": "Deixe o estudante explicar cada parte com a própria voz. Guarde também um texto curto para ele conferir ou refazer.",
+        "title": "Grave a explicação e mantenha um texto para revisão",
+        "action_sha256": "46032a4425644082484b8bb0e3cf375f9f189b7c45c1987f3994edba8e263e87",
+        "steps": [
+            ("Grave a explicação em trechos curtos de áudio.", "registrar a explicação em trechos curtos de áudio"),
+            ("Junte a cada trecho um resumo em texto que possa ser editado.", "associar uma síntese textual editável"),
+            ("Permita que o estudante aprove ou refaça cada trecho.", "permitir que o estudante aprove ou refaça cada trecho"),
+        ],
         "relation": "A fala preserva a forma autoral de expressão; o áudio mantém essa contribuição recuperável e o texto curto apoia revisão e correção.",
     },
     "PAD-REPRESENTACAO-VISUAL-EXPLICADA": {
-        "group": "combine",
-        "title": "Imagem e desenho para representar relações",
-        "text": "Escolha as imagens e os desenhos com o estudante. Explique em texto ou fala o que cada um mostra.",
+        "title": "Explique o que cada imagem ou desenho comunica",
+        "action_sha256": "cab923bfa75942c2b5140dbc121f1317cc082611e2e0db881298e21c64bc312d",
+        "steps": [
+            ("Escolha ou produza cada imagem e desenho com o estudante.", "selecionar ou produzir cada imagem e desenho com o estudante"),
+            ("Registre o que cada representação demonstra.", "registrar o que ela demonstra"),
+            ("Acrescente uma descrição em texto ou fala que preserve a informação usada na atividade.", "acrescentar descrição textual ou oral equivalente ao ponto usado na atividade"),
+        ],
         "relation": "Imagem e desenho mostram relações visuais; texto ou fala explicam o significado para quem não percebe ou interpreta o visual da mesma forma.",
     },
     "PAD-VIDEO-PROCESSO": {
-        "group": "conditional",
-        "title": "Vídeo, quando for preciso mostrar processo ou mudança",
-        "text": "Use vídeo apenas para mostrar uma mudança, um processo ou um contraste. Pause, explique e ofereça legenda e descrição do conteúdo visual.",
+        "title": "Use um trecho de vídeo com pausa e explicação",
+        "action_sha256": "ec98a9048ed087db1d070c48e9e7d21f55a5542cbde35092d21fdc79df4057af",
+        "steps": [
+            ("Use um trecho curto de vídeo somente para a relação que precisa ser mostrada.", "usar um trecho curto de vídeo somente para a relação previamente escolhida"),
+            ("Pause para explicar e ofereça legendas e descrição do conteúdo visual.", "com pausa para explicação, legendas, descrição do conteúdo visual"),
+            ("Retome a informação em texto ou fala.", "retomada em texto ou fala"),
+        ],
         "relation": "O vídeo apresenta a mudança no tempo; pausas, fala, legenda e descrição preservam o conteúdo e tornam seus pontos principais recuperáveis.",
     },
     "PAD-JOGO-CONSOLIDACAO-FEEDBACK": {
-        "group": "conditional",
-        "title": "Jogo, quando for preciso relacionar e conferir",
-        "text": "Use um jogo curto apenas para ordenar, comparar ou relacionar ideias. Explique cada resposta e permita uma nova tentativa.",
+        "title": "Use o jogo para relacionar ideias e explicar as respostas",
+        "action_sha256": "0a7dd9a1c15b145104949cdbbd87a21913587511f5aee2f3974f830adceac700",
+        "steps": [
+            ("Crie poucas situações de ordenar, relacionar ou comparar.", "criar poucas situações de ordenar, relacionar ou comparar"),
+            ("Depois de cada resposta, explique o resultado e permita uma nova tentativa.", "após cada resposta, oferecer feedback explicativo, permitir nova tentativa"),
+            ("Discuta com a turma as respostas diferentes.", "discutir divergências com a turma"),
+        ],
         "relation": "A ação no jogo testa uma relação; o feedback em texto ou fala explica o resultado e orienta a retomada, sem transformar o jogo em recompensa.",
     },
     "PAD-PAPEIS-TURNOS-AUTORIA": {
-        "group": "participation",
-        "title": "Fala organizada por papéis e transições",
-        "text": "Combine antes quem fala, quando a turma pergunta e como uma ideia interrompida será retomada.",
+        "title": "Combine os momentos de participação e de retomada",
+        "action_sha256": "fa9497b635ecae487fc2a88d125f0aa515535d0d09cb21773676714ac3af0554",
+        "steps": [
+            ("Combine quem abre cada bloco e quando os colegas podem perguntar.", "combinar quem abre cada bloco, quando colegas perguntam"),
+            ("Combine como a professora sinaliza a passagem para a próxima parte.", "como a professora sinaliza a transição"),
+            ("Defina como o estudante registra uma contribuição que ficará para revisão.", "como o estudante registra uma contribuição que ficará para revisão"),
+        ],
         "relation": "A fala continua sendo espaço de participação, enquanto o roteiro visível marca turnos, transições e pontos de retomada.",
     },
     "PAD-REVISAO-CONFIRMACAO": {
-        "group": "review",
-        "title": "Texto e fala para revisar e confirmar",
-        "text": "Revise cada parte com o estudante e peça a um colega que diga o que compreendeu antes da publicação.",
-        "relation": "O registro escrito mantém a versão a conferir; a explicação oral do estudante e a devolutiva de um colega revelam o que precisa ser ajustado.",
+        "title": "Confira o conteúdo e suas alternativas antes de publicar",
+        "action_sha256": "fe70e0e3206fe55ab49180cacdeb8a05c062ee28d739c8de791abef29bd2a698",
+        "steps": [
+            ("Revise cada bloco com o estudante e teste com pelo menos um colega.", "revisar cada bloco com o estudante, testar com pelo menos um colega"),
+            ("Registre o que precisou de explicação.", "registrar o que precisou de explicação"),
+            ("Publique somente depois de confirmar o conteúdo e as alternativas.", "publicar somente após confirmação de conteúdo e alternativas"),
+        ],
+        "relation": "O registro editável mantém o conteúdo disponível para conferência; a revisão com o estudante e a devolutiva de um colega ajudam a identificar o que precisa ser explicado ou ajustado, incluindo as alternativas de acesso.",
     },
     "PAD-ORIENTACAO-AUDIO-RECUPERAVEL": {
-        "group": "start",
-        "title": "Dê uma orientação que possa ser repetida",
-        "text": "Apresente orientações curtas por áudio e deixe a pessoa repetir a última mensagem quando quiser.",
-        "relation": "O áudio apresenta a orientação no momento da ação; a repetição e o registro textual mantêm seu conteúdo disponível para conferência.",
+        "title": "Permita ouvir e repetir cada orientação",
+        "action_sha256": "afedb4cdf5b250beda732553750c8f83bfffbac3d2adb8082438cb8418d2999a",
+        "steps": [
+            ("Apresente cada orientação em um áudio curto.", "apresentar cada orientação em áudio curto"),
+            ("Mantenha um comando acessível para repetir a última mensagem.", "manter um comando acessível para repetir a última mensagem"),
+            ("Dê uma confirmação perceptível quando a ação for reconhecida.", "confirmar de forma perceptível quando a ação foi reconhecida"),
+        ],
+        "relation": "O áudio apresenta a orientação; a repetição permite ouvi-la novamente, e a confirmação informa se a ação foi reconhecida.",
     },
     "PAD-RETORNO-HAPTICO-RUIDO": {
-        "group": "combine",
         "title": "Acrescente um aviso por vibração",
-        "text": "Use uma vibração simples para avisar que há nova orientação, mantendo o conteúdo disponível em áudio ou texto.",
+        "action_sha256": "9a6e5bfd4376801d633b7a9e7d219ff42f73902d22e484ebb2f8429c1c2c2a66",
+        "steps": [
+            ("Use um aviso tátil simples e distinguível para sinalizar uma nova orientação.", "usar um padrão tátil simples e distinguível para avisar que há nova orientação"),
+            ("Mantenha a mensagem completa em áudio repetível ou texto acessível.", "mantendo o conteúdo disponível em áudio repetível ou texto acessível"),
+        ],
         "relation": "A vibração chama a atenção sem depender da escuta; o áudio ou o texto comunica o significado completo do aviso.",
     },
     "PAD-CONTEUDO-WEB-EQUIVALENTE": {
-        "group": "start",
-        "title": "Preserve o significado da página",
-        "text": "Descreva o que cada elemento visual comunica e organize títulos e relações para que o leitor de tela apresente o conteúdo na ordem correta.",
+        "title": "Prepare o conteúdo para acesso com leitor de tela",
+        "action_sha256": "27b44c7f63f87fdcf3354ae3f30a9e9352f1c0ea0b942adde796eca25a990155",
+        "steps": [
+            ("A pessoa responsável pela adaptação identifica a função de cada elemento visual.", "o responsável autorizado identifica a função dos elementos visuais"),
+            ("Ela produz alternativas em texto que preservem essa informação.", "produz alternativas textuais equivalentes"),
+            ("Ela organiza os títulos e as relações na página.", "estrutura títulos e relações na página"),
+            ("A pessoa usuária confere a sequência e a compreensão com seu leitor de tela.", "a pessoa usuária verifica a sequência e a compreensão com seu leitor de tela"),
+        ],
         "relation": "A organização textual preserva estrutura e relações; a descrição verbaliza o conteúdo visual e o leitor de tela o apresenta por voz e navegação sequencial.",
     },
     "PAD-COMUNICACAO-MULTIFORMATO": {
-        "group": "start",
-        "title": "Ofereça mais de uma forma de comunicar",
-        "text": "Permita escrever ou falar a mensagem. Mostre o texto reconhecido antes do envio, ofereça leitura em voz alta e informe claramente se houve envio ou erro.",
-        "relation": "A voz pode produzir a mensagem, o texto visível permite revisar e corrigir, e a leitura em voz confirma o conteúdo antes e depois do envio.",
+        "title": "Permita escrever ou ditar e conferir antes de enviar",
+        "action_sha256": "dbaa29ab7a5da30716aeb0d54d6fcc2de5e183a40ffb918e51ccc85325e5c6ef",
+        "steps": [
+            ("A pessoa responsável pela adaptação oferece digitação e voz como entradas alternativas.", "o responsável autorizado integra digitação e voz como entradas alternativas"),
+            ("Ela mostra o texto reconhecido antes do envio e oferece leitura em voz e retorno perceptível.", "apresenta o texto reconhecido antes do envio e disponibiliza leitura em voz e retorno perceptível"),
+            ("A pessoa usuária revisa, corrige, confirma e decide quando enviar.", "a pessoa usuária revisa, corrige, confirma e decide quando enviar"),
+        ],
+        "relation": "A voz pode produzir a mensagem, o texto permite revisar e corrigir, e a leitura em voz oferece outra forma de conferir o conteúdo antes de decidir pelo envio.",
     },
-}
-PRACTICAL_HEADLINES = {
-    "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE": "Organize com o estudante, a professora e a turma um material digital em partes curtas. Preserve a autoria do estudante e reserve momentos para perguntas, revisão e ajustes.",
-    "PAD-ORIENTACAO-AUDIO-RECUPERAVEL": "Ofereça orientações curtas por áudio, que possam ser repetidas, e use outro aviso quando o ambiente dificultar a escuta.",
-    "PAD-CONTEUDO-WEB-EQUIVALENTE": "Organize o conteúdo para que as informações visuais também possam ser compreendidas e navegadas com leitor de tela.",
-    "PAD-COMUNICACAO-MULTIFORMATO": "Permita que a pessoa produza e compreenda mensagens usando texto ou voz, sempre com confirmação e possibilidade de correção.",
 }
 
 
@@ -181,6 +219,7 @@ class DecisionEngine:
         }
         self.transfer_mappings = self.data.get("transfer_mappings", [])
         self.participations = self.data.get("context_participations", [])
+        self.functional_matrix = self.data.get("functional_matrix", [])
         self.components = [
             row
             for row in self.data["decision_components"]
@@ -189,6 +228,7 @@ class DecisionEngine:
         self.current = None
         self._evidence = None
         self._record_checks = False
+        self._dialogue_route_ids = None
         self.start_context("CTX-TRANSFERENCIA-RECURSO-DIGITAL-01")
 
     def _check(self, stage, subject, rule, outcome, message, **details):
@@ -322,6 +362,7 @@ class DecisionEngine:
             "estado_dos_recursos": self.resource_state_payload(c),
             "funcoes_requeridas": self.labels(c.get("funcoes_requeridas_ids")),
             "function_derivation": copy.deepcopy(c.get("function_derivation", [])),
+            "access_requirements": copy.deepcopy(c.get("access_requirements", [])),
             "restricoes": c.get("restricoes", []),
             "informacoes_ausentes": c.get("informacoes_ausentes", []),
             "baseado_em": c.get("baseado_em_contexto_ids", []),
@@ -417,6 +458,7 @@ class DecisionEngine:
     def _invalidate_result(self):
         self._evidence = None
         self._record_checks = False
+        self._dialogue_route_ids = None
         self.current["last_result"] = None
 
     def clear(self):
@@ -475,6 +517,7 @@ class DecisionEngine:
                 "titulo_curto": "Caso informado agora",
                 "funcoes_requeridas_ids": [],
                 "function_derivation": [],
+                "access_requirements": [],
                 "natureza": "CASO_INFORMADO_PELA_PESSOA",
                 "status": "AGUARDANDO_CARACTERIZACAO",
             }
@@ -838,23 +881,28 @@ class DecisionEngine:
         self.current["participations"] = roles
         # A reported diagnosis describes a group; it never supplies its
         # communication route, preferred mode or assistive technology.
-        groups = list(re.finditer(r"\b(?:(\d+|um|uma|dois|duas|tres|quatro)\s+)?(?:alunos?\s+|alunas?\s+|estudantes?\s+|pessoas?\s+)?(surdos?|surdas?|cegos?|cegas?)\b", normalized))
+        groups = [match for match in re.finditer(r"\b(?:(\d+|um|uma|dois|duas|tres|quatro)\s+)?(?:alunos?\s+|alunas?\s+|estudantes?\s+|pessoas?\s+)?(surdos?|surdas?|cegos?|cegas?|(?:com\s+)?baixa visao)\b", normalized)
+                  if not self._negated_access_signal(normalized, match.start())]
         if groups:
             roles = [row for row in roles if row["papel_id"] not in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
             quantities = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "tres": 3, "quatro": 4}
             for match in groups:
                 count, description = match.groups()
                 quantity = int(count) if count and count.isdigit() else quantities.get(count, 1)
-                label = f"{quantity} estudante(s): {description} informado no relato"
+                student = bool(re.search(r"\b(alunos?|alunas?|estudantes?|turma)\b", normalized))
+                label = f"{quantity} {'estudante(s)' if student else 'pessoa(s)'}: {description} informado no relato"
                 roles.append({"id": f"PART-CASO-{len(roles)+1:02d}-{uuid.uuid4().hex[:6].upper()}",
-                              "contexto_id": context["id"], "papel_id": "PAPEL-ESTUDANTE",
+                              "contexto_id": context["id"], "papel_id": "PAPEL-ESTUDANTE" if student else "PAPEL-PESSOA-APOIADA",
                               "label": label, "grupo_rotulo": description, "quantidade": quantity,
-                              "caracteristica_ids": [], "tarefa_ids": copy.deepcopy(context["tarefas"]),
+                              "reported_condition": {"text": description, "start": match.start(), "end": match.end()},
+                              "caracteristica_ids": [],
+                              "tarefa_ids": copy.deepcopy(context["tarefas"]),
                               "modalidade_ids": [], "recurso_operado_ids": [],
                               "objetivo_participacao": match.group(0), "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"})
             self.current["participations"] = roles
             # An aggregate alias match cannot establish who has the condition.
             context["caracteristicas_pessoa"] = []
+        self.derive_access_requirements(narrative)
         context["informacoes_ausentes"] = [
             item["question"] for item in self.missing_questions()
         ]
@@ -968,6 +1016,8 @@ class DecisionEngine:
                         "quantidade": quantity,
                         "observacoes": str(incoming.get("observacoes", "")).strip(),
                         "apoios_informados": str(incoming.get("apoios_informados", "")).strip(),
+                        "reported_condition": copy.deepcopy(next((row.get("reported_condition", {}) for row in previous_participations
+                                                                   if row["id"] == incoming.get("id")), {})),
                         "caracteristica_ids": unique(
                             incoming.get("caracteristica_ids") or []
                         ),
@@ -1038,6 +1088,70 @@ class DecisionEngine:
         ]
         return self.current_payload()
 
+    @staticmethod
+    def _negated_access_signal(text, start):
+        # Restrict negation to the local clause, not another person's statement.
+        prefix = text[max(0, start - 45):start]
+        return bool(re.search(
+            r"\b(?:nao (?:e|eh|sao|esta|estao|tem|tenho|temos|possui|ha|existe|existem)|sem|nenhum|nenhuma)\s*"
+            r"(?:(?:um|uma|dois|duas|tres|quatro|qualquer|nenhum|nenhuma|\d+)\s+)?"
+            r"(?:(?:alunos?|alunas?|estudantes?|pessoas?|usuarios?|usuarias?)\s+)?$", prefix))
+
+    def derive_access_requirements(self, narrative):
+        """Apply the existing curated functional matrix, never a diagnosis->ability rule.
+
+        Only design needs are projected into the context. Each inference keeps
+        its documentary witness and participant scope; no mode, device, language
+        or personal competence is filled by this operation.
+        """
+        context = self.current["context"]
+        text = normalize_text(narrative)
+        people = [row for row in self.current.get("participations", [])
+                  if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
+        requirements = []
+        for matrix in self.functional_matrix:
+            source_ids = [sid for sid in matrix.get("fonte_ids", []) if sid in self.sources]
+            excerpt_ids = [tid for tid in matrix.get("trecho_ids", []) if tid in self.excerpts]
+            need_ids = [nid for nid in matrix.get("requisito_ids", [])
+                        if self.concepts.get(nid, {}).get("tipo") == "NECESSIDADE"]
+            if not source_ids or not excerpt_ids or not need_ids or matrix.get("estado") not in {
+                "CONFERIDO_RC3", "CONFERIDO_NO_CASO_RC3", "RECONSTRUIDO_CONFERIDO_RC3", "CONFERIDO_NA_SECAO_ORIGINAL"
+            }:
+                continue
+            observed = {}
+            for signal in matrix.get("sinais_relato", []):
+                token = normalize_text(signal)
+                if not token:
+                    continue
+                for match in re.finditer(r"\b" + re.escape(token) + r"\b", text):
+                    candidates = [row for row in people if row.get("reported_condition")
+                                  and row["reported_condition"]["start"] <= match.start() < row["reported_condition"]["end"]]
+                    person = candidates[0] if len(candidates) == 1 else (people[0] if len(people) == 1 else None)
+                    key = person["id"] if person else ""
+                    record = observed.setdefault(key, {"person": person, "positive": [], "negative": []})
+                    record["negative" if self._negated_access_signal(text, match.start()) else "positive"].append(match.group(0))
+            for participant_id, observed_row in observed.items():
+                if not observed_row["positive"]:
+                    continue
+                conflict = bool(observed_row["negative"])
+                requirements.append({
+                    "matrix_id": matrix["id"], "participant_id": participant_id,
+                    "participant_label": observed_row["person"].get("label", "") if observed_row["person"] else "",
+                    "trigger": unique(observed_row["positive"]), "matched_text": "; ".join(unique(observed_row["positive"])),
+                    "description": matrix.get("descricao_simples", ""),
+                    "requirement_ids": need_ids, "requirement_labels": self.labels(need_ids),
+                    "function_ids": [fid for fid in matrix.get("funcao_ids", []) if fid in self.concepts],
+                    "knowledge_ids": [kid for kid in matrix.get("knowledge_ids", []) if kid in self.knowledge],
+                    "source_ids": source_ids, "excerpt_ids": excerpt_ids,
+                    "conditions": matrix.get("condicoes", ""), "limit": matrix.get("contraindicacoes", ""),
+                    "status": "CONFLITO_A_CONFIRMAR" if conflict else "DERIVADO_DA_BASE_PARA_CONFIRMACAO",
+                    "capabilities_inferred": False,
+                    "scope": "PARTICIPANTE" if participant_id else "RELATO_SEM_ATRIBUICAO_INDIVIDUAL",
+                })
+        context["access_requirements"] = requirements
+        context["necessidades"] = unique(context.get("necessidades", []) + [nid for row in requirements
+            if row["status"] != "CONFLITO_A_CONFIRMAR" for nid in row["requirement_ids"]])
+
     def _task_components(self, context):
         """Existing patterns whose task requirement has a hierarchy witness."""
         return [component for component in self.components
@@ -1052,7 +1166,175 @@ class DecisionEngine:
         return unique(task for component in components
                       for task in component.get("requires_all", {}).get("tarefas", []))
 
+    def _dialogue_routes(self, context):
+        """Plan questions for viable existing routes, not every pattern's fields.
+
+        This ranking controls clarification effort only. Generation independently
+        verifies all applicable patterns and retains its documentary gates.
+        """
+        blocked = set(context.get("recursos_impedidos", []))
+        available = set(self.available_context_values(context, "recursos_disponiveis"))
+        role_ids = {row.get("papel_id") for row in self.current.get("participations", [])}
+        if "PAPEL-ESTUDANTE" in role_ids:
+            role_ids.add("PAPEL-PESSOA-APOIADA")
+        candidates = []
+        for component in self._task_components(context):
+            if not self._access_requirement_scope_matches(component, context):
+                continue
+            required = set(component.get("required_resource_ids", []))
+            if blocked & (required | set(component.get("proposed_resource_ids", []))):
+                continue
+            resource_groups = component.get("required_any_resource_groups", []) or ([] if required else [component.get("resource_ids", [])])
+            if any(group and set(group) <= blocked for group in resource_groups):
+                continue
+            groups = component.get("requires_any_groups") or ([component["requires_any"]] if component.get("requires_any") else [])
+            # A possible resource cannot manufacture the need for video/game etc.
+            if any(not any(self.intersects(context, row["field"], row.get("ids", [])) for row in group) for group in groups):
+                continue
+            mismatched_function = any(field in {"barreiras", "necessidades", "caracteristicas_pessoa"}
+                                      and not self.intersects(context, field, ids)
+                                      for field, ids in component.get("requires_all", {}).items())
+            if mismatched_function:
+                continue
+            unknown = len(required - available)
+            unknown += sum(bool(group) and not set(group) & available for group in resource_groups)
+            unknown += len(set(component.get("required_role_ids", [])) - role_ids)
+            unknown += sum(not self.intersects(context, field, ids) for field, ids in component.get("requires_all", {}).items()
+                           if field != "tarefas")
+            candidates.append((unknown, component))
+        candidates.sort(key=lambda item: (item[0], item[1].get("role") != "principal", item[1]["id"]))
+        required_functions = set(context.get("funcoes_requeridas_ids", []))
+        if not candidates:
+            return []
+        if not required_functions:
+            return [next((item[1] for item in candidates if item[1].get("role") == "principal"), candidates[0][1])]
+        selected, covered = [], set()
+        for _, component in candidates:
+            offered = set(component.get("function_ids", []))
+            if offered & (required_functions - covered):
+                selected.append(component)
+                covered.update(offered)
+        return selected or [candidates[0][1]]
+
+    @staticmethod
+    def _access_requirement_scope_matches(component, context):
+        requirements = [row for row in context.get("access_requirements", []) if row.get("status") != "CONFLITO_A_CONFIRMAR"]
+        allowed = component.get("access_requirement_matrix_ids", [])
+        return not requirements or not allowed or bool(set(allowed) & {row["matrix_id"] for row in requirements})
+
+    def _free_missing_questions(self):
+        context = self.current["context"]
+        self.derive_required_functions()
+        tasks = self.labels(context.get("tarefas", []))
+        activity = tasks[0] if tasks else "o desafio que você descreveu"
+        routes = self._dialogue_routes(context)
+        component_ids = [row["id"] for row in routes]
+        questions = []
+
+        def add(field, label, reason, *, options=None, required=False, priority=50, participant=None, **extra):
+            question = {"field": field, "question": label, "label": label, "context_label": activity,
+                        "reason": reason, "required": required, "priority": priority,
+                        "candidate_component_ids": component_ids, **extra}
+            if options is not None:
+                question["concept_ids"] = unique(options)
+            if participant:
+                question.update(participant_id=participant["id"], participant_label=participant.get("label") or self.label(participant["papel_id"]))
+            questions.append(question)
+
+        if not context.get("tarefas"):
+            add("tarefas", "O que a pessoa precisa fazer com o conteúdo ou recurso digital?",
+                "A atividade determina quais conhecimentos da base podem ser aplicados.", required=True, priority=0)
+            return questions
+        if not self._task_components(context):
+            options = self._operational_task_options(context)
+            if options:
+                add("tarefas", "No desafio que você descreveu, o que precisa ficar acessível?",
+                    "Precisamos distinguir a ação digital do assunto do conteúdo.", options=options,
+                    type="single", required=True, priority=0)
+                return questions
+        if not str(context.get("objetivo", "")).strip():
+            add("objetivo", f"Ao {activity[:1].lower() + activity[1:]}, o que precisa ser possível fazer?",
+                "O objetivo informado ajuda a conferir se a orientação responde ao desafio.", type="text", priority=5)
+        if not context.get("barreiras") and not context.get("necessidades"):
+            add("barreira_ou_necessidade", f"Ao tentar {activity[:1].lower() + activity[1:]}, o que está impedindo ou dificultando a participação?",
+                "A dificuldade seleciona os apoios pertinentes; não é uma avaliação da pessoa.", required=True, priority=10)
+        if not routes:
+            return questions
+        if not context.get("recursos_digitais"):
+            candidate_resources = unique(identifier for component in routes
+                for identifier in component.get("requires_all", {}).get("recursos_digitais", []))
+            if not candidate_resources:
+                candidate_resources = unique(identifier for component in routes for kid in component.get("knowledge_ids", [])
+                    for identifier in self.knowledge.get(kid, {}).get("aplicabilidade", {}).get("recursos_digitais", []))
+            add("recursos_digitais", "Em que material, aplicativo ou equipamento esse desafio acontece?",
+                "O tipo de material muda a adaptação: por exemplo, conteúdo visual, vídeo ou mensagem.",
+                options=candidate_resources or None, priority=15)
+        role_ids = {row.get("papel_id") for row in self.current.get("participations", [])}
+        if "PAPEL-ESTUDANTE" in role_ids:
+            role_ids.add("PAPEL-PESSOA-APOIADA")
+        missing_roles = unique(identifier for component in routes for identifier in component.get("required_role_ids", []) if identifier not in role_ids)
+        if missing_roles:
+            add("participantes", f"Quem pode preparar ou ajustar o material para {activity[:1].lower() + activity[1:]}?",
+                "Essa resposta define quem realiza a adaptação; o cargo não comprova disponibilidade ou capacidade.",
+                options=missing_roles, priority=25)
+        available = set(self.available_context_values(context, "recursos_disponiveis"))
+        blocked = set(context.get("recursos_impedidos", []))
+        missing_resources = []
+        for component in routes:
+            missing_resources.extend(set(component.get("required_resource_ids", [])) - available - blocked)
+            groups = component.get("required_any_resource_groups", []) or ([] if component.get("required_resource_ids") else [component.get("resource_ids", [])])
+            for group in groups:
+                if not set(group) & available:
+                    missing_resources.extend(set(group) - blocked)
+        if missing_resources:
+            add("recursos_disponiveis", "Quais destes recursos estão disponíveis para essa atividade?",
+                "Perguntamos somente os recursos das possibilidades fundamentadas que ainda precisam de confirmação.",
+                options=sorted(set(missing_resources)), priority=20)
+        people = [row for row in self.current.get("participations", []) if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
+        for person in people:
+            matrix_ids = {row["matrix_id"] for row in context.get("access_requirements", [])
+                          if row.get("participant_id") == person["id"] and row.get("status") != "CONFLITO_A_CONFIRMAR"}
+            personal_routes = [row for row in routes if not context.get("access_requirements")
+                               or not row.get("access_requirement_matrix_ids")
+                               or matrix_ids & set(row["access_requirement_matrix_ids"])]
+            modes = unique(identifier for component in personal_routes
+                           for identifier in component.get("requires_all", {}).get("modalidades_disponiveis", []))
+            if modes and not person.get("modalidade_ids"):
+                add("modalidades_disponiveis", "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
+                    "A necessidade de acesso é recuperada da base; a forma efetivamente utilizada depende da pessoa e do contexto.",
+                    options=modes, participant=person, answer_field="modalidade_ids", priority=30)
+        if len(people) > 1:
+            required_resources = {rid for component in routes for rid in component.get("required_resource_ids", [])}
+            operated = {rid for person in self.current.get("participations", []) for rid in person.get("recurso_operado_ids", [])}
+            pending_operation = required_resources & available - operated
+            for person in self.current.get("participations", []):
+                if not pending_operation:
+                    break
+                allowed = set()
+                if person in people:
+                    applicable_matrix_ids = {row["matrix_id"] for row in context.get("access_requirements", [])
+                                             if row.get("participant_id") == person["id"] and row.get("status") != "CONFLITO_A_CONFIRMAR"}
+                    allowed = {rid for row in self.functional_matrix if row["id"] in applicable_matrix_ids for rid in row.get("recurso_ids", [])}
+                elif any(person.get("papel_id") == component.get("responsible_role_id") for component in routes):
+                    allowed = pending_operation
+                relevant = pending_operation & allowed
+                if relevant:
+                    add("recursos_disponiveis", "Quais destes recursos essa pessoa consegue utilizar nesta atividade?",
+                        "O equipamento disponível no local não comprova que a pessoa consegue operá-lo.", options=sorted(relevant),
+                        participant=person, answer_field="recurso_operado_ids", priority=40)
+        # An environment or functional characteristic is asked only when an
+        # existing route explicitly depends on it, never just because it is empty.
+        for field, label in (("ambientes", "Onde essa atividade será realizada?"),
+                             ("caracteristicas_pessoa", "Qual destas condições interfere nessa atividade?")):
+            options = unique(identifier for component in routes for identifier in component.get("requires_all", {}).get(field, [])
+                             if not self.intersects(context, field, [identifier]))
+            if options:
+                add(field, label, "Esta condição altera uma das possibilidades de apoio recuperadas.", options=options, priority=35)
+        return sorted(questions, key=lambda row: (row["priority"], row["field"], row.get("participant_id", "")))
+
     def missing_questions(self):
+        if self.current.get("scenario_mode") == "free_narrative":
+            return self._free_missing_questions()
         c, questions = (self.current["context"], [])
         free = self.current.get("scenario_mode") == "free_narrative"
         task_components = self._task_components(c) if free else []
@@ -1245,8 +1527,11 @@ class DecisionEngine:
                     if matches:
                         witnesses.append({"field": field, "concept_ids": matches,
                                           "task_paths": task_paths,
-                                          "participant_ids": [row["id"] for row in self.current.get("participations", [])
-                                                              if field == "caracteristicas_pessoa" and set(matches) & set(row.get("caracteristica_ids", []))]})
+                                          "participant_ids": unique([row["id"] for row in self.current.get("participations", [])
+                                                              if field == "caracteristicas_pessoa" and set(matches) & set(row.get("caracteristica_ids", []))]
+                                                              + [row["participant_id"] for row in context.get("access_requirements", [])
+                                                                 if field == "necessidades" and row.get("participant_id") and set(matches) & set(row.get("requirement_ids", []))
+                                                                 and row.get("status") != "CONFLITO_A_CONFIRMAR"])})
                 if not witnesses:
                     continue
                 for function in knowledge.get("funcao_decisoria_ids", []):
@@ -1403,6 +1688,9 @@ class DecisionEngine:
                 "required_function_id": local_id(row[6]) if row[6] else "",
                 "task_path": self._task_path(local_id(row[9]), local_id(row[10])),
                 "authorization": state,
+                "access_requirement_witnesses": [copy.deepcopy(item) for item in context.get("access_requirements", [])
+                                                  if row[11] and local_id(row[11]) in item.get("requirement_ids", [])
+                                                  and item.get("status") != "CONFLITO_A_CONFIRMAR"],
             }
             witness["id"] = "WIT-" + hashlib.sha256(json.dumps(witness, sort_keys=True).encode()).hexdigest()[:16]
             check_id = self._check(
@@ -1614,6 +1902,19 @@ class DecisionEngine:
         self, component, context, authorized_knowledge, authorized_criteria
     ):
         reasons, matches = ([], [])
+        conditional_application = (self.current.get("scenario_mode") == "free_narrative"
+                                   and bool(component.get("conditions") and component.get("alternative"))
+                                   and component["id"] in (self._dialogue_route_ids if self._dialogue_route_ids is not None
+                                                          else {row["id"] for row in self._dialogue_routes(context)}))
+        pending_application = []
+        scope_matches = self._access_requirement_scope_matches(component, context)
+        if component.get("access_requirement_matrix_ids") and context.get("access_requirements"):
+            self._check("component", component["id"], "documented_access_requirement_scope", "PASS" if scope_matches else "FAIL",
+                        "O requisito funcional documentado deve corresponder à aplicação do padrão; um rótulo de deficiência não autoriza outra rota.",
+                        expected_ids=component.get("access_requirement_matrix_ids", []),
+                        observed_ids=unique(row["matrix_id"] for row in context["access_requirements"] if row.get("status") != "CONFLITO_A_CONFIRMAR"))
+        if not scope_matches:
+            reasons.append("a rota não corresponde ao requisito de acesso documentado para este caso")
         available_roles = {
             row.get("papel_id") for row in self.current.get("participations", [])
         }
@@ -1623,14 +1924,12 @@ class DecisionEngine:
             and "PAPEL-ESTUDANTE" in available_roles
         ):
             missing_roles.remove("PAPEL-PESSOA-APOIADA")
-        self._check("component", component["id"], "required_roles", "FAIL" if missing_roles else "PASS",
+        self._check("component", component["id"], "required_roles", ("PENDING" if conditional_application else "FAIL") if missing_roles else "PASS",
                     "Papéis participantes exigidos pelo padrão.", operator="ALL_WITH_STUDENT_AS_SUPPORTED_PERSON",
                     expected_ids=component.get("required_role_ids", []), observed_ids=sorted(available_roles), missing_ids=sorted(missing_roles))
         if missing_roles:
-            reasons.append(
-                "papel participante ausente: "
-                + ", ".join(self.labels(sorted(missing_roles)))
-            )
+            (pending_application if conditional_application else reasons).append(
+                "confirmar quem assume a responsabilidade: " + ", ".join(self.labels(sorted(missing_roles))))
         required_resources = set(component.get("required_resource_ids", []))
         supported_people = [row for row in self.current.get("participations", [])
                             if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
@@ -1644,7 +1943,7 @@ class DecisionEngine:
                         operator="ALL_RESOURCES_HAVE_A_DECLARED_OPERATOR", expected_ids=sorted(required_resources), observed_ids=sorted(operated),
                         missing_ids=sorted(missing_operation), participant_ids=[row["id"] for row in operation_rows if required_resources & set(row.get("recurso_operado_ids", []))])
             if missing_operation:
-                reasons.append("quem consegue utilizar o recurso ainda não foi confirmado: " + ", ".join(self.labels(sorted(missing_operation))))
+                (pending_application if conditional_application else reasons).append("confirmar quem consegue utilizar: " + ", ".join(self.labels(sorted(missing_operation))))
         resource_groups = component.get("required_any_resource_groups", [])
         if not required_resources and (not resource_groups):
             resource_groups = [component.get("resource_ids", [])]
@@ -1659,10 +1958,11 @@ class DecisionEngine:
                 "recurso nuclear explicitamente impedido: "
                 + ", ".join(self.labels(sorted(blocked_core_resources)))
             )
-        resource_gate = "CONFIRMADO_DISPONIVEL"
+        resource_gate = "CONDICIONAL_A_CONFIRMACAO" if pending_application else "CONFIRMADO_DISPONIVEL"
         if unknown_core_resources:
-            if component.get("role") == "condicional" and component.get("alternative"):
+            if conditional_application or component.get("role") == "condicional" and component.get("alternative"):
                 resource_gate = "CONDICIONAL_A_CONFIRMACAO"
+                pending_application.append("confirmar disponibilidade de " + ", ".join(self.labels(sorted(unknown_core_resources))))
                 matches.append(
                     {
                         "field": "recursos_a_confirmar",
@@ -1685,7 +1985,7 @@ class DecisionEngine:
         for group_index, group in enumerate(resource_groups, 1):
             options = set(group)
             group_pending = bool(options and not options & available_resources and not options <= blocked_resources
-                                 and component.get("role") == "condicional" and component.get("alternative"))
+                                 and (conditional_application or component.get("role") == "condicional" and component.get("alternative")))
             self._check("component", component["id"], f"resource_option_group_{group_index}",
                         "PASS" if options & available_resources else ("PENDING" if group_pending else "FAIL"),
                         "Ao menos um recurso deste grupo deve estar disponível.", operator="ANY",
@@ -1704,11 +2004,11 @@ class DecisionEngine:
                     + ", ".join(self.labels(sorted(options)))
                 )
             elif (
-                component.get("role") == "condicional"
-                and component.get("alternative")
+                (conditional_application or component.get("role") == "condicional" and component.get("alternative"))
                 and options
             ):
                 resource_gate = "CONDICIONAL_A_CONFIRMACAO"
+                pending_application.append("confirmar um meio disponível entre " + ", ".join(self.labels(sorted(options - blocked_resources))))
                 matches.append(
                     {
                         "field": "recursos_a_confirmar",
@@ -1749,7 +2049,12 @@ class DecisionEngine:
         for field, identifiers in component.get("requires_all", {}).items():
             matched = self.intersects(context, field, identifiers)
             matching_ids = self.matching_identifiers(context, field, identifiers)
-            self._check("component", component["id"], f"required_field_{field}", "PASS" if matched else "FAIL",
+            pending_field = conditional_application and not matched and field in {"modalidades_disponiveis", "recursos_disponiveis", "recursos_digitais"}
+            if field == "recursos_digitais" and context.get(field):
+                pending_field = False
+            if field == "recursos_disponiveis" and set(identifiers) <= blocked_resources:
+                pending_field = False
+            self._check("component", component["id"], f"required_field_{field}", "PASS" if matched else ("PENDING" if pending_field else "FAIL"),
                         "Cada campo é obrigatório; os conceitos dentro do campo são opções alternativas.", operator="ANY_IN_FIELD",
                         field=field, expected_ids=identifiers, observed_ids=self.available_context_values(context, field),
                         matched_ids=matching_ids,
@@ -1763,7 +2068,11 @@ class DecisionEngine:
                     {"field": field, "ids": values, "labels": self.labels(values)}
                 )
             else:
-                reasons.append(f"sem correspondência obrigatória em {field}")
+                if pending_field:
+                    resource_gate = "CONDICIONAL_A_CONFIRMACAO"
+                    pending_application.append("confirmar para esta aplicação: " + ", ".join(self.labels(identifiers)))
+                else:
+                    reasons.append(f"sem correspondência obrigatória em {field}")
         any_groups = component.get("requires_any_groups") or (
             [component.get("requires_any", [])] if component.get("requires_any") else []
         )
@@ -1857,6 +2166,8 @@ class DecisionEngine:
                         "Conferência da presença de um campo documental, não da eficácia do seu conteúdo.", operator="PRESENCE", field=gate)
             if not passed:
                 reasons.append(f"porta de maturidade ausente: {gate}")
+        if pending_application:
+            matches.append({"field": "application_to_confirm", "ids": [], "labels": unique(pending_application)})
         return (
             not reasons,
             matches,
@@ -1987,59 +2298,24 @@ class DecisionEngine:
         return self.label(identifier)
 
     def compose_transfer_orientation(self, selected, context):
-        by_id = {item["id"]: item for item in selected}
-        phases = [
-            (
-                "1. Organizar objetivo, autoria e transições",
-                ["PAD-ORGANIZAR-CONTEUDO-PERSISTENTE", "PAD-PAPEIS-TURNOS-AUTORIA"],
-            ),
-            (
-                "2. Produzir e preservar a contribuição autoral",
-                [
-                    "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
-                    "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
-                ],
-            ),
-            (
-                "3. Acrescentar vídeo ou jogo somente pela função",
-                ["PAD-VIDEO-PROCESSO", "PAD-JOGO-CONSOLIDACAO-FEEDBACK"],
-            ),
-            (
-                "4. Revisar, confirmar e registrar o que precisa mudar",
-                ["PAD-REVISAO-CONFIRMACAO"],
-            ),
-        ]
+        """Render only selected actions; presentation order is not a causal plan."""
+        objective = str(context.get("objetivo", "")).strip().rstrip(".")
         rendered = []
-        for title, identifiers in phases:
-            actions = [
-                str(by_id[i]["action"]).strip().rstrip(".")
-                for i in identifiers
-                if i in by_id
-            ]
-            if actions:
-                rendered.append(f"{title}: " + "; ".join(actions) + ".")
-        known = {identifier for _, identifiers in phases for identifier in identifiers}
-        remaining = [item for item in selected if item["id"] not in known]
-        for index, item in enumerate(remaining, 1):
+        for item in selected:
             action = str(item.get("action", "")).strip().rstrip(".")
             if action:
-                rendered.append(
-                    f"{index}. {item.get('label', 'Configuração aplicável')}: {action}."
-                )
-        objective = str(context.get("objetivo", "")).strip().rstrip(".")
-        framing = (
-            "construa o recurso como uma produção compartilhada com autoria identificável, função explícita para cada modo e alternativa equivalente. "
-            if set(by_id) & known
-            else "combine os meios disponíveis conforme as funções abaixo e prepare as adaptações indicadas antes de usá-las. "
-        )
-        return (
-            f"Para {(objective[:1].lower() + objective[1:] if objective else 'responder ao objetivo confirmado')}, "
-            + framing
-            + " ".join(rendered)
-        )
+                title = item.get("label") or "Orientação"
+                rendered.append(f"{title}: {action}.")
+        prefix = f"Objetivo informado: {objective}.\n\n" if objective else ""
+        return prefix + "\n\n".join(rendered)
 
     def build_practical_summary(self, configurations, status, context=None):
-        """Projeta a mesma decisão em linguagem simples, sem selecionar conteúdo novo."""
+        """Project selected actions without inventing modes, order or support.
+
+        Curated wording is editorial, not a new decision rule. Its source-action
+        fingerprint prevents stale copy from silently overriding changed data.
+        Each step retains the source fragment used to write it.
+        """
         if status not in {"GERADA", "GERADA_PARCIAL"} or not configurations:
             return {
                 "titulo": "Ainda não é possível orientar este caso",
@@ -2048,190 +2324,99 @@ class DecisionEngine:
                 "component_ids": [],
                 "derivacao": "PROJECAO_DA_MESMA_DECISAO_SEM_NOVO_CONTEUDO",
             }
-        by_id = {
-            item.get("component_id", item.get("id")): item for item in configurations
-        }
+        groups = []
+        for row in configurations:
+            identifier = row.get("component_id", row.get("id"))
+            action = str(row.get("acao", row.get("action", ""))).strip()
+            copy_row = PRACTICAL_COPY.get(identifier, {})
+            fingerprint = hashlib.sha256(action.encode("utf-8")).hexdigest()
+            curated = bool(
+                action
+                and copy_row.get("action_sha256") == fingerprint
+                and copy_row.get("steps")
+                and all(fragment in action for _, fragment in copy_row["steps"])
+            )
+            if curated:
+                step_rows = copy_row["steps"]
+            else:
+                # Preserve changed/new actions literally. A semicolon is already
+                # an explicit separation in that action, not a dependency inferred
+                # between two different configurations.
+                fragments = [part.strip() for part in action.split(";") if part.strip()]
+                step_rows = [
+                    (part[:1].upper() + part[1:].rstrip(".") + ".", part)
+                    for part in fragments
+                ]
+            steps = [
+                {
+                    "texto": text,
+                    "component_id": identifier,
+                    "campo_origem": "acao",
+                    "fragmento_origem": fragment,
+                }
+                for text, fragment in step_rows
+            ]
+            title = (
+                copy_row["title"] if curated
+                else row.get("label") or "Aplique a ação indicada"
+            )
+            function = str(row.get("funcao", row.get("function", ""))).strip()
+            availability = row.get("availability_status", "CONFIRMADO_DISPONIVEL")
+            resources = copy.deepcopy(row.get("resource_options", []))
+            conditional = availability == "CONDICIONAL_A_CONFIRMACAO"
+            groups.append({
+                "id": f"choice-{identifier}",
+                "titulo": title,
+                "passos": steps,
+                "itens": [step["texto"] for step in steps],
+                "component_ids": [identifier],
+                "modos": [row.get("modo") or self.label(row.get("mode_id"))]
+                    if row.get("modo") or row.get("mode_id") else [],
+                "funcao": function,
+                "como_combinar": copy_row.get("relation", "") if curated else "",
+                "condicoes": unique(row.get("conditions", [])),
+                "alternativas": [row["alternative"]] if row.get("alternative") else [],
+                "acompanhamento": [row["monitoring"]] if row.get("monitoring") else [],
+                "estado_recurso": [availability],
+                "aplicabilidade": availability,
+                "antes_de_usar": (
+                    "Possibilidade condicionada: confirme os pontos abaixo antes de aplicar."
+                    if conditional else ""
+                ),
+                "recursos": unique(
+                    resource.get("label") for resource in resources if resource.get("label")
+                ),
+                "recursos_estruturados": resources,
+                "origem": {
+                    "component_id": identifier,
+                    "campo_acao": "acao",
+                    "acao_original": action,
+                    "acao_sha256": fingerprint,
+                    "projecao_editorial_conferida": curated,
+                    "relacao": "EXPLICACAO_EDITORIAL_DO_PADRAO_SELECIONADO" if curated else None,
+                    "knowledge_ids": list(row.get("knowledge_ids", [])),
+                    "criterion_ids": list(row.get("criterion_ids", [])),
+                    "articulation_ids": list(row.get("articulation_ids", [])),
+                },
+            })
         primary = next(
-            (
-                item
-                for item in configurations
-                if item.get("papel", item.get("role")) == "principal"
-            ),
+            (row for row in configurations if row.get("papel", row.get("role")) == "principal"),
             configurations[0],
         )
         primary_id = primary.get("component_id", primary.get("id"))
-        interview_ids = {
-            "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
-            "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
-            "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
-            "PAD-VIDEO-PROCESSO",
-            "PAD-JOGO-CONSOLIDACAO-FEEDBACK",
-            "PAD-PAPEIS-TURNOS-AUTORIA",
-            "PAD-REVISAO-CONFIRMACAO",
-        }
-        selected_ids = set(by_id)
-        if selected_ids & interview_ids:
-            clauses = []
-            if "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE" in selected_ids:
-                clauses.append("texto para organizar e retomar")
-            if "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO" in selected_ids:
-                clauses.append("fala e áudio para preservar a autoria")
-            if "PAD-REPRESENTACAO-VISUAL-EXPLICADA" in selected_ids:
-                clauses.append("imagem e desenho para representar relações")
-            headline = "Construa o recurso em partes curtas: " + "; ".join(clauses) + "."
-            optional_modes = [label for identifier, label in (
-                ("PAD-VIDEO-PROCESSO", "vídeo"), ("PAD-JOGO-CONSOLIDACAO-FEEDBACK", "jogo")) if identifier in selected_ids]
-            if optional_modes:
-                headline += " Considere " + " e ".join(optional_modes) + " somente quando cumprir uma função necessária, com acessibilidade, feedback e alternativa."
-        else:
-            headline = PRACTICAL_HEADLINES.get(
-                primary_id,
-                f"Comece por esta ação: {str(primary.get('acao', primary.get('action', ''))).strip().rstrip('.')}.",
-            )
-        group_specs = [
-            (
-                "estrutura",
-                "Organizar conteúdo, participação e retomada",
-                ["PAD-ORGANIZAR-CONTEUDO-PERSISTENTE", "PAD-PAPEIS-TURNOS-AUTORIA"],
-            ),
-            (
-                "autoria",
-                "Combinar voz, texto, imagem e desenho",
-                [
-                    "PAD-EXPRESSAO-AUTORAL-FALA-AUDIO",
-                    "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
-                ],
-            ),
-            ("video", "Vídeo como possibilidade funcional", ["PAD-VIDEO-PROCESSO"]),
-            (
-                "jogo",
-                "Jogo como possibilidade funcional",
-                ["PAD-JOGO-CONSOLIDACAO-FEEDBACK"],
-            ),
-            (
-                "revisao",
-                "Revisar e confirmar antes de concluir",
-                ["PAD-REVISAO-CONFIRMACAO"],
-            ),
-        ]
-        used, groups = (set(), [])
-
-        def build_group(group_id, title, component_ids):
-            rows = [
-                by_id[identifier] for identifier in component_ids if identifier in by_id
-            ]
-            if not rows:
-                return None
-            used.update(component_ids)
-            copies = [
-                PRACTICAL_COPY.get(identifier, {})
-                for identifier in component_ids
-                if identifier in by_id
-            ]
-            availability = unique(
-                (
-                    row.get("availability_status", "CONFIRMADO_DISPONIVEL")
-                    for row in rows
-                )
-            )
-            return {
-                "id": group_id,
-                "titulo": title,
-                "modos": unique(
-                    (
-                        row.get("modo", self.label(row.get("mode_id")))
-                        for row in rows
-                        if row.get("modo") or row.get("mode_id")
-                    )
-                ),
-                "funcao": " ".join(
-                    unique(
-                        (
-                            str(row.get("funcao", row.get("function", ""))).strip()
-                            for row in rows
-                            if str(row.get("funcao", row.get("function", ""))).strip()
-                        )
-                    )
-                ),
-                "como_combinar": " ".join(
-                    unique(
-                        (
-                            copy_row.get("relation", "")
-                            for copy_row in copies
-                            if copy_row.get("relation")
-                        )
-                    )
-                ),
-                "itens": [
-                    copy_row.get("text", "")
-                    for copy_row in copies
-                    if copy_row.get("text")
-                ],
-                "condicoes": unique(
-                    (value for row in rows for value in row.get("conditions", []))
-                ),
-                "alternativas": unique(
-                    (
-                        row.get("alternative", "")
-                        for row in rows
-                        if row.get("alternative")
-                    )
-                ),
-                "acompanhamento": unique(
-                    (row.get("monitoring", "") for row in rows if row.get("monitoring"))
-                ),
-                "estado_recurso": availability,
-                "recursos": unique(
-                    (
-                        resource.get("label")
-                        for row in rows
-                        for resource in row.get("resource_options", [])
-                        if resource.get("label")
-                    )
-                ),
-                "recursos_estruturados": unique(
-                    (
-                        resource
-                        for row in rows
-                        for resource in row.get("resource_options", [])
-                    )
-                ),
-                "component_ids": [
-                    row.get("component_id", row.get("id")) for row in rows
-                ],
-            }
-
-        for group_id, title, identifiers in group_specs:
-            group = build_group(group_id, title, identifiers)
-            if group:
-                groups.append(group)
-        for identifier, row in by_id.items():
-            if identifier in used:
-                continue
-            copy_row = PRACTICAL_COPY.get(identifier, {})
-            group = build_group(
-                f"other-{identifier}",
-                copy_row.get("title", row.get("label", "Como aplicar")),
-                [identifier],
-            )
-            if group:
-                groups.append(group)
+        headline = next(
+            (group["titulo"] for group in groups if group["component_ids"] == [primary_id]),
+            "Orientações para as condições informadas",
+        )
         return {
             "titulo": "Sugestão para este caso",
             "texto": headline,
             "etapas": groups,
-            "component_ids": [
-                item.get("component_id", item.get("id")) for item in configurations
-            ],
-            "resultado_esperado": " ".join(
-                unique(
-                    (
-                        item.get("monitoring")
-                        for item in configurations
-                        if item.get("monitoring")
-                    )
-                )
-            ),
+            "component_ids": [row.get("component_id", row.get("id")) for row in configurations],
+            "organizacao": "CARTOES_POR_CONFIGURACAO_SEM_ORDEM_CAUSAL_ENTRE_ELES",
+            "resultado_esperado": " ".join(unique(
+                row.get("monitoring") for row in configurations if row.get("monitoring")
+            )),
             "aviso_resultado": "Esses são sinais para acompanhamento, não uma garantia de aprendizagem ou de eficácia em outros contextos.",
             "derivacao": "PROJECAO_DA_MESMA_DECISAO_SEM_NOVO_CONTEUDO",
         }
@@ -2690,7 +2875,10 @@ class DecisionEngine:
     def generate(self):
         self.derive_required_functions()
         context = self.current["context"]
+        self._dialogue_route_ids = ({row["id"] for row in self._dialogue_routes(context)}
+                                   if self.current.get("scenario_mode") == "free_narrative" else set())
         self._evidence = ExecutionEvidence(VERSION, context["id"])
+        self._evidence.data["access_requirements"] = copy.deepcopy(context.get("access_requirements", []))
         self._record_checks = True
         questions = self.missing_questions()
         if not self.current.get("mapping_confirmed"):
@@ -2782,6 +2970,8 @@ class DecisionEngine:
                             "configured_resource_ids": configured_resources,
                             "resource_options": resource_options,
                             "resource_gate": resource_gate,
+                            "conditions": unique(component.get("conditions", []) + ["Antes de aplicar: " + text + "."
+                                                  for match in matches if match.get("field") == "application_to_confirm" for text in match.get("labels", [])]),
                             "selected_support": support_rows,
                         }
                     )
@@ -2834,6 +3024,8 @@ class DecisionEngine:
             status = "GERADA_PARCIAL"
         if primary and any(not row.get("required", True) for row in questions):
             status = "GERADA_PARCIAL"
+        if primary and any(item.get("resource_gate") == "CONDICIONAL_A_CONFIRMACAO" for item in selected):
+            status = "GERADA_PARCIAL"
         supported_people = [row for row in self.current.get("participations", [])
                             if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
         participant_coverage = []
@@ -2841,21 +3033,37 @@ class DecisionEngine:
             for participant in supported_people:
                 declared_modes = set(participant.get("modalidade_ids", []))
                 operated = set(participant.get("recurso_operado_ids", []))
+                participant_matrix_ids = {row["matrix_id"] for row in context.get("access_requirements", [])
+                                          if row.get("participant_id") == participant["id"] and row.get("status") != "CONFLITO_A_CONFIRMAR"}
+                def scoped_to_person(item):
+                    allowed = set(item.get("access_requirement_matrix_ids", []))
+                    if context.get("access_requirements") and allowed:
+                        return bool(allowed & participant_matrix_ids)
+                    return True
                 compatible = [item["id"] for item in selected
-                              if item.get("mode_id") in declared_modes
-                              or operated & set(item.get("selected_resource_ids", []))]
+                              if scoped_to_person(item) and item.get("resource_gate") != "CONDICIONAL_A_CONFIRMACAO"
+                              and (item.get("mode_id") in declared_modes
+                                   or operated & set(item.get("selected_resource_ids", [])))]
+                conditional = [item["id"] for item in selected if scoped_to_person(item)
+                               and item.get("resource_gate") == "CONDICIONAL_A_CONFIRMACAO"
+                               and (participant_matrix_ids & set(item.get("access_requirement_matrix_ids", []))
+                                    or item.get("mode_id") in declared_modes
+                                    or operated & set(item.get("selected_resource_ids", [])))]
                 participant_coverage.append({"participant_id": participant["id"],
                                              "label": participant.get("label") or participant.get("grupo_rotulo") or self.label(participant["papel_id"]),
                                              "component_ids": compatible,
-                                             "status": "ROTA_DECLARADA_A_CONFERIR_EM_USO" if compatible else "SEM_ROTA_FUNDAMENTADA",
+                                             "conditional_component_ids": conditional,
+                                             "status": "ROTA_DECLARADA_A_CONFERIR_EM_USO" if compatible else ("POSSIBILIDADE_CONDICIONAL_A_CONFIRMAR" if conditional else "SEM_ROTA_FUNDAMENTADA"),
                                              "meaning_or_learning_measured": False})
             if selected and any(not row["component_ids"] for row in participant_coverage):
                 status = "GERADA_PARCIAL"
+        ready_functions = {f for item in selected if item.get("resource_gate") != "CONDICIONAL_A_CONFIRMACAO" for f in item.get("function_ids", [])}
         self._evidence.data["functions"] = {
             "required": required_functions, "offered": offered_functions,
-            "verified": [f for f in required_functions if f in offered_functions],
+            "verified": [f for f in required_functions if f in ready_functions],
+            "conditional": [f for f in required_functions if f in offered_functions and f not in ready_functions],
             "remaining": remaining_functions,
-            "interpretation": "Interseção declarada de requisitos e funções dos padrões; não comprova eficácia em uso.",
+            "interpretation": "Funções de propostas condicionais permanecem a confirmar; funções dos demais padrões atendem às verificações registradas, não comprovam eficácia em uso.",
         }
         self._check("coverage", context["id"], "required_functions_coverage", "PENDING" if remaining_functions else ("PASS" if required_functions else "NOT_EXECUTED"),
                     "Funções requeridas comparadas às oferecidas pelos padrões selecionados.", operator="SET_COVERAGE",

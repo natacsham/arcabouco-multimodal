@@ -22,12 +22,12 @@ const report = {
   test_sha256: sha(await fs.readFile(fileURLToPath(import.meta.url))),
   checks: {}, assets: {}, flows: {}, errors: [], external_requests: [],
   limits: [
-    'Synthetic explicit follow-up answers; not an expert session or learning evaluation.',
-    'The mathematics topic is contextual. The confirmed operational task is accessible digital-content access, not a complete mathematics-teaching method.',
+    'Synthetic task confirmation and unknown follow-up answers; not an expert session or learning evaluation.',
+    'Mathematics and astronomy are contextual subjects. The confirmed operational task is digital-content access, not a complete teaching method for either subject.',
     'GERADA_PARCIAL does not establish coverage of every participant or guarantee educational benefit.',
     'Microphone accuracy, screen readers, comprehension with users and full WCAG conformance were not tested in this public smoke.',
-    'Negative resource phrases in narrative are not treated as verified parser support; the local variant tested unconfirmed reader availability and operation.',
-    'This smoke verifies a short partial-answer regression and one complete flow in each presentation; it does not replace the full local regression.'
+    'Unknown reader availability and operation stay pending; this smoke does not establish personal skills from a reported disability.',
+    'This smoke verifies a maximum-three-question initial round and a conditional partial output in each presentation; it does not replace the full local regression.'
   ]
 };
 const check = (name, result) => {report.checks[name] = Boolean(result); assert(result, name);};
@@ -104,104 +104,157 @@ try {
   });
   const ready = page => page.waitForFunction(() => document.querySelector('#health')?.dataset.state === 'ready' &&
     document.querySelector('#main')?.getAttribute('aria-busy') === 'false', {}, {timeout: 180000});
-  for (const view of ['index.html', 'guiado.html']) {
+  for (const [view, topic] of [['index.html', 'matemática'], ['guiado.html', 'astronomia']]) {
     const page = await context.newPage(); page.on('pageerror', error => report.errors.push(error.message));
     await page.goto(base + 'amado/' + view, {waitUntil: 'domcontentloaded'}); await ready(page);
-    const flow = report.flows[view] = {questions: []};
+    const flow = report.flows[view] = {topic, questions: []};
     check(view + '_real_worker_ready', await page.locator('#analyze-case').isEnabled());
-    check(view + '_direct_challenge_heading',(await page.locator('h1').innerText()).trim()==='Qual é o seu desafio de hoje?');
-    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
-    await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
-    await page.locator('#questions-form input[value="TAR-ORGANIZAR-CONTEUDO-DIGITAL"]').check();
-    await page.locator('#answer-questions').click();
-    await page.locator('#questions-form [data-question="barreira_ou_necessidade"]').waitFor({state:'visible',timeout:180000});
-    const barrier=page.locator('#questions-form input[value="BAR-CONTEUDO-SEM-ESTRUTURA-PERSISTENTE"]');
-    const label=barrier.locator('xpath=ancestor::label[1]'),box=await label.boundingBox();assert(box);
-    await label.click({position:{x:box.width-12,y:box.height/2}});
-    check(view+'_whole_option_selects_one_barrier',await barrier.isChecked()&&await page.locator('#questions-form input:checked').count()===1&&await label.evaluate(element=>getComputedStyle(element).cursor)==='pointer');
-    await page.locator('#answer-questions').click();
-    await page.waitForFunction(()=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!=='barreira_ou_necessidade',{}, {timeout:20000});
-    check(view+'_single_barrier_answer_advances',true);
-    await page.locator('#new-case').click();await ready(page);
-    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
-    await page.locator('#analyze-case').click(); await page.locator('#case-questions').waitFor({state: 'visible', timeout: 180000});
+    check(view + '_direct_challenge_heading', (await page.locator('h1').innerText()).trim() === 'Qual é o seu desafio de hoje?');
+    await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de ' + topic + ' à minha turma, com dois estudantes surdos e um estudante cego.');
+    await page.locator('#analyze-case').click();
+    await page.waitForFunction(() => !document.querySelector('#case-questions').hidden ||
+      !document.querySelector('#case-review').hidden, {}, {timeout: 180000});
     const initial = await page.evaluate(() => window.__publicSmoke.state);
+    const noInventedAbility = state => (state.participations || []).every(person =>
+      !(person.modalidade_ids || []).length && !(person.recurso_operado_ids || []).length) &&
+      !(state.context.raw.modalidades_disponiveis || []).length &&
+      !(state.context.raw.recursos_disponiveis || []).includes('REC-LEITOR-DE-TELA');
     check(view + '_no_inferred_classroom_or_access_technology', initial.context.raw.ambientes.length === 0 &&
-      !/Libras|leitor de tela|Braille/i.test(JSON.stringify(initial.context.participantes.map(person => [person.modalidades, person.recursos_operados]))));
+      noInventedAbility(initial));
+    const requirements = initial.context.access_requirements || [];
+    check(view + '_documented_needs_derived_without_inventing_abilities',
+      requirements.length >= 2 && requirements.every(item => item.matrix_id && item.source_ids?.length &&
+        item.excerpt_ids?.length && item.capabilities_inferred === false && item.participant_id));
+    const originalPeople = new Map(initial.participations.map(person => [person.id, person]));
+    check(view + '_derived_needs_belong_to_the_reported_participants',
+      requirements.some(item => item.matrix_id === 'MF-01' && /ceg/i.test(originalPeople.get(item.participant_id)?.label || '')) &&
+      requirements.some(item => item.matrix_id === 'MF-11' && /surd/i.test(originalPeople.get(item.participant_id)?.label || '')));
+    let optionClickChecked = false;
     while (await page.locator('#case-questions').isVisible()) {
-      const row = page.locator('#questions-form [data-question]'), id = await row.getAttribute('data-question');
+      const row = page.locator('#question-fields [data-question]'), id = await row.getAttribute('data-question');
       const person = await page.locator('#question-person').innerText(), field = id.split(':')[0];
-      const progress=await page.locator('#question-progress').innerText();
-      assert(/\d+\s+de\s+\d+/.test(progress),'Progress is available while answering');
-      const values = field === 'tarefas' ? ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'] :
-        field === 'participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
-        field === 'modalidades_disponiveis' ? /surd/i.test(person) ? ['MOD-TEXTO', 'MOD-IMAGEM'] : /ceg/i.test(person) ? ['MOD-AUDIO'] : ['MOD-TEXTO'] :
-        field === 'caracteristicas_pessoa' ? /ceg/i.test(person) ? ['CAR-INTERACAO-NAO-VISUAL'] : ['unknown'] :
-        field === 'recursos_digitais' ? ['RED-PAGINA-WEB'] : field === 'ambientes' ? ['AMB-SALA-DE-AULA'] :
-        field === 'recursos_disponiveis' ? person ? /ceg/i.test(person) ? ['REC-LEITOR-DE-TELA'] : /adapta/i.test(person) ? ['REC-EDITOR-MULTIMIDIA'] : ['unknown'] : [] :
-        field === 'apoios_informados' ? [/surd/i.test(person) ? 'O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.' :
-          'O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.'] : [];
-      if (field === 'recursos_disponiveis' && !person)
-        for (const candidate of ['REC-COMPUTADOR', 'REC-LEITOR-DE-TELA', 'REC-EDITOR-MULTIMIDIA'])
-          if (await row.locator('input[value="' + candidate + '"]').count()) values.push(candidate);
-      if (field === 'barreira_ou_necessidade')
-        for (const candidate of ['NEC-ACESSO-EQUIVALENTE', 'NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE'])
-          if (await row.locator('input[value="' + candidate + '"]').count()) values.push(candidate);
-      assert(values.length, 'Unexpected question: ' + id);
-      if (field === 'apoios_informados') await row.locator('textarea').fill(values[0]);
-      else for (const value of values) {
-        const control = row.locator('input[value="' + value + '"]'); assert.equal(await control.count(), 1, 'Existing concept ' + value);
-        if (!await control.isVisible()) await control.evaluate(element => {
-          for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement) if (ancestor.tagName === 'DETAILS') ancestor.open = true;
-        });
-        await control.check();
+      const labelText = await page.locator('#questions-title').innerText();
+      const progress = await page.locator('#question-progress').innerText();
+      const total = Number(await page.locator('#question-progress').getAttribute('data-total'));
+      assert(flow.questions.length < 3, 'The initial clarification round is limited to three questions');
+      assert(total <= 3 && total >= flow.questions.length + 1, 'Progress describes this short round');
+      assert(/\d+\s+de(?:\s+até)?\s+\d+/.test(progress), 'Progress is available while answering');
+      assert.notEqual(field, 'barreira_ou_necessidade', 'Documented access needs must not be asked again');
+      assert(!/^(Quais dificuldades ou necessidades você percebe|O que facilita ou dificulta a participação)\?$/.test(labelText),
+        'A follow-up must be contextual, not the previous generic prompt');
+      let values;
+      if (field === 'tarefas') values = ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'];
+      else if (field === 'objetivo') {
+        values = ['Permitir que as pessoas acessem e compreendam o conteúdo apresentado.'];
+        await row.locator('textarea').first().fill(values[0]);
+      } else if (await row.locator('input[value="unknown"]').count()) values = ['unknown'];
+      else {
+        values = ['Ainda não sei'];
+        await row.locator('textarea').first().fill(values[0]);
       }
-      if(field==='modalidades_disponiveis'&&person&&await row.locator('textarea').count()){
-        const note=row.locator('textarea');await note.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
-        await note.fill(/surd/i.test(person)?'O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos.':
-          'O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação.');
+      if (field !== 'objetivo' && values[0] !== 'Ainda não sei') {
+        for (const value of values) {
+          const control = row.locator('input[value="' + value + '"]');
+          assert.equal(await control.count(), 1, 'Existing response option ' + value);
+          await control.evaluate(element => {
+            for (let ancestor = element.parentElement; ancestor; ancestor = ancestor.parentElement)
+              if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+          });
+          const label = control.locator('xpath=ancestor::label[1]');
+          const box = await label.boundingBox(); assert(box);
+          await label.click({position: {x: box.width - 12, y: box.height / 2}});
+          assert(await control.isChecked(), 'Clicking the option label selects its control');
+          assert.equal(await label.evaluate(element => getComputedStyle(element).cursor), 'pointer');
+          optionClickChecked = true;
+        }
       }
-      flow.questions.push({id, participant_label: person, values,progress});
+      flow.questions.push({id, label: labelText, participant_label: person, values, progress});
       assert.equal(new Set(flow.questions.map(item => item.id)).size, flow.questions.length, 'No repeated question');
-      assert(flow.questions.length <= 20, 'Intake terminates');
       await page.locator('#answer-questions').click();
       await page.waitForFunction(previous => !document.querySelector('#case-review').hidden ||
-        document.querySelector('#questions-form [data-question]')?.dataset.question !== previous, id, {timeout: 180000});
+        document.querySelector('#question-fields [data-question]')?.dataset.question !== previous, id, {timeout: 180000});
     }
+    check(view + '_whole_option_is_clickable', optionClickChecked);
+    check(view + '_short_contextual_round_finishes', flow.questions.length > 0 && flow.questions.length <= 3);
     const state = await page.evaluate(() => window.__publicSmoke.state);
     flow.participants = state.participations.filter(person => person.papel_id === 'PAPEL-ESTUDANTE');
+    flow.access_requirements = state.context.access_requirements;
     check(view + '_groups_and_task_preserved', flow.participants.some(person => /surd/i.test(person.label) && person.quantidade === 2) &&
       flow.participants.some(person => /ceg/i.test(person.label) && person.quantidade === 1) &&
       JSON.stringify(state.context.raw.tarefas) === JSON.stringify(['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL']));
+    check(view + '_unknown_answers_do_not_become_personal_abilities', noInventedAbility(state));
     check(view + '_explicit_confirmation_required', await page.locator('#generate-orientation').isDisabled());
     await page.locator('#case-confirmed').check(); await page.locator('#generate-orientation').click();
     await page.locator('#orientation-result').waitFor({state: 'visible', timeout: 180000});
     const result = await page.evaluate(() => window.__publicSmoke.generated);
-    flow.decision = {status: result.decision.status, component_ids: result.decision.component_ids,
-      knowledge_ids: result.decision.knowledge_ids, articulation_ids: result.decision.articulation_ids,
-      limitations: result.decision.informacoes_ausentes, checks_executed: result.execution_evidence.checks.length};
-    check(view + '_actual_partial_decision_and_exact_grounds', flow.decision.status === 'GERADA_PARCIAL' &&
-      JSON.stringify(flow.decision.component_ids) === JSON.stringify(['PAD-CONTEUDO-WEB-EQUIVALENTE']) &&
-      JSON.stringify([...flow.decision.knowledge_ids].sort()) === JSON.stringify(['K10', 'K42']) &&
-      JSON.stringify(flow.decision.articulation_ids) === JSON.stringify(['ART-REF-03']) && flow.decision.checks_executed > 0);
+    const decision = result.decision, configurations = decision.configuracao_modal || [];
+    flow.decision = {status: decision.status, component_ids: decision.component_ids,
+      knowledge_ids: decision.knowledge_ids, articulation_ids: decision.articulation_ids,
+      limitations: decision.informacoes_ausentes, checks_executed: result.execution_evidence.checks.length,
+      participant_coverage: decision.participant_coverage,
+      configurations: configurations.map(item => ({id: item.component_id, availability: item.availability_status,
+        knowledge_ids: item.knowledge_ids, criterion_ids: item.criterion_ids, conditions: item.conditions}))};
+    check(view + '_actual_partial_conditional_decision',
+      decision.status === 'GERADA_PARCIAL' && configurations.length > 0 &&
+      configurations.some(item => item.availability_status === 'CONDICIONAL_A_CONFIRMACAO') &&
+      result.execution_evidence.checks.some(item => item.outcome === 'PENDING'));
+    const selectedKnowledge = new Set(decision.knowledge_ids);
+    const selectedCriteria = new Set(decision.criterion_ids);
+    const supportRows = result.execution_evidence.supports || [];
+    check(view + '_each_choice_has_exact_executed_foundation', configurations.every(configuration => {
+      const supports = supportRows.filter(item => item.component_id === configuration.component_id);
+      return supports.length > 0 && supports.every(item => selectedCriteria.has(item.criterion_id) &&
+        item.knowledge_ids.length > 0 && item.knowledge_ids.every(id => selectedKnowledge.has(id) &&
+          configuration.knowledge_ids.includes(id)) && item.origins.length > 0);
+    }));
+    check(view + '_conditional_scope_is_not_reported_as_a_confirmed_route',
+      decision.participant_coverage.length === 2 && decision.participant_coverage.every(person =>
+        !(person.component_ids || []).length) &&
+      decision.participant_coverage.some(person => (person.conditional_component_ids || []).length));
+    check(view + '_conditional_scope_uses_the_correct_requirement', decision.participant_coverage.every(person =>
+      (person.conditional_component_ids || []).every(componentId => {
+        const scope = result.execution_evidence.checks.find(item => item.subject_id === componentId &&
+          item.rule_id === 'documented_access_requirement_scope');
+        return !scope || state.context.access_requirements.some(item => item.participant_id === person.participant_id &&
+          scope.expected_ids.includes(item.matrix_id));
+      })));
     check(view + '_partial_status_visible', (await page.locator('#orientation-state').innerText()) === 'Apoio para parte do desafio');
-    check(view+'_partial_orientation_starts_with_supported_action',await page.locator('#orientation-main .orientation-step').count()>0&&
-      !/^\s*Faltam informa[cç][oõ]es e apoios verificados/i.test(await page.locator('#orientation-main').innerText())&&
-      (await page.locator('#orientation-main .step-action').first().innerText()).trim().length>20);
+    const cards = page.locator('#orientation-main .orientation-step');
+    check(view + '_partial_orientation_starts_with_supported_action', await cards.count() === configurations.length &&
+      !/^\s*Faltam informa[cç][oõ]es e apoios verificados/i.test(await page.locator('#orientation-main').innerText()) &&
+      (await page.locator('#orientation-main .step-action').first().innerText()).trim().length > 20);
+    const practical = decision.sintese_pratica.etapas;
+    check(view + '_action_steps_keep_the_recorded_source_fragments', practical.length === configurations.length &&
+      practical.every(group => group.component_ids.length === 1 && group.passos.length > 0 &&
+        group.passos.every(step => {
+          const source = configurations.find(item => item.component_id === step.component_id);
+          return source && group.component_ids.includes(step.component_id) && step.campo_origem === 'acao' &&
+            source.acao.includes(step.fragmento_origem);
+        })));
+    check(view + '_numbered_steps_stay_inside_each_configuration',
+      await page.locator('#orientation-main .action-instructions').count() === configurations.length &&
+      await page.locator('#orientation-main > ol').count() === 0);
+    for (let i = 0; i < practical.length; i++) {
+      if (practical[i].aplicabilidade !== 'CONDICIONAL_A_CONFIRMACAO') continue;
+      const text = await cards.nth(i).innerText();
+      assert(text.indexOf('Possibilidade') >= 0 && text.indexOf('Possibilidade') < text.indexOf('Como fazer'),
+        'Conditional status must precede imperative instructions');
+    }
+    check(view + '_pending_status_precedes_the_instructions', true);
     await page.locator('#orientation-foundations > summary').click();
-    // Native details dispatches toggle asynchronously after the click. Wait for
-    // this execution's record, not a delay or a prepared/global catalogue.
-    await page.locator('#orientation-foundation-body [data-knowledge-id="K10"]').first().waitFor({state: 'attached'});
+    // Native details dispatches toggle asynchronously. Wait for a record from
+    // this execution, without pinning a former version's knowledge identifiers.
+    await page.locator('#orientation-foundation-body [data-knowledge-id]').first().waitFor({state: 'attached'});
     flow.configuration_groundings = (result.explanation?.configurations || []).map(configuration => ({
       id: configuration.id, supports: configuration.application?.supports,
       construction_knowledge_ids: (configuration.construction?.knowledge || []).map(item => item.id),
       articulation_ids: (configuration.construction?.articulations || []).filter(item => item.mobilized_in_execution === true).map(item => item.id)
     }));
-    // Identifiers are deliberately inside collapsed technical details. Inspect
-    // the rendered records rather than requiring jargon in the visible summary.
     flow.foundation_record_ids = await page.locator('#orientation-foundation-body [data-knowledge-id]').evaluateAll(nodes =>
       nodes.map(node => node.dataset.knowledgeId));
-    check(view + '_foundation_records_render', flow.foundation_record_ids.includes('K10') && flow.foundation_record_ids.includes('K42'));
+    const usedKnowledge = [...new Set(supportRows.flatMap(item => item.knowledge_ids))];
+    check(view + '_foundation_records_render_the_actual_selected_support',
+      usedKnowledge.length > 0 && usedKnowledge.every(id => flow.foundation_record_ids.includes(id)));
     await page.reload(); await ready(page);
     check(view + '_reload_discards_case', await page.locator('#case-narrative').inputValue() === '' && await page.locator('#orientation-result').isHidden());
     check(view + '_no_case_storage', await page.evaluate(async () => localStorage.length === 0 && sessionStorage.length === 0 &&

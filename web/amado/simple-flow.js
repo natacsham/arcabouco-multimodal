@@ -1,8 +1,8 @@
 import {request, restart} from './client.mjs';
 import {renderExplanation} from '../explanation.js';
 import {setupDictation} from './voice.js';
-import {legacyQuestions, legacyAnswer, legacySummary, participantName, detectCompositionTask,
-  compositionDraft, compositionQuestions, compositionSummary} from './intake.mjs';
+import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, participantName, detectCompositionTask,
+  compositionDraft, compositionQuestions, compositionSummary, questionRound} from './intake.mjs';
 
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -13,8 +13,9 @@ const list = values => {
 };
 let catalog, compositionCatalog, current, mode = 'legacy', draft, result, busy = false, epoch = 0;
 let questions = [], answered = new Set(), handled = new Set(), exampleNarrative = null, exampleId = null, speechText = '', organizedNarrative = null;
+let roundAnswered = 0, clarificationRound = 1;
 const unknown = value => typeof value === 'string' && /^(?:ainda )?nao sei(?: ainda)?[.!]?$/.test(value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().trim());
-function resetQuestions() { answered.clear(); handled.clear(); }
+function resetQuestions() { answered.clear(); handled.clear(); roundAnswered = 0; clarificationRound = 1; }
 const voice = setupDictation({button:$('#dictate-case'),input:$('#case-narrative'),status:$('#dictation-status'),
   preview:$('#dictation-preview'),dialog:$('#speech-consent'),allow:$('#allow-browser-dictation'),cancel:$('#cancel-dictation')});
 function status(text) { $('#flow-status').textContent = text; }
@@ -59,8 +60,12 @@ function questionMarkup(question) {
   const id = question.id, description = ' aria-describedby="question-person question-context question-help"',
     base = '<fieldset class="question" data-question="'+esc(id)+'"'+description+'><legend class="sr-only">'+esc(question.label)+(question.participant_label ? ' — '+esc(question.participant_label) : '')+'</legend>';
   if (question.type === 'text') return base+'<label class="sr-only" for="answer-'+esc(id)+'">'+esc(question.label)+'</label><textarea id="answer-'+esc(id)+'" name="'+esc(id)+'"'+description+' rows="2"></textarea></fieldset>';
-  if (question.type === 'single') return base+'<div class="question-options question-single">'+question.options.map(option =>
-    '<label><input type="radio" name="'+esc(id)+'" value="'+esc(option.id)+'"> '+esc(option.label)+'</label>').join('')+'</div></fieldset>';
+  if (question.type === 'single') {
+    const choices = question.options.some(option => option.id === 'unknown') ? question.options :
+      [...question.options, {id:'unknown',label:'Ainda não sei'}];
+    return base+'<div class="question-options question-single">'+choices.map(option =>
+      '<label><input type="radio" name="'+esc(id)+'" value="'+esc(option.id)+'"> '+esc(option.label)+'</label>').join('')+'</div></fieldset>';
+  }
   const checkbox = (option,index) => '<label><input type="checkbox" name="'+esc(id)+'" value="'+esc(option.id)+'"> '+esc(option.label)+'</label>';
   const initial = question.options.slice(0,6), other = question.options.slice(6);
   const note = question.note_label ? '<div class="question-note"><label for="note-'+esc(id)+'">'+esc(question.note_label)+'</label><textarea id="note-'+esc(id)+'" name="'+esc(id)+':note"'+description+' maxlength="2000" rows="2"></textarea></div>' : '';
@@ -73,15 +78,18 @@ function unanswered() {
 }
 function askOrReview() {
   $('#new-case').hidden = false;
-  // One missing piece at a time; the rest of the decomposition stays internal.
+  // At most three pertinent clarifications before confirming the understanding.
+  // Later refinement is opt-in and does not erase answered or unknown fields.
   const pending = unanswered();
-  questions = pending.slice(0,1);
+  const round = questionRound(pending, answered, handled, roundAnswered);
+  questions = round.questions.slice(0,1);
   if (!questions.length) { review(); return; }
   $('#questions-title').textContent = questions[0].label;
-  $('#question-progress').textContent = 'Pergunta '+(answered.size+1)+' de '+(answered.size+pending.length)+' previstas';
-  $('#question-progress').dataset.current = String(answered.size+1);
-  $('#question-progress').dataset.total = String(answered.size+pending.length);
-  $('#question-progress-help').textContent = 'As próximas perguntas dependem das suas respostas.';
+  $('#question-progress').textContent = 'Pergunta '+round.current+' de até '+round.total;
+  $('#question-progress').dataset.current = String(round.current);
+  $('#question-progress').dataset.total = String(round.total);
+  $('#question-progress').dataset.round = String(clarificationRound);
+  $('#question-progress-help').textContent = 'Depois, você confere o que entendemos. Pode seguir sem responder.';
   $('#question-person').textContent = questions[0].participant_label || '';
   $('#question-person').hidden = !questions[0].participant_label;
   $('#question-context').textContent = questions[0].context_label || '';
@@ -96,6 +104,19 @@ function summaryRows() { return mode === 'legacy' ? legacySummary(current) : com
 function fieldsHTML(rows) {
   return '<div class="review-fields">'+rows.map(row => '<div class="review-field"><strong>'+esc(row.label)+'</strong>'+para(row.value)+'</div>').join('')+'</div>';
 }
+function requirementsHTML() {
+  if (mode !== 'legacy') return '';
+  const rows = accessRequirementSummary(current);
+  if (!rows.length) return '';
+  return '<details class="review-requirements"><summary>O que a base acrescenta ao seu relato</summary>'+
+    '<p>São requisitos de acesso recuperados das fontes, não habilidades individuais ou recursos já confirmados.</p>'+
+    rows.map(row => '<section><h3>'+esc(row.participant)+'</h3>'+list(row.requirements.length ? row.requirements : [row.description])+
+      (row.needsConfirmation ? '<p><strong>Precisa de conferência:</strong> há informações conflitantes neste requisito.</p>' : '')+
+      '<details><summary>Conferir o fundamento deste requisito</summary>'+para(row.description)+
+      (row.matchedText ? '<p><strong>Informação utilizada do relato:</strong> '+esc(row.matchedText)+'</p>' : '')+
+      para(row.conditions)+para(row.limit)+
+      '<p><strong>Registros de origem:</strong> '+esc([row.matrixId,...row.sourceIds,...row.excerptIds].filter(Boolean).join(' · '))+'</p></details></section>').join('')+'</details>';
+}
 function review() {
   invalidate();
   const rows = summaryRows(), narrative = $('#case-narrative').value.trim();
@@ -104,6 +125,7 @@ function review() {
     .filter(([,value]) => value && value !== narrative);
   $('#review-summary').innerHTML = concise.length ? '<dl class="review-summary">'+concise.map(([label,value]) =>
     '<div><dt>'+esc(label)+'</dt><dd>'+esc(value)+'</dd></div>').join('')+'</dl>' : para(narrative.length > 300 ? narrative.slice(0,300)+'…' : narrative);
+  $('#review-summary').innerHTML += requirementsHTML();
   $('#review-fields').innerHTML = fieldsHTML(rows)+'<h3>Seu relato</h3>'+para(narrative);
   const missing = mode === 'legacy' ? current.questions || [] : compositionQuestions(draft,compositionCatalog);
   $('#review-gaps').hidden = !missing.length;
@@ -165,6 +187,7 @@ $('#questions-form').addEventListener('submit',event => {
       // Finish this conversation step, not all semantic requirements for the field.
       // Unselected options and unknown answers remain unknown in the engine.
       answered.add(question.id);
+      roundAnswered++;
       (question.handles_ids || []).forEach(id => handled.add(id));
     }
     if (expected === epoch) askOrReview();
@@ -216,8 +239,24 @@ function legacyOutput(response) {
   const gaps = decision.informacoes_ausentes || [];
   const pendingQuestions = gaps.filter(value => /\?/.test(value) && !/^A necessidade |^Função requerida/.test(value));
   const uncoveredPeople = (decision.participant_coverage || []).filter(person => person.status === 'SEM_ROTA_FUNDAMENTADA');
-  $('#orientation-title').textContent = suspended ? 'O que falta para orientar este caso' : 'Orientação para o seu caso';
+  $('#orientation-title').textContent = suspended ? 'O que falta para orientar este caso' : 'O que você pode fazer';
   $('#orientation-state').textContent = suspended ? 'Ainda sem orientação' : partial ? 'Apoio para parte do desafio' : 'Orientação construída';
+  const foundations = componentIds => {
+    const configurations = (response.explanation?.configurations || []).filter(item => componentIds.includes(item.component_id));
+    const supports = configurations.flatMap(item => item.application?.supports || []);
+    if (!supports.length) return '';
+    const knowledge = new Map([...(response.traceability?.knowledge || []),...configurations.flatMap(item => item.construction?.knowledge || [])].map(item => [item.id,item]));
+    const criteria = new Map((response.traceability?.criteria || []).map(item => [item.id,item]));
+    const text = item => item?.enunciado || item?.statement || item?.title || item?.titulo || item?.label || '';
+    return '<details class="step-foundation"><summary>Por que esta ação foi sugerida?</summary>'+supports.map(support =>
+      para(support.justification || support.justificativa)+
+      '<p><strong>Critério aplicado:</strong> '+esc(support.criterion_statement || text(support.criterion || criteria.get(support.criterion_id)) || 'Descrição não incluída neste retorno.')+'</p>'+
+      '<p><strong>Conhecimento empregado:</strong></p>'+list((support.knowledge_ids || []).map(id => text(knowledge.get(id))).filter(Boolean))+
+      ((support.origins || []).length ? '<details><summary>Conferir as origens deste critério</summary>'+support.origins.map(origin =>
+        para(origin.resumo_publico || origin.enunciado_publico || origin.texto || origin.item_texto || origin.aviso_publicacao)+
+        '<p><strong>Localização:</strong> '+esc(origin.localizacao_publica || origin.localizacao || origin.pagina || origin.secao || 'Não detalhada neste retorno.')+'</p>'+
+        '<p><strong>Registros:</strong> '+esc([origin.id,origin.fonte_id,origin.trecho_id].filter(Boolean).join(' · '))+'</p>').join('')+'</details>' : '')).join('')+'</details>';
+  };
   const card = step => {
     const rows = configurations.filter(item => (step.component_ids || []).includes(item.component_id));
     const resources = step.recursos_estruturados || rows.flatMap(item => item.resource_options || []);
@@ -227,25 +266,29 @@ function legacyOutput(response) {
     const responsible = unique(rows.map(item => item.responsavel));
     const people = (decision.participant_coverage || []).filter(person =>
       (person.component_ids || []).some(id => (step.component_ids || []).includes(id)));
+    const conditionalPeople = (decision.participant_coverage || []).filter(person =>
+      (person.conditional_component_ids || []).some(id => (step.component_ids || []).includes(id)));
     const limits = unique(rows.map(item => item.limit));
     const alternatives = unique(step.alternativas || rows.map(item => item.alternative));
     const monitoring = unique(step.acompanhamento || rows.map(item => item.monitoring));
-    const conditional = rows.some(item => item.availability_status === 'CONDICIONAL_A_CONFIRMACAO');
-    const actions = step.itens?.length ? step.itens : rows.map(item => item.acao);
+    const conditional = step.aplicabilidade === 'CONDICIONAL_A_CONFIRMACAO' || rows.some(item => item.availability_status === 'CONDICIONAL_A_CONFIRMACAO');
+    const actions = step.passos?.length ? step.passos.map(item => item.texto) : step.itens?.length ? step.itens : rows.map(item => item.acao);
     return '<article class="orientation-step"><h3>'+esc(step.titulo)+'</h3>'+
-      actions.filter(Boolean).map(action => '<p class="step-action">'+esc(action)+'</p>').join('')+
-      (step.como_combinar ? '<p class="step-combination"><strong>Como as formas se combinam:</strong> '+esc(step.como_combinar)+'</p>' : '')+
+      (conditional ? '<p class="step-conditional">'+esc(step.antes_de_usar || 'Possibilidade condicionada: confirme os pontos abaixo antes de aplicar.')+'</p>' : '')+
+      '<h4>Como fazer</h4><ol class="action-instructions">'+actions.filter(Boolean).map(action => '<li class="step-action">'+esc(action)+'</li>').join('')+'</ol>'+
+      (step.como_combinar ? '<p class="step-combination"><strong>Por que combinar estas formas:</strong> '+esc(step.como_combinar)+'</p>' : '')+
       (people.length ? '<p class="step-responsibility"><strong>Participantes relacionados a esta opção:</strong> '+esc(people.map(person => participantName(person)).join('; '))+'. Confira a forma de acesso com cada pessoa.</p>' : '')+
+      (conditionalPeople.length ? '<p class="step-responsibility"><strong>Possibilidade a confirmar para:</strong> '+esc(conditionalPeople.map(person => participantName(person)).join('; '))+'. Ainda não é uma forma de acesso confirmada para essas pessoas.</p>' : '')+
       (responsible.length ? '<p class="step-responsibility"><strong>Quem participa da aplicação:</strong> '+esc(responsible.join('; '))+'</p>' : '')+
       ((pending.length || preparation.length || conditions.length || conditional) ? '<div class="step-conditions">'+
-        (pending.length ? '<p><strong>Antes de usar, confirme:</strong> '+esc(pending.join('; '))+'.</p>' : '')+
+        (pending.length ? '<p><strong>Antes de aplicar, confirme:</strong> '+esc(pending.join('; '))+'.</p>' : '')+
         (preparation.length ? '<p><strong>Precisa preparar:</strong> '+esc(preparation.join('; '))+'.</p>' : '')+
-        (conditional && !pending.length ? '<p><strong>Uso condicionado:</strong> confira as condições desta opção antes de utilizá-la.</p>' : '')+
         conditions.map(condition => '<p><strong>Condição de uso:</strong> '+esc(condition)+'</p>').join('')+'</div>' : '')+
       ((alternatives.length || monitoring.length || limits.length) ? '<details><summary>Cuidados, alternativas e acompanhamento</summary>'+
         (alternatives.length ? '<h4>Se esta opção não funcionar</h4>'+list(alternatives) : '')+
         (monitoring.length ? '<h4>O que observar</h4>'+list(monitoring) : '')+
-        (limits.length ? '<h4>Limites desta opção</h4>'+list(limits) : '')+'</details>' : '')+'</article>';
+        (limits.length ? '<h4>Limites desta opção</h4>'+list(limits) : '')+'</details>' : '')+
+      foundations(step.component_ids || [])+'</article>';
   };
   if (suspended) {
     $('#orientation-main').innerHTML = '<div class="orientation-gaps">'+
@@ -256,7 +299,8 @@ function legacyOutput(response) {
     const steps = summary.etapas?.length ? summary.etapas : configurations.map(item => ({
       titulo: item.modo, itens: [item.acao], component_ids: [item.component_id]
     }));
-    $('#orientation-main').innerHTML = para(summary.texto || decision.orientacao_principal)+
+    const intro = summary.texto || decision.orientacao_principal;
+    $('#orientation-main').innerHTML = (steps.some(step => step.titulo === intro) ? '' : para(intro))+
       '<div class="orientation-cards">'+steps.map(card).join('')+'</div>'+
       ((partial || uncoveredPeople.length) ? '<aside class="orientation-gaps"><h3>O que ainda precisa de apoio</h3>'+
         para('As opções acima apoiam parte do desafio. Elas ainda não cobrem tudo o que foi informado.')+
@@ -280,7 +324,7 @@ function compositionOutput(response) {
   const localResults = people.length ? people.map(person => person.result) : [response];
   const hasPossibilities = localResults.some(local => (local.choices || []).length || (local.pending_candidates || []).length || (local.partial_segments || []).length);
   const groupHeading = people.length ? 'h4' : 'h3', choiceHeading = people.length ? 'h5' : 'h4';
-  $('#orientation-title').textContent = hasPossibilities ? 'Orientação para o seu caso' : 'O que falta para orientar este caso';
+  $('#orientation-title').textContent = hasPossibilities ? 'O que você pode fazer' : 'O que falta para orientar este caso';
   const card = (choice, kind, local) => {
     const steps = choice.steps || [], relations = choice.relations || [];
     const pending = unique([...steps, ...relations].flatMap(item => item.condition_checks || [])
@@ -291,7 +335,7 @@ function compositionOutput(response) {
     const limitations = unique([...(choice.limits || []), ...steps.map(step => step.limitation)]);
     return '<article class="orientation-step"><'+choiceHeading+'>'+esc(steps.map(step => step.label).join(' → ') || 'Possibilidade de apoio')+'</'+choiceHeading+'>'+
       (kind === 'pending' ? '<p class="step-conditions"><strong>A confirmar:</strong> esta possibilidade ainda depende das condições indicadas abaixo.</p>' : '')+
-      steps.map(step => '<p class="step-action">'+esc(step.action)+'</p>').join('')+
+      '<p class="instruction-label">Como fazer</p><ol class="action-instructions">'+steps.map(step => '<li class="step-action">'+esc(step.action)+'</li>').join('')+'</ol>'+
       relations.map(relation => '<p class="step-combination"><strong>Como as etapas se conectam:</strong> '+esc(relation.explanation)+'</p>').join('')+
       (conditions.length ? '<div class="step-conditions"><p><strong>Antes de usar, confirme:</strong></p>'+list(conditions)+'</div>' : '')+
       (choice.entry ? '<p class="step-conditions"><strong>Esta parte depende de:</strong> '+esc(label(choice.entry.representation))+'. '+
@@ -368,10 +412,10 @@ $('#generate-orientation').addEventListener('click',() => {
     }
     if (expected !== epoch) return;
     if (mode === 'legacy') legacyOutput(result); else compositionOutput(result);
-    const pending = mode === 'legacy' ? legacyQuestions(current,catalog) : compositionQuestions(draft,compositionCatalog);
-    $('#complete-information').hidden = !pending.length;
+    $('#complete-information').hidden = !unanswered().length;
+    $('#complete-information').textContent = 'Refinar esta orientação (opcional)';
     $('#orientation-foundation-body').replaceChildren();
-    $('#orientation-case-body').innerHTML = para($('#case-narrative').value)+fieldsHTML(summaryRows());
+    $('#orientation-case-body').innerHTML = para($('#case-narrative').value)+fieldsHTML(summaryRows())+requirementsHTML();
     for (const id of ['orientation-details','orientation-foundations','orientation-case']) $('#'+id).open = false;
     $('#reading-message').textContent = ''; status(''); screen('orientation-result','orientation-title');
     // Read the visible layout: hidden containers do not retain paragraph breaks in innerText.
@@ -379,9 +423,7 @@ $('#generate-orientation').addEventListener('click',() => {
   },'Relacionando seu caso aos conhecimentos da base…',true);
 });
 $('#complete-information').addEventListener('click',() => {
-  const pending = mode === 'legacy' ? legacyQuestions(current,catalog) : compositionQuestions(draft,compositionCatalog);
-  // Reopen unanswered requirements only on this explicit user request.
-  for (const question of pending) { answered.delete(question.id); handled.delete(question.id); }
+  roundAnswered = 0; clarificationRound++;
   invalidate(); askOrReview();
 });
 $('#orientation-foundations').addEventListener('toggle',() => {

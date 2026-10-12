@@ -1,6 +1,6 @@
 # Uma combinação que não estava cadastrada como cenário completo
 
-Este teste técnico sintético foi introduzido na **1.3.0-rc1** e é reexecutado na **1.4.0-rc2**. Não é um novo caso observado com participante. A entrada usa conceitos controlados, para separar a capacidade de composição da interpretação de uma narrativa. O relatório atual registra também verificações e cobertura parcial; a descrição das alternativas não significa que foram automaticamente avaliadas.
+Este teste técnico sintético foi introduzido na **1.3.0-rc1** e integra a regressão da **1.4.0-rc3**. Não é um novo caso observado com participante. A entrada usa conceitos controlados, para separar a capacidade de composição da interpretação de uma narrativa. O relatório atual registra também verificações e cobertura parcial; a descrição das alternativas não significa que foram automaticamente avaliadas. As expectativas atuais distinguem escolhas com condições satisfeitas de propostas condicionais; resultados antigos não são reapresentados como novas execuções.
 
 ## Entrada e controle
 

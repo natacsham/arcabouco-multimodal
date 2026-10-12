@@ -68,6 +68,8 @@ check('partial legacy output leads with action and preserves the modal relation'
   assert(result.main.indexOf('ACTION_STEP') < result.main.indexOf('MODAL_RELATION'));
   assert(result.main.indexOf('class="orientation-step"') < result.main.indexOf('class="orientation-gaps"'));
   assert.match(result.main, /class="step-combination"/);
+  assert.equal(result.title,'O que você pode fazer');
+  assert.match(result.main, /<h4>Como fazer<\/h4><ol class="action-instructions">/);
   assert.doesNotMatch(result.main, /orientação segura/);
 });
 
@@ -91,6 +93,16 @@ check('participant links remain scoped and missing coverage remains explicit', (
   assert.match(main, /UNCOVERED_FUNCTION/);
 });
 
+check('conditional participant links do not become confirmed routes',()=>{
+  const fixture=legacyFixture();
+  fixture.decision.participant_coverage=[{label:'Pessoa da possibilidade',component_ids:[],
+    conditional_component_ids:['SYNTHETIC-COMPONENT'],status:'POSSIBILIDADE_CONDICIONAL_A_CONFIRMAR'}];
+  const {main}=render('legacyOutput',fixture);
+  assert.match(main,/Possibilidade a confirmar para:<\/strong> Pessoa da possibilidade/);
+  assert.match(main,/Ainda não é uma forma de acesso confirmada/);
+  assert.doesNotMatch(main,/Participantes relacionados a esta opção/);
+});
+
 check('a suspended zero-choice result contains questions and never an actionable card', () => {
   const fixture = legacyFixture();
   fixture.decision.status = 'SUSPENSA_POR_CARACTERIZACAO_OU_COBERTURA_INSUFICIENTE';
@@ -108,6 +120,39 @@ check('legacy explanations escape source text instead of interpreting markup', (
   const {main} = render('legacyOutput', fixture);
   assert.match(main, /&lt;img/);
   assert.doesNotMatch(main, /<img/);
+});
+
+check('registered steps take precedence over the old summary and retain their order inside one action', () => {
+  const fixture=legacyFixture(),step=fixture.decision.sintese_pratica.etapas[0];
+  step.passos=[{texto:'SOURCE_STEP_ONE',component_id:'SYNTHETIC-COMPONENT',campo_origem:'acao'},
+    {texto:'SOURCE_STEP_TWO',component_id:'SYNTHETIC-COMPONENT',campo_origem:'acao'}];
+  const {main}=render('legacyOutput',fixture);
+  assert(main.indexOf('SOURCE_STEP_ONE')<main.indexOf('SOURCE_STEP_TWO'));
+  assert.doesNotMatch(main,/ACTION_STEP/);
+  assert.equal((main.match(/<ol class="action-instructions">/g)||[]).length,1);
+});
+
+check('a conditional configuration remains visibly conditional before its details', () => {
+  const fixture=legacyFixture();
+  fixture.decision.sintese_pratica.etapas[0].aplicabilidade='CONDICIONAL_A_CONFIRMACAO';
+  fixture.decision.sintese_pratica.etapas[0].antes_de_usar='CONFIRM_BEFORE_APPLY';
+  const {main}=render('legacyOutput',fixture);
+  assert(main.indexOf('CONFIRM_BEFORE_APPLY')<main.indexOf('<details>'));
+  assert(main.indexOf('CONFIRM_BEFORE_APPLY')<main.indexOf('Como fazer'),'Conditional status precedes the imperative steps');
+  assert.match(main,/CONFIRM_BEFORE_APPLY/);
+});
+
+check('local foundations contain only supports tied to that selected configuration', () => {
+  const fixture=legacyFixture();
+  fixture.explanation={configurations:[{component_id:'SYNTHETIC-COMPONENT',application:{supports:[{
+    criterion_statement:'EXACT_CRITERION',justification:'EXACT_REASON',knowledge_ids:['K1'],origins:[{
+      id:'O1',fonte_id:'F1',resumo_publico:'EXACT_ORIGIN',localizacao:'SECTION_ONE'}]}]},
+    construction:{knowledge:[{id:'K1',enunciado:'EXACT_KNOWLEDGE'}]}},
+    {component_id:'OTHER',application:{supports:[{criterion_statement:'UNRELATED_CRITERION'}]}}]};
+  const {main}=render('legacyOutput',fixture);
+  assert.match(main,/<details class="step-foundation"><summary>Por que esta ação foi sugerida\?/);
+  for(const text of ['EXACT_CRITERION','EXACT_REASON','EXACT_ORIGIN','SECTION_ONE','EXACT_KNOWLEDGE'])assert(main.includes(text));
+  assert.doesNotMatch(main,/UNRELATED_CRITERION/);
 });
 
 const labels = {Keyboard:'Teclado disponível', TextDraft:'Texto a revisar', Review:'Conferir o conteúdo'};

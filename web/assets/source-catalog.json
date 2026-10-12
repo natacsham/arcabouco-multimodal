@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "base_version": "1.4.0-rc2",
+  "base_version": "1.4.0-rc3",
   "source_collections_sha256": {
     "sources": "55817b426687828cbde50457b6cb16ccb14e3618347f8587cfa46720ed65ed7d",
     "references": "1fef90b4c4f4242dea8ed9068010885d036e84d31fb3f3763d002473e3c9552f",
     "reference_audit": "0d36e3af19beb00790ced8360f1db493bf6aedb514e10c8b9d4b3bb5904cb63c",
-    "excerpts": "5470d7debcf19c663040e0cf638e9e95c66605fedbab45d4dc65cf840ea01793",
+    "excerpts": "1c19f23fd3d93a49afd6fbb322870e0408f0a8cea08aea925f69fc8524d6eb17",
     "contributions": "b534f2c9b0ab9ca1a7145b5d4ce773471b0e977e7e30d9bf226d308d4a567539"
   },
   "summary": {
@@ -1339,13 +1339,13 @@
         },
         {
           "id": "TD-ORI-0142",
-          "localizacao_publica": "PLANILHA_FINAL_DE_EXTRACAO",
+          "localizacao_publica": "1.2.1 — Audio-only and Video-only (Prerecorded)",
           "estado_publicacao": "TEXTO_NAO_REDISTRIBUIDO",
           "status_curadoria": "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3",
-          "document_url": null,
-          "document_version": null,
-          "document_review_status": null,
-          "document_review_date": null
+          "document_url": "https://www.w3.org/TR/2023/REC-WCAG22-20231005/#audio-only-and-video-only-prerecorded",
+          "document_version": "2023-10-05",
+          "document_review_status": "CONFERIDO_NA_SECAO_ORIGINAL",
+          "document_review_date": "2026-10-11"
         },
         {
           "id": "TD-ORI-0148",

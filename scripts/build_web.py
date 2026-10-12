@@ -78,7 +78,7 @@ def build():
         if p.is_file()
     }
     manifest = {
-        "version": "1.4.0-rc2",
+        "version": data["metadata"]["version"],
         "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
         "instrument": "AMADO",
         "public_projection": True,
