@@ -89,6 +89,14 @@ anteriores são reutilizados somente para seus arquivos inalterados; não são
 apresentados como uma nova execução de HermiT ou SHACL. A verificação do endereço
 público é identificada separadamente por revisão e hash em `evidence/public-smoke.json`.
 
+Após a publicação de `072b707`, o teste público aprovou **33/33 verificações** e
+conferiu **37/37 arquivos servidos por hash**. Nas duas apresentações, uma única
+dificuldade selecionada pelo rótulo inteiro avançou à próxima pergunta; o percurso
+com respostas explícitas concluiu treze perguntas distintas e manteve a mesma
+orientação parcial. Não foram observados erros JavaScript ou requisições externas
+nesse teste. O relatório identifica `072b707` como revisão executada; este registro
+posterior não modifica o produto testado.
+
 ## Histórico: conferência da publicação RC2 — 11/10/2026
 
 O [relatório preservado em `46e318a`](https://github.com/natacsham/arcabouco-multimodal/blob/46e318afbd529a7ddfa28b8257c32743e06537cd/evidence/public-smoke.json) registra a execução sintética real no endereço público da revisão `b560fa6`: 25 verificações aprovadas e 37 arquivos servidos com hashes correspondentes. Nas duas apresentações, a narrativa de Matemática, após respostas explícitas e confirmação, preservou os grupos de dois estudantes surdos e um estudante cego e produziu `GERADA_PARCIAL`, com `PAD-CONTEUDO-WEB-EQUIVALENTE`, K10, K42 e ART-REF-03. Os registros K10/K42 foram conferidos na fundamentação da própria escolha, não apenas no catálogo. O relatório de mesmo nome na versão corrente pode pertencer a uma execução posterior; deve-se conferir seu identificador de revisão.

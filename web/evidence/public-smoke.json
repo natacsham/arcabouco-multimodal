@@ -1,10 +1,10 @@
 {
   "type": "SYNTHETIC_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
   "url": "https://natacsham.github.io/arcabouco-multimodal/",
-  "checked_at": "2026-10-11T07:46:09.257Z",
-  "expected_commit": "b560fa6f994b56028bfaa1f919a344b5b83aa5c5",
+  "checked_at": "2026-10-12T00:00:29.417Z",
+  "expected_commit": "072b7077db3ed5d597a515031a19d517e94d3cd2",
   "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
-  "test_sha256": "2e256ecbc738db596b3a1659fa6a2d7dd1bdcf6008c1f5d3450031a4f1c8c9dc",
+  "test_sha256": "c9d6aea4a5200e7e32c1d6aaaf9655da38d173f2302ce16d451a914444b407bc",
   "checks": {
     "public_manifest_http_200": true,
     "public_manifest_matches_current_build": true,
@@ -12,20 +12,28 @@
     "source_catalog_rendered_with_limits": true,
     "source_reference_selection_works": true,
     "index.html_real_worker_ready": true,
+    "index.html_direct_challenge_heading": true,
+    "index.html_whole_option_selects_one_barrier": true,
+    "index.html_single_barrier_answer_advances": true,
     "index.html_no_inferred_classroom_or_access_technology": true,
     "index.html_groups_and_task_preserved": true,
     "index.html_explicit_confirmation_required": true,
     "index.html_actual_partial_decision_and_exact_grounds": true,
     "index.html_partial_status_visible": true,
+    "index.html_partial_orientation_starts_with_supported_action": true,
     "index.html_foundation_records_render": true,
     "index.html_reload_discards_case": true,
     "index.html_no_case_storage": true,
     "guiado.html_real_worker_ready": true,
+    "guiado.html_direct_challenge_heading": true,
+    "guiado.html_whole_option_selects_one_barrier": true,
+    "guiado.html_single_barrier_answer_advances": true,
     "guiado.html_no_inferred_classroom_or_access_technology": true,
     "guiado.html_groups_and_task_preserved": true,
     "guiado.html_explicit_confirmation_required": true,
     "guiado.html_actual_partial_decision_and_exact_grounds": true,
     "guiado.html_partial_status_visible": true,
+    "guiado.html_partial_orientation_starts_with_supported_action": true,
     "guiado.html_foundation_records_render": true,
     "guiado.html_reload_discards_case": true,
     "guiado.html_no_case_storage": true,
@@ -34,9 +42,9 @@
   },
   "assets": {
     "amado/index.html": {
-      "bytes": 7624,
-      "expected_sha256": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
-      "served_sha256": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
+      "bytes": 8437,
+      "expected_sha256": "9cdc299b305f89a90667cba0182e7f1b3f30de02e2b99a3c0411ba951694570a",
+      "served_sha256": "9cdc299b305f89a90667cba0182e7f1b3f30de02e2b99a3c0411ba951694570a",
       "passed": true
     },
     "amado/app.js": {
@@ -64,9 +72,9 @@
       "passed": true
     },
     "amado/guiado.html": {
-      "bytes": 7624,
-      "expected_sha256": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
-      "served_sha256": "56d0a9d28bd6e50d40f5780874a23a84318477f58b45de27b055de79df290bbc",
+      "bytes": 8437,
+      "expected_sha256": "9cdc299b305f89a90667cba0182e7f1b3f30de02e2b99a3c0411ba951694570a",
+      "served_sha256": "9cdc299b305f89a90667cba0182e7f1b3f30de02e2b99a3c0411ba951694570a",
       "passed": true
     },
     "amado/guided.js": {
@@ -100,15 +108,15 @@
       "passed": true
     },
     "amado/simple-flow.js": {
-      "bytes": 23533,
-      "expected_sha256": "703a17bae6c5ac287c4724c43f2750aad398fa66e642ec503068db0517ed94bf",
-      "served_sha256": "703a17bae6c5ac287c4724c43f2750aad398fa66e642ec503068db0517ed94bf",
+      "bytes": 33996,
+      "expected_sha256": "813ec93271d16841b3dc8495e4c67cb1af28550dac9613bb5922aeb88b3d641b",
+      "served_sha256": "813ec93271d16841b3dc8495e4c67cb1af28550dac9613bb5922aeb88b3d641b",
       "passed": true
     },
     "amado/simple-flow.css": {
-      "bytes": 4859,
-      "expected_sha256": "f98d1047d42eba688a50ad4891ae1aba64c953ea5c28caf3b7067335304f8431",
-      "served_sha256": "f98d1047d42eba688a50ad4891ae1aba64c953ea5c28caf3b7067335304f8431",
+      "bytes": 7962,
+      "expected_sha256": "2738a5f0d7ace8f8bbfe94ced5462a3be97b269d3ca1f3e15a0f524941c9e5e2",
+      "served_sha256": "2738a5f0d7ace8f8bbfe94ced5462a3be97b269d3ca1f3e15a0f524941c9e5e2",
       "passed": true
     },
     "amado/voice.js": {
@@ -118,9 +126,9 @@
       "passed": true
     },
     "amado/intake.mjs": {
-      "bytes": 20401,
-      "expected_sha256": "98a08a564804c6d4c469e5f24b2bf6e2114c382d05a832bf065cf9a7d19ed027",
-      "served_sha256": "98a08a564804c6d4c469e5f24b2bf6e2114c382d05a832bf065cf9a7d19ed027",
+      "bytes": 23223,
+      "expected_sha256": "40415c9e9969ef859b7c8ca0c5efc3af73c15cd4c488f34cd231ad906820eb32",
+      "served_sha256": "40415c9e9969ef859b7c8ca0c5efc3af73c15cd4c488f34cd231ad906820eb32",
       "passed": true
     },
     "amado/completo.html": {
@@ -264,7 +272,8 @@
           "participant_label": "",
           "values": [
             "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
-          ]
+          ],
+          "progress": "Pergunta 1 de 6 previstas"
         },
         {
           "id": "barreira_ou_necessidade",
@@ -272,92 +281,89 @@
           "values": [
             "NEC-ACESSO-EQUIVALENTE",
             "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"
-          ]
+          ],
+          "progress": "Pergunta 2 de 12 previstas"
         },
         {
           "id": "participantes",
           "participant_label": "",
           "values": [
             "PAPEL-RESPONSAVEL-ADAPTACAO"
-          ]
+          ],
+          "progress": "Pergunta 3 de 12 previstas"
         },
         {
-          "id": "modalidades_disponiveis:PART-CASO-03-5230CA",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "id": "modalidades_disponiveis:PART-CASO-03-6FC9E8",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "MOD-TEXTO",
             "MOD-IMAGEM"
-          ]
+          ],
+          "progress": "Pergunta 4 de 13 previstas"
         },
         {
-          "id": "caracteristicas_pessoa:PART-CASO-03-5230CA",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "id": "caracteristicas_pessoa:PART-CASO-03-6FC9E8",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
-          ]
+          ],
+          "progress": "Pergunta 5 de 13 previstas"
         },
         {
-          "id": "apoios_informados:PART-CASO-03-5230CA",
-          "participant_label": "2 estudante(s): surdos informado no relato",
-          "values": [
-            "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos."
-          ]
-        },
-        {
-          "id": "modalidades_disponiveis:PART-CASO-04-FF72EB",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "id": "modalidades_disponiveis:PART-CASO-04-FB1971",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "MOD-AUDIO"
-          ]
+          ],
+          "progress": "Pergunta 6 de 13 previstas"
         },
         {
-          "id": "caracteristicas_pessoa:PART-CASO-04-FF72EB",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "id": "caracteristicas_pessoa:PART-CASO-04-FB1971",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "CAR-INTERACAO-NAO-VISUAL"
-          ]
+          ],
+          "progress": "Pergunta 7 de 13 previstas"
         },
         {
-          "id": "apoios_informados:PART-CASO-04-FF72EB",
-          "participant_label": "1 estudante(s): cego informado no relato",
-          "values": [
-            "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação."
-          ]
-        },
-        {
-          "id": "recursos_disponiveis:PART-CASO-03-5230CA",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "id": "recursos_disponiveis:PART-CASO-03-6FC9E8",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
-          ]
+          ],
+          "progress": "Pergunta 8 de 13 previstas"
         },
         {
-          "id": "recursos_disponiveis:PART-CASO-04-FF72EB",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "id": "recursos_disponiveis:PART-CASO-04-FB1971",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "REC-LEITOR-DE-TELA"
-          ]
+          ],
+          "progress": "Pergunta 9 de 13 previstas"
         },
         {
-          "id": "recursos_disponiveis:PART-CASO-05-92ED4C",
+          "id": "recursos_disponiveis:PART-CASO-05-F3F282",
           "participant_label": "Responsável pela adaptação do recurso",
           "values": [
             "REC-EDITOR-MULTIMIDIA"
-          ]
+          ],
+          "progress": "Pergunta 10 de 13 previstas"
         },
         {
           "id": "recursos_digitais",
           "participant_label": "",
           "values": [
             "RED-PAGINA-WEB"
-          ]
+          ],
+          "progress": "Pergunta 11 de 13 previstas"
         },
         {
           "id": "ambientes",
           "participant_label": "",
           "values": [
             "AMB-SALA-DE-AULA"
-          ]
+          ],
+          "progress": "Pergunta 12 de 13 previstas"
         },
         {
           "id": "recursos_disponiveis",
@@ -365,13 +371,14 @@
           "values": [
             "REC-LEITOR-DE-TELA",
             "REC-EDITOR-MULTIMIDIA"
-          ]
+          ],
+          "progress": "Pergunta 13 de 13 previstas"
         }
       ],
       "participants": [
         {
-          "id": "PART-CASO-03-5230CA",
-          "contexto_id": "CTX-CASO-56A0BC7B78",
+          "id": "PART-CASO-03-6FC9E8",
+          "contexto_id": "CTX-CASO-27F031CCDE",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -391,8 +398,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-FF72EB",
-          "contexto_id": "CTX-CASO-56A0BC7B78",
+          "id": "PART-CASO-04-FB1971",
+          "contexto_id": "CTX-CASO-27F031CCDE",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -437,7 +444,7 @@
       },
       "configuration_groundings": [
         {
-          "id": "CFG-D-GERADA-D4920FB5DF-01",
+          "id": "CFG-D-GERADA-77F8DE31DD-01",
           "supports": [
             {
               "id": "SUP-PAD-CONTEUDO-WEB-EQUIVALENTE-01",
@@ -635,7 +642,8 @@
           "participant_label": "",
           "values": [
             "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"
-          ]
+          ],
+          "progress": "Pergunta 1 de 6 previstas"
         },
         {
           "id": "barreira_ou_necessidade",
@@ -643,92 +651,89 @@
           "values": [
             "NEC-ACESSO-EQUIVALENTE",
             "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE"
-          ]
+          ],
+          "progress": "Pergunta 2 de 12 previstas"
         },
         {
           "id": "participantes",
           "participant_label": "",
           "values": [
             "PAPEL-RESPONSAVEL-ADAPTACAO"
-          ]
+          ],
+          "progress": "Pergunta 3 de 12 previstas"
         },
         {
-          "id": "modalidades_disponiveis:PART-CASO-03-623A81",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "id": "modalidades_disponiveis:PART-CASO-03-7B6A9D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "MOD-TEXTO",
             "MOD-IMAGEM"
-          ]
+          ],
+          "progress": "Pergunta 4 de 13 previstas"
         },
         {
-          "id": "caracteristicas_pessoa:PART-CASO-03-623A81",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "id": "caracteristicas_pessoa:PART-CASO-03-7B6A9D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
-          ]
+          ],
+          "progress": "Pergunta 5 de 13 previstas"
         },
         {
-          "id": "apoios_informados:PART-CASO-03-623A81",
-          "participant_label": "2 estudante(s): surdos informado no relato",
-          "values": [
-            "O grupo consegue compreender o texto e as imagens usados na atividade. Outros apoios ainda precisam ser conferidos."
-          ]
-        },
-        {
-          "id": "modalidades_disponiveis:PART-CASO-04-30D671",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "id": "modalidades_disponiveis:PART-CASO-04-F6BC28",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "MOD-AUDIO"
-          ]
+          ],
+          "progress": "Pergunta 6 de 13 previstas"
         },
         {
-          "id": "caracteristicas_pessoa:PART-CASO-04-30D671",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "id": "caracteristicas_pessoa:PART-CASO-04-F6BC28",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "CAR-INTERACAO-NAO-VISUAL"
-          ]
+          ],
+          "progress": "Pergunta 7 de 13 previstas"
         },
         {
-          "id": "apoios_informados:PART-CASO-04-30D671",
-          "participant_label": "1 estudante(s): cego informado no relato",
-          "values": [
-            "O estudante usa leitura em voz do conteúdo pelo leitor de tela e pode pedir a retomada da informação."
-          ]
-        },
-        {
-          "id": "recursos_disponiveis:PART-CASO-03-623A81",
-          "participant_label": "2 estudante(s): surdos informado no relato",
+          "id": "recursos_disponiveis:PART-CASO-03-7B6A9D",
+          "participant_label": "Estudantes surdos (2)",
           "values": [
             "unknown"
-          ]
+          ],
+          "progress": "Pergunta 8 de 13 previstas"
         },
         {
-          "id": "recursos_disponiveis:PART-CASO-04-30D671",
-          "participant_label": "1 estudante(s): cego informado no relato",
+          "id": "recursos_disponiveis:PART-CASO-04-F6BC28",
+          "participant_label": "Estudante cego (1)",
           "values": [
             "REC-LEITOR-DE-TELA"
-          ]
+          ],
+          "progress": "Pergunta 9 de 13 previstas"
         },
         {
-          "id": "recursos_disponiveis:PART-CASO-05-F044E7",
+          "id": "recursos_disponiveis:PART-CASO-05-29D617",
           "participant_label": "Responsável pela adaptação do recurso",
           "values": [
             "REC-EDITOR-MULTIMIDIA"
-          ]
+          ],
+          "progress": "Pergunta 10 de 13 previstas"
         },
         {
           "id": "recursos_digitais",
           "participant_label": "",
           "values": [
             "RED-PAGINA-WEB"
-          ]
+          ],
+          "progress": "Pergunta 11 de 13 previstas"
         },
         {
           "id": "ambientes",
           "participant_label": "",
           "values": [
             "AMB-SALA-DE-AULA"
-          ]
+          ],
+          "progress": "Pergunta 12 de 13 previstas"
         },
         {
           "id": "recursos_disponiveis",
@@ -736,13 +741,14 @@
           "values": [
             "REC-LEITOR-DE-TELA",
             "REC-EDITOR-MULTIMIDIA"
-          ]
+          ],
+          "progress": "Pergunta 13 de 13 previstas"
         }
       ],
       "participants": [
         {
-          "id": "PART-CASO-03-623A81",
-          "contexto_id": "CTX-CASO-52566DE048",
+          "id": "PART-CASO-03-7B6A9D",
+          "contexto_id": "CTX-CASO-C846A09E22",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -762,8 +768,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-30D671",
-          "contexto_id": "CTX-CASO-52566DE048",
+          "id": "PART-CASO-04-F6BC28",
+          "contexto_id": "CTX-CASO-C846A09E22",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -808,7 +814,7 @@
       },
       "configuration_groundings": [
         {
-          "id": "CFG-D-GERADA-184E349595-01",
+          "id": "CFG-D-GERADA-F6B648DF52-01",
           "supports": [
             {
               "id": "SUP-PAD-CONTEUDO-WEB-EQUIVALENTE-01",
@@ -1008,10 +1014,10 @@
     "GERADA_PARCIAL does not establish coverage of every participant or guarantee educational benefit.",
     "Microphone accuracy, screen readers, comprehension with users and full WCAG conformance were not tested in this public smoke.",
     "Negative resource phrases in narrative are not treated as verified parser support; the local variant tested unconfirmed reader availability and operation.",
-    "This smoke verifies one flow in each presentation, not the full 118-check local regression."
+    "This smoke verifies a short partial-answer regression and one complete flow in each presentation; it does not replace the full local regression."
   ],
   "browser": "155.0.8059.39",
-  "public_manifest_sha256": "641c32fb43f6b02fde661a0c5d7854550a452bba89f5882ef669aec2c4e3e378",
+  "public_manifest_sha256": "19233389619c9ea8f6f4f1c86c8b6e93e6aade36b2a5498bb8f4a2fd517e408b",
   "version": "1.4.0-rc2",
   "source_catalog": {
     "version": "1.4.0-rc2",
@@ -1030,5 +1036,5 @@
   },
   "completed": true,
   "passed": true,
-  "finished_at": "2026-10-11T07:47:19.358Z"
+  "finished_at": "2026-10-12T00:01:29.411Z"
 }

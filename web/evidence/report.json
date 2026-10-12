@@ -2,7 +2,7 @@
   "version": "1.4.0-rc2",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-11T23:56:17.653512+00:00",
+  "compiled_at_utc": "2026-10-12T00:02:53.374592+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -773,28 +773,28 @@
       "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"
     },
     "public_smoke": {
-      "passed": false,
+      "passed": true,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": false,
-        "exact_manifest": false,
+        "exact_test": true,
+        "exact_manifest": true,
         "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": false,
+        "current_asset_bytes": true,
         "current_base_inputs": true,
         "current_native_engine": true
       },
-      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-11T07:46:09.257Z",
-      "expected_commit": "b560fa6f994b56028bfaa1f919a344b5b83aa5c5",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "checked_at": "2026-10-12T00:00:29.417Z",
+      "expected_commit": "072b7077db3ed5d597a515031a19d517e94d3cd2",
       "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
-      "test_sha256": "2e256ecbc738db596b3a1659fa6a2d7dd1bdcf6008c1f5d3450031a4f1c8c9dc",
-      "public_manifest_sha256": "641c32fb43f6b02fde661a0c5d7854550a452bba89f5882ef669aec2c4e3e378",
-      "check_count": 25,
+      "test_sha256": "c9d6aea4a5200e7e32c1d6aaaf9655da38d173f2302ce16d451a914444b407bc",
+      "public_manifest_sha256": "19233389619c9ea8f6f4f1c86c8b6e93e6aade36b2a5498bb8f4a2fd517e408b",
+      "check_count": 33,
       "asset_count": 37,
       "scope": "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana.",
       "limits": [
@@ -803,7 +803,7 @@
         "GERADA_PARCIAL does not establish coverage of every participant or guarantee educational benefit.",
         "Microphone accuracy, screen readers, comprehension with users and full WCAG conformance were not tested in this public smoke.",
         "Negative resource phrases in narrative are not treated as verified parser support; the local variant tested unconfirmed reader availability and operation.",
-        "This smoke verifies one flow in each presentation, not the full 118-check local regression."
+        "This smoke verifies a short partial-answer regression and one complete flow in each presentation; it does not replace the full local regression."
       ]
     }
   },
@@ -840,7 +840,7 @@
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "83584f9ab3eb5dd15a9ebf7aaea9450a04063085de4d96ae04ef7487a9629915"
+      "sha256": "d5150fd41f151adff88f2257b22d41568ba05673d5304357f34245ff7e88b01c"
     },
     "build-manifest.json": {
       "url": "build-manifest.json",
@@ -859,8 +859,14 @@
     "source-catalog-browser.json": {
       "url": "source-catalog-browser.json",
       "sha256": "02875927589c6f5120c0f107fb4f145cdb669dedf9a9f1870b778e8ac34fe0a0"
+    },
+    "public-smoke.json": {
+      "url": "public-smoke.json",
+      "sha256": "a006c98caf86d02c3d1adda0fd4f5469eb1e68cc08b676562e216557c461e492",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "expected_commit": "072b7077db3ed5d597a515031a19d517e94d3cd2"
     }
   },
   "historical_evidence_notice": "Os relatórios identificam individualmente execução atual ou reúso de componentes idênticos. A apresentação simplificada possui seu próprio relatório. Evidências antigas não aprovam bytes diferentes.",
-  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE"
 }
