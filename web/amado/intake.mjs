@@ -17,7 +17,7 @@ function options(catalog, type, selected = [], field, allowed) {
   return (catalog?.concepts?.[type] || []).filter(item => selected.includes(item.id) ||
     ((type === 'PAPEL_NO_CONTEXTO' || item.curated !== false || Array.isArray(allowed) && allowed.includes(item.id)) && item.scope !== 'CASO_ENTREVISTA'))
     .filter(item => !Array.isArray(allowed) || allowed.includes(item.id) || selected.includes(item.id))
-    .filter(item => type !== 'CARACTERISTICA_PESSOA' || item.categoria !== 'ESCOPO_DE_PUBLICO')
+    .filter(item => type !== 'CARACTERISTICA_PESSOA' || item.categoria !== 'ESCOPO_DE_PUBLICO' || selected.includes(item.id))
     .sort((a, b) => (a.order || 500) - (b.order || 500) || a.label.localeCompare(b.label, 'pt-BR'))
     .map(item => ({id: item.id, label: item.label, ...(field ? {field} : {})}));
 }
@@ -82,6 +82,8 @@ export function legacyQuestions(current, catalog) {
       participant_label: personLabel,
       help: item.help || item.reason || 'Marque apenas o que corresponde ao seu caso.', existingParticipations: people};
     if (field === 'objetivo') return {...question, type: 'text', label: contextual('O que você espera que as pessoas consigam fazer?')};
+    if (field === 'requester_relation') return {...question, type:'single', label:contextual('Como você participa deste desafio?'),
+      options:item.options || requesterOptions};
     if (field === 'barreira_ou_necessidade') return {...question, label: contextual('O que dificulta acessar, compreender ou utilizar o conteúdo ou recurso?'),
       help: item.help || item.reason || 'Pode marcar uma ou mais respostas. Não é preciso marcar todas.',
       options: [...options(catalog, 'BARREIRA', raw.barreiras, 'barreiras', item.concept_ids), ...options(catalog, 'NECESSIDADE', raw.necessidades, 'necessidades', item.concept_ids)]};
@@ -98,6 +100,8 @@ export function legacyQuestions(current, catalog) {
     if (!config) return {...question, label: contextual('Qual informação precisa ser considerada?'), type: 'text'};
     const projected = {...question, label: contextual(item.participant_id ? personalLabels[field] || config[1] : config[1]),
       options: options(catalog, config[0], selected, undefined, item.concept_ids)};
+    if(Array.isArray(item.options)) projected.options=projected.options.map(option=>({...option,
+      label:item.options.find(explicit=>explicit.id===option.id)?.label || option.label}));
     if (field === 'tarefas' && !item.help && !item.reason) projected.help = 'Pense no que precisa ser feito, como acessar um material, escrever ou participar de uma apresentação.';
     if (item.participant_id && field === 'modalidades_disponiveis') {
       // A game may contain several access modes. It cannot, by itself, answer
@@ -117,12 +121,15 @@ export function legacyAnswer(current, question, value, note = '') {
   const payload = {...copy(c.raw || {}), objetivo: c.objetivo || '', descricao_do_contexto: c.texto_curto || '',
     restricoes: copy(c.restricoes || []), operacao_do_recurso: c.operacao_do_recurso || '',
     impedimentos_verificados: c.impedimentos_verificados === true, mapping_confirmed: false, transfer_confirmed: false};
+  payload.requester_relation = c.requester_relation || 'unspecified';
+  payload.requester_participation_id = c.requester_participation_id || '';
   const preservedPeople = copy(question.existingParticipations || participants(current));
   // Global equipment/context answers must not clear distinct personal routes.
   if (preservedPeople.filter(person => ['PAPEL-ESTUDANTE','PAPEL-PESSOA-APOIADA'].includes(person.papel_id)).length > 1)
     payload.participations = preservedPeople;
   const hasNote = question.participant_id && typeof note === 'string' && note.trim();
   if (!hasNote && (value === null || value === undefined || value === '' || value === 'unknown')) return payload;
+  if (question.field === 'requester_relation') { payload.requester_relation = value; return payload; }
   if (question.type === 'text' && !question.participant_id) { payload[question.field] = String(value).trim(); return payload; }
   const chosen = (Array.isArray(value) ? value : [value]).filter(id => question.options.some(item => item.id === id));
   if (question.participant_id) {
@@ -155,6 +162,7 @@ export function legacySummary(current) {
   const people = c.participantes || [];
   const personName = person => participantName(person, person.papel);
   const rows = [
+    ['Sua participação', requesterOptions.find(item => item.id === c.requester_relation && item.id !== 'unspecified')?.label],
     ['Pessoas', people.map(personName)],
     ['Sobre a pessoa', c.caracteristicas_relevantes], ['Atividade', c.tarefas], ['Objetivo', c.objetivo],
     ['Dificuldade', c.barreiras], ['Apoio necessário', c.necessidades], ['Onde acontece', c.ambientes],
@@ -168,6 +176,128 @@ export function legacySummary(current) {
     if (details.length) rows.push(['Sobre '+personName(person), details]);
   }
   return rows.map(([label, value]) => ({label, value: Array.isArray(value) ? value.join('; ') : value || ''})).filter(row => row.value);
+}
+
+export const requesterOptions = [
+  {id:'self',label:'Quero apoio para uma atividade que eu realizo'},
+  {id:'support',label:'Acompanho ou apoio outra pessoa na atividade'},
+  {id:'prepare',label:'Preparo ou adapto o material ou recurso'},
+  {id:'seek_guidance',label:'Quero orientar quem conduz ou prepara a atividade'},
+  {id:'unspecified',label:'Ainda não sei ou prefiro não informar'},
+];
+
+// This editor changes the existing context; it does not interpret a second
+// narrative or merge unchecked options back into the previous selection.
+export function legacyEditor(current, catalog) {
+  const c=current.context || {}, raw=c.raw || {};
+  const rows=[{key:'requester_relation',field:'requester_relation',label:'Como você participa deste desafio?',type:'single',
+    options:requesterOptions,value:c.requester_relation || 'unspecified',group:'Pessoas e participação'},
+    {key:'objetivo',field:'objetivo',label:'O que você espera que as pessoas consigam fazer?',type:'text',value:c.objetivo || '',group:'Atividade e objetivo'},
+    {key:'operacao_do_recurso',field:'operacao_do_recurso',label:'Quem utiliza ou prepara o recurso nesta atividade?',type:'text',value:c.operacao_do_recurso || '',group:'Pessoas e participação'},
+    {key:'restricoes',field:'restricoes',label:'Outras condições ou restrições (uma por linha)',type:'text',value:(c.restricoes || []).join('\n'),group:'Recursos e condições'}];
+  const labels={tarefas:'Atividade',ambientes:'Onde acontece',recursos_digitais:'Aplicativo ou material envolvido',
+    recursos_disponiveis:'Equipamentos e apoios disponíveis',modalidades_disponiveis:'Formas de interação disponíveis',
+    barreiras:'Dificuldades observadas',necessidades:'Apoio necessário',caracteristicas_pessoa:'Características informadas sem pessoa identificada'};
+  for(const [field,[type]] of Object.entries(fields)) rows.push({key:field,field,label:labels[field],type:'multi',
+    value:copy(raw[field] || []),options:options(catalog,type,raw[field] || []),
+    group:field==='tarefas'?'Atividade e objetivo':['barreiras','necessidades','caracteristicas_pessoa'].includes(field)?'Dificuldades e apoio':'Recursos e condições'});
+  rows.push({key:'recursos_impedidos',field:'recursos_impedidos',label:'Recursos que não podem ser usados',type:'multi',
+    value:copy(raw.recursos_impedidos || []),options:options(catalog,'RECURSO_DISPONIVEL',raw.recursos_impedidos || []),group:'Recursos e condições'});
+  rows.push({key:'recursos_propostos',field:'recursos_propostos',label:'Recursos que ainda poderão ser preparados',type:'multi',
+    value:copy(raw.recursos_propostos || []),options:options(catalog,'RECURSO_DISPONIVEL',raw.recursos_propostos || []),group:'Recursos e condições'});
+  for(const person of participants(current,catalog)) {
+    const group=participantName(person) || 'Pessoa participante';
+    rows.push({key:'remove:'+person.id,participant_id:person.id,field:'remove',type:'remove',label:'Remover esta pessoa ou grupo do caso',value:false,group});
+    rows.push({key:'person:'+person.id+':label',participant_id:person.id,field:'label',type:'text',label:'Como identificar esta pessoa ou grupo',value:person.label || '',group});
+    rows.push({key:'person:'+person.id+':papel_id',participant_id:person.id,field:'papel_id',type:'single',label:'Papel nesta atividade',
+      value:person.papel_id || '',options:options(catalog,'PAPEL_NO_CONTEXTO',[person.papel_id]),group});
+    for(const [field,type,label] of [['caracteristica_ids','CARACTERISTICA_PESSOA','Características desta pessoa ou grupo'],
+      ['modalidade_ids','MODALIDADE','Formas de interação que já utiliza'],['recurso_operado_ids','RECURSO_DISPONIVEL','Recursos que já consegue operar']])
+      rows.push({key:'person:'+person.id+':'+field,participant_id:person.id,field,type:'multi',label,value:copy(person[field] || []),options:options(catalog,type,person[field] || []),group});
+    rows.push({key:'person:'+person.id+':apoios_informados',participant_id:person.id,field:'apoios_informados',type:'text',label:'Outro apoio informado (opcional)',value:person.apoios_informados || '',group});
+  }
+  return rows;
+}
+export function legacyRevision(current,catalog,values) {
+  const c=current.context || {}, payload={...copy(c.raw || {}),objetivo:c.objetivo || '',descricao_do_contexto:c.texto_curto || '',
+    restricoes:copy(c.restricoes || []),operacao_do_recurso:c.operacao_do_recurso || '',impedimentos_verificados:c.impedimentos_verificados===true,
+    requester_relation:c.requester_relation || 'unspecified',requester_participation_id:c.requester_participation_id || '',
+    participations:participants(current,catalog),mapping_confirmed:false,transfer_confirmed:false};
+  for(const row of legacyEditor(current,catalog)) if(Object.hasOwn(values,row.key)) {
+    if(row.type==='remove')continue;
+    let value=values[row.key];
+    if(row.type==='multi') value=uniq((Array.isArray(value)?value:[]).filter(id=>row.options.some(option=>option.id===id)));
+    else value=String(value ?? '');
+    if(row.field==='restricoes')value=value.split('\n').map(item=>item.trim()).filter(Boolean);
+    if(row.type==='single'&&!row.options.some(option=>option.id===value)) continue;
+    const target=row.participant_id?payload.participations.find(person=>person.id===row.participant_id):payload;
+    if(target) target[row.field]=value;
+  }
+  payload.participations=payload.participations.filter(person=>values['remove:'+person.id]!==true);
+  if(payload.requester_participation_id&&!payload.participations.some(person=>person.id===payload.requester_participation_id))payload.requester_participation_id='';
+  // A resource cannot be simultaneously marked available and forbidden.
+  const available=payload.recursos_disponiveis || [],blocked=payload.recursos_impedidos || [],proposed=payload.recursos_propostos || [];
+  if(available.some(id=>blocked.includes(id)||proposed.includes(id))||blocked.some(id=>proposed.includes(id)))
+    throw new Error('Um recurso está em mais de um estado: disponível, impedido ou ainda a preparar. Revise essas seleções antes de salvar.');
+  return payload;
+}
+
+export function compositionEditor(context,catalog) {
+  const rows=[{key:'task',field:'task',type:'single',label:'Atividade',value:context.task || '',
+    options:[{id:'',label:'Ainda não informada'},...(catalog.tasks || []).map(item=>({id:item.id,label:item.label}))],group:'Atividade e objetivo'}];
+  const add=(target,person=null)=>{
+    for(const field of ['facts','resources']) for(const item of catalog[field] || []) {
+      if(person&&field==='facts'&&item.scope==='context')continue;
+      if(!person&&context.participants?.length&&field==='facts'&&item.scope!=='context')continue;
+      rows.push({key:(person?person.id+':':'')+field+':'+item.id,field,concept_id:item.id,participant_id:person?.id,
+        type:'single',label:simpleQuestions[item.id] || item.label,value:target[field]?.[item.id]===true?'true':target[field]?.[item.id]===false?'false':'unknown',
+        options:[{id:'true',label:'Sim'},{id:'false',label:'Não'},{id:'unknown',label:'Ainda não sei'}],
+        group:person?.label || (field==='resources'?'Recursos e condições':'Condições da atividade')});
+    }
+  };
+  add(context);for(const person of context.participants || [])add(person,person);
+  return rows;
+}
+export function compositionRevision(context,catalog,values) {
+  const updated=copy(context);updated.confirmed=false;
+  for(const row of compositionEditor(context,catalog)) if(Object.hasOwn(values,row.key)) {
+    if(row.field==='task'){if(row.options.some(item=>item.id===values[row.key]))updated.task=values[row.key];continue;}
+    const target=row.participant_id?updated.participants.find(person=>person.id===row.participant_id):updated;
+    target[row.field] ||= {};target[row.field][row.concept_id]=values[row.key]==='unknown'?null:values[row.key]==='true';
+  }
+  return updated;
+}
+
+// Project only origins attached to an application used by this result. Source
+// titles or the complete catalogue alone do not prove that a source was used.
+export function usedSourceRecords(response) {
+  const records=[],entities=response.execution_evidence?.entities || {};
+  for(const config of response.explanation?.configurations || [])for(const support of config.application?.supports || [])
+    for(const origin of support.origins || []) {
+      const source=entities[origin.fonte_id] || {};
+      records.push({id:origin.id,sourceId:origin.fonte_id,title:source.title || source.titulo || source.label || origin.fonte_item || origin.fonte_id,
+        url:origin.document_url || source.url || '',location:origin.localizacao_publica || origin.localizacao || origin.secao || origin.pagina || '',
+        statement:origin.document_paraphrase || origin.resumo_publico || origin.enunciado_publico || origin.aviso_publicacao || '',
+        status:origin.status_localizacao || 'PENDENTE',componentId:config.component_id,criterionId:support.criterion_id,
+        applicationState:config.selection==='CONDITIONAL'||config.availability_status==='CONDICIONAL_A_CONFIRMACAO'?'conditional':'selected'});
+    }
+  const collect=local=>{
+    const choices=[...(local.choices || []).map(choice=>({choice,state:'selected'})),
+      ...(local.pending_candidates || []).map(choice=>({choice,state:'conditional'})),...(local.partial_segments || []).map(choice=>({choice,state:'partial'}))];
+    for(const {choice,state} of choices) {
+      const grounds=[...(choice.steps || []).flatMap(step=>step.groundings || []),...(choice.relations || []).map(row=>row.grounding).filter(Boolean)];
+      for(const grounding of grounds) {
+        const criterion=grounding.criterion || {};
+        const contributions=grounding.articulation?.contributions || [];
+        for(const row of [...contributions,...(criterion.source?[{source:criterion.source,locator:criterion.locator,statement:criterion.justification,status:criterion.status}]:[])])
+          records.push({id:row.id || grounding.id,sourceId:row.source?.id,title:row.source?.label || row.source?.title || row.source?.id || '',
+            url:row.document_url || row.source?.url || '',location:row.locator || '',statement:row.statement || '',status:row.status || 'PENDENTE',componentId:choice.id,criterionId:criterion.id,applicationState:state});
+      }
+    }
+  };
+  collect(response);for(const person of response.participant_results || [])collect(person.result);
+  const unique=new Map();for(const row of records){const key=[row.id,row.sourceId,row.componentId,row.criterionId].join('|');if(!unique.has(key))unique.set(key,row);}
+  return [...unique.values()];
 }
 export function accessRequirementSummary(current) {
   return (current.context?.access_requirements || []).map(row => ({

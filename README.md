@@ -111,11 +111,29 @@ O tema — Matemática, História ou outro — contextualiza a atividade, não s
 
 ### Como as perguntas avançam e como ler o resultado
 
+**Revisão de entrada: `AMADO-web-1.4.0-rc3-intake1`.** A ontologia e a base de conhecimento permanecem na versão 1.4.0-rc3. Esta revisão adapta a interpretação, o diálogo e a edição do contexto; não acrescenta conhecimentos ou padrões para fazer um exemplo funcionar. A implementação anterior permanece no histórico (`f9f5eec`).
+
+O percurso passa por **relato → entendimento → esclarecimentos necessários → revisão → confirmação**. Antes das perguntas, a pessoa confere uma síntese do que foi reconhecido. Relatar “ensinar a usar Google Forms” identifica um formulário, mas não confirma que a atividade seja ler conteúdo ou preencher respostas. A ação pretendida precisa ser esclarecida quando ambígua. O nome do produto e o tema da aula não selecionam uma resposta pronta.
+
+Quem solicita pode realizar a atividade, apoiar alguém, preparar material ou orientar outra pessoa responsável. Essa relação é separada dos papéis dos participantes. Reconhecer “mediadora” não significa substituí-la por professora; “sou mediadora e quero conversar com o professor” não é uma única participação. Padrões realmente escolares continuam delimitados: não se pede que alguém assuma um papel ausente apenas para habilitar uma orientação.
+
+As perguntas consideram primeiro ambiguidades de tarefa e participação. Quando o ambiente altera as opções, ele é esclarecido antes dos equipamentos. Sala de aula explicitamente informada não é perguntada novamente; “dar aula” sozinho não confirma presença física. Ambiente, material/aplicativo e equipamento são campos diferentes.
+
 Cada pergunta identifica a atividade e, quando necessário, a pessoa ou o grupo a que se refere. A primeira rodada contém até três perguntas, podendo conter nenhuma. Uma resposta encerra essa pergunta no diálogo: não é necessário marcar todas as opções. “Ainda não sei” permite continuar sem transformar ausência de informação em confirmação. O indicador mostra a posição e o total da rodada; esclarecimentos adicionais são opcionais.
 
 O limite da rodada pertence à interface (`web/amado/simple-flow.js`); a seleção das perguntas considera os percursos no motor e em `intake.mjs`. Não se reúnem automaticamente as exigências de todos os padrões. Escolher uma dificuldade não confirma as demais. O refinamento permite retomar pontos pendentes sem repetir automaticamente perguntas já respondidas.
 
+**Revisar informações** abre os campos preenchidos e as lacunas. É possível completar um “não sei”, retirar ou substituir equipamento e corrigir participantes, ambiente ou atividade sem recomeçar a rodada. A edição substitui os valores do campo, em vez de somente acumular opções. Uma mudança invalida a orientação e exige nova confirmação; as respostas não afetadas são preservadas. Alterar e reinterpretar o relato original é uma ação distinta, pois pode mudar o contexto reconhecido.
+
+A habilidade de uma pessoa para operar um recurso não comprova que esse recurso esteja disponível nesta atividade. Retirar um equipamento deixa sua disponibilidade em aberto sem apagar a habilidade pessoal. Informar que o equipamento está impedido exclui essa possibilidade; ausência de informação pode mantê-la apenas condicional. Remover uma pessoa interpretada indevidamente retira seus requisitos derivados, sem eliminar os requisitos das demais.
+
+O progresso corresponde à execução: carregamento e conferência do pacote; recuperação na base RDF; verificações de condições e apoios; composição; apresentação do resultado. Cada solicitação possui sua identificação para não misturar mensagens de execuções diferentes. Na rota de composição por funções, recuperação e verificações são intercaladas: a mensagem informa essa operação conjunta, sem simular etapas separadas. Falha não é mostrada como conclusão. Não há porcentagem estimada, espera artificial ou leitura online de ABNT/WCAG durante a consulta.
+
+As fontes exibidas junto ao resultado vêm dos apoios efetivamente usados, com referência, seção, paráfrase e link quando disponíveis. Fonte apenas cadastrada, recuperação sem autorização e leitura direta de documento são estados distintos. Acesso restrito ou conferência documental pendente permanecem explícitos.
+
 A orientação começa por **O que você pode fazer**: uma ação por configuração, seus passos e as condições antes de aplicar. A ordem interna dos passos não transforma configurações independentes em um procedimento obrigatório. Cada passo conserva o fragmento da ação que o sustenta; a impressão digital da ação impede reaproveitar uma simplificação antiga após mudança da base. Não se acrescentam modalidades de outros cartões. Alternativas, acompanhamento, limites e fundamentos ficam no próprio bloco. Apoio parcial ou condicional continua identificado; não equivale a uma solução completa. [Fluxo de leitura e verificações](docs/visao-guiada.md).
+
+A cobertura permanece delimitada: reconhecer o aplicativo, a tarefa ou a pessoa não garante uma configuração elegível. Falta de informação, falha de interpretação e ausência de padrão para a função requerida precisam ser distinguidas. Esta entrega não reorganiza toda a saída nem elimina seus aprofundamentos; a revisão em duas áreas (orientação prática e fundamentação técnica) é uma etapa posterior.
 
 ## Arquivos e reprodução
 

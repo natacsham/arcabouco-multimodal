@@ -2,7 +2,8 @@
   "version": "1.4.0-rc3",
   "instrument": "AMADO",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
-  "compiled_at_utc": "2026-10-12T01:56:26.472687+00:00",
+  "executor_version": "AMADO-web-1.4.0-rc3-intake1",
+  "compiled_at_utc": "2026-10-12T03:16:39.013242+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -31,13 +32,14 @@
     "composition_model": true,
     "composition_reasoner": true,
     "simple_flow_current_presentation": true,
+    "focused_dialogue_current_execution": true,
     "source_catalog_browser": true,
     "source_catalog_current_build": true,
     "source_catalog_current_inputs": true,
     "current_frontend_files": true
   },
   "results": {
-    "unit_tests": 168,
+    "unit_tests": 194,
     "ontology_triples": 15416,
     "owl_2_dl": true,
     "hermit_consistency": true,
@@ -77,7 +79,7 @@
       "index.html_real_traceability": true,
       "index.html_foundations_keyboard_access": true,
       "index.html_details_do_not_regenerate": true,
-      "index.html_editing_discards_orientation": true,
+      "index.html_editing_opens_populated_context": true,
       "index.html_clear_case": true,
       "index.html_composition_asks_missing_conditions": true,
       "index.html_composition_first_round_limited_to_three": true,
@@ -118,6 +120,7 @@
       "index.html_only_missing_questions": true,
       "index.html_answer_preserves_other_information": true,
       "index.html_unknown_not_silently_completed": true,
+      "index.html_existing_objective_visible_in_editor": true,
       "index.html_unchanged_narrative_preserves_answers": true,
       "index.html_inputs_blocked_while_processing": true,
       "index.html_generation_progress_visible": true,
@@ -145,7 +148,7 @@
       "guiado.html_real_traceability": true,
       "guiado.html_foundations_keyboard_access": true,
       "guiado.html_details_do_not_regenerate": true,
-      "guiado.html_editing_discards_orientation": true,
+      "guiado.html_editing_opens_populated_context": true,
       "guiado.html_clear_case": true,
       "guiado.html_composition_asks_missing_conditions": true,
       "guiado.html_composition_first_round_limited_to_three": true,
@@ -186,6 +189,7 @@
       "guiado.html_only_missing_questions": true,
       "guiado.html_answer_preserves_other_information": true,
       "guiado.html_unknown_not_silently_completed": true,
+      "guiado.html_existing_objective_visible_in_editor": true,
       "guiado.html_unchanged_narrative_preserves_answers": true,
       "guiado.html_inputs_blocked_while_processing": true,
       "guiado.html_generation_progress_visible": true,
@@ -223,7 +227,7 @@
         "index.html_real_traceability": true,
         "index.html_foundations_keyboard_access": true,
         "index.html_details_do_not_regenerate": true,
-        "index.html_editing_discards_orientation": true,
+        "index.html_editing_opens_populated_context": true,
         "index.html_clear_case": true,
         "index.html_composition_asks_missing_conditions": true,
         "index.html_composition_first_round_limited_to_three": true,
@@ -264,6 +268,7 @@
         "index.html_only_missing_questions": true,
         "index.html_answer_preserves_other_information": true,
         "index.html_unknown_not_silently_completed": true,
+        "index.html_existing_objective_visible_in_editor": true,
         "index.html_unchanged_narrative_preserves_answers": true,
         "index.html_inputs_blocked_while_processing": true,
         "index.html_generation_progress_visible": true,
@@ -291,7 +296,7 @@
         "guiado.html_real_traceability": true,
         "guiado.html_foundations_keyboard_access": true,
         "guiado.html_details_do_not_regenerate": true,
-        "guiado.html_editing_discards_orientation": true,
+        "guiado.html_editing_opens_populated_context": true,
         "guiado.html_clear_case": true,
         "guiado.html_composition_asks_missing_conditions": true,
         "guiado.html_composition_first_round_limited_to_three": true,
@@ -332,6 +337,7 @@
         "guiado.html_only_missing_questions": true,
         "guiado.html_answer_preserves_other_information": true,
         "guiado.html_unknown_not_silently_completed": true,
+        "guiado.html_existing_objective_visible_in_editor": true,
         "guiado.html_unchanged_narrative_preserves_answers": true,
         "guiado.html_inputs_blocked_while_processing": true,
         "guiado.html_generation_progress_visible": true,
@@ -346,6 +352,70 @@
         "no_case_transmission": true,
         "no_javascript_errors": true
       }
+    },
+    "context_revision": {
+      "report": "focused-dialogue-browser.json",
+      "checks": [
+        "index.html: initial field has a visible label and generic example",
+        "index.html: initial round has at most three contextual questions",
+        "index.html: access requirements are sourced and scoped",
+        "index.html: base requirements are distinguished from reported abilities",
+        "index.html: the real engine returns recorded checks",
+        "index.html: represented access challenge has conditional or supported actions",
+        "index.html: actions are numbered only inside each configuration",
+        "index.html: steps display registered action fragments",
+        "index.html: unknown reader is not implicitly available",
+        "index.html: pending conditions are visible",
+        "index.html: foundations remain optional and local",
+        "index.html: optional refinement asks only new questions",
+        "index.html: complete prepared case skips questions",
+        "index.html: generation reports actual request-correlated phases",
+        "index.html: presentation recorded only after output",
+        "index.html: used source disclosure contains source links",
+        "index.html: source disclosure distinguishes prior extraction from live fetching",
+        "index.html: correction opens existing and missing fields",
+        "index.html: correction preserves narrative and requires new confirmation",
+        "index.html: correction replaces state without interpreting narrative again",
+        "index.html: action output reflows at 320 pixels",
+        "index.html: reading controls remain reachable",
+        "index.html: high contrast remains operable",
+        "index.html: Google Forms preview identifies the resource without assigning a teacher",
+        "index.html: Google Forms preview preserves the stated intention before questions",
+        "index.html: incomplete Google Forms case has an editable missing objective",
+        "index.html: review editor reflows at 320 pixels",
+        "index.html: Google Forms edits reach the engine without restarting the narrative",
+        "index.html: removing a resource replaces the previous selection",
+        "guiado.html: initial field has a visible label and generic example",
+        "guiado.html: initial round has at most three contextual questions",
+        "guiado.html: access requirements are sourced and scoped",
+        "guiado.html: base requirements are distinguished from reported abilities",
+        "guiado.html: the real engine returns recorded checks",
+        "guiado.html: represented access challenge has conditional or supported actions",
+        "guiado.html: actions are numbered only inside each configuration",
+        "guiado.html: steps display registered action fragments",
+        "guiado.html: unknown reader is not implicitly available",
+        "guiado.html: pending conditions are visible",
+        "guiado.html: foundations remain optional and local",
+        "guiado.html: optional refinement asks only new questions",
+        "guiado.html: complete prepared case skips questions",
+        "guiado.html: generation reports actual request-correlated phases",
+        "guiado.html: presentation recorded only after output",
+        "guiado.html: used source disclosure contains source links",
+        "guiado.html: source disclosure distinguishes prior extraction from live fetching",
+        "guiado.html: correction opens existing and missing fields",
+        "guiado.html: correction preserves narrative and requires new confirmation",
+        "guiado.html: correction replaces state without interpreting narrative again",
+        "guiado.html: action output reflows at 320 pixels",
+        "guiado.html: reading controls remain reachable",
+        "guiado.html: high contrast remains operable",
+        "guiado.html: Google Forms preview identifies the resource without assigning a teacher",
+        "guiado.html: Google Forms preview preserves the stated intention before questions",
+        "guiado.html: incomplete Google Forms case has an editable missing objective",
+        "guiado.html: Google Forms edits reach the engine without restarting the narrative",
+        "guiado.html: removing a resource replaces the previous selection",
+        "no unhandled browser errors",
+        "no cases sent outside the static site"
+      ]
     },
     "source_catalog": {
       "report": "source-catalog-browser.json",
@@ -411,11 +481,11 @@
         },
         "evidence_use": "ARTIFACT_COMPARISON_WITH_QUALIFIED_BROWSER_PROVENANCE",
         "originating_report": "evidence/traceability-browser.json",
-        "originating_report_sha256": "7958ac3024c583c74eb45544cbf6bd3e5ab05c589e84a0b3e84b043ff5dc1678",
-        "originating_execution_at": "2026-10-12T01:41:47.542Z",
+        "originating_report_sha256": "612b6edbb4b599ad8d2f8f30872ccd72073502bfaa54a9bfc20f5b7f8a1fab08",
+        "originating_execution_at": "2026-10-12T03:03:54.749Z",
         "originating_evidence_use": "CURRENT_BUILD_EXECUTION",
-        "native_sha256": "0a3f5d61a3065d482169628ad4fd7a0c85126afb81eb59d82a272d0d140ab5ae",
-        "browser_sha256": "263e76be856bf63765c209f08de5b31bb0a5676211c5c6a17182b26008104d5f",
+        "native_sha256": "dc5ad7b65e81342bda63f7bcfaadd3db0a643250af6841f31248c527f7393205",
+        "browser_sha256": "a484df9741ac50d89e1ce65a2abb25a45cf37da4d38e5a10c8f012533af9366b",
         "browser_artifact_verification": "VERIFIED_PRESENT_ARTIFACT",
         "browser_artifact_checked_directly": true,
         "artifact_hash_sealed_in_originating_report": false,
@@ -589,22 +659,22 @@
       "model_report": "https://github.com/natacsham/arcabouco-multimodal/tree/main/experimental/v2/evidence"
     },
     "public_smoke": {
-      "passed": true,
+      "passed": false,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": true,
-        "exact_manifest": true,
+        "exact_test": false,
+        "exact_manifest": false,
         "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": true,
+        "current_asset_bytes": false,
         "current_base_inputs": true,
         "current_native_engine": true
       },
-      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
       "checked_at": "2026-10-12T01:55:15.926Z",
       "expected_commit": "0bc0e192031f7fbcf5e9c0278f60d66002fcb360",
       "commit_observation": "Deployment commit supplied by the publisher; serving identity is verified independently by manifest and content hashes, not an HTTP commit identifier.",
@@ -634,7 +704,7 @@
   "reports": {
     "technical-report.json": {
       "url": "technical-report.json",
-      "sha256": "116177a6cd641e6c1bfa930bc1c18a0b9aae896e3b360cf0cd60c386db9651c2"
+      "sha256": "baf45c1cfccb4d4af96938b14a039bc08c6e0b5c3966b76ac159abf934235465"
     },
     "reasoner-report.json": {
       "url": "reasoner-report.json",
@@ -642,47 +712,45 @@
     },
     "regression-report.json": {
       "url": "regression-report.json",
-      "sha256": "3e6f2ff260cb0ae6a95f5291ae6e64956753e5a3026bea352e0e19e7252c7b2f"
+      "sha256": "fd2c16ca918d41935278401afcbc3a32858a17599631be1c5653751774850963"
     },
     "traceability-browser.json": {
       "url": "traceability-browser.json",
-      "sha256": "7958ac3024c583c74eb45544cbf6bd3e5ab05c589e84a0b3e84b043ff5dc1678",
+      "sha256": "612b6edbb4b599ad8d2f8f30872ccd72073502bfaa54a9bfc20f5b7f8a1fab08",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "parity-report.json": {
       "url": "parity-report.json",
-      "sha256": "4c6ef23544c0e7d1e24ceeacf7d042913036243c1a90ba326a4c00aa2e063344",
+      "sha256": "81e47c8a766a9a9224763f1c760a6dd83a0178dadfe37558bf565db555baa362",
       "evidence_use": "ARTIFACT_COMPARISON_WITH_QUALIFIED_BROWSER_PROVENANCE"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "5f00cf6da931e118b7a80781f8349387661d6d29369b672325d59fca74c2441d"
+      "sha256": "d56d2e77fb28c41bfb7bf4e8c2a341eda8b3222d558d2d37a042b263723a57c5"
     },
     "build-manifest.json": {
       "url": "build-manifest.json",
-      "sha256": "ed301fa125f4db9c30b2f30fb7202bf2bdffe7dc717b204e266084cd5f2b701f"
+      "sha256": "cf58d511d71afa33f41b66263e7b2c10c0e702381b6139f97005629ae944cde0"
     },
     "composition-browser.json": {
       "url": "composition-browser.json",
-      "sha256": "fce81a6651cdfdf27a304af44fb63a4ee5b97282be1acfc2ea65f633b74adabc",
+      "sha256": "75fb271a4c4fb695652f15a7a81c95afa138fa6f757f1bd0056505acd6b32fe8",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "simple-flow-browser.json": {
       "url": "simple-flow-browser.json",
-      "sha256": "257ec23f16f40123d9cc774fbc54032c2861610e5b2a853d03ea306a8b8fe4c1",
+      "sha256": "89ac50ca54d32967acb73d77691301bcc871fb61fc66b44b3353ba26f86063d5",
       "evidence_use": "CURRENT_PRESENTATION_EXECUTION"
+    },
+    "focused-dialogue-browser.json": {
+      "url": "focused-dialogue-browser.json",
+      "sha256": "1526aa05b666c577ad1663c8ca38a74f2f650dceba597b2d0ccc861a15cd2c91"
     },
     "source-catalog-browser.json": {
       "url": "source-catalog-browser.json",
-      "sha256": "a36a4037cd4454888ebd51ffab4649907cff2260bc629a428cd52751badb474a"
-    },
-    "public-smoke.json": {
-      "url": "public-smoke.json",
-      "sha256": "bb6c8cabd80d2804e6bc43280198af4584be69a8571e126fcbf60d30bf3d8197",
-      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
-      "expected_commit": "0bc0e192031f7fbcf5e9c0278f60d66002fcb360"
+      "sha256": "02fa16d0a6440c55c8b0e0ea51867650dcfeef2f904f9f4e529e7201fb7c6b99"
     }
   },
   "historical_evidence_notice": "Os relatórios identificam individualmente execução atual ou reúso de componentes idênticos. A apresentação simplificada possui seu próprio relatório. Evidências antigas não aprovam bytes diferentes.",
-  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE"
+  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD"
 }

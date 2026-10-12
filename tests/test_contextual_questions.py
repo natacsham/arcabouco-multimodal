@@ -31,7 +31,10 @@ class ContextualQuestionTests(unittest.TestCase):
         self.assertEqual(person["recurso_operado_ids"], [])
         self.assertNotIn("CAR-USA-LEITOR-TELA", person["caracteristica_ids"])
         self.assertFalse(any(row["field"] == "barreira_ou_necessidade" for row in current["questions"]))
-        self.assertLessEqual(len(current["questions"]), 3)
+        self.assertLessEqual(len([row for row in current["questions"] if row.get("decision_relevant", True)]), 3)
+        # The requester question is conversational metadata, not another
+        # condition to authorize or suspend the selected accessibility route.
+        self.assertEqual(len([row for row in current["questions"] if row["field"] == "requester_relation"]), 1)
 
     def test_low_vision_is_not_asserted_to_be_nonvisual_interaction(self):
         current = self.analyze("Uma pessoa com baixa visão precisa acessar conteúdo digital. Quero adaptar a página web.")
@@ -60,11 +63,20 @@ class ContextualQuestionTests(unittest.TestCase):
         self.assertEqual(current["context"]["access_requirements"], [])
 
     def test_negated_groups_do_not_create_people_or_requirements(self):
-        for statement in ("Não há alunos cegos nesta turma.", "Não existem pessoas surdas neste grupo."):
+        for statement, expected_roles, expected_needs in (
+            ("Não há alunos cegos nesta turma.", {"PAPEL-TURMA"}, {"NEC-APOIAR-COMPREENSAO-TURMA"}),
+            ("Não existem pessoas surdas neste grupo.", set(), set()),
+        ):
             self.engine.start_free_context()
             current = self.analyze(statement + " Quero adaptar uma página web para acessar conteúdo digital.")
             self.assertEqual(current["context"]["access_requirements"], [])
-            self.assertFalse(any(person.get("grupo_rotulo") for person in current["participations"]))
+            # Negation excludes the blind/deaf participants, not the classroom
+            # group explicitly mentioned outside the negated phrase.
+            self.assertEqual({person["papel_id"] for person in current["participations"]}, expected_roles)
+            self.assertFalse(any(person.get("reported_condition") for person in current["participations"]))
+            self.assertTrue(all(person.get("grupo_rotulo") == "turma" and person["quantidade"] is None
+                                for person in current["participations"]))
+            self.assertEqual(set(current["context"]["raw"]["necessidades"]), expected_needs)
 
     def test_negation_of_equipment_does_not_negate_the_person_in_another_clause(self):
         current = self.analyze("Não há computador, mas há uma pessoa cega que precisa acessar conteúdo digital em uma página web.")

@@ -347,6 +347,7 @@ try {
       window.amadoProbeWorker=new Worker('./worker.mjs',{type:'module'});
       window.amadoProbePending=new Map(); window.amadoProbeSequence=0;
       window.amadoProbeWorker.onmessage=({data})=>{
+        if (data.type==='progress') return;
         const item=window.amadoProbePending.get(data.id);
         if (!item) return;
         window.amadoProbePending.delete(data.id); clearTimeout(item.timer);

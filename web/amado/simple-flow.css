@@ -97,3 +97,20 @@ body.simple-view main {max-width:86rem;gap:1rem;margin:1.5rem auto}
 html[data-contrast="high"] .simple-view .simple-status,html[data-contrast="high"] .simple-view .simple-about,html[data-contrast="high"] .simple-view .input-tools p {color:inherit}
 @media(forced-colors:active) {.orientation-step,.review-field,.question-person,.generation-progress{border:1px solid CanvasText}.question-options label:has(input:checked){border:2px solid Highlight}.question-options label:focus-within,.question-unknown:focus-within{outline-color:Highlight}.microphone[aria-pressed="true"]{color:HighlightText;background:Highlight}}
 .simple-view .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.revision-group {margin:1.5rem 0;padding-top:.75rem;border-top:1px solid var(--border)}
+.revision-text {margin:.75rem 0}
+.revision-remove {display:flex;align-items:center;gap:.5rem;min-height:44px;cursor:pointer}
+.revision-text label,.revision-options > label {display:block;margin:.4rem 0;font-weight:600}
+.revision-text select,.revision-options > :is(input,select) {width:100%;min-height:44px}
+.revision-options {padding:.65rem 0;border:0!important;border-top:1px solid var(--border)!important;border-radius:0}
+.revision-options summary span {display:block;font-weight:400;color:#35565f;margin-top:.2rem}
+.revision-options .question-options {max-height:20rem;overflow-y:auto;padding:.2rem;border:0;min-width:0}
+.revision-options [hidden] {display:none!important}
+.source-disclosure > li {margin:.75rem 0}
+.source-disclosure p {margin:.35rem 0}
+.source-state {font-size:.9375rem}
+#generation-stages {margin:.5rem 0;padding-left:1.5rem}
+#generation-stages li {margin:.4rem 0}
+#generation-stages [data-state="completed"] {font-weight:600}
+html[data-contrast="high"] .revision-options summary span {color:inherit}
+@media(prefers-reduced-motion:no-preference){#case-understanding,#case-editor{animation:case-entry-appear .15s ease-out}@keyframes case-entry-appear{from{opacity:.5;transform:translateY(.15rem)}to{opacity:1;transform:none}}}

@@ -4,11 +4,12 @@
     "version": "1.4.0-rc3",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
+    "executor_version": "AMADO-web-1.4.0-rc3-intake1",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "b72c774b99038340e4bf773ff580858bb46be2e49a0c0b9bb360af1814adecd8",
-    "bridge_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
-    "base_zip_sha256": "f45d2e26e62ee172eec30fa7c98155cbe1e85fd11c21e52a59bec0971db892a1",
+    "core_sha256": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
+    "bridge_sha256": "227811d568fedbf3fed1ff4ef70ce2720c36c26ac0a01e30686044e28ca046f1",
+    "base_zip_sha256": "1af0ee6a7e999257d4e6c1fb82a1637530691df44d53c9bd87bb6bd29b6f5821",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -60,21 +61,21 @@
       }
     },
     "frontend_sha256": {
-      "index.html": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
+      "index.html": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
       "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
-      "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
-      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
+      "worker.mjs": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
+      "client.mjs": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
+      "guiado.html": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-      "simple-flow.js": "af74e4f509a07293217bb8afa8ef7af9300ebacde5d7036c12a49e31263ef419",
-      "simple-flow.css": "61bc7df7141eb575c59c7e6b7c5a8fcee570eaff3f5020404813c8d8a1e64de5",
+      "simple-flow.js": "aba2f073907bfa8093ea46087834450b08258b44d78e28b18abac850a61b023a",
+      "simple-flow.css": "36259d35a26afc8e4de7fdfe15dcfd77758ab5ac0426c18ada3069414c30c845",
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
-      "intake.mjs": "74a716616410b75f0f96b9ed1c16d777c0fcede03e0cf887940dfc3c4f3cb56b",
+      "intake.mjs": "f868f233be38d2d1555c1ef6cd7fdc95b5813291607ba5119c8c946da0ded2dc",
       "completo.html": "3c6fc3e388b6df3e3d3284342a10025437d813cfe10d3b51313d4f648649d7a2",
       "completo-guiado.html": "fcad9bab6756d0fdcb2e816e64c85fcfa4564be46ece4de80ae26826b6d15b55"
     },
@@ -95,7 +96,7 @@
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
       "data/knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "data/interface-vocabulary.json": "6dda22d0a9ce0feac42bb8dbf5761d78703b29650a33cead29fd7119830e996f",
       "ontology/mado-combined.ttl": "7b37cec86bfe8f6fa4004b6ffecf50ba60ecb1c6769eed997391c6986a1ed52d",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
@@ -114,7 +115,7 @@
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "executed_at": "2026-10-12T01:48:22.743Z",
+  "executed_at": "2026-10-12T03:13:37.921Z",
   "normalization": [
     "Somente horário de execução e sufixos aleatórios de contexto, participante e decisão são desconsiderados.",
     "Linhas SPARQL e topologia do grafo são comparadas como conjuntos ordenados canonicamente, preservando duplicatas.",
@@ -123,8 +124,8 @@
     "A ordem das configurações, passos práticos e demais listas é preservada.",
     "Identidades CHECK são recalculadas a partir do predicado normalizado; estado, condições e valores observados permanecem comparados."
   ],
-  "native_sha256": "0a3f5d61a3065d482169628ad4fd7a0c85126afb81eb59d82a272d0d140ab5ae",
-  "browser_sha256": "263e76be856bf63765c209f08de5b31bb0a5676211c5c6a17182b26008104d5f",
+  "native_sha256": "dc5ad7b65e81342bda63f7bcfaadd3db0a643250af6841f31248c527f7393205",
+  "browser_sha256": "a484df9741ac50d89e1ce65a2abb25a45cf37da4d38e5a10c8f012533af9366b",
   "cases": {
     "principal": {
       "equal": true,
@@ -148,8 +149,8 @@
         "CQ-007": 7,
         "CQ-008": 4
       },
-      "native_canonical_sha256": "e89e1c03a7951c3c1c072839b4015a9b7aa942ab04714396007232b4cc80a2dc",
-      "browser_canonical_sha256": "e89e1c03a7951c3c1c072839b4015a9b7aa942ab04714396007232b4cc80a2dc",
+      "native_canonical_sha256": "3bf86738c9fb77e267095be7e2956df06f6b00d53e153be2184f1f12be2eec7a",
+      "browser_canonical_sha256": "3bf86738c9fb77e267095be7e2956df06f6b00d53e153be2184f1f12be2eec7a",
       "differences": []
     },
     "principal_sem_jogo": {
@@ -173,8 +174,8 @@
         "CQ-007": 6,
         "CQ-008": 4
       },
-      "native_canonical_sha256": "a56ad6a202b29f1e2c6a2cf7f73c236757a8ad86e1d6225f34c6ed60e22e88c4",
-      "browser_canonical_sha256": "a56ad6a202b29f1e2c6a2cf7f73c236757a8ad86e1d6225f34c6ed60e22e88c4",
+      "native_canonical_sha256": "6787c1e8b0331f1e9a6d13d948a6eca07e5cae25c4ba7ca36527d3f255787f9f",
+      "browser_canonical_sha256": "6787c1e8b0331f1e9a6d13d948a6eca07e5cae25c4ba7ca36527d3f255787f9f",
       "differences": []
     },
     "leitor_tela": {
@@ -193,8 +194,8 @@
         "CQ-007": 1,
         "CQ-008": 1
       },
-      "native_canonical_sha256": "d22e1becf205ff211d8ae94b7b042e6a7a590fcb43c41a344faea3aef61fdd6f",
-      "browser_canonical_sha256": "d22e1becf205ff211d8ae94b7b042e6a7a590fcb43c41a344faea3aef61fdd6f",
+      "native_canonical_sha256": "21998acc061b51acf15128258a4b406d6fa05e9f9037584cc535503c54959429",
+      "browser_canonical_sha256": "21998acc061b51acf15128258a4b406d6fa05e9f9037584cc535503c54959429",
       "differences": []
     },
     "mobilidade_ruido": {
@@ -214,8 +215,8 @@
         "CQ-007": 2,
         "CQ-008": 2
       },
-      "native_canonical_sha256": "178323f7bd3c936c0e577df0b38e49844c4884b3031ad317ff25011c8994df3f",
-      "browser_canonical_sha256": "178323f7bd3c936c0e577df0b38e49844c4884b3031ad317ff25011c8994df3f",
+      "native_canonical_sha256": "ba138222dbe613a59aaf5bde466bab9e6b7ee89b56dff838bf3daa3f4bba2996",
+      "browser_canonical_sha256": "ba138222dbe613a59aaf5bde466bab9e6b7ee89b56dff838bf3daa3f4bba2996",
       "differences": []
     },
     "comunicacao": {
@@ -234,8 +235,8 @@
         "CQ-007": 1,
         "CQ-008": 2
       },
-      "native_canonical_sha256": "39a35fbe5e8076d02a1c7e97b09fb32f40e81f6a370650f3f4203567bed27fa7",
-      "browser_canonical_sha256": "39a35fbe5e8076d02a1c7e97b09fb32f40e81f6a370650f3f4203567bed27fa7",
+      "native_canonical_sha256": "7164abbdcdd154f573af9516b50a5938e1897d24c57457589ac4d32bdd100dbd",
+      "browser_canonical_sha256": "7164abbdcdd154f573af9516b50a5938e1897d24c57457589ac4d32bdd100dbd",
       "differences": []
     },
     "diagnostico_isolado": {
@@ -252,8 +253,8 @@
         "CQ-007": 0,
         "CQ-008": 5
       },
-      "native_canonical_sha256": "f8d11e9888d9a81efa017a5bc63348e724e644263993bfe0db248b17f8c7babb",
-      "browser_canonical_sha256": "f8d11e9888d9a81efa017a5bc63348e724e644263993bfe0db248b17f8c7babb",
+      "native_canonical_sha256": "fa5376657c89a27ca9606cc2a93efe224429c010cf44147860668be7995abc76",
+      "browser_canonical_sha256": "fa5376657c89a27ca9606cc2a93efe224429c010cf44147860668be7995abc76",
       "differences": []
     },
     "sem_confirmacao": {
@@ -270,54 +271,49 @@
         "CQ-007": 0,
         "CQ-008": 25
       },
-      "native_canonical_sha256": "33e829539d854b7376ac3ba96b989df8eef20bcb9ab8d823ccf63f53d5d7c4f0",
-      "browser_canonical_sha256": "33e829539d854b7376ac3ba96b989df8eef20bcb9ab8d823ccf63f53d5d7c4f0",
+      "native_canonical_sha256": "cfe3154a91445cfd81ec856d01bc81eed1ee99a467cb05ec4c7b60faacddfa18",
+      "browser_canonical_sha256": "cfe3154a91445cfd81ec856d01bc81eed1ee99a467cb05ec4c7b60faacddfa18",
       "differences": []
     },
     "combinacao_nao_cadastrada": {
       "equal": true,
       "status": "GERADA_PARCIAL",
       "configurations": [
-        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
-        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
         "PAD-CONTEUDO-WEB-EQUIVALENTE",
         "PAD-COMUNICACAO-MULTIFORMATO"
       ],
       "query_rows": {
-        "CQ-001": 62,
+        "CQ-001": 65,
         "CQ-002": 167,
-        "CQ-003": 37,
-        "CQ-004": 108,
-        "CQ-005": 4,
-        "CQ-006": 4,
-        "CQ-007": 4,
-        "CQ-008": 5
+        "CQ-003": 20,
+        "CQ-004": 54,
+        "CQ-005": 2,
+        "CQ-006": 2,
+        "CQ-007": 2,
+        "CQ-008": 8
       },
-      "native_canonical_sha256": "b487c6b19a4ad93a39a28a86489a2be257c35b5be4666ee7d051b6247781a8b8",
-      "browser_canonical_sha256": "b487c6b19a4ad93a39a28a86489a2be257c35b5be4666ee7d051b6247781a8b8",
+      "native_canonical_sha256": "9c5ee8a3bc30b4921c6cdf8cae31be7f6318d0584c1cb07c917e6e7b3f56129c",
+      "browser_canonical_sha256": "9c5ee8a3bc30b4921c6cdf8cae31be7f6318d0584c1cb07c917e6e7b3f56129c",
       "differences": []
     },
     "combinacao_sem_voz": {
       "equal": true,
       "status": "GERADA_PARCIAL",
       "configurations": [
-        "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
-        "PAD-REPRESENTACAO-VISUAL-EXPLICADA",
-        "PAD-REVISAO-CONFIRMACAO",
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
       "query_rows": {
-        "CQ-001": 65,
+        "CQ-001": 69,
         "CQ-002": 167,
-        "CQ-003": 35,
-        "CQ-004": 102,
-        "CQ-005": 4,
-        "CQ-006": 4,
-        "CQ-007": 4,
-        "CQ-008": 8
+        "CQ-003": 11,
+        "CQ-004": 30,
+        "CQ-005": 2,
+        "CQ-006": 1,
+        "CQ-007": 1,
+        "CQ-008": 12
       },
-      "native_canonical_sha256": "3c55e270a02369bca6faa90d535f219056bfcd4732abfb46c0a891278c218826",
-      "browser_canonical_sha256": "3c55e270a02369bca6faa90d535f219056bfcd4732abfb46c0a891278c218826",
+      "native_canonical_sha256": "f5ddf474ef9cf1cc7eb762a8a6683673fa6214f2c8415e674a975a701f0270ac",
+      "browser_canonical_sha256": "f5ddf474ef9cf1cc7eb762a8a6683673fa6214f2c8415e674a975a701f0270ac",
       "differences": []
     }
   },

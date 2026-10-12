@@ -2,7 +2,8 @@ import {request, restart} from './client.mjs';
 import {renderExplanation} from '../explanation.js';
 import {setupDictation} from './voice.js';
 import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, participantName, detectCompositionTask,
-  compositionDraft, compositionQuestions, compositionSummary, questionRound} from './intake.mjs';
+  compositionDraft, compositionQuestions, compositionSummary, questionRound,legacyEditor,legacyRevision,
+  compositionEditor,compositionRevision,usedSourceRecords} from './intake.mjs';
 
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -14,6 +15,7 @@ const list = values => {
 let catalog, compositionCatalog, current, mode = 'legacy', draft, result, busy = false, epoch = 0;
 let questions = [], answered = new Set(), handled = new Set(), exampleNarrative = null, exampleId = null, speechText = '', organizedNarrative = null;
 let roundAnswered = 0, clarificationRound = 1;
+let editorRows=[], editorReturn='case-review';
 const unknown = value => typeof value === 'string' && /^(?:ainda )?nao sei(?: ainda)?[.!]?$/.test(value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().trim());
 function resetQuestions() { answered.clear(); handled.clear(); roundAnswered = 0; clarificationRound = 1; }
 const voice = setupDictation({button:$('#dictate-case'),input:$('#case-narrative'),status:$('#dictation-status'),
@@ -26,7 +28,7 @@ function invalidate() {
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
 function screen(id, focus) {
-  for (const name of ['case-entry','case-questions','case-review','orientation-result']) $('#'+name).hidden = name !== id;
+  for (const name of ['case-entry','case-understanding','case-editor','case-questions','case-review','orientation-result']) $('#'+name).hidden = name !== id;
   if (focus) $('#'+focus).focus();
 }
 async function run(action, message='', generating=false) {
@@ -35,6 +37,8 @@ async function run(action, message='', generating=false) {
   $('#flow-error').textContent = ''; status(message);
   $('#generation-progress').hidden = !generating;
   if (generating) {
+    $('#generation-stages').replaceChildren();
+    $('#generation-status').textContent='Preparando as informações confirmadas.';
     $('#generate-orientation').textContent = 'Gerando orientação…';
     $('#generation-progress').scrollIntoView({block:'center',behavior:'instant'});
   }
@@ -55,6 +59,18 @@ async function run(action, message='', generating=false) {
       if (recoveryFocus) $('#'+recoveryFocus)?.focus();
     }
   }
+}
+function generationStage(event) {
+  if(!busy || $('#generation-progress').hidden)return;
+  const allowed={initialization:'Carregar a base no navegador',retrieval:'Recuperar conhecimentos da base MADO',
+    verification:'Conferir condições e fundamentos',composition:'Compor a orientação',presentation:'Apresentar o resultado'};
+  if(!allowed[event.stage])return;
+  const states={running:'Em andamento',completed:'Concluída',failed:'Interrompida',cancelled:'Cancelada'};
+  let item=$('#generation-stages').querySelector('[data-stage="'+event.stage+'"]');
+  if(!item){item=document.createElement('li');item.dataset.stage=event.stage;$('#generation-stages').append(item);}
+  item.dataset.state=event.state;
+  item.textContent=allowed[event.stage]+' — '+(states[event.state] || event.state);
+  $('#generation-status').textContent=event.message || item.textContent;
 }
 function questionMarkup(question) {
   const id = question.id, description = ' aria-describedby="question-person question-context question-help"',
@@ -101,6 +117,16 @@ function askOrReview() {
   status(''); screen('case-questions','questions-title');
 }
 function summaryRows() { return mode === 'legacy' ? legacySummary(current) : compositionSummary(draft,compositionCatalog); }
+function understanding() {
+  const rows=summaryRows(), preferred=['Pessoas','Sua participação','Atividade','Objetivo','Onde acontece','Aplicativo ou conteúdo'];
+  const selected=preferred.map(label=>rows.find(row=>row.label===label)).filter(Boolean);
+  $('#understanding-summary').innerHTML=selected.length?'<dl class="review-summary">'+selected.map(row=>'<div><dt>'+esc(row.label)+'</dt><dd>'+esc(row.value)+'</dd></div>').join('')+'</dl>':para($('#case-narrative').value.trim());
+  const pending=unanswered();
+  $('#understanding-next').textContent=pending.length?'Vamos esclarecer até três pontos sobre este contexto para direcionar o apoio. Você pode responder somente o que souber.':'Já há informações para conferir o caso e consultar as possibilidades da base.';
+  $('#continue-understanding').textContent=pending.length?'Responder às perguntas':'Conferir o caso';
+  status('');screen('case-understanding','understanding-title');
+}
+$('#continue-understanding').addEventListener('click',askOrReview);
 function fieldsHTML(rows) {
   return '<div class="review-fields">'+rows.map(row => '<div class="review-field"><strong>'+esc(row.label)+'</strong>'+para(row.value)+'</div>').join('')+'</div>';
 }
@@ -140,7 +166,7 @@ async function organize(expected) {
     throw Object.assign(new Error('Descreva o que a pessoa precisa fazer e o que dificulta a atividade.'),{field:'case-narrative'});
   }
   $('#case-narrative').removeAttribute('aria-invalid');
-  if (organizedNarrative === text && (mode === 'legacy' ? current : draft)) { askOrReview(); return; }
+  if (organizedNarrative === text && (mode === 'legacy' ? current : draft)) { understanding(); return; }
   resetQuestions();
   if (exampleNarrative === text && exampleId) {
     if (exampleId === 'composition-example') {
@@ -159,7 +185,7 @@ async function organize(expected) {
   }
   if (expected !== epoch) return;
   organizedNarrative = text;
-  askOrReview();
+  understanding();
 }
 $('#case-form').addEventListener('submit',event => { event.preventDefault(); run(organize,'Lendo o que você informou…'); });
 $('#questions-form').addEventListener('change',event => {
@@ -222,14 +248,66 @@ $('#load-example').addEventListener('click',() => run(async expected => {
   }
   $('#case-narrative').value = exampleNarrative;
   organizedNarrative = exampleNarrative;
-  if (expected === epoch) askOrReview();
+  if (expected === epoch) understanding();
 },'Carregando o exemplo…'));
-function edit() {
+function editNarrative() {
   voice.clear(); invalidate(); status(''); $('#flow-error').textContent = '';
   screen('case-entry'); $('#case-narrative').focus();
 }
+function editorField(row,index) {
+  const id='revision-'+index;
+  if(row.type==='remove')return '<label class="revision-remove"><input type="checkbox" data-revision="'+esc(row.key)+'"> '+esc(row.label)+' (ao salvar)</label>';
+  if(row.type==='text')return '<div class="revision-text"><label for="'+id+'">'+esc(row.label)+'</label><textarea id="'+id+'" data-revision="'+esc(row.key)+'" rows="2">'+esc(row.value)+'</textarea></div>';
+  if(row.type==='single')return '<div class="revision-text"><label for="'+id+'">'+esc(row.label)+'</label><select id="'+id+'" data-revision="'+esc(row.key)+'">'+row.options.map(option=>'<option value="'+esc(option.id)+'"'+(option.id===row.value?' selected':'')+'>'+esc(option.label)+'</option>').join('')+'</select></div>';
+  const chosen=row.options.filter(option=>row.value.includes(option.id));
+  return '<details class="revision-options"><summary>'+esc(row.label)+' <span>'+esc(chosen.length?chosen.map(option=>option.label).join('; '):'Ainda não informado')+'</span></summary>'+
+    '<label for="'+id+'-search">Filtrar opções</label><input type="search" id="'+id+'-search" data-revision-filter="'+esc(row.key)+'" placeholder="Digite parte da opção">'+
+    '<fieldset class="question-options" data-revision="'+esc(row.key)+'"><legend class="sr-only">'+esc(row.label)+'</legend>'+row.options.map(option=>'<label><input type="checkbox" value="'+esc(option.id)+'"'+(row.value.includes(option.id)?' checked':'')+'> '+esc(option.label)+'</label>').join('')+'</fieldset><p>Sem opções marcadas, esta informação fica em aberto.</p></details>';
+}
+function edit() {
+  if(!(mode==='legacy'?current:draft)){editNarrative();return;}
+  editorReturn=['case-understanding','case-questions','case-review','orientation-result'].find(id=>!$('#'+id).hidden) || 'case-review';
+  voice.clear();status('');$('#flow-error').textContent='';$('#editor-error').textContent='';
+  editorRows=mode==='legacy'?legacyEditor(current,catalog):compositionEditor(draft,compositionCatalog);
+  const groups=[...new Set(editorRows.map(row=>row.group))];
+  $('#editor-fields').innerHTML=groups.map(group=>'<section class="revision-group"><h3>'+esc(group)+'</h3>'+editorRows.map((row,index)=>row.group===group?editorField(row,index):'').join('')+'</section>').join('');
+  if(mode==='legacy')$('#editor-fields').innerHTML+='<details class="revision-options"><summary>Adicionar uma pessoa ou responsável que ainda não aparece</summary><label for="revision-new-role">Papel nesta atividade</label><select id="revision-new-role"><option value="">Não adicionar</option>'+(catalog.concepts.PAPEL_NO_CONTEXTO || []).map(row=>'<option value="'+esc(row.id)+'">'+esc(row.label)+'</option>').join('')+'</select><label for="revision-new-label">Como identificar esta pessoa ou grupo (opcional)</label><input id="revision-new-label" maxlength="200"></details>';
+  screen('case-editor','editor-title');
+}
 $('#edit-case').addEventListener('click',edit);
 document.querySelectorAll('[data-edit-case]').forEach(button => button.addEventListener('click',edit));
+document.querySelectorAll('[data-edit-narrative]').forEach(button=>button.addEventListener('click',editNarrative));
+$('#cancel-editor').addEventListener('click',()=>screen(editorReturn,editorReturn==='orientation-result'?'orientation-title':editorReturn==='case-questions'?'questions-title':editorReturn==='case-understanding'?'understanding-title':'review-title'));
+$('#editor-fields').addEventListener('input',event=>{
+  const key=event.target.dataset.revisionFilter;if(!key)return;
+  const field=[...$('#editor-fields').querySelectorAll('[data-revision]')].find(item=>item.dataset.revision===key);
+  const value=event.target.value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase();
+  for(const label of field.querySelectorAll('label'))label.hidden=!label.innerText.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().includes(value);
+});
+$('#editor-form').addEventListener('submit',event=>{
+  event.preventDefault();run(async expected=>{
+    const values={};
+    for(const row of editorRows){const field=[...$('#editor-fields').querySelectorAll('[data-revision]')].find(item=>item.dataset.revision===row.key);values[row.key]=row.type==='multi'?[...field.querySelectorAll('input:checked')].map(input=>input.value):row.type==='remove'?field.checked:field.value;}
+    if(mode==='legacy'){
+      const payload=legacyRevision(current,catalog,values),role=$('#revision-new-role')?.value;
+      if(role)payload.participations.push({papel_id:role,label:$('#revision-new-label').value.trim(),caracteristica_ids:[],tarefa_ids:[],modalidade_ids:[],recurso_operado_ids:[]});
+      current=await request('update',{payload});
+    }else draft=compositionRevision(draft,compositionCatalog,values);
+    if(expected===epoch){invalidate();review();status('Informações atualizadas. Confirme novamente antes de gerar a orientação.');}
+  },'Atualizando as informações revisadas…');
+});
+
+function sourceDisclosure(response) {
+  const rows=usedSourceRecords(response), states={SECAO_ORIGINAL_CONFERIDA:'Seção do documento original conferida',PRIMARY_CHECKED:'Contribuição conferida na fonte primária',
+    CONFERIDA_NO_REGISTRO:'Conferida no registro preservado',CONFERIDA_NO_DOCUMENTO:'Conferida no documento',PENDENTE:'Conferência documental pendente',
+    ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA:'Item preservado na planilha; documento original não conferido nesta revisão'};
+  const safeLink=(url,title)=>{try{const link=new URL(url);if(['http:','https:'].includes(link.protocol))return '<a href="'+esc(link.href)+'">'+esc(title)+'</a>';}catch{}return esc(title);};
+  const unique=new Map();for(const row of rows){const key=[row.sourceId,row.location,row.statement,row.applicationState].join('|');if(!unique.has(key))unique.set(key,row);}
+  $('#orientation-sources-body').innerHTML=unique.size?'<ul class="source-disclosure">'+[...unique.values()].map(row=>'<li><strong>'+safeLink(row.url,row.title || 'Fonte registrada')+'</strong>'+(row.location?' — '+esc(row.location):'')+para(row.statement)+
+    (row.applicationState==='conditional'?'<p>Fundamenta uma possibilidade que ainda depende de confirmação.</p>':row.applicationState==='partial'?'<p>Fundamenta somente uma parte do apoio apresentado.</p>':'')+
+    '<p class="source-state">'+esc(states[row.status] || 'Origem registrada; confira o estado documental nos detalhes técnicos.')+'</p></li>').join('')+'</ul>':para('Não há origens de aplicação detalhadas neste resultado. A presença de uma fonte no catálogo não significa que ela foi usada neste caso.');
+  $('#orientation-sources').open=false;
+}
 function legacyOutput(response) {
   const decision = response.decision, summary = decision.sintese_pratica || {};
   const configurations = decision.configuracao_modal || [];
@@ -253,8 +331,9 @@ function legacyOutput(response) {
       '<p><strong>Critério aplicado:</strong> '+esc(support.criterion_statement || text(support.criterion || criteria.get(support.criterion_id)) || 'Descrição não incluída neste retorno.')+'</p>'+
       '<p><strong>Conhecimento empregado:</strong></p>'+list((support.knowledge_ids || []).map(id => text(knowledge.get(id))).filter(Boolean))+
       ((support.origins || []).length ? '<details><summary>Conferir as origens deste critério</summary>'+support.origins.map(origin =>
-        para(origin.resumo_publico || origin.enunciado_publico || origin.texto || origin.item_texto || origin.aviso_publicacao)+
+        para(origin.document_paraphrase || origin.resumo_publico || origin.enunciado_publico || origin.texto || origin.item_texto || origin.aviso_publicacao)+
         '<p><strong>Localização:</strong> '+esc(origin.localizacao_publica || origin.localizacao || origin.pagina || origin.secao || 'Não detalhada neste retorno.')+'</p>'+
+        ((/^https?:\/\//.test(origin.document_url || ''))?'<p><a href="'+esc(origin.document_url)+'">Consultar esta fonte e seção</a></p>':'')+
         '<p><strong>Registros:</strong> '+esc([origin.id,origin.fonte_id,origin.trecho_id].filter(Boolean).join(' · '))+'</p>').join('')+'</details>' : '')).join('')+'</details>';
   };
   const card = step => {
@@ -406,12 +485,13 @@ $('#generate-orientation').addEventListener('click',() => {
   run(async expected => {
     if (mode === 'legacy') {
       current = await request('update',{payload:{mapping_confirmed:true,transfer_confirmed:false}});
-      result = await request('generate');
+      result = await request('generate',{}, {onProgress:generationStage});
     } else {
-      const {evidence,...context} = draft; result = await request('compose',{payload:{...context,confirmed:true}});
+      const {evidence,...context} = draft; result = await request('compose',{payload:{...context,confirmed:true}},{onProgress:generationStage});
     }
     if (expected !== epoch) return;
     if (mode === 'legacy') legacyOutput(result); else compositionOutput(result);
+    sourceDisclosure(result);
     $('#complete-information').hidden = !unanswered().length;
     $('#complete-information').textContent = 'Refinar esta orientação (opcional)';
     $('#orientation-foundation-body').replaceChildren();
@@ -420,6 +500,7 @@ $('#generate-orientation').addEventListener('click',() => {
     $('#reading-message').textContent = ''; status(''); screen('orientation-result','orientation-title');
     // Read the visible layout: hidden containers do not retain paragraph breaks in innerText.
     speechText = $('#orientation-main').innerText;
+    generationStage({stage:'presentation',state:'completed',message:'Orientação apresentada com as fontes e condições registradas nesta execução.'});
   },'Relacionando seu caso aos conhecimentos da base…',true);
 });
 $('#complete-information').addEventListener('click',() => {

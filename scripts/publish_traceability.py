@@ -255,6 +255,7 @@ def main():
     composition_trajectory = read("experimental/v2/evidence/trajectory-report.json")
     composition_reasoner = read("experimental/v2/evidence/trajectory-reasoner-report.json")
     simple = read("evidence/simple-flow-browser.json")
+    focused = read("evidence/focused-dialogue-browser.json")
     source_catalog = read("evidence/source-catalog-browser.json")
     reused = {"traceability-browser.json": preserved_components(browser, manifest),
               "parity-report.json": parity_components(parity, browser, manifest),
@@ -286,6 +287,9 @@ def main():
         "composition_model": composition_model.get("passed") is True and composition_trajectory.get("passed") is True,
         "composition_reasoner": composition_reasoner.get("passed") is True and composition_reasoner.get("input_sha256") == sha("experimental/v2/evidence/trajectory-combined.ttl"),
         "simple_flow_current_presentation": current_presentation(simple, manifest),
+        "focused_dialogue_current_execution": focused.get("passed") is True and not focused.get("errors")
+            and bool(focused.get("checks")) and focused.get("build") == manifest
+            and focused.get("test_sha256") == sha("tests/focused-dialogue-browser.mjs"),
         "source_catalog_browser": source_catalog.get("passed") is True and not source_catalog.get("errors")
             and bool(source_catalog.get("checks")) and all(source_catalog["checks"].values()),
         "source_catalog_current_build": source_catalog.get("build") == manifest,
@@ -296,11 +300,12 @@ def main():
     }
     if not all(checks.values()):
         raise SystemExit(json.dumps(checks))
-    reports = ["technical-report.json", "reasoner-report.json", "regression-report.json", "traceability-browser.json", "parity-report.json", "distribution-audit.json", "build-manifest.json", "composition-browser.json", "simple-flow-browser.json", "source-catalog-browser.json"]
+    reports = ["technical-report.json", "reasoner-report.json", "regression-report.json", "traceability-browser.json", "parity-report.json", "distribution-audit.json", "build-manifest.json", "composition-browser.json", "simple-flow-browser.json", "focused-dialogue-browser.json", "source-catalog-browser.json"]
     target = ROOT / "web/evidence"
     target.mkdir(exist_ok=True)
     summary = {
         "version": manifest["version"], "instrument": "AMADO", "origin_commit": manifest["origin_commit"],
+        "executor_version": manifest["executor_version"],
         "compiled_at_utc": datetime.now(timezone.utc).isoformat(),
         "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE", "checks": checks,
         "results": {"unit_tests": technical["checks"]["unittest"]["tests_run"], "ontology_triples": technical["graph_counts"]["triples"],
@@ -309,6 +314,7 @@ def main():
                     "runtime_query_rows": technical["checks"]["runtime_main_decision_shacl_and_queries"]["query_rows"],
                     "browser_checks": simple["checks"],
                     "current_presentation": {"report": "simple-flow-browser.json", "checks": simple["checks"]},
+                    "context_revision": {"report": "focused-dialogue-browser.json", "checks": focused["checks"]},
                     "source_catalog": {"report": "source-catalog-browser.json", "checks": source_catalog["checks"],
                                        "scope": "Catálogo e percurso documental conferidos no navegador; não leitura integral das referências."},
                     "reused_component_evidence": reused,

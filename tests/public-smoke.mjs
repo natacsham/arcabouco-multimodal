@@ -1,6 +1,12 @@
 // Small real public-site verification. Synthetic input; not a participant session.
 // Does not mutate product, use hidden decision APIs, or repeat the local QA suite.
 import assert from 'node:assert/strict';
+async function advanceUnderstanding(page){
+  await page.locator('#case-understanding').waitFor({state:'visible',timeout:180000});
+  assert(await page.locator('#case-questions').isHidden(),'Understanding precedes questions');
+  assert(await page.locator('#understanding-summary').innerText(),'Preview contains registered information');
+  await page.locator('#continue-understanding').click();
+}
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -83,12 +89,13 @@ try {
   await docs.close();
 
   await context.addInitScript(() => {
-    window.__publicSmoke = {operations: [], state: null, generated: null};
+    window.__publicSmoke = {operations: [], state: null, generated: null, progress: []};
     const NativeWorker = window.Worker;
     window.Worker = class extends NativeWorker {
       constructor(...args) {
         super(...args); this.operations = new Map();
         this.addEventListener('message', event => {
+          if(event.data.type==='progress'){window.__publicSmoke.progress.push(event.data);return;}
           if (event.data.type !== 'result') return;
           const operation = this.operations.get(event.data.id), data = event.data.data;
           if (data?.current?.context) window.__publicSmoke.state = data.current;
@@ -111,7 +118,7 @@ try {
     check(view + '_real_worker_ready', await page.locator('#analyze-case').isEnabled());
     check(view + '_direct_challenge_heading', (await page.locator('h1').innerText()).trim() === 'Qual é o seu desafio de hoje?');
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de ' + topic + ' à minha turma, com dois estudantes surdos e um estudante cego.');
-    await page.locator('#analyze-case').click();
+    await page.locator('#analyze-case').click();await advanceUnderstanding(page);
     await page.waitForFunction(() => !document.querySelector('#case-questions').hidden ||
       !document.querySelector('#case-review').hidden, {}, {timeout: 180000});
     const initial = await page.evaluate(() => window.__publicSmoke.state);
@@ -255,6 +262,33 @@ try {
     const usedKnowledge = [...new Set(supportRows.flatMap(item => item.knowledge_ids))];
     check(view + '_foundation_records_render_the_actual_selected_support',
       usedKnowledge.length > 0 && usedKnowledge.every(id => flow.foundation_record_ids.includes(id)));
+    const progress=await page.evaluate(()=>window.__publicSmoke.progress.filter(item=>item.operation==='generate'));
+    check(view+'_real_request_progress',progress.some(item=>item.stage==='retrieval'&&item.state==='completed'&&Number.isInteger(item.id))&&
+      progress.some(item=>item.stage==='verification'&&item.state==='completed')&&progress.some(item=>item.stage==='composition'&&item.state==='completed'));
+    await page.locator('#orientation-sources > summary').click();
+    check(view+'_linked_sources_actually_used',await page.locator('#orientation-sources-body a[href^="https://www.w3.org/"]').count()>0&&
+      /Não buscou estes documentos na internet/.test(await page.locator('#orientation-sources').innerText()));
+    const analysisCount=await page.evaluate(()=>window.__publicSmoke.operations.filter(item=>item==='analyze').length);
+    await page.locator('#orientation-result [data-edit-case]').click();
+    await page.locator('[data-revision="requester_relation"]').selectOption('seek_guidance');
+    await page.locator('[data-revision="objetivo"]').fill('Orientar a pessoa responsável a oferecer acesso ao conteúdo.');
+    await page.locator('#save-case').click();await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
+    check(view+'_correction_preserves_context_without_reparse',await page.evaluate(()=>window.__publicSmoke.operations.filter(item=>item==='analyze').length)===analysisCount&&
+      await page.evaluate(()=>window.__publicSmoke.state.context.requester_relation)==='seek_guidance'&&await page.locator('#generate-orientation').isDisabled());
+    await page.locator('#new-case').click();await ready(page);
+    await page.locator('#case-narrative').fill('Quero ensinar pessoas muito diferentes a usar o Google Forms.');
+    await page.locator('#analyze-case').click();
+    await page.locator('#case-understanding').waitFor({state:'visible',timeout:180000});
+    check(view+'_forms_recognized_without_teacher_assumption',/formulário/i.test(await page.locator('#understanding-summary').innerText())&&
+      !/professor/i.test(await page.locator('#understanding-summary').innerText()));
+    await page.locator('#continue-understanding').click();
+    if(await page.locator('#case-questions').isVisible())await page.locator('#skip-questions').click();
+    await page.locator('#case-review').waitFor({state:'visible'});await page.locator('#edit-case').click();
+    await page.locator('[data-revision="objetivo"]').fill('Preencher e conferir as respostas do formulário.');
+    await page.locator('[data-revision="requester_relation"]').selectOption('support');
+    await page.locator('#save-case').click();await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
+    check(view+'_forms_missing_information_is_editable',await page.evaluate(()=>window.__publicSmoke.state.context.objetivo)==='Preencher e conferir as respostas do formulário.'&&
+      await page.evaluate(()=>window.__publicSmoke.state.context.requester_relation)==='support');
     await page.reload(); await ready(page);
     check(view + '_reload_discards_case', await page.locator('#case-narrative').inputValue() === '' && await page.locator('#orientation-result').isHidden());
     check(view + '_no_case_storage', await page.evaluate(async () => localStorage.length === 0 && sessionStorage.length === 0 &&

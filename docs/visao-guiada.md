@@ -1,6 +1,6 @@
 # Percurso de perguntas e leitura do AMADO
 
-## Entrada atual — 1.4.0-rc3
+## Entrada atual — AMADO-web-1.4.0-rc3-intake1
 
 A rodada inicial limita-se a três esclarecimentos relevantes. O entendimento separa o que foi relatado dos requisitos recuperados na base, sem afirmar capacidades individuais. Em **O que você pode fazer**, cada configuração possui seus próprios passos e condições, sem transformar todas as sugestões numa sequência obrigatória. Refinamentos adicionais e fundamentos continuam opcionais.
 
@@ -10,12 +10,25 @@ A apresentação completa anterior permanece em `completo.html` e
 `completo-guiado.html`; todos consultam os mesmos motores e a mesma base.
 
 1. **Descrever o desafio:** texto ou ditado; exemplos opcionais.
-2. **Completar uma informação por vez:** atividade e participante aparecem junto
+2. **Conferir o entendimento:** síntese apenas do que foi reconhecido, antes das perguntas; é possível corrigir a interpretação.
+3. **Completar uma informação por vez:** atividade e participante aparecem junto
    da pergunta. O indicador informa a posição e o total previsto, ajustado conforme
    as respostas. A pessoa pode responder que não sabe ou seguir sem as demais informações.
-3. **Confirmar:** rever o caso e autorizar a geração da orientação.
-4. **Ler o resultado:** ação, combinação modal e condição de uso em cartões;
+4. **Revisar informações e confirmar:** abrir os campos preenchidos e as lacunas, completar, substituir ou retirar opções; confirmar novamente após mudanças.
+5. **Ler o resultado:** ação, combinação modal e condição de uso em cartões;
    cuidados, alternativas, acompanhamento e fundamentos sob demanda.
+
+### Entendimento, correção e progresso
+
+A relação de quem solicita com o desafio não é automaticamente uma profissão. Uma mediadora pode apoiar alguém ou orientar outro responsável. Ambiente informado, material ou aplicativo e equipamentos disponíveis são tratados separadamente; dar aula não confirma sala física. Google Forms identifica um formulário, mas ensinar seu uso requer esclarecer a ação quando o relato não a informa.
+
+O editor não reaplica somente as opções já selecionadas: permite completar campos vazios e limpar escolhas. Respostas não alteradas ficam preservadas; resultado e confirmação anteriores são invalidados. O relato original tem edição própria, distinta da revisão dos campos organizados.
+
+As mensagens de andamento vêm das operações do motor e usam o identificador da solicitação. A primeira inicialização confere os arquivos publicados; a geração consulta a base preparada, verifica condições e compõe a orientação. Não lê normas na internet. Na composição por funções, operações intercaladas são apresentadas juntas, sem etapas fictícias. A interface só informa apresentação concluída depois de exibir o resultado. Atualizações de status não movimentam o foco a cada etapa.
+
+Fontes empregadas são as vinculadas aos apoios selecionados, não todo o catálogo. Quando disponíveis, são apresentados nome, seção, link e paráfrase, com estado documental. Consultar uma fonte cadastrada, autorizar conhecimento e ter conferido o documento original não são equivalentes.
+
+Os testes desta revisão incluem recuperação de resposta desconhecida, remoção de recurso, participações distintas e percurso de ensinar uso de formulário. Resultados e limites dependem dos relatórios efetivamente produzidos. Não foi criada nova capacidade para a tarefa de ensino nem conduzida avaliação humana da interface.
 
 ### Correção da repetição — 11/10/2026
 

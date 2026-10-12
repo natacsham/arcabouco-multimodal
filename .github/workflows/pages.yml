@@ -26,6 +26,8 @@ jobs:
       - run: python -B experimental/v2/verify.py
       - run: python scripts/check_bundle.py
       - run: node tests/intake.mjs
+      - run: node tests/review-input.mjs
+      - run: node tests/progress.mjs
       - run: node tests/result-presentation.mjs
       - run: node tests/source-path.mjs
       - run: python -B tests/publish-gates.py

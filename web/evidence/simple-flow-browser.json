@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SIMPLE_FLOW_BROWSER_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-12T01:41:55.573Z",
+  "checked_at": "2026-10-12T03:07:22.826Z",
   "target": "LOCAL_SUBPATH",
   "checks": {
     "served_manifest_matches_build": true,
@@ -23,7 +23,7 @@
     "index.html_real_traceability": true,
     "index.html_foundations_keyboard_access": true,
     "index.html_details_do_not_regenerate": true,
-    "index.html_editing_discards_orientation": true,
+    "index.html_editing_opens_populated_context": true,
     "index.html_clear_case": true,
     "index.html_composition_asks_missing_conditions": true,
     "index.html_composition_first_round_limited_to_three": true,
@@ -64,6 +64,7 @@
     "index.html_only_missing_questions": true,
     "index.html_answer_preserves_other_information": true,
     "index.html_unknown_not_silently_completed": true,
+    "index.html_existing_objective_visible_in_editor": true,
     "index.html_unchanged_narrative_preserves_answers": true,
     "index.html_inputs_blocked_while_processing": true,
     "index.html_generation_progress_visible": true,
@@ -91,7 +92,7 @@
     "guiado.html_real_traceability": true,
     "guiado.html_foundations_keyboard_access": true,
     "guiado.html_details_do_not_regenerate": true,
-    "guiado.html_editing_discards_orientation": true,
+    "guiado.html_editing_opens_populated_context": true,
     "guiado.html_clear_case": true,
     "guiado.html_composition_asks_missing_conditions": true,
     "guiado.html_composition_first_round_limited_to_three": true,
@@ -132,6 +133,7 @@
     "guiado.html_only_missing_questions": true,
     "guiado.html_answer_preserves_other_information": true,
     "guiado.html_unknown_not_silently_completed": true,
+    "guiado.html_existing_objective_visible_in_editor": true,
     "guiado.html_unchanged_narrative_preserves_answers": true,
     "guiado.html_inputs_blocked_while_processing": true,
     "guiado.html_generation_progress_visible": true,
@@ -156,11 +158,12 @@
     "version": "1.4.0-rc3",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
+    "executor_version": "AMADO-web-1.4.0-rc3-intake1",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "b72c774b99038340e4bf773ff580858bb46be2e49a0c0b9bb360af1814adecd8",
-    "bridge_sha256": "0deefc745717b5a05c57bc827b89a6cc4a8bc489abe1303609e8ff4d2ded72dc",
-    "base_zip_sha256": "f45d2e26e62ee172eec30fa7c98155cbe1e85fd11c21e52a59bec0971db892a1",
+    "core_sha256": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
+    "bridge_sha256": "227811d568fedbf3fed1ff4ef70ce2720c36c26ac0a01e30686044e28ca046f1",
+    "base_zip_sha256": "1af0ee6a7e999257d4e6c1fb82a1637530691df44d53c9bd87bb6bd29b6f5821",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -212,21 +215,21 @@
       }
     },
     "frontend_sha256": {
-      "index.html": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
+      "index.html": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "app.js": "4977ce67cff0aad4af9accc5a300f90a00e817eeb415be72615680437b2c0982",
       "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
-      "worker.mjs": "6fe6dd75868001e4fd0543fd466d040d2b689e45e10810f659517c3d64a681d2",
-      "client.mjs": "d55152f7954a5eaf5dda969e820e18bc394510b59beb19ffd0e44f24664ab3fc",
-      "guiado.html": "7bb811ab9cde9411f005e00e543b1a086bdf888fb669f11fa5da14f6053ff559",
+      "worker.mjs": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
+      "client.mjs": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
+      "guiado.html": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-      "simple-flow.js": "af74e4f509a07293217bb8afa8ef7af9300ebacde5d7036c12a49e31263ef419",
-      "simple-flow.css": "61bc7df7141eb575c59c7e6b7c5a8fcee570eaff3f5020404813c8d8a1e64de5",
+      "simple-flow.js": "aba2f073907bfa8093ea46087834450b08258b44d78e28b18abac850a61b023a",
+      "simple-flow.css": "36259d35a26afc8e4de7fdfe15dcfd77758ab5ac0426c18ada3069414c30c845",
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
-      "intake.mjs": "74a716616410b75f0f96b9ed1c16d777c0fcede03e0cf887940dfc3c4f3cb56b",
+      "intake.mjs": "f868f233be38d2d1555c1ef6cd7fdc95b5813291607ba5119c8c946da0ded2dc",
       "completo.html": "3c6fc3e388b6df3e3d3284342a10025437d813cfe10d3b51313d4f648649d7a2",
       "completo-guiado.html": "fcad9bab6756d0fdcb2e816e64c85fcfa4564be46ece4de80ae26826b6d15b55"
     },
@@ -247,7 +250,7 @@
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
       "data/knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-      "data/interface-vocabulary.json": "f3bfcf23d7489cac90660570f6c2dff8859004d21ede1c3717e45494eea617ba",
+      "data/interface-vocabulary.json": "6dda22d0a9ce0feac42bb8dbf5761d78703b29650a33cead29fd7119830e996f",
       "ontology/mado-combined.ttl": "7b37cec86bfe8f6fa4004b6ffecf50ba60ecb1c6769eed997391c6986a1ed52d",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
@@ -266,7 +269,7 @@
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "test_sha256": "f340b0007a9ffa3362782ee796c2730629230ac403b3f267ce34ddf1222fc3b0",
+  "test_sha256": "7775a6c74f14a728003de9f290d65110040d11346fdea6860b8a1b4637467e0c",
   "native_decision": {
     "status": "GERADA",
     "components": [
@@ -617,17 +620,17 @@
     "index.html": {
       "answers": [
         {
+          "id": "requester_relation",
+          "participant": "",
+          "answer": "unknown"
+        },
+        {
           "id": "tarefas",
           "participant": "",
           "answer": "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
         },
         {
           "id": "recursos_digitais",
-          "participant": "",
-          "answer": "unknown"
-        },
-        {
-          "id": "recursos_disponiveis",
           "participant": "",
           "answer": "unknown"
         }
@@ -677,17 +680,17 @@
     "guiado.html": {
       "answers": [
         {
+          "id": "requester_relation",
+          "participant": "",
+          "answer": "unknown"
+        },
+        {
           "id": "tarefas",
           "participant": "",
           "answer": "TAR-ORGANIZAR-CONTEUDO-DIGITAL"
         },
         {
           "id": "recursos_digitais",
-          "participant": "",
-          "answer": "unknown"
-        },
-        {
-          "id": "recursos_disponiveis",
           "participant": "",
           "answer": "unknown"
         }
@@ -739,6 +742,13 @@
     "index.html": {
       "answers": [
         {
+          "question": "requester_relation",
+          "participant_label": "",
+          "values": [
+            "prepare"
+          ]
+        },
+        {
           "question": "tarefas",
           "participant_label": "",
           "values": [
@@ -751,18 +761,10 @@
           "values": [
             "RED-APRESENTACAO-DIGITAL"
           ]
-        },
-        {
-          "question": "recursos_disponiveis",
-          "participant_label": "",
-          "values": [
-            "REC-LEITOR-DE-TELA",
-            "REC-EDITOR-MULTIMIDIA"
-          ]
         }
       ],
       "context": {
-        "id": "CTX-CASO-03C2ADD21D",
+        "id": "CTX-CASO-404A243C3E",
         "natureza": "CASO_INFORMADO_PELA_PESSOA",
         "status": "AGUARDANDO_CARACTERIZACAO",
         "texto_curto": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
@@ -770,6 +772,10 @@
         "titulo_curto": "Caso informado agora",
         "premissas_do_exemplo": [],
         "operacao_do_recurso": "",
+        "requester_relation": "prepare",
+        "requester_relation_label": "Preparo ou adapto o material ou recurso",
+        "requester_relation_status": "INFORMADO_NA_SESSAO",
+        "requester_participation_id": "",
         "impedimentos_verificados": false,
         "tarefas": [
           "Acessar e compreender conteúdo digital"
@@ -778,7 +784,7 @@
         "caracteristicas_estruturadas": [],
         "participantes": [
           {
-            "id": "PART-CASO-02-FE8A06",
+            "id": "PART-CASO-02-3865DB",
             "papel_id": "PAPEL-PROFESSORA",
             "label": "Professora",
             "grupo_rotulo": "",
@@ -795,11 +801,11 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-119A2F",
+            "id": "PART-CASO-03-D4E6EF",
             "papel_id": "PAPEL-TURMA",
-            "label": "Turma",
-            "grupo_rotulo": "",
-            "quantidade": 1,
+            "label": "Turma ou colegas (quantidade não informada)",
+            "grupo_rotulo": "turma",
+            "quantidade": null,
             "observacoes": "",
             "apoios_informados": "",
             "papel": "Turma",
@@ -812,7 +818,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-C81076",
+            "id": "PART-CASO-03-50DCB9",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "2 estudante(s): surdos informado no relato",
             "grupo_rotulo": "surdos",
@@ -831,7 +837,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-04-A2BB92",
+            "id": "PART-CASO-04-E2E241",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "1 estudante(s): cego informado no relato",
             "grupo_rotulo": "cego",
@@ -862,24 +868,10 @@
         ],
         "ambientes": [],
         "modalidades_disponiveis": [],
-        "recursos_disponiveis": [
-          "Leitor de tela",
-          "Editor de apresentação, página ou painel multimídia"
-        ],
+        "recursos_disponiveis": [],
         "recursos_impedidos": [],
         "recursos_propostos": [],
-        "estado_dos_recursos": [
-          {
-            "id": "REC-LEITOR-DE-TELA",
-            "label": "Leitor de tela",
-            "estado": "DISPONIVEL_CONFIRMADO"
-          },
-          {
-            "id": "REC-EDITOR-MULTIMIDIA",
-            "label": "Editor de apresentação, página ou painel multimídia",
-            "estado": "DISPONIVEL_CONFIRMADO"
-          }
-        ],
+        "estado_dos_recursos": [],
         "funcoes_requeridas": [
           "Preservar significado por alternativas perceptivas e operacionais",
           "Preservar o significado entre formas de representação"
@@ -909,7 +901,7 @@
                   ]
                 ],
                 "participant_ids": [
-                  "PART-CASO-04-A2BB92"
+                  "PART-CASO-04-E2E241"
                 ]
               }
             ],
@@ -950,8 +942,8 @@
                   ]
                 ],
                 "participant_ids": [
-                  "PART-CASO-04-A2BB92",
-                  "PART-CASO-03-C81076"
+                  "PART-CASO-04-E2E241",
+                  "PART-CASO-03-50DCB9"
                 ]
               }
             ],
@@ -992,8 +984,8 @@
                   ]
                 ],
                 "participant_ids": [
-                  "PART-CASO-04-A2BB92",
-                  "PART-CASO-03-C81076"
+                  "PART-CASO-04-E2E241",
+                  "PART-CASO-03-50DCB9"
                 ]
               }
             ],
@@ -1006,7 +998,7 @@
         "access_requirements": [
           {
             "matrix_id": "MF-01",
-            "participant_id": "PART-CASO-04-A2BB92",
+            "participant_id": "PART-CASO-04-E2E241",
             "participant_label": "1 estudante(s): cego informado no relato",
             "trigger": [
               "cego"
@@ -1047,7 +1039,7 @@
           },
           {
             "matrix_id": "MF-11",
-            "participant_id": "PART-CASO-03-C81076",
+            "participant_id": "PART-CASO-03-50DCB9",
             "participant_label": "2 estudante(s): surdos informado no relato",
             "trigger": [
               "surdos"
@@ -1085,9 +1077,9 @@
         ],
         "restricoes": [],
         "informacoes_ausentes": [
+          "Quais equipamentos ou apoios estão disponíveis para usar apresentação digital?",
           "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
-          "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
-          "Quais destes recursos essa pessoa consegue utilizar nesta atividade?"
+          "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?"
         ],
         "baseado_em": [],
         "raw": {
@@ -1107,10 +1099,7 @@
           ],
           "ambientes": [],
           "modalidades_disponiveis": [],
-          "recursos_disponiveis": [
-            "REC-LEITOR-DE-TELA",
-            "REC-EDITOR-MULTIMIDIA"
-          ],
+          "recursos_disponiveis": [],
           "recursos_impedidos": [],
           "recursos_propostos": [],
           "funcoes_requeridas_ids": [
@@ -1121,8 +1110,8 @@
       },
       "participant_conditions": [
         {
-          "id": "PART-CASO-03-C81076",
-          "contexto_id": "CTX-CASO-03C2ADD21D",
+          "id": "PART-CASO-03-50DCB9",
+          "contexto_id": "CTX-CASO-404A243C3E",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -1144,8 +1133,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-A2BB92",
-          "contexto_id": "CTX-CASO-03C2ADD21D",
+          "id": "PART-CASO-04-E2E241",
+          "contexto_id": "CTX-CASO-404A243C3E",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -1179,9 +1168,9 @@
         "ART-REF-03"
       ],
       "limitations": [
+        "Quais equipamentos ou apoios estão disponíveis para usar apresentação digital?",
         "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
         "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
-        "Quais destes recursos essa pessoa consegue utilizar nesta atividade?",
         "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
         "A necessidade 'Garantir que informações essenciais não dependam de uma única modalidade' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
         "Função requerida ainda sem cobertura: Preservar significado por alternativas perceptivas e operacionais"
@@ -1191,6 +1180,13 @@
     "guiado.html": {
       "answers": [
         {
+          "question": "requester_relation",
+          "participant_label": "",
+          "values": [
+            "prepare"
+          ]
+        },
+        {
           "question": "tarefas",
           "participant_label": "",
           "values": [
@@ -1203,18 +1199,10 @@
           "values": [
             "RED-APRESENTACAO-DIGITAL"
           ]
-        },
-        {
-          "question": "recursos_disponiveis",
-          "participant_label": "",
-          "values": [
-            "REC-LEITOR-DE-TELA",
-            "REC-EDITOR-MULTIMIDIA"
-          ]
         }
       ],
       "context": {
-        "id": "CTX-CASO-9322E45603",
+        "id": "CTX-CASO-64442EFABE",
         "natureza": "CASO_INFORMADO_PELA_PESSOA",
         "status": "AGUARDANDO_CARACTERIZACAO",
         "texto_curto": "Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.",
@@ -1222,6 +1210,10 @@
         "titulo_curto": "Caso informado agora",
         "premissas_do_exemplo": [],
         "operacao_do_recurso": "",
+        "requester_relation": "prepare",
+        "requester_relation_label": "Preparo ou adapto o material ou recurso",
+        "requester_relation_status": "INFORMADO_NA_SESSAO",
+        "requester_participation_id": "",
         "impedimentos_verificados": false,
         "tarefas": [
           "Acessar e compreender conteúdo digital"
@@ -1230,7 +1222,7 @@
         "caracteristicas_estruturadas": [],
         "participantes": [
           {
-            "id": "PART-CASO-02-E01180",
+            "id": "PART-CASO-02-3D8AA6",
             "papel_id": "PAPEL-PROFESSORA",
             "label": "Professora",
             "grupo_rotulo": "",
@@ -1247,11 +1239,11 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-56DC84",
+            "id": "PART-CASO-03-431E27",
             "papel_id": "PAPEL-TURMA",
-            "label": "Turma",
-            "grupo_rotulo": "",
-            "quantidade": 1,
+            "label": "Turma ou colegas (quantidade não informada)",
+            "grupo_rotulo": "turma",
+            "quantidade": null,
             "observacoes": "",
             "apoios_informados": "",
             "papel": "Turma",
@@ -1264,7 +1256,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-03-440607",
+            "id": "PART-CASO-03-775C46",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "2 estudante(s): surdos informado no relato",
             "grupo_rotulo": "surdos",
@@ -1283,7 +1275,7 @@
             "estatuto": "IDENTIFICADO_PARA_CONFIRMACAO"
           },
           {
-            "id": "PART-CASO-04-15AB3B",
+            "id": "PART-CASO-04-F703BF",
             "papel_id": "PAPEL-ESTUDANTE",
             "label": "1 estudante(s): cego informado no relato",
             "grupo_rotulo": "cego",
@@ -1314,24 +1306,10 @@
         ],
         "ambientes": [],
         "modalidades_disponiveis": [],
-        "recursos_disponiveis": [
-          "Leitor de tela",
-          "Editor de apresentação, página ou painel multimídia"
-        ],
+        "recursos_disponiveis": [],
         "recursos_impedidos": [],
         "recursos_propostos": [],
-        "estado_dos_recursos": [
-          {
-            "id": "REC-LEITOR-DE-TELA",
-            "label": "Leitor de tela",
-            "estado": "DISPONIVEL_CONFIRMADO"
-          },
-          {
-            "id": "REC-EDITOR-MULTIMIDIA",
-            "label": "Editor de apresentação, página ou painel multimídia",
-            "estado": "DISPONIVEL_CONFIRMADO"
-          }
-        ],
+        "estado_dos_recursos": [],
         "funcoes_requeridas": [
           "Preservar significado por alternativas perceptivas e operacionais",
           "Preservar o significado entre formas de representação"
@@ -1361,7 +1339,7 @@
                   ]
                 ],
                 "participant_ids": [
-                  "PART-CASO-04-15AB3B"
+                  "PART-CASO-04-F703BF"
                 ]
               }
             ],
@@ -1402,8 +1380,8 @@
                   ]
                 ],
                 "participant_ids": [
-                  "PART-CASO-04-15AB3B",
-                  "PART-CASO-03-440607"
+                  "PART-CASO-04-F703BF",
+                  "PART-CASO-03-775C46"
                 ]
               }
             ],
@@ -1444,8 +1422,8 @@
                   ]
                 ],
                 "participant_ids": [
-                  "PART-CASO-04-15AB3B",
-                  "PART-CASO-03-440607"
+                  "PART-CASO-04-F703BF",
+                  "PART-CASO-03-775C46"
                 ]
               }
             ],
@@ -1458,7 +1436,7 @@
         "access_requirements": [
           {
             "matrix_id": "MF-01",
-            "participant_id": "PART-CASO-04-15AB3B",
+            "participant_id": "PART-CASO-04-F703BF",
             "participant_label": "1 estudante(s): cego informado no relato",
             "trigger": [
               "cego"
@@ -1499,7 +1477,7 @@
           },
           {
             "matrix_id": "MF-11",
-            "participant_id": "PART-CASO-03-440607",
+            "participant_id": "PART-CASO-03-775C46",
             "participant_label": "2 estudante(s): surdos informado no relato",
             "trigger": [
               "surdos"
@@ -1537,9 +1515,9 @@
         ],
         "restricoes": [],
         "informacoes_ausentes": [
+          "Quais equipamentos ou apoios estão disponíveis para usar apresentação digital?",
           "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
-          "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
-          "Quais destes recursos essa pessoa consegue utilizar nesta atividade?"
+          "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?"
         ],
         "baseado_em": [],
         "raw": {
@@ -1559,10 +1537,7 @@
           ],
           "ambientes": [],
           "modalidades_disponiveis": [],
-          "recursos_disponiveis": [
-            "REC-LEITOR-DE-TELA",
-            "REC-EDITOR-MULTIMIDIA"
-          ],
+          "recursos_disponiveis": [],
           "recursos_impedidos": [],
           "recursos_propostos": [],
           "funcoes_requeridas_ids": [
@@ -1573,8 +1548,8 @@
       },
       "participant_conditions": [
         {
-          "id": "PART-CASO-03-440607",
-          "contexto_id": "CTX-CASO-9322E45603",
+          "id": "PART-CASO-03-775C46",
+          "contexto_id": "CTX-CASO-64442EFABE",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "2 estudante(s): surdos informado no relato",
           "grupo_rotulo": "surdos",
@@ -1596,8 +1571,8 @@
           "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
         },
         {
-          "id": "PART-CASO-04-15AB3B",
-          "contexto_id": "CTX-CASO-9322E45603",
+          "id": "PART-CASO-04-F703BF",
+          "contexto_id": "CTX-CASO-64442EFABE",
           "papel_id": "PAPEL-ESTUDANTE",
           "label": "1 estudante(s): cego informado no relato",
           "grupo_rotulo": "cego",
@@ -1631,9 +1606,9 @@
         "ART-REF-03"
       ],
       "limitations": [
+        "Quais equipamentos ou apoios estão disponíveis para usar apresentação digital?",
         "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
         "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
-        "Quais destes recursos essa pessoa consegue utilizar nesta atividade?",
         "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
         "A necessidade 'Garantir que informações essenciais não dependam de uma única modalidade' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
         "Função requerida ainda sem cobertura: Preservar significado por alternativas perceptivas e operacionais"
@@ -1644,16 +1619,16 @@
   "teaching_resource_variant": {
     "index.html": {
       "questions": [
+        "requester_relation",
         "tarefas",
-        "recursos_digitais",
-        "recursos_disponiveis"
+        "recursos_digitais"
       ],
       "status": "GERADA_PARCIAL",
       "component_ids": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
       "information_missing": [
-        "Quais destes recursos estão disponíveis para essa atividade?",
+        "Quais equipamentos ou apoios estão disponíveis para usar apresentação digital?",
         "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
         "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
         "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
@@ -1664,16 +1639,16 @@
     },
     "guiado.html": {
       "questions": [
+        "requester_relation",
         "tarefas",
-        "recursos_digitais",
-        "recursos_disponiveis"
+        "recursos_digitais"
       ],
       "status": "GERADA_PARCIAL",
       "component_ids": [
         "PAD-CONTEUDO-WEB-EQUIVALENTE"
       ],
       "information_missing": [
-        "Quais destes recursos estão disponíveis para essa atividade?",
+        "Quais equipamentos ou apoios estão disponíveis para usar apresentação digital?",
         "Quem pode preparar ou ajustar o material para acessar e compreender conteúdo digital?",
         "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
         "A necessidade 'Apoiar a compreensão e a participação da turma' foi registrada, mas a base ainda não documenta sua ligação específica com a configuração selecionada.",
@@ -1689,7 +1664,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1702,7 +1677,7 @@
         "operation": "generate",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1715,7 +1690,7 @@
         "operation": "compose",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1728,7 +1703,7 @@
         "operation": "compose",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1741,7 +1716,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -1759,7 +1734,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -1797,7 +1772,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -1815,7 +1790,45 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
+        "controls": [
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -1853,7 +1866,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -1868,29 +1881,6 @@
           {
             "id": "",
             "name": "recursos_digitais",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
             "blocked": true
           }
         ]
@@ -1899,7 +1889,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1912,7 +1902,7 @@
         "operation": "generate",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -1925,7 +1915,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -1943,7 +1933,45 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
+        "controls": [
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -1981,7 +2009,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -1996,29 +2024,6 @@
           {
             "id": "",
             "name": "recursos_digitais",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
             "blocked": true
           }
         ]
@@ -2027,7 +2032,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2040,7 +2045,7 @@
         "operation": "generate",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2053,7 +2058,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -2071,7 +2076,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2114,11 +2119,59 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "answer-objetivo",
             "name": "objetivo",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
+        "controls": [
+          {
+            "id": "revision-0",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-2",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-1",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-3",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-15",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-16",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-20",
+            "name": "",
             "blocked": true
           }
         ]
@@ -2129,7 +2182,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2142,7 +2195,7 @@
         "operation": "generate",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2155,7 +2208,7 @@
         "operation": "compose",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2168,7 +2221,7 @@
         "operation": "compose",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2181,7 +2234,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -2199,7 +2252,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2237,7 +2290,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -2255,7 +2308,45 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
+        "controls": [
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2293,7 +2384,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Conferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2308,29 +2399,6 @@
           {
             "id": "",
             "name": "recursos_digitais",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
             "blocked": true
           }
         ]
@@ -2339,7 +2407,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2352,7 +2420,7 @@
         "operation": "generate",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2365,7 +2433,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -2383,7 +2451,45 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
+        "controls": [
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "requester_relation",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2421,7 +2527,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2436,29 +2542,6 @@
           {
             "id": "",
             "name": "recursos_digitais",
-            "blocked": true
-          }
-        ]
-      },
-      {
-        "operation": "update",
-        "busy": true,
-        "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
-        "controls": [
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
-            "blocked": true
-          },
-          {
-            "id": "",
-            "name": "recursos_disponiveis",
             "blocked": true
           }
         ]
@@ -2467,7 +2550,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2480,7 +2563,7 @@
         "operation": "generate",
         "busy": true,
         "generationVisible": true,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoPreparando as informações confirmadas.",
         "controls": [
           {
             "id": "case-confirmed",
@@ -2493,7 +2576,7 @@
         "operation": "analyze",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "case-narrative",
@@ -2511,7 +2594,7 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "",
@@ -2554,11 +2637,59 @@
         "operation": "update",
         "busy": true,
         "generationVisible": false,
-        "generationText": "Preparando sua orientaçãoRelacionando as informações confirmadas aos conhecimentos da base.",
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
         "controls": [
           {
             "id": "answer-objetivo",
             "name": "objetivo",
+            "blocked": true
+          }
+        ]
+      },
+      {
+        "operation": "update",
+        "busy": true,
+        "generationVisible": false,
+        "generationText": "Preparando sua orientaçãoOrientação apresentada com as fontes e condições registradas nesta execução.Recuperar conhecimentos da base MADO — ConcluídaConferir condições e fundamentos — ConcluídaCompor a orientação — ConcluídaApresentar o resultado — Concluída",
+        "controls": [
+          {
+            "id": "revision-0",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-2",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-1",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-3",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-15",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-16",
+            "name": "",
+            "blocked": true
+          },
+          {
+            "id": "revision-20",
+            "name": "",
             "blocked": true
           }
         ]

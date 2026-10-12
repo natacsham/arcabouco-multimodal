@@ -6,12 +6,35 @@
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
    xmlns:v2="https://w3id.org/mado/experimental/v2#"
 >
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardPrimaryContribution2">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TaskReviewExistingText">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Task"/>
+    <rdfs:label xml:lang="pt">Revisar conteúdo textual já disponível</rdfs:label>
+    <v2:requiresFunction rdf:resource="https://w3id.org/mado/experimental/v2#Review"/>
+    <v2:inputType rdf:resource="https://w3id.org/mado/experimental/v2#TextDraft"/>
+    <v2:outputType rdf:resource="https://w3id.org/mado/experimental/v2#ReviewedText"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#provides">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardPrimaryContribution1">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
     <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptCARE"/>
-    <v2:statement>CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.</v2:statement>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptKeyboard"/>
+    <v2:statement>Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada.</v2:statement>
     <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#CA38">
+    <rdf:type rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
+    <rdfs:label xml:lang="pt">Toda funcionalidade deve ser operável por teclado (sem exigir tempo preciso)</rdfs:label>
+    <v2:source rdf:resource="https://w3id.org/mado/experimental/v2#SourceKeyboard"/>
+    <v2:locator>WCAG 2.2, 2.1.1; origem legada ORI-0238 preservada</v2:locator>
+    <v2:justification>CA38 fundamenta a rota de teclado; K41 fornece condições situadas de sua admissibilidade. Não fundamenta voz, revisão ou envio da contribuição.</v2:justification>
+    <v2:legacyCollection>criteria</v2:legacyCollection>
+    <v2:legacyRecordId>CA38</v2:legacyRecordId>
+    <v2:legacyRecordHash>404e90232edaa58d020cf9e7cf42f11fdd3820fc83263160dcfb2c9002da31d2</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aag":"-","abnt_17060_mobile":"-","abnt_17225_web":"X","aplicabilidade":{"modalidades":["MOD-TECLADO"],"tarefas":["TAR-PREENCHER-ENVIAR-MENSAGEM-0C1FB87","TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD"]},"auditiva":"-","codigo_trabalho":"AT38","cognitiva":"X","condicoes_ativacao_ids":[],"condicoes_impeditivas_ids":[],"conhecimento_ids":["K25","K28","K29"],"emag":"X","enunciado":"Toda funcionalidade deve ser operável por teclado (sem exigir tempo preciso)","enunciado_base_anterior":"Toda funcionalidade deve ser operável por teclado (sem exigir tempo preciso)","funcao_decisoria":["preservar operação, foco, correção e confirmação"],"id":"CA38","itens_mmi_relacionados":["AT116","AT187","AT201","AT204","AT225","AT233"],"justificativa_fundamentacao":"Em versão anterior, a ligação foi reconstruída analiticamente porque o critério participa de uma configuração modalidade–função–recurso–responsável fundamentada por esses conhecimentos; não se atribui essa formalização retrospectiva às publicações originais.","justificativa_mesclagem":"Operar tudo por teclado elimina dependência de ponteiro e gestos finos (benefício motor), permite navegação coesa com leitor de tela (benefício visual) e reduz confusão com interações imprevisíveis (benefício cognitivo). A norma proíbe exigir pressões em tempos específicos; exceções valem apenas quando a função depende do traçado (p.ex., desenho livre), caso em que informa-se a limitação e, quando possível, oferece-se modo alternativo.","justificativa_relacao_mmi":null,"mobile":"v","motora":"X","observacao":null,"origem_mmi_no_catalogo":"SIM","status_fundamentacao":"FUNDAMENTACAO_ANALITICA_HISTORICA_NAO_AUTORIZA_CONFIGURACAO_RC3","status_relacao_mmi":"RELACAO_SEM_JUSTIFICATIVA_EXPLICITA","tipo_relacao_mmi":"Não registrado","verificacao_enunciado":"COINCIDE","visual":"X","wcag_2_2":"X","web":"X"}</v2:legacyRecordJSON>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ReviewText">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
@@ -30,6 +53,32 @@
     <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanVerifyMeaning"/>
     <v2:action>Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir</v2:action>
     <v2:limitation>A revisão visual não cobre quem não consegue perceber ou compreender essa apresentação.</v2:limitation>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewKnowledge"/>
+    <v2:operation>Desdobrar o antecedente candidato K28 em uma etapa delimitada de revisão, em conjunto com a opção de prevenção de erros da WCAG e a independência entre entrada e apresentação.</v2:operation>
+    <v2:addedUnderstanding>Produzir o rascunho e apresentá-lo não conclui a tarefa: é necessária uma apresentação que a pessoa possa conferir e um mecanismo de correção. Não se afirma que envio ou confirmação final já ocorreram.</v2:addedUnderstanding>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#TD-EV29">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F08"/>
+    <mado:localizacaoDocumental>50-248883.pdf · 9</mado:localizacaoDocumental>
+    <v2:legacyCollection>excerpts</v2:legacyCollection>
+    <v2:legacyRecordId>TD-EV29</v2:legacyRecordId>
+    <v2:legacyRecordHash>75d14a67ef1c0a160197d646b89d6446a0bd81bd586614c9628f1088357b8d43</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"arquivo":"50-248883.pdf","aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"APLICA CONHECIMENTO","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST07","fonte_id":"F08","id":"TD-EV29","id_legado":"EV29","localizacao_publica":"50-248883.pdf · 9","natureza":"EXPLÍCITO NA FONTE","pagina":9,"rastreabilidade":"Explicita análise e redesign de mensagens, sustentando D15–D18.","tipo_registro_original":"Redesign multimodal de envio de mensagens"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechLegacyContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-07"/>
+    <v2:statement>O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-02"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#FN-WCAG">
     <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
@@ -52,120 +101,27 @@
     <v2:status>CURATED_FOR_PILOT</v2:status>
     <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewLegacyContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
-    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K29"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#TD-ORI-0238">
+  <rdf:Description rdf:about="https://w3id.org/mado#TD-RC3-REF-07">
     <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#FN-WCAG"/>
-    <mado:localizacaoDocumental>PLANILHA_FINAL_DE_EXTRACAO</mado:localizacaoDocumental>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F05"/>
+    <mado:localizacaoDocumental>5</mado:localizacaoDocumental>
     <v2:legacyCollection>excerpts</v2:legacyCollection>
-    <v2:legacyRecordId>TD-ORI-0238</v2:legacyRecordId>
-    <v2:legacyRecordHash>81b15de4d2e08915f169484cd495bfd4bcbf36be292777f5b631891ec5d34b4a</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"ORIGINA_OU_COMPÕE_CRITERIO","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","fonte_id":"FN-WCAG","id":"TD-ORI-0238","localizacao_publica":"PLANILHA_FINAL_DE_EXTRACAO","natureza":"ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA","pagina":"PLANILHA_FINAL_DE_EXTRACAO","status_curadoria":"CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3"}</v2:legacyRecordJSON>
+    <v2:legacyRecordId>TD-RC3-REF-07</v2:legacyRecordId>
+    <v2:legacyRecordHash>ef97d03fa610dd3d80b720b8958fe509b64e89c45b499e2653b8b713b4978580</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"RELACIONA_MOVIMENTO_PERCEPCAO_E_ENTRADA","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST04","fonte_id":"F05","id":"TD-RC3-REF-07","localizacao_publica":"5","natureza":"EXPLICITO_NA_FONTE","pagina":5,"status_curadoria":"CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3"}</v2:legacyRecordJSON>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#operation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#criterion">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanVerifyMeaning">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#KeyboardCompatible">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa pode conferir o significado relevante do rascunho pela apresentação escolhida</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K28"/>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K29"/>
+    <rdfs:label xml:lang="pt">A interface de teclado é compatível com o dispositivo e o sistema usados</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#CA38">
-    <rdf:type rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
-    <rdfs:label xml:lang="pt">Toda funcionalidade deve ser operável por teclado (sem exigir tempo preciso)</rdfs:label>
-    <v2:source rdf:resource="https://w3id.org/mado/experimental/v2#SourceKeyboard"/>
-    <v2:locator>WCAG 2.2, 2.1.1; origem legada ORI-0238 preservada</v2:locator>
-    <v2:justification>CA38 fundamenta a rota de teclado; K41 fornece condições situadas de sua admissibilidade. Não fundamenta voz, revisão ou envio da contribuição.</v2:justification>
-    <v2:legacyCollection>criteria</v2:legacyCollection>
-    <v2:legacyRecordId>CA38</v2:legacyRecordId>
-    <v2:legacyRecordHash>404e90232edaa58d020cf9e7cf42f11fdd3820fc83263160dcfb2c9002da31d2</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aag":"-","abnt_17060_mobile":"-","abnt_17225_web":"X","aplicabilidade":{"modalidades":["MOD-TECLADO"],"tarefas":["TAR-PREENCHER-ENVIAR-MENSAGEM-0C1FB87","TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD"]},"auditiva":"-","codigo_trabalho":"AT38","cognitiva":"X","condicoes_ativacao_ids":[],"condicoes_impeditivas_ids":[],"conhecimento_ids":["K25","K28","K29"],"emag":"X","enunciado":"Toda funcionalidade deve ser operável por teclado (sem exigir tempo preciso)","enunciado_base_anterior":"Toda funcionalidade deve ser operável por teclado (sem exigir tempo preciso)","funcao_decisoria":["preservar operação, foco, correção e confirmação"],"id":"CA38","itens_mmi_relacionados":["AT116","AT187","AT201","AT204","AT225","AT233"],"justificativa_fundamentacao":"Em versão anterior, a ligação foi reconstruída analiticamente porque o critério participa de uma configuração modalidade–função–recurso–responsável fundamentada por esses conhecimentos; não se atribui essa formalização retrospectiva às publicações originais.","justificativa_mesclagem":"Operar tudo por teclado elimina dependência de ponteiro e gestos finos (benefício motor), permite navegação coesa com leitor de tela (benefício visual) e reduz confusão com interações imprevisíveis (benefício cognitivo). A norma proíbe exigir pressões em tempos específicos; exceções valem apenas quando a função depende do traçado (p.ex., desenho livre), caso em que informa-se a limitação e, quando possível, oferece-se modo alternativo.","justificativa_relacao_mmi":null,"mobile":"v","motora":"X","observacao":null,"origem_mmi_no_catalogo":"SIM","status_fundamentacao":"FUNDAMENTACAO_ANALITICA_HISTORICA_NAO_AUTORIZA_CONFIGURACAO_RC3","status_relacao_mmi":"RELACAO_SEM_JUSTIFICATIVA_EXPLICITA","tipo_relacao_mmi":"Não registrado","verificacao_enunciado":"COINCIDE","visual":"X","wcag_2_2":"X","web":"X"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Expression">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-    <rdfs:label xml:lang="pt">Produzir um rascunho</rdfs:label>
-    <v2:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</v2:order>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanReviewVisualText">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa consegue conferir o texto apresentado visualmente</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#statement">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#referenceKind">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewLegacyContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
-    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#TD-RC3-REF-04">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F01"/>
-    <mado:localizacaoDocumental>8</mado:localizacaoDocumental>
-    <v2:legacyCollection>excerpts</v2:legacyCollection>
-    <v2:legacyRecordId>TD-RC3-REF-04</v2:legacyRecordId>
-    <v2:legacyRecordHash>dc66d4a548bdfd40565770dc4c84a27390e10319da643855a74ae55f58f667a2</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"CONDICIONA_RECURSO_A_AMBIENTE_E_MOVIMENTO","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST01","fonte_id":"F01","id":"TD-RC3-REF-04","localizacao_publica":"8","natureza":"EXPLICITO_NA_FONTE","pagina":8,"status_curadoria":"CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Display">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Apresentação visual legível</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#AudioOutput">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Saída de áudio controlável</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceKeyboard">
-    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
-    <rdfs:label xml:lang="pt">W3C Understanding WCAG 2.2, 2.1.1 Keyboard</rdfs:label>
-    <v2:url>https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html</v2:url>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReview">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
-    <rdfs:label xml:lang="pt">Produzir e depois revisar o mesmo conteúdo</rdfs:label>
-    <v2:fromFunction rdf:resource="https://w3id.org/mado/experimental/v2#Expression"/>
-    <v2:toFunction rdf:resource="https://w3id.org/mado/experimental/v2#Review"/>
-    <v2:sharedType rdf:resource="https://w3id.org/mado/experimental/v2#TextDraft"/>
-    <v2:relationKind>SEQUENTIAL_REVIEW</v2:relationKind>
-    <v2:knowledge rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewKnowledge"/>
-    <v2:criterion rdf:resource="https://w3id.org/mado/experimental/v2#CriterionReview"/>
-    <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanCorrect"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#ControlsCompletion"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#LearningCommunicationContext"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanVerifyMeaning"/>
-    <v2:explanation>A primeira etapa produz o rascunho; a segunda torna esse mesmo conteúdo conferível antes da conclusão. A forma de entrada e a forma de revisão podem diferir, desde que ambas sejam operáveis e exista correção.</v2:explanation>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptReview">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceReview"/>
-    <mado:localizacaoDocumental>Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação</mado:localizacaoDocumental>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#TD-EV29">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F08"/>
-    <mado:localizacaoDocumental>50-248883.pdf · 9</mado:localizacaoDocumental>
-    <v2:legacyCollection>excerpts</v2:legacyCollection>
-    <v2:legacyRecordId>TD-EV29</v2:legacyRecordId>
-    <v2:legacyRecordHash>75d14a67ef1c0a160197d646b89d6446a0bd81bd586614c9628f1088357b8d43</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"arquivo":"50-248883.pdf","aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"APLICA CONHECIMENTO","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST07","fonte_id":"F08","id":"TD-EV29","id_legado":"EV29","localizacao_publica":"50-248883.pdf · 9","natureza":"EXPLÍCITO NA FONTE","pagina":9,"rastreabilidade":"Explicita análise e redesign de mensagens, sustentando D15–D18.","tipo_registro_original":"Redesign multimodal de envio de mensagens"}</v2:legacyRecordJSON>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReview">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
@@ -176,6 +132,33 @@
     <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
     <v2:status>CURATED_FOR_PILOT</v2:status>
     <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#requiresFunction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Task"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CaptureKeyboard">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
+    <rdfs:label xml:lang="pt">Registrar por escrita</rdfs:label>
+    <v2:provides rdf:resource="https://w3id.org/mado/experimental/v2#Expression"/>
+    <v2:mode rdf:resource="https://w3id.org/mado/experimental/v2#WrittenEntry"/>
+    <v2:inputType rdf:resource="https://w3id.org/mado/experimental/v2#ContributionContent"/>
+    <v2:outputType rdf:resource="https://w3id.org/mado/experimental/v2#TextDraft"/>
+    <v2:requiresResource rdf:resource="https://w3id.org/mado/experimental/v2#Keyboard"/>
+    <v2:requiresResource rdf:resource="https://w3id.org/mado/experimental/v2#EditableText"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#ContentAvailable"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanUseKeyboard"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#LearningCommunicationContext"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#KeyboardEffortAcceptable"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#KeyboardCompatible"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#KeyboardFeedbackPerceptible"/>
+    <v2:action>Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável</v2:action>
+    <v2:limitation>Teclado disponível não significa operável pela pessoa; a condição funcional precisa ser confirmada.</v2:limitation>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechRecognition">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+    <rdfs:label xml:lang="pt">Reconhecimento de fala</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ReviewSpeech">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
@@ -198,362 +181,6 @@
     <v2:action>Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir</v2:action>
     <v2:limitation>A leitura literal não descreve informação visual ausente do texto; ruído, privacidade ou dificuldade de escuta podem impedir essa rota.</v2:limitation>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#requiresFact">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#VisualText">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
-    <rdfs:label xml:lang="pt">Texto visual como saída</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#TrechoDocumental">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboard">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
-    <v2:capability rdf:resource="https://w3id.org/mado/experimental/v2#CaptureKeyboard"/>
-    <v2:justification>CA38 fundamenta a rota de teclado; K41 fornece condições situadas de sua admissibilidade. Não fundamenta voz, revisão ou envio da contribuição.</v2:justification>
-    <v2:knowledge rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardKnowledge"/>
-    <v2:criterion rdf:resource="https://w3id.org/mado#CA38"/>
-    <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardLegacyContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-04"/>
-    <v2:statement>A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-01"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechPrimaryContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptCARE"/>
-    <v2:statement>CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewPrimaryContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptReview"/>
-    <v2:statement>A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CriterionReview">
-    <rdf:type rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
-    <rdfs:label xml:lang="pt">Permitir conferência e correção antes da conclusão</rdfs:label>
-    <v2:source rdf:resource="https://w3id.org/mado/experimental/v2#SourceReview"/>
-    <v2:locator>3.3.6 (AAA), alternativa de revisão, confirmação e correção</v2:locator>
-    <v2:justification>Escolha de projeto entre alternativas da diretriz AAA; não é exigência universal de revisão visual nem declaração de conformidade.</v2:justification>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TextToSpeech">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Leitura em voz do texto</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#TD-EV30">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F08"/>
-    <mado:localizacaoDocumental>50-248883.pdf · 10</mado:localizacaoDocumental>
-    <v2:legacyCollection>excerpts</v2:legacyCollection>
-    <v2:legacyRecordId>TD-EV30</v2:legacyRecordId>
-    <v2:legacyRecordHash>9c4198506959705853efee82978bc9205e5545ac3716666917bc330e7d5cf59d</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"arquivo":"50-248883.pdf","aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"EXPLICITA COMPOSIÇÃO MULTIMODAL","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST07","fonte_id":"F08","id":"TD-EV30","id_legado":"EV30","localizacao_publica":"50-248883.pdf · 10","natureza":"EXPLÍCITO NA FONTE","pagina":10,"rastreabilidade":"A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.","tipo_registro_original":"Tabela de melhorias multimodais"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewLegacyContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV29"/>
-    <v2:statement>Explicita análise e redesign de mensagens, sustentando D15–D18.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#KeyboardCompatible">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A interface de teclado é compatível com o dispositivo e o sistema usados</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewKnowledge"/>
-    <v2:operation>Relacionar os antecedentes candidatos de apresentação multiformato e coordenação operacional à descrição primária de TTS e à opção de revisão antes da conclusão.</v2:operation>
-    <v2:addedUnderstanding>Uma revisão não precisa ser visual quando outra apresentação do mesmo rascunho permite conferir o significado e controlar a correção. Isso é proposta analítica assistida, não prova de compreensão ou equivalência para a pessoa.</v2:addedUnderstanding>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#TD-RC3-REF-07">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F05"/>
-    <mado:localizacaoDocumental>5</mado:localizacaoDocumental>
-    <v2:legacyCollection>excerpts</v2:legacyCollection>
-    <v2:legacyRecordId>TD-RC3-REF-07</v2:legacyRecordId>
-    <v2:legacyRecordHash>ef97d03fa610dd3d80b720b8958fe509b64e89c45b499e2653b8b713b4978580</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"RELACIONA_MOVIMENTO_PERCEPCAO_E_ENTRADA","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST04","fonte_id":"F05","id":"TD-RC3-REF-07","localizacao_publica":"5","natureza":"EXPLICITO_NA_FONTE","pagina":5,"status_curadoria":"CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#ContextoDeInteracaoDigital">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewKnowledge">
-    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-    <rdfs:label xml:lang="pt">Aplicação de apresentação alternativa à revisão pela fala sintetizada</rdfs:label>
-    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K29"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K28"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#K28">
-    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-    <rdfs:label xml:lang="pt">Em formulários e comunicação digital, acessibilidade depende de uma sequência operacional compreensível: rótulos/instruções, foco e teclado, identificação de erros, confirmação e feedback de status precisam funcionar de forma coordenada.</rdfs:label>
-    <v2:epistemicStatus>PARTIAL_LEGACY</v2:epistemicStatus>
-    <v2:legacyReviewStatus>CANDIDATO_RECONSTRUIDO_A_REVISAR</v2:legacyReviewStatus>
-    <v2:legacyFoundationStatus>NOT_REVIEWED_IN_PILOT</v2:legacyFoundationStatus>
-    <v2:legacyCollection>knowledge</v2:legacyCollection>
-    <v2:legacyRecordId>K28</v2:legacyRecordId>
-    <v2:legacyRecordHash>cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aplicabilidade":{"ambientes":["AMB-CONTEXTO-DIGITAL-DE-APRENDIZAGEM-42D27F5"],"barreiras":["BAR-ROTULOS-FOCO-ERRO-STATUS-INADEQUADOS-219BE43"],"caracteristicas_pessoa":["CAR-PERFIS-FUNCIONAIS-DIVERSOS"],"modalidades":["MOD-TECLADO"],"recursos_disponiveis":["REC-TEXTO-TECLADO-FOCO-FEEDBACK-STATUS-97D641F"],"tarefas":["TAR-PREENCHER-ENVIAR-MENSAGEM-0C1FB87","TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD"]},"articulacao":"A análise da tela de mensagens parte de critérios essenciais violados e estrutura o formulário redesenhado com rótulos, navegação lógica, foco visível, erros, confirmação e status acessível. A decisão não é um item isolado, mas a coordenação de estados e respostas ao longo da tarefa.","classificacao_operacional":"OPERACIONALIZAVEL","condicoes_documentadas":["Formulário","rótulos","teclado","foco","erros","confirmação","status","critérios"],"condicoes_impeditivas_ids":[],"condicoes_necessarias_ids":[],"enunciado":"Em formulários e comunicação digital, acessibilidade depende de uma sequência operacional compreensível: rótulos/instruções, foco e teclado, identificação de erros, confirmação e feedback de status precisam funcionar de forma coordenada.","escopo_caracteristicas_pessoa":"ESPECIFICO_PARA_CARACTERISTICAS_DOCUMENTADAS","estudo_id":"EST07","fonte_ids":["F08"],"funcao_decisoria_ids":["FUN-CONSOLIDAR-COM-FEEDBACK","FUN-ACOMPANHAR-RESULTADO"],"id":"K28","limite":null,"limite_transferencia":"Aplicar somente quando as condições contextuais registradas forem satisfeitas.","natureza":"RECONSTRUÇÃO ANALÍTICA FORTEMENTE SUSTENTADA","origem_estruturacao_semantica":"Relações derivadas de contextos e decisões documentados; complementações RC3 foram estabelecidas somente quando o enunciado, a articulação e os trechos sustentavam a aplicabilidade.","papel_no_cenario":"CONHECIMENTO_CANDIDATO","perspectiva_ids":["P02"],"status_revisao":"CANDIDATO_RECONSTRUIDO_A_REVISAR","trecho_ids":["TD-EV29","TD-EV30"]}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CaptureKeyboard">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
-    <rdfs:label xml:lang="pt">Registrar por escrita</rdfs:label>
-    <v2:provides rdf:resource="https://w3id.org/mado/experimental/v2#Expression"/>
-    <v2:mode rdf:resource="https://w3id.org/mado/experimental/v2#WrittenEntry"/>
-    <v2:inputType rdf:resource="https://w3id.org/mado/experimental/v2#ContributionContent"/>
-    <v2:outputType rdf:resource="https://w3id.org/mado/experimental/v2#TextDraft"/>
-    <v2:requiresResource rdf:resource="https://w3id.org/mado/experimental/v2#Keyboard"/>
-    <v2:requiresResource rdf:resource="https://w3id.org/mado/experimental/v2#EditableText"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#ContentAvailable"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanUseKeyboard"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#LearningCommunicationContext"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#KeyboardEffortAcceptable"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#KeyboardCompatible"/>
-    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#KeyboardFeedbackPerceptible"/>
-    <v2:action>Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável</v2:action>
-    <v2:limitation>Teclado disponível não significa operável pela pessoa; a condição funcional precisa ser confirmada.</v2:limitation>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#K41">
-    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-    <rdfs:label xml:lang="pt">Uma entrada alternativa somente apoia a tarefa quando o gesto ou movimento exigido é viável, o dispositivo e o sistema são compatíveis, o desempenho é suficiente e o usuário recebe confirmação perceptível.</rdfs:label>
-    <v2:epistemicStatus>PARTIAL_LEGACY</v2:epistemicStatus>
-    <v2:legacyReviewStatus>CONFERIDO_PARA_O_ESCOPO_RC3</v2:legacyReviewStatus>
-    <v2:legacyFoundationStatus>PARCIAL</v2:legacyFoundationStatus>
-    <v2:legacyCollection>knowledge</v2:legacyCollection>
-    <v2:legacyRecordId>K41</v2:legacyRecordId>
-    <v2:legacyRecordHash>d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aplicabilidade":{"barreiras":["BAR-RECURSO-INCOMPATIVEL-CAPACIDADE"],"caracteristicas_pessoa":["CAR-OPERACAO-NAO-CONVENCIONAL"],"necessidades":["NEC-ENTRADA-ALTERNATIVA"],"recursos_disponiveis":["REC-ENTRADA-VOZ","REC-TECLADO","REC-SENSORES"],"tarefas":["TAR-OPERAR-SISTEMA"]},"articulacao":"O estudo ACAT/MPD articula movimento residual, baixa visão, webcam, dispositivo de pressão e teclado em tela; o RotaColab mostra falhas quando gesto, touchscreen, rede ou retorno não correspondem às condições reais.","classificacao_operacional":"OPERACIONALIZAVEL","condicoes_documentadas":["TAR-OPERAR-SISTEMA","CAR-OPERACAO-NAO-CONVENCIONAL","BAR-RECURSO-INCOMPATIVEL-CAPACIDADE","NEC-ENTRADA-ALTERNATIVA","REC-ENTRADA-VOZ","REC-TECLADO","REC-SENSORES"],"condicoes_impeditivas_ids":[],"condicoes_necessarias_ids":[],"enunciado":"Uma entrada alternativa somente apoia a tarefa quando o gesto ou movimento exigido é viável, o dispositivo e o sistema são compatíveis, o desempenho é suficiente e o usuário recebe confirmação perceptível.","escopo_caracteristicas_pessoa":"FUNCIONAL_E_NAO_DIAGNOSTICO","estudo_id":null,"fonte_ids":["F01","F05"],"foundation_review_status":"PARCIAL","funcao_decisoria_ids":["FUN-SELECIONAR-MODO-POR-CONDICAO","FUN-FEEDBACK-PERCEPTIVEL"],"id":"K41","limite":"A viabilidade do mecanismo deve ser testada com o movimento, o dispositivo e a tarefa reais.","limite_transferencia":"A viabilidade do mecanismo deve ser testada com o movimento, o dispositivo e a tarefa reais.","natureza":"RECONSTRUCAO_ANALITICA_RASTREAVEL","origem_estruturacao_semantica":"Relação reconstruída pela autora entre trechos do corpus, condições funcionais, tarefa e função decisória; não é atribuída como formulação original às publicações.","papel_no_cenario":"PRODUTO_DE_ARTICULACAO_RC3","pending_foundation_items":["Conferir original e critérios de desempenho; os registros de uma configuração não asseguram viabilidade para outro contexto."],"perspectiva_ids":["P02"],"status_revisao":"CONFERIDO_PARA_O_ESCOPO_RC3","trecho_ids":["TD-RC3-REF-04","TD-RC3-REF-07"]}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyRecordHash">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#locator">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewKnowledge"/>
-    <v2:operation>Desdobrar o antecedente candidato K28 em uma etapa delimitada de revisão, em conjunto com a opção de prevenção de erros da WCAG e a independência entre entrada e apresentação.</v2:operation>
-    <v2:addedUnderstanding>Produzir o rascunho e apresentá-lo não conclui a tarefa: é necessária uma apresentação que a pessoa possa conferir e um mecanismo de correção. Não se afirma que envio ou confirmação final já ocorreram.</v2:addedUnderstanding>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#limitation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewLegacyContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV29"/>
-    <v2:statement>Explicita análise e redesign de mensagens, sustentando D15–D18.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardLegacyContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-07"/>
-    <v2:statement>O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-02"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#sharedType">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewPrimaryContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptReview"/>
-    <v2:statement>A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewPrimaryContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
-    <v2:statement>Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceReview">
-    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
-    <rdfs:label xml:lang="pt">W3C Understanding WCAG 2.2, 3.3.6 Error Prevention (All), AAA</rdfs:label>
-    <v2:url>https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html</v2:url>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#EditableText">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Campo textual editável</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechLegacyContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-07"/>
-    <v2:statement>O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-02"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#KeyboardFeedbackPerceptible">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa percebe o resultado da entrada por teclado</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ReviewedText">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
-    <rdfs:label xml:lang="pt">Conteúdo conferível e corrigível pela pessoa</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewPrimaryContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptReview"/>
-    <v2:statement>A opção de conferir e corrigir antes de concluir especifica a função de revisão; o documento não determina que ela precise ser visual.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechKnowledge">
-    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-    <rdfs:label xml:lang="pt">Aplicação situada de entrada por fala</rdfs:label>
-    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K41"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K29"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Representation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Estado informacional</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptCARE">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceCARE"/>
-    <mado:localizacaoDocumental>pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade</mado:localizacaoDocumental>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#KeyboardEffortAcceptable">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">O esforço e o desempenho da entrada por teclado são aceitáveis nesta tarefa</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ContextFact">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Condição a confirmar</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechLegacyContribution3">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
-    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
-    <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K29"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanCorrect">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">Existe um meio operável para corrigir o rascunho</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_version">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TaskReviewExistingText">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Task"/>
-    <rdfs:label xml:lang="pt">Revisar conteúdo textual já disponível</rdfs:label>
-    <v2:requiresFunction rdf:resource="https://w3id.org/mado/experimental/v2#Review"/>
-    <v2:inputType rdf:resource="https://w3id.org/mado/experimental/v2#TextDraft"/>
-    <v2:outputType rdf:resource="https://w3id.org/mado/experimental/v2#ReviewedText"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReview">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
-    <v2:capability rdf:resource="https://w3id.org/mado/experimental/v2#ReviewText"/>
-    <v2:justification>CriterionReview escolhe uma alternativa de projeto AAA; K28 motiva a coordenação da revisão com a produção, permanecendo candidato a revisão documental.</v2:justification>
-    <v2:knowledge rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewKnowledge"/>
-    <v2:criterion rdf:resource="https://w3id.org/mado/experimental/v2#CriterionReview"/>
-    <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TaskCreateReviewedText">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Task"/>
-    <rdfs:label xml:lang="pt">Produzir e revisar uma contribuição digital</rdfs:label>
-    <v2:requiresFunction rdf:resource="https://w3id.org/mado/experimental/v2#Expression"/>
-    <v2:requiresFunction rdf:resource="https://w3id.org/mado/experimental/v2#Review"/>
-    <v2:inputType rdf:resource="https://w3id.org/mado/experimental/v2#ContributionContent"/>
-    <v2:outputType rdf:resource="https://w3id.org/mado/experimental/v2#ReviewedText"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#GroundingApplication">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Fundamento de uma capacidade</rdfs:label>
-    <rdfs:comment xml:lang="pt">Vínculo curado reutilizável. Distingue-se da aplicação situada de critério produzida em uma execução.</rdfs:comment>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_paraphrase">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanControlPlayback">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa consegue pausar e repetir a leitura</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechKnowledge"/>
-    <v2:operation>Relacionar o antecedente candidato de entrada e percepção multiformato de K29 à viabilidade situada de K41 e à separação entre entrada e saída nos requisitos MMI.</v2:operation>
-    <v2:addedUnderstanding>A fala pode oferecer outra rota para produzir o rascunho apenas sob condições próprias de operação e reconhecimento. Não se deduz sua adequação de diagnóstico nem da mera presença de microfone.</v2:addedUnderstanding>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#explanation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewKnowledge"/>
-    <v2:operation>Relacionar coordenação de etapas de K28 e alternativas de entrada/percepção de K29 para uma sequência sobre o mesmo rascunho, sob condições do piloto.</v2:operation>
-    <v2:addedUnderstanding>A entrada deve deixar informação conferível para a etapa seguinte. Trocar o modo de apresentação não dispensa acesso ao conteúdo nem correção; sequência não é classificada automaticamente como complementaridade CARE.</v2:addedUnderstanding>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#edition">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#ORI-0238">
-    <v2:legacyCollection>criterion_origins</v2:legacyCollection>
-    <v2:legacyRecordId>ORI-0238</v2:legacyRecordId>
-    <v2:legacyRecordHash>8c911b546cfa56ce957061bcbd252803d1ed38133f1504217318949e64724c07</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto do item original não redistribuído; referência documental preservada.","codigo_trabalho":"AT38","criterio_id":"CA38","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","fonte_id":"FN-WCAG","fonte_item":"WCAG","id":"ORI-0238","localizacao_publica":"AT38 · WCAG","status_localizacao":"ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA","trecho_id":"TD-ORI-0238"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#relationKind">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#addedUnderstanding">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyRecordId">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CaptureSpeech">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
     <rdfs:label xml:lang="pt">Registrar por fala</rdfs:label>
@@ -574,188 +201,22 @@
     <v2:action>Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável</v2:action>
     <v2:limitation>Reconhecimento pode alterar palavras; não enviar automaticamente nem presumir fidelidade da transcrição.</v2:limitation>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardKnowledge"/>
-    <v2:operation>Operacionalizar a viabilidade situada registrada em K41 para a entrada por teclado; relacionar a exigência de operação ao requisito primário de interface de teclado e à distinção entre equivalência funcional e uso individual.</v2:operation>
-    <v2:addedUnderstanding>A disponibilidade do teclado não basta: esforço, compatibilidade e percepção do resultado precisam ser confirmados para esta entrada. A restrição é proposta para o piloto, sem promover os registros de K41 a leitura do original.</v2:addedUnderstanding>
-    <v2:status>CURATED_FOR_PILOT</v2:status>
-    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#trechoDeFonte">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado#Fonte"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ContentAvailable">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">Há conteúdo a expressar ou revisar</rdfs:label>
-    <v2:scope>context</v2:scope>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CriterionInput">
-    <rdf:type rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
-    <rdfs:label xml:lang="pt">Escolher uma entrada funcionalmente adequada e operável</rdfs:label>
-    <v2:source rdf:resource="https://w3id.org/mado/experimental/v2#SourceCARE"/>
-    <v2:locator>pp. 2–5, equivalência funcional e compatibilidade com a pessoa</v2:locator>
-    <v2:justification>Critério analítico do piloto: entradas podem cumprir a mesma subfunção, mas sua disponibilidade e viabilidade são verificadas separadamente; não se presume igual esforço.</v2:justification>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#provides">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceMMI">
-    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
-    <rdfs:label xml:lang="pt">W3C Multimodal Interaction Requirements (2003), Note</rdfs:label>
-    <v2:url>https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/</v2:url>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechEffortAcceptable">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">O esforço e o desempenho da entrada por fala são aceitáveis nesta tarefa</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceCARE">
-    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
-    <rdfs:label xml:lang="pt">Coutaz et al. (1995), CARE</rdfs:label>
-    <v2:url>https://danielsalber.com/publications/interact1995.pdf</v2:url>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewLegacyContribution1">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewLegacyContribution2">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
     <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
-    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV29"/>
+    <v2:statement>Explicita análise e redesign de mensagens, sustentando D15–D18.</v2:statement>
     <v2:status>LEGACY_RECORD_ONLY</v2:status>
-    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K29"/>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechInputUsable">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">Reconhecimento de fala utilizável neste ambiente e idioma</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#fromFunction">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardPrimaryContribution1">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardLegacyContribution2">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
     <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptKeyboard"/>
-    <v2:statement>Operação por interface de teclado fornece um requisito de acesso independente de fala; a pessoa ainda precisa conseguir operar essa entrada.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#RelationRule">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Relação funcional documentada entre etapas</rdfs:label>
-    <rdfs:comment xml:lang="pt">Liga funções e estado compartilhado, não pares fixos de capacidades ou identificadores de cenário. Não classifica automaticamente uma sequência como complementaridade CARE.</rdfs:comment>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#requiresResource">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#inArticulation">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#F01">
-    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
-    <rdfs:label xml:lang="pt">An application of mobility aids for the visually impaired</rdfs:label>
-    <v2:url>https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json</v2:url>
-    <v2:referenceKind>PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT</v2:referenceKind>
-    <v2:legacyCollection>sources</v2:legacyCollection>
-    <v2:legacyRecordId>F01</v2:legacyRecordId>
-    <v2:legacyRecordHash>4156fa0647620ab531274498839d6436cb35c83e90842ce1ac05a0ecb640ab14</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"access_status":"NAO_CONSULTADA_NESTA_REVISAO","arquivo":"MUM'14 - p180-raposo.pdf","consulted_at":null,"doi":null,"edition":null,"edition_status":"NAO_IDENTIFICADA","estudo_ids":["EST01"],"id":"F01","metadata_origin":"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE","status":"DOCUMENTADO_NO_CORPUS","tipo":"ARTIGO_CIENTIFICO","titulo":"An application of mobility aids for the visually impaired","url":null,"url_candidates":[],"urls":[]}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechFeedbackPerceptible">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa percebe o resultado do reconhecimento de fala</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechCompatible">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A entrada por fala é compatível com o dispositivo e o sistema usados</rdfs:label>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#excerpt">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewKnowledge">
-    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-    <rdfs:label xml:lang="pt">Articulação situada entre produção e revisão da contribuição</rdfs:label>
-    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K28"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K29"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#AudioUsable">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">O áudio é utilizável no ambiente, com privacidade e percepção suficientes</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#derivedFromLegacy">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardKnowledge">
-    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-    <rdfs:label xml:lang="pt">Aplicação situada de viabilidade à entrada por teclado</rdfs:label>
-    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K41"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Function">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Função exigida pela tarefa</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#criterion">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#produces">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#scope">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:comment xml:lang="pt">context identifica fatos compartilhados; condições pessoais não são herdadas por outro participante.</rdfs:comment>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#inputType">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#LearningCommunicationContext">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A contribuição integra uma atividade de comunicação em contexto de aprendizagem</rdfs:label>
-    <v2:scope>context</v2:scope>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K28"/>
-    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K29"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
-    <owl:versionIRI rdf:resource="https://w3id.org/mado/experimental/2.0.0-alpha2"/>
-    <owl:versionInfo>2.0.0-alpha2</owl:versionInfo>
-    <rdfs:label xml:lang="pt">MADO V2 — piloto de composição fundamentada</rdfs:label>
-    <rdfs:comment xml:lang="pt">Extensão experimental isolada. Não substitui a MADO 1.4 nem representa uma versão validada com participantes. Namespace proposto; não pressupõe registro de resolução pública.</rdfs:comment>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechRecognition">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Reconhecimento de fala</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#action">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechLegacyContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-04"/>
-    <v2:statement>A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.</v2:statement>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-07"/>
+    <v2:statement>O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.</v2:statement>
     <v2:status>LEGACY_RECORD_ONLY</v2:status>
     <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
-    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-01"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-02"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#F08">
     <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
@@ -767,72 +228,20 @@
     <v2:legacyRecordHash>f4e735157ce34ea774f6dde3f82a5b3498734848b745b37e733c8bf873e41f2b</v2:legacyRecordHash>
     <v2:legacyRecordJSON>{"access_status":"NAO_CONSULTADA_NESTA_REVISAO","arquivo":"50-248883.pdf","consulted_at":null,"doi":null,"edition":null,"edition_status":"NAO_IDENTIFICADA","estudo_ids":["EST07"],"id":"F08","metadata_origin":"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE","status":"DOCUMENTADO_NO_CORPUS","tipo":"ARTIGO_CIENTIFICO","titulo":"Integrando Critérios de Acessibilidade Digital no Desenvolvimento de Artefatos de Software para Sistemas Educacionais Inclusivos","url":null,"url_candidates":[],"urls":[]}</v2:legacyRecordJSON>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Review">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-    <rdfs:label xml:lang="pt">Conferir e poder corrigir o rascunho</rdfs:label>
-    <v2:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</v2:order>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Resource">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Recurso necessário</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptMMI">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptKeyboard">
     <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceMMI"/>
-    <mado:localizacaoDocumental>Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces</mado:localizacaoDocumental>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceKeyboard"/>
+    <mado:localizacaoDocumental>Success Criterion e Intent: funcionalidade operável por interface de teclado</mado:localizacaoDocumental>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewPrimaryContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
-    <v2:statement>Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#order">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#C-K41-02">
-    <v2:legacyCollection>contributions</v2:legacyCollection>
-    <v2:legacyRecordId>C-K41-02</v2:legacyRecordId>
-    <v2:legacyRecordHash>d0dbe54da713571944cdeb9df0916714db44d5e600d45fd2fadbef808d0e2a4f</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"articulation_id":"ART-REF-05","contribution_role":"VIABILIDADE_DA_ACAO","excerpt_id":"TD-RC3-REF-07","id":"C-K41-02","justification":"Apoia testar ação e compatibilidade concretas. Não demonstra que todo acionador ou voz atenderá outra pessoa.","knowledge_id":"K41","nature":"PARAFRASE_DE_REGISTRO","review_date":"2026-10-08","reviewer":"Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original","statement":"O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.","verification_status":"CONFERIDA_NO_REGISTRO"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ControlsCompletion">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa controla quando concluir, sem envio automático</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewPrimaryContribution1">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
-    <v2:statement>A descrição MMI inclui síntese de fala como saída e distingue a seleção de entrada da seleção de saída.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#capability">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechPrimaryContribution2">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
-    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
-    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
-    <v2:statement>Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.</v2:statement>
-    <v2:status>PRIMARY_CHECKED</v2:status>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#outputType">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanReviewSpeech">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa consegue conferir o conteúdo por fala sintetizada</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TextDraft">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
-    <rdfs:label xml:lang="pt">Rascunho textual editável</rdfs:label>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboard">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
+    <v2:capability rdf:resource="https://w3id.org/mado/experimental/v2#CaptureKeyboard"/>
+    <v2:justification>CA38 fundamenta a rota de teclado; K41 fornece condições situadas de sua admissibilidade. Não fundamenta voz, revisão ou envio da contribuição.</v2:justification>
+    <v2:knowledge rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardKnowledge"/>
+    <v2:criterion rdf:resource="https://w3id.org/mado#CA38"/>
+    <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewKnowledge">
     <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
@@ -840,9 +249,53 @@
     <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
     <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K28"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#WrittenEntry">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
-    <rdfs:label xml:lang="pt">Escrita como entrada</rdfs:label>
+  <rdf:Description rdf:about="https://w3id.org/mado#F01">
+    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
+    <rdfs:label xml:lang="pt">An application of mobility aids for the visually impaired</rdfs:label>
+    <v2:url>https://github.com/natacsham/arcabouco-multimodal/blob/73013190f26cf8806e7f647dbb3fa36a8c07a3c3/data/knowledge-base.json</v2:url>
+    <v2:referenceKind>PUBLIC_METADATA_NOT_ORIGINAL_DOCUMENT</v2:referenceKind>
+    <v2:legacyCollection>sources</v2:legacyCollection>
+    <v2:legacyRecordId>F01</v2:legacyRecordId>
+    <v2:legacyRecordHash>4156fa0647620ab531274498839d6436cb35c83e90842ce1ac05a0ecb640ab14</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"access_status":"NAO_CONSULTADA_NESTA_REVISAO","arquivo":"MUM'14 - p180-raposo.pdf","consulted_at":null,"doi":null,"edition":null,"edition_status":"NAO_IDENTIFICADA","estudo_ids":["EST01"],"id":"F01","metadata_origin":"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE","status":"DOCUMENTADO_NO_CORPUS","tipo":"ARTIGO_CIENTIFICO","titulo":"An application of mobility aids for the visually impaired","url":null,"url_candidates":[],"urls":[]}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#ORI-0238">
+    <v2:legacyCollection>criterion_origins</v2:legacyCollection>
+    <v2:legacyRecordId>ORI-0238</v2:legacyRecordId>
+    <v2:legacyRecordHash>8c911b546cfa56ce957061bcbd252803d1ed38133f1504217318949e64724c07</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto do item original não redistribuído; referência documental preservada.","codigo_trabalho":"AT38","criterio_id":"CA38","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","fonte_id":"FN-WCAG","fonte_item":"WCAG","id":"ORI-0238","localizacao_publica":"AT38 · WCAG","status_localizacao":"ITEM_PRESERVADO_NA_PLANILHA_AUTORITATIVA","trecho_id":"TD-ORI-0238"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechKnowledge"/>
+    <v2:operation>Relacionar o antecedente candidato de entrada e percepção multiformato de K29 à viabilidade situada de K41 e à separação entre entrada e saída nos requisitos MMI.</v2:operation>
+    <v2:addedUnderstanding>A fala pode oferecer outra rota para produzir o rascunho apenas sob condições próprias de operação e reconhecimento. Não se deduz sua adequação de diagnóstico nem da mera presença de microfone.</v2:addedUnderstanding>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_review_status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#TD-EV30">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F08"/>
+    <mado:localizacaoDocumental>50-248883.pdf · 10</mado:localizacaoDocumental>
+    <v2:legacyCollection>excerpts</v2:legacyCollection>
+    <v2:legacyRecordId>TD-EV30</v2:legacyRecordId>
+    <v2:legacyRecordHash>9c4198506959705853efee82978bc9205e5545ac3716666917bc330e7d5cf59d</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"arquivo":"50-248883.pdf","aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"EXPLICITA COMPOSIÇÃO MULTIMODAL","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST07","fonte_id":"F08","id":"TD-EV30","id_legado":"EV30","localizacao_publica":"50-248883.pdf · 10","natureza":"EXPLÍCITO NA FONTE","pagina":10,"rastreabilidade":"A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.","tipo_registro_original":"Tabela de melhorias multimodais"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Task">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Contrato de tarefa do piloto</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#LearningCommunicationContext">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A contribuição integra uma atividade de comunicação em contexto de aprendizagem</rdfs:label>
+    <v2:scope>context</v2:scope>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K28"/>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K29"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#F05">
     <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
@@ -854,44 +307,228 @@
     <v2:legacyRecordHash>c217cadbfefd5c7b147baa522ef7c0980f9d6b4338d0aa72e4c16c601201c2d1</v2:legacyRecordHash>
     <v2:legacyRecordJSON>{"access_status":"NAO_CONSULTADA_NESTA_REVISAO","arquivo":"PETRA_22_paper_38.pdf","consulted_at":null,"doi":null,"edition":null,"edition_status":"NAO_IDENTIFICADA","estudo_ids":["EST04"],"id":"F05","metadata_origin":"REGISTRO_EXISTENTE_NAO_RECONFERIDO_ONLINE","status":"DOCUMENTADO_NO_CORPUS","tipo":"ARTIGO_CIENTIFICO","titulo":"Enhancing interaction of people with quadriplegia","url":null,"url_candidates":[],"urls":[]}</v2:legacyRecordJSON>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#localizacaoDocumental">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ContentAvailable">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">Há conteúdo a expressar ou revisar</rdfs:label>
+    <v2:scope>context</v2:scope>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#Resultado">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewKnowledge">
+    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
+    <rdfs:label xml:lang="pt">Aplicação de apresentação alternativa à revisão pela fala sintetizada</rdfs:label>
+    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K29"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K28"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#epistemicStatus">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#articulation">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#produces">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#justification">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptMMI">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceMMI"/>
+    <mado:localizacaoDocumental>Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces</mado:localizacaoDocumental>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewKnowledge">
+    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
+    <rdfs:label xml:lang="pt">Articulação situada entre produção e revisão da contribuição</rdfs:label>
+    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K28"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewPrimaryContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
+    <v2:statement>Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#TD-ORI-0238">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#FN-WCAG"/>
+    <mado:localizacaoDocumental>PLANILHA_FINAL_DE_EXTRACAO</mado:localizacaoDocumental>
+    <v2:legacyCollection>excerpts</v2:legacyCollection>
+    <v2:legacyRecordId>TD-ORI-0238</v2:legacyRecordId>
+    <v2:legacyRecordHash>81b15de4d2e08915f169484cd495bfd4bcbf36be292777f5b631891ec5d34b4a</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"ORIGINA_OU_COMPÕE_CRITERIO","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","fonte_id":"FN-WCAG","id":"TD-ORI-0238","localizacao_publica":"PLANILHA_FINAL_DE_EXTRACAO","natureza":"ITEM_EXPLICITO_PRESERVADO_NA_PLANILHA","pagina":"PLANILHA_FINAL_DE_EXTRACAO","status_curadoria":"CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReview">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
+    <v2:capability rdf:resource="https://w3id.org/mado/experimental/v2#ReviewText"/>
+    <v2:justification>CriterionReview escolhe uma alternativa de projeto AAA; K28 motiva a coordenação da revisão com a produção, permanecendo candidato a revisão documental.</v2:justification>
+    <v2:knowledge rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewKnowledge"/>
+    <v2:criterion rdf:resource="https://w3id.org/mado/experimental/v2#CriterionReview"/>
+    <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#operation">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#Fonte">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Expression">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
+    <rdfs:label xml:lang="pt">Produzir um rascunho</rdfs:label>
+    <v2:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</v2:order>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Task">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Contrato de tarefa do piloto</rdfs:label>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardLegacyContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-04"/>
+    <v2:statement>A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-01"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Keyboard">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechLegacyContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-RC3-REF-04"/>
+    <v2:statement>A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#C-K41-01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewPrimaryContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptReview"/>
+    <v2:statement>A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Resource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Recurso necessário</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewLegacyContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV29"/>
+    <v2:statement>Explicita análise e redesign de mensagens, sustentando D15–D18.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReview">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
+    <rdfs:label xml:lang="pt">Produzir e depois revisar o mesmo conteúdo</rdfs:label>
+    <v2:fromFunction rdf:resource="https://w3id.org/mado/experimental/v2#Expression"/>
+    <v2:toFunction rdf:resource="https://w3id.org/mado/experimental/v2#Review"/>
+    <v2:sharedType rdf:resource="https://w3id.org/mado/experimental/v2#TextDraft"/>
+    <v2:relationKind>SEQUENTIAL_REVIEW</v2:relationKind>
+    <v2:knowledge rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewKnowledge"/>
+    <v2:criterion rdf:resource="https://w3id.org/mado/experimental/v2#CriterionReview"/>
+    <v2:articulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanCorrect"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#ControlsCompletion"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#LearningCommunicationContext"/>
+    <v2:requiresFact rdf:resource="https://w3id.org/mado/experimental/v2#CanVerifyMeaning"/>
+    <v2:explanation>A primeira etapa produz o rascunho; a segunda torna esse mesmo conteúdo conferível antes da conclusão. A forma de entrada e a forma de revisão podem diferir, desde que ambas sejam operáveis e exista correção.</v2:explanation>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#relationKind">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TaskCreateReviewedText">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Task"/>
+    <rdfs:label xml:lang="pt">Produzir e revisar uma contribuição digital</rdfs:label>
+    <v2:requiresFunction rdf:resource="https://w3id.org/mado/experimental/v2#Expression"/>
+    <v2:requiresFunction rdf:resource="https://w3id.org/mado/experimental/v2#Review"/>
+    <v2:inputType rdf:resource="https://w3id.org/mado/experimental/v2#ContributionContent"/>
+    <v2:outputType rdf:resource="https://w3id.org/mado/experimental/v2#ReviewedText"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ControlsCompletion">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa controla quando concluir, sem envio automático</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#K41">
+    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
+    <rdfs:label xml:lang="pt">Uma entrada alternativa somente apoia a tarefa quando o gesto ou movimento exigido é viável, o dispositivo e o sistema são compatíveis, o desempenho é suficiente e o usuário recebe confirmação perceptível.</rdfs:label>
+    <v2:epistemicStatus>PARTIAL_LEGACY</v2:epistemicStatus>
+    <v2:legacyReviewStatus>CONFERIDO_PARA_O_ESCOPO_RC3</v2:legacyReviewStatus>
+    <v2:legacyFoundationStatus>PARCIAL</v2:legacyFoundationStatus>
+    <v2:legacyCollection>knowledge</v2:legacyCollection>
+    <v2:legacyRecordId>K41</v2:legacyRecordId>
+    <v2:legacyRecordHash>d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aplicabilidade":{"barreiras":["BAR-RECURSO-INCOMPATIVEL-CAPACIDADE"],"caracteristicas_pessoa":["CAR-OPERACAO-NAO-CONVENCIONAL"],"necessidades":["NEC-ENTRADA-ALTERNATIVA"],"recursos_disponiveis":["REC-ENTRADA-VOZ","REC-TECLADO","REC-SENSORES"],"tarefas":["TAR-OPERAR-SISTEMA"]},"articulacao":"O estudo ACAT/MPD articula movimento residual, baixa visão, webcam, dispositivo de pressão e teclado em tela; o RotaColab mostra falhas quando gesto, touchscreen, rede ou retorno não correspondem às condições reais.","classificacao_operacional":"OPERACIONALIZAVEL","condicoes_documentadas":["TAR-OPERAR-SISTEMA","CAR-OPERACAO-NAO-CONVENCIONAL","BAR-RECURSO-INCOMPATIVEL-CAPACIDADE","NEC-ENTRADA-ALTERNATIVA","REC-ENTRADA-VOZ","REC-TECLADO","REC-SENSORES"],"condicoes_impeditivas_ids":[],"condicoes_necessarias_ids":[],"enunciado":"Uma entrada alternativa somente apoia a tarefa quando o gesto ou movimento exigido é viável, o dispositivo e o sistema são compatíveis, o desempenho é suficiente e o usuário recebe confirmação perceptível.","escopo_caracteristicas_pessoa":"FUNCIONAL_E_NAO_DIAGNOSTICO","estudo_id":null,"fonte_ids":["F01","F05"],"foundation_review_status":"PARCIAL","funcao_decisoria_ids":["FUN-SELECIONAR-MODO-POR-CONDICAO","FUN-FEEDBACK-PERCEPTIVEL"],"id":"K41","limite":"A viabilidade do mecanismo deve ser testada com o movimento, o dispositivo e a tarefa reais.","limite_transferencia":"A viabilidade do mecanismo deve ser testada com o movimento, o dispositivo e a tarefa reais.","natureza":"RECONSTRUCAO_ANALITICA_RASTREAVEL","origem_estruturacao_semantica":"Relação reconstruída pela autora entre trechos do corpus, condições funcionais, tarefa e função decisória; não é atribuída como formulação original às publicações.","papel_no_cenario":"PRODUTO_DE_ARTICULACAO_RC3","pending_foundation_items":["Conferir original e critérios de desempenho; os registros de uma configuração não asseguram viabilidade para outro contexto."],"perspectiva_ids":["P02"],"status_revisao":"CONFERIDO_PARA_O_ESCOPO_RC3","trecho_ids":["TD-RC3-REF-04","TD-RC3-REF-07"]}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#explanation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewLegacyContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
+    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#TD-RC3-REF-04">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado#F01"/>
+    <mado:localizacaoDocumental>8</mado:localizacaoDocumental>
+    <v2:legacyCollection>excerpts</v2:legacyCollection>
+    <v2:legacyRecordId>TD-RC3-REF-04</v2:legacyRecordId>
+    <v2:legacyRecordHash>dc66d4a548bdfd40565770dc4c84a27390e10319da643855a74ae55f58f667a2</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aviso_publicacao":"Texto original não redistribuído. Consulte a fonte e a localização indicadas.","classificacao":"TRECHO_DOCUMENTAL","efeito_no_raciocinio":"CONDICIONA_RECURSO_A_AMBIENTE_E_MOVIMENTO","estado_publicacao":"TEXTO_NAO_REDISTRIBUIDO","estudo_id":"EST01","fonte_id":"F01","id":"TD-RC3-REF-04","localizacao_publica":"8","natureza":"EXPLICITO_NA_FONTE","pagina":8,"status_curadoria":"CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Representation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Estado informacional</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptReview">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceReview"/>
+    <mado:localizacaoDocumental>Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação</mado:localizacaoDocumental>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Microphone">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Interface de teclado</rdfs:label>
+    <rdfs:label xml:lang="pt">Microfone</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#mode">
+  <rdf:Description rdf:about="https://w3id.org/mado#ContextoDeInteracaoDigital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#conditionFromKnowledge">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpokenOutput">
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#AudioOutput">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+    <rdfs:label xml:lang="pt">Saída de áudio controlável</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#C-K41-01">
+    <v2:legacyCollection>contributions</v2:legacyCollection>
+    <v2:legacyRecordId>C-K41-01</v2:legacyRecordId>
+    <v2:legacyRecordHash>bd5f1440af90b37ae9e2dce72add8d7f1789ac69245b6c10299fbf8461a9366a</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"articulation_id":"ART-REF-05","contribution_role":"AMBIENTE_E_APOIO","excerpt_id":"TD-RC3-REF-04","id":"C-K41-01","justification":"Limita a entrada alternativa pela infraestrutura e pelo aprendizado da ação; não se confunde com incapacidade geral.","knowledge_id":"K41","nature":"PARAFRASE_DE_REGISTRO","review_date":"2026-10-08","reviewer":"Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original","statement":"A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.","verification_status":"CONFERIDA_NO_REGISTRO"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#VisualText">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
-    <rdfs:label xml:lang="pt">Fala sintetizada como saída</rdfs:label>
+    <rdfs:label xml:lang="pt">Texto visual como saída</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#CriterioDeDecisaoMultimodal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#toFunction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewPrimaryContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
+    <v2:statement>Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#excerpt">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#K29">
     <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
@@ -904,18 +541,246 @@
     <v2:legacyRecordHash>53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2</v2:legacyRecordHash>
     <v2:legacyRecordJSON>{"aplicabilidade":{"ambientes":["AMB-CONTEXTO-DIGITAL-DE-APRENDIZAGEM-42D27F5"],"barreiras":["BAR-DEPENDENCIA-DE-UMA-FORMA-UNICA-DE-INTERACAO-RECU-2416DFC","BAR-CANAL-EXCLUSIVAMENTE-TEXTUAL-587ACB3"],"caracteristicas_pessoa":["CAR-PERFIS-FUNCIONAIS-DIVERSOS"],"modalidades":["MOD-TEXTO","MOD-AUDIO","MOD-VOZ","MOD-TECLADO"],"necessidades":["NEC-COMUNICACAO-MULTIFORMATO","NEC-ENTRADA-ALTERNATIVA"],"recursos_disponiveis":["REC-TTS-VOZ-VISUAL-LIBRAS-TECNOLOGIAS-ASSISTIVAS-INT-910BEF5","REC-TEXTO-AUDIO-VIDEO-LIBRAS-84F838D"],"tarefas":["TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA","TAR-COMUNICAR-CONTEUDO-1545B38"]},"articulacao":"A tela de mensagens combina barra multimodal, anexos em diferentes mídias e compatibilidade com tecnologias assistivas. O estudo explicita benefícios para perfis visuais, auditivos, motores e cognitivos e preserva a necessidade de compatibilidade e critérios para cada recurso.","classificacao_operacional":"OPERACIONALIZAVEL","condicoes_documentadas":["Mensagens","TTS","voz","aparência","LIBRAS","tecnologias assistivas","Comunicação","texto","áudio","vídeo","anexos","critérios"],"condicoes_impeditivas_ids":[],"condicoes_necessarias_ids":[],"enunciado":"Comunicação em contextos digitais de aprendizagem pode ser ampliada quando a interface admite múltiplas formas de entrada, percepção e expressão, incluindo voz, leitura, LIBRAS e anexos de áudio/vídeo, desde que cada alternativa mantenha acessibilidade própria.","escopo_caracteristicas_pessoa":"ESPECIFICO_PARA_CARACTERISTICAS_DOCUMENTADAS","estudo_id":"EST07","fonte_ids":["F08"],"funcao_decisoria_ids":["FUN-PRESERVAR-ACESSO","FUN-EXPRESSAR-CONHECIMENTO"],"id":"K29","limite":null,"limite_transferencia":"Aplicar somente quando as condições contextuais registradas forem satisfeitas.","natureza":"RECONSTRUÇÃO ANALÍTICA FORTEMENTE SUSTENTADA","origem_estruturacao_semantica":"Relações derivadas de contextos e decisões documentados; complementações RC3 foram estabelecidas somente quando o enunciado, a articulação e os trechos sustentavam a aplicabilidade.","papel_no_cenario":"CONHECIMENTO_CANDIDATO","perspectiva_ids":["P02"],"status_revisao":"CANDIDATO_RECONSTRUIDO_A_REVISAR","trecho_ids":["TD-EV29","TD-EV30"]}</v2:legacyRecordJSON>
   </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewKnowledge"/>
+    <v2:operation>Relacionar os antecedentes candidatos de apresentação multiformato e coordenação operacional à descrição primária de TTS e à opção de revisão antes da conclusão.</v2:operation>
+    <v2:addedUnderstanding>Uma revisão não precisa ser visual quando outra apresentação do mesmo rascunho permite conferir o significado e controlar a correção. Isso é proposta analítica assistida, não prova de compreensão ou equivalência para a pessoa.</v2:addedUnderstanding>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanCorrect">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">Existe um meio operável para corrigir o rascunho</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#action">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardPrimaryContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptCARE"/>
+    <v2:statement>CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechPrimaryContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
+    <v2:statement>Os requisitos MMI distinguem entradas, saídas e coordenação; o resultado de uma entrada pode ser refletido em outra forma de apresentação.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#articulation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#localizacaoDocumental">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceCARE">
+    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
+    <rdfs:label xml:lang="pt">Coutaz et al. (1995), CARE</rdfs:label>
+    <v2:url>https://danielsalber.com/publications/interact1995.pdf</v2:url>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewPrimaryContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptMMI"/>
+    <v2:statement>A descrição MMI inclui síntese de fala como saída e distingue a seleção de entrada da seleção de saída.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#KeyboardEffortAcceptable">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">O esforço e o desempenho da entrada por teclado são aceitáveis nesta tarefa</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechEffortAcceptable">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">O esforço e o desempenho da entrada por fala são aceitáveis nesta tarefa</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#K28">
+    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
+    <rdfs:label xml:lang="pt">Em formulários e comunicação digital, acessibilidade depende de uma sequência operacional compreensível: rótulos/instruções, foco e teclado, identificação de erros, confirmação e feedback de status precisam funcionar de forma coordenada.</rdfs:label>
+    <v2:epistemicStatus>PARTIAL_LEGACY</v2:epistemicStatus>
+    <v2:legacyReviewStatus>CANDIDATO_RECONSTRUIDO_A_REVISAR</v2:legacyReviewStatus>
+    <v2:legacyFoundationStatus>NOT_REVIEWED_IN_PILOT</v2:legacyFoundationStatus>
+    <v2:legacyCollection>knowledge</v2:legacyCollection>
+    <v2:legacyRecordId>K28</v2:legacyRecordId>
+    <v2:legacyRecordHash>cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"aplicabilidade":{"ambientes":["AMB-CONTEXTO-DIGITAL-DE-APRENDIZAGEM-42D27F5"],"barreiras":["BAR-ROTULOS-FOCO-ERRO-STATUS-INADEQUADOS-219BE43"],"caracteristicas_pessoa":["CAR-PERFIS-FUNCIONAIS-DIVERSOS"],"modalidades":["MOD-TECLADO"],"recursos_disponiveis":["REC-TEXTO-TECLADO-FOCO-FEEDBACK-STATUS-97D641F"],"tarefas":["TAR-PREENCHER-ENVIAR-MENSAGEM-0C1FB87","TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD"]},"articulacao":"A análise da tela de mensagens parte de critérios essenciais violados e estrutura o formulário redesenhado com rótulos, navegação lógica, foco visível, erros, confirmação e status acessível. A decisão não é um item isolado, mas a coordenação de estados e respostas ao longo da tarefa.","classificacao_operacional":"OPERACIONALIZAVEL","condicoes_documentadas":["Formulário","rótulos","teclado","foco","erros","confirmação","status","critérios"],"condicoes_impeditivas_ids":[],"condicoes_necessarias_ids":[],"enunciado":"Em formulários e comunicação digital, acessibilidade depende de uma sequência operacional compreensível: rótulos/instruções, foco e teclado, identificação de erros, confirmação e feedback de status precisam funcionar de forma coordenada.","escopo_caracteristicas_pessoa":"ESPECIFICO_PARA_CARACTERISTICAS_DOCUMENTADAS","estudo_id":"EST07","fonte_ids":["F08"],"funcao_decisoria_ids":["FUN-CONSOLIDAR-COM-FEEDBACK","FUN-ACOMPANHAR-RESULTADO"],"id":"K28","limite":null,"limite_transferencia":"Aplicar somente quando as condições contextuais registradas forem satisfeitas.","natureza":"RECONSTRUÇÃO ANALÍTICA FORTEMENTE SUSTENTADA","origem_estruturacao_semantica":"Relações derivadas de contextos e decisões documentados; complementações RC3 foram estabelecidas somente quando o enunciado, a articulação e os trechos sustentavam a aplicabilidade.","papel_no_cenario":"CONHECIMENTO_CANDIDATO","perspectiva_ids":["P02"],"status_revisao":"CANDIDATO_RECONSTRUIDO_A_REVISAR","trecho_ids":["TD-EV29","TD-EV30"]}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#requiresResource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Function">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Função exigida pela tarefa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TextDraft">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
+    <rdfs:label xml:lang="pt">Rascunho textual editável</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanUseSpeech">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa consegue e aceita usar fala nesta tarefa</rdfs:label>
+  </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Capability">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:label xml:lang="pt">Capacidade de interação reutilizável</rdfs:label>
     <rdfs:comment xml:lang="pt">Operação unitária de projeto, não resposta completa de um cenário nem capacidade clínica inferida.</rdfs:comment>
   </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_url">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#order">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#requiresFact">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#outputType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceReview">
+    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
+    <rdfs:label xml:lang="pt">W3C Understanding WCAG 2.2, 3.3.6 Error Prevention (All), AAA</rdfs:label>
+    <v2:url>https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html</v2:url>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanReviewVisualText">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa consegue conferir o texto apresentado visualmente</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#KeyboardFeedbackPerceptible">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa percebe o resultado da entrada por teclado</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#AudioUsable">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">O áudio é utilizável no ambiente, com privacidade e percepção suficientes</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardKnowledge">
+    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
+    <rdfs:label xml:lang="pt">Aplicação situada de viabilidade à entrada por teclado</rdfs:label>
+    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K41"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardKnowledge"/>
+    <v2:operation>Operacionalizar a viabilidade situada registrada em K41 para a entrada por teclado; relacionar a exigência de operação ao requisito primário de interface de teclado e à distinção entre equivalência funcional e uso individual.</v2:operation>
+    <v2:addedUnderstanding>A disponibilidade do teclado não basta: esforço, compatibilidade e percepção do resultado precisam ser confirmados para esta entrada. A restrição é proposta para o piloto, sem promover os registros de K41 a leitura do original.</v2:addedUnderstanding>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewPrimaryContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptReview"/>
+    <v2:statement>A opção de conferir e corrigir antes de concluir especifica a função de revisão; o documento não determina que ela precise ser visual.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#edition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CriterionInput">
+    <rdf:type rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
+    <rdfs:label xml:lang="pt">Escolher uma entrada funcionalmente adequada e operável</rdfs:label>
+    <v2:source rdf:resource="https://w3id.org/mado/experimental/v2#SourceCARE"/>
+    <v2:locator>pp. 2–5, equivalência funcional e compatibilidade com a pessoa</v2:locator>
+    <v2:justification>Critério analítico do piloto: entradas podem cumprir a mesma subfunção, mas sua disponibilidade e viabilidade são verificadas separadamente; não se presume igual esforço.</v2:justification>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewLegacyContribution2">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
+    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#mode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#Resultado">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <v2:produces rdf:resource="https://w3id.org/mado/experimental/v2#ProductionThenReviewKnowledge"/>
+    <v2:operation>Relacionar coordenação de etapas de K28 e alternativas de entrada/percepção de K29 para uma sequência sobre o mesmo rascunho, sob condições do piloto.</v2:operation>
+    <v2:addedUnderstanding>A entrada deve deixar informação conferível para a etapa seguinte. Trocar o modo de apresentação não dispensa acesso ao conteúdo nem correção; sequência não é classificada automaticamente como complementaridade CARE.</v2:addedUnderstanding>
+    <v2:status>CURATED_FOR_PILOT</v2:status>
+    <v2:bindingStatus>PROPOSED_OPERATIONALIZATION</v2:bindingStatus>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpokenEntry">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
+    <rdfs:label xml:lang="pt">Fala como entrada</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#statement">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpokenOutput">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
+    <rdfs:label xml:lang="pt">Fala sintetizada como saída</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyReviewStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#capability">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#GroundingApplication"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Capability"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#inputType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechKnowledge">
+    <rdf:type rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
+    <rdfs:label xml:lang="pt">Aplicação situada de entrada por fala</rdfs:label>
+    <v2:epistemicStatus>DESIGN_SYNTHESIS_NOT_EMPIRICAL</v2:epistemicStatus>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K41"/>
+    <v2:derivedFromLegacy rdf:resource="https://w3id.org/mado#K29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionIRI rdf:resource="https://w3id.org/mado/experimental/2.0.0-alpha2"/>
+    <owl:versionInfo>2.0.0-alpha2</owl:versionInfo>
+    <rdfs:label xml:lang="pt">MADO V2 — piloto de composição fundamentada</rdfs:label>
+    <rdfs:comment xml:lang="pt">Extensão experimental isolada. Não substitui a MADO 1.4 nem representa uma versão validada com participantes. Namespace proposto; não pressupõe registro de resolução pública.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#scope">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="pt">context identifica fatos compartilhados; condições pessoais não são herdadas por outro participante.</rdfs:comment>
+  </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#knowledge">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
     <rdfs:range rdf:resource="https://w3id.org/mado#ConhecimentoMultimodalArticulado"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Microphone">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
-    <rdfs:label xml:lang="pt">Microfone</rdfs:label>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#review_status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewLegacyContribution1">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
@@ -925,117 +790,252 @@
     <v2:status>LEGACY_RECORD_ONLY</v2:status>
     <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K28"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#toFunction">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#bindingStatus">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#source">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado#Fonte"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_url">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptKeyboard">
-    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
-    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceKeyboard"/>
-    <mado:localizacaoDocumental>Success Criterion e Intent: funcionalidade operável por interface de teclado</mado:localizacaoDocumental>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanUseKeyboard">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa consegue operar a interface de teclado</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Contribution">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:subClassOf rdf:resource="https://w3id.org/mado#ContribuicaoNaArticulacao"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#referenceKind">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Mode">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-    <rdfs:label xml:lang="pt">Forma de entrada ou saída</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#requiresFunction">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Task"/>
-    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#C-K41-01">
-    <v2:legacyCollection>contributions</v2:legacyCollection>
-    <v2:legacyRecordId>C-K41-01</v2:legacyRecordId>
-    <v2:legacyRecordHash>bd5f1440af90b37ae9e2dce72add8d7f1789ac69245b6c10299fbf8461a9366a</v2:legacyRecordHash>
-    <v2:legacyRecordJSON>{"articulation_id":"ART-REF-05","contribution_role":"AMBIENTE_E_APOIO","excerpt_id":"TD-RC3-REF-04","id":"C-K41-01","justification":"Limita a entrada alternativa pela infraestrutura e pelo aprendizado da ação; não se confunde com incapacidade geral.","knowledge_id":"K41","nature":"PARAFRASE_DE_REGISTRO","review_date":"2026-10-08","reviewer":"Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original","statement":"A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.","verification_status":"CONFERIDA_NO_REGISTRO"}</v2:legacyRecordJSON>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#DecisaoDeAcessibilidadeMultimodal">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#contributionForKnowledge">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#status">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado#CriterioDeDecisaoMultimodal">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_review_status">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#conditionFromKnowledge">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ContributionContent">
     <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
     <rdfs:label xml:lang="pt">Conteúdo que a pessoa quer expressar</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CriterionReview">
+    <rdf:type rdf:resource="https://w3id.org/mado#CriterioDeDecisaoMultimodal"/>
+    <rdfs:label xml:lang="pt">Permitir conferência e correção antes da conclusão</rdfs:label>
+    <v2:source rdf:resource="https://w3id.org/mado/experimental/v2#SourceReview"/>
+    <v2:locator>3.3.6 (AAA), alternativa de revisão, confirmação e correção</v2:locator>
+    <v2:justification>Escolha de projeto entre alternativas da diretriz AAA; não é exigência universal de revisão visual nem declaração de conformidade.</v2:justification>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#derivedFromLegacy">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyFoundationStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechFeedbackPerceptible">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa percebe o resultado do reconhecimento de fala</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceMMI">
+    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
+    <rdfs:label xml:lang="pt">W3C Multimodal Interaction Requirements (2003), Note</rdfs:label>
+    <v2:url>https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/</v2:url>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Review">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
+    <rdfs:label xml:lang="pt">Conferir e poder corrigir o rascunho</rdfs:label>
+    <v2:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</v2:order>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_version">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechPrimaryContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptCARE"/>
+    <v2:statement>CARE permite examinar alternativas para uma mesma transição e sua compatibilidade com o usuário; não demonstra igual acessibilidade individual.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechCompatible">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A entrada por fala é compatível com o dispositivo e o sistema usados</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K41"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#addedUnderstanding">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Display">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+    <rdfs:label xml:lang="pt">Apresentação visual legível</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#fromFunction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Function"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#url">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyFoundationStatus">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdf:Description rdf:about="https://w3id.org/mado#trechoDeFonte">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado#Fonte"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanUseSpeech">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
-    <rdfs:label xml:lang="pt">A pessoa consegue e aceita usar fala nesta tarefa</rdfs:label>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TextToSpeech">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+    <rdfs:label xml:lang="pt">Leitura em voz do texto</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Keyboard">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+    <rdfs:label xml:lang="pt">Interface de teclado</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#ArticulacaoDocumentada">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyCollection">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#RelationRule">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Relação funcional documentada entre etapas</rdfs:label>
+    <rdfs:comment xml:lang="pt">Liga funções e estado compartilhado, não pares fixos de capacidades ou identificadores de cenário. Não classifica automaticamente uma sequência como complementaridade CARE.</rdfs:comment>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyReviewStatus">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#sharedType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#RelationRule"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
   </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#review_status">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyRecordJSON">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpokenEntry">
-    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
-    <rdfs:label xml:lang="pt">Fala como entrada</rdfs:label>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#source">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado#Fonte"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#ContribuicaoNaArticulacao">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#GroundingApplication">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Fundamento de uma capacidade</rdfs:label>
+    <rdfs:comment xml:lang="pt">Vínculo curado reutilizável. Distingue-se da aplicação situada de critério produzida em uma execução.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechLegacyContribution3">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
+    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanReviewSpeech">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa consegue conferir o conteúdo por fala sintetizada</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewPrimaryContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado/experimental/v2#ExcerptReview"/>
+    <v2:statement>A revisão e confirmação são uma das alternativas de prevenção de erros de submissão; o piloto escolhe essa opção, sem atribuir à fonte uma modalidade obrigatória.</v2:statement>
+    <v2:status>PRIMARY_CHECKED</v2:status>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ExcerptCARE">
+    <rdf:type rdf:resource="https://w3id.org/mado#TrechoDocumental"/>
+    <mado:trechoDeFonte rdf:resource="https://w3id.org/mado/experimental/v2#SourceCARE"/>
+    <mado:localizacaoDocumental>pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade</mado:localizacaoDocumental>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SourceKeyboard">
+    <rdf:type rdf:resource="https://w3id.org/mado#Fonte"/>
+    <rdfs:label xml:lang="pt">W3C Understanding WCAG 2.2, 2.1.1 Keyboard</rdfs:label>
+    <v2:url>https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html</v2:url>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#bindingStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanVerifyMeaning">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa pode conferir o significado relevante do rascunho pela apresentação escolhida</rdfs:label>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K28"/>
+    <v2:conditionFromKnowledge rdf:resource="https://w3id.org/mado#K29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewLegacyContribution1">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <v2:inArticulation rdf:resource="https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation"/>
+    <v2:excerpt rdf:resource="https://w3id.org/mado#TD-EV30"/>
+    <v2:statement>A tabela relaciona barra, formulário, anexos, assistente e TA a critérios/perfis; sustenta K28/K29 e S14–S18.</v2:statement>
+    <v2:status>LEGACY_RECORD_ONLY</v2:status>
+    <v2:contributionForKnowledge rdf:resource="https://w3id.org/mado#K29"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ContextFact">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Condição a confirmar</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#DecisaoDeAcessibilidadeMultimodal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#C-K41-02">
+    <v2:legacyCollection>contributions</v2:legacyCollection>
+    <v2:legacyRecordId>C-K41-02</v2:legacyRecordId>
+    <v2:legacyRecordHash>d0dbe54da713571944cdeb9df0916714db44d5e600d45fd2fadbef808d0e2a4f</v2:legacyRecordHash>
+    <v2:legacyRecordJSON>{"articulation_id":"ART-REF-05","contribution_role":"VIABILIDADE_DA_ACAO","excerpt_id":"TD-RC3-REF-07","id":"C-K41-02","justification":"Apoia testar ação e compatibilidade concretas. Não demonstra que todo acionador ou voz atenderá outra pessoa.","knowledge_id":"K41","nature":"PARAFRASE_DE_REGISTRO","review_date":"2026-10-08","reviewer":"Assistência computacional; conferência dos registros preservados da RC4, não revisão autoral ou leitura do original","statement":"O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.","verification_status":"CONFERIDA_NO_REGISTRO"}</v2:legacyRecordJSON>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyCollection">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#epistemicStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#limitation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#TrechoDocumental">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado#Fonte">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#inArticulation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="https://w3id.org/mado/experimental/v2#Contribution"/>
+    <rdfs:range rdf:resource="https://w3id.org/mado/experimental/v2#ArticulationSupport"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyRecordJSON">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ArticulationSupport">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
     <rdfs:subClassOf rdf:resource="https://w3id.org/mado#ArticulacaoDocumentada"/>
   </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#ReviewedText">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Representation"/>
+    <rdfs:label xml:lang="pt">Conteúdo conferível e corrigível pela pessoa</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#justification">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanControlPlayback">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa consegue pausar e repetir a leitura</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyRecordId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Mode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="pt">Forma de entrada ou saída</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#EditableText">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Resource"/>
+    <rdfs:label xml:lang="pt">Campo textual editável</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#legacyRecordHash">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#document_paraphrase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#WrittenEntry">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#Mode"/>
+    <rdfs:label xml:lang="pt">Escrita como entrada</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#SpeechInputUsable">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">Reconhecimento de fala utilizável neste ambiente e idioma</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#CanUseKeyboard">
+    <rdf:type rdf:resource="https://w3id.org/mado/experimental/v2#ContextFact"/>
+    <rdfs:label xml:lang="pt">A pessoa consegue operar a interface de teclado</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#locator">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#Contribution">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:subClassOf rdf:resource="https://w3id.org/mado#ContribuicaoNaArticulacao"/>
+  </rdf:Description>
   <rdf:Description rdf:about="https://w3id.org/mado#ConhecimentoMultimodalArticulado">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://w3id.org/mado/experimental/v2#contributionForKnowledge">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
   </rdf:Description>
 </rdf:RDF>

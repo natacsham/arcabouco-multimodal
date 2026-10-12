@@ -2,6 +2,8 @@
 
 **Versão alvo: MADO 1.4.0-rc3.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios de outras versões não comprovam esta revisão.
 
+**Revisão de entrada do instrumento: AMADO-web-1.4.0-rc3-intake1.** `test_intake_context_repair.py` cobre papéis, plurais, tarefa ambígua, disponibilidade e correção sem reinterpretação. `test_progress_bridge.py` confere etapas reais e igualdade do retorno com e sem observador. `review-input.mjs` verifica substituição de opções e preservação de informações; `progress.mjs` verifica correlação, cancelamento e falhas. O relatório `focused-dialogue-browser.json` documenta o percurso no navegador e identifica seu manifesto. Nenhum desses testes comprova compreensão por participantes ou amplia a cobertura funcional da base.
+
 ## Controles acrescentados na RC3
 
 `tests/test_contextual_questions.py` confere aproveitamento da matriz, origem dos requisitos, escopo dos participantes, diferenças funcionais e percursos de esclarecimento. `tests/test_practical_summary.py` confere um cartão por configuração e passos rastreáveis à ação selecionada. `tests/focused-dialogue-browser.mjs` verifica a nova rodada de perguntas e a apresentação com o motor real no navegador; a suíte completa permanece em `tests/simple-flow-browser.mjs`.

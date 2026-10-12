@@ -1,6 +1,12 @@
 // Synthetic checks of the public describe -> complete -> confirm -> orient flow.
 // Uses the real worker and base. Mock speech tests cover UI behavior, not accuracy.
 import assert from 'node:assert/strict';
+async function advanceUnderstanding(page){
+  await page.locator('#case-understanding').waitFor({state:'visible',timeout:180000});
+  assert(await page.locator('#case-questions').isHidden(),'Understanding precedes questions');
+  assert(await page.locator('#understanding-summary').innerText(),'Preview contains registered information');
+  await page.locator('#continue-understanding').click();
+}
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import http from 'node:http';
@@ -154,7 +160,7 @@ try{
     check(key('keyboard_reaches_voice'),await page.locator('#dictate-case').evaluate(el=>el===document.activeElement));
     await page.locator('#case-examples > summary').focus();await page.keyboard.press('Enter');
     await page.locator('#case-template').selectOption('CTX-DEMO-WEB-LEITOR-TELA');
-    await page.locator('#load-example').click();
+    await page.locator('#load-example').click();await advanceUnderstanding(page);
     await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
     check(key('example_has_review'),/leitor de tela/i.test(await page.locator('#review-summary').innerText()));
     check(key('example_entry_hidden'),await page.locator('#case-entry').isHidden());
@@ -176,12 +182,12 @@ try{
     await page.keyboard.press('Enter');
     await page.screenshot({path:path.join(artifacts,view+'-orientation.png'),fullPage:true});
     await page.locator('#orientation-result [data-edit-case]').click();
-    check(key('editing_discards_orientation'),await page.locator('#orientation-result').isHidden()&&!await page.locator('#case-confirmed').isChecked());
+    check(key('editing_opens_populated_context'),await page.locator('#orientation-result').isHidden()&&await page.locator('#case-editor').isVisible()&&await page.locator('[data-revision="tarefas"] input:checked').count()>0);
     await page.locator('#new-case').click();await ready(page);
     check(key('clear_case'),await page.locator('#case-narrative').inputValue()===''&&await page.locator('#orientation-result').isHidden());
     // A new narrative reaches composition through the same public field.
     await page.locator('#case-narrative').fill('O aluno quer escrever uma resposta e revisar o texto. Tem um teclado. Há campo de texto editável. Consegue usar o teclado. Não pode falar. Sem microfone. Sem tela. Não consegue ler o texto na tela. Leitura em voz disponível. Saída de áudio disponível. Tem conteúdo. Consegue conferir o texto pela leitura em voz. Consegue pausar e repetir a leitura. Consegue corrigir o texto. Controla quando concluir. Consegue confirmar o sentido do texto.');
-    await page.locator('#analyze-case').click();
+    await page.locator('#analyze-case').click();await advanceUnderstanding(page);
     await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
     const v2Questions=await page.locator('#questions-form [data-question]').first().getAttribute('data-question');
     check(key('composition_asks_missing_conditions'),v2Questions?.startsWith('facts:')||v2Questions?.startsWith('resources:'));
@@ -222,7 +228,7 @@ try{
     // Regression of the reported loop: the old flow re-asked the barrier when
     // the organizing task received ONE valid option, not every offered need.
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
-    await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
+    await page.locator('#analyze-case').click();await advanceUnderstanding(page);await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
     const sparseInitial=await page.evaluate(()=>window.__simpleProbe.state);
     const sparseAnswers=[], sparseProgress=[];
     while(await page.locator('#case-questions').isVisible()){
@@ -281,7 +287,7 @@ try{
     // A collective teaching challenge must not collapse different participants
     // into the single-person writing pilot or infer an assistive technology.
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
-    await page.locator('#analyze-case').click();
+    await page.locator('#analyze-case').click();await advanceUnderstanding(page);
     await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
     const teaching=await page.evaluate(()=>window.__simpleProbe.state);
     const groups=teaching.context.participantes;
@@ -300,6 +306,7 @@ try{
       const questionPerson=await page.locator('#question-person').innerText();
       const field=question.split(':')[0];
       const values=field==='tarefas' ? ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'] :
+        field==='requester_relation' ? ['prepare'] :
         field==='participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
         field==='modalidades_disponiveis' ? /surd/i.test(questionPerson) ? ['MOD-TEXTO','MOD-IMAGEM'] : /ceg/i.test(questionPerson) ? ['MOD-AUDIO'] : ['MOD-TEXTO'] :
         field==='caracteristicas_pessoa' ? /ceg/i.test(questionPerson) ? ['CAR-INTERACAO-NAO-VISUAL'] : ['unknown'] :
@@ -385,7 +392,7 @@ try{
     await page.screenshot({path:path.join(artifacts,view+'-teaching-partial.png'),fullPage:true});
     await page.locator('#new-case').click();await ready(page);
     await page.locator('#case-narrative').fill('Sou docente e quero ensinar um assunto complexo de matemática à minha turma, com dois estudantes surdos e um estudante cego.');
-    await page.locator('#analyze-case').click();await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
+    await page.locator('#analyze-case').click();await advanceUnderstanding(page);await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
     const variantAnswers=[];
     while(await page.locator('#case-questions').isVisible()){
       const row=page.locator('#questions-form [data-question]'),question=await row.getAttribute('data-question');
@@ -394,6 +401,7 @@ try{
         'O grupo compreende texto e imagens. Outros apoios ainda precisam ser conferidos.' : 'A operação de leitor de tela ainda não foi confirmada. É preciso conferir outra forma de acesso.');
       else {
         const wanted=field==='tarefas' ? ['TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL'] :
+          field==='requester_relation' ? ['prepare'] :
           field==='barreira_ou_necessidade' ? ['NEC-ACESSO-EQUIVALENTE','NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE'] :
           field==='participantes' ? ['PAPEL-RESPONSAVEL-ADAPTACAO'] :
           field==='modalidades_disponiveis' ? /surd/i.test(person) ? ['MOD-TEXTO','MOD-IMAGEM'] : ['MOD-AUDIO'] :
@@ -470,17 +478,25 @@ try{
     // An incomplete real narrative asks for missing data, rather than filling an example.
     const marker='MARCADOR-PRIVACIDADE';
     await page.locator('#case-narrative').fill(marker+'. Uma pessoa cega usa leitor de tela, mas as imagens não têm descrição.');
-    await page.locator('#analyze-case').click();
+    await page.locator('#analyze-case').click();await advanceUnderstanding(page);
     await page.locator('#case-questions').waitFor({state:'visible',timeout:180000});
     const before=await page.evaluate(()=>window.__simpleProbe.state);
     check(key('only_missing_questions'),await page.locator('#questions-form [data-question]').count()>0&&!await page.locator('#orientation-result').isVisible());
     let objective=page.locator('#questions-form [name="objetivo"]');
-    if(!await objective.count()){
+    let beforeObjective=0;
+    while(!await objective.count()&&await page.locator('#case-questions').isVisible()){
+      assert(beforeObjective++<3,'Objective clarification stays within the short round');
+      const question=await page.locator('#questions-form [data-question]').getAttribute('data-question');
       const task=page.locator('#questions-form [name="tarefas"][value="TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"]');
-      assert(await task.count()===1,'A missing task precedes the contextual objective question');
-      await task.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
-      await task.check();await page.locator('#answer-questions').click();
-      await page.locator('#questions-form [name="objetivo"]').waitFor({state:'visible',timeout:180000});
+      if(await task.count()){
+        await task.evaluate(element=>{for(let ancestor=element.parentElement;ancestor;ancestor=ancestor.parentElement)if(ancestor.tagName==='DETAILS')ancestor.open=true;});
+        await task.check();
+      }else{
+        assert.equal(question,'requester_relation','Only a role clarification may precede the missing objective here');
+        await page.locator('#questions-form input[value="support"]').check();
+      }
+      await page.locator('#answer-questions').click();
+      await page.waitForFunction(previous=>!document.querySelector('#case-review').hidden||document.querySelector('#questions-form [data-question]')?.dataset.question!==previous,question,{timeout:180000});
       objective=page.locator('#questions-form [name="objetivo"]');
     }
     assert(await objective.count()===1,'Incomplete narrative must ask for an objective within the short round');
@@ -494,7 +510,9 @@ try{
     if(await page.locator('#case-questions').isVisible())await page.locator('#skip-questions').click();
     await page.locator('#case-review').waitFor({state:'visible',timeout:180000});
     check(key('unknown_not_silently_completed'),await page.locator('#generate-orientation').isDisabled());
-    await page.locator('#edit-case').click();await page.locator('#analyze-case').click();
+    await page.locator('#edit-case').click();
+    check(key('existing_objective_visible_in_editor'),await page.locator('[data-revision="objetivo"]').inputValue()==='Compreender a informação das imagens e continuar a atividade.');
+    await page.locator('#save-case').click();
     await page.waitForFunction(()=>!document.querySelector('#case-questions').hidden||!document.querySelector('#case-review').hidden,{}, {timeout:180000});
     check(key('unchanged_narrative_preserves_answers'),
       (await page.locator('#case-questions').isHidden()||await page.locator('#questions-form [name="objetivo"]').count()===0)&&

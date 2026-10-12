@@ -29,7 +29,14 @@ DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
 VERSION = "1.4.0-rc3"
-UI_VERSION = "AMADO-web-1.4.0-rc3"
+UI_VERSION = "AMADO-web-1.4.0-rc3-intake1"
+REQUESTER_RELATIONS = {
+    "self": "Sou eu quem realizará a atividade",
+    "support": "Apoio quem realizará a atividade",
+    "prepare": "Preparo ou adapto o material ou recurso",
+    "seek_guidance": "Busco orientações para conversar com quem conduz ou apoia a atividade",
+    "unspecified": "Ainda não sei informar",
+}
 PRACTICAL_COPY = {
     "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE": {
         "title": "Organize o material em blocos que possam ser revisados",
@@ -346,6 +353,10 @@ class DecisionEngine:
             "titulo_curto": c.get("titulo_curto", ""),
             "premissas_do_exemplo": c.get("premissas_do_exemplo", []),
             "operacao_do_recurso": c.get("operacao_do_recurso", ""),
+            "requester_relation": c.get("requester_relation", ""),
+            "requester_relation_label": REQUESTER_RELATIONS.get(c.get("requester_relation"), ""),
+            "requester_relation_status": c.get("requester_relation_status", ""),
+            "requester_participation_id": c.get("requester_participation_id", ""),
             "impedimentos_verificados": bool(c.get("impedimentos_verificados", False)),
             "tarefas": self.labels(c.get("tarefas")),
             "caracteristicas_relevantes": self.labels(c.get("caracteristicas_pessoa")),
@@ -512,6 +523,9 @@ class DecisionEngine:
                 "informacoes_ausentes": [],
                 "recursos_propostos": [],
                 "operacao_do_recurso": "",
+                "requester_relation": "",
+                "requester_relation_status": "",
+                "requester_participation_id": "",
                 "impedimentos_verificados": False,
                 "premissas_do_exemplo": [],
                 "titulo_curto": "Caso informado agora",
@@ -542,6 +556,9 @@ class DecisionEngine:
         context = self.current["context"]
         context["restricoes"] = []
         context["operacao_do_recurso"] = ""
+        context["requester_relation"] = ""
+        context["requester_relation_status"] = ""
+        context["requester_participation_id"] = ""
         context["impedimentos_verificados"] = False
         context["premissas_do_exemplo"] = []
         detected = {field: [] for field in self.context_fields}
@@ -567,7 +584,7 @@ class DecisionEngine:
             )
             for alias in aliases:
                 token = normalize_text(alias)
-                if field == "ambientes" and token in {"turma", "professor", "professora", "aluno", "estudante"}:
+                if field == "ambientes" and token in {"turma", "professor", "professora", "aluno", "estudante", "aula"}:
                     # A participant or group does not establish the location.
                     continue
                 if len(token) >= 4 and token in normalized:
@@ -833,7 +850,7 @@ class DecisionEngine:
                 sentence
                 for sentence in sentences
                 if re.search(
-                    "\\b(objetiv|precisa|deve|espera|quer|para que)\\w*\\b",
+                    "\\b(objetiv|precis|deve|esper|quer|para que)\\w*\\b",
                     normalize_text(sentence),
                 )
             ),
@@ -843,16 +860,35 @@ class DecisionEngine:
         roles = []
         role_cues = [
             ("PAPEL-ESTUDANTE", "\\b(estudantes?|alunos?|alunas?)\\b"),
-            ("PAPEL-PROFESSORA", "\\b(professora|professor|docente)\\b"),
+            ("PAPEL-PROFESSORA", "\\b(professor(?:a|es|as)?|docentes?)\\b"),
             ("PAPEL-TURMA", "\\b(turma|colegas)\\b"),
-            ("PAPEL-PESSOA-APOIADA", "\\b(pessoa|usuario|usuaria)\\b"),
+            ("PAPEL-PESSOA-APOIADA", "\\b(pessoas?|usuarios?|usuarias?)\\b"),
+            ("PAPEL-MEDIADOR", "\\b(mediador(?:a|es|as)?|facilitador(?:a|es|as)?)\\b"),
             (
                 "PAPEL-RESPONSAVEL-ADAPTACAO",
                 "\\b(responsavel pela adaptacao|responsavel por adaptar|pessoa responsavel por adaptar)\\b",
             ),
         ]
         for role_id, pattern in role_cues:
-            if re.search(pattern, normalized):
+            role_matches = [match for match in re.finditer(pattern, normalized)
+                            if not self._negated_access_signal(normalized, match.start())
+                            and not re.search(r"\bnao (?:sou|somos)\s+$", normalized[max(0, match.start() - 25):match.start()])]
+            if role_matches:
+                plural = next((match for match in role_matches
+                               if match.group(0).endswith("s") or match.group(0) == "turma"), None)
+                group_info = {}
+                if plural:
+                    count_match = re.search(r"\b(\d+|um|uma|dois|duas|tres|quatro)\s+$",
+                                            normalized[:plural.start()])
+                    count = count_match.group(1) if count_match else None
+                    quantity = (int(count) if count and count.isdigit()
+                                else {"um": 1, "uma": 1, "dois": 2, "duas": 2, "tres": 3, "quatro": 4}.get(count))
+                    group_label = {"PAPEL-ESTUDANTE": "Estudantes", "PAPEL-PROFESSORA": "Docentes",
+                                   "PAPEL-PESSOA-APOIADA": "Pessoas apoiadas na interação",
+                                   "PAPEL-MEDIADOR": "Pessoas que fazem a mediação",
+                                   "PAPEL-TURMA": "Turma ou colegas"}.get(role_id, plural.group(0))
+                    group_info = {"label": f"{group_label} ({quantity if quantity is not None else 'quantidade não informada'})",
+                                  "grupo_rotulo": plural.group(0), "quantidade": quantity}
                 roles.append(
                     {
                         "id": f"PART-CASO-{len(roles) + 1:02d}-{uuid.uuid4().hex[:6].upper()}",
@@ -876,21 +912,25 @@ class DecisionEngine:
                         "recurso_operado_ids": [],
                         "objetivo_participacao": "",
                         "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO",
+                        **group_info,
                     }
                 )
         self.current["participations"] = roles
         # A reported diagnosis describes a group; it never supplies its
         # communication route, preferred mode or assistive technology.
-        groups = [match for match in re.finditer(r"\b(?:(\d+|um|uma|dois|duas|tres|quatro)\s+)?(?:alunos?\s+|alunas?\s+|estudantes?\s+|pessoas?\s+)?(surdos?|surdas?|cegos?|cegas?|(?:com\s+)?baixa visao)\b", normalized)
-                  if not self._negated_access_signal(normalized, match.start())]
+        groups = [match for match in re.finditer(r"\b(?:(\d+|um|uma|dois|duas|tres|quatro)\s+)?(?:alunos?\s+|alunas?\s+|estudantes?\s+|pessoas?\s+)?(?:(?:e|sao|tem|possuem)\s+)?(surdos?|surdas?|cegos?|cegas?|(?:com\s+)?baixa visao)\b", normalized)
+                  if not self._negated_access_signal(normalized, match.start(2))]
         if groups:
             roles = [row for row in roles if row["papel_id"] not in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
             quantities = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "tres": 3, "quatro": 4}
             for match in groups:
                 count, description = match.groups()
-                quantity = int(count) if count and count.isdigit() else quantities.get(count, 1)
+                plural = description.endswith("s") or bool(re.search(r"\b(alunos|alunas|estudantes|pessoas)\b", match.group(0)))
+                quantity = int(count) if count and count.isdigit() else quantities.get(count, None if plural else 1)
                 student = bool(re.search(r"\b(alunos?|alunas?|estudantes?|turma)\b", normalized))
-                label = f"{quantity} {'estudante(s)' if student else 'pessoa(s)'}: {description} informado no relato"
+                label = (f"{quantity} {'estudante(s)' if student else 'pessoa(s)'}: {description} informado no relato"
+                         if quantity is not None else
+                         f"{'Estudantes' if student else 'Pessoas'}: {description} (quantidade não informada)")
                 roles.append({"id": f"PART-CASO-{len(roles)+1:02d}-{uuid.uuid4().hex[:6].upper()}",
                               "contexto_id": context["id"], "papel_id": "PAPEL-ESTUDANTE" if student else "PAPEL-PESSOA-APOIADA",
                               "label": label, "grupo_rotulo": description, "quantidade": quantity,
@@ -902,6 +942,24 @@ class DecisionEngine:
             self.current["participations"] = roles
             # An aggregate alias match cannot establish who has the condition.
             context["caracteristicas_pessoa"] = []
+        # The requester is not automatically the supported person or whoever
+        # holds a profession mentioned in the narrative. These are candidates
+        # for confirmation, not abilities or authorization to adapt a resource.
+        requester_cues = (
+            ("seek_guidance", r"\b(?:o que (?:eu )?posso|quero|preciso)\s+(?:falar|dizer|orientar|conversar)\b.{0,65}\b(?:professor|professora|docente|mediador|mediadora|responsavel)\b"),
+            ("prepare", r"\b(?:eu (?:vou|preciso|quero)|quero|preciso)\s+(?:preparar|adaptar|ajustar)\b.{0,35}\b(?:material|conteudo|recurso|apresentacao)\b"),
+            ("support", r"\b(?:eu apoio|pessoa que (?:eu )?apoio|quero (?:ajudar|apoiar)|preciso (?:ajudar|apoiar))\b"),
+            ("self", r"\b(?:para (?:meu uso|mim)|sou eu quem (?:vai|precisa)|eu mesmo preciso|eu mesma preciso|eu (?:preciso|quero|vou) (?:acessar|usar|utilizar|preencher|enviar|ler|consultar|navegar|operar))\b"),
+        )
+        for relation, pattern in requester_cues:
+            match = re.search(pattern, normalized)
+            if match:
+                context["requester_relation"] = relation
+                context["requester_relation_status"] = "IDENTIFICADO_PARA_CONFIRMACAO"
+                evidence.append({"field": "requester_relation", "value": relation,
+                                 "label": REQUESTER_RELATIONS[relation], "matched_text": match.group(0),
+                                 "status": "IDENTIFICADO_PARA_CONFIRMACAO"})
+                break
         self.derive_access_requirements(narrative)
         context["informacoes_ausentes"] = [
             item["question"] for item in self.missing_questions()
@@ -947,6 +1005,16 @@ class DecisionEngine:
         previous_participations = self.current.get("participations", [])
         context = copy.deepcopy(previous_context)
         participations = copy.deepcopy(previous_participations)
+        if "requester_relation" in body:
+            relation = body["requester_relation"]
+            if not isinstance(relation, str) or relation not in {"", *REQUESTER_RELATIONS}:
+                raise ValueError("Relação de quem solicita não reconhecida.")
+            context["requester_relation"] = relation
+            context["requester_relation_status"] = "INFORMADO_NA_SESSAO" if relation else ""
+        if "requester_participation_id" in body:
+            if not isinstance(body["requester_participation_id"], str):
+                raise ValueError("O vínculo de quem solicita deve identificar uma participação.")
+            context["requester_participation_id"] = body["requester_participation_id"].strip()
         for scalar in ("objetivo", "descricao_do_contexto", "operacao_do_recurso"):
             if scalar in body:
                 context[scalar] = str(body.get(scalar, "")).strip()
@@ -1003,7 +1071,8 @@ class DecisionEngine:
                     if not isinstance(values, list) or any(self.concepts.get(value, {}).get("tipo") != expected_type for value in values):
                         raise ValueError("Condição pessoal não reconhecida ou de tipo incorreto: " + field)
                 quantity = incoming.get("quantidade", 1)
-                if isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 1:
+                unknown_group_size = quantity is None and bool(str(incoming.get("grupo_rotulo", "")).strip())
+                if not unknown_group_size and (isinstance(quantity, bool) or not isinstance(quantity, int) or quantity < 1):
                     raise ValueError("A quantidade de participantes precisa ser um inteiro positivo.")
                 rows.append(
                     {
@@ -1045,12 +1114,38 @@ class DecisionEngine:
                     )
                     row["status_evidencia"] = "IDENTIFICADO_PARA_CONFIRMACAO"
                     break
+        requester_id = context.get("requester_participation_id", "")
+        if requester_id and requester_id not in {row["id"] for row in participations}:
+            if "requester_participation_id" in body:
+                raise ValueError("Quem solicita deve ser vinculado a uma participação existente.")
+            # Removing a participant also removes its optional requester link;
+            # the relation (support/preparation/etc.) remains independent.
+            context["requester_participation_id"] = ""
+        if "participations" in body:
+            participant_ids = {row["id"] for row in participations}
+            old_requirements = context.get("access_requirements", [])
+            retained_requirements = [row for row in old_requirements
+                                     if not row.get("participant_id") or row["participant_id"] in participant_ids]
+            removed_requirements = [row for row in old_requirements if row not in retained_requirements]
+            if removed_requirements:
+                removed_needs = {nid for row in removed_requirements for nid in row.get("requirement_ids", [])}
+                retained_needs = {nid for row in retained_requirements for nid in row.get("requirement_ids", [])}
+                explicit_needs = {row.get("concept_id") for row in (self.current.get("narrative_interpretation") or {}).get("evidence", [])
+                                  if row.get("field") == "necessidades"}
+                orphan_needs = removed_needs - retained_needs - explicit_needs
+                context["necessidades"] = [nid for nid in context.get("necessidades", []) if nid not in orphan_needs]
+                context["access_requirements"] = retained_requirements
         for row in participations:
             for participant_field, context_field in (
                 ("tarefa_ids", "tarefas"),
                 ("modalidade_ids", "modalidades_disponiveis"),
                 ("recurso_operado_ids", "recursos_disponiveis"),
             ):
+                if participant_field == "recurso_operado_ids":
+                    # A learned way of operating a device is not its current
+                    # availability. Removing/blocking equipment does not erase
+                    # that capability or reintroduce the equipment as available.
+                    continue
                 if "participations" in body and participant_field != "recurso_operado_ids":
                     continue
                 if (
@@ -1179,6 +1274,12 @@ class DecisionEngine:
             role_ids.add("PAPEL-PESSOA-APOIADA")
         candidates = []
         for component in self._task_components(context):
+            # Do not turn a pattern's historical school roles into facts the
+            # requester is pushed to adopt. Generic support/adaptation roles
+            # may still be clarified; school roles must already be reported.
+            school_roles = {"PAPEL-PROFESSORA", "PAPEL-ESTUDANTE", "PAPEL-COLEGAS", "PAPEL-TURMA"}
+            if set(component.get("required_role_ids", [])) & (school_roles - role_ids):
+                continue
             if not self._access_requirement_scope_matches(component, context):
                 continue
             required = set(component.get("required_resource_ids", []))
@@ -1227,12 +1328,15 @@ class DecisionEngine:
         self.derive_required_functions()
         tasks = self.labels(context.get("tarefas", []))
         activity = tasks[0] if tasks else "o desafio que você descreveu"
+        materials = self.labels(context.get("recursos_digitais", []))
+        environments = self.labels(context.get("ambientes", []))
+        situation = " · ".join([activity, *materials, *environments])
         routes = self._dialogue_routes(context)
         component_ids = [row["id"] for row in routes]
         questions = []
 
         def add(field, label, reason, *, options=None, required=False, priority=50, participant=None, **extra):
-            question = {"field": field, "question": label, "label": label, "context_label": activity,
+            question = {"field": field, "question": label, "label": label, "context_label": situation,
                         "reason": reason, "required": required, "priority": priority,
                         "candidate_component_ids": component_ids, **extra}
             if options is not None:
@@ -1241,9 +1345,33 @@ class DecisionEngine:
                 question.update(participant_id=participant["id"], participant_label=participant.get("label") or self.label(participant["papel_id"]))
             questions.append(question)
 
+        role_ids = {row.get("papel_id") for row in self.current.get("participations", [])}
+        narrated_mediation = re.search(r"\b(?:ensinar|treinar|orientar|mediar)\b.{0,60}\b(?:pessoas?|alunos?|estudantes?|grupo|turma)\b",
+                                      normalize_text(context.get("descricao_do_contexto", "")))
+        unassigned_preparation = any("PAPEL-RESPONSAVEL-ADAPTACAO" in component.get("required_role_ids", [])
+                                    for component in routes) and "PAPEL-RESPONSAVEL-ADAPTACAO" not in role_ids
+        if not context.get("requester_relation") and (narrated_mediation or unassigned_preparation):
+            add("requester_relation", "Como você participa desse desafio?",
+                "Isso distingue o que você poderá fazer do que precisa combinar com quem realiza ou prepara a atividade.",
+                type="single", priority=-10, decision_relevant=False)
+            questions[-1]["options"] = [{"id": key, "label": value} for key, value in REQUESTER_RELATIONS.items()]
         if not context.get("tarefas"):
-            add("tarefas", "O que a pessoa precisa fazer com o conteúdo ou recurso digital?",
+            task_question = (f"O que as pessoas precisam fazer com {materials[0][:1].lower() + materials[0][1:]}?"
+                             if materials else "Qual atividade precisa ser acessível no desafio que você descreveu?")
+            add("tarefas", task_question,
                 "A atividade determina quais conhecimentos da base podem ser aplicados.", required=True, priority=0)
+            if "RED-FORMULARIO" in context.get("recursos_digitais", []):
+                # Product recognition is not an answer. Ask about the intended
+                # action using existing task concepts; never substitute reading
+                # for creating, filling in or reviewing a form.
+                task_choices = [
+                    ("TAR-OPERAR-SISTEMA", "Preencher e enviar respostas"),
+                    ("TAR-PREPARAR-ADAPTAR-CONTEUDO-5107638", "Criar ou adaptar o formulário"),
+                    ("TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL", "Ler e compreender perguntas e instruções"),
+                    ("TAR-REVISAR-E-CONFIRMAR", "Revisar respostas antes de enviar"),
+                ]
+                questions[-1].update(type="single", concept_ids=[identifier for identifier, _ in task_choices],
+                                     options=[{"id": identifier, "label": label} for identifier, label in task_choices])
             return questions
         if not self._task_components(context):
             options = self._operational_task_options(context)
@@ -1256,23 +1384,37 @@ class DecisionEngine:
             add("objetivo", f"Ao {activity[:1].lower() + activity[1:]}, o que precisa ser possível fazer?",
                 "O objetivo informado ajuda a conferir se a orientação responde ao desafio.", type="text", priority=5)
         if not context.get("barreiras") and not context.get("necessidades"):
-            add("barreira_ou_necessidade", f"Ao tentar {activity[:1].lower() + activity[1:]}, o que está impedindo ou dificultando a participação?",
+            activity_target = materials[0][:1].lower() + materials[0][1:] if materials else activity[:1].lower() + activity[1:]
+            add("barreira_ou_necessidade", f"Que dificuldade de acesso ou uso aparece ao lidar com {activity_target}?",
                 "A dificuldade seleciona os apoios pertinentes; não é uma avaliação da pessoa.", required=True, priority=10)
         if not routes:
             return questions
+        # A relevant physical/online environment is clarified before equipment,
+        # not asked again merely because a pattern supplies more location IDs.
+        if not context.get("ambientes"):
+            environment_options = unique(identifier for component in routes
+                for identifier in component.get("requires_all", {}).get("ambientes", []))
+            if environment_options:
+                add("ambientes", "Onde essa atividade será realizada?",
+                    "O local pode mudar quais formas de acesso e recursos são viáveis.",
+                    options=environment_options, priority=12)
         if not context.get("recursos_digitais"):
             candidate_resources = unique(identifier for component in routes
                 for identifier in component.get("requires_all", {}).get("recursos_digitais", []))
             if not candidate_resources:
                 candidate_resources = unique(identifier for component in routes for kid in component.get("knowledge_ids", [])
                     for identifier in self.knowledge.get(kid, {}).get("aplicabilidade", {}).get("recursos_digitais", []))
-            add("recursos_digitais", "Em que material, aplicativo ou equipamento esse desafio acontece?",
-                "O tipo de material muda a adaptação: por exemplo, conteúdo visual, vídeo ou mensagem.",
+            resource_question = (f"Em {environments[0][:1].lower() + environments[0][1:]}, que material ou aplicativo será usado?"
+                                 if environments else "Que material ou aplicativo será usado nessa atividade?")
+            add("recursos_digitais", resource_question,
+                "Isso identifica o conteúdo ou aplicativo. Os equipamentos disponíveis são conferidos separadamente.",
                 options=candidate_resources or None, priority=15)
         role_ids = {row.get("papel_id") for row in self.current.get("participations", [])}
         if "PAPEL-ESTUDANTE" in role_ids:
             role_ids.add("PAPEL-PESSOA-APOIADA")
-        missing_roles = unique(identifier for component in routes for identifier in component.get("required_role_ids", []) if identifier not in role_ids)
+        missing_roles = unique(identifier for component in routes for identifier in component.get("required_role_ids", [])
+                               if identifier not in role_ids and identifier not in {
+                                   "PAPEL-PROFESSORA", "PAPEL-ESTUDANTE", "PAPEL-COLEGAS", "PAPEL-TURMA"})
         if missing_roles:
             add("participantes", f"Quem pode preparar ou ajustar o material para {activity[:1].lower() + activity[1:]}?",
                 "Essa resposta define quem realiza a adaptação; o cargo não comprova disponibilidade ou capacidade.",
@@ -1287,7 +1429,8 @@ class DecisionEngine:
                 if not set(group) & available:
                     missing_resources.extend(set(group) - blocked)
         if missing_resources:
-            add("recursos_disponiveis", "Quais destes recursos estão disponíveis para essa atividade?",
+            resource_scope = f" para usar {materials[0][:1].lower() + materials[0][1:]}" if materials else " nessa atividade"
+            add("recursos_disponiveis", f"Quais equipamentos ou apoios estão disponíveis{resource_scope}?",
                 "Perguntamos somente os recursos das possibilidades fundamentadas que ainda precisam de confirmação.",
                 options=sorted(set(missing_resources)), priority=20)
         people = [row for row in self.current.get("participations", []) if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
@@ -1324,8 +1467,7 @@ class DecisionEngine:
                         participant=person, answer_field="recurso_operado_ids", priority=40)
         # An environment or functional characteristic is asked only when an
         # existing route explicitly depends on it, never just because it is empty.
-        for field, label in (("ambientes", "Onde essa atividade será realizada?"),
-                             ("caracteristicas_pessoa", "Qual destas condições interfere nessa atividade?")):
+        for field, label in (("caracteristicas_pessoa", "Qual destas condições interfere nessa atividade?"),):
             options = unique(identifier for component in routes for identifier in component.get("requires_all", {}).get(field, [])
                              if not self.intersects(context, field, [identifier]))
             if options:
@@ -1474,8 +1616,7 @@ class DecisionEngine:
         """Presence somewhere in this context is not an ability of every person."""
         values = list(context.get(field, []))
         personal = {"caracteristicas_pessoa": "caracteristica_ids",
-                    "modalidades_disponiveis": "modalidade_ids",
-                    "recursos_disponiveis": "recurso_operado_ids"}.get(field)
+                    "modalidades_disponiveis": "modalidade_ids"}.get(field)
         if (personal and context is self.current.get("context")
                 and self.current.get("scenario_mode") == "free_narrative"):
             values.extend(identifier for row in self.current.get("participations", [])
@@ -2872,7 +3013,19 @@ class DecisionEngine:
         result["explanation"] = build_explanation(result["execution_evidence"])
         result["de_para"] = result["explanation"]["de_para"]
 
-    def generate(self):
+    def generate(self, progress=None):
+        """Compose a decision; optional progress reports actual stage boundaries.
+
+        Notifications contain no narrative or personal information and never
+        become evidence of a verification. The returned result is unchanged.
+        """
+        if progress is not None and not callable(progress):
+            raise TypeError("O observador de progresso deve ser uma função.")
+
+        def notify(stage, state, message):
+            if progress is not None:
+                progress({"stage": stage, "state": state, "message": message})
+
         self.derive_required_functions()
         context = self.current["context"]
         self._dialogue_route_ids = ({row["id"] for row in self._dialogue_routes(context)}
@@ -2880,7 +3033,9 @@ class DecisionEngine:
         self._evidence = ExecutionEvidence(VERSION, context["id"])
         self._evidence.data["access_requirements"] = copy.deepcopy(context.get("access_requirements", []))
         self._record_checks = True
-        questions = self.missing_questions()
+        # Who requests guidance is useful for presentation but cannot authorize
+        # a pattern or suspend a decision when its functional conditions hold.
+        questions = [row for row in self.missing_questions() if row.get("decision_relevant", True)]
         if not self.current.get("mapping_confirmed"):
             questions = [
                 {
@@ -2894,8 +3049,11 @@ class DecisionEngine:
         self._check("context", context["id"], "minimum_context", "FAIL" if blocking_questions else "PASS",
                     "Campos mínimos conferidos; perguntas sobre rotas individuais pendentes permanecem visíveis e são avaliadas em cada configuração.", operator="NO_MISSING_ESSENTIAL_FIELDS",
                     missing_fields=[r["field"] for r in blocking_questions], pending_questions=[row for row in questions if not row.get("required", True)])
+        notify("retrieval", "running", "Consultando os conhecimentos e vínculos da base local da MADO…")
         context_graph = self.build_context_graph()
         retrieval = self.retrieve_transfer_candidates(context_graph)
+        notify("retrieval", "completed", "Conhecimentos e articulações recuperados da base local.")
+        notify("verification", "running", "Conferindo condições, critérios e apoios para este caso…")
 
         def select_components(knowledge_ids, criterion_ids, record=False):
             self._record_checks = record
@@ -3087,6 +3245,8 @@ class DecisionEngine:
                 & set(selected_knowledge_ids)
             )
         )
+        notify("verification", "completed", "Conferência concluída; condições pendentes e limites foram preservados.")
+        notify("composition", "running", "Organizando as ações e seus fundamentos para apresentação…")
         decision_id = f"D-GERADA-{uuid.uuid4().hex[:10].upper()}"
         if status in {"GERADA", "GERADA_PARCIAL"}:
             orientation = self.compose_transfer_orientation(selected, context)
@@ -3506,4 +3666,5 @@ class DecisionEngine:
         }
         self.current["last_result"] = result
         self._record_checks = False
+        notify("composition", "completed", "Resultado da consulta e rastreabilidade organizados.")
         return result

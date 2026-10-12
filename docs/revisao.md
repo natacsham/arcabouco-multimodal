@@ -1,5 +1,17 @@
 # Revisão 1.4.0-rc3 — usar a matriz existente e explicar ações
 
+## Revisão do instrumento — intake1
+
+`AMADO-web-1.4.0-rc3-intake1` corrige o entendimento do desafio antes de ampliar a apresentação dos resultados. Preserva a base, os padrões e a ontologia 1.4.0-rc3; modifica interpretação, seleção de esclarecimentos, edição e mensagens de execução. O manifesto identifica separadamente a revisão do instrumento.
+
+- Síntese do entendimento antes das perguntas, sem converter automaticamente ensinar o uso de uma ferramenta em leitura de conteúdo.
+- Reconhecimento de mediadores e participações plurais; relação de quem solicita separada de papéis e capacidades. Padrões escolares sem os papéis relatados não induzem a invenção desses papéis.
+- Separação entre ambiente, material/aplicativo e equipamento, com perguntas contextualizadas e no máximo três na rodada inicial.
+- Revisão efetiva de campos preenchidos e vazios; substituição e remoção de opções; nova confirmação após alterações.
+- Progresso ligado à execução e à solicitação correta; referências e localizações dos apoios utilizados, sem fingir busca online nas normas.
+
+Os relatórios registram os testes realmente executados. Reconhecimento limitado de narrativa e cobertura incompleta de tarefas permanecem limitações; não há nova avaliação com participantes. A revisão geral da saída, a unificação de Ouvir/Parar e a redução de caixas repetidas ficam fora desta entrega.
+
 ## Alterações desta revisão
 
 - Consumo operacional da matriz funcional existente, com requisitos derivados separados dos fatos relatados e das capacidades individuais desconhecidas.

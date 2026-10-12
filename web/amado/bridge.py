@@ -75,8 +75,13 @@ def composition_catalog():
             "synthetic_example": {"kind": "SYNTHETIC", "label": "Escrever e conferir pela leitura em voz", "context": example}}
 
 
-def compose_context(payload):
+def compose_context(payload, progress=None):
     """Accept explicit, tri-state confirmations; never reinterpret narrative."""
+    def emit(stage, state, message):
+        if progress is not None:
+            progress({"stage": stage, "state": state, "message": message})
+
+    emit("verification", "running", "Conferindo a tarefa, os participantes e as condições informadas…")
     allowed = {"id", "task", "confirmed", "resources", "facts", "participants"}
     if set(payload) - allowed:
         raise ValueError("A composição aceita somente tarefa, condições e recursos confirmados; não interpreta texto livre.")
@@ -120,6 +125,10 @@ def compose_context(payload):
             context["participants"].append({"id": person_id, "label": label, "traits": list(traits),
                 "facts": confirmed_values(person.get("facts", {}), "facts"),
                 "resources": confirmed_values(person.get("resources", {}), "resources")})
+    emit("verification", "completed", "Formato das informações conferido; sua compatibilidade será avaliada na composição.")
+    # This composer checks conditions while traversing possible transitions.
+    # A separate 'retrieval completed' event would claim a boundary it does not have.
+    emit("composition", "running", "Consultando as relações da base, verificando condições e compondo possibilidades…")
     result = composition_engine().compose(context)
     # File hashes are identical in native and browser execution; host paths are
     # not evidence and must not be exposed or affect their public comparison.
@@ -134,10 +143,11 @@ def compose_context(payload):
         for participant in record.get("participant_results", []):
             public_fingerprints(participant["result"])
     public_fingerprints(result)
+    emit("composition", "completed", "Possibilidades, condições pendentes e lacunas organizadas para apresentação.")
     return result
 
 
-def dispatch(request):
+def dispatch(request, progress=None):
     if not isinstance(request, dict):
         raise ValueError("A operação deve ser um objeto JSON.")
     if ENGINE is None:
@@ -150,7 +160,7 @@ def dispatch(request):
     if operation == "catalog_composition":
         return composition_catalog()
     if operation == "compose":
-        return compose_context(payload)
+        return compose_context(payload, progress=progress)
     if operation == "catalog":
         return ENGINE.catalog_payload()
     if operation == "start":
@@ -182,11 +192,11 @@ def dispatch(request):
             raise ValueError("Use até 10.000 caracteres na correção.")
         return ENGINE.confirm_reported(payload["confirmed"], correction)
     if operation == "generate":
-        return ENGINE.generate()
+        return ENGINE.generate(progress=progress) if progress is not None else ENGINE.generate()
     raise ValueError("Operação não disponível nesta versão pública.")
 
 
-def dispatch_json(raw):
+def dispatch_json(raw, progress=None):
     if not isinstance(raw, str) or len(raw) > 200000:
         raise ValueError("A descrição excede o tamanho aceito.")
-    return json.dumps(dispatch(json.loads(raw)), ensure_ascii=False)
+    return json.dumps(dispatch(json.loads(raw), progress=progress), ensure_ascii=False)

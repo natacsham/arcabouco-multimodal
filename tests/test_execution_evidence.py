@@ -65,19 +65,22 @@ class ExecutionEvidenceTests(unittest.TestCase):
         self.assertEqual({row["component_id"] for row in configurations if row["availability_status"] != "CONDICIONAL_A_CONFIRMACAO"},
                          {"PAD-CONTEUDO-WEB-EQUIVALENTE", "PAD-COMUNICACAO-MULTIFORMATO"})
         self.assertEqual({row["component_id"] for row in configurations if row["availability_status"] == "CONDICIONAL_A_CONFIRMACAO"},
-                         {"PAD-ORGANIZAR-CONTEUDO-PERSISTENTE", "PAD-REPRESENTACAO-VISUAL-EXPLICADA"})
+                         set())
+        # A supported person and an adaptation owner do not establish teacher
+        # or student roles. Existing school patterns must not be offered merely
+        # as questions that steer the user into the interview's configuration.
+        self.assert_school_role_exclusions(self.novel)
         # Existing choices remain reusable, but the functional applicability
         # index now makes unmet design requirements explicit before selection.
         self.assertEqual(self.novel["decision"]["status"], "GERADA_PARCIAL")
         functions = self.novel["execution_evidence"]["functions"]
-        expected_missing = {"FUN-PRESERVAR-ACESSO", "FUN-CARACTERIZAR-CONDICOES", "FUN-REDUZIR-SOBRECARGA"}
-        self.assertEqual(set(functions["conditional"]), {"FUN-ORGANIZAR-CONTEUDO", "FUN-PERMITIR-REVISAO", "FUN-EXPRESSAR-CONHECIMENTO"})
+        expected_missing = {"FUN-PRESERVAR-ACESSO", "FUN-CARACTERIZAR-CONDICOES", "FUN-REDUZIR-SOBRECARGA",
+                            "FUN-ORGANIZAR-CONTEUDO", "FUN-PERMITIR-REVISAO", "FUN-EXPRESSAR-CONHECIMENTO"}
+        self.assertEqual(set(functions["conditional"]), set())
         self.assertFalse(set(functions["conditional"]) & set(functions["verified"]))
         for row in configurations:
-            if row["availability_status"] == "CONDICIONAL_A_CONFIRMACAO":
-                self.assertTrue(row["criterion_support"] and row["knowledge_ids"])
-                self.assertTrue(set(row["function_ids"]) & set(functions["required"]))
-                self.assertTrue(any("Antes de aplicar" in condition for condition in row["conditions"]))
+            self.assertTrue(row["criterion_support"] and row["knowledge_ids"])
+            self.assertTrue(set(row["function_ids"]) & set(functions["required"]))
         self.assertEqual(set(functions["remaining"]), expected_missing)
         self.assertEqual(set(functions["required"]) - set(functions["offered"]), expected_missing)
         derivations = self.novel["decision"]["function_derivation"]
@@ -91,12 +94,35 @@ class ExecutionEvidenceTests(unittest.TestCase):
         configurations = self.no_voice["decision"]["configuracao_modal"]
         self.assertEqual([row["component_id"] for row in configurations if row["availability_status"] != "CONDICIONAL_A_CONFIRMACAO"], ["PAD-CONTEUDO-WEB-EQUIVALENTE"])
         self.assertEqual({row["component_id"] for row in configurations if row["availability_status"] == "CONDICIONAL_A_CONFIRMACAO"},
-                         {"PAD-ORGANIZAR-CONTEUDO-PERSISTENTE", "PAD-REPRESENTACAO-VISUAL-EXPLICADA", "PAD-REVISAO-CONFIRMACAO"})
+                         set())
+        self.assert_school_role_exclusions(self.no_voice)
         self.assertEqual(self.no_voice["decision"]["status"], "GERADA_PARCIAL")
         rejected = next(r for r in self.no_voice["explanation"]["rejected"] if r["component_id"] == "PAD-COMUNICACAO-MULTIFORMATO")
         checks = {r["id"]: r for r in self.no_voice["execution_evidence"]["checks"]}
         self.assertTrue(any("REC-ENTRADA-VOZ" in checks[c].get("blocked_ids", []) for c in rejected["check_ids"]))
         self.assertFalse(any("acionador" in text for text in self.no_voice["decision"]["alternativas"]))
+        functions = self.no_voice["execution_evidence"]["functions"]
+        self.assertEqual(set(functions["conditional"]), set())
+        self.assertEqual(set(functions["verified"]), {"FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS", "FUN-MANTER-INFORMACAO-RECUPERAVEL"})
+        self.assertEqual(set(functions["remaining"]), set(self.novel["execution_evidence"]["functions"]["remaining"]) |
+                         {"FUN-SELECIONAR-MODO-POR-CONDICAO", "FUN-FEEDBACK-PERCEPTIVEL"})
+        self.assertEqual(set(functions["required"]) - set(functions["offered"]), set(functions["remaining"]))
+
+    def assert_school_role_exclusions(self, result):
+        checks = {row["id"]: row for row in result["execution_evidence"]["checks"]}
+        expected = {"PAD-ORGANIZAR-CONTEUDO-PERSISTENTE": {"PAPEL-PROFESSORA"},
+                    "PAD-REPRESENTACAO-VISUAL-EXPLICADA": {"PAPEL-PROFESSORA", "PAPEL-ESTUDANTE"},
+                    "PAD-REVISAO-CONFIRMACAO": {"PAPEL-PROFESSORA", "PAPEL-ESTUDANTE"}}
+        for component, missing_roles in expected.items():
+            rejected = next(row for row in result["explanation"]["rejected"] if row["component_id"] == component)
+            self.assertEqual(rejected["selection"], "REJECTED")
+            self.assertTrue(rejected["reasons"])
+            role_check = next(checks[identifier] for identifier in rejected["check_ids"]
+                              if checks[identifier]["rule_id"] == "required_roles")
+            self.assertEqual(role_check["outcome"], "FAIL")
+            self.assertEqual(set(role_check["missing_ids"]), missing_roles)
+            self.assertFalse(missing_roles & set(role_check["observed_ids"]))
+            self.assertNotIn(component, result["decision"]["component_ids"])
 
     def test_video_instruction_cannot_promise_explicitly_blocked_access(self):
         self.assertNotIn("PAD-VIDEO-PROCESSO", self.no_video_access["decision"]["component_ids"])

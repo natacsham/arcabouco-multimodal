@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-alpha2",
-  "checked_at_utc": "2026-10-12T01:35:26.145488+00:00",
+  "checked_at_utc": "2026-10-12T03:04:28.247911+00:00",
   "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
   "shacl": {
     "base": {
@@ -627,9 +627,9 @@
     "skipped": 0
   },
   "preserved_files": {
-    "data/knowledge-base.json": "0cf5f6b55707b3c63a8c55e1c9b02621b1dae95c1d15e5843e7b749ce516b005",
-    "engine.py": "ffc8d51e7b79af2e36b5c5aae2d34eed2ace1e5ece6a3191bb240f75acac5f4e",
-    "ontology/mado-combined.ttl": "df03e9906a9f09f4759637f96193603cd71512ab5921fd79361e5e0f15c5daee",
+    "data/knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
+    "engine.py": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
+    "ontology/mado-combined.ttl": "7b37cec86bfe8f6fa4004b6ffecf50ba60ecb1c6769eed997391c6986a1ed52d",
     "ontology/main.ttl": "0b7614a1e48528fbc95ec96b5b0746ffbc40e1c58a548b0843386a4220194aeb",
     "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
     "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",

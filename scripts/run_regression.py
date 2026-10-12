@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from engine import DecisionEngine
+from engine import DecisionEngine, VERSION, UI_VERSION
 
 
 def digest():
@@ -149,7 +149,8 @@ def main():
         json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     report = {
-        "version": "1.4.0-rc1",
+        "version": VERSION,
+        "executor_version": UI_VERSION,
         "type": "SYNTHETIC_TECHNICAL_REGRESSION_NOT_HUMAN_EVALUATION",
         "checks": checks,
         "cases": summary,

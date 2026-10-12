@@ -49,6 +49,10 @@ def build():
                               (ROOT / "experimental/v2/schema.ttl").read_text(encoding="utf-8"))
     if not version_match:
         raise RuntimeError("Composition schema must declare its own version.")
+    executor_match = re.search(r'^UI_VERSION\s*=\s*"([^"]+)"',
+                               (ROOT / "engine.py").read_text(encoding="utf-8"), re.MULTILINE)
+    if not executor_match:
+        raise RuntimeError("The instrument must declare its own revision.")
     for package in ("rdflib", "pyparsing", "html5rdf"):
         paths += [
             p
@@ -81,6 +85,7 @@ def build():
         "version": data["metadata"]["version"],
         "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
         "instrument": "AMADO",
+        "executor_version": executor_match.group(1),
         "public_projection": True,
         "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
         "core_sha256": sha(APP / "engine.py"),

@@ -47,17 +47,20 @@ O piloto é uma projeção de uma execução técnica preparada, não uma sessã
 
 ## Navegador
 
-A entrada simples atende aos dois motores. Tarefas representadas de escrita, revisão e acesso a conteúdo são encaminhadas ao módulo `experimental/v2`. Condições desconhecidas precisam ser conferidas por participante; recursos disponíveis não autorizam inferir capacidades. [Escopo e percurso dos dados](composicao-por-funcoes.md).
+A entrada simples atende aos dois motores. Escrita com revisão e revisão de texto usam o módulo `experimental/v2`; acesso a conteúdo e demais tarefas seguem o motor existente, conforme sua cobertura. Condições desconhecidas precisam ser conferidas por participante; recursos disponíveis não autorizam inferir capacidades. [Escopo e percurso dos dados](composicao-por-funcoes.md).
 
 Verificação da apresentação simples:
 
 ```text
 node tests/intake.mjs
+node tests/review-input.mjs
+node tests/progress.mjs
 node tests/source-path.mjs
 node tests/simple-flow-browser.mjs
+node tests/focused-dialogue-browser.mjs
 ```
 
-O segundo teste executa os motores reais por Pyodide, confere paridade com Python, confirmação e correção do caso, perguntas por informações ausentes, falha e recuperação do carregamento, descarte, teclado e reflow. O reconhecimento de voz é simulado somente para conferir os controles e a preservação do texto; não mede a precisão do ditado nem testa um microfone real. `SIMPLE_PUBLIC_URL=https://natacsham.github.io/arcabouco-multimodal/` executa o mesmo teste no endereço público e produz `simple-flow-public.json`.
+Os testes `simple-flow-browser` e `focused-dialogue-browser` executam os motores reais por Pyodide. Conferem paridade com Python, síntese antes das perguntas, confirmação, edição sem reinterpretar o relato, remoção de recursos, tratamento de Google Forms, progresso ligado à solicitação e fontes utilizadas. A suíte simples cobre também falha e recuperação do carregamento, descarte, teclado e reflow. O reconhecimento de voz é simulado somente para conferir os controles e a preservação do texto; não mede a precisão do ditado nem testa um microfone real. `SIMPLE_PUBLIC_URL=https://natacsham.github.io/arcabouco-multimodal/` executa o teste simples no endereço público e produz `simple-flow-public.json`.
 
 Para verificar separadamente esse módulo:
 

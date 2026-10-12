@@ -227,8 +227,7 @@
       "label": "Sala de aula",
       "aliases": [
         "sala de aula",
-        "turma",
-        "aula"
+        "sala presencial"
       ],
       "category_label": "Outros ambientes",
       "scope": "GERAL",
@@ -951,7 +950,9 @@
       "aliases": [
         "formulário",
         "cadastro",
-        "questionário"
+        "questionário",
+        "Google Forms",
+        "Microsoft Forms"
       ],
       "category_label": "Web e aprendizagem",
       "scope": "GERAL",

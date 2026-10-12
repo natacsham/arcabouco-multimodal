@@ -190,7 +190,7 @@ try{
   // A separate isolated worker executes the same structured input fixtures as native Python.
   await page.evaluate(()=>{
     window.probeWorker=new Worker('./worker.mjs',{type:'module'});let seq=0;const pending=new Map();
-    window.probeWorker.onmessage=({data})=>{const p=pending.get(data.id);if(!p)return;pending.delete(data.id);clearTimeout(p.timer);data.type==='error'?p.reject(new Error(data.error)):p.resolve(data.data);};
+    window.probeWorker.onmessage=({data})=>{if(data.type==='progress')return;const p=pending.get(data.id);if(!p)return;pending.delete(data.id);clearTimeout(p.timer);data.type==='error'?p.reject(new Error(data.error)):p.resolve(data.data);};
     window.probe=payload=>new Promise((resolve,reject)=>{const id=++seq,timer=setTimeout(()=>reject(new Error('Worker timeout')),180000);pending.set(id,{resolve,reject,timer});window.probeWorker.postMessage({id,...payload});});
   });
   const probe=request=>page.evaluate(r=>window.probe(r),request);

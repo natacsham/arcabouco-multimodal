@@ -1,6 +1,7 @@
 """Verify the checked-in, browser-tested artifact without rebuilding it in CI."""
 import hashlib
 import json
+import re
 from pathlib import Path
 import zipfile
 
@@ -15,6 +16,8 @@ def sha(path):
 def main():
     m = json.loads((APP / "manifest.json").read_text(encoding="utf-8"))
     assert sha(ROOT / "engine.py") == sha(APP / "engine.py") == m["core_sha256"]
+    executor = re.search(r'^UI_VERSION\s*=\s*"([^"]+)"', (ROOT / "engine.py").read_text(encoding="utf-8"), re.MULTILINE)
+    assert executor and m.get("executor_version") == executor.group(1), "Instrument revision differs from the tested engine"
     assert sha(APP / "bridge.py") == m["bridge_sha256"]
     assert sha(APP / "assets/base.zip") == m["base_zip_sha256"]
     for name, digest in m["files"].items():
