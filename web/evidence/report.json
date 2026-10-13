@@ -2,7 +2,7 @@
   "version": "1.5.0-rc1",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.5.0-rc1-situated1",
-  "compiled_at_utc": "2026-10-13T05:23:00.398986+00:00",
+  "compiled_at_utc": "2026-10-13T05:31:54.075928+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -102,6 +102,40 @@
       "no_javascript_errors": true,
       "native_bridge_worker_canonical_parity": true,
       "conditional_native_worker_canonical_parity": true
+    },
+    "public_smoke": {
+      "passed": true,
+      "checks": {
+        "recognized_smoke": true,
+        "completed_and_passed": true,
+        "nonempty_successful_checks": true,
+        "no_errors": true,
+        "exact_test": true,
+        "exact_manifest": true,
+        "version": true,
+        "deployment_commit_recorded": true,
+        "all_consumed_assets_recorded": true,
+        "current_asset_bytes": true,
+        "current_base_inputs": true,
+        "current_native_engine": true,
+        "current_download_bytes": true
+      },
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "checked_at": "2026-10-13T05:29:11.858Z",
+      "expected_commit": "c0ec3c400e0c32408e005daf03e2345029312401",
+      "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
+      "test_sha256": "956709fd0bfd2953d0b5d8e4f7500ed7a44abb89c019551c4da394e00dcd6fd9",
+      "public_manifest_sha256": "56f76116df68826192ec014d23cfdbf05d92a390c31b5fa64c83083320f0e031",
+      "check_count": 33,
+      "asset_count": 38,
+      "scope": "Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana.",
+      "limits": [
+        "Synthetic browser verification, not human, clinical, learning-outcome or WCAG-conformance validation.",
+        "Serving identity is checked using the current local manifest and remote content hashes, not an assumed deployment commit.",
+        "Conditional operations are not a complete solution. Unknown personal abilities remain unknown.",
+        "Speech is mocked to prevent audio; microphone accuracy and real screen readers are not tested.",
+        "This smoke does not replace the local regression or native/worker canonical parity checks."
+      ]
     }
   },
   "limits": [
@@ -117,7 +151,7 @@
     "Verificações técnicas não comprovam utilidade, aprendizagem ou conformidade integral de acessibilidade."
   ],
   "historical_evidence_notice": "Somente os relatórios listados abaixo aprovam estes bytes. Arquivos anteriores conservam sua própria versão e seu alcance.",
-  "public_smoke_status": "PENDING_FOR_CURRENT_BUILD",
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
   "reports": {
     "technical-1.5-report.json": {
       "url": "technical-1.5-report.json",
@@ -141,13 +175,19 @@
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "37de3d517af6f11bd02e036c7396b1e22cab162fcb533ffa9677b9a93f3fe53e",
+      "sha256": "e4c633dfb8689b83221270c12902ef4a1aeee0c25add814771ab71cc46cbf9ba",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
       "url": "trajectory-reasoner-report.json",
       "sha256": "071b59194f1280920a955eb1a1f55108e421a2042afc9fa0546d370adf93eb36",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
+    },
+    "situated-public-smoke.json": {
+      "url": "situated-public-smoke.json",
+      "sha256": "3d4c152aacde6caaa4928f32c3cdcb442bfd7fbb12133201e948a357e2f795db",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "expected_commit": "c0ec3c400e0c32408e005daf03e2345029312401"
     }
   }
 }

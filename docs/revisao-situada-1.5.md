@@ -125,6 +125,7 @@ O exemplo vem de `collaborative_unknown_context` no teste. O JSON conserva a ent
 | Suíte principal | 273 testes passaram; inclui os 25 testes situados, interpretação, autorização, composição, correções e exportação. As contagens não devem ser somadas entre si. |
 | Compositor anterior | 75 testes de regressão passaram; não substituem a verificação situada. |
 | Navegador | 49 verificações passaram, incluindo duas comparações Python–worker, interpretação, correção, apresentação, teclado, foco, contraste e refluxo. |
+| Endereço público | 33 verificações passaram após publicação; 38 arquivos da aplicação e quatro downloads coincidiram com os hashes conferidos localmente. Sem erros de JavaScript ou envio dos casos a serviços externos no percurso testado. |
 | RDF e consultas | 16.925 triplas; consultas CQ-001 a CQ-010 executadas. A CQ-010 também foi testada com exportação situada positiva e vínculos exatos entre participante, situação, tarefa, função e condição. |
 | SHACL | Sem violações; 65 avisos documentais históricos preservados, sem promovê-los a fundamentação conferida. |
 | OWL 2 DL e HermiT | Aprovados para os grafos registrados nos relatórios e seus respectivos hashes. |
@@ -134,4 +135,8 @@ Relatórios: [verificação técnica](../evidence/technical-1.5-report.json), [n
 
 ## Estado de entrega
 
-Implementação e verificações locais concluídas na branch `feat/amado-situated-composition`; publicação e conferência do endereço público ainda pendentes neste registro. Resultados técnicos não representam reconferência autoral de todas as interpretações, teste com participantes nem prova de aprendizagem. Houve inspeção visual e verificações automatizadas de teclado, foco, contraste e ampliação. Não houve teste com leitor de tela real, avaliação da precisão do ditado nem declaração de conformidade integral com WCAG.
+Implementação concluída na branch `feat/amado-situated-composition` e publicada no site existente pelo commit `c0ec3c400e0c32408e005daf03e2345029312401`, com [verificação e implantação aprovadas](https://github.com/natacsham/arcabouco-multimodal/actions/runs/38351144785). O [teste público sintético](../evidence/situated-public-smoke.json) confirmou os mesmos arquivos e downloads. Ele mantém a data e o commit efetivamente observados; atualizações posteriores deste relatório não representam outra sessão.
+
+O exemplo preparado conserva quatro operações condicionais, não uma solução completa. O relato sintético do teste público permaneceu sem composição e recebeu três esclarecimentos. O ensaio de recombinação completa é o caso sintético detalhado acima, com suas condições explicitamente confirmadas. Não se equiparam esses resultados nem se afirma resolução geral de narrativas.
+
+Resultados técnicos não representam reconferência autoral de todas as interpretações, teste com participantes nem prova de aprendizagem. Houve inspeção visual e verificações automatizadas de teclado, foco, contraste e ampliação. Não houve teste com leitor de tela real, avaliação da precisão do ditado nem declaração de conformidade integral com WCAG.

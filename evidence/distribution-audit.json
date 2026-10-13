@@ -1,6 +1,6 @@
 {
   "scope": "TRACKED_PUBLIC_FILES_AND_BROWSER_BUNDLE",
-  "tracked_file_count": 660,
+  "tracked_file_count": 662,
   "browser_bundle_entries": 222,
   "rdf_files": {
     "experimental/v2/base.ttl": {
@@ -110,7 +110,7 @@
     ".gitattributes": "034225545b05318bfc43b14e3dc7b6e6c801fd66a332448c19e72f5ce3bf3728",
     ".github/workflows/pages.yml": "e91a9f11f25d8e988c8d12e0daf1c092d6650bf6e6d3528eec7e4e59753cdb22",
     ".gitignore": "781cdb5df099f23eb34a0e0666d62ee183f1c5339caebe5068ffe0466dbe165b",
-    "README.md": "0b360745b893189014280c8ea3634d4211e563dc29056947c3c4ec523b3ae60b",
+    "README.md": "21952004e80c742600fbb50c4942fd926fc3e360fe8ecdf791b45c6a64c6b1b5",
     "THIRD_PARTY.md": "f4d42708d85fdecb0193f5bfc7e70d0db625d72d6b9a272ec153c8d4ab3c841c",
     "data/interface-vocabulary.json": "bed2124ac9798fbef8f56a73a90775a241a5fc27cf88a965f4370f1feba6b0b5",
     "data/knowledge-base.json": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
@@ -125,7 +125,7 @@
     "docs/modelo.md": "9248e98bfcc64d3d27659e844321c2af546322a8efe8f5ab916b60ae545439f1",
     "docs/reproduzir.md": "62cf8c28d89610eb98fab07ae9d4373b461f4793483a353d32f7ffe436c10ab5",
     "docs/revisao-compositor-1.5.md": "a86387467bf08ec7415bd7a33759971ca13388a1d1750edd8cc0d18e8dc0216f",
-    "docs/revisao-situada-1.5.md": "73e18e57ec11fa235bf2fa13808802e23eebbcbc2dc3d43e280b1c3280e6d868",
+    "docs/revisao-situada-1.5.md": "f7d7123abd6c3bc7a14de7b2ff336ae65f415e82248f80786b90238b4ca9b621",
     "docs/revisao.md": "117236c14eaa029a1fff8dc07b75b2bca504e1893ac355d57d42961ff310ef6f",
     "docs/teste-de-reutilizacao.md": "4421c8cf96d8798554120a89311d4e5e6dd3373a7255d708b81daa6b672d015e",
     "docs/verificacao.md": "e0d04f4f6212890327f9212c06edd4a916df78f42c009d072ddcddad9bf9e3e0",
