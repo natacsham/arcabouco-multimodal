@@ -184,7 +184,7 @@ def parity_components(report, browser, manifest):
                        + "O relatório originário não selou o hash de decisions.json; este vínculo é qualificado, não uma assinatura criptográfica histórica nem uma nova execução de navegador.")}
 
 
-def current_public_smoke(report, manifest):
+def current_public_smoke(report, manifest, *, situated=False):
     """Verify the bounded public smoke, not the full local browser regression.
 
     Preserve the deployment commit and execution time recorded by the test.
@@ -203,11 +203,11 @@ def current_public_smoke(report, manifest):
                      and "\\" not in name and ":" not in name
                      and ".." not in name.split("/") for name in assets)
     checks = {
-        "recognized_smoke": report.get("type") == "SYNTHETIC_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
+        "recognized_smoke": report.get("type") == ("SYNTHETIC_SITUATED_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION" if situated else "SYNTHETIC_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION"),
         "completed_and_passed": report.get("completed") is True and report.get("passed") is True,
         "nonempty_successful_checks": bool(test_checks) and all(value is True for value in test_checks.values()),
         "no_errors": report.get("errors") == [] and report.get("external_requests") == [],
-        "exact_test": _matches("tests/public-smoke.mjs", report.get("test_sha256")),
+        "exact_test": _matches("tests/situated-public-smoke.mjs" if situated else "tests/public-smoke.mjs", report.get("test_sha256")),
         "exact_manifest": _matches("web/amado/manifest.json", report.get("public_manifest_sha256")),
         "version": report.get("version") == manifest.get("version"),
         "deployment_commit_recorded": bool(re.fullmatch(r"[a-f0-9]{40}", report.get("expected_commit") or "")),
@@ -225,13 +225,22 @@ def current_public_smoke(report, manifest):
             _matches(name, digest) for name, digest in manifest.get("files", {}).items()),
         "current_native_engine": _matches("engine.py", manifest.get("core_sha256")),
     }
+    if situated:
+        downloads = report.get("download_assets") or {}
+        expected_downloads = {"downloads/mado-public.ttl", "downloads/mado.owl",
+                              "downloads/main.ttl", "downloads/main.shacl.ttl"}
+        checks["current_download_bytes"] = set(downloads) == expected_downloads and all(
+            isinstance(item, dict) and item.get("passed") is True
+            and item.get("expected_sha256") == item.get("served_sha256")
+            and _matches("web/" + name, item.get("served_sha256"))
+            for name, item in downloads.items())
     return {"passed": all(checks.values()), "checks": checks,
             "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE" if all(checks.values()) else "NOT_VERIFIED_CURRENT_BUILD",
             "checked_at": report.get("checked_at"), "expected_commit": report.get("expected_commit"),
             "commit_observation": report.get("commit_observation"),
             "test_sha256": report.get("test_sha256"), "public_manifest_sha256": report.get("public_manifest_sha256"),
             "check_count": len(test_checks), "asset_count": len(assets),
-            "scope": "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana.",
+            "scope": ("Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana." if situated else "Smoke público sintético limitado aos checks registrados; não equivale aos 118 checks locais nem a avaliação humana."),
             "limits": report.get("limits", [])}
 
 
@@ -242,8 +251,97 @@ def current_presentation(report, manifest):
             and report.get("test_sha256") == sha("tests/simple-flow-browser.mjs"))
 
 
+def situated_release_checks(manifest, technical, reasoner, situated, browser, distribution, logical):
+    """New runtime requires new evidence; old browser reports cannot approve it."""
+    technical_inputs = technical.get("source_sha256") or {}
+    frozen = situated.get("source_hashes_before") or {}
+    required = {"engine.py", "situated_context.py", "data/knowledge-base.json", "experimental/v2/composer.py",
+                "experimental/v2/trajectory.py", "experimental/v2/trajectory-bindings.json", "web/amado/bridge.py",
+                "tests/test_situated_intake.py", "tests/test_situated_composition.py", "tests/test_situated_catalogue.py",
+                *[f"queries/CQ-{i:03d}.rq" for i in range(1, 11)]}
+    checks = browser.get("checks") or {}
+    return {
+        "version": manifest.get("version") == "1.5.0-rc1" and manifest.get("composition", {}).get("version") == "2.0.0-alpha3",
+        "current_package": preserved_components({"build": manifest}, manifest)["passed"],
+        "technical_passed": technical.get("passed") is True,
+        "technical_inputs_current": required <= set(technical_inputs) and all(_matches(n, h) for n, h in technical_inputs.items()),
+        "owl_and_hermit_current": reasoner.get("passed") is True and reasoner.get("profile_passed") is True
+            and reasoner.get("consistency_passed") is True and _matches("ontology/mado-combined.ttl", reasoner.get("input_sha256")),
+        "situated_tests": situated.get("tests", {}).get("success") is True and situated.get("tests", {}).get("count", 0) > 0
+            and situated.get("tests", {}).get("skipped") == 0,
+        "situated_frozen_inputs": bool(frozen) and situated.get("source_files_unchanged") is True
+            and situated.get("input_context_unchanged") is True and frozen == situated.get("source_hashes_after")
+            and all(_matches(n, h) for n, h in frozen.items()),
+        "novel_case_and_ablation": situated.get("delta", {}).get("complete_choices_with_relation", 0) > 0
+            and situated.get("delta", {}).get("complete_choices_without_relation") == 0
+            and situated.get("delta", {}).get("complete_choices_without_articulation_operation") == 0
+            and situated.get("delta", {}).get("first_person_sequence_preserved") is True,
+        "browser_current_execution": browser.get("type") == "SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION"
+            and browser.get("passed") is True and not browser.get("errors") and bool(checks)
+            and all(value is True for value in checks.values()) and browser.get("build") == manifest
+            and _matches("tests/situated-browser.mjs", browser.get("test_sha256")),
+        "browser_native_parity": checks.get("conditional_native_worker_canonical_parity") is True,
+        "distribution_current": distribution.get("passed") is True and bool(distribution.get("distribution_sha256"))
+            and all(_matches(n, h) for n, h in distribution.get("distribution_sha256", {}).items()),
+        "composition_rdf_reasoner": logical.get("passed") is True and logical.get("profile_passed") is True
+            and logical.get("consistency_passed") is True
+            and _matches("experimental/v2/evidence/trajectory-combined.ttl", logical.get("input_sha256")),
+    }
+
+
+def publish_situated(manifest):
+    paths = {"technical": "evidence/technical-1.5-report.json", "reasoner": "evidence/reasoner-1.5-report.json",
+             "situated": "experimental/v2/evidence/situated-report.json", "browser": "evidence/situated-browser.json",
+             "distribution": "evidence/distribution-audit.json", "logical": "experimental/v2/evidence/trajectory-reasoner-report.json"}
+    records = {key: read(name) for key, name in paths.items()}
+    checks = situated_release_checks(manifest, **records)
+    if not all(checks.values()):
+        raise SystemExit(json.dumps({"published": False, "version": manifest.get("version"), "checks": checks}))
+    technical, reasoner = records["technical"], records["reasoner"]
+    target = ROOT / "web/evidence"
+    target.mkdir(exist_ok=True)
+    summary = {
+        "version": manifest["version"], "instrument": "AMADO", "executor_version": manifest["executor_version"],
+        "compiled_at_utc": datetime.now(timezone.utc).isoformat(), "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
+        "checks": checks,
+        "results": {"unit_tests": technical["checks"]["unittest"]["tests_run"],
+                    "ontology_triples": technical["graph_counts"]["triples"],
+                    "owl_2_dl": reasoner["profile_passed"], "hermit_consistency": reasoner["consistency_passed"],
+                    "shacl": {k: technical["checks"]["public_base_shacl"][k] for k in ("violations", "warnings", "passed")},
+                    "query_rows_legacy_compatibility": technical["checks"]["runtime_main_decision_shacl_and_queries"]["query_rows"],
+                    "situated_composition": {"version": manifest["composition"]["version"], "delta": records["situated"]["delta"],
+                                             "tests": records["situated"]["tests"]["count"]},
+                    "browser_checks": records["browser"]["checks"]},
+        "limits": records["situated"]["limits"] + records["browser"]["limits"] + [
+            "Conferência de um registro não equivale à leitura integral de todas as fontes.",
+            "Relatórios de versões anteriores não são evidência desta execução.",
+            "Verificações técnicas não comprovam utilidade, aprendizagem ou conformidade integral de acessibilidade."],
+        "historical_evidence_notice": "Somente os relatórios listados abaixo aprovam estes bytes. Arquivos anteriores conservam sua própria versão e seu alcance.",
+        "public_smoke_status": "PENDING_FOR_CURRENT_BUILD", "reports": {},
+    }
+    for key, name in paths.items():
+        filename = Path(name).name
+        (target / filename).write_bytes((ROOT / name).read_bytes())
+        summary["reports"][filename] = {"url": filename, "sha256": sha(name), "evidence_use": "CURRENT_BUILD_EXECUTION"}
+    smoke_name = "evidence/situated-public-smoke.json"
+    if (ROOT / smoke_name).is_file():
+        smoke = read(smoke_name)
+        verification = current_public_smoke(smoke, manifest, situated=True)
+        summary["public_smoke_status"] = verification["evidence_use"]
+        summary["results"]["public_smoke"] = verification
+        if verification["passed"]:
+            filename = Path(smoke_name).name
+            (target / filename).write_bytes((ROOT / smoke_name).read_bytes())
+            summary["reports"][filename] = {"url": filename, "sha256": sha(smoke_name),
+                "evidence_use": verification["evidence_use"], "expected_commit": smoke["expected_commit"]}
+    (target / "report.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"passed": True, "version": manifest["version"], "checks": len(checks)}))
+
+
 def main():
     manifest = read("web/amado/manifest.json")
+    if manifest.get("version") == "1.5.0-rc1":
+        return publish_situated(manifest)
     technical = read("evidence/technical-report.json")
     reasoner = read("evidence/reasoner-report.json")
     regression = read("evidence/regression-report.json")

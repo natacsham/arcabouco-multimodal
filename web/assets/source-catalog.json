@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "base_version": "1.4.0-rc3",
+  "base_version": "1.5.0-rc1",
   "source_collections_sha256": {
-    "sources": "55817b426687828cbde50457b6cb16ccb14e3618347f8587cfa46720ed65ed7d",
+    "sources": "7d7872f80d630f02e93e9977175ed01f96cfe424582d0e5f056e6a7cada45854",
     "references": "1fef90b4c4f4242dea8ed9068010885d036e84d31fb3f3763d002473e3c9552f",
     "reference_audit": "0d36e3af19beb00790ced8360f1db493bf6aedb514e10c8b9d4b3bb5904cb63c",
     "excerpts": "1c19f23fd3d93a49afd6fbb322870e0408f0a8cea08aea925f69fc8524d6eb17",

@@ -418,7 +418,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Produção oral humana situada; distinta de reconhecimento automático.",
+      "semantic_kind": "LANGUAGE_REPRESENTATION"
     },
     "MOD-TEXTO": {
       "label": "Texto",
@@ -431,7 +432,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Texto pode ser apresentado visualmente ou por tecnologia assistiva.",
+      "semantic_kind": "SYMBOLIC_REPRESENTATION"
     },
     "MOD-IMAGEM": {
       "label": "Imagem",
@@ -444,7 +446,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Representação visual; sua função e alternativa dependem da tarefa.",
+      "semantic_kind": "VISUAL_REPRESENTATION"
     },
     "MOD-DESENHO": {
       "label": "Desenho",
@@ -456,7 +459,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Representação gráfica autoral; não implica capacidade de produção ou percepção.",
+      "semantic_kind": "VISUAL_REPRESENTATION"
     },
     "MOD-AUDIO": {
       "label": "Áudio",
@@ -469,7 +473,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Conteúdo sonoro reproduzido; não prova que a pessoa o percebe.",
+      "semantic_kind": "MEDIA_REPRESENTATION"
     },
     "MOD-HAPTICO": {
       "label": "Vibração ou retorno tátil",
@@ -482,7 +487,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Sinal tátil; percepção e significado precisam de confirmação.",
+      "semantic_kind": "FEEDBACK_CHANNEL"
     },
     "MOD-VOZ": {
       "label": "Comando ou entrada por voz",
@@ -495,7 +501,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Entrada por voz; exige reconhecimento e confirmação próprios.",
+      "semantic_kind": "INPUT_METHOD"
     },
     "MOD-TECLADO": {
       "label": "Teclado",
@@ -507,7 +514,8 @@
       "scope": "GERAL",
       "order": 900,
       "show_in_interface": true,
-      "description": ""
+      "description": "Método de entrada por dispositivo; não é um formato do conteúdo.",
+      "semantic_kind": "INPUT_METHOD"
     },
     "CAR-FALA-PERSISTENTE-REPETITIVA": {
       "label": "Insiste ou repete contribuições quando busca manter a fala",
@@ -1308,6 +1316,51 @@
       "scope": "GERAL",
       "order": 65,
       "show_in_interface": true
+    },
+    "MOD-JOGO-INTERATIVO": {
+      "label": "Interação em jogo digital",
+      "aliases": [],
+      "show_in_interface": true,
+      "semantic_kind": "COMPOSITE_ACTIVITY",
+      "description": "Atividade composta; não é modalidade elementar nem prova de aprendizagem."
+    },
+    "MOD-VIDEO": {
+      "label": "Vídeo",
+      "aliases": [],
+      "show_in_interface": true,
+      "semantic_kind": "COMPOSITE_MEDIA",
+      "description": "Mídia temporal composta; alternativas dependem de seu conteúdo."
+    },
+    "MOD-TOQUE": {
+      "label": "Entrada por toque",
+      "aliases": [],
+      "show_in_interface": true,
+      "semantic_kind": "INPUT_METHOD",
+      "description": "Método de entrada por contato; não confundir com feedback háptico."
+    },
+    "NEC-CONFERIR-OPERACAO-DO-RECURSO": {
+      "label": "Conferir a operação efetiva do recurso na tarefa",
+      "description": "Requisito situado de projeto; não confirma capacidade, impedimento ou resultado.",
+      "aliases": [],
+      "show_in_interface": true
+    },
+    "NEC-MEDIACAO-CONTEXTUAL": {
+      "label": "Explicitar o apoio necessário para preparar ou compreender o recurso",
+      "description": "Requisito situado de projeto; não confirma capacidade, impedimento ou resultado.",
+      "aliases": [],
+      "show_in_interface": true
+    },
+    "NEC-CONFERIR-DISPONIBILIDADE-EFETIVA": {
+      "label": "Conferir disponibilidade efetiva nas condições do ambiente",
+      "description": "Requisito situado de projeto; não confirma capacidade, impedimento ou resultado.",
+      "aliases": [],
+      "show_in_interface": true
     }
+  },
+  "schema_version": "1.5.0-rc1",
+  "claim_states": {
+    "DOCUMENTED_OPERATIONAL_CLAIM": "Parcela documentada no escopo indicado",
+    "PROPOSED_OPERATIONALIZATION": "Proposta sem autorização operacional",
+    "NOT_ELIGIBLE": "Fundamentação insuficiente para orientar"
   }
 }

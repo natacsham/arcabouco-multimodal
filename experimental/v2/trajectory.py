@@ -46,7 +46,7 @@ class ResearchComposer(Composer):
 
     def __init__(self, base_path: Path | str | None = None,
                  bindings_path: Path | str | None = None,
-                 include_audio: bool = True) -> None:
+                 include_audio: bool = True, *, legacy_projection: bool = True) -> None:
         paths = [HERE / "schema.ttl", HERE / "base.ttl"]
         if include_audio:
             paths.append(HERE / "extensions" / "audio-review.ttl")
@@ -67,8 +67,15 @@ class ResearchComposer(Composer):
             raise TrajectoryError("Contratos curados da ponte ausentes.")
         self.records: dict[tuple[str, str], dict] = {}
         self.application_records: dict[str, dict] = {}
-        self._validate_records()
-        self._project()
+        self.legacy_projection = legacy_projection
+        self.situated_graph = Graph()
+        self.situated_graph += self.graph
+        # The original pilot remains reproducible on request. The situated
+        # adapter reads operation contracts directly from every active research
+        # component and is not limited by the old five pilot bindings.
+        if legacy_projection:
+            self._validate_records()
+            self._project()
         self.projected_graph_sha256 = self._graph_hash()
 
     def _graph_hash(self) -> str:
@@ -348,6 +355,17 @@ class ResearchComposer(Composer):
             "record_keys": sorted(used),
         }
 
+    def compose_context(self, context: dict[str, Any], engine=None, progress=None) -> dict[str, Any]:
+        # A caller may retain the legacy projection for its editable catalogue
+        # and regression API. The situated evaluator uses the primary-grounded
+        # RDF records before that historical projection, without swapping shared
+        # state or invoking the legacy search.
+        if self.legacy_projection:
+            view = copy.copy(self)
+            view.graph = self.situated_graph
+            return Composer.compose_context(view, context, engine=engine, progress=progress)
+        return super().compose_context(context, engine=engine, progress=progress)
+
     def compose(self, context: dict[str, Any]) -> dict[str, Any]:
         self.projected_graph_sha256 = self._graph_hash()
         result = super().compose(context)
@@ -390,3 +408,9 @@ def build_trajectory_graph(base_path: Path | str | None = None,
                            include_audio: bool = True) -> Graph:
     """Return a deterministic RDF projection, without writing any file."""
     return ResearchComposer(base_path, bindings_path, include_audio).graph
+
+
+def compose_context(context: dict[str, Any], engine=None, progress=None) -> dict[str, Any]:
+    """Public situated contract; legacy bindings cannot gate unrelated claims."""
+    composer = ResearchComposer(legacy_projection=False)
+    return composer.compose_context(context, engine=engine, progress=progress)

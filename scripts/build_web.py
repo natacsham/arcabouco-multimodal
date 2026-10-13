@@ -38,6 +38,7 @@ def build():
     downloads.mkdir(exist_ok=True)
     paths = [
         ROOT / "execution_trace.py",
+        ROOT / "situated_context.py",
         ROOT / "data/knowledge-base.json",
         ROOT / "data/interface-vocabulary.json",
         ROOT / "ontology/mado-combined.ttl",
@@ -108,7 +109,7 @@ def build():
         "frontend_sha256": {
             name: sha(APP / name)
             for name in ("index.html", "app.js", "styles.css", "worker.mjs", "client.mjs", "guiado.html", "guided.js", "guided.css", "views.css", "composition.js", "composition.css",
-                         "simple-flow.js", "simple-flow.css", "voice.js", "intake.mjs", "completo.html", "completo-guiado.html")
+                         "simple-flow.js", "simple-flow.css", "voice.js", "intake.mjs", "situated-output.mjs", "completo.html", "completo-guiado.html")
         },
         "site_assets_sha256": {
             name: sha(WEB / name)

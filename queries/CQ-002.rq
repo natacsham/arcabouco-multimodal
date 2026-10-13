@@ -3,7 +3,7 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 # Each row is a concrete witness. The first eight columns retain the engine contract.
 SELECT DISTINCT ?conhecimento ?enunciado ?modoRecuperacao ?articulacao
        ?tipoArticulacao ?nivelConfirmacao ?funcaoAcrescentada ?correspondencias
-       ?entrada ?tarefaContexto ?tarefaConhecimento ?conceitoContexto ?predicado
+       ?entrada ?tarefaContexto ?tarefaConhecimento ?conceitoContexto ?predicado ?participante
 WHERE {
   VALUES ?ctx { mado:CTX-TRANSFERENCIA-RECURSO-DIGITAL-01 }
   {
@@ -34,7 +34,10 @@ WHERE {
   ?tarefaContexto skos:broader* ?tarefaConhecimento .
   ?entrada mado:aplicavelATarefa ?tarefaConhecimento .
   {
-    ?ctx mado:temParticipacao/mado:temCaracteristicaRelevante ?conceitoContexto .
+    ?ctx mado:temParticipacao ?participante .
+    ?participante mado:temCaracteristicaRelevante ?conceitoContexto ;
+                  mado:realizaTarefa ?tarefaDaParticipacao .
+    ?tarefaDaParticipacao skos:broader* ?tarefaConhecimento .
     ?entrada mado:aplicavelACaracteristicaRelevanteDaPessoa ?conceitoContexto .
     BIND(mado:aplicavelACaracteristicaRelevanteDaPessoa AS ?predicado)
     BIND("caracteristica_funcional_situada" AS ?correspondencias)

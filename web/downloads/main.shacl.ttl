@@ -2,6 +2,59 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+# PENDING and PROPOSED are legitimate documentary states, never implicit support.
+mado:AfirmacaoOperacionalShape a sh:NodeShape ;
+  sh:targetClass mado:AfirmacaoOperacionalDocumentada ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:enunciado ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:afirmacaoDoConhecimento ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path mado:elegibilidadeOperacional ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "DOCUMENTED_OPERATIONAL_CLAIM" "PROPOSED_OPERATIONALIZATION" "NOT_ELIGIBLE" ) ] ;
+  sh:property [ sh:path mado:estadoDaAfirmacao ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "SUPPORTED_IN_RECORDED_SCOPE" "PROPOSED_OPERATIONALIZATION" "PENDING" ) ] ;
+  sh:property [ sh:path mado:limiteDaAfirmacao ; sh:minCount 1 ] ;
+  sh:sparql [
+    sh:message "Afirmação operacional elegível exige estado compatível e suporte localizado no conhecimento exato."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:elegibilidadeOperacional "DOCUMENTED_OPERATIONAL_CLAIM" ; mado:afirmacaoDoConhecimento ?k .
+        FILTER ( NOT EXISTS { $this mado:estadoDaAfirmacao "SUPPORTED_IN_RECORDED_SCOPE" } ||
+                 NOT EXISTS { $this mado:trechoDaAfirmacao ?t ; mado:fonteDaAfirmacao ?f .
+                              ?k mado:sustentadoPorTrecho ?t ; mado:derivadoDe ?f .
+                              ?t mado:trechoDeFonte ?f . } )
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Cada trecho da afirmação deve pertencer ao conhecimento e a uma fonte da própria afirmação."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?t WHERE {
+        $this mado:elegibilidadeOperacional "DOCUMENTED_OPERATIONAL_CLAIM" ;
+              mado:afirmacaoDoConhecimento ?k ; mado:trechoDaAfirmacao ?t .
+        FILTER NOT EXISTS { ?k mado:sustentadoPorTrecho ?t ; mado:derivadoDe ?f .
+                            ?t mado:trechoDeFonte ?f . $this mado:fonteDaAfirmacao ?f . }
+      }
+    """
+  ] .
+
+mado:FuncaoRequeridaSituadaShape a sh:NodeShape ;
+  sh:targetClass mado:FuncaoRequeridaSituada ;
+  sh:property [ sh:path mado:noContexto ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+  sh:property [ sh:path mado:paraTarefa ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:requerFuncao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:paraParticipacao ; sh:class mado:ParticipacaoNoContexto ] ;
+  sh:sparql [
+    sh:message "A participação do requisito deve pertencer ao contexto ou ao seu contexto pai."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?p WHERE {
+        $this mado:noContexto ?ctx ; mado:paraParticipacao ?p .
+        FILTER NOT EXISTS { ?p mado:participacaoEmContexto ?ctx }
+        FILTER NOT EXISTS { ?ctx mado:episodioDoContexto ?parent . ?p mado:participacaoEmContexto ?parent }
+      }
+    """
+  ] .
+
 mado:ConhecimentoShape a sh:NodeShape ;
   sh:targetClass mado:ConhecimentoMultimodalArticulado ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;

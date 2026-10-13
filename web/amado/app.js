@@ -1,5 +1,6 @@
 import { request, restart } from './client.mjs';
 import { renderExplanation } from '../explanation.js';
+import { situatedOutput } from './situated-output.mjs';
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 let catalog = null;
@@ -495,6 +496,23 @@ $("#toggle-decision-content").addEventListener("click", () => {
 
 function renderDecision(result) {
   lastResult = result;
+  if (result.result_contract === 'AMADO_SITUATED_1') {
+    const output=situatedOutput(result);
+    $('#saida').hidden=false; setDecisionExpanded(true);
+    $('#decision-status').textContent=output.state;
+    $('#practical-title').textContent=output.title;
+    $('#practical-headline').textContent='';
+    $('#shared-explanation').innerHTML=output.html;
+    $('#orientation').textContent='A orientação é composta a partir das operações e dos fundamentos conferidos para este caso.';
+    $('#rationale').innerHTML=output.detailHTML;
+    $('#criteria').innerHTML=output.foundationHTML;
+    for(const id of ['knowledge','rejected','technical-summary']) $('#'+id).textContent='';
+    $('#missing-box').hidden=true;
+    $('#limit').textContent='Os apoios parciais e as condições estão identificados junto às ações. Não há garantia de resultado educacional.';
+    $('#orientation-details').open=false;
+    $('#decision-title').focus();
+    return;
+  }
   const decision = result.decision;
   // Depois da confirmação, recolhe as etapas de entrada para que a pessoa
   // chegue diretamente à orientação sem percorrer novamente uma página longa.
@@ -549,7 +567,7 @@ async function generate(container, free, statusTarget) {
   if (free) renderMissingQuestions(currentCase.questions || []);
   const result = await api("/api/generate", {method: "POST", body: "{}"});
   renderDecision(result);
-  $(statusTarget).textContent = result.decision.status === "GERADA" ? "Orientação pronta." : result.decision.status === "GERADA_PARCIAL" ? "Orientação parcial disponível. Confira as funções não cobertas e os limites." : "A decisão foi suspensa; confira as informações ausentes.";
+  $(statusTarget).textContent = result.result_contract === 'AMADO_SITUATED_1' ? situatedOutput(result).state : result.decision.status === "GERADA" ? "Orientação pronta." : result.decision.status === "GERADA_PARCIAL" ? "Orientação parcial disponível. Confira as funções não cobertas e os limites." : "A decisão foi suspensa; confira as informações ausentes.";
 }
 
 $("#confirm-reported").addEventListener("click", () => runBusy('#reported-status', async () => {
@@ -681,6 +699,7 @@ function speakLocally(text) {
 }
 $("#speak-button").addEventListener("click", () => {
   if (!lastResult) return;
+  if (lastResult.result_contract === 'AMADO_SITUATED_1') { speakLocally($('#shared-explanation').innerText); return; }
   const decision = lastResult.decision;
   const summary = decision.sintese_pratica || {};
   const text = [summary.texto || decision.orientacao_principal, ...(summary.etapas || []).flatMap((step) => [step.titulo, `Formas: ${(step.modos || []).join(", ")}.`, `Função: ${step.funcao || ""}.`, `Como se complementam: ${step.como_combinar || ""}.`, ...(step.itens || [])]), summary.resultado_esperado || "", summary.aviso_resultado || ""].join(" ");
@@ -688,6 +707,7 @@ $("#speak-button").addEventListener("click", () => {
 });
 $("#speak-detailed-button").addEventListener("click", () => {
   if (!lastResult) return;
+  if (lastResult.result_contract === 'AMADO_SITUATED_1') { speakLocally($('#shared-explanation').innerText); return; }
   const decision = lastResult.decision;
   const text = [decision.orientacao_principal, ...decision.configuracao_modal.map((item) => `${item.modo}: ${item.funcao}. ${item.acao}`), ...decision.condicoes].join(" ");
   speakLocally(text);

@@ -1,4 +1,8 @@
-# Revisão 1.4.0-rc3 — usar a matriz existente e explicar ações
+# Revisões do AMADO
+
+A revisão atual é [MADO 1.5.0-rc1 — representação e composição situadas](revisao-situada-1.5.md). A auditoria do catálogo está em [auditoria-catalogo-1.5.md](auditoria-catalogo-1.5.md); a revisão independente do motor, em [revisao-compositor-1.5.md](revisao-compositor-1.5.md). O conteúdo abaixo conserva o histórico, não descreve o contrato atual.
+
+## Histórico: 1.4.0-rc3 — usar a matriz existente e explicar ações
 
 ## Revisão do instrumento — intake1
 

@@ -64,7 +64,7 @@ class ContextualQuestionTests(unittest.TestCase):
 
     def test_negated_groups_do_not_create_people_or_requirements(self):
         for statement, expected_roles, expected_needs in (
-            ("Não há alunos cegos nesta turma.", {"PAPEL-TURMA"}, {"NEC-APOIAR-COMPREENSAO-TURMA"}),
+            ("Não há alunos cegos nesta turma.", {"PAPEL-TURMA"}, set()),
             ("Não existem pessoas surdas neste grupo.", set(), set()),
         ):
             self.engine.start_free_context()

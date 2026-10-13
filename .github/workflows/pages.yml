@@ -21,14 +21,16 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - run: python scripts/build_traceability_rdf.py --check
       - run: python -B scripts/source_catalog.py --check --check-projection web/assets/source-catalog.json
-      - run: python scripts/verify_public.py
+      - run: python scripts/verify_public.py --report evidence/technical-1.5-report.json --reasoner-report evidence/reasoner-1.5-report.json
       - run: python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
       - run: python -B experimental/v2/verify.py
+      - run: python -B experimental/v2/verify_situated.py --output experimental/v2/evidence/situated-report.json
       - run: python scripts/check_bundle.py
       - run: node tests/intake.mjs
       - run: node tests/review-input.mjs
       - run: node tests/progress.mjs
       - run: node tests/result-presentation.mjs
+      - run: node tests/situated-output.mjs
       - run: node tests/source-path.mjs
       - run: python -B tests/publish-gates.py
       - run: python scripts/audit_distribution.py

@@ -126,10 +126,11 @@ def compose_context(payload, progress=None):
                 "facts": confirmed_values(person.get("facts", {}), "facts"),
                 "resources": confirmed_values(person.get("resources", {}), "resources")})
     emit("verification", "completed", "Formato das informações conferido; sua compatibilidade será avaliada na composição.")
-    # This composer checks conditions while traversing possible transitions.
-    # A separate 'retrieval completed' event would claim a boundary it does not have.
-    emit("composition", "running", "Consultando as relações da base, verificando condições e compondo possibilidades…")
-    result = composition_engine().compose(context)
+    # The typed legacy example is an input adapter, not a second decision path.
+    # The same situated enumerator consumes existing RDF operation contracts.
+    result = composition_engine().compose_context(context, engine=ENGINE, progress=progress)
+    from engine import VERSION
+    result.update(result_contract="AMADO_SITUATED_1", base_version=VERSION, case_storage=False)
     # File hashes are identical in native and browser execution; host paths are
     # not evidence and must not be exposed or affect their public comparison.
     from pathlib import Path
@@ -141,9 +142,9 @@ def compose_context(payload, progress=None):
                 for name, digest in record["fingerprints"].items()
             }
         for participant in record.get("participant_results", []):
-            public_fingerprints(participant["result"])
+            if isinstance(participant.get("result"), dict):
+                public_fingerprints(participant["result"])
     public_fingerprints(result)
-    emit("composition", "completed", "Possibilidades, condições pendentes e lacunas organizadas para apresentação.")
     return result
 
 
@@ -192,7 +193,7 @@ def dispatch(request, progress=None):
             raise ValueError("Use até 10.000 caracteres na correção.")
         return ENGINE.confirm_reported(payload["confirmed"], correction)
     if operation == "generate":
-        return ENGINE.generate(progress=progress) if progress is not None else ENGINE.generate()
+        return ENGINE.generate_situated(progress=progress)
     raise ValueError("Operação não disponível nesta versão pública.")
 
 

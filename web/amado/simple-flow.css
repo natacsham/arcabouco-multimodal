@@ -109,6 +109,13 @@ html[data-contrast="high"] .simple-view .simple-status,html[data-contrast="high"
 .source-disclosure > li {margin:.75rem 0}
 .source-disclosure p {margin:.35rem 0}
 .source-state {font-size:.9375rem}
+.situated-choice > summary {font-size:1.125rem;line-height:1.5;cursor:pointer;padding:.25rem;overflow-wrap:anywhere}
+.situated-choice > summary:focus-visible {outline:2px solid var(--focus);outline-offset:3px}
+.situated-action {margin:1rem 0;padding:.25rem 0 1rem;border-bottom:1px solid var(--border)}
+.situated-action:last-child {border-bottom:0}
+.step-grounding {padding:.5rem 0}
+.step-grounding h5 {font-size:1rem;margin:.75rem 0 .25rem}
+.situated-choice li,.situated-choice p {overflow-wrap:anywhere}
 #generation-stages {margin:.5rem 0;padding-left:1.5rem}
 #generation-stages li {margin:.4rem 0}
 #generation-stages [data-state="completed"] {font-weight:600}

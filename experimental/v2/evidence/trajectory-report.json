@@ -1,6 +1,6 @@
 {
   "artifact": "MADO V2 — ponte experimental para conhecimentos da trajetória",
-  "checked_at_utc": "2026-10-12T03:04:26.777136+00:00",
+  "checked_at_utc": "2026-10-13T05:14:26.683772+00:00",
   "tool": {
     "python": "3.12.10",
     "command": "python -B experimental/v2/verify_trajectory.py"
@@ -290,17 +290,17 @@
           {
             "collection": "knowledge",
             "id": "K28",
-            "sha256": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f"
+            "sha256": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b"
           },
           {
             "collection": "knowledge",
             "id": "K29",
-            "sha256": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2"
+            "sha256": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a"
           },
           {
             "collection": "knowledge",
             "id": "K41",
-            "sha256": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470"
+            "sha256": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f"
           },
           {
             "collection": "sources",
@@ -325,8 +325,8 @@
         ],
         "pending_trajectory_records": [],
         "partial_trajectory_records": [],
-        "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-        "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+        "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+        "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
         "gaps": [],
         "limits": [
           "Resultados são propostas de projeto, não garantia de acessibilidade ou melhores resultados educacionais.",
@@ -627,7 +627,7 @@
           {
             "collection": "knowledge",
             "id": "K41",
-            "sha256": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470",
+            "sha256": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f",
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           },
           {
@@ -649,8 +649,8 @@
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           }
         ],
-        "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-        "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+        "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+        "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
         "gaps": [
           {
             "code": "FUNCTION_NOT_COVERED",
@@ -953,17 +953,17 @@
           {
             "collection": "knowledge",
             "id": "K28",
-            "sha256": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f"
+            "sha256": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b"
           },
           {
             "collection": "knowledge",
             "id": "K29",
-            "sha256": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2"
+            "sha256": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a"
           },
           {
             "collection": "knowledge",
             "id": "K41",
-            "sha256": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470"
+            "sha256": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f"
           },
           {
             "collection": "sources",
@@ -988,8 +988,8 @@
         ],
         "pending_trajectory_records": [],
         "partial_trajectory_records": [],
-        "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-        "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+        "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+        "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
         "gaps": [],
         "limits": [
           "Resultados são propostas de projeto, não garantia de acessibilidade ou melhores resultados educacionais.",
@@ -1088,12 +1088,12 @@
               "check-3c3291a5b234f15f"
             ],
             "candidate_ids": [
-              "proposal-c27c73a7baf93a6256bd",
+              "proposal-d7880474e7248fa8884e",
               "https://w3id.org/mado/experimental/v2#CaptureKeyboard"
             ],
             "candidates": [
               {
-                "id": "proposal-c27c73a7baf93a6256bd",
+                "id": "proposal-d7880474e7248fa8884e",
                 "kind": "CONDITIONAL_COMPLETE_CANDIDATE"
               },
               {
@@ -1339,19 +1339,19 @@
           {
             "collection": "knowledge",
             "id": "K28",
-            "sha256": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
+            "sha256": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b",
             "usage": "CONDITIONAL_CANDIDATE"
           },
           {
             "collection": "knowledge",
             "id": "K29",
-            "sha256": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2",
+            "sha256": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a",
             "usage": "CONDITIONAL_CANDIDATE"
           },
           {
             "collection": "knowledge",
             "id": "K41",
-            "sha256": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470",
+            "sha256": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f",
             "usage": "CONDITIONAL_CANDIDATE"
           },
           {
@@ -1395,13 +1395,13 @@
           {
             "collection": "knowledge",
             "id": "K28",
-            "sha256": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
+            "sha256": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b",
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           },
           {
             "collection": "knowledge",
             "id": "K29",
-            "sha256": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2",
+            "sha256": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a",
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           },
           {
@@ -1411,8 +1411,8 @@
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           }
         ],
-        "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-        "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+        "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+        "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
         "gaps": [
           {
             "code": "PENDING_CONDITIONS",
@@ -1736,7 +1736,7 @@
           {
             "collection": "knowledge",
             "id": "K41",
-            "sha256": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470",
+            "sha256": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f",
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           },
           {
@@ -1758,8 +1758,8 @@
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           }
         ],
-        "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-        "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+        "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+        "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
         "gaps": [
           {
             "code": "FUNCTION_NOT_COVERED",
@@ -2055,13 +2055,13 @@
           {
             "collection": "knowledge",
             "id": "K28",
-            "sha256": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
+            "sha256": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b",
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           },
           {
             "collection": "knowledge",
             "id": "K29",
-            "sha256": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2",
+            "sha256": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a",
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           },
           {
@@ -2071,8 +2071,8 @@
             "usage": "PARTIAL_SEGMENT_NOT_WHOLE_TASK"
           }
         ],
-        "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-        "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+        "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+        "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
         "gaps": [
           {
             "code": "FUNCTION_NOT_COVERED",
@@ -2095,9 +2095,9 @@
     }
   ],
   "trace_sample": {
-    "base_sha256": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-    "bindings_sha256": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
-    "projected_graph_sha256": "dd37d4d405b3d102f47413eae03a377c0ef59ea12f89454f513684d8cfbab135",
+    "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+    "bindings_sha256": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
+    "projected_graph_sha256": "97962c0a27231ebe7bbe65aca1e4d410e63dab1d90a40a2667f9bfc99ab57abc",
     "interpretation": "Operacionalização analítica assistida da trajetória; não descoberta pelo programa nem nova conferência dos artigos originais.",
     "records": [
       {
@@ -2319,7 +2319,7 @@
         "collection": "knowledge",
         "id": "K28",
         "usage": "COMPLETE_PROPOSAL",
-        "sha256": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
+        "sha256": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b",
         "record": {
           "id": "K28",
           "estudo_id": "EST07",
@@ -2379,14 +2379,150 @@
           "funcao_decisoria_ids": [
             "FUN-CONSOLIDAR-COM-FEEDBACK",
             "FUN-ACOMPANHAR-RESULTADO"
-          ]
+          ],
+          "operation_claims": [
+            {
+              "id": "CLM-K28-LEGACY",
+              "statement": "Em formulários e comunicação digital, acessibilidade depende de uma sequência operacional compreensível: rótulos/instruções, foco e teclado, identificação de erros, confirmação e feedback de status precisam funcionar de forma coordenada.",
+              "function_ids": [
+                "FUN-CONSOLIDAR-COM-FEEDBACK",
+                "FUN-ACOMPANHAR-RESULTADO"
+              ],
+              "status": "PROPOSED_OPERATIONALIZATION",
+              "eligibility": "PROPOSED_OPERATIONALIZATION",
+              "epistemic_status": "PRESERVED_CANDIDATE_NOT_OPERATIONAL_SUPPORT",
+              "foundation_status": "PENDING",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F08"
+              ],
+              "excerpt_ids": [
+                "TD-EV29",
+                "TD-EV30"
+              ],
+              "contribution_ids": [],
+              "review_basis_ids": [],
+              "support": [
+                {
+                  "source_id": "F08",
+                  "excerpt_id": "TD-EV29",
+                  "support_scope": "Enunciado e localização preservados no registro; não houve nova leitura do original.",
+                  "review_status": "EXISTING_RECORD_ONLY",
+                  "locator": "50-248883.pdf · 9",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                },
+                {
+                  "source_id": "F08",
+                  "excerpt_id": "TD-EV30",
+                  "support_scope": "Enunciado e localização preservados no registro; não houve nova leitura do original.",
+                  "review_status": "EXISTING_RECORD_ONLY",
+                  "locator": "50-248883.pdf · 10",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-PREENCHER-ENVIAR-MENSAGEM-0C1FB87",
+                  "TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD"
+                ],
+                "function_ids": [
+                  "FUN-CONSOLIDAR-COM-FEEDBACK",
+                  "FUN-ACOMPANHAR-RESULTADO"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "Aplicar somente quando as condições contextuais registradas forem satisfeitas."
+              ],
+              "pending_items": [],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            },
+            {
+              "id": "CLM-K28-SCOPED-1",
+              "statement": "O registro de redesenho de mensagens reúne rótulos, instruções, identificação de erros, confirmação e feedback acessível.",
+              "function_ids": [
+                "FUN-PERMITIR-REVISAO",
+                "FUN-FEEDBACK-PERCEPTIVEL"
+              ],
+              "status": "SUPPORTED_IN_RECORDED_SCOPE",
+              "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
+              "epistemic_status": "DOCUMENTED_SCOPED_DESIGN_PRECEDENT",
+              "foundation_status": "DOCUMENTED_IN_RECORDED_SCOPE",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F08"
+              ],
+              "excerpt_ids": [
+                "TD-EV29"
+              ],
+              "contribution_ids": [],
+              "review_basis_ids": [
+                "C-K38-03"
+              ],
+              "support": [
+                {
+                  "source_id": "F08",
+                  "excerpt_id": "TD-EV29",
+                  "support_scope": "O registro de redesenho de mensagens reúne rótulos, instruções, identificação de erros, confirmação e feedback acessível.",
+                  "review_status": "CONFERIDA_NO_REGISTRO",
+                  "locator": "50-248883.pdf · 9",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-PREENCHER-ENVIAR-MENSAGEM-0C1FB87",
+                  "TAR-EXECUTAR-TAREFAS-NO-AVA-7BEF3BD"
+                ],
+                "function_ids": [
+                  "FUN-PERMITIR-REVISAO",
+                  "FUN-FEEDBACK-PERCEPTIVEL"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "Oferece precedente de revisão e confirmação numa tarefa de mensagens; sua transferência para autoria de recurso digital exige justificar a equivalência funcional, não copiar a interface.",
+                "A transferência mantém somente esta parcela; o enunciado candidato completo continua pendente."
+              ],
+              "pending_items": [],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            }
+          ],
+          "claim_audit": {
+            "schema_version": "1.5.0-rc1",
+            "historical_status_preserved": true,
+            "whole_statement_auto_promoted": false,
+            "historical_review_status": "CANDIDATO_RECONSTRUIDO_A_REVISAR",
+            "complete_claim_requires_all_parts_supported": true
+          }
         }
       },
       {
         "collection": "knowledge",
         "id": "K29",
         "usage": "COMPLETE_PROPOSAL",
-        "sha256": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2",
+        "sha256": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a",
         "record": {
           "id": "K29",
           "estudo_id": "EST07",
@@ -2459,14 +2595,150 @@
           "funcao_decisoria_ids": [
             "FUN-PRESERVAR-ACESSO",
             "FUN-EXPRESSAR-CONHECIMENTO"
-          ]
+          ],
+          "operation_claims": [
+            {
+              "id": "CLM-K29-LEGACY",
+              "statement": "Comunicação em contextos digitais de aprendizagem pode ser ampliada quando a interface admite múltiplas formas de entrada, percepção e expressão, incluindo voz, leitura, LIBRAS e anexos de áudio/vídeo, desde que cada alternativa mantenha acessibilidade própria.",
+              "function_ids": [
+                "FUN-PRESERVAR-ACESSO",
+                "FUN-EXPRESSAR-CONHECIMENTO"
+              ],
+              "status": "PROPOSED_OPERATIONALIZATION",
+              "eligibility": "PROPOSED_OPERATIONALIZATION",
+              "epistemic_status": "PRESERVED_CANDIDATE_NOT_OPERATIONAL_SUPPORT",
+              "foundation_status": "PENDING",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F08"
+              ],
+              "excerpt_ids": [
+                "TD-EV29",
+                "TD-EV30"
+              ],
+              "contribution_ids": [],
+              "review_basis_ids": [],
+              "support": [
+                {
+                  "source_id": "F08",
+                  "excerpt_id": "TD-EV29",
+                  "support_scope": "Enunciado e localização preservados no registro; não houve nova leitura do original.",
+                  "review_status": "EXISTING_RECORD_ONLY",
+                  "locator": "50-248883.pdf · 9",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                },
+                {
+                  "source_id": "F08",
+                  "excerpt_id": "TD-EV30",
+                  "support_scope": "Enunciado e localização preservados no registro; não houve nova leitura do original.",
+                  "review_status": "EXISTING_RECORD_ONLY",
+                  "locator": "50-248883.pdf · 10",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA",
+                  "TAR-COMUNICAR-CONTEUDO-1545B38"
+                ],
+                "function_ids": [
+                  "FUN-PRESERVAR-ACESSO",
+                  "FUN-EXPRESSAR-CONHECIMENTO"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "Aplicar somente quando as condições contextuais registradas forem satisfeitas."
+              ],
+              "pending_items": [],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            },
+            {
+              "id": "CLM-K29-SCOPED-1",
+              "statement": "A tabela preservada associa formulários, anexos e formas alternativas de comunicação a critérios e perfis funcionais.",
+              "function_ids": [
+                "FUN-PRESERVAR-ACESSO",
+                "FUN-EXPRESSAR-CONHECIMENTO"
+              ],
+              "status": "SUPPORTED_IN_RECORDED_SCOPE",
+              "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
+              "epistemic_status": "DOCUMENTED_SCOPED_DESIGN_PRECEDENT",
+              "foundation_status": "DOCUMENTED_IN_RECORDED_SCOPE",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F08"
+              ],
+              "excerpt_ids": [
+                "TD-EV30"
+              ],
+              "contribution_ids": [],
+              "review_basis_ids": [
+                "C-K37-01"
+              ],
+              "support": [
+                {
+                  "source_id": "F08",
+                  "excerpt_id": "TD-EV30",
+                  "support_scope": "A tabela preservada associa formulários, anexos e formas alternativas de comunicação a critérios e perfis funcionais.",
+                  "review_status": "CONFERIDA_NO_REGISTRO",
+                  "locator": "50-248883.pdf · 10",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-ENVIAR-LER-MENSAGEM-INTERAGIR-COM-MENSAGENS-4C0CACA",
+                  "TAR-COMUNICAR-CONTEUDO-1545B38"
+                ],
+                "function_ids": [
+                  "FUN-PRESERVAR-ACESSO",
+                  "FUN-EXPRESSAR-CONHECIMENTO"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "Contribuição apenas contextual: não documenta jogo, ordenação de eventos, relação causal ou consolidação da aprendizagem.",
+                "A transferência mantém somente esta parcela; o enunciado candidato completo continua pendente."
+              ],
+              "pending_items": [],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            }
+          ],
+          "claim_audit": {
+            "schema_version": "1.5.0-rc1",
+            "historical_status_preserved": true,
+            "whole_statement_auto_promoted": false,
+            "historical_review_status": "CANDIDATO_RECONSTRUIDO_A_REVISAR",
+            "complete_claim_requires_all_parts_supported": true
+          }
         }
       },
       {
         "collection": "knowledge",
         "id": "K41",
         "usage": "COMPLETE_PROPOSAL",
-        "sha256": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470",
+        "sha256": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f",
         "record": {
           "id": "K41",
           "foundation_review_status": "PARCIAL",
@@ -2528,7 +2800,197 @@
           "funcao_decisoria_ids": [
             "FUN-SELECIONAR-MODO-POR-CONDICAO",
             "FUN-FEEDBACK-PERCEPTIVEL"
-          ]
+          ],
+          "operation_claims": [
+            {
+              "id": "CLM-K41-LEGACY",
+              "statement": "Uma entrada alternativa somente apoia a tarefa quando o gesto ou movimento exigido é viável, o dispositivo e o sistema são compatíveis, o desempenho é suficiente e o usuário recebe confirmação perceptível.",
+              "function_ids": [
+                "FUN-SELECIONAR-MODO-POR-CONDICAO",
+                "FUN-FEEDBACK-PERCEPTIVEL"
+              ],
+              "status": "PROPOSED_OPERATIONALIZATION",
+              "eligibility": "PROPOSED_OPERATIONALIZATION",
+              "epistemic_status": "PRESERVED_CANDIDATE_NOT_OPERATIONAL_SUPPORT",
+              "foundation_status": "PENDING",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F01",
+                "F05"
+              ],
+              "excerpt_ids": [
+                "TD-RC3-REF-04",
+                "TD-RC3-REF-07"
+              ],
+              "contribution_ids": [],
+              "review_basis_ids": [],
+              "support": [
+                {
+                  "source_id": "F01",
+                  "excerpt_id": "TD-RC3-REF-04",
+                  "support_scope": "Enunciado e localização preservados no registro; não houve nova leitura do original.",
+                  "review_status": "EXISTING_RECORD_ONLY",
+                  "locator": "8",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                },
+                {
+                  "source_id": "F05",
+                  "excerpt_id": "TD-RC3-REF-07",
+                  "support_scope": "Enunciado e localização preservados no registro; não houve nova leitura do original.",
+                  "review_status": "EXISTING_RECORD_ONLY",
+                  "locator": "5",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-OPERAR-SISTEMA"
+                ],
+                "function_ids": [
+                  "FUN-SELECIONAR-MODO-POR-CONDICAO",
+                  "FUN-FEEDBACK-PERCEPTIVEL"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "A viabilidade do mecanismo deve ser testada com o movimento, o dispositivo e a tarefa reais."
+              ],
+              "pending_items": [
+                "Conferir original e critérios de desempenho; os registros de uma configuração não asseguram viabilidade para outro contexto."
+              ],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            },
+            {
+              "id": "CLM-K41-C-K41-01",
+              "statement": "A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.",
+              "function_ids": [
+                "FUN-CARACTERIZAR-CONDICOES"
+              ],
+              "status": "SUPPORTED_IN_RECORDED_SCOPE",
+              "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
+              "epistemic_status": "DOCUMENTED_SCOPED_DESIGN_PRECEDENT",
+              "foundation_status": "DOCUMENTED_IN_RECORDED_SCOPE",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F01"
+              ],
+              "excerpt_ids": [
+                "TD-RC3-REF-04"
+              ],
+              "contribution_ids": [
+                "C-K41-01"
+              ],
+              "review_basis_ids": [],
+              "support": [
+                {
+                  "source_id": "F01",
+                  "excerpt_id": "TD-RC3-REF-04",
+                  "support_scope": "A extração descreve perda de sinal e necessidade de explicação e apoio para acionar informação de localização.",
+                  "review_status": "CONFERIDA_NO_REGISTRO",
+                  "locator": "8",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-OPERAR-SISTEMA"
+                ],
+                "function_ids": [
+                  "FUN-CARACTERIZAR-CONDICOES"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "Limita a entrada alternativa pela infraestrutura e pelo aprendizado da ação; não se confunde com incapacidade geral."
+              ],
+              "pending_items": [],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            },
+            {
+              "id": "CLM-K41-C-K41-02",
+              "statement": "O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.",
+              "function_ids": [
+                "FUN-SELECIONAR-MODO-POR-CONDICAO"
+              ],
+              "status": "SUPPORTED_IN_RECORDED_SCOPE",
+              "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
+              "epistemic_status": "DOCUMENTED_SCOPED_DESIGN_PRECEDENT",
+              "foundation_status": "DOCUMENTED_IN_RECORDED_SCOPE",
+              "operationalization_status": "PROPOSED_FOR_SITUATED_VERIFICATION",
+              "source_ids": [
+                "F05"
+              ],
+              "excerpt_ids": [
+                "TD-RC3-REF-07"
+              ],
+              "contribution_ids": [
+                "C-K41-02"
+              ],
+              "review_basis_ids": [],
+              "support": [
+                {
+                  "source_id": "F05",
+                  "excerpt_id": "TD-RC3-REF-07",
+                  "support_scope": "O registro de entrada alternativa relaciona movimentos disponíveis e dispositivos utilizados em uma configuração específica.",
+                  "review_status": "CONFERIDA_NO_REGISTRO",
+                  "locator": "5",
+                  "document_url": null,
+                  "original_document_rechecked_in_this_migration": false
+                }
+              ],
+              "scope": {
+                "task_ids": [
+                  "TAR-OPERAR-SISTEMA"
+                ],
+                "function_ids": [
+                  "FUN-SELECIONAR-MODO-POR-CONDICAO"
+                ],
+                "transfer_rule": "FUNCTIONAL_WITNESS_AND_SITUATED_CONDITIONS_REQUIRED",
+                "allow_new_task_with_functional_witness": true,
+                "forbidden_inferences": [
+                  "DIAGNOSIS_TO_CAPABILITY",
+                  "GROUP_TO_MEMBER",
+                  "RESOURCE_TO_OPERATION",
+                  "DOCUMENTATION_TO_EMPIRICAL_EFFECT",
+                  "UNKNOWN_TO_ABSENT"
+                ],
+                "empirical_effect_authorized": false
+              },
+              "limits": [
+                "Apoia testar ação e compatibilidade concretas. Não demonstra que todo acionador ou voz atenderá outra pessoa."
+              ],
+              "pending_items": [],
+              "review_provenance": "MIGRATION_OF_EXISTING_RECORDS_2026-10-13_NO_NEW_ORIGINAL_REVIEW"
+            }
+          ],
+          "claim_audit": {
+            "schema_version": "1.5.0-rc1",
+            "historical_status_preserved": true,
+            "whole_statement_auto_promoted": false,
+            "historical_review_status": "CONFERIDO_PARA_O_ESCOPO_RC3",
+            "complete_claim_requires_all_parts_supported": true
+          }
         }
       },
       {
@@ -2865,9 +3327,9 @@
   },
   "graph": {
     "triples": 684,
-    "isomorphism_digest": "38606653800755799843882734847738510087536309409790874139160597460576621585265628",
+    "isomorphism_digest": "38541339243348472996633374636962781694426187566970877475875412067300893012647121",
     "repeated_build_identical": true,
-    "serialized_sha256": "77ce01a5ebf9cbb8730178963c6b839419b2767b844ffeb33f392b786fa676c1"
+    "serialized_sha256": "b4d72fafefef7c0b01971e5e78aff8e2e230e7ce2138211b530ab3d140980fab"
   },
   "shacl": {
     "conforms": true,
@@ -3234,7 +3696,7 @@
     },
     "primary_support_removed": {
       "rejected": true,
-      "report": "Validation Report\nConforms: False\nResults (5):\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\n"
+      "report": "Validation Report\nConforms: False\nResults (5):\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundAudioReviewArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundKeyboardArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundSpeechArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#ProductionThenReviewArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\nConstraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: v2:ArticulationShape\n\tFocus Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation>\n\tValue Node: <https://w3id.org/mado/experimental/v2#TrajectoryGroundTextReviewArticulation>\n\tSource Constraint: [ sh:message Literal(\"Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\") ; sh:select Literal(\"\n    PREFIX v2: <https://w3id.org/mado/experimental/v2#>\n    SELECT $this WHERE {\n      $this v2:status \"CURATED_FOR_PILOT\" .\n      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status \"PRIMARY_CHECKED\" }\n    }\n  \") ]\n\tMessage: Articulação habilitada precisa de contribuição primária conferida, não só registro legado.\n"
     },
     "missing_capability_function": {
       "rejected": true,
@@ -3330,55 +3792,59 @@
     ],
     "failures": [],
     "errors": [],
-    "log": "test_01_baseline_composes_speech_and_visual_review (test_composition.CompositionTests.test_01_baseline_composes_speech_and_visual_review) ... ok\ntest_02_new_conjunction_requires_documented_knowledge_increment (test_composition.CompositionTests.test_02_new_conjunction_requires_documented_knowledge_increment) ... ok\ntest_03_extension_does_not_add_capability_rule_action_task_or_scenario (test_composition.CompositionTests.test_03_extension_does_not_add_capability_rule_action_task_or_scenario) ... ok\ntest_04_removing_extension_reverses_its_operational_effect (test_composition.CompositionTests.test_04_removing_extension_reverses_its_operational_effect) ... ok\ntest_05_bibliography_alone_never_enables_audio_review (test_composition.CompositionTests.test_05_bibliography_alone_never_enables_audio_review) ... ok\ntest_06_missing_contributions_block_the_application (test_composition.CompositionTests.test_06_missing_contributions_block_the_application) ... ok\ntest_07_missing_exact_support_cannot_be_replaced_by_other_grounding (test_composition.CompositionTests.test_07_missing_exact_support_cannot_be_replaced_by_other_grounding) ... ok\ntest_08_unconfirmed_contribution_cannot_authorize_selection (test_composition.CompositionTests.test_08_unconfirmed_contribution_cannot_authorize_selection) ... ok\ntest_09_missing_source_or_locator_blocks_grounding (test_composition.CompositionTests.test_09_missing_source_or_locator_blocks_grounding) ... ok\ntest_10_unknown_task_is_not_resolved_by_names_or_fallback (test_composition.CompositionTests.test_10_unknown_task_is_not_resolved_by_names_or_fallback) ... ok\ntest_11_absent_and_null_resource_are_pending_false_is_exclusion (test_composition.CompositionTests.test_11_absent_and_null_resource_are_pending_false_is_exclusion) ... ok\ntest_12_absent_fact_is_pending_false_fact_blocks (test_composition.CompositionTests.test_12_absent_fact_is_pending_false_fact_blocks) ... ok\ntest_13_every_ready_step_has_only_satisfied_resource_and_fact_requirements (test_composition.CompositionTests.test_13_every_ready_step_has_only_satisfied_resource_and_fact_requirements) ... ok\ntest_14_diagnostic_or_persona_fields_are_rejected_not_inferred (test_composition.CompositionTests.test_14_diagnostic_or_persona_fields_are_rejected_not_inferred) ... ok\ntest_15_context_identifier_does_not_select_the_configuration (test_composition.CompositionTests.test_15_context_identifier_does_not_select_the_configuration) ... ok\ntest_16_repeated_execution_is_deterministic_and_does_not_mutate_inputs (test_composition.CompositionTests.test_16_repeated_execution_is_deterministic_and_does_not_mutate_inputs) ... ok\ntest_17_single_function_reuses_review_without_forcing_a_second_modality (test_composition.CompositionTests.test_17_single_function_reuses_review_without_forcing_a_second_modality) ... ok\ntest_18_incompatible_intermediate_representation_blocks_composition (test_composition.CompositionTests.test_18_incompatible_intermediate_representation_blocks_composition) ... ok\ntest_19_wrong_function_cannot_fulfil_required_review (test_composition.CompositionTests.test_19_wrong_function_cannot_fulfil_required_review) ... ok\ntest_20_relation_is_not_invented_from_adjacent_capabilities (test_composition.CompositionTests.test_20_relation_is_not_invented_from_adjacent_capabilities) ... ok\ntest_21_relation_without_grounding_cannot_be_used (test_composition.CompositionTests.test_21_relation_without_grounding_cannot_be_used) ... ok\ntest_22_sequential_review_is_not_automatically_care_complementarity (test_composition.CompositionTests.test_22_sequential_review_is_not_automatically_care_complementarity) ... ok\ntest_23_unconfirmed_case_does_not_execute_composition (test_composition.CompositionTests.test_23_unconfirmed_case_does_not_execute_composition) ... ok\ntest_24_all_explanation_checks_reference_execution_records (test_composition.CompositionTests.test_24_all_explanation_checks_reference_execution_records) ... ok\ntest_25_wrong_produced_knowledge_blocks_articulation_application (test_composition.CompositionTests.test_25_wrong_produced_knowledge_blocks_articulation_application) ... ok\ntest_26_unknown_resource_and_non_boolean_values_require_correction (test_composition.CompositionTests.test_26_unknown_resource_and_non_boolean_values_require_correction) ... ok\ntest_27_external_graph_labels_do_not_replace_functional_semantics (test_composition.CompositionTests.test_27_external_graph_labels_do_not_replace_functional_semantics) ... ok\ntest_28_declared_relations_and_exact_sources_are_present_in_explanation (test_composition.CompositionTests.test_28_declared_relations_and_exact_sources_are_present_in_explanation) ... ok\ntest_29_capabilities_recombine_without_fixed_input_output_pairs (test_composition.CompositionTests.test_29_capabilities_recombine_without_fixed_input_output_pairs) ... ok\ntest_30_legacy_only_contributions_do_not_become_checked_primary_sources (test_composition.CompositionTests.test_30_legacy_only_contributions_do_not_become_checked_primary_sources) ... ok\ntest_31_criterion_without_documentary_justification_does_not_authorize (test_composition.CompositionTests.test_31_criterion_without_documentary_justification_does_not_authorize) ... ok\ntest_32_ready_choice_does_not_appropriate_rejected_application_checks (test_composition.CompositionTests.test_32_ready_choice_does_not_appropriate_rejected_application_checks) ... ok\ntest_33_multiple_tasks_are_not_silently_composed (test_composition.CompositionTests.test_33_multiple_tasks_are_not_silently_composed) ... ok\ntest_34_missing_requirements_do_not_become_vacuously_satisfied (test_composition.CompositionTests.test_34_missing_requirements_do_not_become_vacuously_satisfied) ... ok\ntest_35_ambiguous_articulation_product_cannot_authorize_either_knowledge (test_composition.CompositionTests.test_35_ambiguous_articulation_product_cannot_authorize_either_knowledge) ... ok\ntest_36_non_text_action_cannot_be_rendered_as_instruction (test_composition.CompositionTests.test_36_non_text_action_cannot_be_rendered_as_instruction) ... ok\ntest_37_unusable_source_url_blocks_documentary_grounding (test_composition.CompositionTests.test_37_unusable_source_url_blocks_documentary_grounding) ... ok\ntest_38_action_uses_pilot_string_contract_labels_may_have_language (test_composition.CompositionTests.test_38_action_uses_pilot_string_contract_labels_may_have_language) ... ok\ntest_bounded_search_discloses_incomplete_enumeration (test_partial_composition.PartialCompositionTests.test_bounded_search_discloses_incomplete_enumeration) ... ok\ntest_disconnected_steps_are_not_combined_into_a_fake_complete_path (test_partial_composition.PartialCompositionTests.test_disconnected_steps_are_not_combined_into_a_fake_complete_path) ... ok\ntest_internal_segment_does_not_assume_prior_output_exists (test_partial_composition.PartialCompositionTests.test_internal_segment_does_not_assume_prior_output_exists) ... ok\ntest_known_impediment_is_not_reported_as_missing_information (test_partial_composition.PartialCompositionTests.test_known_impediment_is_not_reported_as_missing_information) ... ok\ntest_missing_final_function_does_not_hide_supported_prior_sequence (test_partial_composition.PartialCompositionTests.test_missing_final_function_does_not_hide_supported_prior_sequence) ... ok\ntest_missing_review_retains_only_grounded_initial_step (test_partial_composition.PartialCompositionTests.test_missing_review_retains_only_grounded_initial_step) ... ok\ntest_pending_whole_plan_separates_usable_step_and_question (test_partial_composition.PartialCompositionTests.test_pending_whole_plan_separates_usable_step_and_question) ... ok\ntest_review_existing_content_never_assumes_content_exists (test_partial_composition.PartialCompositionTests.test_review_existing_content_never_assumes_content_exists) ... ok\ntest_unknown_condition_of_impossible_route_is_not_a_question (test_partial_composition.PartialCompositionTests.test_unknown_condition_of_impossible_route_is_not_a_question) ... ok\ntest_conflicting_shared_facts_and_duplicate_people_are_blocked (test_participants.ParticipantTests.test_conflicting_shared_facts_and_duplicate_people_are_blocked) ... ok\ntest_distinct_routes_use_conditions_of_their_own_participant (test_participants.ParticipantTests.test_distinct_routes_use_conditions_of_their_own_participant) ... ok\ntest_missing_personal_capacities_are_not_filled_by_global_true_or_diagnosis (test_participants.ParticipantTests.test_missing_personal_capacities_are_not_filled_by_global_true_or_diagnosis) ... ok\ntest_resource_available_to_one_person_is_not_operability_of_another (test_participants.ParticipantTests.test_resource_available_to_one_person_is_not_operability_of_another) ... ok\ntest_01_reads_real_knowledge_with_hash_and_original_record_values (test_trajectory.TrajectoryTests.test_01_reads_real_knowledge_with_hash_and_original_record_values) ... ok\ntest_02_blocked_speech_input_does_not_disable_speech_output (test_trajectory.TrajectoryTests.test_02_blocked_speech_input_does_not_disable_speech_output) ... ok\ntest_03_audio_support_is_necessary_for_the_audio_only_context (test_trajectory.TrajectoryTests.test_03_audio_support_is_necessary_for_the_audio_only_context) ... ok\ntest_04_removing_audio_adapts_to_visual_review_only_when_viable (test_trajectory.TrajectoryTests.test_04_removing_audio_adapts_to_visual_review_only_when_viable) ... ok\ntest_05_unknown_operability_is_pending_and_identifies_what_to_confirm (test_trajectory.TrajectoryTests.test_05_unknown_operability_is_pending_and_identifies_what_to_confirm) ... ok\ntest_06_known_impediments_exclude_instead_of_simulating_operation (test_trajectory.TrajectoryTests.test_06_known_impediments_exclude_instead_of_simulating_operation) ... ok\ntest_07_missing_review_is_partial_coverage_not_a_complete_plan (test_trajectory.TrajectoryTests.test_07_missing_review_is_partial_coverage_not_a_complete_plan) ... ok\ntest_08_does_not_promote_candidate_and_partial_records_to_primary_evidence (test_trajectory.TrajectoryTests.test_08_does_not_promote_candidate_and_partial_records_to_primary_evidence) ... ok\ntest_09_missing_or_changed_pending_records_fail_closed (test_trajectory.TrajectoryTests.test_09_missing_or_changed_pending_records_fail_closed) ... ok\ntest_10_scenario_identifier_has_no_selection_effect (test_trajectory.TrajectoryTests.test_10_scenario_identifier_has_no_selection_effect) ... ok\ntest_11_profile_and_diagnosis_are_not_interpreted_as_functional_facts (test_trajectory.TrajectoryTests.test_11_profile_and_diagnosis_are_not_interpreted_as_functional_facts) ... ok\ntest_12_rdf_build_and_execution_are_reproducible (test_trajectory.TrajectoryTests.test_12_rdf_build_and_execution_are_reproducible) ... ok\ntest_13_preserved_base_ontology_queries_and_engine_are_not_written (test_trajectory.TrajectoryTests.test_13_preserved_base_ontology_queries_and_engine_are_not_written) ... ok\ntest_14_contradictory_aliases_require_correction (test_trajectory.TrajectoryTests.test_14_contradictory_aliases_require_correction) ... ok\ntest_15_meaning_verification_cannot_be_assumed_from_type_compatibility (test_trajectory.TrajectoryTests.test_15_meaning_verification_cannot_be_assumed_from_type_compatibility) ... ok\ntest_16_no_generalization_outside_registered_learning_communication_scope (test_trajectory.TrajectoryTests.test_16_no_generalization_outside_registered_learning_communication_scope) ... ok\ntest_17_existing_content_review_does_not_require_creating_content_again (test_trajectory.TrajectoryTests.test_17_existing_content_review_does_not_require_creating_content_again) ... ok\ntest_18_removing_prepared_scenarios_and_decisions_has_no_effect (test_trajectory.TrajectoryTests.test_18_removing_prepared_scenarios_and_decisions_has_no_effect) ... ok\ntest_19_partial_provenance_is_present_and_separate_from_complete_choices (test_trajectory.TrajectoryTests.test_19_partial_provenance_is_present_and_separate_from_complete_choices) ... ok\ntest_20_pending_provenance_is_not_reported_as_authorized_complete_use (test_trajectory.TrajectoryTests.test_20_pending_provenance_is_not_reported_as_authorized_complete_use) ... ok\ntest_21_pending_bridge_application_is_not_promoted_to_authorized (test_trajectory.TrajectoryTests.test_21_pending_bridge_application_is_not_promoted_to_authorized) ... ok\ntest_22_review_requires_available_content_in_both_output_modes (test_trajectory.TrajectoryTests.test_22_review_requires_available_content_in_both_output_modes) ... ok\ntest_23_bridge_cannot_drop_functional_conditions_derived_from_knowledge (test_trajectory.TrajectoryTests.test_23_bridge_cannot_drop_functional_conditions_derived_from_knowledge) ... ok\ntest_24_bridge_cannot_substitute_unrelated_existing_knowledge_or_primary_support (test_trajectory.TrajectoryTests.test_24_bridge_cannot_substitute_unrelated_existing_knowledge_or_primary_support) ... ok\n\n----------------------------------------------------------------------\nRan 75 tests in 12.163s\n\nOK\n"
+    "log": "test_01_baseline_composes_speech_and_visual_review (test_composition.CompositionTests.test_01_baseline_composes_speech_and_visual_review) ... ok\ntest_02_new_conjunction_requires_documented_knowledge_increment (test_composition.CompositionTests.test_02_new_conjunction_requires_documented_knowledge_increment) ... ok\ntest_03_extension_does_not_add_capability_rule_action_task_or_scenario (test_composition.CompositionTests.test_03_extension_does_not_add_capability_rule_action_task_or_scenario) ... ok\ntest_04_removing_extension_reverses_its_operational_effect (test_composition.CompositionTests.test_04_removing_extension_reverses_its_operational_effect) ... ok\ntest_05_bibliography_alone_never_enables_audio_review (test_composition.CompositionTests.test_05_bibliography_alone_never_enables_audio_review) ... ok\ntest_06_missing_contributions_block_the_application (test_composition.CompositionTests.test_06_missing_contributions_block_the_application) ... ok\ntest_07_missing_exact_support_cannot_be_replaced_by_other_grounding (test_composition.CompositionTests.test_07_missing_exact_support_cannot_be_replaced_by_other_grounding) ... ok\ntest_08_unconfirmed_contribution_cannot_authorize_selection (test_composition.CompositionTests.test_08_unconfirmed_contribution_cannot_authorize_selection) ... ok\ntest_09_missing_source_or_locator_blocks_grounding (test_composition.CompositionTests.test_09_missing_source_or_locator_blocks_grounding) ... ok\ntest_10_unknown_task_is_not_resolved_by_names_or_fallback (test_composition.CompositionTests.test_10_unknown_task_is_not_resolved_by_names_or_fallback) ... ok\ntest_11_absent_and_null_resource_are_pending_false_is_exclusion (test_composition.CompositionTests.test_11_absent_and_null_resource_are_pending_false_is_exclusion) ... ok\ntest_12_absent_fact_is_pending_false_fact_blocks (test_composition.CompositionTests.test_12_absent_fact_is_pending_false_fact_blocks) ... ok\ntest_13_every_ready_step_has_only_satisfied_resource_and_fact_requirements (test_composition.CompositionTests.test_13_every_ready_step_has_only_satisfied_resource_and_fact_requirements) ... ok\ntest_14_diagnostic_or_persona_fields_are_rejected_not_inferred (test_composition.CompositionTests.test_14_diagnostic_or_persona_fields_are_rejected_not_inferred) ... ok\ntest_15_context_identifier_does_not_select_the_configuration (test_composition.CompositionTests.test_15_context_identifier_does_not_select_the_configuration) ... ok\ntest_16_repeated_execution_is_deterministic_and_does_not_mutate_inputs (test_composition.CompositionTests.test_16_repeated_execution_is_deterministic_and_does_not_mutate_inputs) ... ok\ntest_17_single_function_reuses_review_without_forcing_a_second_modality (test_composition.CompositionTests.test_17_single_function_reuses_review_without_forcing_a_second_modality) ... ok\ntest_18_incompatible_intermediate_representation_blocks_composition (test_composition.CompositionTests.test_18_incompatible_intermediate_representation_blocks_composition) ... ok\ntest_19_wrong_function_cannot_fulfil_required_review (test_composition.CompositionTests.test_19_wrong_function_cannot_fulfil_required_review) ... ok\ntest_20_relation_is_not_invented_from_adjacent_capabilities (test_composition.CompositionTests.test_20_relation_is_not_invented_from_adjacent_capabilities) ... ok\ntest_21_relation_without_grounding_cannot_be_used (test_composition.CompositionTests.test_21_relation_without_grounding_cannot_be_used) ... ok\ntest_22_sequential_review_is_not_automatically_care_complementarity (test_composition.CompositionTests.test_22_sequential_review_is_not_automatically_care_complementarity) ... ok\ntest_23_unconfirmed_case_does_not_execute_composition (test_composition.CompositionTests.test_23_unconfirmed_case_does_not_execute_composition) ... ok\ntest_24_all_explanation_checks_reference_execution_records (test_composition.CompositionTests.test_24_all_explanation_checks_reference_execution_records) ... ok\ntest_25_wrong_produced_knowledge_blocks_articulation_application (test_composition.CompositionTests.test_25_wrong_produced_knowledge_blocks_articulation_application) ... ok\ntest_26_unknown_resource_and_non_boolean_values_require_correction (test_composition.CompositionTests.test_26_unknown_resource_and_non_boolean_values_require_correction) ... ok\ntest_27_external_graph_labels_do_not_replace_functional_semantics (test_composition.CompositionTests.test_27_external_graph_labels_do_not_replace_functional_semantics) ... ok\ntest_28_declared_relations_and_exact_sources_are_present_in_explanation (test_composition.CompositionTests.test_28_declared_relations_and_exact_sources_are_present_in_explanation) ... ok\ntest_29_capabilities_recombine_without_fixed_input_output_pairs (test_composition.CompositionTests.test_29_capabilities_recombine_without_fixed_input_output_pairs) ... ok\ntest_30_legacy_only_contributions_do_not_become_checked_primary_sources (test_composition.CompositionTests.test_30_legacy_only_contributions_do_not_become_checked_primary_sources) ... ok\ntest_31_criterion_without_documentary_justification_does_not_authorize (test_composition.CompositionTests.test_31_criterion_without_documentary_justification_does_not_authorize) ... ok\ntest_32_ready_choice_does_not_appropriate_rejected_application_checks (test_composition.CompositionTests.test_32_ready_choice_does_not_appropriate_rejected_application_checks) ... ok\ntest_33_multiple_tasks_are_not_silently_composed (test_composition.CompositionTests.test_33_multiple_tasks_are_not_silently_composed) ... ok\ntest_34_missing_requirements_do_not_become_vacuously_satisfied (test_composition.CompositionTests.test_34_missing_requirements_do_not_become_vacuously_satisfied) ... ok\ntest_35_ambiguous_articulation_product_cannot_authorize_either_knowledge (test_composition.CompositionTests.test_35_ambiguous_articulation_product_cannot_authorize_either_knowledge) ... ok\ntest_36_non_text_action_cannot_be_rendered_as_instruction (test_composition.CompositionTests.test_36_non_text_action_cannot_be_rendered_as_instruction) ... ok\ntest_37_unusable_source_url_blocks_documentary_grounding (test_composition.CompositionTests.test_37_unusable_source_url_blocks_documentary_grounding) ... ok\ntest_38_action_uses_pilot_string_contract_labels_may_have_language (test_composition.CompositionTests.test_38_action_uses_pilot_string_contract_labels_may_have_language) ... ok\ntest_bounded_search_discloses_incomplete_enumeration (test_partial_composition.PartialCompositionTests.test_bounded_search_discloses_incomplete_enumeration) ... ok\ntest_disconnected_steps_are_not_combined_into_a_fake_complete_path (test_partial_composition.PartialCompositionTests.test_disconnected_steps_are_not_combined_into_a_fake_complete_path) ... ok\ntest_internal_segment_does_not_assume_prior_output_exists (test_partial_composition.PartialCompositionTests.test_internal_segment_does_not_assume_prior_output_exists) ... ok\ntest_known_impediment_is_not_reported_as_missing_information (test_partial_composition.PartialCompositionTests.test_known_impediment_is_not_reported_as_missing_information) ... ok\ntest_missing_final_function_does_not_hide_supported_prior_sequence (test_partial_composition.PartialCompositionTests.test_missing_final_function_does_not_hide_supported_prior_sequence) ... ok\ntest_missing_review_retains_only_grounded_initial_step (test_partial_composition.PartialCompositionTests.test_missing_review_retains_only_grounded_initial_step) ... ok\ntest_pending_whole_plan_separates_usable_step_and_question (test_partial_composition.PartialCompositionTests.test_pending_whole_plan_separates_usable_step_and_question) ... ok\ntest_review_existing_content_never_assumes_content_exists (test_partial_composition.PartialCompositionTests.test_review_existing_content_never_assumes_content_exists) ... ok\ntest_unknown_condition_of_impossible_route_is_not_a_question (test_partial_composition.PartialCompositionTests.test_unknown_condition_of_impossible_route_is_not_a_question) ... ok\ntest_conflicting_shared_facts_and_duplicate_people_are_blocked (test_participants.ParticipantTests.test_conflicting_shared_facts_and_duplicate_people_are_blocked) ... ok\ntest_distinct_routes_use_conditions_of_their_own_participant (test_participants.ParticipantTests.test_distinct_routes_use_conditions_of_their_own_participant) ... ok\ntest_missing_personal_capacities_are_not_filled_by_global_true_or_diagnosis (test_participants.ParticipantTests.test_missing_personal_capacities_are_not_filled_by_global_true_or_diagnosis) ... ok\ntest_resource_available_to_one_person_is_not_operability_of_another (test_participants.ParticipantTests.test_resource_available_to_one_person_is_not_operability_of_another) ... ok\ntest_01_reads_real_knowledge_with_hash_and_original_record_values (test_trajectory.TrajectoryTests.test_01_reads_real_knowledge_with_hash_and_original_record_values) ... ok\ntest_02_blocked_speech_input_does_not_disable_speech_output (test_trajectory.TrajectoryTests.test_02_blocked_speech_input_does_not_disable_speech_output) ... ok\ntest_03_audio_support_is_necessary_for_the_audio_only_context (test_trajectory.TrajectoryTests.test_03_audio_support_is_necessary_for_the_audio_only_context) ... ok\ntest_04_removing_audio_adapts_to_visual_review_only_when_viable (test_trajectory.TrajectoryTests.test_04_removing_audio_adapts_to_visual_review_only_when_viable) ... ok\ntest_05_unknown_operability_is_pending_and_identifies_what_to_confirm (test_trajectory.TrajectoryTests.test_05_unknown_operability_is_pending_and_identifies_what_to_confirm) ... ok\ntest_06_known_impediments_exclude_instead_of_simulating_operation (test_trajectory.TrajectoryTests.test_06_known_impediments_exclude_instead_of_simulating_operation) ... ok\ntest_07_missing_review_is_partial_coverage_not_a_complete_plan (test_trajectory.TrajectoryTests.test_07_missing_review_is_partial_coverage_not_a_complete_plan) ... ok\ntest_08_does_not_promote_candidate_and_partial_records_to_primary_evidence (test_trajectory.TrajectoryTests.test_08_does_not_promote_candidate_and_partial_records_to_primary_evidence) ... ok\ntest_09_missing_or_changed_pending_records_fail_closed (test_trajectory.TrajectoryTests.test_09_missing_or_changed_pending_records_fail_closed) ... ok\ntest_10_scenario_identifier_has_no_selection_effect (test_trajectory.TrajectoryTests.test_10_scenario_identifier_has_no_selection_effect) ... ok\ntest_11_profile_and_diagnosis_are_not_interpreted_as_functional_facts (test_trajectory.TrajectoryTests.test_11_profile_and_diagnosis_are_not_interpreted_as_functional_facts) ... ok\ntest_12_rdf_build_and_execution_are_reproducible (test_trajectory.TrajectoryTests.test_12_rdf_build_and_execution_are_reproducible) ... ok\ntest_13_preserved_base_ontology_queries_and_engine_are_not_written (test_trajectory.TrajectoryTests.test_13_preserved_base_ontology_queries_and_engine_are_not_written) ... ok\ntest_14_contradictory_aliases_require_correction (test_trajectory.TrajectoryTests.test_14_contradictory_aliases_require_correction) ... ok\ntest_15_meaning_verification_cannot_be_assumed_from_type_compatibility (test_trajectory.TrajectoryTests.test_15_meaning_verification_cannot_be_assumed_from_type_compatibility) ... ok\ntest_16_no_generalization_outside_registered_learning_communication_scope (test_trajectory.TrajectoryTests.test_16_no_generalization_outside_registered_learning_communication_scope) ... ok\ntest_17_existing_content_review_does_not_require_creating_content_again (test_trajectory.TrajectoryTests.test_17_existing_content_review_does_not_require_creating_content_again) ... ok\ntest_18_removing_prepared_scenarios_and_decisions_has_no_effect (test_trajectory.TrajectoryTests.test_18_removing_prepared_scenarios_and_decisions_has_no_effect) ... ok\ntest_19_partial_provenance_is_present_and_separate_from_complete_choices (test_trajectory.TrajectoryTests.test_19_partial_provenance_is_present_and_separate_from_complete_choices) ... ok\ntest_20_pending_provenance_is_not_reported_as_authorized_complete_use (test_trajectory.TrajectoryTests.test_20_pending_provenance_is_not_reported_as_authorized_complete_use) ... ok\ntest_21_pending_bridge_application_is_not_promoted_to_authorized (test_trajectory.TrajectoryTests.test_21_pending_bridge_application_is_not_promoted_to_authorized) ... ok\ntest_22_review_requires_available_content_in_both_output_modes (test_trajectory.TrajectoryTests.test_22_review_requires_available_content_in_both_output_modes) ... ok\ntest_23_bridge_cannot_drop_functional_conditions_derived_from_knowledge (test_trajectory.TrajectoryTests.test_23_bridge_cannot_drop_functional_conditions_derived_from_knowledge) ... ok\ntest_24_bridge_cannot_substitute_unrelated_existing_knowledge_or_primary_support (test_trajectory.TrajectoryTests.test_24_bridge_cannot_substitute_unrelated_existing_knowledge_or_primary_support) ... ok\n\n----------------------------------------------------------------------\nRan 75 tests in 11.158s\n\nOK\n"
   },
   "preservation": {
     "unchanged": true,
     "before": {
-      "data/knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-      "engine.py": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
-      "ontology/mado-combined.ttl": "7b37cec86bfe8f6fa4004b6ffecf50ba60ecb1c6769eed997391c6986a1ed52d",
-      "ontology/main.ttl": "0b7614a1e48528fbc95ec96b5b0746ffbc40e1c58a548b0843386a4220194aeb",
+      "data/knowledge-base.json": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+      "engine.py": "d3b7cb928b3dfa03e43c553cef5a6bbb67a0c38d0c929e007a70477252da60aa",
+      "ontology/mado-combined.ttl": "a1598943c6698c67f679e5299c73e0c1465da47d3044e227393b5659c5a87f85",
+      "ontology/main.ttl": "a5fbc203f725ec8991145073533170def64a81f6958b11fb94c027590b14443b",
       "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
-      "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
+      "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
       "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
       "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
       "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
       "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
-      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+      "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
+      "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9"
     },
     "after": {
-      "data/knowledge-base.json": "5073c5854e7d68f38cae79500b579b91445899467a6363522bd4b5475fa3b444",
-      "engine.py": "c96c69a4cbd0061660368271e5e164f338d46a3be55ff77fe2c45ef63c60e7cd",
-      "ontology/mado-combined.ttl": "7b37cec86bfe8f6fa4004b6ffecf50ba60ecb1c6769eed997391c6986a1ed52d",
-      "ontology/main.ttl": "0b7614a1e48528fbc95ec96b5b0746ffbc40e1c58a548b0843386a4220194aeb",
+      "data/knowledge-base.json": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+      "engine.py": "d3b7cb928b3dfa03e43c553cef5a6bbb67a0c38d0c929e007a70477252da60aa",
+      "ontology/mado-combined.ttl": "a1598943c6698c67f679e5299c73e0c1465da47d3044e227393b5659c5a87f85",
+      "ontology/main.ttl": "a5fbc203f725ec8991145073533170def64a81f6958b11fb94c027590b14443b",
       "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
-      "queries/CQ-002.rq": "7466a3e2906460a255423e5e5191996be01d02bf8d46e54217bc0584a930586d",
+      "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
       "queries/CQ-004.rq": "b1bcdc309c820edbd0eba4df2639ac2db7faf2319ca44438e365e746553365a0",
       "queries/CQ-005.rq": "2d4d9f426b8e8f33774ff111b20746739cee50ac797973819a7aa46f427c7ee8",
       "queries/CQ-006.rq": "10dabd895f060950875e75dd74eafa377af3290c210e6ab2c0c319e76dc824d8",
       "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
-      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a"
+      "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
+      "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
+      "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9"
     },
     "experimental_code_before": {
-      "experimental/v2/composer.py": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
-      "experimental/v2/trajectory.py": "a4136772e09e27b69dcdb1477953894a741bdc4e526d46422049b450b3b0e369",
-      "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+      "experimental/v2/composer.py": "d70bcd746d788eb06ebe1da2d810226f7ae419c5910982441140522bc5f1bbc0",
+      "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
+      "experimental/v2/schema.ttl": "2fe223106c18014d4a19db2f6337a8adb5ad783911c2da276e7d8e107a6ceeba",
       "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-      "experimental/v2/trajectory-bindings.json": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+      "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
       "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
       "experimental/v2/shapes.ttl": "c3b236e27c46735d8518ccf3ad5c82884ccfa2f0784c775e6aed2d934f1d2133"
     },
     "experimental_code_after": {
-      "experimental/v2/composer.py": "36944ec6fc4a9f3917d4825e95a575c537def143d2f3f95d2c3ff95a856873e4",
-      "experimental/v2/trajectory.py": "a4136772e09e27b69dcdb1477953894a741bdc4e526d46422049b450b3b0e369",
-      "experimental/v2/schema.ttl": "3457b60b68fbfd5380261ad324a5196b626bb93cdb3a9d1bfa2957558b2b4bb2",
+      "experimental/v2/composer.py": "d70bcd746d788eb06ebe1da2d810226f7ae419c5910982441140522bc5f1bbc0",
+      "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
+      "experimental/v2/schema.ttl": "2fe223106c18014d4a19db2f6337a8adb5ad783911c2da276e7d8e107a6ceeba",
       "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-      "experimental/v2/trajectory-bindings.json": "a330c59701749673812dada9cc90766dc037289e4d191c73d99b4d8c56f3c618",
+      "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
       "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
       "experimental/v2/shapes.ttl": "c3b236e27c46735d8518ccf3ad5c82884ccfa2f0784c775e6aed2d934f1d2133"
     }

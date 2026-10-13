@@ -48,7 +48,7 @@ class CompositionBridgeTests(unittest.TestCase):
         from rdflib import RDF, RDFS
         from experimental.v2.composer import V2
         catalog = bridge.dispatch({"operation": "catalog_composition"})
-        self.assertEqual(catalog["version"], "2.0.0-alpha2")
+        self.assertEqual(catalog["version"], "2.0.0-alpha3")
         for group, entity_type in (("facts", V2.ContextFact), ("resources", V2.Resource)):
             self.assertEqual({row["iri"] for row in catalog[group]},
                              {str(node) for node in self.composer.graph.subjects(RDF.type, entity_type)})
@@ -62,7 +62,9 @@ class CompositionBridgeTests(unittest.TestCase):
         self.assertFalse(catalog["case_storage"])
 
     def test_composes_without_legacy_case_and_matches_direct_execution(self):
-        expected = self.composer.compose(self.context)
+        from engine import VERSION
+        expected = self.composer.compose_context(self.context, engine=self.legacy)
+        expected.update(result_contract="AMADO_SITUATED_1", base_version=VERSION, case_storage=False)
         expected["fingerprints"] = {Path(name).relative_to(ROOT).as_posix(): value
                                     for name, value in expected["fingerprints"].items()}
         actual = self.compose()
@@ -100,7 +102,7 @@ class CompositionBridgeTests(unittest.TestCase):
         self.assertEqual(result["proposal_status"], "PARTIAL")
         self.assertEqual(result["choices"], [])
         self.assertTrue(result["partial_segments"])
-        self.assertTrue(result["trajectory_evidence"]["partial_records"])
+        self.assertTrue(result["trajectory_evidence"]["partial_applications"])
 
     def test_rejects_text_instead_of_confirmed_fields(self):
         self.context["narrative"] = "Uma pessoa tem um teclado."

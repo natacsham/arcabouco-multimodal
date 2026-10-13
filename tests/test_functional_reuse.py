@@ -93,7 +93,10 @@ class FunctionalReuseTests(unittest.TestCase):
             self.engine.update_context(payload)
 
         self.assertEqual(self.engine.current["context"]["tarefas"], ["TAR-COMUNICAR-CONTEUDO-1545B38"])
-        answer("tarefas", ["TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"])
+        self.assertFalse(any(row["field"] == "tarefas" for row in self.engine.missing_questions()))
+        # Access is an explicit additional action supplied by the person, not
+        # a replacement elicited merely to activate an existing template.
+        self.engine.update_context({"tarefas": ["TAR-COMUNICAR-CONTEUDO-1545B38", "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"]})
         # The matrix supplies design needs with documentary witnesses, rather
         # than making the person re-enter a general accessibility principle.
         self.assertFalse(any(row["field"] == "barreira_ou_necessidade" for row in self.engine.missing_questions()))
@@ -110,8 +113,8 @@ class FunctionalReuseTests(unittest.TestCase):
         decision = self.engine.generate()["decision"]
         self.assertEqual(decision["status"], "GERADA_PARCIAL")
         self.assertEqual(decision["component_ids"], ["PAD-CONTEUDO-WEB-EQUIVALENTE"])
-        self.assertEqual(set(decision["knowledge_ids"]), {"K10", "K42"})
-        self.assertEqual(decision["articulation_ids"], ["ART-REF-03"])
+        self.assertEqual(set(decision["knowledge_ids"]), {"K10", "K17", "K42"})
+        self.assertEqual(set(decision["articulation_ids"]), {"ART-TRJ-01", "ART-REF-03"})
         students = [row for row in self.engine.current["participations"] if row["papel_id"] == "PAPEL-ESTUDANTE"]
         self.assertEqual(students[0]["recurso_operado_ids"], [])
         self.assertNotIn("CAR-INTERACAO-NAO-VISUAL", students[0]["caracteristica_ids"])

@@ -21,6 +21,8 @@
 - **ConfiguracaoModalDaDecisao:** liga função, modo, recurso, responsável, condições, alternativa e fundamentação.
 - **AplicacaoDeCriterio:** preserva, para uma configuração e um critério específicos, os conhecimentos de apoio, origens e justificativa correspondentes.
 - **ContribuicaoNaArticulacao:** liga uma contribuição individual ao trecho localizado, à operação de articulação e ao conhecimento produzido ou refinado. Registra conteúdo próprio, justificativa, papel e grau de conferência; a fonte é recuperada pelo trecho.
+- **FuncaoRequeridaSituada:** liga a necessidade de uma função à participação, tarefa, condição e episódio. A função oferecida por uma operação não cria retrospectivamente essa necessidade.
+- **AfirmacaoOperacionalDocumentada:** delimita a parcela de um conhecimento, com fonte, trecho, escopo e estado documental. Conferir essa parcela não aprova todas as frases do conhecimento.
 
 Estratégia, Evidência e Recomendação não são retomadas como classes centrais autônomas. A palavra “orientação” nomeia a apresentação da decisão no AMADO, não uma segunda ontologia.
 
@@ -34,7 +36,7 @@ O elemento auxiliar torna essa associação examinável. Ele não transforma jus
 
 ## Qual camada faz o quê?
 
-Na 1.4.0-rc1, `execution_evidence` registra em memória as correspondências e verificações efetivamente executadas. `execution_trace.py` deriva uma única projeção para as duas leituras, o de/para e o grafo. A função requerida pelo contexto é independente da função oferecida pelo padrão: a segunda não cria retrospectivamente a primeira.
+Na 1.5.0-rc1, `ResearchComposer.compose_context` registra em memória as correspondências e verificações em `execution_evidence`, com participante e situação. `situated-output.mjs` apresenta as ações e seus fundamentos. `execution_trace.py` permanece na rota legada de compatibilidade. A função requerida pelo contexto é independente da função oferecida pela operação: a segunda não cria retrospectivamente a primeira.
 
 As verificações distinguem **satisfeita**, **não satisfeita**, **pendente** e **não executada**. Condições escritas em prosa não são promovidas a testes computacionais. A cobertura parcial e as alternativas apenas descritas permanecem explícitas.
 

@@ -65,6 +65,13 @@ def source_hashes():
         ("scripts", "verify_*.py"),
     ):
         files.update((ROOT / folder).glob(pattern))
+    # The situated path is public runtime, not merely an optional experiment.
+    for folder, patterns in (("experimental/v2", ("*.py", "*.ttl", "trajectory-bindings.json")),
+                             ("experimental/v2/extensions", ("*.ttl",)),
+                             ("experimental/v2/tests", ("test_*.py",))):
+        for pattern in patterns:
+            files.update((ROOT / folder).glob(pattern))
+    files.add(ROOT / "web/amado/bridge.py")
     return {relative(path): sha256(path) for path in sorted(files)}
 
 
@@ -176,11 +183,13 @@ def runtime_check(shapes):
         "runtime_configurations": len(set(runtime.subjects(RDF.type, MADO.ConfiguracaoModalDaDecisao))),
         "runtime_criterion_applications": len(set(runtime.subjects(RDF.type, MADO.AplicacaoDeCriterio))),
         "query_rows": query_counts,
-        "all_eight_queries_executed": set(query_counts) == {f"CQ-{i:03d}" for i in range(1, 9)},
+        "all_eight_queries_executed": {f"CQ-{i:03d}" for i in range(1, 9)} <= set(query_counts),
+        "all_current_queries_executed": set(query_counts) == set(engine.queries),
+        "execution_scope": "LEGACY_SELECTOR_COMPATIBILITY_NOT_SITUATED_COMPOSER",
         "persisted_runtime_graph": False,
     })
     check["coverage_not_claimed_complete"] = check["decision_status"] in {"GERADA", "GERADA_PARCIAL"}
-    check["passed"] = check["passed"] and check["coverage_not_claimed_complete"] and check["runtime_configurations"] > 0 and check["runtime_criterion_applications"] > 0 and check["all_eight_queries_executed"]
+    check["passed"] = check["passed"] and check["coverage_not_claimed_complete"] and check["runtime_configurations"] > 0 and check["runtime_criterion_applications"] > 0 and check["all_eight_queries_executed"] and check["all_current_queries_executed"]
     return check
 
 

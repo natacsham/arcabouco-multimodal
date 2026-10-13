@@ -1,7 +1,8 @@
 import {request, restart} from './client.mjs';
 import {renderExplanation} from '../explanation.js';
 import {setupDictation} from './voice.js';
-import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, participantName, detectCompositionTask,
+import {situatedOutput} from './situated-output.mjs';
+import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, participantName,
   compositionDraft, compositionQuestions, compositionSummary, questionRound,legacyEditor,legacyRevision,
   compositionEditor,compositionRevision,usedSourceRecords} from './intake.mjs';
 
@@ -13,11 +14,20 @@ const list = values => {
   return items.length ? '<ul>'+items.map(value => '<li>'+esc(typeof value === 'object' ? value.label || value.title || value.titulo || '' : value)+'</li>').join('')+'</ul>' : '';
 };
 let catalog, compositionCatalog, current, mode = 'legacy', draft, result, busy = false, epoch = 0;
-let questions = [], answered = new Set(), handled = new Set(), exampleNarrative = null, exampleId = null, speechText = '', organizedNarrative = null;
+let questions = [], refinementQuestions = [], answered = new Set(), handled = new Set(), exampleNarrative = null, exampleId = null, speechText = '', organizedNarrative = null;
 let roundAnswered = 0, clarificationRound = 1;
-let editorRows=[], editorReturn='case-review';
+let editorRows=[], editorReturn='case-review', reading=false;
+// One control changes state instead of exposing separate start/stop actions.
+$('#stop-reading').hidden=true;
+$('#read-orientation').textContent='Ouvir';
+function stopReading(message='') {
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  reading=false; $('#read-orientation').textContent='Ouvir';
+  $('#read-orientation').setAttribute('aria-pressed','false');
+  $('#reading-message').textContent=message;
+}
 const unknown = value => typeof value === 'string' && /^(?:ainda )?nao sei(?: ainda)?[.!]?$/.test(value.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase().trim());
-function resetQuestions() { answered.clear(); handled.clear(); roundAnswered = 0; clarificationRound = 1; }
+function resetQuestions() { answered.clear(); handled.clear(); refinementQuestions=[]; roundAnswered = 0; clarificationRound = 1; }
 const voice = setupDictation({button:$('#dictate-case'),input:$('#case-narrative'),status:$('#dictation-status'),
   preview:$('#dictation-preview'),dialog:$('#speech-consent'),allow:$('#allow-browser-dictation'),cancel:$('#cancel-dictation')});
 function status(text) { $('#flow-status').textContent = text; }
@@ -25,7 +35,7 @@ function invalidate() {
   result = null; $('#orientation-result').hidden = true; $('#case-confirmed').checked = false;
   $('#generate-orientation').disabled = true;
   renderExplanation($('#orientation-foundation-body'), {});
-  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  stopReading();
 }
 function screen(id, focus) {
   for (const name of ['case-entry','case-understanding','case-editor','case-questions','case-review','orientation-result']) $('#'+name).hidden = name !== id;
@@ -90,7 +100,7 @@ function questionMarkup(question) {
     '<label class="question-unknown"><input type="checkbox" name="'+esc(id)+'" value="unknown"> Ainda não sei</label>'+note+'</fieldset>';
 }
 function unanswered() {
-  return (mode === 'legacy' ? legacyQuestions(current,catalog) : compositionQuestions(draft,compositionCatalog)).filter(question => !answered.has(question.id) && !handled.has(question.id));
+  return [...(mode === 'legacy' ? legacyQuestions(current,catalog) : compositionQuestions(draft,compositionCatalog)),...refinementQuestions].filter(question => !answered.has(question.id) && !handled.has(question.id));
 }
 function askOrReview() {
   $('#new-case').hidden = false;
@@ -118,7 +128,7 @@ function askOrReview() {
 }
 function summaryRows() { return mode === 'legacy' ? legacySummary(current) : compositionSummary(draft,compositionCatalog); }
 function understanding() {
-  const rows=summaryRows(), preferred=['Pessoas','Sua participação','Atividade','Objetivo','Onde acontece','Aplicativo ou conteúdo'];
+  const rows=summaryRows(), preferred=['Pessoas','Sua participação','Situações identificadas','Atividade','Objetivo','Onde acontece','Aplicativo ou conteúdo'];
   const selected=preferred.map(label=>rows.find(row=>row.label===label)).filter(Boolean);
   $('#understanding-summary').innerHTML=selected.length?'<dl class="review-summary">'+selected.map(row=>'<div><dt>'+esc(row.label)+'</dt><dd>'+esc(row.value)+'</dd></div>').join('')+'</dl>':para($('#case-narrative').value.trim());
   const pending=unanswered();
@@ -174,14 +184,10 @@ async function organize(expected) {
     } else { mode = 'legacy'; current = await request('start',{template:exampleId}); }
   } else {
     exampleId = exampleNarrative = null;
-    const task = detectCompositionTask(text);
-    if (task) {
-      compositionCatalog ||= await request('catalog_composition');
-      mode = 'composition'; draft = {...compositionDraft(text,compositionCatalog),id:'WEB-'+crypto.randomUUID(),confirmed:false};
-    } else {
-      mode = 'legacy'; await request('start'); const response = await request('analyze',{payload:{narrative:text}});
-      current = response.current;
-    }
+    // A subject, group name or task phrase must not choose a different reasoner.
+    mode = 'legacy'; await request('start');
+    const response = await request('analyze',{payload:{narrative:text}});
+    current = response.current;
   }
   if (expected !== epoch) return;
   organizedNarrative = text;
@@ -205,7 +211,12 @@ $('#questions-form').addEventListener('submit',event => {
       const note = unknown(typedNote) ? '' : typedNote;
       const isUnknown = !value || value === 'unknown' || unknown(value) || Array.isArray(value) && (!value.length || value.includes('unknown'));
       if (isUnknown) value = null;
-      if (mode === 'legacy' && (!isUnknown || note && question.participant_id)) current = await request('update',{payload:legacyAnswer(current,question,value,note)});
+      if (mode === 'legacy' && question.field === 'situated_fact') current = await request('update',{payload:{
+        situated_facts:[{participant_id:question.participant_id,situation_id:question.situation_id,
+          fact_id:question.fact_id,value:isUnknown?null:value==='true',label:question.label,
+          source_text:question.label+' — '+(isUnknown?'Ainda não sei':value==='true'?'Sim':'Não')}],
+        mapping_confirmed:false}});
+      else if (mode === 'legacy') current = await request('update',{payload:legacyAnswer(current,question,value,note)});
       else if (mode !== 'legacy' && !isUnknown) {
         const target = question.participant_id ? draft.participants?.find(person => person.id === question.participant_id) : draft;
         if (target) { target[question.field] ||= {}; target[question.field][question.concept_id] = value === 'true'; }
@@ -490,8 +501,22 @@ $('#generate-orientation').addEventListener('click',() => {
       const {evidence,...context} = draft; result = await request('compose',{payload:{...context,confirmed:true}},{onProgress:generationStage});
     }
     if (expected !== epoch) return;
-    if (mode === 'legacy') legacyOutput(result); else compositionOutput(result);
+    if (result.result_contract === 'AMADO_SITUATED_1') {
+      const output=situatedOutput(result);
+      $('#orientation-title').textContent=output.title;
+      $('#orientation-state').textContent=output.state;
+      $('#orientation-main').innerHTML=output.html;
+      $('#orientation-detail-body').innerHTML=output.detailHTML;
+    } else if (mode === 'legacy') legacyOutput(result); else compositionOutput(result);
     sourceDisclosure(result);
+    if(result.result_contract==='AMADO_SITUATED_1') {
+      const people=current?.context?.participantes || [], situations=current?.context?.situations || [];
+      refinementQuestions=mode==='legacy'?[...(result.facts_to_confirm || []),...(result.resources_to_confirm || [])].map(row=>({
+        ...row,id:row.question_id,type:'single',field:'situated_fact',
+        context_label:situations.find(s=>s.id===row.situation_id)?.label || '',
+        participant_label:participantName(people.find(p=>p.id===row.participant_id)),
+        help:row.reason,options:[{id:'true',label:'Sim'},{id:'false',label:'Não'},{id:'unknown',label:'Ainda não sei'}]})):[];
+    }
     $('#complete-information').hidden = !unanswered().length;
     $('#complete-information').textContent = 'Refinar esta orientação (opcional)';
     $('#orientation-foundation-body').replaceChildren();
@@ -509,7 +534,8 @@ $('#complete-information').addEventListener('click',() => {
 });
 $('#orientation-foundations').addEventListener('toggle',() => {
   if (!$('#orientation-foundations').open || !result) return;
-  if (mode === 'legacy') renderExplanation($('#orientation-foundation-body'),result);
+  if (result.result_contract === 'AMADO_SITUATED_1') $('#orientation-foundation-body').innerHTML=situatedOutput(result).foundationHTML;
+  else if (mode === 'legacy') renderExplanation($('#orientation-foundation-body'),result);
   else $('#orientation-foundation-body').innerHTML = compositionFoundations(result);
 });
 $('#new-case').addEventListener('click',() => run(async expected => {
@@ -519,16 +545,18 @@ $('#new-case').addEventListener('click',() => run(async expected => {
   await request('clear'); if (expected === epoch) { $('#new-case').hidden = true; status(''); screen('case-entry'); $('#case-narrative').focus(); }
 },''));
 $('#read-orientation').addEventListener('click',() => {
+  if (reading) { stopReading('Leitura interrompida.'); return; }
   if (!('speechSynthesis' in window)) { $('#reading-message').textContent = 'A leitura em voz não está disponível neste navegador. A orientação continua em texto.'; return; }
   const voice = speechSynthesis.getVoices().find(item => item.localService && /^pt/i.test(item.lang));
   if (!voice) { $('#reading-message').textContent = 'Não foi encontrada uma voz local em português. Você pode ler a orientação em texto.'; return; }
   speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(speechText);
   utterance.voice = voice; utterance.lang = voice.lang;
-  utterance.onend = () => $('#reading-message').textContent = 'Leitura concluída.';
-  utterance.onerror = () => $('#reading-message').textContent = 'Leitura interrompida. A orientação continua em texto.';
-  $('#reading-message').textContent = 'Lendo a orientação. Use Parar leitura para interromper.'; speechSynthesis.speak(utterance);
+  utterance.onend = () => stopReading('Leitura concluída.');
+  utterance.onerror = () => stopReading('Leitura interrompida. A orientação continua em texto.');
+  reading=true; $('#read-orientation').textContent='Parar';
+  $('#read-orientation').setAttribute('aria-pressed','true');
+  $('#reading-message').textContent = 'Lendo a orientação.'; speechSynthesis.speak(utterance);
 });
-$('#stop-reading').addEventListener('click',() => { if ('speechSynthesis' in window) speechSynthesis.cancel(); $('#reading-message').textContent = 'Leitura interrompida.'; });
 async function load() {
   await run(async expected => {
     $('#health').dataset.state = 'loading'; $('#health').textContent = 'Preparando o AMADO…'; $('#retry-load').hidden = true;

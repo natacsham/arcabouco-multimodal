@@ -1,6 +1,10 @@
 # Verificação, evidências e limites
 
-**Versão alvo: MADO 1.4.0-rc3.** Consulte o índice `web/evidence/report.json` e seus relatórios vinculados. Ele aceita apenas entradas e código correspondentes aos hashes atuais. Relatórios de outras versões não comprovam esta revisão.
+**Versão alvo: MADO 1.5.0-rc1 / compositor 2.0.0-alpha3.** Consulte [a revisão situada](revisao-situada-1.5.md), `evidence/technical-1.5-report.json`, `evidence/situated-browser.json` e `experimental/v2/evidence/situated-report.json`. O índice público só pode ser atualizado após conferir os hashes. Relatórios de outras versões não comprovam esta revisão.
+
+As oito questões anteriores foram mantidas; CQ-009 examina as afirmações operacionais delimitadas e CQ-010 as funções requeridas por participação e contexto. A consulta SPARQL e a composição situada são verificações distintas. O relatório técnico identifica a geração legada executada para compatibilidade; o relatório situado examina o compositor público atual.
+
+## Histórico de verificação da 1.4
 
 **Revisão de entrada do instrumento: AMADO-web-1.4.0-rc3-intake1.** `test_intake_context_repair.py` cobre papéis, plurais, tarefa ambígua, disponibilidade e correção sem reinterpretação. `test_progress_bridge.py` confere etapas reais e igualdade do retorno com e sem observador. `review-input.mjs` verifica substituição de opções e preservação de informações; `progress.mjs` verifica correlação, cancelamento e falhas. O relatório `focused-dialogue-browser.json` documenta o percurso no navegador e identifica seu manifesto. Nenhum desses testes comprova compreensão por participantes ou amplia a cobertura funcional da base.
 

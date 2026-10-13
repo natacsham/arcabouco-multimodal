@@ -13,6 +13,7 @@ import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 from execution_trace import ExecutionEvidence, build_explanation
+import situated_context
 
 ROOT = Path(__file__).resolve().parent
 for dependency_path in (ROOT / "vendor",):
@@ -28,8 +29,8 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.4.0-rc3"
-UI_VERSION = "AMADO-web-1.4.0-rc3-intake1"
+VERSION = "1.5.0-rc1"
+UI_VERSION = "AMADO-web-1.5.0-rc1-situated1"
 REQUESTER_RELATIONS = {
     "self": "Sou eu quem realizará a atividade",
     "support": "Apoio quem realizará a atividade",
@@ -278,6 +279,8 @@ class DecisionEngine:
                 "label": row.get("label") or row.get("grupo_rotulo") or self.label(row["papel_id"]),
                 "grupo_rotulo": row.get("grupo_rotulo", ""),
                 "quantidade": row.get("quantidade", 1),
+                "parent_group_id": row.get("parent_group_id", ""),
+                "group_scope": row.get("group_scope", ""),
                 "observacoes": row.get("observacoes", ""),
                 "apoios_informados": row.get("apoios_informados", ""),
                 "papel": self.label(row["papel_id"]),
@@ -374,6 +377,16 @@ class DecisionEngine:
             "funcoes_requeridas": self.labels(c.get("funcoes_requeridas_ids")),
             "function_derivation": copy.deepcopy(c.get("function_derivation", [])),
             "access_requirements": copy.deepcopy(c.get("access_requirements", [])),
+            "situated_version": c.get("situated_version", ""),
+            "revision": c.get("revision", 0),
+            "situations": copy.deepcopy(c.get("situations", [])),
+            "assertions": copy.deepcopy(c.get("assertions", [])),
+            "active_situation_id": c.get("active_situation_id", ""),
+            "question_answers": copy.deepcopy(c.get("question_answers", [])),
+            "facts": copy.deepcopy(c.get("facts", {})),
+            "situated_facts": copy.deepcopy(c.get("situated_facts", [])),
+            "review_changes": copy.deepcopy(c.get("review_changes", [])),
+            "unmapped_text": copy.deepcopy(c.get("unmapped_text", [])),
             "restricoes": c.get("restricoes", []),
             "informacoes_ausentes": c.get("informacoes_ausentes", []),
             "baseado_em": c.get("baseado_em_contexto_ids", []),
@@ -452,7 +465,9 @@ class DecisionEngine:
             copied = copy.deepcopy(row)
             copied["id"] = f"PART-CASO-{index:02d}-{uuid.uuid4().hex[:6].upper()}"
             copied["contexto_id"] = context["id"]
+            copied["label"] = copied.get("label") or self.label(copied.get("papel_id", "")) or "Participante do exemplo"
             session_participations.append(copied)
+        situated_context.from_legacy(context, session_participations)
         self.current = {
             "context": context,
             "reported_confirmed": False,
@@ -537,6 +552,7 @@ class DecisionEngine:
             }
         )
         self.current["participations"] = []
+        context.update(situated_context.fresh_contract())
         return self.current_payload()
 
     def analyze_narrative(self, narrative, input_modality="text"):
@@ -552,7 +568,9 @@ class DecisionEngine:
         self._invalidate_result()
         self.current["mapping_confirmed"] = False
         self.current["transfer_confirmed"] = False
-        normalized = normalize_text(narrative)
+        previous_situated = copy.deepcopy(self.current["context"])
+        effective_narrative, _ = situated_context.corrected_text(narrative)
+        normalized = normalize_text(effective_narrative)
         context = self.current["context"]
         context["restricoes"] = []
         context["operacao_do_recurso"] = ""
@@ -576,6 +594,11 @@ class DecisionEngine:
         for identifier, concept in self.concepts.items():
             field = field_for_type.get(concept.get("tipo"))
             if not field:
+                continue
+            if identifier == "REC-COMPUTADOR-DATASHOW" and not (
+                re.search(r"\bcomputador(?:es)?\b", normalized) and re.search(r"\b(?:projetor|data show|datashow)\b", normalized)
+            ):
+                # An aggregate cannot be recognized from just one component.
                 continue
             public = self.ui_vocab.get("concepts", {}).get(identifier, {})
             aliases = unique(
@@ -646,7 +669,7 @@ class DecisionEngine:
                 "TAR-ORGANIZAR-CONTEUDO-DIGITAL",
             ),
             (
-                "\\b(revisar|confirmar|retomar|corrigir)\\b",
+                "\\b(revisar|confirmar|corrigir)\\b",
                 "tarefas",
                 "TAR-REVISAR-E-CONFIRMAR",
             ),
@@ -696,17 +719,12 @@ class DecisionEngine:
                 "NEC-PRESERVAR-PROTAGONISMO",
             ),
             (
-                "\\b(turma|colegas|sala de aula)\\b",
-                "necessidades",
-                "NEC-APOIAR-COMPREENSAO-TURMA",
-            ),
-            (
                 "\\b(sala de aula)\\b",
                 "ambientes",
                 "AMB-SALA-DE-AULA",
             ),
             (
-                "\\b(projetor|data show|datashow)\\b",
+                "\\b(?:computador(?:es)?.{0,50}(?:projetor|data show|datashow)|(?:projetor|data show|datashow).{0,50}computador(?:es)?)\\b",
                 "recursos_disponiveis",
                 "REC-COMPUTADOR-DATASHOW",
             ),
@@ -837,6 +855,8 @@ class DecisionEngine:
                 for value in detected["caracteristicas_pessoa"]
                 if value != "CAR-PESSOA-CEGA-LEITOR-TELA"
             ]
+        if not re.search(r"\b(?:revisar|revisao|confirmar|confirmacao|corrigir)\b", normalized):
+            detected["tarefas"] = [value for value in detected["tarefas"] if value != "TAR-REVISAR-E-CONFIRMAR"]
         for field, identifiers in detected.items():
             context[field] = unique(identifiers)
         context["descricao_do_contexto"] = narrative
@@ -960,7 +980,9 @@ class DecisionEngine:
                                  "label": REQUESTER_RELATIONS[relation], "matched_text": match.group(0),
                                  "status": "IDENTIFICADO_PARA_CONFIRMACAO"})
                 break
-        self.derive_access_requirements(narrative)
+        situated_context.build(context, roles, narrative, self.concepts, evidence, previous_situated)
+        self.current["participations"] = roles
+        self.derive_access_requirements(effective_narrative)
         context["informacoes_ausentes"] = [
             item["question"] for item in self.missing_questions()
         ]
@@ -1063,7 +1085,7 @@ class DecisionEngine:
             rows = []
             for index, incoming in enumerate(body.get("participations") or [], 1):
                 role_id = incoming.get("papel_id")
-                if role_id not in self.concepts:
+                if role_id and role_id not in self.concepts:
                     raise ValueError(f"Papel não reconhecido: {role_id}")
                 for field, expected_type in (("caracteristica_ids", "CARACTERISTICA_PESSOA"), ("tarefa_ids", "TAREFA"),
                                              ("modalidade_ids", "MODALIDADE"), ("recurso_operado_ids", "RECURSO_DISPONIVEL")):
@@ -1083,6 +1105,8 @@ class DecisionEngine:
                         "label": str(incoming.get("label", "")).strip(),
                         "grupo_rotulo": str(incoming.get("grupo_rotulo", "")).strip(),
                         "quantidade": quantity,
+                        "parent_group_id": str(incoming.get("parent_group_id", "")),
+                        "group_scope": str(incoming.get("group_scope", "")),
                         "observacoes": str(incoming.get("observacoes", "")).strip(),
                         "apoios_informados": str(incoming.get("apoios_informados", "")).strip(),
                         "reported_condition": copy.deepcopy(next((row.get("reported_condition", {}) for row in previous_participations
@@ -1162,6 +1186,12 @@ class DecisionEngine:
                                                   else identifier in context.get(context_field, []))]
                     if before != row[participant_field]:
                         row["status_evidencia"] = "IDENTIFICADO_PARA_CONFIRMACAO"
+        situated_context.sync_legacy_edits(context, participations, body, previous_context)
+        situated_context.review(context, participations, body, self.concepts)
+        for left_index, left in enumerate(resource_fields):
+            for right in resource_fields[left_index + 1:]:
+                if set(context.get(left, [])) & set(context.get(right, [])):
+                    raise ValueError("Um recurso não pode estar disponível, impedido e proposto ao mesmo tempo.")
         mapping_confirmed = bool(body.get("mapping_confirmed", False))
         transfer_confirmed = bool(body.get("transfer_confirmed", False))
         changed = (
@@ -1178,6 +1208,8 @@ class DecisionEngine:
         self.current["transfer_confirmed"] = transfer_confirmed
         if changed or confirmation_revoked:
             self._invalidate_result()
+        if body.get("assertion_changes") or body.get("question_answers"):
+            self.derive_access_requirements("", observations_only=True)
         context["informacoes_ausentes"] = [
             item["question"] for item in self.missing_questions()
         ]
@@ -1192,7 +1224,7 @@ class DecisionEngine:
             r"(?:(?:um|uma|dois|duas|tres|quatro|qualquer|nenhum|nenhuma|\d+)\s+)?"
             r"(?:(?:alunos?|alunas?|estudantes?|pessoas?|usuarios?|usuarias?)\s+)?$", prefix))
 
-    def derive_access_requirements(self, narrative):
+    def derive_access_requirements(self, narrative, observations_only=False):
         """Apply the existing curated functional matrix, never a diagnosis->ability rule.
 
         Only design needs are projected into the context. Each inference keeps
@@ -1203,10 +1235,18 @@ class DecisionEngine:
         text = normalize_text(narrative)
         people = [row for row in self.current.get("participations", [])
                   if row.get("papel_id") in {"PAPEL-ESTUDANTE", "PAPEL-PESSOA-APOIADA"}]
-        requirements = []
-        for matrix in self.functional_matrix:
+        previous_derived_needs = {n for row in context.get("access_requirements", []) for n in row.get("requirement_ids", [])}
+        requirements = ([copy.deepcopy(row) for row in context.get("access_requirements", []) if not row.get("assertion_ids")]
+                        if observations_only else [])
+        for matrix in situated_context.expanded_matrices(self.functional_matrix):
+            inference_contract = matrix.get("inference_contract", {})
+            if inference_contract.get("eligibility") == "NOT_ELIGIBLE":
+                continue
             source_ids = [sid for sid in matrix.get("fonte_ids", []) if sid in self.sources]
             excerpt_ids = [tid for tid in matrix.get("trecho_ids", []) if tid in self.excerpts]
+            if inference_contract.get("support"):
+                source_ids = unique(row["source_id"] for row in inference_contract["support"] if row.get("source_id") in self.sources)
+                excerpt_ids = unique(row["excerpt_id"] for row in inference_contract["support"] if row.get("excerpt_id") in self.excerpts)
             need_ids = [nid for nid in matrix.get("requisito_ids", [])
                         if self.concepts.get(nid, {}).get("tipo") == "NECESSIDADE"]
             if not source_ids or not excerpt_ids or not need_ids or matrix.get("estado") not in {
@@ -1219,13 +1259,31 @@ class DecisionEngine:
                 if not token:
                     continue
                 for match in re.finditer(r"\b" + re.escape(token) + r"\b", text):
+                    if any(a.get("kind") == "functional_observation" and a.get("state") in situated_context.ACTIVE_STATES
+                           and re.search(r"\b" + re.escape(token) + r"\b", normalize_text(a.get("value", "")))
+                           for a in context.get("assertions", [])):
+                        continue
                     candidates = [row for row in people if row.get("reported_condition")
-                                  and row["reported_condition"]["start"] <= match.start() < row["reported_condition"]["end"]]
+                                  and row["reported_condition"].get("start", -1) <= match.start() < row["reported_condition"].get("end", -1)]
                     person = candidates[0] if len(candidates) == 1 else (people[0] if len(people) == 1 else None)
-                    key = person["id"] if person else ""
+                    key = (person["id"] if person else "", "")
                     record = observed.setdefault(key, {"person": person, "positive": [], "negative": []})
                     record["negative" if self._negated_access_signal(text, match.start()) else "positive"].append(match.group(0))
-            for participant_id, observed_row in observed.items():
+            for assertion in context.get("assertions", []):
+                if assertion.get("kind") != "functional_observation" or assertion.get("state") not in situated_context.ACTIVE_STATES:
+                    continue
+                observation = normalize_text(assertion.get("value", ""))
+                for signal in matrix.get("sinais_relato", []):
+                    token = normalize_text(signal)
+                    if not token:
+                        continue
+                    for match in re.finditer(r"\b" + re.escape(token) + r"\b", observation):
+                        person = next((row for row in people if row["id"] == assertion["subject_id"]), None)
+                        key = (person["id"] if person else "", assertion.get("situation_id", ""))
+                        record = observed.setdefault(key, {"person": person, "positive": [], "negative": [], "assertion_ids": []})
+                        record.setdefault("assertion_ids", []).append(assertion["id"])
+                        record["negative" if self._negated_access_signal(observation, match.start()) else "positive"].append(match.group(0))
+            for (participant_id, situation_id), observed_row in observed.items():
                 if not observed_row["positive"]:
                     continue
                 conflict = bool(observed_row["negative"])
@@ -1242,10 +1300,18 @@ class DecisionEngine:
                     "status": "CONFLITO_A_CONFIRMAR" if conflict else "DERIVADO_DA_BASE_PARA_CONFIRMACAO",
                     "capabilities_inferred": False,
                     "scope": "PARTICIPANTE" if participant_id else "RELATO_SEM_ATRIBUICAO_INDIVIDUAL",
+                    "situation_ids": [situation_id] if situation_id else [s["id"] for s in context.get("situations", [])
+                                      if participant_id and participant_id in s.get("participant_ids", [])],
+                    "assertion_ids": unique(observed_row.get("assertion_ids", [])),
+                    "trigger_group_id": matrix.get("trigger_group_id", ""),
+                    "inference_contract": copy.deepcopy(inference_contract),
+                    "eligibility": inference_contract.get("eligibility", "LEGACY_DOCUMENTED_REQUIREMENT"),
                 })
         context["access_requirements"] = requirements
-        context["necessidades"] = unique(context.get("necessidades", []) + [nid for row in requirements
-            if row["status"] != "CONFLITO_A_CONFIRMAR" for nid in row["requirement_ids"]])
+        retained = {nid for row in requirements if row["status"] != "CONFLITO_A_CONFIRMAR" for nid in row["requirement_ids"]}
+        explicit = {a["value"] for a in context.get("assertions", []) if a["kind"] == "need" and a["state"] in situated_context.ACTIVE_STATES}
+        context["necessidades"] = unique([nid for nid in context.get("necessidades", [])
+            if nid not in previous_derived_needs or nid in retained or nid in explicit] + sorted(retained))
 
     def _task_components(self, context):
         """Existing patterns whose task requirement has a hierarchy witness."""
@@ -1476,7 +1542,8 @@ class DecisionEngine:
 
     def missing_questions(self):
         if self.current.get("scenario_mode") == "free_narrative":
-            return self._free_missing_questions()
+            return situated_context.questions(self.current["context"], self.current.get("participations", []),
+                                              self._free_missing_questions())
         c, questions = (self.current["context"], [])
         free = self.current.get("scenario_mode") == "free_narrative"
         task_components = self._task_components(c) if free else []
@@ -1675,7 +1742,13 @@ class DecisionEngine:
                                                                  and row.get("status") != "CONFLITO_A_CONFIRMAR"])})
                 if not witnesses:
                     continue
-                for function in knowledge.get("funcao_decisoria_ids", []):
+                supported_functions = knowledge.get("funcao_decisoria_ids", [])
+                if "operation_claims" in knowledge:
+                    supported_functions = unique(function for claim in knowledge["operation_claims"]
+                        if claim.get("eligibility") == "DOCUMENTED_OPERATIONAL_CLAIM"
+                        and claim.get("status") == "SUPPORTED_IN_RECORDED_SCOPE"
+                        for function in claim.get("function_ids", []))
+                for function in supported_functions:
                     if function in self.concepts:
                         derivations.append({"function_id": function, "knowledge_id": kid,
                                             "source_ids": knowledge.get("fonte_ids", []), "excerpt_ids": knowledge.get("trecho_ids", []),
@@ -1689,7 +1762,21 @@ class DecisionEngine:
         context["function_derivation"] = derivations
         context["funcoes_requeridas_ids"] = unique(explicit + [row["function_id"] for row in derivations])
 
-    def build_context_graph(self):
+    def build_context_graph(self, situated_result=None):
+        """Export this case; an optional current situated result replaces legacy requirements."""
+        if situated_result is not None:
+            snapshot = copy.deepcopy(self.current["context"])
+            snapshot["participations"] = copy.deepcopy(self.current.get("participations", []))
+            snapshot["confirmed"] = self.current.get("mapping_confirmed") is True
+            digest = hashlib.sha256(json.dumps(snapshot, sort_keys=True, ensure_ascii=False,
+                                               separators=(",", ":")).encode()).hexdigest()
+            if not snapshot["confirmed"]:
+                raise ValueError("Confirme o contexto antes de exportar seus requisitos situados.")
+            if (not isinstance(situated_result, dict)
+                    or situated_result.get("composition_kind") != "SITUATED_OPERATION_GRAPH"
+                    or situated_result.get("context_id") != snapshot["id"]
+                    or situated_result.get("execution_inputs", {}).get("context_sha256") != digest):
+                raise ValueError("O resultado situado não pertence ao contexto e à revisão atuais.")
         graph = Graph()
         graph.bind("mado", MADO)
         context, ctx = (self.current["context"], MADO[self.current["context"]["id"]])
@@ -1762,7 +1849,8 @@ class DecisionEngine:
             graph.add((participation, MADO.identificador, Literal(row["id"])))
             graph.add((participation, MADO.participacaoEmContexto, ctx))
             graph.add((ctx, MADO.temParticipacao, participation))
-            graph.add((participation, MADO.temPapelNoContexto, MADO[row["papel_id"]]))
+            if row.get("papel_id"):
+                graph.add((participation, MADO.temPapelNoContexto, MADO[row["papel_id"]]))
             graph.add(
                 (
                     participation,
@@ -1796,6 +1884,86 @@ class DecisionEngine:
                 graph.add((participation, MADO.operaRecurso, MADO[identifier]))
         for missing in context.get("informacoes_ausentes", []):
             graph.add((ctx, MADO.informacaoAusente, Literal(missing, lang="pt-BR")))
+        for situation in context.get("situations", []):
+            episode = MADO[situation["id"]]
+            graph.add((episode, RDF.type, MADO.ContextoDeInteracaoDigital))
+            graph.add((episode, MADO.episodioDoContexto, ctx))
+            graph.add((episode, MADO.identificador, Literal(situation["id"])))
+            graph.add((episode, MADO.descricaoDoContexto, Literal(situation.get("label", ""), lang="pt-BR")))
+            # An episode belongs to the same situated description unless a
+            # local perspective is stated. Preserve an explicit empty value;
+            # missing perspective must remain visible to SHACL, not invented.
+            perspectives = situation.get("perspectiva_ids", context.get("perspectiva_ids", []))
+            for perspective in perspectives or []:
+                graph.add((episode, MADO.descritoSobPerspectiva, MADO[perspective]))
+            for task in situation.get("task_ids", []):
+                graph.add((episode, MADO.temTarefa, MADO[task]))
+            # Participation already belongs to the overall context. Do not add
+            # a second value to functional participacaoEmContexto or infer that
+            # one person's ability belongs to the whole group.
+        if situated_result is not None:
+            from rdflib import URIRef, RDFS
+
+            def resource(identifier):
+                # Keep foreign RDF task/function IRIs; do not mint MADO aliases.
+                return URIRef(identifier) if identifier.startswith(("https://", "http://", "urn:")) else MADO[identifier]
+
+            situations = {row["id"]: row for row in context.get("situations", [])}
+            people = {row["id"] for row in self.current.get("participations", [])}
+            checks = {row["id"]: row for row in situated_result.get("execution_evidence", [])}
+            for requirement in situated_result.get("required_functions", []):
+                sid, pid = requirement.get("situation_id"), requirement.get("participant_id")
+                situation = situations.get(sid)
+                if (not situation or pid not in people or pid not in situation.get("participant_ids", [])
+                        or context.get("active_situation_id") and sid != context["active_situation_id"]):
+                    raise ValueError("Requisito situado fora da participação ou situação atuais.")
+                tasks, function = requirement.get("task_ids", []), requirement.get("function_id")
+                scope = requirement.get("task_scope_kind")
+                recorded = [checks.get(check_id, {}) for check_id in requirement.get("check_ids", [])]
+                witnessed_fields = ("id", "function_id", "situation_id", "participant_id", "task_ids",
+                                    "task_scope_kind", "origin", "witnesses", "claim_ids")
+                witnessed = any(row.get("kind") == "REQUIRED_FUNCTION_BEFORE_SELECTION"
+                                and all(row.get("observed", {}).get("value", {}).get(field) == requirement.get(field)
+                                        for field in witnessed_fields) for row in recorded)
+                if (not function or not tasks or scope not in {
+                        "REGISTERED_TASK_REQUIREMENT", "CONTEXTUAL_TASK_SCOPE_NOT_CAUSAL_SUPPORT"}
+                        or not witnessed):
+                    raise ValueError("Requisito situado sem tarefa e testemunho de derivação registrados.")
+                occurrence = MADO["FUN-SIT-" + hashlib.sha256(json.dumps(
+                    [context["id"], sid, pid, function], sort_keys=True).encode()).hexdigest()[:16]]
+                graph.add((occurrence, RDF.type, MADO.FuncaoRequeridaSituada))
+                graph.add((occurrence, MADO.noContexto, MADO[sid]))
+                graph.add((occurrence, MADO.paraParticipacao, MADO[pid]))
+                graph.add((occurrence, MADO.requerFuncao, resource(function)))
+                graph.add((occurrence, MADO.origemDoRegistro, Literal(requirement.get("origin", ""))))
+                graph.add((occurrence, MADO.statusDoRegistro, Literal(scope)))
+                if scope == "CONTEXTUAL_TASK_SCOPE_NOT_CAUSAL_SUPPORT":
+                    graph.add((occurrence, RDFS.comment, Literal(
+                        "paraTarefa delimita o escopo contextual; não afirma que a tarefa fundamenta a necessidade funcional.", lang="pt-BR")))
+                for task in tasks:
+                    graph.add((occurrence, MADO.paraTarefa, resource(task)))
+                for witness in requirement.get("witnesses", []):
+                    for condition in witness.get("need_ids", []) + witness.get("characteristic_ids", []):
+                        graph.add((occurrence, MADO.derivadaDaCondicao, resource(condition)))
+            return graph
+        for requirement in context.get("function_derivation", []):
+            if not requirement.get("function_id"):
+                continue
+            for witness in requirement.get("correspondences", []):
+                people = witness.get("participant_ids") or [None]
+                for person in people:
+                    signature = json.dumps([context["id"], requirement["function_id"], requirement.get("knowledge_id"), witness, person], sort_keys=True)
+                    occurrence = MADO["FUN-SIT-" + hashlib.sha256(signature.encode()).hexdigest()[:16]]
+                    graph.add((occurrence, RDF.type, MADO.FuncaoRequeridaSituada))
+                    graph.add((occurrence, MADO.noContexto, MADO[witness.get("situation_id") or context["id"]]))
+                    graph.add((occurrence, MADO.requerFuncao, MADO[requirement["function_id"]]))
+                    if person:
+                        graph.add((occurrence, MADO.paraParticipacao, MADO[person]))
+                    for path in witness.get("task_paths", []):
+                        if path:
+                            graph.add((occurrence, MADO.paraTarefa, MADO[path[0]]))
+                    for condition in witness.get("concept_ids", []):
+                        graph.add((occurrence, MADO.derivadaDaCondicao, MADO[condition]))
         return graph
 
     def retrieve_transfer_candidates(self, context_graph):
@@ -1826,6 +1994,7 @@ class DecisionEngine:
                 "context_task_id": local_id(row[9]), "knowledge_task_id": local_id(row[10]),
                 "context_concept_id": local_id(row[11]) if row[11] else "",
                 "match_predicate": local_id(row[12]),
+                "participant_id": local_id(row[13]) if len(row) > 13 and row[13] else None,
                 "required_function_id": local_id(row[6]) if row[6] else "",
                 "task_path": self._task_path(local_id(row[9]), local_id(row[10])),
                 "authorization": state,
@@ -1962,6 +2131,43 @@ class DecisionEngine:
                     confirmation=row.get("nivel_confirmacao"))
         return authorized
 
+    def authorize_knowledge_claim(self, identifier, claim_id, context, function_id=None):
+        """Check the applied assertion, not the mere presence of a bibliography.
+
+        A proposal with an unreviewed foundation is not a conditional advice.
+        Conditionality is reserved for unknown *contextual* preconditions after
+        an eligible documentary claim has been identified.
+        """
+        knowledge = self.knowledge.get(identifier, {})
+        claim = next((row for row in knowledge.get("operation_claims", [])
+                      if row.get("id") == claim_id), None)
+        reasons = []
+        if not claim:
+            reasons.append("Afirmação operacional não registrada neste conhecimento.")
+        else:
+            if (claim.get("eligibility") != "DOCUMENTED_OPERATIONAL_CLAIM"
+                    or claim.get("status") != "SUPPORTED_IN_RECORDED_SCOPE"
+                    or claim.get("foundation_status") != "DOCUMENTED_IN_RECORDED_SCOPE"):
+                reasons.append("A afirmação aplicada ainda não tem fundamentação autorizada no escopo registrado.")
+            support = claim.get("support", [])
+            if not support:
+                reasons.append("A afirmação não indica uma contribuição documental localizada.")
+            for row in support:
+                excerpt = self.excerpts.get(row.get("excerpt_id"), {})
+                if not excerpt or row.get("source_id") not in self.sources or excerpt.get("fonte_id") != row.get("source_id"):
+                    reasons.append("O trecho e a fonte da afirmação não correspondem.")
+                if not row.get("support_scope") or not row.get("review_status"):
+                    reasons.append("O escopo e o estado de conferência do apoio não foram informados.")
+            functions = set(claim.get("function_ids", []) or claim.get("scope", {}).get("function_ids", []))
+            if function_id and function_id not in functions:
+                reasons.append("A afirmação não autoriza esta função.")
+        self._check("claim", claim_id, "localized_operational_claim", "FAIL" if reasons else "PASS",
+                    "Conferência da afirmação empregada, separada da aprovação do conhecimento completo.",
+                    knowledge_id=identifier, function_id=function_id, reasons=reasons)
+        if reasons:
+            return "EXCLUIDO", reasons
+        return self.authorize_knowledge(identifier, context)
+
     def authorize_knowledge(self, identifier, context):
         """Selection gate, distinct from candidate retrieval; never uses diagnosis/name IDs."""
         knowledge = self.knowledge[identifier]
@@ -2004,6 +2210,17 @@ class DecisionEngine:
                 "Recurso necessário impedido: "
                 + ", ".join(self.labels(sorted(required & blocked)))
             )
+        claims = knowledge.get("operation_claims")
+        eligible_claims = [row for row in claims or []
+                           if row.get("eligibility") == "DOCUMENTED_OPERATIONAL_CLAIM"
+                           and row.get("status") == "SUPPORTED_IN_RECORDED_SCOPE"
+                           and row.get("foundation_status") == "DOCUMENTED_IN_RECORDED_SCOPE"]
+        if claims is not None and not eligible_claims:
+            reasons.append("Nenhuma afirmação deste conhecimento está autorizada para orientação; registro mantido para auditoria.")
+        if claims is not None:
+            self._check("knowledge", identifier, "claim_level_authorization", "PASS" if eligible_claims else "FAIL",
+                        "Há pelo menos uma parcela documentada; somente essa parcela poderá ser aplicada.",
+                        claim_ids=[row["id"] for row in eligible_claims], whole_knowledge_authorized=False)
         if knowledge.get("classificacao_operacional") == "PENDENTE_DE_FUNDAMENTACAO":
             reasons.append("Conhecimento ainda pendente de fundamentação.")
         if not knowledge.get("fonte_ids") or not knowledge.get("trecho_ids"):
@@ -3012,6 +3229,28 @@ class DecisionEngine:
         result["execution_evidence"] = copy.deepcopy(evidence)
         result["explanation"] = build_explanation(result["execution_evidence"])
         result["de_para"] = result["explanation"]["de_para"]
+
+    def generate_situated(self, progress=None):
+        """Public 1.5 route for examples and narratives, with no topic dispatch.
+
+        ``generate`` below remains a compatibility audit of the former pattern
+        selector; it is not the public recommendation path in this revision.
+        """
+        from experimental.v2.trajectory import compose_context
+        if self.current is None:
+            raise ValueError("Informe e confira o caso antes de gerar a orientação.")
+        context = copy.deepcopy(self.current["context"])
+        context["participations"] = copy.deepcopy(self.current.get("participations", []))
+        context["confirmed"] = self.current.get("mapping_confirmed") is True
+        result = compose_context(context, engine=self, progress=progress)
+        result["fingerprints"] = {
+            Path(name).relative_to(ROOT).as_posix() if Path(name).is_absolute() and Path(name).is_relative_to(ROOT) else name: digest
+            for name, digest in result.get("fingerprints", {}).items()
+        }
+        result["result_contract"] = "AMADO_SITUATED_1"
+        result["base_version"] = VERSION
+        result["case_storage"] = False
+        return result
 
     def generate(self, progress=None):
         """Compose a decision; optional progress reports actual stage boundaries.

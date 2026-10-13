@@ -1,0 +1,11 @@
+PREFIX mado: <https://w3id.org/mado#>
+# Scoped requirements are generated for the current case, not historical outcomes.
+SELECT DISTINCT ?requisito ?contexto ?episodioPai ?participacao ?tarefa ?funcao ?condicao
+WHERE {
+  ?requisito a mado:FuncaoRequeridaSituada ;
+    mado:noContexto ?contexto ; mado:paraTarefa ?tarefa ; mado:requerFuncao ?funcao .
+  OPTIONAL { ?requisito mado:paraParticipacao ?participacao . }
+  OPTIONAL { ?requisito mado:derivadaDaCondicao ?condicao . }
+  OPTIONAL { ?contexto mado:episodioDoContexto ?episodioPai . }
+}
+ORDER BY ?contexto ?participacao ?tarefa ?funcao

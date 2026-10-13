@@ -248,6 +248,25 @@ class PublicationGateTests(unittest.TestCase):
         self.assertIn("não equivale aos 118", result["scope"])
         self.assertEqual(report, original)
 
+    def test_situated_public_smoke_requires_its_own_actual_public_execution(self):
+        report = self.public_smoke()
+        self.write("tests/situated-public-smoke.mjs", "// synthetic situated public test")
+        self.assertFalse(gate.current_public_smoke(report, self.manifest, situated=True)["passed"])
+        report["type"] = "SYNTHETIC_SITUATED_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION"
+        report["test_sha256"] = gate.sha("tests/situated-public-smoke.mjs")
+        report["download_assets"] = {}
+        for name in ("mado-public.ttl", "mado.owl", "main.ttl", "main.shacl.ttl"):
+            self.write("web/downloads/" + name, "synthetic download")
+            digest = gate.sha("web/downloads/" + name)
+            report["download_assets"]["downloads/" + name] = {
+                "expected_sha256": digest, "served_sha256": digest, "passed": True}
+        self.assertTrue(gate.current_public_smoke(report, self.manifest, situated=True)["passed"])
+        self.write("web/downloads/mado.owl", "changed download")
+        self.assertFalse(gate.current_public_smoke(report, self.manifest, situated=True)["passed"])
+        self.write("web/downloads/mado.owl", "synthetic download")
+        report["type"] = "LOCAL_DRY_RUN_OF_SITUATED_PUBLIC_SMOKE"
+        self.assertFalse(gate.current_public_smoke(report, self.manifest, situated=True)["passed"])
+
     def test_public_smoke_changed_base_manifest_test_or_consumed_asset_fails(self):
         report = self.public_smoke()
         for name in ("data/knowledge-base.json", "web/amado/manifest.json", "tests/public-smoke.mjs",
@@ -285,6 +304,56 @@ class PublicationGateTests(unittest.TestCase):
                 else:
                     broken["assets"]["../engine.py"] = broken["assets"]["amado/engine.py"]
                 self.assertFalse(gate.current_public_smoke(broken, self.manifest)["passed"])
+
+    def situated_records(self):
+        self.manifest.update(version='1.5.0-rc1', composition={'version':'2.0.0-alpha3'})
+        required={'engine.py','situated_context.py','data/knowledge-base.json','experimental/v2/composer.py',
+                  'experimental/v2/trajectory.py','experimental/v2/trajectory-bindings.json','web/amado/bridge.py',
+                  'tests/test_situated_intake.py','tests/test_situated_composition.py','tests/test_situated_catalogue.py',
+                  *[f'queries/CQ-{i:03d}.rq' for i in range(1,11)]}
+        for name in required - {'engine.py','data/knowledge-base.json','web/amado/bridge.py'}:
+            self.write(name, 'synthetic '+name)
+        for name in ['ontology/mado-combined.ttl','experimental/v2/evidence/trajectory-combined.ttl','tests/situated-browser.mjs']:
+            self.write(name, 'synthetic '+name)
+        inputs={n:gate.sha(n) for n in required}
+        technical={'passed':True,'source_sha256':inputs}
+        reasoner={'passed':True,'profile_passed':True,'consistency_passed':True,'input_sha256':gate.sha('ontology/mado-combined.ttl')}
+        situated={'tests':{'success':True,'count':22,'skipped':0},'source_hashes_before':inputs.copy(),'source_hashes_after':inputs.copy(),
+                  'source_files_unchanged':True,'input_context_unchanged':True,
+                  'delta':{'complete_choices_with_relation':2,'complete_choices_without_relation':0,
+                           'complete_choices_without_articulation_operation':0,'first_person_sequence_preserved':True}}
+        browser={'type':'SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION','passed':True,'errors':[],
+                 'checks':{'conditional_native_worker_canonical_parity':True},'build':copy.deepcopy(self.manifest),
+                 'test_sha256':gate.sha('tests/situated-browser.mjs')}
+        distribution={'passed':True,'distribution_sha256':inputs.copy()}
+        logical={**reasoner,'input_sha256':gate.sha('experimental/v2/evidence/trajectory-combined.ttl')}
+        return dict(technical=technical,reasoner=reasoner,situated=situated,browser=browser,distribution=distribution,logical=logical)
+
+    def test_situated_release_requires_current_scoped_evidence(self):
+        records=self.situated_records()
+        self.assertTrue(all(gate.situated_release_checks(self.manifest, **records).values()))
+        for key in ['technical','reasoner','browser','distribution','logical']:
+            changed=copy.deepcopy(records)
+            changed[key]['passed']=False
+            self.assertFalse(all(gate.situated_release_checks(self.manifest, **changed).values()),key)
+
+    def test_situated_release_rejects_stale_tests_missing_queries_and_old_browser(self):
+        records=self.situated_records()
+        for group,field,value in [('browser','type','SYNTHETIC_TECHNICAL_BROWSER_CHECK'),
+                                   ('browser','checks',{}),('situated','source_files_unchanged',False),
+                                   ('browser','test_sha256','0'*64),('reasoner','input_sha256','0'*64)]:
+            changed=copy.deepcopy(records);changed[group][field]=value
+            self.assertFalse(all(gate.situated_release_checks(self.manifest,**changed).values()))
+        records['technical']['source_sha256'].pop('queries/CQ-010.rq')
+        self.assertFalse(all(gate.situated_release_checks(self.manifest, **records).values()))
+
+    def test_situated_release_cannot_approve_changed_runtime_bytes(self):
+        records=self.situated_records()
+        self.write('experimental/v2/composer.py', 'changed after tests')
+        checks=gate.situated_release_checks(self.manifest, **records)
+        self.assertFalse(checks['technical_inputs_current'])
+        self.assertFalse(checks['situated_frozen_inputs'])
+        self.assertFalse(checks['distribution_current'])
 
 
 if __name__ == "__main__":

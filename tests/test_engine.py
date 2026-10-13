@@ -70,8 +70,9 @@ class EngineTests(unittest.TestCase):
                 )
 
     def test_all_queries_executed(self):
+        # The eight historical CQs remain; CQ009/010 audit claims and situated functions.
         self.assertEqual(
-            set(self.main["query_summary"]), {f"CQ-{i:03}" for i in range(1, 9)}
+            set(self.main["query_summary"]), {f"CQ-{i:03}" for i in range(1, 11)}
         )
         self.assertTrue(self.main["query_results"]["CQ-003"])
         self.assertTrue(

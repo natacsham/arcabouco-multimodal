@@ -1,0 +1,17 @@
+PREFIX mado: <https://w3id.org/mado#>
+# Each source is joined through the actual excerpt, never a Cartesian list.
+SELECT DISTINCT ?afirmacao ?conhecimento ?enunciado ?elegibilidade ?estado ?trecho ?fonte ?limite
+WHERE {
+  ?afirmacao a mado:AfirmacaoOperacionalDocumentada ;
+    mado:afirmacaoDoConhecimento ?conhecimento ;
+    mado:enunciado ?enunciado ;
+    mado:elegibilidadeOperacional ?elegibilidade ;
+    mado:estadoDaAfirmacao ?estado ;
+    mado:limiteDaAfirmacao ?limite .
+  OPTIONAL {
+    ?afirmacao mado:trechoDaAfirmacao ?trecho ; mado:fonteDaAfirmacao ?fonte .
+    ?trecho mado:trechoDeFonte ?fonte .
+    ?conhecimento mado:sustentadoPorTrecho ?trecho ; mado:derivadoDe ?fonte .
+  }
+}
+ORDER BY ?conhecimento ?afirmacao ?trecho

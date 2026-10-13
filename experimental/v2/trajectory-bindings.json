@@ -2,6 +2,22 @@
   "version": "trajectory-pilot-1",
   "status": "PROPOSED_OPERATIONALIZATION",
   "interpretation": "Operacionalização analítica assistida da trajetória; não descoberta pelo programa nem nova conferência dos artigos originais.",
+  "situated_task_bindings": [
+    {
+      "id": "RefineAttributedProductionAndReviewOfTextDraft",
+      "task_ids_all": ["TAR-PRODUZIR-CONTEUDO-MULTIMODAL", "TAR-REVISAR-E-CONFIRMAR"],
+      "requires_same_actor_and_situation": true,
+      "required_facts": [{"id": "SameEditableTextDraft", "label": "A produção e a revisão se referem ao mesmo rascunho textual editável, que a pessoa pode conferir e corrigir antes de concluir?"}],
+      "rdf_task_id": "https://w3id.org/mado/experimental/v2#TaskCreateReviewedText",
+      "status": "PROPOSED_OPERATIONALIZATION",
+      "interpretation": "Refinamento técnico situado, não equivalência entre os conceitos amplos da MADO e a tarefa específica do piloto. Exige ambas as ações atribuídas à mesma pessoa no mesmo episódio e confirmação do mesmo rascunho textual. As aplicações continuam passando por suas próprias fontes, contribuições, critérios e condições; comunicar ou apresentar genericamente não ativa este vínculo.",
+      "primary_contribution_ids": ["CReviewMMI", "CReviewWCAG"],
+      "sources": [
+        {"id": "SourceMMI", "url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/", "locator": "1.2, 1.3 e 4.6: entradas, saídas e coordenação"},
+        {"id": "SourceReview", "url": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html", "locator": "3.3.6 AAA: uma alternativa de revisão e correção antes de concluir, não exigência universal de modalidade"}
+      ]
+    }
+  ],
   "contracts": {
     "CaptureKeyboard": {"kind": "capability", "knowledge_ids": ["K41"], "primary_contribution_ids": ["CInputKeyboard", "CInputCARE"], "criterion": "CA38", "criterion_origin": "ORI-0238", "criterion_source_id": "FN-WCAG", "criterion_primary_source": "SourceKeyboard", "criterion_locator": "WCAG 2.2, 2.1.1; origem legada ORI-0238 preservada", "requires_facts": ["LearningCommunicationContext", "KeyboardEffortAcceptable", "KeyboardCompatible", "KeyboardFeedbackPerceptible"]},
     "CaptureSpeech": {"kind": "capability", "knowledge_ids": ["K41", "K29"], "primary_contribution_ids": ["CInputCARE", "CReviewMMI"], "criterion": "CriterionInput", "requires_facts": ["LearningCommunicationContext", "SpeechEffortAcceptable", "SpeechCompatible", "SpeechFeedbackPerceptible"]},
@@ -11,9 +27,9 @@
   },
   "records": {
     "knowledge": {
-      "K28": "cd3969cba23e667432f0283622fdd85c306ba856639a7c880df164be2e26331f",
-      "K29": "53681dec716c1c01d58e9a9727ef4978feb6bf9dcc6f42516860ebdc05328ab2",
-      "K41": "d53b8401ee7d9f98d9aa9da1483fed45691b0a26681d2dc557bbd3cc29a6e470"
+      "K28": "65bb8340c52463a91cfb103a776192105b5834e1a6ebbbf52f130b3e613cc85b",
+      "K29": "0b63ff04d501fee3b70c69837637447cf6175f08e1811656b495c12bf85dc93a",
+      "K41": "01022528ad0aea377ab7cda1a7849931c7dada7e7ebae709fe409a1fcc8d688f"
     },
     "sources": {
       "F01": "4156fa0647620ab531274498839d6436cb35c83e90842ce1ac05a0ecb640ab14",

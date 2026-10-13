@@ -16,28 +16,30 @@ def main():
     engine = DecisionEngine()
     engine.start_context("CTX-TRANSFERENCIA-RECURSO-DIGITAL-01")
     engine.update_context({"mapping_confirmed": True, "transfer_confirmed": True})
-    generated = engine.generate()
-    result = {key: generated[key] for key in ("decision", "traceability", "articulations_used", "execution_evidence", "explanation") if key in generated}
-    choices = result["explanation"]["configurations"]
-    pilot = [row for row in choices if any(
-        support.get("criterion_id") == "CA02" and {"K38", "K43"} <= set(support.get("knowledge_ids", []))
-        for support in row.get("application", {}).get("supports", []))]
+    result = engine.generate_situated()
+    collections = ("choices", "partial_segments", "pending_candidates")
+    pilot = [(group, row) for group in collections for row in result[group]
+             if any(step.get("component_id") == "PAD-ORGANIZAR-CONTEUDO-PERSISTENTE" for step in row.get("steps", []))]
     if not pilot:
         raise RuntimeError("The approved pilot has no generated configuration; no separate story will replace it.")
-    # Keep the full graph/evidence for fidelity; disclose that only one choice
-    # is expanded on the Home. All decision configurations remain in the result.
-    result["explanation"]["configurations"] = pilot[:1]
+    # Keep checks and documentary scope, but display a single genuine proposal.
+    # Never convert a conditional proposal into a ready orientation for the Home.
+    selected_group, selected = pilot[0]
+    for group in collections:
+        result[group] = [selected] if group == selected_group else []
+    result["alternatives"] = []
     result["version"] = VERSION
     result["example_label"] = "Exemplo de aplicação — organização de conteúdo persistente"
     result["prepared_public_example"] = True
-    result["selection_notice"] = "Uma escolha exibida; registros da execução completa preservados. Não é sessão de participante."
+    result["selection_notice"] = "Uma possibilidade da execução preparada. As condições pendentes continuam pendentes; não é uma sessão de participante."
     result["source_hashes"] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                               for name in ("engine.py", "execution_trace.py", "data/knowledge-base.json", "ontology/mado-combined.ttl")}
+                               for name in ("engine.py", "situated_context.py", "experimental/v2/composer.py", "experimental/v2/trajectory.py",
+                                            "data/knowledge-base.json", "ontology/mado-combined.ttl")}
     # Execution identifiers/timestamps remain labelled as a prepared technical run.
     target = ROOT / "web/assets/explanation-pilot.json"
     target.parent.mkdir(exist_ok=True)
     target.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(json.dumps({"pilot": pilot[0]["component_id"], "version": VERSION, "bytes": target.stat().st_size}))
+    print(json.dumps({"pilot": selected["id"], "state": selected_group, "version": VERSION, "bytes": target.stat().st_size}))
 
 
 if __name__ == "__main__":

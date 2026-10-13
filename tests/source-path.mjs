@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {renderSourcePath} from '../web/source-path.js';
+import {situatedOutput} from '../web/amado/situated-output.mjs';
 
 const escape = value => String(value ?? '').replace(/[&<>"']/g, char => ({
   '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;',
@@ -109,22 +110,28 @@ check('rendering does not mutate the decision or evidence', () => {
 
 const pilot = JSON.parse(await fs.readFile(new URL('../web/assets/explanation-pilot.json', import.meta.url), 'utf8'));
 check('prepared pilot uses the actual engine configuration and exact support', () => {
-  const cfg = pilot.explanation.configurations[0], html = renderSourcePath(pilot);
+  const proposals=[...pilot.choices,...pilot.pending_candidates,...pilot.partial_segments];
+  const cfg = proposals[0].steps.find(step=>step.component_id==='PAD-ORGANIZAR-CONTEUDO-PERSISTENTE');
+  const html = situatedOutput(pilot).html;
   assert.equal(pilot.prepared_public_example, true);
+  assert.equal(pilot.result_contract,'AMADO_SITUATED_1');
   assert.equal(cfg.component_id, 'PAD-ORGANIZAR-CONTEUDO-PERSISTENTE');
-  assert(html.includes(escape(cfg.title)));
-  for (const support of cfg.application.supports) {
-    assert(html.includes(escape(support.criterion_statement)));
+  assert(html.includes(escape(cfg.label)));
+  for (const support of cfg.groundings) {
+    if(support.criterion)assert(html.includes(escape(support.criterion.label)));
     assert(html.includes(escape(support.justification)));
   }
   assert(!html.includes('ART-TESTE-NAO-CONFIRMADA'));
 });
 check('prepared pilot preserves current knowledge review limitations', () => {
-  const cfg = pilot.explanation.configurations[0], html = renderSourcePath(pilot);
-  for (const knowledge of cfg.construction.knowledge) {
-    if (knowledge.foundation_review_status) assert(html.includes(escape(knowledge.foundation_review_status)));
-    for (const item of knowledge.pending_foundation_items || []) assert(html.includes(escape(item)));
+  const proposals=[...pilot.choices,...pilot.pending_candidates,...pilot.partial_segments], html = situatedOutput(pilot).html;
+  for (const step of proposals[0].steps) {
+    for (const support of step.groundings) {
+      for (const item of support.claim?.limits || []) assert(html.includes(escape(item)));
+      for (const source of support.sources || []) if(source.review_status) assert(html.includes(escape(source.review_status)));
+    }
   }
+  if(pilot.pending_candidates.length)assert(html.includes('Confirme as condições'));
 });
 console.log(JSON.stringify({passed:true, checks, scope:'PURE_RENDERING_SYNTHETIC_AND_PREPARED_PILOT', network:false,
   limitations:['Não verifica reflow, contraste, teclado ou leitores de tela.','Não é validação humana.']}));

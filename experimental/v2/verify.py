@@ -175,7 +175,7 @@ def main():
     write_json(output / "verification.json", report)
     manifest_files = sorted(p for p in HERE.rglob("*") if p.is_file()
                             and "__pycache__" not in p.parts and p.name != "manifest.json")
-    write_json(output / "manifest.json", {"version": "2.0.0-alpha2", "files": {
+    write_json(output / "manifest.json", {"version": "2.0.0-alpha3", "files": {
         p.relative_to(HERE).as_posix(): digest(p) for p in manifest_files}})
     print(json.dumps({"passed": report["passed"], "unit_tests": result.testsRun,
                       "shacl": {k: v["conforms"] for k, v in report["shacl"].items()},

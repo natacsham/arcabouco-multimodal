@@ -5,10 +5,10 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/mado/experimental/v2> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/experimental/2.0.0-alpha2> ;
-  owl:versionInfo "2.0.0-alpha2" ;
+  owl:versionIRI <https://w3id.org/mado/experimental/2.0.0-alpha3> ;
+  owl:versionInfo "2.0.0-alpha3" ;
   rdfs:label "MADO V2 — piloto de composição fundamentada"@pt ;
-  rdfs:comment "Extensão experimental isolada. Não substitui a MADO 1.4 nem representa uma versão validada com participantes. Namespace proposto; não pressupõe registro de resolução pública."@pt .
+  rdfs:comment "Namespace experimental do compositor delimitado, reutilizado pela geração situada da MADO 1.5. Preserva o piloto e suas fontes sem substituir a ontologia principal nem afirmar validação humana. Namespace proposto; não pressupõe registro de resolução pública."@pt .
 
 # The six core categories are retained, not replaced by a new disability taxonomy.
 mado:Fonte a owl:Class .

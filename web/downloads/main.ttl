@@ -9,9 +9,9 @@
 skos:broader a owl:ObjectProperty .
 
 <https://w3id.org/mado> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/1.4.0-rc3> ;
-  owl:versionInfo "1.4.0-rc3" ;
-  owl:priorVersion <https://w3id.org/mado/1.4.0-rc2> ;
+  owl:versionIRI <https://w3id.org/mado/1.5.0-rc1> ;
+  owl:versionInfo "1.5.0-rc1" ;
+  owl:priorVersion <https://w3id.org/mado/1.4.0-rc3> ;
   dcterms:creator "Natacsha Ordones Raposo de Melo" ;
   rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
   rdfs:comment "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .
@@ -279,3 +279,32 @@ mado:pendenciaDeFundamentacao a owl:DatatypeProperty ; rdfs:domain mado:Conhecim
 mado:impedimentosVerificados a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range xsd:boolean .
 mado:premissaDoExemplo a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .
 mado:operacaoDoRecurso a owl:DatatypeProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range rdf:langString .
+
+# Auxiliares 1.5: autorização de parcelas e requisitos com escopo explícito.
+# Não alteram as seis classes centrais nem introduzem taxonomia de diagnóstico.
+mado:AfirmacaoOperacionalDocumentada a owl:Class ;
+  rdfs:label "Afirmação operacional documentada"@pt-BR ;
+  rdfs:comment "Parcela identificada de um conhecimento com suporte exato e autorização própria. Pode permanecer pendente; ser instância desta classe não constitui aprovação nem leitura do original."@pt-BR .
+mado:afirmacaoDoConhecimento a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:possuiAfirmacaoOperacional a owl:ObjectProperty ; owl:inverseOf mado:afirmacaoDoConhecimento ; rdfs:domain mado:ConhecimentoMultimodalArticulado ; rdfs:range mado:AfirmacaoOperacionalDocumentada .
+mado:trechoDaAfirmacao a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:TrechoDocumental .
+mado:fonteDaAfirmacao a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:Fonte .
+mado:funcaoDaAfirmacao a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range skos:Concept .
+mado:contribuicaoDaAfirmacao a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:ContribuicaoNaArticulacao .
+mado:elegibilidadeOperacional a owl:DatatypeProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range xsd:string .
+mado:estadoDaAfirmacao a owl:DatatypeProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range xsd:string .
+mado:estatutoEpistemicoDaAfirmacao a owl:DatatypeProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range xsd:string .
+mado:escopoDaAfirmacao a owl:DatatypeProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range rdf:langString .
+mado:limiteDaAfirmacao a owl:DatatypeProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range rdf:langString .
+mado:originalReconferidoNaMigracao a owl:DatatypeProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range xsd:boolean .
+mado:FuncaoRequeridaSituada a owl:Class ;
+  rdfs:label "Função requerida situada"@pt-BR ;
+  rdfs:comment "Ocorrência de requisito para tarefa e participação identificadas no contexto. Uma função requerida para um grupo não é propagada aos demais participantes ou episódios."@pt-BR .
+mado:noContexto a owl:ObjectProperty ; rdfs:domain mado:FuncaoRequeridaSituada ; rdfs:range mado:ContextoDeInteracaoDigital .
+mado:paraParticipacao a owl:ObjectProperty ; rdfs:domain mado:FuncaoRequeridaSituada ; rdfs:range mado:ParticipacaoNoContexto .
+mado:paraTarefa a owl:ObjectProperty ; rdfs:domain mado:FuncaoRequeridaSituada ; rdfs:range skos:Concept .
+mado:requerFuncao a owl:ObjectProperty ; rdfs:domain mado:FuncaoRequeridaSituada ; rdfs:range skos:Concept .
+mado:derivadaDaCondicao a owl:ObjectProperty ; rdfs:domain mado:FuncaoRequeridaSituada ; rdfs:range skos:Concept .
+mado:episodioDoContexto a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range mado:ContextoDeInteracaoDigital .
+mado:tipoSemanticoDeInteracao a owl:AnnotationProperty ; rdfs:label "tipo semântico da forma de interação"@pt-BR .
+mado:tipoDeAfirmacaoContextual a owl:AnnotationProperty ; rdfs:label "tipo da afirmação contextual"@pt-BR .

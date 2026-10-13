@@ -4,11 +4,11 @@
 
 O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão deste projeto: 1.4.0-rc3 — candidata.** Este repositório dá continuidade à distribuição pública sem modificar o repositório e o site MADO anteriores. A versão da tese permanece preservada. Os resultados de avaliações anteriores não são automaticamente resultados desta revisão.
+**Versão desta revisão: MADO 1.5.0-rc1 / compositor 2.0.0-alpha3 — candidata.** O estado anterior permanece no commit `ebfcb75ab3a584128cc804270e73851db1d5e837`; a implementação foi iniciada na branch `feat/amado-situated-composition`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
 
-**Este é o projeto em desenvolvimento.** As melhorias da ontologia e do AMADO são integradas aqui, em `arcabouco-multimodal`; não existe um produto separado chamado “Evolution”. O repositório `MADO` anterior permanece preservado. A versão 1.4 da base e o módulo de composição 2.0.0-alpha2 têm identificadores distintos para permitir conferir exatamente o que foi executado.
+**Este é o projeto em desenvolvimento.** Base, representação, motor e interface continuam em `arcabouco-multimodal`. As versões da base e do compositor são distintas para identificar exatamente o que foi executado. Não foi criada outra matriz de conhecimento.
 
-No AMADO, conte seu desafio por texto ou ditado, responda às perguntas necessárias e confira as informações antes de gerar a orientação. Os exemplos são opcionais. Escrita com revisão e revisão de texto usam o compositor por funções; acesso a conteúdo e demais tarefas seguem o motor existente, conforme sua cobertura. Tema da aula não é chave de busca, e condições pessoais são conferidas por participante. A interpretação é limitada e precisa de confirmação. [Como usar e o que já está coberto](docs/composicao-por-funcoes.md).
+No AMADO, conte seu desafio por texto ou ditado, confira o entendimento e responda a até três esclarecimentos por rodada. Os exemplos e os relatos livres passam pelo mesmo contrato de contexto e pelo compositor situado. O assunto da aula e palavras como “turma” não escolhem outro motor. A interpretação é determinística e limitada: correções, informação não reconhecida e condições ainda desconhecidas permanecem visíveis. Refinamentos posteriores são opcionais.
 
 ## Qual problema esta pesquisa enfrenta?
 
@@ -24,6 +24,7 @@ O foco da pesquisa é a articulação desses conhecimentos: o que pode ser relac
 
 ## Comece por aqui
 
+- [Acompanhe a revisão 1.5 e um exemplo integral efetivamente executado](docs/revisao-situada-1.5.md).
 - [Entenda a MADO em linguagem simples](docs/entenda-mado.md).
 - [Acompanhe um exemplo real da base](docs/exemplo-rastreavel.md).
 - [Veja o teste de uma combinação não cadastrada e seus limites](docs/teste-de-reutilizacao.md).
@@ -34,7 +35,7 @@ O foco da pesquisa é a articulação desses conhecimentos: o que pode ser relac
 - [Execute e reproduza as verificações](docs/reproduzir.md).
 - [Confira as licenças dos componentes de terceiros](THIRD_PARTY.md).
 
-Os endereços públicos reúnem [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). A publicação é condicionada ao sucesso das verificações no fluxo do GitHub Pages. A [conferência do endereço publicado](evidence/public-smoke.json) identifica separadamente a revisão e os fluxos realmente executados.
+Os endereços públicos reúnem [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). Sua existência não comprova a publicação desta candidata 1.5. A publicação depende das verificações e do fluxo do GitHub Pages; a [conferência do endereço publicado](evidence/public-smoke.json) deve identificar a revisão e os fluxos realmente executados.
 
 Cada escolha pode ser examinada por duas leituras: **como seu conhecimento foi construído** e **por que ele foi empregado naquele caso**. Ambas usam os mesmos registros, distinguindo contribuição da fonte, operação de articulação, conhecimento, aplicação do critério e limite. Contribuição não detalhada permanece como lacuna, sem justificativa inventada. [Contrato da explicação pública](docs/explicacao-publica.md).
 
@@ -42,7 +43,7 @@ Cada escolha pode ser examinada por duas leituras: **como seu conhecimento foi c
 
 Não é apenas um conjunto de citações nem um resumo de um artigo. É a compreensão produzida ao relacionar conteúdos e registrar convergências, complementações, condições, refinamentos e limites.
 
-Um exemplo é relacionar a necessidade de **retomar uma explicação**, a **preservação do significado entre formatos** e a **organização da atenção**. Essa articulação pode fundamentar uma configuração em que a fala preserva a expressão da pessoa, o texto mantém pontos recuperáveis e a imagem representa relações, cada qual com função e condições explícitas.
+Um exemplo executado nesta revisão relaciona **independência entre entrada e saída**, **operação situada** e **possibilidade de conferir e corrigir antes de concluir**. Essa articulação permite examinar entradas e apresentações diferentes para produzir e revisar o mesmo rascunho. Não basta constatar que voz, texto e áudio estão disponíveis: a pessoa precisa poder realizar cada função e a ligação precisa estar fundamentada.
 
 O AMADO não descobre essa síntese intelectual sozinho. Ele consulta articulações previamente documentadas e verifica se os conhecimentos e os padrões disponíveis podem ser empregados no contexto informado. [Veja o exemplo e seus limites](docs/exemplo-rastreavel.md).
 
@@ -72,10 +73,10 @@ Relato → informações a confirmar → contexto confirmado
 1. **Localizar:** em `data/knowledge-base.json`, `sources` identifica as fontes da trajetória e `references` conserva as referências citadas pelos artigos. URL não comprova leitura do original.
 2. **Conferir:** consultar a edição e a seção original; atualizar o registro existente em `excerpts` e sua origem em `criterion_origins`, preservando a localização anterior. Não promover toda a bibliografia a conhecimento operacional.
 3. **Articular:** `contributions` delimita o que cada trecho acrescenta; `articulations` explica a operação e a compreensão resultante; `knowledge` registra aplicabilidade e limites. A síntese analítica é anterior à execução, não descoberta pelo programa.
-4. **Operacionalizar:** adaptar os vínculos existentes em `decision_components` e nos contratos versionados de `experimental/v2/trajectory-bindings.json`. Uma função só integra a orientação se suas condições e apoios forem satisfeitos; ter uma fonte a mais não cria automaticamente uma capacidade.
+4. **Operacionalizar:** delimitar `operation_claims` nos conhecimentos e `operation_contract` nos onze padrões existentes em `decision_components`. Os contratos qualificam ações, funções, entradas, saídas, relações e aplicações exatas de critérios. `experimental/v2/trajectory-bindings.json` conserva a ponte do piloto e seu refinamento técnico de tarefa; não é uma segunda matriz de casos. Bibliografia não habilita operações: cada afirmação usada precisa de apoio localizado elegível.
 5. **Publicar:** regenerar RDF, catálogo, piloto e pacote; reexecutar as verificações; publicar somente os arquivos públicos. O navegador consome a mesma versão empacotada da base, não uma segunda planilha explicativa.
 
-O [catálogo e o desenho do percurso](https://natacsham.github.io/arcabouco-multimodal/ontologia/#fontes) são projeções desses registros. A conferência desta revisão é parcial: sete origens WCAG/MMI receberam seção e versão verificadas; outras referências permanecem citadas ou pendentes. O acesso restrito a uma norma não é tratado como leitura concluída. [O que foi conferido e como reproduzir](docs/fundamentacao-documental.md).
+O [catálogo e o desenho do percurso](https://natacsham.github.io/arcabouco-multimodal/ontologia/#fontes) são projeções desses registros. A conferência documental é parcial: o estado, a seção e a versão de cada origem precisam ser lidos no registro correspondente; outras referências permanecem citadas ou pendentes. Acesso restrito a uma norma não é leitura concluída. [O que foi conferido e como reproduzir](docs/fundamentacao-documental.md).
 
 1. O contexto é organizado em conceitos representados na base e conferido pela pessoa usuária.
 2. Consultas recuperam conhecimentos pertinentes e articulações documentadas.
@@ -87,9 +88,54 @@ O [catálogo e o desenho do percurso](https://natacsham.github.io/arcabouco-mult
 
 O AMADO executa Python no navegador por Pyodide, com RDF e consultas SPARQL. Não há servidor de decisões nem chamada a modelo de linguagem. A ontologia não gera prosa sozinha: o compositor emprega padrões e formulações previamente documentados. A narrativa livre também tem cobertura limitada e exige confirmação.
 
+### O percurso executável nesta revisão
+
+1. `engine.analyze_narrative` e `situated_context.py` conservam **quem**, **qual ação**, **situação**, **dificuldade**, **apoio** e o trecho de origem. Não atribuem uma capacidade a alguém por diagnóstico.
+2. `situations` separa interações, por exemplo apresentação coletiva e consulta individual. `assertions` conserva o sujeito, a situação, o estado e as correções. O objetivo textual continua sendo descrição; não é anunciado como interpretação semântica geral.
+3. A matriz funcional existente relaciona dificuldades reconhecidas a requisitos documentados. Quando não há suporte ou a atribuição é ambígua, isso gera uma lacuna específica, não uma necessidade inventada.
+4. `DecisionEngine.generate_situated` chama `ResearchComposer.compose_context`. A recuperação operacional percorre registros curados em JSON e relações representadas; RDF conserva o modelo e a hierarquia, e SPARQL permite conferir as questões de competência. Não se afirma que o reasoner OWL compõe a orientação nem que toda verificação Python é uma inferência OWL.
+5. A função necessária precede a escolha de operações. Cada aplicação relaciona a **afirmação delimitada**, seu trecho/fonte, critério, participante e situação. `PROPOSED_OPERATIONALIZATION` sem apoio autorizado permanece na auditoria. Uma condição contextual desconhecida, com fundamento já disponível, pode produzir uma possibilidade condicional.
+6. As operações reaproveitam ações da base. Sequência dependente, alternativa funcional, complementaridade e redundância têm contratos diferentes. Identidade de tipos não prova preservação do significado; conteúdo, suficiência e acesso ainda podem precisar de confirmação situada.
+7. A saída mantém escolhas, apoios parciais, condições, exclusões, limites da busca e `execution_evidence`. A interface apresenta ações e fundamentos da **mesma execução**. Não gera frases sobre modalidades ausentes.
+
+O método `DecisionEngine.generate()` permanece para regressão de compatibilidade do seletor antigo. A operação pública `generate` usa `generate_situated()`. Essa distinção evita apresentar testes históricos do seletor como testes do novo compositor. A operação pública `compose` aceita o formato de entrada do piloto por um adaptador e executa o mesmo compositor situado; o método Python antigo `Composer.compose` permanece somente para reprodução histórica. Não há desvio automático por assunto ou palavra da narrativa.
+
+**Como conferir:** [relatório e roteiro de reprodução desta revisão](docs/revisao-situada-1.5.md). Os resultados atuais e os itens não executados devem ser consultados nesse relatório, não inferidos de relatórios históricos.
+
+### Um exemplo realmente executado, do fundamento à ação
+
+O caso **sintético** `SYN-NOVEL-COLLAB-908` prepara notas para um encontro comunitário. A tarefa de produzir e revisar uma contribuição é atribuída separadamente a A e B. A declara fala e revisão visual utilizáveis; B declara teclado e revisão por fala utilizáveis. Recursos, correção, controle de conclusão e possibilidade de conferir o significado são entradas explícitas, não inferências sobre diagnósticos.
+
+A cadeia documental é a seguinte:
+
+1. **Fontes e contribuições:** os registros CARE e WCAG de teclado alimentam `CInputCARE` e `CInputKeyboard`, distinguindo alternativa funcional de operação individual. W3C MMI e WCAG 3.3.6 alimentam `CReviewMMI` e `CReviewWCAG`, distinguindo entrada/saída e revisão/correção. A WCAG de teclado não sustenta voz; a opção de revisão é uma escolha de projeto baseada em critério AAA, não exigência universal de modalidade.
+2. **Articulação:** `ArtInput → KInput` estabelece produção por entrada operável; `ArtReview → KReview` liga o rascunho à conferência corrigível. `ArtAudioReview → KAudioReview` delimita a revisão por fala. Essas sínteses já estavam registradas; o programa não as descobriu durante o atendimento.
+3. **Funções e aplicação:** a tarefa exige produzir (`Expression`) e conferir/corrigir (`Review`) antes da seleção. O executor verifica as aplicações exatas de `CriterionInput` e `CriterionReview`, seus apoios e condições por pessoa.
+4. **Relação:** `ProductionThenReview` liga a saída e a entrada do mesmo `TextDraft`, com correção disponível. É sequência de produção/revisão, não complementaridade CARE inferida da presença de duas mídias.
+
+| Pessoa | Operações e ações admitidas no ensaio |
+| --- | --- |
+| A | `CaptureSpeech → ReviewText`: registrar por fala, manter o rascunho editável e apresentá-lo visualmente para conferir e corrigir. |
+| B | `CaptureKeyboard → ReviewSpeech`: registrar por teclado e ler o mesmo rascunho em voz, com pausa, repetição e correção sob controle da pessoa. |
+
+Quando apenas `AudioUsable` de B é negado, a sequência de A é preservada e B mantém somente o registro por teclado; o conjunto deixa de ser declarado completo. Retirar em memória a regra `ProductionThenReview`, ou a operação analítica de `ArtReview` mantendo as fontes, também elimina as sequências completas. São verificações estruturais e de execução, **não prova de compreensão, aprendizagem ou coordenação entre pessoas**.
+
+O [exemplo integral explicado](docs/revisao-situada-1.5.md) apresenta fontes com links/localizadores, contribuições, critérios, condições e limites. O [JSON reproduzível](experimental/v2/evidence/situated-report.json) conserva entradas, ações, verificações, ablações e hashes antes/depois. Também registra o refinamento condicionado das tarefas principais de produção e revisão, quando atribuídas à mesma pessoa e ao mesmo rascunho; comunicar genericamente não basta.
+
+**Limite do repertório:** onze contratos não equivalem a onze composições completas. `PAD-PAPEIS-TURNOS-AUTORIA` permanece somente na auditoria por falta de aplicação admissível de critério. A alegação de consolidação da aprendizagem por jogo (`K37`) continua pendente; a parcela operacional trata apenas de feedback e conferência em atividade interativa já escolhida. Vínculos entre outros PAD ainda exigem curadoria específica.
+
 O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A organização anterior da interface continua em `amado/completo.html` e `amado/completo-guiado.html`, utilizando a mesma versão atual dos motores. A versão anterior completa permanece no histórico do repositório.
 
-### Da descrição à ação: o que foi adaptado na RC3
+## Registros históricos preservados
+
+Os blocos abaixo documentam etapas anteriores. Foram mantidos para rastrear decisões e limitações, mas não descrevem o contrato nem a situação de entrega da candidata 1.5.
+
+<details>
+<summary>Histórico RC3 — seletor e adaptação da matriz funcional; descrição substituída pelo percurso situado acima</summary>
+
+### Registro histórico: o que foi adaptado na RC3
+
+Esta seção descreve a etapa anterior. A execução e os limites atuais são os do contrato situado descrito acima; nomes de campos históricos abaixo não substituem a evidência da revisão 1.5.
 
 Não foi criada outra matriz nem uma resposta pronta para um assunto. O motor passa a consumir `functional_matrix`, dentro de `data/knowledge-base.json`, junto aos conhecimentos, critérios e articulações já existentes. A matriz é uma camada operacional curada; o reasoner OWL não interpreta o texto livre nem presume capacidades individuais.
 
@@ -108,6 +154,11 @@ Os vínculos auditivos são delimitados pelas seções conferidas: alternativa p
 Foi corrigida também uma omissão no índice de K10: **página web** não aparecia entre seus recursos digitais, embora o próprio conhecimento e seus registros WABlind tratem de conteúdo web. O vínculo existente foi completado no JSON e projetado no RDF, para não restringir a pergunta a apresentação ou imagem digital. Isso não cria outro conhecimento nem altera o tema da tarefa.
 
 O tema — Matemática, História ou outro — contextualiza a atividade, não seleciona uma resposta cadastrada. Uma combinação desconhecida pode reutilizar um padrão existente. Isso não significa que toda tarefa esteja coberta: se faltam funções ou uma rota não está conferida, o apoio é parcial ou condicional, com a lacuna indicada.
+
+</details>
+
+<details>
+<summary>Histórico intake1 / base 1.4.0-rc3 — fluxo e limites daquela entrega, não da revisão 1.5</summary>
 
 ### Como as perguntas avançam e como ler o resultado
 
@@ -135,6 +186,8 @@ A orientação começa por **O que você pode fazer**: uma ação por configura�
 
 A cobertura permanece delimitada: reconhecer o aplicativo, a tarefa ou a pessoa não garante uma configuração elegível. Falta de informação, falha de interpretação e ausência de padrão para a função requerida precisam ser distinguidas. Esta entrega não reorganiza toda a saída nem elimina seus aprofundamentos; a revisão em duas áreas (orientação prática e fundamentação técnica) é uma etapa posterior.
 
+</details>
+
 ## Arquivos e reprodução
 
 - `ontology/`: formalização e grafo da distribuição pública.
@@ -142,6 +195,7 @@ A cobertura permanece delimitada: reconhecer o aplicativo, a tarefa ou a pessoa 
 - `queries/`: consultas SPARQL das questões de competência.
 - `shapes/`: restrições SHACL.
 - `tests/` e `evidence/`: verificações e resultados desta revisão.
+- `experimental/v2/`: compositor reutilizado, piloto preservado e relatório situado reproduzível.
 - `web/`: documentação navegável e AMADO no navegador.
 
 Os relatórios gerados em `evidence/` são a autoridade para saber **o que foi efetivamente executado**, em qual versão e com quais resultados. A descrição de um teste nesta documentação não equivale à sua aprovação.
@@ -159,7 +213,7 @@ Consistência lógica, integridade dos dados, respostas às consultas, comportam
 
 Referência simples sugerida:
 
-> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.4.0-rc3. Repositório do projeto.
+> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.5.0-rc1 (candidata). Repositório do projeto.
 
 Não há DOI exigido para consultar ou compreender este trabalho. Referências bibliográficas, autores de terceiros e perspectivas participantes conservam sua própria atribuição.
 

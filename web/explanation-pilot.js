@@ -1,4 +1,5 @@
 import { renderExplanation } from './explanation.js';
+import { situatedOutput } from './amado/situated-output.mjs';
 const disclosure = document.querySelector('[data-explanation-pilot-details]');
 const target = document.querySelector('[data-explanation-pilot]');
 let pending = false;
@@ -13,6 +14,12 @@ async function loadPilot() {
     const response = await fetch(new URL('./assets/explanation-pilot.json', import.meta.url));
     if (!response.ok) throw new Error('Exemplo indisponível.');
     const result = await response.json();
+    if (result.result_contract === 'AMADO_SITUATED_1') {
+      const view = situatedOutput(result);
+      target.innerHTML = '<p>Possibilidade gerada a partir dos registros atuais. Condições ainda não confirmadas permanecem indicadas; não é uma avaliação em uso.</p>'+view.html;
+      loaded = true;
+      return;
+    }
     if (!Array.isArray(result.explanation?.configurations)) throw new Error('Registros incompletos.');
     renderExplanation(target, result, {prepared: true});
     loaded = true;

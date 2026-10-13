@@ -1,7 +1,7 @@
 project: Arcabouco Multimodal
-version: 1.4.0-rc3
+version: 1.5.0-rc1
 instrument: AMADO
-instrument_revision: AMADO-web-1.4.0-rc3-intake1
+instrument_revision: AMADO-web-1.5.0-rc1
 author: Natacsha Ordones Raposo de Melo
 research: Arcabouço Multimodal para Acessibilidade Digital
 purpose: Permitir examinar a contribuição documental para a articulação do conhecimento e as verificações efetivas de seu emprego em decisões existentes.
@@ -18,11 +18,14 @@ public_origin_repository: https://github.com/natacsham/MADO
 public_origin_commit: d660b773ed08038a7a543205575a16fc22d2c1c2
 repository: https://github.com/natacsham/arcabouco-multimodal
 public_site: https://natacsham.github.io/arcabouco-multimodal/
-new_auxiliary_element: ContribuicaoNaArticulacao
+new_auxiliary_elements:
+  - AfirmacaoOperacionalDocumentada
+  - FuncaoRequeridaSituada
+previous_auxiliary_element: ContribuicaoNaArticulacao
 formalization: OWL 2 DL
 integrity: SHACL
 retrieval: SPARQL
-composition: Deterministic Python with explicit curated patterns
+composition: Deterministic situated functions with scoped documentary claims and explicit curated operations
 public_runtime: Pyodide 314.0.7 in isolated browser worker
 storage: Current case in RAM only; no case history or evaluation collection
 license: No open reuse license granted to original research material
@@ -35,3 +38,5 @@ limits:
   - Recorded contribution review is distinct from checking the original document
   - Documentary support and successful execution checks do not guarantee applicability
   - Textual alternatives are not automatically evaluated or recomposed
+  - Pending documentary foundation never becomes an unknown contextual condition
+  - A scoped claim does not promote the complete historical candidate statement

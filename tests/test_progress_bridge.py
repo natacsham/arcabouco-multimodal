@@ -38,8 +38,9 @@ class ProgressBridgeTests(unittest.TestCase):
         self.assertEqual(actual, expected)
         self.assertEqual([(row["stage"], row["state"]) for row in events], [
             ("verification", "running"), ("verification", "completed"),
+            ("retrieval", "running"), ("retrieval", "completed"),
             ("composition", "running"), ("composition", "completed")])
-        self.assertFalse(any(row["stage"] in {"presentation", "retrieval"} for row in events))
+        self.assertFalse(any(row["stage"] == "presentation" for row in events))
 
     def test_bad_input_does_not_complete_verification_or_start_composition(self):
         events = []
@@ -49,11 +50,12 @@ class ProgressBridgeTests(unittest.TestCase):
 
     def test_engine_exception_does_not_complete_composition(self):
         events = []
-        with patch.object(self.composer, "compose", side_effect=RuntimeError("controlled failure")):
+        with patch.object(self.composer, "compose_context", side_effect=RuntimeError("controlled failure")):
             with self.assertRaises(RuntimeError):
                 bridge.dispatch({"operation": "compose", "payload": copy.deepcopy(self.example)}, progress=events.append)
-        self.assertEqual(events[-1]["stage"], "composition")
-        self.assertEqual(events[-1]["state"], "running")
+        self.assertEqual(events[-1]["stage"], "verification")
+        self.assertEqual(events[-1]["state"], "completed")
+        self.assertFalse(any(row["stage"] == "composition" for row in events))
 
     def test_generate_callback_forwarding_preserves_json_result(self):
         events = []
@@ -61,7 +63,7 @@ class ProgressBridgeTests(unittest.TestCase):
             if progress:
                 progress({"stage": "retrieval", "state": "running", "message": "actual boundary"})
             return {"decision": "exact"}
-        self.engine.generate = generate
+        self.engine.generate_situated = generate
         self.assertEqual(bridge.dispatch_json('{"operation":"generate"}', progress=events.append), '{"decision": "exact"}')
         self.assertEqual(events, [{"stage": "retrieval", "state": "running", "message": "actual boundary"}])
 
