@@ -1,9 +1,9 @@
 {
   "type": "SYNTHETIC_SITUATED_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
   "url": "https://natacsham.github.io/arcabouco-multimodal/",
-  "checked_at": "2026-10-21T12:18:16.441Z",
-  "test_sha256": "956709fd0bfd2953d0b5d8e4f7500ed7a44abb89c019551c4da394e00dcd6fd9",
-  "expected_commit": "98639605b32ff20aec53e4ae067a1d0bc205e94f",
+  "checked_at": "2026-10-21T12:32:35.732Z",
+  "test_sha256": "25d31663024eb0d344f243db7ecfb07740e24a2bc88a02392ab28f33c6f39582",
+  "expected_commit": "82308cb6a99e54d89c47e6ed3e6d8c8d0d384eaf",
   "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
   "checks": {
     "public_manifest_http_200": true,
@@ -47,6 +47,12 @@
       "served_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "passed": true
     },
+    "amado/styles.css": {
+      "bytes": 38922,
+      "expected_sha256": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
+      "served_sha256": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
+      "passed": true
+    },
     "amado/worker.mjs": {
       "bytes": 4531,
       "expected_sha256": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
@@ -57,18 +63,6 @@
       "bytes": 51404,
       "expected_sha256": "00815afab2d5f36a030c8741f9c214c813431d03e4d2b023fcf6771e1dd078ee",
       "served_sha256": "00815afab2d5f36a030c8741f9c214c813431d03e4d2b023fcf6771e1dd078ee",
-      "passed": true
-    },
-    "amado/styles.css": {
-      "bytes": 38922,
-      "expected_sha256": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
-      "served_sha256": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
-      "passed": true
-    },
-    "amado/client.mjs": {
-      "bytes": 2243,
-      "expected_sha256": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
-      "served_sha256": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
       "passed": true
     },
     "amado/guided.css": {
@@ -83,28 +77,16 @@
       "served_sha256": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "passed": true
     },
+    "amado/client.mjs": {
+      "bytes": 2243,
+      "expected_sha256": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
+      "served_sha256": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
+      "passed": true
+    },
     "amado/guiado.html": {
       "bytes": 9882,
       "expected_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
       "served_sha256": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
-      "passed": true
-    },
-    "amado/composition.js": {
-      "bytes": 20994,
-      "expected_sha256": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
-      "served_sha256": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
-      "passed": true
-    },
-    "amado/views.css": {
-      "bytes": 971,
-      "expected_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
-      "served_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
-      "passed": true
-    },
-    "amado/simple-flow.js": {
-      "bytes": 49101,
-      "expected_sha256": "3f40ad805e43f7b4b3b0db3de8ef179759f4af277bbb2262d6772fb9fa46911c",
-      "served_sha256": "3f40ad805e43f7b4b3b0db3de8ef179759f4af277bbb2262d6772fb9fa46911c",
       "passed": true
     },
     "amado/composition.css": {
@@ -113,22 +95,22 @@
       "served_sha256": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
       "passed": true
     },
-    "amado/intake.mjs": {
-      "bytes": 41355,
-      "expected_sha256": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
-      "served_sha256": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
+    "amado/composition.js": {
+      "bytes": 20994,
+      "expected_sha256": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
+      "served_sha256": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "passed": true
     },
-    "amado/situated-output.mjs": {
-      "bytes": 16061,
-      "expected_sha256": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
-      "served_sha256": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
+    "amado/simple-flow.js": {
+      "bytes": 49101,
+      "expected_sha256": "3f40ad805e43f7b4b3b0db3de8ef179759f4af277bbb2262d6772fb9fa46911c",
+      "served_sha256": "3f40ad805e43f7b4b3b0db3de8ef179759f4af277bbb2262d6772fb9fa46911c",
       "passed": true
     },
-    "amado/voice.js": {
-      "bytes": 5702,
-      "expected_sha256": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
-      "served_sha256": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
+    "amado/views.css": {
+      "bytes": 971,
+      "expected_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+      "served_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "passed": true
     },
     "amado/simple-flow.css": {
@@ -137,10 +119,22 @@
       "served_sha256": "1f02c79520a8054d4bda5f8e48030fd7734500425e6530a2cc99063e499e18c3",
       "passed": true
     },
-    "amado/completo.html": {
-      "bytes": 22429,
-      "expected_sha256": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
-      "served_sha256": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
+    "amado/situated-output.mjs": {
+      "bytes": 16061,
+      "expected_sha256": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
+      "served_sha256": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
+      "passed": true
+    },
+    "amado/intake.mjs": {
+      "bytes": 41355,
+      "expected_sha256": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
+      "served_sha256": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
+      "passed": true
+    },
+    "amado/voice.js": {
+      "bytes": 5702,
+      "expected_sha256": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
+      "served_sha256": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "passed": true
     },
     "index.html": {
@@ -149,16 +143,28 @@
       "served_sha256": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
       "passed": true
     },
-    "amado/completo-guiado.html": {
-      "bytes": 23752,
-      "expected_sha256": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6",
-      "served_sha256": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6",
+    "amado/completo.html": {
+      "bytes": 22429,
+      "expected_sha256": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
+      "served_sha256": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
       "passed": true
     },
     "ontologia/index.html": {
       "bytes": 22768,
       "expected_sha256": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
       "served_sha256": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
+      "passed": true
+    },
+    "amado/completo-guiado.html": {
+      "bytes": 23752,
+      "expected_sha256": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da",
+      "served_sha256": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da",
+      "passed": true
+    },
+    "site.js": {
+      "bytes": 1998,
+      "expected_sha256": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
+      "served_sha256": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "passed": true
     },
     "shell.css": {
@@ -171,12 +177,6 @@
       "bytes": 471,
       "expected_sha256": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
       "served_sha256": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
-      "passed": true
-    },
-    "site.js": {
-      "bytes": 1998,
-      "expected_sha256": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
-      "served_sha256": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "passed": true
     },
     "site.css": {
@@ -215,16 +215,16 @@
       "served_sha256": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
       "passed": true
     },
-    "assets/source-catalog.json": {
-      "bytes": 365824,
-      "expected_sha256": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7",
-      "served_sha256": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7",
-      "passed": true
-    },
     "amado/runtime/pyodide-lock.json": {
       "bytes": 119077,
       "expected_sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
       "served_sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+      "passed": true
+    },
+    "assets/source-catalog.json": {
+      "bytes": 365824,
+      "expected_sha256": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7",
+      "served_sha256": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7",
       "passed": true
     },
     "amado/runtime/pyodide.asm.mjs": {
@@ -245,16 +245,16 @@
       "served_sha256": "b71640c7e1481a9a0adcd6d35914395e47df2f052e9ff839bdea9f0857d36d21",
       "passed": true
     },
-    "amado/runtime/python_stdlib.zip": {
-      "bytes": 2545637,
-      "expected_sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
-      "served_sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
-      "passed": true
-    },
     "amado/runtime/pyodide.asm.wasm": {
       "bytes": 9598218,
       "expected_sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
       "served_sha256": "cc36e3cab04fdfc9a63ff13eb52eae2b911bf46c025cc7b281f394bd3de1d5e6",
+      "passed": true
+    },
+    "amado/runtime/python_stdlib.zip": {
+      "bytes": 2545637,
+      "expected_sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
+      "served_sha256": "fa1957e5777068fc4f7437f96d860ae2fbe9c19732ba06c84e004ec16dd7dd7a",
       "passed": true
     },
     "amado/bridge.py": {
@@ -331,7 +331,7 @@
     "This smoke does not replace the local regression or native/worker canonical parity checks."
   ],
   "browser": "155.0.8059.40",
-  "public_manifest_sha256": "adc6d5a3d1595663ba64f4074c45264b8731c5455e734efdeac447cca9f4fb37",
+  "public_manifest_sha256": "0bf028dc1bf7d90586abeceedc2fecf33f11a315f6f21eb7d86da4348ceeb8df",
   "version": "1.5.0-rc2",
   "build": {
     "version": "1.5.0-rc2",
@@ -410,8 +410,8 @@
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
       "situated-output.mjs": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
-      "completo.html": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
-      "completo-guiado.html": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6"
+      "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
+      "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
