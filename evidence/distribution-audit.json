@@ -108,7 +108,7 @@
   "passed": true,
   "distribution_sha256": {
     ".gitattributes": "034225545b05318bfc43b14e3dc7b6e6c801fd66a332448c19e72f5ce3bf3728",
-    ".github/workflows/pages.yml": "d9ab1c9e38763fa7eb4c81f4abc8b3274214862250a59d7196157fb031986247",
+    ".github/workflows/pages.yml": "72398c09f1d675092eea34c1e3a28c46a7a14f3148718882f0f37bde59444ef3",
     ".gitignore": "781cdb5df099f23eb34a0e0666d62ee183f1c5339caebe5068ffe0466dbe165b",
     "README.md": "c8f182d6017d6ff0df82cc49a5aeab3e93616a7410eb036c7f6698682dd5a394",
     "THIRD_PARTY.md": "f4d42708d85fdecb0193f5bfc7e70d0db625d72d6b9a272ec153c8d4ab3c841c",
@@ -229,7 +229,7 @@
     "tests/review-input.mjs": "3cd79a5f132d0e2f6c366ef37c047219980cce6f08961150f324c553db271f1c",
     "tests/simple-flow-browser.mjs": "7775a6c74f14a728003de9f290d65110040d11346fdea6860b8a1b4637467e0c",
     "tests/site-presentation.mjs": "82a5fd22caf2f8429f44f3cf9f3cfd6a7b3bb437096a4a535221fbcc9831cf6f",
-    "tests/situated-browser.mjs": "8702225929b36b8c40bcef6fac51401c81480e651719f16c922a2adf9f3cddc6",
+    "tests/situated-browser.mjs": "4fe1884bd138b4426d3fb228e79ca4183ad949606eb5258380c34935136c9295",
     "tests/situated-output.mjs": "7befc129e8202c45b7eb237bedd3aa92a1838b9b2c0d591b76420807fc3cac14",
     "tests/situated-public-smoke.mjs": "0012d14f67f659cfc18a1731b9163e3ec280b20bf8202ee79c48a42688e42eca",
     "tests/source-catalog-browser.mjs": "ed65089eeab1fa6add2969ee52a8dd5aa3e60217ecc616e2ec6862193484afd5",

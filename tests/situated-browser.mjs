@@ -4,14 +4,21 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import http from 'node:http';
+import os from 'node:os';
 import crypto from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const web=path.join(root,'web'),prefix='/arcabouco-multimodal/';
-const modules=process.env.AMADO_NODE_MODULES||path.join(process.env.USERPROFILE,'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules');
-const {chromium}=await import(pathToFileURL(path.join(modules,'playwright/index.mjs')).href);
+let playwright;
+try{playwright=await import('playwright');}
+catch(error){
+  if(error.code!=='ERR_MODULE_NOT_FOUND')throw error;
+  const modules=process.env.AMADO_NODE_MODULES||path.join(os.homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules');
+  playwright=await import(pathToFileURL(path.join(modules,'playwright/index.mjs')).href);
+}
+const {chromium}=playwright;
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.json':'application/json','.wasm':'application/wasm','.zip':'application/zip'};
 const server=http.createServer(async(req,res)=>{
   try{
@@ -38,7 +45,13 @@ report.build=JSON.parse(await fs.readFile(path.join(web,'amado/manifest.json'),'
 report.static_query_allowlist=['amado/styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes'];
 report.test_sha256=sha(await fs.readFile(fileURLToPath(import.meta.url)));
 const check=(name,value)=>{report.checks[name]=Boolean(value);assert(value,name);};
-const browser=await chromium.launch({headless:true,executablePath:process.env.AMADO_CHROMIUM||path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1243/chrome-win64/chrome.exe')});
+const launch={headless:true};
+if(process.env.AMADO_CHROMIUM)launch.executablePath=process.env.AMADO_CHROMIUM;
+else if(process.platform==='win32'&&process.env.LOCALAPPDATA){
+  const installed=path.join(process.env.LOCALAPPDATA,'ms-playwright/chromium-1243/chrome-win64/chrome.exe');
+  if(await fs.access(installed).then(()=>true,()=>false))launch.executablePath=installed;
+}
+const browser=await chromium.launch(launch);
 report.browser=browser.version();
 const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'});
 await context.addInitScript(()=>{
@@ -338,7 +351,7 @@ try{
   report.passed=true;
 }catch(error){
   report.passed=false;report.failure=String(error.stack||error).replaceAll(root,'<PROJECT>').replaceAll(root.replaceAll('\\','/'),'<PROJECT>')
-    .replaceAll(process.env.USERPROFILE,'<USERPROFILE>').replaceAll(process.env.USERPROFILE.replaceAll('\\','/'),'<USERPROFILE>');
+    .replaceAll(os.homedir(),'<USERPROFILE>').replaceAll(os.homedir().replaceAll('\\','/'),'<USERPROFILE>');
   process.exitCode=1;await page?.screenshot({path:path.join(artifacts,'failure.png'),fullPage:true}).catch(()=>{});
 }finally{
   await browser.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));
