@@ -2,7 +2,7 @@
   "version": "1.5.0-rc1",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.5.0-rc1-intake1",
-  "compiled_at_utc": "2026-10-21T09:25:14.527754+00:00",
+  "compiled_at_utc": "2026-10-21T09:31:15.304084+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -108,28 +108,28 @@
       "narrative_dictation_native_worker_parity": true
     },
     "public_smoke": {
-      "passed": false,
+      "passed": true,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
         "exact_test": true,
-        "exact_manifest": false,
+        "exact_manifest": true,
         "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": false,
+        "current_asset_bytes": true,
         "current_base_inputs": true,
         "current_native_engine": true,
         "current_download_bytes": true
       },
-      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-13T05:29:11.858Z",
-      "expected_commit": "c0ec3c400e0c32408e005daf03e2345029312401",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "checked_at": "2026-10-21T09:29:43.924Z",
+      "expected_commit": "96b7c1361ac3cd398f76ddbefaf1684cbbc6b1c0",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
       "test_sha256": "956709fd0bfd2953d0b5d8e4f7500ed7a44abb89c019551c4da394e00dcd6fd9",
-      "public_manifest_sha256": "56f76116df68826192ec014d23cfdbf05d92a390c31b5fa64c83083320f0e031",
+      "public_manifest_sha256": "6205b7de0149e5b16ddb706771e67464cbb13377c541d62a118cfef212ce4a58",
       "check_count": 33,
       "asset_count": 38,
       "scope": "Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana.",
@@ -155,7 +155,7 @@
     "Verificações técnicas não comprovam utilidade, aprendizagem ou conformidade integral de acessibilidade."
   ],
   "historical_evidence_notice": "Somente os relatórios listados abaixo aprovam estes bytes. Arquivos anteriores conservam sua própria versão e seu alcance.",
-  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD",
+  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
   "reports": {
     "technical-1.5-report.json": {
       "url": "technical-1.5-report.json",
@@ -191,6 +191,12 @@
       "url": "narrative-to-actions-report.json",
       "sha256": "fa81235ddd66a54b0250644ad8fe36f4eb0d2751b4da51771ab27387e8ecc26f",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
+    },
+    "situated-public-smoke.json": {
+      "url": "situated-public-smoke.json",
+      "sha256": "5aa4972e36bf08dcdec2aacbf63fc15071a4115cdb67a0374dc0c1a365c6cf57",
+      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "expected_commit": "96b7c1361ac3cd398f76ddbefaf1684cbbc6b1c0"
     }
   }
 }
