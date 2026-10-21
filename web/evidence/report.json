@@ -2,7 +2,7 @@
   "version": "1.5.0-rc2",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.5.0-rc2-articulation",
-  "compiled_at_utc": "2026-10-21T12:10:05.390965+00:00",
+  "compiled_at_utc": "2026-10-21T12:24:43.629828+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -114,22 +114,22 @@
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": true,
+        "exact_test": false,
         "exact_manifest": false,
-        "version": false,
+        "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
         "current_asset_bytes": false,
         "current_base_inputs": true,
         "current_native_engine": true,
-        "current_download_bytes": false
+        "current_download_bytes": true
       },
       "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-21T09:29:43.924Z",
-      "expected_commit": "96b7c1361ac3cd398f76ddbefaf1684cbbc6b1c0",
+      "checked_at": "2026-10-21T12:18:16.441Z",
+      "expected_commit": "98639605b32ff20aec53e4ae067a1d0bc205e94f",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
       "test_sha256": "956709fd0bfd2953d0b5d8e4f7500ed7a44abb89c019551c4da394e00dcd6fd9",
-      "public_manifest_sha256": "6205b7de0149e5b16ddb706771e67464cbb13377c541d62a118cfef212ce4a58",
+      "public_manifest_sha256": "adc6d5a3d1595663ba64f4074c45264b8731c5455e734efdeac447cca9f4fb37",
       "check_count": 33,
       "asset_count": 38,
       "scope": "Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana.",
@@ -174,12 +174,12 @@
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "74362d1cb9cb69ab8b48e7bb77b84f2cfd56b191bd91e5f922b358d767cd363d",
+      "sha256": "5b5c09793eefc33451df777146ca023a9d14c957d3f78cb33b3357b1f0f6b2a3",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "49d89aebf70307acb2b3044751ea6c8d05847f52aef383817e2ef2f86ed42826",
+      "sha256": "18ea7707c2f2c1f30731c35e83c3310f01d6426042c17be55b3fea736479b5c9",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
@@ -189,7 +189,7 @@
     },
     "articulation-browser.json": {
       "url": "articulation-browser.json",
-      "sha256": "28d1304f63f46a291e1374c4957bab2e5df5f6ece383142ecf6d2c4987ffdcab",
+      "sha256": "f8e6aa3bc9b17301fcc67029e02c3c124b0b60215e5bffaead1f7d2c151a4e4f",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     }
   }

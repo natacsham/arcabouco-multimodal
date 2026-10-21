@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-21T12:03:19.670Z",
+  "checked_at": "2026-10-21T12:21:55.744Z",
   "checks": {
     "served_manifest_matches_build": true,
     "single_free_narrative_entry": true,
@@ -139,8 +139,8 @@
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
       "situated-output.mjs": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
-      "completo.html": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
-      "completo-guiado.html": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6"
+      "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
+      "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
@@ -184,9 +184,9 @@
   "static_query_allowlist": [
     "amado/styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes"
   ],
-  "test_sha256": "798be7d505016affbaa1fc1179f80134ccbe140e0cc920f7ef94c61a0238b4de",
+  "test_sha256": "23830197371c597412fc567d45ebb573b1266de9843c45da30fc2ed7940b9016",
   "browser": "155.0.8059.40",
-  "canonical_result_sha256": "61bc21eeb7ca00298bc3614be7c3e79c39baed0db3d9676d6b5fb04fb9f34c70",
+  "canonical_result_sha256": "f0e939421182dfdd2a49b6bed149eff3b073a3fb88d697f487d62ea3b7ada300",
   "result": {
     "contract": "AMADO_SITUATED_1",
     "status": "INSUFFICIENT",
@@ -2426,26 +2426,26 @@
     "status": "INSUFFICIENT",
     "proposal_status": "CONDITIONAL",
     "operation_count": 1,
-    "canonical_sha256": "a84b25c9248a0811edcbd6278694391d1c7655017e105fca6629352cd8d9d442"
+    "canonical_sha256": "51a46cae186e19ddb32dc41f649602a4af864313fcfad69cbe02896cf374a80f"
   },
   "narrative_cases": [
     {
       "id": "presentation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "c24475b8a33e5ebd87ecc282bd641c69a1934f7e4ece3f6cf48dc0e7f48ff2a0"
+      "canonical_sha256": "44d7efca9df8ef773231b7a626d8c315135982bdf3988ca9084ae8177ea31de5"
     },
     {
       "id": "form",
       "parity": true,
       "proposal_status": "PARTIAL",
-      "canonical_sha256": "df64760e3feba73b1751f20e2e09241ca60329f8e94e2bf76c72ea3e81d9a7b2"
+      "canonical_sha256": "702d3254d7622a2a5334b7acbd1a2ad082e1e804587d90ce30f70b3e3bc62fc4"
     },
     {
       "id": "dictation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "842381dd6d21e639e05c4f0418fe9210167b0b2bbd90213b20cd1c9b5db7957d"
+      "canonical_sha256": "d558287a9b4d1c5439886f85f8fd99866d96319e6852f4d41fff49eeb252884a"
     }
   ],
   "passed": true

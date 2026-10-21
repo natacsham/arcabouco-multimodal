@@ -260,7 +260,7 @@ try{
     check(view+'_situated_contract',output?.result_contract==='AMADO_SITUATED_1');
     check(view+'_actions_and_grounding',await full.locator('.situated-action').count()>0&&await full.locator('.step-grounding').count()>0);
     check(view+'_no_runtime_error',!(await full.locator('#runtime-error').innerText()).trim());
-    check(view+'_current_version_footer',(await full.locator('.version-note').innerText()).includes('MADO 1.5.0-rc1'));
+    check(view+'_current_version_footer',(await full.locator('.version-note').innerText()).includes('MADO '+report.build.version));
     await full.screenshot({path:path.join(artifacts,view+'-situated.png'),fullPage:true});
     await full.close();
   }

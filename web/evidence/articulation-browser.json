@@ -93,7 +93,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "efd3d8a80dec5ba19a6d8146bcfa1c5b0fd3c4028c0e0c536d6533a8d37b68eb",
+      "canonical_sha256": "0ede49420583b0057ec92360878816510b73766c9729613e8462f7de2db24318",
       "proposals": 1,
       "relations": 0,
       "analytical_applications": 1
@@ -104,7 +104,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "a53e24afc3ae4920e8d5889adf41ec5c5dc5d7f741afbb0419f0842eef02809f",
+      "canonical_sha256": "d8220228c410e21ce90a12cce100be0dd8869af693a4cc4a75ee2aa2283b8b4e",
       "proposals": 2,
       "relations": 2,
       "analytical_applications": 2
@@ -115,7 +115,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "7c191f55d8c21a482566d673e9235abd59902d9a5005f2adb36186543c419552",
+      "canonical_sha256": "c01d315362310f1e030859b7b26388fab8fb1904076c0e6a814a0458069f2fac",
       "proposals": 6,
       "relations": 2,
       "analytical_applications": 0
@@ -126,7 +126,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "8f7e2046d350857211489f631f918863844d39445cd79aefed34b46a655c4ec9",
+      "canonical_sha256": "c5589c6e926ec2be097c87d313747482da66a843ec68d101e2964e061068a0b7",
       "proposals": 3,
       "relations": 0,
       "analytical_applications": 0
@@ -137,7 +137,7 @@
     "Three synthetic texts entered manually via visible controls; no claim of human relevance or learning outcomes.",
     "Speech output is mocked for start/stop controls; microphone accuracy and assistive-technology reading are not tested."
   ],
-  "checked_at": "2026-10-21T12:05:03.320Z",
+  "checked_at": "2026-10-21T12:20:37.575Z",
   "build": {
     "version": "1.5.0-rc2",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
@@ -215,8 +215,8 @@
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
       "situated-output.mjs": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
-      "completo.html": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
-      "completo-guiado.html": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6"
+      "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
+      "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",

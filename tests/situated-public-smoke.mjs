@@ -148,7 +148,7 @@ try{
     await page.locator('#mapping-confirmed').check();await page.locator('#generate-known').click();await page.locator('#saida').waitFor({state:'visible',timeout:60000});
     const result=await generated(page);
     check(view+'_situated_actions_and_grounding',result?.result_contract==='AMADO_SITUATED_1'&&await page.locator('.situated-action').count()>0&&await page.locator('.step-grounding').count()>0);
-    check(view+'_current_footer',(await page.locator('.version-note').innerText()).includes('MADO 1.5.0-rc1'));
+    check(view+'_current_footer',(await page.locator('.version-note').innerText()).includes('MADO '+expected.version));
     check(view+'_no_runtime_error',!(await page.locator('#runtime-error').innerText()).trim());await page.close();
   }
   const home=await context.newPage();home.on('pageerror',error=>report.errors.push(error.message));await home.goto(base);
