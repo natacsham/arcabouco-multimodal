@@ -287,7 +287,11 @@ function edit() {
   screen('case-editor','editor-title');
 }
 $('#edit-case').addEventListener('click',edit);
-document.querySelectorAll('[data-edit-case]').forEach(button => button.addEventListener('click',edit));
+// Conditions in the generated orientation also open the existing editor.
+$('#main').addEventListener('click',event => {
+  const button=event.target.closest('[data-edit-case]');
+  if (button && !button.disabled && !busy) edit();
+});
 document.querySelectorAll('[data-edit-narrative]').forEach(button=>button.addEventListener('click',editNarrative));
 $('#cancel-editor').addEventListener('click',()=>screen(editorReturn,editorReturn==='orientation-result'?'orientation-title':editorReturn==='case-questions'?'questions-title':editorReturn==='case-understanding'?'understanding-title':'review-title'));
 $('#editor-fields').addEventListener('input',event=>{
@@ -318,7 +322,6 @@ function sourceDisclosure(response) {
   $('#orientation-sources-body').innerHTML=unique.size?'<ul class="source-disclosure">'+[...unique.values()].map(row=>'<li><strong>'+safeLink(row.url,row.title || 'Fonte registrada')+'</strong>'+(row.location?' — '+esc(row.location):'')+para(row.statement)+
     (row.applicationState==='conditional'?'<p>Fundamenta uma possibilidade que ainda depende de confirmação.</p>':row.applicationState==='partial'?'<p>Fundamenta somente uma parte do apoio apresentado.</p>':'')+
     '<p class="source-state">'+esc(states[row.status] || 'Origem registrada; confira o estado documental nos detalhes técnicos.')+'</p></li>').join('')+'</ul>':para('Não há origens de aplicação detalhadas neste resultado. A presença de uma fonte no catálogo não significa que ela foi usada neste caso.');
-  $('#orientation-sources').open=false;
 }
 function legacyOutput(response) {
   const decision = response.decision, summary = decision.sintese_pratica || {};
@@ -509,7 +512,12 @@ $('#generate-orientation').addEventListener('click',() => {
       $('#orientation-main').innerHTML=output.html;
       $('#orientation-detail-body').innerHTML=output.detailHTML;
     } else if (mode === 'legacy') legacyOutput(result); else compositionOutput(result);
-    sourceDisclosure(result);
+    const situated=result.result_contract==='AMADO_SITUATED_1';
+    // The situated projection already carries exact, localized sources. Keep
+    // the older adapters available without repeating their disclosure beside it.
+    for (const id of ['orientation-sources','orientation-details','orientation-case']) $('#'+id).hidden=situated;
+    if (!situated) sourceDisclosure(result);
+    else $('#orientation-sources-body').replaceChildren();
     if(result.result_contract==='AMADO_SITUATED_1') {
       const people=current?.context?.participantes || [], situations=current?.context?.situations || [];
       refinementQuestions=mode==='legacy'?[...(result.facts_to_confirm || []),...(result.resources_to_confirm || [])].map(row=>({
@@ -522,7 +530,8 @@ $('#generate-orientation').addEventListener('click',() => {
     $('#complete-information').textContent = 'Refinar esta orientação (opcional)';
     $('#orientation-foundation-body').replaceChildren();
     $('#orientation-case-body').innerHTML = para($('#case-narrative').value)+fieldsHTML(summaryRows())+requirementsHTML();
-    for (const id of ['orientation-details','orientation-foundations','orientation-case']) $('#'+id).open = false;
+    $('#orientation-foundations').open=false;
+    delete $('#orientation-foundations').dataset.rendered;
     $('#reading-message').textContent = ''; status(''); screen('orientation-result','orientation-title');
     // Read the visible layout: hidden containers do not retain paragraph breaks in innerText.
     speechText = $('#orientation-main').innerText;
@@ -534,10 +543,11 @@ $('#complete-information').addEventListener('click',() => {
   invalidate(); askOrReview();
 });
 $('#orientation-foundations').addEventListener('toggle',() => {
-  if (!$('#orientation-foundations').open || !result) return;
+  if (!$('#orientation-foundations').open || !result || $('#orientation-foundations').dataset.rendered==='true') return;
   if (result.result_contract === 'AMADO_SITUATED_1') $('#orientation-foundation-body').innerHTML=situatedOutput(result).foundationHTML;
   else if (mode === 'legacy') renderExplanation($('#orientation-foundation-body'),result);
   else $('#orientation-foundation-body').innerHTML = compositionFoundations(result);
+  $('#orientation-foundations').dataset.rendered='true';
 });
 $('#new-case').addEventListener('click',() => run(async expected => {
   voice.clear(); invalidate(); current = draft = null; resetQuestions(); exampleId = exampleNarrative = null;

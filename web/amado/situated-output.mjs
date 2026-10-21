@@ -1,4 +1,4 @@
-// Presentation only: every action and relationship comes from this execution.
+// Presentation only. The execution remains the single origin of actions and grounds.
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const items = value => Array.isArray(value) ? value : value ? [value] : [];
 const diagnosticLabels={NO_DOCUMENTED_FUNCTION_REQUIREMENT:'Ainda não há uma necessidade funcional fundamentada e atribuída a esta pessoa nesta situação.',
@@ -14,133 +14,214 @@ const diagnosticLabels={NO_DOCUMENTED_FUNCTION_REQUIREMENT:'Ainda não há uma n
 const text = value => typeof value === 'object' && value ? value.label || value.statement || value.text || value.message || value.explanation || diagnosticLabels[value.code] || diagnosticLabels[value.reason] || value.reason || value.id || '' : value || '';
 const para = value => value ? '<p>'+esc(text(value))+'</p>' : '';
 const list = value => items(value).length ? '<ul>'+items(value).map(item=>'<li>'+esc(text(item))+'</li>').join('')+'</ul>' : '';
-const states = {PASS:'Conferida',SATISFIED:'Conferida',FAIL:'Não atendida',PENDING:'A confirmar',NOT_EXECUTED:'Não verificada'};
 const unique = values => [...new Map(items(values).filter(Boolean).map(value=>[JSON.stringify(value),value])).values()];
-function source(row) {
-  const s = row.source || row, url = s.url || s.document_url || row.document_url;
-  const name = s.title || s.titulo || s.label || s.source_id || s.id;
-  const locator=row.locator || row.location || row.excerpt?.locator || s.locator || s.location;
-  return para(name)+(locator ? para(locator) : '')+
-    (/^https?:\/\//.test(url || '') ? '<a href="'+esc(url)+'" rel="noreferrer">Consultar a fonte</a>' : '')+
-    para(row.review_status || row.verification_status || row.status);
+const uniqueText = values => [...new Map(items(values).map(text).filter(Boolean).map(value=>[value,value])).values()];
+const states = {PASS:'Conferida',SATISFIED:'Conferida',FAIL:'Não atendida',PENDING:'A confirmar',NOT_EXECUTED:'Não verificada'};
+const sourceStates = {CONFERIDA_NO_REGISTRO:'Conferida no registro preservado',CONFERIDA_NO_DOCUMENTO:'Conferida no documento',PRIMARY_CHECKED:'Conferida na fonte primária',PENDING:'Conferência pendente'};
+const originAttr = (path,phase) => ' data-origin-path="'+esc(path)+'"'+(phase?' data-phase="'+esc(phase)+'"':'');
+const known = row => ['PASS','SATISFIED'].includes(row.state || row.outcome);
+const trimSentence = value => String(text(value)).replace(/[?.]\s*$/,'');
+function humanCondition(row) {
+  const value=trimSentence(row);
+  if(/^Ao menos um recurso:\s*/i.test(value)) return 'Informe se há como utilizar '+value.replace(/^Ao menos um recurso:\s*/i,'')+'.';
+  if(/^Recurso:\s*/i.test(value)) return 'Confirme a disponibilidade de '+value.replace(/^Recurso:\s*/i,'')+'.';
+  return (row.state==='FAIL'?'Esta condição não foi atendida: ':'Confirme: ')+value+'.';
 }
-function groundingHTML(grounding) {
-  const art = grounding.construction || grounding.articulation || {}, knowledge = grounding.knowledge || {};
-  const contributions = grounding.contributions || art.contributions || [];
-  const claims = items(grounding.claims || grounding.claim);
-  const analytical = grounding.application_kind === 'GROUNDED_ANALYTICAL_APPLICATION';
-  const statement=grounding.justification || grounding.justificativa;
-  const constructionLimits=unique([...items(grounding.limits),...items(art.limits),...claims.flatMap(claim=>items(claim.limits))]);
-  return '<section class="step-grounding">'+
-    (statement && statement!==art.operation?para(statement):'')+
-    (text(knowledge) && (!analytical || text(knowledge)!==text(art.added_understanding)) ? '<h5>Conhecimento empregado</h5>'+para(knowledge) : '')+
-    claims.filter(claim=>text(claim)!==text(knowledge) && text(claim)!==text(art.added_understanding)).map(claim=>para(claim.statement || claim.text)).join('')+
-    (contributions.length ? '<h5>O que as fontes acrescentaram</h5>'+contributions.map(c=>{
-      const located=c.source?c:items(grounding.sources).find(s=>s.id===c.source_id && s.excerpt_id===c.excerpt_id);
-      return para(c.statement || c.text)+(located?source(located):'');
-    }).join('') : '')+
-    (art.operation || art.added_understanding ? '<h5>'+(analytical?'Como as contribuições foram articuladas':'Como o fundamento foi empregado')+'</h5>'+para(art.operation)+
-      (art.added_understanding?'<p><strong>Compreensão resultante:</strong> '+esc(text(art.added_understanding))+'</p>':'') : '')+
-    (analytical ? '<p class="analytical-scope">Esta síntese analítica fundamentou esta aplicação. Não é uma descoberta feita durante a consulta nem prova de benefício em uso.</p>'+para(grounding.authorized_application || grounding.application_scope)+list(grounding.conditions || art.conditions) : '')+
-    (items(art.documentary_articulations).length ? '<details><summary>Construção anterior deste conhecimento</summary><p>Este percurso documental antecede a consulta. Não significa que todas as suas premissas tenham sido verificadas neste caso.</p>'+items(art.documentary_articulations).map(a=>para(a.operation)+para(a.added_understanding)+para(a.limit)).join('')+'</details>':'')+
-    (items(grounding.criterion_applications).some(row=>row.criterion)?'<h5>Critérios aplicados nesta escolha</h5>'+items(grounding.criterion_applications).map(row=>para(row.criterion)+para(row.justification)).join(''):
-      grounding.criterion ? '<h5>Critério aplicado</h5>'+para(grounding.criterion)+para(grounding.criterion.justification) : '')+
-    items(grounding.sources || grounding.support).map(source).join('')+
-    list(constructionLimits)+'</section>';
+function verificationAction(value) {
+  const raw=String(text(value)).trim();
+  if(!raw)return '';
+  // This changes the framing of the existing check, not its meaning or result.
+  if(/\?$/.test(raw)) return 'Confira: '+trimSentence(raw)+'.';
+  return raw.replace(/^Depois de preparar,\s*conferir\b/i,'Depois de preparar, confira');
 }
-function checksHTML(checks) {
-  return list(items(checks).map(check=>
-    (check.explanation || check.message || check.predicate || check.kind || check.id)+
-    ' — '+(states[check.state || check.outcome] || check.state || check.outcome || 'Não verificada')));
+function actionProjection(step,path) {
+  const raw=items(step.instructions).length?items(step.instructions):items(step.action);
+  const field=items(step.instructions).length?'instructions':'action';
+  const rows=raw.map((value,index)=>({text:text(value),phase:'action',origin_path:path+'.'+field+(field==='instructions'?'['+index+']':''),source_text:text(value)})).filter(row=>row.text);
+  const absorbed=[];
+  items(step.phase_conditions).forEach((row,index)=>{
+    if(!['production','verification'].includes(row.phase))return;
+    const source_text=String(text(row)),origin_path=path+'.phase_conditions['+index+']';
+    // The generic production reminder is already expressed by the scoped action.
+    // Keep its provenance without adding a redundant "prepare the resource" step.
+    if(rows.length && row.phase==='production' && /^Preparar o recurso proposto e conservar a informação identificada como necessária\.?$/i.test(source_text)){
+      absorbed.push({origin_path,source_text});return;
+    }
+    const rendered=row.phase==='verification'?verificationAction(row):source_text;
+    if(rows.some(item=>item.text===rendered)){absorbed.push({origin_path,source_text});return;}
+    rows.push({text:rendered,phase:row.phase,origin_path,source_text,state:row.state});
+  });
+  return {id:step.id,origin_path:path,rows,absorbed_origins:absorbed};
 }
-function phasesHTML(conditions, preparedOutputs=[]) {
-  const rows=items(conditions), phaseRows=phase=>rows.filter(row=>row.phase===phase);
-  const production=phaseRows('production').length?phaseRows('production'):items(preparedOutputs);
-  const pending=phaseRows('precondition').filter(row=>!['PASS','SATISFIED'].includes(row.state));
-  const phaseList=values=>list(values.map(row=>({label:text(row)+(row.state==='FAIL'?' — não atendida':row.state==='PASS'||row.state==='SATISFIED'?' — conferida':' — ainda precisa ser conferida')})));
-  return (production.length?'<div class="step-preparation"><p><strong>O que esta ação propõe preparar:</strong></p>'+list(production)+'<p>Estes recursos não são apresentados como prontos ou já conferidos.</p></div>':'')+
-    (pending.length?'<div class="step-conditions"><p><strong>Antes de começar, confirme:</strong></p>'+phaseList(pending)+'</div>':'')+
-    (phaseRows('verification').length?'<div class="step-verification"><p><strong>Depois de preparar, confira antes de utilizar:</strong></p>'+phaseList(phaseRows('verification'))+'</div>':'');
+function preconditionsHTML(step,path,reviewEnabled) {
+  const pending=items(step.phase_conditions).map((row,index)=>({row,path:path+'.phase_conditions['+index+']'})).filter(({row})=>row.phase==='precondition'&&!known(row));
+  const conditions=items(step.conditions);
+  if(!pending.length&&!conditions.length)return '';
+  return '<div class="step-conditions"><p><strong>Antes de aplicar</strong></p><ul>'+pending.map(({row,path:origin})=>
+    '<li'+originAttr(origin,'precondition')+'>'+esc(humanCondition(row))+'</li>').join('')+
+    conditions.map((row,index)=>'<li'+originAttr(path+'.conditions['+index+']','precondition')+'>'+esc(text(row))+'</li>').join('')+
+    '</ul>'+(pending.length&&reviewEnabled?'<button type="button" class="secondary" data-edit-case>Revisar esta informação</button>':'')+'</div>';
 }
-function relationshipHTML(relation) {
-  const names={DEPENDENT_SEQUENCE:'Uma ação prepara a seguinte',SEQUENTIAL:'Uma ação prepara a seguinte',SEQUENTIAL_REVIEW:'Revisão do mesmo conteúdo',
-    FUNCTIONAL_ALTERNATIVE:'Outra forma de realizar a mesma função',ALTERNATIVE:'Outra forma de realizar a mesma função',COMPLEMENTARITY:'Partes que se completam',REDUNDANCY:'Mesma informação em formas coordenadas'};
-  return '<div class="step-combination"><strong>'+esc(names[relation.kind] || 'Relação entre as ações')+':</strong> '+esc(relation.explanation || relation.justification || '')+
-    (relation.preservation || relation.preservation_obligation || relation.preserves ? para('O que deve ser preservado: '+items(relation.preservation || relation.preservation_obligation || relation.preserves).map(text).join('; ')) : '')+
-    phasesHTML(relation.phase_conditions)+
-    (items(relation.groundings || relation.grounding).length?'<details><summary>Por que esta relação pode ser utilizada?</summary>'+items(relation.groundings || relation.grounding).map(groundingHTML).join('')+checksHTML(relation.condition_checks)+'</details>':'')+'</div>';
+function practicalStep(step,index,choice,path,projections,reviewEnabled) {
+  const projection=actionProjection(step,path);projections.push(projection);
+  const responsibleRecord=step.responsible_participant;
+  const responsibleLabel=text(responsibleRecord);
+  const responsible=responsibleLabel && responsibleLabel===responsibleRecord?.id ?
+    (step.operation_scope==='PREPARATION_FOR_RECIPIENT'?'Responsável pela preparação informado no relato':'Participante responsável informado no relato'):responsibleLabel;
+  const beneficiary=step.participant_label||choice.participant_label;
+  const modes=uniqueText(step.modes || step.mode),functions=uniqueText(step.functions || step.function);
+  // `limitation` belongs to the historical pattern. The selected operational
+  // contract supplies `limits`; do not turn the former into a new instruction.
+  const limits=uniqueText(step.limits);
+  const heading=items(choice.steps).length===1&&choiceTitle(choice)===step.label?'Passos':step.label||'Ação '+(index+1);
+  return '<section class="situated-action"><h4>'+esc(heading)+'</h4>'+
+    (responsible?'<p class="step-responsible"'+originAttr(path+'.responsible_participant')+'><strong>Quem realiza:</strong> '+esc(responsible)+'</p>':'')+
+    (beneficiary?'<p class="step-beneficiary"'+originAttr(step.participant_label?path+'.participant_label':path.replace(/\.steps\[\d+\]$/,'')+'.participant_label')+'><strong>Para quem:</strong> '+esc(beneficiary)+'</p>':'')+
+    (projection.rows.length?'<ol class="action-instructions" role="list">'+projection.rows.map((row,i)=>'<li'+originAttr(row.origin_path,row.phase)+'><span class="step-number">Passo '+(i+1)+'. </span>'+esc(row.text)+'</li>').join('')+'</ol>':'')+
+    (modes.length?'<p class="step-modes"'+originAttr(path+'.modes')+'><strong>Formas de interação:</strong> '+esc(modes.join('; '))+'</p>':'')+
+    (functions.length?'<p class="step-purpose"'+originAttr(path+'.functions')+'><strong>Para quê:</strong> '+esc(functions.join('; '))+'</p>':'')+
+    preconditionsHTML(step,path,reviewEnabled)+
+    (step.monitoring?'<p class="step-monitoring"'+originAttr(path+'.monitoring')+'><strong>Como conferir:</strong> '+esc(text(step.monitoring))+'</p>':'')+
+    (limits.length?'<div class="step-limits"><p><strong>Limites desta ação</strong></p>'+list(limits)+'</div>':'')+'</section>';
 }
-function derivationHTML(step) {
-  const origins={EXPLICIT_CONTEXT_REQUIREMENT:'Função informada no contexto',
-    DOCUMENTED_FUNCTIONAL_WITNESS:'Necessidade relacionada à matriz funcional',
-    REGISTERED_TASK_FUNCTION_REQUIREMENT:'Função necessária à ação representada',
-    REGISTERED_TASK_REFINEMENT:'Refinamento da ação, sujeito às condições indicadas'};
-  return items(step.function_derivation).map(row=>{
-    const fn=items(step.functions).find(f=>f.id===row.function_id);
-    const witnesses=items(row.witnesses).flatMap(w=>[
-      ...items(w.need_labels),...items(w.characteristic_labels),...items(w.source_texts),
-      ...items(w.needs).map(text),...items(w.characteristics).map(text),
-      ...items(w.assertions).map(a=>a.source_text).filter(Boolean),
-      ...(w.task_label?[w.task_label]:[])]);
-    return '<p><strong>'+esc(origins[row.origin] || 'Condição relacionada à função')+':</strong> '+esc(text(fn) || text(row.function) || '')+'</p>'+list(unique(witnesses));
-  }).join('');
+const relationNames={DEPENDENT_SEQUENCE:'Uma ação prepara a seguinte',SEQUENTIAL:'Uma ação prepara a seguinte',SEQUENTIAL_REVIEW:'Revisão do mesmo conteúdo',
+  FUNCTIONAL_ALTERNATIVE:'Outra forma de realizar a mesma função',ALTERNATIVE:'Outra forma de realizar a mesma função',COMPLEMENTARITY:'Partes que se completam',REDUNDANCY:'Mesma informação em formas coordenadas'};
+function practicalRelation(relation,path,reviewEnabled) {
+  const preservation=relation.preservation||relation.preservation_obligation||relation.preserves;
+  const preservationField=relation.preservation?'preservation':relation.preservation_obligation?'preservation_obligation':'preserves';
+  const later=items(relation.phase_conditions).map((row,index)=>({row,path:path+'.phase_conditions['+index+']'})).filter(({row})=>row.phase!=='precondition');
+  return '<div class="step-combination"><p><strong>'+esc(relationNames[relation.kind]||'Relação entre as ações')+':</strong> '+esc(relation.explanation||relation.justification||'')+'</p>'+
+    (preservation?'<p'+originAttr(path+'.'+preservationField)+'><strong>O que deve ser preservado:</strong> '+esc(items(preservation).map(text).join('; '))+'</p>':'')+
+    preconditionsHTML(relation,path,reviewEnabled)+(later.length?'<p><strong>Como conferir a combinação</strong></p><ul>'+later.map(({row,path:origin})=>'<li'+originAttr(origin,row.phase)+'>'+esc(verificationAction(row))+'</li>').join('')+'</ul>':'')+'</div>';
 }
-function stepHTML(step, index) {
-  const instructions=items(step.instructions).length?items(step.instructions):items(step.action);
-  const modes=items(step.modes || step.mode).map(text), functions=items(step.functions || step.function).map(text);
-  return '<section class="situated-action"><h4>'+esc(step.label || 'Ação '+(index+1))+'</h4>'+
-    (instructions.length>1 ? '<ol class="action-instructions">'+instructions.map(value=>'<li>'+esc(text(value))+'</li>').join('') : para(instructions[0]))+
-    (functions.length ? '<p><strong>Finalidade:</strong> '+esc(functions.join('; '))+'</p>' : '')+
-    (modes.length ? '<p><strong>Formas de interação desta ação:</strong> '+esc(modes.join('; '))+'</p>' : '')+
-    phasesHTML(step.phase_conditions,step.prepared_outputs)+
-    (step.monitoring ? '<p><strong>Como observar se ajudou:</strong> '+esc(text(step.monitoring))+'</p>' : '')+
-    (items(step.conditions).length ? '<details><summary>Antes de aplicar</summary>'+list(step.conditions)+'</details>' : '')+
-    '<details><summary>Por que esta ação foi sugerida?</summary>'+derivationHTML(step)+list(step.correspondences || step.witnesses)+
-    items(step.groundings).map(groundingHTML).join('')+checksHTML(step.condition_checks)+list(step.limits || step.limitation)+
-    '<details><summary>Conferir identificadores e verificações</summary>'+para([step.id,step.component_id,step.situation_id,step.participant_id].filter(Boolean).join(' · '))+list(step.check_ids)+'</details></details></section>';
-}
-function choiceTitle(choice) {
-  return choice.label || items(choice.steps).map(step=>step.label).filter(Boolean).join(choice.composition_type==='INDEPENDENT_SUPPORTS'?' · ':' → ') || 'Possibilidade de apoio';
-}
-function choiceHTML(choice,kind,index) {
-  const independent=choice.composition_type==='INDEPENDENT_SUPPORTS';
-  const title=choiceTitle(choice);
+const choiceTitle=choice=>choice.label||items(choice.steps).map(step=>step.label).filter(Boolean).join(choice.composition_type==='INDEPENDENT_SUPPORTS'?' · ':' → ')||'Possibilidade de apoio';
+function practicalChoice(choice,kind,index,path,projections,reviewEnabled) {
   const scope=[choice.participant_label,choice.situation_label].filter(Boolean).join(' · ');
-  const body=(kind==='pending' ? '<p class="step-conditional">Confirme as condições indicadas antes de aplicar esta possibilidade.</p>' :
-    choice.ready_for_application===false?'<p class="step-conditional">Há ações fundamentadas para este caso. Prepare e confira os pontos indicados antes de utilizar o resultado.</p>':'')+
-    (independent?'<p class="independent-supports">Estes apoios atendem necessidades diferentes. Não há uma sequência obrigatória nem uma relação multimodal presumida entre eles.</p>':'')+
-    items(choice.steps).map(stepHTML).join('')+items(choice.relations).map(relationshipHTML).join('')+
-    (items(choice.missing_functions).length ? '<p><strong>Esta opção ainda não cobre:</strong></p>'+list(choice.missing_functions) : '')+
-    (items(choice.limits).length?'<details><summary>Limites deste percurso</summary>'+list(choice.limits)+'</details>':'');
-  return '<details class="orientation-step situated-choice"'+(index===0?' open':'')+'><summary>'+esc(title)+
-    (scope?' <span class="choice-context">'+esc(scope)+'</span>':'')+'</summary>'+body+'</details>';
+  return '<article class="orientation-step situated-choice" data-choice-index="'+index+'"><h3>'+esc(choiceTitle(choice))+'</h3>'+
+    (scope?'<p class="choice-context">'+esc(scope)+'</p>':'')+
+    (kind==='pending'?'<p class="step-conditional">Esta possibilidade depende das condições indicadas em “Antes de aplicar”.</p>':'')+
+    (choice.composition_type==='INDEPENDENT_SUPPORTS'?'<p class="independent-supports">Estes apoios podem ser utilizados separadamente. Não há uma sequência obrigatória entre eles.</p>':'')+
+    items(choice.steps).map((step,i)=>practicalStep(step,i,choice,path+'.steps['+i+']',projections,reviewEnabled)).join('')+
+    items(choice.relations).map((row,i)=>practicalRelation(row,path+'.relations['+i+']',reviewEnabled)).join('')+
+    (items(choice.missing_functions).length?'<div class="step-missing"><p><strong>Esta opção ainda não cobre:</strong></p>'+list(choice.missing_functions)+'</div>':'')+'</article>';
 }
-/** No invented modality, step, consequence or automatic equivalence. */
-export function situatedOutput(response) {
+function derivation(step) {
+  const rows=items(step.function_derivation),reported=[],needs=[];
+  for(const row of rows){
+    const fn=items(step.functions).find(f=>f.id===row.function_id);if(text(fn||row.function))needs.push(text(fn||row.function));
+    for(const witness of items(row.witnesses)){
+      reported.push(...items(witness.source_texts),...items(witness.assertions).map(a=>a.source_text).filter(Boolean));
+      needs.push(...items(witness.need_labels),...items(witness.characteristic_labels),...items(witness.needs).map(text),...items(witness.characteristics).map(text));
+      if(witness.task_label)needs.push(witness.task_label);
+    }
+  }
+  return {reported:uniqueText(reported),needs:uniqueText(needs)};
+}
+function sourceInfo(row) {
+  const s=row.source||row,url=s.url||s.document_url||row.document_url;
+  return {id:s.source_id||s.id||row.source_id,name:s.title||s.titulo||s.label||s.source_id||s.id||'Fonte registrada',url,
+    excerpt_id:row.excerpt_id||row.excerpt?.id||s.excerpt_id,
+    locator:row.locator||row.location||row.excerpt?.locator||s.locator||s.location,
+    status:row.review_status||row.verification_status||row.status||s.review_status};
+}
+function groundingRows(step){return items(step.groundings||step.grounding);}
+function foundation(rendered,executionChecks,response,coverage) {
+  const contributions=new Map(),sources=new Map(),analyses=new Map();
+  const sourceRef=row=>{
+    const info=sourceInfo(row),key=JSON.stringify([info.id||info.name,info.excerpt_id||info.locator||info.url]);
+    if(!sources.has(key))sources.set(key,{...info,anchor:'amado-source-'+(sources.size+1),statuses:new Set()});
+    const stored=sources.get(key);if(info.status)stored.statuses.add(info.status);return stored;
+  };
+  const contributionRef=(row,ground)=>{
+    const related=items(ground.sources).find(s=>(s.id||s.source_id)===row.source_id&&s.excerpt_id===row.excerpt_id);
+    const source=(row.source||related)?sourceRef(row.source?row:related):null;
+    const key=row.id||JSON.stringify([row.statement||row.text,source?.anchor]);
+    if(!contributions.has(key))contributions.set(key,{...row,source,anchor:'amado-contribution-'+(contributions.size+1)});
+    return contributions.get(key);
+  };
+  const projections=rendered.map(({choice,path},index)=>{
+    const grounds=items(choice.steps).flatMap(groundingRows).concat(items(choice.relations).flatMap(groundingRows));
+    const contributionLinks=[],sourceLinks=[],analysisLinks=[],criteria=[],limits=[];
+    for(const ground of grounds){
+      const art=ground.construction||ground.articulation||{};
+      const refs=items(ground.contributions||art.contributions).map(row=>contributionRef(row,ground));
+      contributionLinks.push(...refs);
+      // A source attached to a contribution is shown there once. Other exact
+      // supporting references remain available, without asserting a new premise.
+      sourceLinks.push(...items(ground.sources||ground.support).map(sourceRef));
+      const analytical=ground.application_kind==='GROUNDED_ANALYTICAL_APPLICATION';
+      if(analytical||!refs.length){
+        const key=ground.analytical_application_id||ground.claim_id||ground.id||JSON.stringify([art.operation,art.added_understanding,text(ground.knowledge)]);
+        if(!analyses.has(key))analyses.set(key,{anchor:'amado-analysis-'+(analyses.size+1),ground,art,analytical,refs});
+        analysisLinks.push(analyses.get(key));
+      }
+      for(const row of items(ground.criterion_applications).length?ground.criterion_applications:ground.criterion?[{criterion:ground.criterion,justification:ground.criterion.justification||ground.justification,origin_ids:ground.origin_ids}]:[]){
+        if(text(row.criterion))criteria.push({label:text(row.criterion),justification:row.justification,origin_ids:row.origin_ids,ground_id:ground.id});
+      }
+      limits.push(...items(ground.limits),...items(art.limits),...items(ground.claims||ground.claim).flatMap(claim=>items(claim.limits)));
+    }
+    const derivations=items(choice.steps).map(derivation),scope=[choice.participant_label,choice.situation_label].filter(Boolean).join(' · ');
+    const sourceSet=new Set(contributionLinks.map(row=>row.source?.anchor).filter(Boolean));
+    const links=unique(contributionLinks.map(row=>({anchor:row.anchor,label:row.source?row.source.name+(row.source.locator?' — '+row.source.locator:''):'Contribuição registrada'})));
+    const extraSources=unique(sourceLinks.filter(row=>!sourceSet.has(row.anchor)).map(row=>({anchor:row.anchor,label:row.name+(row.locator?' — '+row.locator:'')})));
+    const referredAnalyses=unique(analysisLinks.map(row=>({anchor:row.anchor,label:text(row.art.added_understanding)||text(row.ground.knowledge)||text(row.ground.claim)||'Compreensão registrada'})));
+    return {choice,path,index,grounds,scope,reported:uniqueText(derivations.flatMap(d=>d.reported)),needs:uniqueText(derivations.flatMap(d=>d.needs)),links,extraSources,referredAnalyses,criteria,limits:uniqueText(limits)};
+  });
+  const linkList=rows=>rows.length?'<ul>'+rows.map(row=>'<li><a href="#'+esc(row.anchor)+'">'+esc(row.label)+'</a></li>').join('')+'</ul>':'';
+  const choicesHTML=projections.map(p=>'<section class="foundation-choice"><h3>'+esc(choiceTitle(p.choice))+'</h3>'+para(p.scope)+
+    '<h4>Informação considerada no relato</h4>'+(p.reported.length?list(p.reported):para('O vínculo desta escolha está registrado pelas condições e funções abaixo; não há um trecho do relato associado neste resultado.'))+
+    '<h4>Necessidade identificada</h4>'+list(p.needs)+
+    '<h4>Contribuições das fontes</h4>'+linkList(p.links)+linkList(p.extraSources)+
+    '<h4>Compreensão utilizada</h4>'+linkList(p.referredAnalyses)+
+    '<h4>Critério e escolha autorizada</h4>'+list(uniqueText(p.criteria.map(row=>row.label)))+
+    list(uniqueText(items(p.choice.steps).map(step=>step.action)))+
+    (items(p.choice.relations).length?list(items(p.choice.relations).map(row=>(relationNames[row.kind]||'Relação entre as ações')+': '+text(row.explanation||row.preserves))):'')+
+    '<h4>Condições verificadas e limites</h4>'+checksHTML(items(p.choice.steps).concat(items(p.choice.relations)).flatMap(row=>items(row.condition_checks)).filter(row=>row.phase==='precondition'))+
+    list(uniqueText([...p.limits,...items(p.choice.limits)]))+'</section>').join('');
+  const contributionsHTML=[...contributions.values()].map(row=>'<section class="step-grounding foundation-contribution" id="'+esc(row.anchor)+'" data-contribution-id="'+esc(row.id||'')+'"><h4>'+esc(text(row)||'Contribuição registrada')+'</h4>'+
+    (row.source?'<p><a href="#'+esc(row.source.anchor)+'">'+esc(row.source.name+(row.source.locator?' — '+row.source.locator:''))+'</a></p>':'')+'</section>').join('');
+  const analysesHTML=[...analyses.values()].map(row=>'<section class="step-grounding foundation-analysis" id="'+esc(row.anchor)+'"><h4>'+(row.analytical?'Como as contribuições foram articuladas':'Conhecimento empregado')+'</h4>'+
+    (row.refs.length?'<p><strong>Contribuições relacionadas nesta compreensão:</strong></p>'+linkList(unique(row.refs.map(ref=>({anchor:ref.anchor,label:ref.source?ref.source.name+(ref.source.locator?' — '+ref.source.locator:''):'Contribuição registrada'})))):'')+
+    para(row.art.operation||row.ground.justification)+
+    (row.art.added_understanding?'<p><strong>Compreensão resultante:</strong> '+esc(text(row.art.added_understanding))+'</p>':para(row.ground.knowledge||row.ground.claim))+
+    para(row.ground.authorized_application||row.ground.application_scope)+
+    (row.analytical?'<p>Esta síntese foi construída na pesquisa. A consulta verifica sua aplicação ao caso; não demonstra benefício em uso.</p>':'')+
+    list(uniqueText([...items(row.ground.conditions),...items(row.art.conditions)]))+'</section>').join('');
+  const sourcesHTML=[...sources.values()].map(row=>'<section class="foundation-source" id="'+esc(row.anchor)+'"><h4>'+esc(row.name)+'</h4>'+para(row.locator)+
+    (/^https?:\/\//.test(row.url||'')?'<p><a href="'+esc(row.url)+'" rel="noreferrer">Consultar '+esc(row.name)+'</a></p>':'')+
+    list([...row.statuses].map(state=>sourceStates[state]||state))+'</section>').join('');
+  const technical=projections.map(p=>'<section><h4>'+esc(choiceTitle(p.choice))+'</h4>'+items(p.choice.steps).concat(items(p.choice.relations)).map(row=>
+    '<p>'+esc([row.id,row.component_id,row.participant_id,row.situation_id].filter(Boolean).join(' · '))+'</p>'+list(row.check_ids)).join('')+
+    items(p.choice.steps).filter(row=>row.limitation).map(row=>'<p><strong>Limite do padrão histórico, não instrução adicional desta operação:</strong> '+esc(text(row.limitation))+'</p>').join('')+
+    p.grounds.map(g=>{const art=g.construction||g.articulation||{};return '<p>'+esc([g.id,g.claim_id,g.analytical_application_id,...items(g.origin_ids)].filter(Boolean).join(' · '))+'</p>'+para(g.justification||g.justificativa)+
+      list(items(g.criterion_applications).map(a=>[text(a.criterion),...items(a.origin_ids),a.justification].filter(Boolean).join(' — ')))+
+      (items(art.documentary_articulations).length?'<p><strong>Trajetória histórica, não confirmação desta aplicação:</strong></p>'+items(art.documentary_articulations).map(a=>para(a.operation)+para(a.added_understanding)+para(a.limit)).join(''):'');}).join('')+'</section>').join('');
+  return '<p>O percurso liga as informações deste caso aos conhecimentos preparados na base. As fontes não são lidas na internet durante a geração.</p>'+choicesHTML+
+    (contributionsHTML?'<section class="foundation-contributions"><h3>O que cada fonte contribuiu</h3>'+contributionsHTML+'</section>':'')+
+    (analysesHTML?'<section class="foundation-understanding"><h3>Articulação e compreensão resultante</h3>'+analysesHTML+'</section>':'')+
+    (sourcesHTML?'<section class="foundation-sources"><h3>Fontes e localizações</h3>'+sourcesHTML+'</section>':'')+
+    '<section class="foundation-coverage"><h3>Cobertura por pessoa e situação</h3>'+list(coverage)+list(response.limits)+'</section>'+
+    '<details class="foundation-technical"><summary>Consultar identificadores, histórico e verificações</summary>'+technical+
+    '<h3>Possibilidades excluídas</h3>'+list(unique(response.exclusions))+'<h3>Verificações executadas</h3>'+checksHTML(executionChecks)+'</details>';
+}
+function checksHTML(checks){return list(unique(items(checks)).map(check=>(check.explanation||check.message||check.predicate||check.kind||check.id)+' — '+(states[check.state||check.outcome]||check.state||check.outcome||'Não verificada')));}
+/** No selected operation, representation, relationship or epistemic state is changed. */
+export function situatedOutput(response,{reviewEnabled=true}={}) {
   const executionChecks=Array.isArray(response.execution_evidence)?response.execution_evidence:items(response.execution_evidence?.checks);
   const checks=new Map(executionChecks.map(check=>[check.id,check]));
-  const checked=item=>({...item,condition_checks:item.condition_checks || items(item.check_ids).map(id=>checks.get(id)).filter(Boolean)});
-  const contextualize=choice=>({...choice,steps:items(choice.steps).map(checked),relations:items(choice.relations).map(checked)});
-  const choices=[...items(response.choices).map(c=>[contextualize(c),'complete']),...items(response.partial_segments).map(c=>[contextualize(c),'partial']),...items(response.pending_candidates).map(c=>[contextualize(c),'pending'])];
-  // Presentation order only: do not lead with a generic single support when
-  // an actual proposal covers more required functions. Stable ties preserve
-  // the producer's order; pending states and missing coverage remain explicit.
-  choices.sort(([left],[right])=>items(right.covered_functions).length-items(left.covered_functions).length);
-  const seen=new Set();
-  const rendered=choices.filter(([choice])=>{const key=JSON.stringify([choice.situation_id,choice.participant_id,items(choice.steps).map(s=>s.id),items(choice.relations).map(r=>r.id)]);if(seen.has(key))return false;seen.add(key);return true;});
-  const state={COMPLETE:response.covers_whole_reported_task===false?'Apoio às funções identificadas':'Percurso com condições conferidas',PARTIAL:'Apoio para parte do desafio',CONDITIONAL:'Possibilidades a confirmar',NONE:'Ainda sem uma operação fundamentada',UNCONFIRMED:'Confira o entendimento antes de gerar'}[response.proposal_status] || 'Confira o alcance desta orientação';
-  const scoped=row=>typeof row==='object'&&row?[row.participant_label,row.situation_label,
-    row.explanation?[row.label,row.explanation].filter(Boolean).join(': '):row.message || text(row)].filter(Boolean).join(' — '):row;
-  const gaps=unique(items(response.gaps).map(scoped)), coverage=items(response.coverage || response.function_coverage).map(row=>typeof row==='object'?
-    [row.participant_label,row.situation_label,text(row.function),{CAPABILITY_AVAILABLE:'há operação com condições conferidas',CONDITIONAL_CAPABILITY:'depende de condições a confirmar',NO_AVAILABLE_CAPABILITY:'ainda sem operação utilizável'}[row.state] || text(row)].filter(Boolean).join(' — '):row);
-  const html=(rendered.length?'<p>Examine uma possibilidade por vez. Ações independentes não precisam ser executadas em sequência.</p>'+rendered.map(([choice,kind],index)=>choiceHTML(choice,kind,index)).join(''):
-    '<p>Não foi encontrada uma operação fundamentada para as condições confirmadas. Os motivos abaixo distinguem o que falta informar do que ainda falta representar na base.</p>')+
-    para(response.coverage_explanation)+
-    (gaps.length?'<aside class="orientation-gaps"><h3>O que ficou sem cobertura</h3>'+list(gaps)+'</aside>':'');
-  return {title:rendered.length?'O que você pode fazer':'O que falta para orientar este caso',state,html,
-    detailHTML:'<h3>Cobertura por pessoa e situação</h3>'+list(coverage)+list(response.limits),
-    foundationHTML:'<p>Os registros abaixo pertencem a esta execução; não representam leitura das normas na internet.</p>'+rendered.map(([choice])=>
-      '<details><summary>'+esc(choiceTitle(choice))+'</summary>'+items(choice.steps).map(step=>'<h4>'+esc(step.label)+'</h4>'+items(step.groundings).map(groundingHTML).join('')+checksHTML(step.condition_checks)).join('')+
-      items(choice.relations).map(relationshipHTML).join('')+'</details>').join('')+
-      '<details><summary>Possibilidades excluídas e verificações</summary>'+list(unique(response.exclusions))+checksHTML(executionChecks)+'</details>'};
+  const checked=item=>({...item,condition_checks:item.condition_checks||items(item.check_ids).map(id=>checks.get(id)).filter(Boolean)});
+  const choices=['choices','partial_segments','pending_candidates'].flatMap((field,group)=>items(response[field]).map((choice,index)=>({
+    choice:{...choice,steps:items(choice.steps).map(checked),relations:items(choice.relations).map(checked)},kind:['complete','partial','pending'][group],path:field+'['+index+']'})));
+  // Keep the existing coverage-first presentation, including stable ties.
+  choices.sort((a,b)=>items(b.choice.covered_functions).length-items(a.choice.covered_functions).length);
+  const seen=new Set(),rendered=choices.filter(({choice})=>{const key=JSON.stringify([choice.situation_id,choice.participant_id,items(choice.steps).map(s=>s.id),items(choice.relations).map(r=>r.id)]);if(seen.has(key))return false;seen.add(key);return true;});
+  const state={COMPLETE:response.covers_whole_reported_task===false?'Apoio às funções identificadas':'Percurso com condições conferidas',PARTIAL:'Apoio para parte do desafio',CONDITIONAL:'Possibilidades a confirmar',NONE:'Ainda sem uma operação fundamentada',UNCONFIRMED:'Confira o entendimento antes de gerar'}[response.proposal_status]||'Confira o alcance desta orientação';
+  const scoped=row=>typeof row==='object'&&row?[row.participant_label,row.situation_label,row.explanation?[row.label,row.explanation].filter(Boolean).join(': '):row.message||text(row)].filter(Boolean).join(' — '):row;
+  const gaps=unique(items(response.gaps).map(scoped)),coverage=items(response.coverage||response.function_coverage).map(row=>typeof row==='object'?
+    [row.participant_label,row.situation_label,text(row.function),{CAPABILITY_AVAILABLE:'há operação com condições conferidas',CONDITIONAL_CAPABILITY:'depende de condições a confirmar',NO_AVAILABLE_CAPABILITY:'ainda sem operação utilizável'}[row.state]||text(row)].filter(Boolean).join(' — '):row);
+  const projections=[];
+  const html=(rendered.length?rendered.map(({choice,kind,path},index)=>practicalChoice(choice,kind,index,path,projections,reviewEnabled)).join(''):
+    '<p>Não foi encontrada uma ação fundamentada para as condições confirmadas. Confira abaixo se falta uma informação do caso ou um apoio representado na base.</p>')+
+    para(response.coverage_explanation)+(gaps.length?'<aside class="orientation-gaps"><h3>O que ficou sem cobertura</h3>'+list(gaps)+'</aside>':'');
+  return {title:'O que fazer',state,html,detailHTML:'',foundationHTML:foundation(rendered,executionChecks,response,coverage),actionProjection:projections};
 }

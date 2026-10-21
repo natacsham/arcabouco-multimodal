@@ -120,6 +120,31 @@ html[data-contrast="high"] .simple-view .simple-status,html[data-contrast="high"
 .step-preparation p,.step-verification p {margin:.3rem 0}
 .analytical-scope,.independent-supports {font-size:.9375rem}
 .situated-choice li,.situated-choice p {overflow-wrap:anywhere}
+/* Two reading levels: a complete practical section, then one optional rationale. */
+.simple-view .situated-choice {border:0;border-top:1px solid var(--border);border-radius:0;padding:1.25rem 0;margin:1rem 0;background:transparent}
+.situated-choice > h3 {font-size:1.25rem;line-height:1.4;margin:0 0 .4rem}
+.situated-choice > .choice-context {display:block;margin:.3rem 0 1rem;color:var(--primary-dark)}
+.situated-action {padding:.25rem 0 .75rem}
+.situated-action .step-responsible,.situated-action .step-beneficiary {font-size:1rem;margin:.3rem 0}
+.situated-action .action-instructions {margin:.75rem 0 1rem;padding-left:0;max-width:75ch;list-style:none}
+.situated-action .action-instructions > li {padding:.4rem 0;line-height:1.6}
+.situated-action .step-number {display:inline;min-width:0;height:auto;border-radius:0;background:transparent;color:inherit;font-weight:700}
+.situated-action .step-conditions {border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:.3rem;padding:.75rem 1rem;background:var(--soft)}
+.situated-action .step-conditions button {margin:.4rem 0 0;white-space:normal}
+.simple-view .orientation-foundations {margin-top:1.5rem!important;border:1px solid var(--border)!important;border-radius:.5rem;padding:0!important;background:var(--surface)}
+.orientation-foundations > summary {padding:1rem 1.25rem;min-height:44px;line-height:1.5;font-size:1.125rem;color:var(--primary-dark)}
+.orientation-foundations > summary:focus-visible {outline:3px solid var(--focus);outline-offset:3px}
+.orientation-foundations > div,.orientation-foundations > section {padding:0 1.25rem 1.25rem}
+.foundation-choice {padding:1rem 0;border-bottom:1px solid var(--border);overflow-wrap:anywhere}
+.foundation-choice > h3 {font-size:1.25rem;margin:.25rem 0 .75rem}
+.foundation-choice h4,.orientation-foundations h4 {font-size:1.0625rem;margin:1rem 0 .4rem}
+.orientation-foundations :is(p,li,dd,a) {overflow-wrap:anywhere}
+.orientation-foundations li {margin:.35rem 0}
+.orientation-foundations .step-grounding {border:0;background:transparent;padding:.25rem 0}
+.orientation-foundations :target {outline:2px solid var(--focus);outline-offset:4px;scroll-margin-block:2rem}
+html[data-contrast="high"] .situated-choice > .choice-context,html[data-contrast="high"] .orientation-foundations > summary {color:inherit}
+@media(max-width:520px) {.orientation-foundations > summary{padding:.85rem}.orientation-foundations > div,.orientation-foundations > section{padding:0 .85rem .85rem}.situated-action .step-conditions{padding:.65rem}.situated-choice > h3{font-size:1.125rem}}
+@media(forced-colors:active) {.simple-view .orientation-foundations,.situated-action .step-conditions{border-color:CanvasText}.orientation-foundations :target{outline-color:Highlight}}
 #generation-stages {margin:.5rem 0;padding-left:1.5rem}
 #generation-stages li {margin:.4rem 0}
 #generation-stages [data-state="completed"] {font-weight:600}

@@ -56,6 +56,12 @@ O modelo diferencia modo de interação, recurso digital, dispositivo e respons�
 
 ## Como funciona, sem LLM
 
+### Duas leituras do mesmo resultado
+
+O resultado do AMADO apresenta **O que fazer**, com ações e passos abertos, quem realiza, para quem, condições essenciais e como conferir. A seção recolhida **Como chegamos a esta orientação** reúne a informação considerada no relato, contribuições localizadas, articulação, critério, verificações e limites. As fontes não são repetidas em outra “orientação completa”. A leitura em voz acompanha somente a parte prática.
+
+Esta revisão de apresentação parte do commit `b6cefb8` e não altera a base, a ontologia nem o compositor. Os passos vêm das ações e fases registradas na execução; não acrescentam modalidades, responsáveis presumidos ou novas relações. Alternativas e apoios independentes não são transformados em etapas obrigatórias de um mesmo percurso. As decisões permanecem comparáveis à versão anterior, preservada no histórico.
+
 ### O que mudou na articulação operacional
 
 Uma relação histórica entre artigos não autoriza uma recomendação. Nesta revisão, uma **aplicação analítica delimitada** liga afirmações e contribuições conferidas a uma operação ou relação específica. O motor verifica essa autorização durante a consulta. Retirar uma premissa indispensável impede as aplicações dependentes, mesmo que a bibliografia continue cadastrada.

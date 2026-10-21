@@ -136,10 +136,18 @@ try{
     await finishQuestions(page,view);const result=await generateSimple(page);
     check(view+'_situated_conditional_operations',result.result_contract==='AMADO_SITUATED_1'&&result.pending_candidates.length>0&&result.proposal_status!=='COMPLETE');
     check(view+'_role_labels_not_session_ids',result.pending_candidates.every(candidate=>candidate.participant_label&&!candidate.participant_label.startsWith('PART-CASO')));
-    check(view+'_rendered_action_grounding_links',await page.locator('.situated-action').count()>0&&await page.locator('.step-grounding a[href^="http"]').count()>0);
+    check(view+'_practical_orientation_open',await page.locator('#orientation-main .situated-action').count()>0&&await page.locator('#orientation-main details').count()===0);
+    check(view+'_responsible_and_beneficiary',await page.locator('#orientation-main .step-responsible').count()>0&&await page.locator('#orientation-main .step-beneficiary').count()>0);
+    check(view+'_no_duplicate_orientation_disclosures',await page.locator('details#orientation-details,details#orientation-sources').count()===0);
+    const foundations=page.locator('#orientation-foundations > summary');
+    check(view+'_single_foundation_section',await foundations.count()===1&&await foundations.innerText()==='Como chegamos a esta orientação'&&await foundations.evaluate(el=>!el.parentElement.open));
+    await foundations.focus();await page.keyboard.press('Enter');
+    check(view+'_rendered_action_grounding_links',await page.locator('#orientation-foundations .step-grounding').count()>0&&await page.locator('#orientation-foundations a[href^="http"]').count()>0);
+    check(view+'_no_internal_comments_in_actions',!/ainda precisa ser conferida|Estes recursos não são apresentados como prontos/.test(await page.locator('#orientation-main').innerText()));
     check(view+'_no_automatic_speech',await page.evaluate(()=>window.__publicSituated.speaks===0));
     check(view+'_no_case_storage',await page.evaluate(async()=>localStorage.length===0&&sessionStorage.length===0&&document.cookie===''&&(await indexedDB.databases()).length===0&&(await caches.keys()).length===0));
     report.flows[view]={contract:result.result_contract,status:result.status,proposal_status:result.proposal_status,operations:result.pending_candidates.flatMap(candidate=>candidate.steps).length};
+    await foundations.focus();await page.keyboard.press('Enter');
     await page.locator('#orientation-title').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(artifacts,view+'.png')});await page.close();
   }
   for(const view of ['completo.html','completo-guiado.html']){
@@ -148,12 +156,14 @@ try{
     await page.locator('#mapping-confirmed').check();await page.locator('#generate-known').click();await page.locator('#saida').waitFor({state:'visible',timeout:60000});
     const result=await generated(page);
     check(view+'_situated_actions_and_grounding',result?.result_contract==='AMADO_SITUATED_1'&&await page.locator('.situated-action').count()>0&&await page.locator('.step-grounding').count()>0);
+    check(view+'_no_unhandled_review_controls',await page.locator('.situated-action [data-edit-case]').count()===0);
+    check(view+'_inline_step_numbers',await page.locator('.situated-action .step-number').evaluateAll(rows=>rows.length>0&&rows.every(row=>getComputedStyle(row).display==='inline')));
     check(view+'_current_footer',(await page.locator('.version-note').innerText()).includes('MADO '+expected.version));
     check(view+'_no_runtime_error',!(await page.locator('#runtime-error').innerText()).trim());await page.close();
   }
   const home=await context.newPage();home.on('pageerror',error=>report.errors.push(error.message));await home.goto(base);
-  await home.locator('[data-explanation-pilot-details] > summary').click();await home.locator('[data-explanation-pilot] .situated-action').first().waitFor({state:'visible',timeout:60000});
-  check('home_situated_pilot',await home.locator('[data-explanation-pilot] .step-grounding').count()>0);await home.close();
+  await home.locator('[data-explanation-pilot-details] > summary').click();await home.locator('[data-explanation-pilot] .step-grounding').first().waitFor({state:'visible',timeout:60000});
+  check('home_situated_pilot',await home.locator('[data-explanation-pilot] .step-grounding').count()>0&&await home.locator('[data-explanation-pilot] [data-edit-case]').count()===0);await home.close();
   check('no_case_transmission',requests.every(request=>request.method==='GET'&&!request.has_body&&request.url.startsWith(origin+'/')&&(!new URL(request.url).search||request.url===staticStyleQuery)));
   check('no_javascript_errors',report.errors.length===0);report.completed=true;report.passed=true;
 }catch(error){

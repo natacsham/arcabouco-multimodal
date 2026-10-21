@@ -43,11 +43,11 @@ report.browser=browser.version();
 const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'});
 await context.addInitScript(()=>{
   window.__situatedProbe={records:[],current:null,generated:null};
-  window.__readingProbe={speaks:0,cancels:0};
+  window.__readingProbe={speaks:0,cancels:0,texts:[]};
   window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};
   Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{
     getVoices:()=>[{localService:true,lang:'pt-BR',name:'Synthetic local voice'}],
-    speak:()=>{window.__readingProbe.speaks++;},cancel:()=>{window.__readingProbe.cancels++;},
+    speak:utterance=>{window.__readingProbe.speaks++;window.__readingProbe.texts.push(utterance.text);},cancel:()=>{window.__readingProbe.cancels++;},
     addEventListener:()=>{},removeEventListener:()=>{}
   }});
   const NativeWorker=window.Worker;
@@ -186,7 +186,8 @@ try{
   check('public_result_contract',result.result_contract==='AMADO_SITUATED_1');
   check('result_scope_is_selected_situation',Boolean(result.situation_results?.length)&&result.situation_results.every(s=>s.situation_id===selectedPriority));
   check('result_explains_pending_or_missing_support',(await page.locator('#orientation-main').innerText()).trim().length>40);
-  check('sources_collapsed_initially',await page.locator('#orientation-sources').getAttribute('open')===null);
+  check('foundations_collapsed_initially',await page.locator('#orientation-foundations').getAttribute('open')===null);
+  check('practical_orientation_without_disclosures',await page.locator('#orientation-main details').count()===0);
   await page.screenshot({path:path.join(artifacts,'situated-orientation.png'),fullPage:true});
   const native=JSON.parse(execFileSync(process.env.AMADO_PYTHON||'python',['-B','-W','ignore','-c',replayPython],{
     cwd:root,encoding:'utf8',input:JSON.stringify(probe.records),maxBuffer:64*1024*1024}));
@@ -206,21 +207,28 @@ try{
   const positive=await page.evaluate(()=>window.__situatedProbe.generated);
   check('prepared_example_has_grounded_conditional_operations',positive.result_contract==='AMADO_SITUATED_1'&&positive.pending_candidates.length>0&&positive.proposal_status!=='COMPLETE');
   check('prepared_example_uses_role_labels',positive.pending_candidates.every(candidate=>candidate.participant_label&&!candidate.participant_label.startsWith('PART-CASO')));
-  check('actions_and_conditions_rendered',await page.locator('.situated-action').count()>0&&await page.locator('.step-conditional').count()>0);
+  check('actions_and_conditions_rendered',await page.locator('.situated-action').count()>0&&await page.locator('.step-conditions').count()>0);
+  check('responsibility_visible_in_action',await page.locator('#orientation-main .step-responsible').count()>0);
+  check('beneficiary_visible_in_action',await page.locator('#orientation-main .step-beneficiary').count()>0);
   check('no_automatic_speech',await page.evaluate(()=>window.__readingProbe.speaks===0));
   await page.locator('#read-orientation').focus();await page.keyboard.press('Enter');
   check('keyboard_starts_local_speech',await page.evaluate(()=>window.__readingProbe.speaks===1)&&await page.locator('#read-orientation').getAttribute('aria-pressed')==='true');
   await page.keyboard.press('Enter');
   check('same_control_stops_speech',await page.locator('#read-orientation').innerText()==='Ouvir'&&await page.locator('#read-orientation').getAttribute('aria-pressed')==='false');
-  const grounding=page.locator('.situated-action summary').filter({hasText:'Por que esta ação foi sugerida?'}).first();
+  const grounding=page.locator('#orientation-foundations > summary');
   await grounding.focus();await page.keyboard.press('Enter');
-  check('keyboard_opens_action_grounding',await grounding.evaluate(el=>el.parentElement.open));
-  check('grounding_links_real_sources',await page.locator('.situated-action .step-grounding a[href^="http"]').count()>0);
+  check('keyboard_opens_single_foundation_section',await grounding.evaluate(el=>el.parentElement.open)&&await grounding.innerText()==='Como chegamos a esta orientação');
+  check('grounding_links_real_sources',await page.locator('#orientation-foundations .foundation-choice a[href^="#"]').count()>0&&await page.locator('#orientation-foundations .foundation-source a[href^="http"]').count()>0);
+  check('source_anchors_resolve',await page.locator('#orientation-foundations a[href^="#"]').evaluateAll(links=>links.every(link=>Boolean(document.getElementById(link.hash.slice(1))))));
   check('no_raw_object_rendering',!(await page.locator('#orientation-main').innerText()).includes('[object Object]'));
-  await page.locator('#orientation-details > summary').focus();await page.keyboard.press('Enter');
-  check('coverage_exposed_by_person_and_situation',/Cobertura por pessoa e situação/.test(await page.locator('#orientation-detail-body').innerText()));
-  await page.locator('#orientation-sources > summary').focus();await page.keyboard.press('Enter');
-  check('source_disclosure_has_links',await page.locator('#orientation-sources-body a[href^="http"]').count()>0);
+  check('coverage_exposed_by_person_and_situation',/Cobertura por pessoa e situação/.test(await page.locator('#orientation-foundations').innerText()));
+  check('source_disclosure_has_links',await page.locator('#orientation-foundations .foundation-source a[href^="http"]').count()>0);
+  check('no_duplicate_orientation_disclosures',await page.locator('details#orientation-details,details#orientation-sources').count()===0);
+  await page.locator('#orientation-foundations').scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(artifacts,'foundation-viewport.png')});
+  await page.locator('#read-orientation').focus();await page.keyboard.press('Enter');
+  check('speech_excludes_open_technical_details',await page.evaluate(()=>window.__readingProbe.texts.at(-1).trim()===document.querySelector('#orientation-main').innerText.trim()));
+  await page.keyboard.press('Enter');
   await grounding.focus();
   report.contrast={normal:await contrastSamples(page)};
   check('new_text_and_focus_sampled_contrast',report.contrast.normal.length>10&&report.contrast.normal.every(s=>s.ratio>=s.minimum));
@@ -259,6 +267,8 @@ try{
     const output=await full.evaluate(()=>window.__situatedProbe.generated);
     check(view+'_situated_contract',output?.result_contract==='AMADO_SITUATED_1');
     check(view+'_actions_and_grounding',await full.locator('.situated-action').count()>0&&await full.locator('.step-grounding').count()>0);
+    check(view+'_no_unhandled_review_controls',await full.locator('.situated-action [data-edit-case]').count()===0);
+    check(view+'_inline_step_numbers',await full.locator('.situated-action .step-number').evaluateAll(rows=>rows.length>0&&rows.every(row=>getComputedStyle(row).display==='inline')));
     check(view+'_no_runtime_error',!(await full.locator('#runtime-error').innerText()).trim());
     check(view+'_current_version_footer',(await full.locator('.version-note').innerText()).includes('MADO '+report.build.version));
     await full.screenshot({path:path.join(artifacts,view+'-situated.png'),fullPage:true});
@@ -267,8 +277,8 @@ try{
   const home=await context.newPage();home.on('pageerror',error=>report.errors.push(error.message));
   await home.goto(base);
   await home.locator('[data-explanation-pilot-details] > summary').focus();await home.keyboard.press('Enter');
-  await home.locator('[data-explanation-pilot] .situated-action').first().waitFor({state:'visible',timeout:60000});
-  check('home_pilot_uses_current_situated_actions',await home.locator('[data-explanation-pilot] .step-grounding').count()>0);
+  await home.locator('[data-explanation-pilot] .step-grounding').first().waitFor({state:'visible',timeout:60000});
+  check('home_pilot_shows_current_foundation_without_dead_review_controls',await home.locator('[data-explanation-pilot] .step-grounding').count()>0&&await home.locator('[data-explanation-pilot] [data-edit-case]').count()===0);
   await home.screenshot({path:path.join(artifacts,'home-situated-pilot.png'),fullPage:true});
   await home.close();
   check('no_case_storage',await page.evaluate(async()=>localStorage.length===0&&sessionStorage.length===0&&document.cookie===''&&(await indexedDB.databases()).length===0&&(await caches.keys()).length===0));

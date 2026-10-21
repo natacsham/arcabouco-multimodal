@@ -497,7 +497,7 @@ $("#toggle-decision-content").addEventListener("click", () => {
 function renderDecision(result) {
   lastResult = result;
   if (result.result_contract === 'AMADO_SITUATED_1') {
-    const output=situatedOutput(result);
+    const output=situatedOutput(result,{reviewEnabled:false});
     $('#saida').hidden=false; setDecisionExpanded(true);
     $('#decision-status').textContent=output.state;
     $('#practical-title').textContent=output.title;

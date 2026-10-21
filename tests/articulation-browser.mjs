@@ -61,11 +61,11 @@ report.browser=browser.version();
 const context=await browser.newContext({viewport:{width:1280,height:900},reducedMotion:'reduce'});
 await context.addInitScript(()=>{
   window.__articulationReadOnly={records:[],progress:[],current:null,generated:null};
-  window.__speechControls={speaks:0,cancels:0};
+  window.__speechControls={speaks:0,cancels:0,texts:[]};
   window.SpeechSynthesisUtterance=class{constructor(text){this.text=text;}};
   Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{
     getVoices:()=>[{localService:true,lang:'pt-BR',name:'Synthetic local voice'}],
-    speak:()=>{window.__speechControls.speaks++;},cancel:()=>{window.__speechControls.cancels++;},
+    speak:utterance=>{window.__speechControls.speaks++;window.__speechControls.texts.push(utterance.text);},cancel:()=>{window.__speechControls.cancels++;},
     addEventListener:()=>{},removeEventListener:()=>{}
   }});
   const NativeWorker=window.Worker;
@@ -174,7 +174,21 @@ async function generate(page,fixture){
   check(fixture.id+'_situated_contract',result?.result_contract==='AMADO_SITUATED_1');
   check(fixture.id+'_grounded_proposals',proposals(result).length>0);
   check(fixture.id+'_actions_visible',await page.locator('.situated-action').count()>0);
-  check(fixture.id+'_no_object_strings',!(await page.locator('#orientation-main').innerText()).includes('[object Object]'));
+  const practicalText=await page.locator('#orientation-main').innerText();
+  check(fixture.id+'_no_object_strings',!practicalText.includes('[object Object]'));
+  check(fixture.id+'_whole_practical_orientation_open',await page.locator('#orientation-main details').count()===0);
+  check(fixture.id+'_single_foundation_disclosure',await page.locator('#orientation-foundations').count()===1&&
+    await page.locator('#orientation-foundations').getAttribute('open')===null&&
+    (await page.locator('#orientation-foundations > summary').innerText()).trim()==='Como chegamos a esta orientação');
+  check(fixture.id+'_no_duplicate_complete_orientation',await page.locator('details#orientation-details,details#orientation-sources').count()===0);
+  check(fixture.id+'_responsible_and_beneficiary_visible',await page.locator('#orientation-main .step-responsible').count()>0&&await page.locator('#orientation-main .step-beneficiary').count()>0);
+  check(fixture.id+'_steps_with_origin_and_phase',await page.locator('#orientation-main .action-instructions li').count()>0&&
+    await page.locator('#orientation-main .action-instructions li').evaluateAll(rows=>rows.every(row=>Boolean(row.dataset.originPath)&&Boolean(row.dataset.phase))));
+  check(fixture.id+'_step_numbers_are_inline_not_legacy_badges',await page.locator('#orientation-main .step-number').evaluateAll(rows=>rows.every(row=>{
+    const style=getComputedStyle(row);return style.display==='inline'&&style.backgroundColor==='rgba(0, 0, 0, 0)'&&style.borderRadius==='0px';
+  })));
+  check(fixture.id+'_no_internal_review_comments',!/ainda precisa ser conferida|Estes recursos não são apresentados como prontos|\bNOT_EXECUTED\b|\bGROUNDED_ANALYTICAL_APPLICATION\b/.test(practicalText));
+  check(fixture.id+'_technical_foundations_not_in_practical',await page.locator('#orientation-main .step-grounding,#orientation-main .foundation-source').count()===0);
   check(fixture.id+'_no_hidden_confirmation',probe.records.slice(recordStart).filter(r=>r.request.operation==='update').every(r=>{
     const payload=r.request.payload||{};
     return !(payload.situated_facts||[]).some(f=>f.value===true);
@@ -205,23 +219,32 @@ try{
     if(process.env.AMADO_BROWSER_SCREENSHOTS){
       await fs.mkdir(process.env.AMADO_BROWSER_SCREENSHOTS,{recursive:true});
       await page.screenshot({path:path.join(process.env.AMADO_BROWSER_SCREENSHOTS,fixture.id+'.png'),fullPage:true});
+      await page.locator('#orientation-title').scrollIntoViewIfNeeded();
+      await page.screenshot({path:path.join(process.env.AMADO_BROWSER_SCREENSHOTS,fixture.id+'-practical-viewport.png')});
     }
-    const grounding=page.locator('.situated-action summary').filter({hasText:'Por que esta ação foi sugerida?'}).first();
+    const grounding=page.locator('#orientation-foundations > summary');
     await grounding.focus();await page.keyboard.press('Enter');
     check(fixture.id+'_keyboard_grounding',await grounding.evaluate(el=>el.parentElement.open));
-    check(fixture.id+'_localized_source_links',await page.locator('.step-grounding a[href^="http"]').count()>0);
+    check(fixture.id+'_localized_source_links',await page.locator('.foundation-choice a[href^="#"]').count()>0&&await page.locator('.foundation-source a[href^="http"]').count()>0);
+    check(fixture.id+'_source_anchors_resolve',await page.locator('#orientation-foundations a[href^="#"]').evaluateAll(links=>links.every(link=>Boolean(document.getElementById(link.hash.slice(1))))));
+    check(fixture.id+'_sources_only_in_foundation',await page.locator('.foundation-source').count()===await page.locator('#orientation-foundations .foundation-source').count());
     if(process.env.AMADO_BROWSER_SCREENSHOTS){
+      await page.locator('#orientation-foundations').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(process.env.AMADO_BROWSER_SCREENSHOTS,fixture.id+'-detail.png'),fullPage:false});
     }
     if(fixture.id==='dictation_review_control'){
       check('dictation_exposes_a_real_relation',proposals(result).some(p=>(p.relations||[]).length>0));
       await page.locator('#read-orientation').focus();await page.keyboard.press('Enter');
       check('one_control_starts_speech',await page.locator('#read-orientation').innerText()==='Parar');
+      const speech=await page.evaluate(()=>window.__speechControls.texts.at(-1));
+      check('speech_uses_only_practical_orientation_with_foundation_open',speech.trim()===(await page.locator('#orientation-main').innerText()).trim());
       await page.keyboard.press('Enter');check('one_control_stops_speech',await page.locator('#read-orientation').innerText()==='Ouvir');
       const pending=[...(result.facts_to_confirm||[]),...(result.resources_to_confirm||[])].find(row=>row.fact_id);
       if(pending){
         report.review_counterfactual={condition:pending.label,value:false,source:'SYNTHETIC_REVIEW_CHANGE_NOT_IN_ORIGINAL_NARRATIVE'};
-        await page.locator('#orientation-result [data-edit-case]').click();
+        const review=page.locator('#orientation-main .step-conditions [data-edit-case]').first();
+        check('pending_action_links_directly_to_review',await review.count()===1);
+        await review.click();
         const key=['fact',pending.participant_id,pending.situation_id,pending.fact_id].join(':');
         const control=page.locator('[data-revision="'+key+'"]');
         check('unanswered_condition_is_editable',await control.count()===1);
@@ -244,9 +267,15 @@ try{
     for(const width of [375,320]){
       await page.setViewportSize({width,height:900});
       check(fixture.id+'_reflow_'+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+      await page.evaluate(()=>document.documentElement.style.fontSize='125%');
+      check(fixture.id+'_step_numbers_inline_text125_'+width,await page.locator('#orientation-main .step-number').evaluateAll(rows=>rows.every(row=>getComputedStyle(row).display==='inline'&&getComputedStyle(row).backgroundColor==='rgba(0, 0, 0, 0)')));
       await page.evaluate(()=>document.documentElement.style.fontSize='200%');
       check(fixture.id+'_text200_'+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
       await page.evaluate(()=>document.documentElement.style.fontSize='');
+      if(width===320&&process.env.AMADO_BROWSER_SCREENSHOTS){
+        await page.locator('#orientation-title').scrollIntoViewIfNeeded();
+        await page.screenshot({path:path.join(process.env.AMADO_BROWSER_SCREENSHOTS,fixture.id+'-practical-320.png')});
+      }
     }
     check(fixture.id+'_no_case_storage',await page.evaluate(async()=>localStorage.length===0&&sessionStorage.length===0&&document.cookie===''&&(await indexedDB.databases()).length===0&&(await caches.keys()).length===0));
     await page.close();page=null;

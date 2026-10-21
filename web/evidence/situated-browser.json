@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-21T12:21:55.744Z",
+  "checked_at": "2026-10-21T13:19:04.249Z",
   "checks": {
     "served_manifest_matches_build": true,
     "single_free_narrative_entry": true,
@@ -19,18 +19,24 @@
     "public_result_contract": true,
     "result_scope_is_selected_situation": true,
     "result_explains_pending_or_missing_support": true,
-    "sources_collapsed_initially": true,
+    "foundations_collapsed_initially": true,
+    "practical_orientation_without_disclosures": true,
     "prepared_example_has_grounded_conditional_operations": true,
     "prepared_example_uses_role_labels": true,
     "actions_and_conditions_rendered": true,
+    "responsibility_visible_in_action": true,
+    "beneficiary_visible_in_action": true,
     "no_automatic_speech": true,
     "keyboard_starts_local_speech": true,
     "same_control_stops_speech": true,
-    "keyboard_opens_action_grounding": true,
+    "keyboard_opens_single_foundation_section": true,
     "grounding_links_real_sources": true,
+    "source_anchors_resolve": true,
     "no_raw_object_rendering": true,
     "coverage_exposed_by_person_and_situation": true,
     "source_disclosure_has_links": true,
+    "no_duplicate_orientation_disclosures": true,
+    "speech_excludes_open_technical_details": true,
     "new_text_and_focus_sampled_contrast": true,
     "high_contrast_new_text_and_focus": true,
     "layout_375_no_horizontal_overflow": true,
@@ -39,13 +45,17 @@
     "layout_320_text_200_percent": true,
     "completo.html_situated_contract": true,
     "completo.html_actions_and_grounding": true,
+    "completo.html_no_unhandled_review_controls": true,
+    "completo.html_inline_step_numbers": true,
     "completo.html_no_runtime_error": true,
     "completo.html_current_version_footer": true,
     "completo-guiado.html_situated_contract": true,
     "completo-guiado.html_actions_and_grounding": true,
+    "completo-guiado.html_no_unhandled_review_controls": true,
+    "completo-guiado.html_inline_step_numbers": true,
     "completo-guiado.html_no_runtime_error": true,
     "completo-guiado.html_current_version_footer": true,
-    "home_pilot_uses_current_situated_actions": true,
+    "home_pilot_shows_current_foundation_without_dead_review_controls": true,
     "no_case_storage": true,
     "no_case_transmission": true,
     "no_javascript_errors": true,
@@ -123,22 +133,22 @@
       }
     },
     "frontend_sha256": {
-      "index.html": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
-      "app.js": "00815afab2d5f36a030c8741f9c214c813431d03e4d2b023fcf6771e1dd078ee",
-      "styles.css": "2ba155b0155d9c5d90e096fe5f8c576dba5b6776d9c831a6644928ef18031d8e",
+      "index.html": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
+      "app.js": "213854291fd072f463f110b18eb736b1e7842685c9ac76c668418f26fd7cb862",
+      "styles.css": "74afd7f756ad74ff18b70f7b0111ef0838be980b2df74e8ce58718543713f83b",
       "worker.mjs": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
       "client.mjs": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
-      "guiado.html": "7df5152c9ac1d96341e05a1d21639559a34496db9dad3354554be2cae0bc2404",
+      "guiado.html": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
       "guided.js": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "guided.css": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
       "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-      "simple-flow.js": "3f40ad805e43f7b4b3b0db3de8ef179759f4af277bbb2262d6772fb9fa46911c",
-      "simple-flow.css": "1f02c79520a8054d4bda5f8e48030fd7734500425e6530a2cc99063e499e18c3",
+      "simple-flow.js": "e4d6aa459a79eab49c336d6b9f7e36836f9a47ea5afdf24c45ad6de9ac112eb8",
+      "simple-flow.css": "97092fef474b7f6087e61429edccf534f716d48cae15adc9ed6f9bc053917b79",
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
-      "situated-output.mjs": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
+      "situated-output.mjs": "bc2146c401c33fceba3b0caaac18feab7b2e8a20e78300a269ffebe5d405fa79",
       "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
       "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
     },
@@ -151,7 +161,7 @@
       "sitemap.xml": "97c5e53245bb952c064f97d1501aa688aaea8c352aec6d0d8fd8d37dce08dffb",
       "explanation.js": "99ed5c901099216983a26bbd3a4afa92de2993f3810982081bdcca1147f6d57c",
       "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
-      "explanation-pilot.js": "3a803382df9d22dbefba3ce6e027c477f82a20c56a20e119012f9d0dc245d455",
+      "explanation-pilot.js": "9e8ae2760bac3388b3434a297b1cc0ac2b35c47ae43aaed6170492ea78716c91",
       "assets/explanation-pilot.json": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
       "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
       "assets/source-catalog.json": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7"
@@ -184,9 +194,9 @@
   "static_query_allowlist": [
     "amado/styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes"
   ],
-  "test_sha256": "23830197371c597412fc567d45ebb573b1266de9843c45da30fc2ed7940b9016",
+  "test_sha256": "837143d2b016ddb6f080cd5e6199d4502d625448fd9aed8b9337dddd06d055d3",
   "browser": "155.0.8059.40",
-  "canonical_result_sha256": "f0e939421182dfdd2a49b6bed149eff3b073a3fb88d697f487d62ea3b7ada300",
+  "canonical_result_sha256": "7b224ab80417714eba2c7ad51959f2c1a3544a14a85ef53027b69351149e57a8",
   "result": {
     "contract": "AMADO_SITUATED_1",
     "status": "INSUFFICIENT",
@@ -204,15 +214,8 @@
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
+        "class_name": "choice-context",
+        "ratio": 11.83683129207257,
         "minimum": 4.5
       },
       {
@@ -232,48 +235,20 @@
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
+        "class_name": "step-responsible",
         "ratio": 14.079618687682288,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
+        "class_name": "step-beneficiary",
         "ratio": 14.079618687682288,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
         "class_name": "",
         "ratio": 14.079618687682288,
         "minimum": 4.5
@@ -295,21 +270,42 @@
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
+        "class_name": "step-modes",
         "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-purpose",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 14.079618687682288,
+        "ratio": 12.516661994305135,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-monitoring",
         "ratio": 14.079618687682288,
         "minimum": 4.5
       },
@@ -322,14 +318,7 @@
       },
       {
         "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
+        "element": "LI",
         "class_name": "",
         "ratio": 14.079618687682288,
         "minimum": 4.5
@@ -365,825 +354,6 @@
       {
         "kind": "text",
         "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "analytical-scope",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 14.079618687682288,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
         "class_name": "",
         "ratio": 14.079618687682288,
         "minimum": 4.5
@@ -1318,14 +488,7 @@
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
+        "class_name": "choice-context",
         "ratio": 21,
         "minimum": 4.5
       },
@@ -1346,48 +509,20 @@
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
+        "class_name": "step-responsible",
         "ratio": 21,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
+        "class_name": "step-beneficiary",
         "ratio": 21,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
         "class_name": "",
         "ratio": 21,
         "minimum": 4.5
@@ -1409,21 +544,42 @@
       {
         "kind": "text",
         "element": "P",
-        "class_name": "",
+        "class_name": "step-modes",
         "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-purpose",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 21,
+        "ratio": 18.763901930292075,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-monitoring",
         "ratio": 21,
         "minimum": 4.5
       },
@@ -1436,14 +592,7 @@
       },
       {
         "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
+        "element": "LI",
         "class_name": "",
         "ratio": 21,
         "minimum": 4.5
@@ -1479,825 +628,6 @@
       {
         "kind": "text",
         "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "analytical-scope",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "P",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "LI",
-        "class_name": "",
-        "ratio": 21,
-        "minimum": 4.5
-      },
-      {
-        "kind": "text",
-        "element": "SUMMARY",
         "class_name": "",
         "ratio": 21,
         "minimum": 4.5
@@ -2426,26 +756,26 @@
     "status": "INSUFFICIENT",
     "proposal_status": "CONDITIONAL",
     "operation_count": 1,
-    "canonical_sha256": "51a46cae186e19ddb32dc41f649602a4af864313fcfad69cbe02896cf374a80f"
+    "canonical_sha256": "bf59619a552bb09dbdb75f11f99a0a6add6b2b6749212afb672ab991924eb4c3"
   },
   "narrative_cases": [
     {
       "id": "presentation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "44d7efca9df8ef773231b7a626d8c315135982bdf3988ca9084ae8177ea31de5"
+      "canonical_sha256": "3a9ebd552dbc8b720ded1da4d892f91df008a01d75efb22fb7ef30dc07c7c280"
     },
     {
       "id": "form",
       "parity": true,
       "proposal_status": "PARTIAL",
-      "canonical_sha256": "702d3254d7622a2a5334b7acbd1a2ad082e1e804587d90ce30f70b3e3bc62fc4"
+      "canonical_sha256": "07d6ea8688ed9b1cedad3f7647a1d458338437aef17721b362e9ea58582eed73"
     },
     {
       "id": "dictation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "d558287a9b4d1c5439886f85f8fd99866d96319e6852f4d41fff49eeb252884a"
+      "canonical_sha256": "2a167250af5492adb160db7c21447bbf828607ec3713fe15d1a4f467777be7e0"
     }
   ],
   "passed": true

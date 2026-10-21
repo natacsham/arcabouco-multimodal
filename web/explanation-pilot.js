@@ -16,7 +16,7 @@ async function loadPilot() {
     const result = await response.json();
     if (result.result_contract === 'AMADO_SITUATED_1') {
       const view = situatedOutput(result);
-      target.innerHTML = '<p>Possibilidade gerada a partir dos registros atuais. Condições ainda não confirmadas permanecem indicadas; não é uma avaliação em uso.</p>'+view.html;
+      target.innerHTML = '<p>Possibilidade gerada a partir dos registros atuais. Condições ainda não confirmadas permanecem indicadas; não é uma avaliação em uso.</p>'+view.foundationHTML;
       loaded = true;
       return;
     }

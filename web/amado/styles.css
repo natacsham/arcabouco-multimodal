@@ -85,6 +85,9 @@ h4 { font-size: 1rem; }
 .step-card > summary strong { display: block; font-size: 1.125rem; }
 .step-card > summary small { display: block; font-weight: 400; color: #405c64; margin-top: 4px; }
 .step-number { display: grid; place-items: center; min-width: 42px; height: 42px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; }
+/* Numbered instructions also appear in the preserved full presentation. */
+.situated-action .action-instructions { list-style: none; padding-left: 0; }
+.situated-action .step-number { display: inline; min-width: 0; height: auto; border-radius: 0; background: transparent; color: inherit; font-weight: 700; }
 .step-content { border-top: 1px solid var(--border); padding: 24px 28px; }
 .summary-grid, .result-grid, .delta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .summary-grid article, .result-grid article, .delta-grid > article, .mode-card { border: 1px solid var(--border); border-radius: 12px; padding: 15px; background: #fff; }

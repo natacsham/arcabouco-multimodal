@@ -112,26 +112,27 @@ const pilot = JSON.parse(await fs.readFile(new URL('../web/assets/explanation-pi
 check('prepared pilot uses the actual engine configuration and exact support', () => {
   const proposals=[...pilot.choices,...pilot.pending_candidates,...pilot.partial_segments];
   const cfg = proposals[0].steps.find(step=>step.component_id==='PAD-ORGANIZAR-CONTEUDO-PERSISTENTE');
-  const html = situatedOutput(pilot).html;
+  const output = situatedOutput(pilot), html=output.html, foundation=output.foundationHTML;
   assert.equal(pilot.prepared_public_example, true);
   assert.equal(pilot.result_contract,'AMADO_SITUATED_1');
   assert.equal(cfg.component_id, 'PAD-ORGANIZAR-CONTEUDO-PERSISTENTE');
   assert(html.includes(escape(cfg.label)));
   for (const support of cfg.groundings) {
-    if(support.criterion)assert(html.includes(escape(support.criterion.label)));
-    assert(html.includes(escape(support.justification)));
+    if(support.criterion)assert(foundation.includes(escape(support.criterion.label)));
+    assert(foundation.includes(escape(support.justification)));
   }
-  assert(!html.includes('ART-TESTE-NAO-CONFIRMADA'));
+  assert(!(html+foundation).includes('ART-TESTE-NAO-CONFIRMADA'));
 });
 check('prepared pilot preserves current knowledge review limitations', () => {
-  const proposals=[...pilot.choices,...pilot.pending_candidates,...pilot.partial_segments], html = situatedOutput(pilot).html;
+  const proposals=[...pilot.choices,...pilot.pending_candidates,...pilot.partial_segments], output=situatedOutput(pilot), html=output.html, foundation=output.foundationHTML;
+  const reviewLabels={CONFERIDA_NO_REGISTRO:'Conferida no registro preservado',CONFERIDA_NO_DOCUMENTO:'Conferida no documento',PRIMARY_CHECKED:'Conferida na fonte primária',PENDING:'Conferência pendente'};
   for (const step of proposals[0].steps) {
     for (const support of step.groundings) {
-      for (const item of support.claim?.limits || []) assert(html.includes(escape(item)));
-      for (const source of support.sources || []) if(source.review_status) assert(html.includes(escape(source.review_status)));
+      for (const item of support.claim?.limits || []) assert(foundation.includes(escape(item)));
+      for (const source of support.sources || []) if(source.review_status) assert(foundation.includes(escape(reviewLabels[source.review_status]||source.review_status)));
     }
   }
-  if(pilot.pending_candidates.length)assert(html.includes('Confirme as condições'));
+  if(pilot.pending_candidates.length)assert(html.includes('Antes de aplicar'));
 });
 console.log(JSON.stringify({passed:true, checks, scope:'PURE_RENDERING_SYNTHETIC_AND_PREPARED_PILOT', network:false,
   limitations:['Não verifica reflow, contraste, teclado ou leitores de tela.','Não é validação humana.']}));

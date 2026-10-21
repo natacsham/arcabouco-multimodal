@@ -2,7 +2,7 @@
   "version": "1.5.0-rc2",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.5.0-rc2-articulation",
-  "compiled_at_utc": "2026-10-21T12:33:48.350859+00:00",
+  "compiled_at_utc": "2026-10-21T13:20:57.757312+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -71,18 +71,24 @@
       "public_result_contract": true,
       "result_scope_is_selected_situation": true,
       "result_explains_pending_or_missing_support": true,
-      "sources_collapsed_initially": true,
+      "foundations_collapsed_initially": true,
+      "practical_orientation_without_disclosures": true,
       "prepared_example_has_grounded_conditional_operations": true,
       "prepared_example_uses_role_labels": true,
       "actions_and_conditions_rendered": true,
+      "responsibility_visible_in_action": true,
+      "beneficiary_visible_in_action": true,
       "no_automatic_speech": true,
       "keyboard_starts_local_speech": true,
       "same_control_stops_speech": true,
-      "keyboard_opens_action_grounding": true,
+      "keyboard_opens_single_foundation_section": true,
       "grounding_links_real_sources": true,
+      "source_anchors_resolve": true,
       "no_raw_object_rendering": true,
       "coverage_exposed_by_person_and_situation": true,
       "source_disclosure_has_links": true,
+      "no_duplicate_orientation_disclosures": true,
+      "speech_excludes_open_technical_details": true,
       "new_text_and_focus_sampled_contrast": true,
       "high_contrast_new_text_and_focus": true,
       "layout_375_no_horizontal_overflow": true,
@@ -91,13 +97,17 @@
       "layout_320_text_200_percent": true,
       "completo.html_situated_contract": true,
       "completo.html_actions_and_grounding": true,
+      "completo.html_no_unhandled_review_controls": true,
+      "completo.html_inline_step_numbers": true,
       "completo.html_no_runtime_error": true,
       "completo.html_current_version_footer": true,
       "completo-guiado.html_situated_contract": true,
       "completo-guiado.html_actions_and_grounding": true,
+      "completo-guiado.html_no_unhandled_review_controls": true,
+      "completo-guiado.html_inline_step_numbers": true,
       "completo-guiado.html_no_runtime_error": true,
       "completo-guiado.html_current_version_footer": true,
-      "home_pilot_uses_current_situated_actions": true,
+      "home_pilot_shows_current_foundation_without_dead_review_controls": true,
       "no_case_storage": true,
       "no_case_transmission": true,
       "no_javascript_errors": true,
@@ -108,23 +118,23 @@
       "narrative_dictation_native_worker_parity": true
     },
     "public_smoke": {
-      "passed": true,
+      "passed": false,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": true,
-        "exact_manifest": true,
+        "exact_test": false,
+        "exact_manifest": false,
         "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": true,
+        "current_asset_bytes": false,
         "current_base_inputs": true,
         "current_native_engine": true,
         "current_download_bytes": true
       },
-      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
       "checked_at": "2026-10-21T12:32:35.732Z",
       "expected_commit": "82308cb6a99e54d89c47e6ed3e6d8c8d0d384eaf",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
@@ -155,7 +165,7 @@
     "Verificações técnicas não comprovam utilidade, aprendizagem ou conformidade integral de acessibilidade."
   ],
   "historical_evidence_notice": "Somente os relatórios listados abaixo aprovam estes bytes. Arquivos anteriores conservam sua própria versão e seu alcance.",
-  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD",
   "reports": {
     "technical-1.5-report.json": {
       "url": "technical-1.5-report.json",
@@ -174,12 +184,12 @@
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "5b5c09793eefc33451df777146ca023a9d14c957d3f78cb33b3357b1f0f6b2a3",
+      "sha256": "9a41be9772fdbbc11a3045de9be79e7d19475e88a56eedbcc265199e2b6c6dfa",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "18ea7707c2f2c1f30731c35e83c3310f01d6426042c17be55b3fea736479b5c9",
+      "sha256": "51f03de5557096999e5d43e3f5d9876f9f55f09500f43891443d107a86482c2a",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
@@ -189,14 +199,8 @@
     },
     "articulation-browser.json": {
       "url": "articulation-browser.json",
-      "sha256": "f8e6aa3bc9b17301fcc67029e02c3c124b0b60215e5bffaead1f7d2c151a4e4f",
+      "sha256": "68d51fa369e96a73dab9ae5e354e01a9d19dce255318168eba02eb5c3b66962d",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
-    },
-    "situated-public-smoke.json": {
-      "url": "situated-public-smoke.json",
-      "sha256": "476e474d5e9863955ef54d2d8dd1e79b59550c3284ac48f7321e46394437c175",
-      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
-      "expected_commit": "82308cb6a99e54d89c47e6ed3e6d8c8d0d384eaf"
     }
   }
 }
