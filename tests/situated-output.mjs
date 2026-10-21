@@ -15,6 +15,8 @@ assert.match(output.html,/Como conferir/);
 assert.match(output.html,/Quem realiza:<\/strong> Quem prepara o material/);
 assert.match(output.html,/Para quem:<\/strong> Pessoa que acompanha o conteúdo/);
 assert.match(output.html,/class="orientation-step situated-choice"/);
+assert.match(output.html,/<span class="orientation-number">Orientação 1<\/span>/);
+assert.match(output.foundationHTML,/<span class="orientation-number">Orientação 1<\/span>/);
 assert.equal((output.html.match(/Revisar o conteúdo/g)||[]).length,1,'A single operation must not repeat the choice title as an adjacent action title');
 assert.match(output.html,/<h4>Passos<\/h4>/);
 assert.match(output.html,/data-origin-path="partial_segments\[0\].steps\[0\].action" data-phase="action"/);
@@ -107,6 +109,23 @@ const ranked=situatedOutput({partial_segments:[{label:'Apoio independente limita
   pending_candidates:[{label:'Produzir e revisar',steps:[{...step,id:'OP-B'}],covered_functions:['one','two']}]});
 assert(ranked.html.indexOf('Produzir e revisar')<ranked.html.indexOf('Apoio independente limitado'));
 assert.match(ranked.html,/depende das condições/);
+assert.match(ranked.html,/Orientação 1<\/span> <span class="orientation-title">Produzir e revisar/);
+assert.match(ranked.html,/Orientação 2<\/span> <span class="orientation-title">Apoio independente limitado/);
+assert.match(ranked.foundationHTML,/Orientação 1<\/span> <span class="orientation-title">Produzir e revisar/);
+assert.match(ranked.foundationHTML,/Orientação 2<\/span> <span class="orientation-title">Apoio independente limitado/);
+const sequenceResponse={choices:[{composition_type:'CONNECTED_PATH',steps:[step,{...step,id:'OP-B',label:'Confirmar o registro'}],
+  relations:[{kind:'SEQUENTIAL_REVIEW',explanation:'A confirmação usa o registro revisado.'}]}]};
+const sequenceSnapshot=structuredClone(sequenceResponse);
+const sequence=situatedOutput(sequenceResponse);
+assert.deepEqual([...sequence.html.matchAll(/class="step-number">Passo (\d+)\./g)].map(m=>Number(m[1])),[1,2]);
+assert.deepEqual([...sequence.html.matchAll(/class="action-instructions" role="list" start="(\d+)"/g)].map(m=>Number(m[1])),[1,2]);
+assert.deepEqual(sequenceResponse,sequenceSnapshot,'Numbering must not reorder or mutate execution data');
+const nonSequential=situatedOutput({choices:[{...sequenceResponse.choices[0],relations:[{kind:'ALTERNATIVE'}]}]});
+assert.deepEqual([...nonSequential.html.matchAll(/class="step-number">Passo (\d+)\./g)].map(m=>Number(m[1])),[1,1],
+  'A connected functional alternative is not a chronological sequence');
+const separate=situatedOutput({choices:[{composition_type:'INDEPENDENT_SUPPORTS',steps:sequenceResponse.choices[0].steps}]});
+assert.deepEqual([...separate.html.matchAll(/class="step-number">Passo (\d+)\./g)].map(m=>Number(m[1])),[1,1]);
+assert.deepEqual(sequence.actionProjection,nonSequential.actionProjection,'Display numbering must preserve the same source projections');
 const video=situatedOutput({pending_candidates:[{participant_id:'A',participant_label:'Participante A',situation_label:'Consulta individual',steps:[{...step,id:'audio',modes:['áudio'],
   responsible_participant:{id:'PART-PREPARER',label:'PART-PREPARER'},operation_scope:'PREPARATION_FOR_RECIPIENT'}]},
   {participant_id:'B',participant_label:'Participante B',situation_label:'Consulta individual',steps:[{...step,id:'text',modes:['texto']}]}]});
@@ -114,6 +133,8 @@ assert(video.html.indexOf('Participante A')<video.html.indexOf('Participante B')
 assert.match(video.html,/Responsável pela preparação informado no relato/);
 assert.doesNotMatch(video.html,/PART-PREPARER|professora/);
 assert.equal((video.html.match(/<article/g)||[]).length,2,'Different recipients do not become one numbered sequence');
+assert.deepEqual([...video.html.matchAll(/class="orientation-number">Orientação (\d+)/g)].map(m=>Number(m[1])),[1,2]);
+assert.deepEqual([...video.html.matchAll(/class="step-number">Passo (\d+)\./g)].map(m=>Number(m[1])),[1,1]);
 const hrefs=[...phases.foundationHTML.matchAll(/href="#([^\"]+)"/g)].map(m=>m[1]);
 for(const href of hrefs)assert(phases.foundationHTML.includes('id="'+href+'"'),'Every source/premise reference resolves: '+href);
 const frozen=structuredClone(phaseResponse);Object.freeze(frozen);

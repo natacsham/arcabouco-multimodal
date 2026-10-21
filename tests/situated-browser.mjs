@@ -269,7 +269,9 @@ try{
     check(view+'_situated_contract',output?.result_contract==='AMADO_SITUATED_1');
     check(view+'_actions_and_grounding',await full.locator('.situated-action').count()>0&&await full.locator('.step-grounding').count()>0);
     check(view+'_no_unhandled_review_controls',await full.locator('.situated-action [data-edit-case]').count()===0);
-    check(view+'_inline_step_numbers',await full.locator('.situated-action .step-number').evaluateAll(rows=>rows.length>0&&rows.every(row=>getComputedStyle(row).display==='inline')));
+    check(view+'_step_numbers_without_legacy_badges',await full.locator('.situated-action .step-number').evaluateAll(rows=>rows.length>0&&rows.every(row=>{
+      const style=getComputedStyle(row);return ['inline','block'].includes(style.display)&&style.borderRadius==='0px'&&style.backgroundColor==='rgba(0, 0, 0, 0)';
+    })));
     check(view+'_no_runtime_error',!(await full.locator('#runtime-error').innerText()).trim());
     check(view+'_current_version_footer',(await full.locator('.version-note').innerText()).includes('MADO '+report.build.version));
     await full.screenshot({path:path.join(artifacts,view+'-situated.png'),fullPage:true});

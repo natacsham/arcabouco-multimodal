@@ -137,6 +137,7 @@ try{
     check(view+'_situated_conditional_operations',result.result_contract==='AMADO_SITUATED_1'&&result.pending_candidates.length>0&&result.proposal_status!=='COMPLETE');
     check(view+'_role_labels_not_session_ids',result.pending_candidates.every(candidate=>candidate.participant_label&&!candidate.participant_label.startsWith('PART-CASO')));
     check(view+'_practical_orientation_open',await page.locator('#orientation-main .situated-action').count()>0&&await page.locator('#orientation-main details').count()===0);
+    check(view+'_numbered_orientations',await page.locator('#orientation-main .situated-choice > h3 .orientation-number').evaluateAll(rows=>rows.length>0&&rows.every((row,index)=>row.textContent.trim()==='Orientação '+(index+1))));
     check(view+'_responsible_and_beneficiary',await page.locator('#orientation-main .step-responsible').count()>0&&await page.locator('#orientation-main .step-beneficiary').count()>0);
     check(view+'_no_duplicate_orientation_disclosures',await page.locator('details#orientation-details,details#orientation-sources').count()===0);
     const foundations=page.locator('#orientation-foundations > summary');
@@ -144,6 +145,10 @@ try{
     await foundations.focus();await page.keyboard.press('Enter');
     await page.locator('#orientation-foundations .foundation-source a[href^="http"]').first().waitFor({state:'visible',timeout:10000});
     check(view+'_rendered_action_grounding_links',await page.locator('#orientation-foundations .step-grounding').count()>0&&await page.locator('#orientation-foundations a[href^="http"]').count()>0);
+    check(view+'_matching_foundation_numbers',await page.evaluate(()=>{
+      const titles=selector=>[...document.querySelectorAll(selector)].map(row=>row.textContent.trim());
+      return JSON.stringify(titles('#orientation-main .situated-choice > h3'))===JSON.stringify(titles('#orientation-foundations .foundation-choice > h3'));
+    }));
     check(view+'_no_internal_comments_in_actions',!/ainda precisa ser conferida|Estes recursos não são apresentados como prontos/.test(await page.locator('#orientation-main').innerText()));
     check(view+'_no_automatic_speech',await page.evaluate(()=>window.__publicSituated.speaks===0));
     check(view+'_no_case_storage',await page.evaluate(async()=>localStorage.length===0&&sessionStorage.length===0&&document.cookie===''&&(await indexedDB.databases()).length===0&&(await caches.keys()).length===0));
@@ -158,7 +163,9 @@ try{
     const result=await generated(page);
     check(view+'_situated_actions_and_grounding',result?.result_contract==='AMADO_SITUATED_1'&&await page.locator('.situated-action').count()>0&&await page.locator('.step-grounding').count()>0);
     check(view+'_no_unhandled_review_controls',await page.locator('.situated-action [data-edit-case]').count()===0);
-    check(view+'_inline_step_numbers',await page.locator('.situated-action .step-number').evaluateAll(rows=>rows.length>0&&rows.every(row=>getComputedStyle(row).display==='inline')));
+    check(view+'_step_numbers_without_legacy_badges',await page.locator('.situated-action .step-number').evaluateAll(rows=>rows.length>0&&rows.every(row=>{
+      const style=getComputedStyle(row);return ['inline','block'].includes(style.display)&&style.borderRadius==='0px'&&style.backgroundColor==='rgba(0, 0, 0, 0)';
+    })));
     check(view+'_current_footer',(await page.locator('.version-note').innerText()).includes('MADO '+expected.version));
     check(view+'_no_runtime_error',!(await page.locator('#runtime-error').innerText()).trim());await page.close();
   }

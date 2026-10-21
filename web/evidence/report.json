@@ -2,7 +2,7 @@
   "version": "1.5.0-rc2",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.5.0-rc2-articulation",
-  "compiled_at_utc": "2026-10-21T13:32:27.167966+00:00",
+  "compiled_at_utc": "2026-10-21T13:53:27.949409+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -98,13 +98,13 @@
       "completo.html_situated_contract": true,
       "completo.html_actions_and_grounding": true,
       "completo.html_no_unhandled_review_controls": true,
-      "completo.html_inline_step_numbers": true,
+      "completo.html_step_numbers_without_legacy_badges": true,
       "completo.html_no_runtime_error": true,
       "completo.html_current_version_footer": true,
       "completo-guiado.html_situated_contract": true,
       "completo-guiado.html_actions_and_grounding": true,
       "completo-guiado.html_no_unhandled_review_controls": true,
-      "completo-guiado.html_inline_step_numbers": true,
+      "completo-guiado.html_step_numbers_without_legacy_badges": true,
       "completo-guiado.html_no_runtime_error": true,
       "completo-guiado.html_current_version_footer": true,
       "home_pilot_shows_current_foundation_without_dead_review_controls": true,
@@ -135,12 +135,12 @@
         "current_download_bytes": true
       },
       "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-21T12:32:35.732Z",
-      "expected_commit": "82308cb6a99e54d89c47e6ed3e6d8c8d0d384eaf",
+      "checked_at": "2026-10-21T13:38:18.298Z",
+      "expected_commit": "123d6c70ca525782a933c1d841dbe1ff7c026414",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
-      "test_sha256": "25d31663024eb0d344f243db7ecfb07740e24a2bc88a02392ab28f33c6f39582",
-      "public_manifest_sha256": "0bf028dc1bf7d90586abeceedc2fecf33f11a315f6f21eb7d86da4348ceeb8df",
-      "check_count": 33,
+      "test_sha256": "5a8a74badfaa5610136742515d9fc36f059718512bd3ac1c1cb2ef55704b908f",
+      "public_manifest_sha256": "fe2d15011bfb3a4afe8e1b532b5981ae31834c54a46ea223bab42efc7ff29212",
+      "check_count": 47,
       "asset_count": 38,
       "scope": "Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana.",
       "limits": [
@@ -184,12 +184,12 @@
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "21f7264b662e1aa4269179d05afe8deefb7f317408124f47384fe55f0122d747",
+      "sha256": "33a28b6d768104303446f4b95b425414d4be087c32d4bd7e7a30f862412f1d75",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "9b14580ef34cb56988e7f86e57c68e8bb153721ed6ea83eef02d21786b711fc6",
+      "sha256": "4474e4dff0095fdf8506c125c1cf5dcfae61e51a31f570ccd158acd98c5264cd",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
@@ -199,7 +199,7 @@
     },
     "articulation-browser.json": {
       "url": "articulation-browser.json",
-      "sha256": "88ce5be3194895f78b4eec5419fa4c6c5199295ea9e5e6ddeffa4e38a18ad86c",
+      "sha256": "97fb94c36531fcbbd0b295d3dc989129ae86039cccfe195b8dece1a059d55028",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     }
   }

@@ -62,7 +62,7 @@ function preconditionsHTML(step,path,reviewEnabled) {
     conditions.map((row,index)=>'<li'+originAttr(path+'.conditions['+index+']','precondition')+'>'+esc(text(row))+'</li>').join('')+
     '</ul>'+(pending.length&&reviewEnabled?'<button type="button" class="secondary" data-edit-case>Revisar esta informação</button>':'')+'</div>';
 }
-function practicalStep(step,index,choice,path,projections,reviewEnabled) {
+function practicalStep(step,index,choice,path,projections,reviewEnabled,start=1) {
   const projection=actionProjection(step,path);projections.push(projection);
   const responsibleRecord=step.responsible_participant;
   const responsibleLabel=text(responsibleRecord);
@@ -77,7 +77,7 @@ function practicalStep(step,index,choice,path,projections,reviewEnabled) {
   return '<section class="situated-action"><h4>'+esc(heading)+'</h4>'+
     (responsible?'<p class="step-responsible"'+originAttr(path+'.responsible_participant')+'><strong>Quem realiza:</strong> '+esc(responsible)+'</p>':'')+
     (beneficiary?'<p class="step-beneficiary"'+originAttr(step.participant_label?path+'.participant_label':path.replace(/\.steps\[\d+\]$/,'')+'.participant_label')+'><strong>Para quem:</strong> '+esc(beneficiary)+'</p>':'')+
-    (projection.rows.length?'<ol class="action-instructions" role="list">'+projection.rows.map((row,i)=>'<li'+originAttr(row.origin_path,row.phase)+'><span class="step-number">Passo '+(i+1)+'. </span>'+esc(row.text)+'</li>').join('')+'</ol>':'')+
+    (projection.rows.length?'<ol class="action-instructions" role="list" start="'+start+'">'+projection.rows.map((row,i)=>'<li'+originAttr(row.origin_path,row.phase)+'><span class="step-number">Passo '+(start+i)+'. </span><span class="step-instruction-text">'+esc(row.text)+'</span></li>').join('')+'</ol>':'')+
     (modes.length?'<p class="step-modes"'+originAttr(path+'.modes')+'><strong>Formas de interação:</strong> '+esc(modes.join('; '))+'</p>':'')+
     (functions.length?'<p class="step-purpose"'+originAttr(path+'.functions')+'><strong>Para quê:</strong> '+esc(functions.join('; '))+'</p>':'')+
     preconditionsHTML(step,path,reviewEnabled)+
@@ -95,13 +95,24 @@ function practicalRelation(relation,path,reviewEnabled) {
     preconditionsHTML(relation,path,reviewEnabled)+(later.length?'<p><strong>Como conferir a combinação</strong></p><ul>'+later.map(({row,path:origin})=>'<li'+originAttr(origin,row.phase)+'>'+esc(verificationAction(row))+'</li>').join('')+'</ul>':'')+'</div>';
 }
 const choiceTitle=choice=>choice.label||items(choice.steps).map(step=>step.label).filter(Boolean).join(choice.composition_type==='INDEPENDENT_SUPPORTS'?' · ':' → ')||'Possibilidade de apoio';
+const numberedChoiceTitle=(choice,index)=>'<span class="orientation-number">Orientação '+(index+1)+'</span> <span class="orientation-title">'+esc(choiceTitle(choice))+'</span>';
 function practicalChoice(choice,kind,index,path,projections,reviewEnabled) {
   const scope=[choice.participant_label,choice.situation_label].filter(Boolean).join(' · ');
-  return '<article class="orientation-step situated-choice" data-choice-index="'+index+'"><h3>'+esc(choiceTitle(choice))+'</h3>'+
+  // Only an already ordered path shares step numbers across operations.
+  // Independent supports and functional alternatives do not acquire an order.
+  const sequential=choice.composition_type==='CONNECTED_PATH'&&items(choice.relations).length>0&&
+    items(choice.relations).every(row=>['DEPENDENT_SEQUENCE','SEQUENTIAL','SEQUENTIAL_REVIEW'].includes(row.kind));
+  let nextStep=1;
+  const actions=items(choice.steps).map((step,i)=>{
+    const result=practicalStep(step,i,choice,path+'.steps['+i+']',projections,reviewEnabled,sequential?nextStep:1);
+    nextStep+=projections[projections.length-1].rows.length;
+    return result;
+  }).join('');
+  return '<article class="orientation-step situated-choice" data-choice-index="'+index+'"><h3>'+numberedChoiceTitle(choice,index)+'</h3>'+
     (scope?'<p class="choice-context">'+esc(scope)+'</p>':'')+
     (kind==='pending'?'<p class="step-conditional">Esta possibilidade depende das condições indicadas em “Antes de aplicar”.</p>':'')+
     (choice.composition_type==='INDEPENDENT_SUPPORTS'?'<p class="independent-supports">Estes apoios podem ser utilizados separadamente. Não há uma sequência obrigatória entre eles.</p>':'')+
-    items(choice.steps).map((step,i)=>practicalStep(step,i,choice,path+'.steps['+i+']',projections,reviewEnabled)).join('')+
+    actions+
     items(choice.relations).map((row,i)=>practicalRelation(row,path+'.relations['+i+']',reviewEnabled)).join('')+
     (items(choice.missing_functions).length?'<div class="step-missing"><p><strong>Esta opção ainda não cobre:</strong></p>'+list(choice.missing_functions)+'</div>':'')+'</article>';
 }
@@ -168,7 +179,7 @@ function foundation(rendered,executionChecks,response,coverage) {
     return {choice,path,index,grounds,scope,reported:uniqueText(derivations.flatMap(d=>d.reported)),needs:uniqueText(derivations.flatMap(d=>d.needs)),links,extraSources,referredAnalyses,criteria,limits:uniqueText(limits)};
   });
   const linkList=rows=>rows.length?'<ul>'+rows.map(row=>'<li><a href="#'+esc(row.anchor)+'">'+esc(row.label)+'</a></li>').join('')+'</ul>':'';
-  const choicesHTML=projections.map(p=>'<section class="foundation-choice"><h3>'+esc(choiceTitle(p.choice))+'</h3>'+para(p.scope)+
+  const choicesHTML=projections.map(p=>'<section class="foundation-choice"><h3>'+numberedChoiceTitle(p.choice,p.index)+'</h3>'+para(p.scope)+
     '<h4>Informação considerada no relato</h4>'+(p.reported.length?list(p.reported):para('O vínculo desta escolha está registrado pelas condições e funções abaixo; não há um trecho do relato associado neste resultado.'))+
     '<h4>Necessidade identificada</h4>'+list(p.needs)+
     '<h4>Contribuições das fontes</h4>'+linkList(p.links)+linkList(p.extraSources)+
@@ -190,7 +201,7 @@ function foundation(rendered,executionChecks,response,coverage) {
   const sourcesHTML=[...sources.values()].map(row=>'<section class="foundation-source" id="'+esc(row.anchor)+'"><h4>'+esc(row.name)+'</h4>'+para(row.locator)+
     (/^https?:\/\//.test(row.url||'')?'<p><a href="'+esc(row.url)+'" rel="noreferrer">Consultar '+esc(row.name)+'</a></p>':'')+
     list([...row.statuses].map(state=>sourceStates[state]||state))+'</section>').join('');
-  const technical=projections.map(p=>'<section><h4>'+esc(choiceTitle(p.choice))+'</h4>'+items(p.choice.steps).concat(items(p.choice.relations)).map(row=>
+  const technical=projections.map(p=>'<section><h4>'+numberedChoiceTitle(p.choice,p.index)+'</h4>'+items(p.choice.steps).concat(items(p.choice.relations)).map(row=>
     '<p>'+esc([row.id,row.component_id,row.participant_id,row.situation_id].filter(Boolean).join(' · '))+'</p>'+list(row.check_ids)).join('')+
     items(p.choice.steps).filter(row=>row.limitation).map(row=>'<p><strong>Limite do padrão histórico, não instrução adicional desta operação:</strong> '+esc(text(row.limitation))+'</p>').join('')+
     p.grounds.map(g=>{const art=g.construction||g.articulation||{};return '<p>'+esc([g.id,g.claim_id,g.analytical_application_id,...items(g.origin_ids)].filter(Boolean).join(' · '))+'</p>'+para(g.justification||g.justificativa)+

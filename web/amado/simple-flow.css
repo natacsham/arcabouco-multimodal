@@ -121,7 +121,7 @@ html[data-contrast="high"] .simple-view .simple-status,html[data-contrast="high"
 .analytical-scope,.independent-supports {font-size:.9375rem}
 .situated-choice li,.situated-choice p {overflow-wrap:anywhere}
 /* Two reading levels: a complete practical section, then one optional rationale. */
-.simple-view .situated-choice {border:0;border-top:1px solid var(--border);border-radius:0;padding:1.25rem 0;margin:1rem 0;background:transparent}
+/* Orientation boundaries and semantic surfaces are shared in styles.css. */
 .situated-choice > h3 {font-size:1.25rem;line-height:1.4;margin:0 0 .4rem}
 .situated-choice > .choice-context {display:block;margin:.3rem 0 1rem;color:var(--primary-dark)}
 .situated-action {padding:.25rem 0 .75rem}

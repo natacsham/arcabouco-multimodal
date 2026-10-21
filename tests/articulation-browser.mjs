@@ -174,6 +174,11 @@ async function generate(page,fixture){
   check(fixture.id+'_situated_contract',result?.result_contract==='AMADO_SITUATED_1');
   check(fixture.id+'_grounded_proposals',proposals(result).length>0);
   check(fixture.id+'_actions_visible',await page.locator('.situated-action').count()>0);
+  check(fixture.id+'_orientations_numbered_in_display_order',await page.locator('#orientation-main .situated-choice').evaluateAll(rows=>rows.length>0&&rows.every((row,index)=>{
+    const number=row.querySelector(':scope > h3 .orientation-number');
+    return number?.textContent.trim()==='Orientação '+(index+1)&&row.dataset.choiceIndex===String(index)&&
+      Boolean(row.querySelector(':scope > h3 .orientation-title')?.textContent.trim());
+  })));
   const practicalText=await page.locator('#orientation-main').innerText();
   check(fixture.id+'_no_object_strings',!practicalText.includes('[object Object]'));
   check(fixture.id+'_whole_practical_orientation_open',await page.locator('#orientation-main details').count()===0);
@@ -185,8 +190,14 @@ async function generate(page,fixture){
   check(fixture.id+'_steps_with_origin_and_phase',await page.locator('#orientation-main .action-instructions li').count()>0&&
     await page.locator('#orientation-main .action-instructions li').evaluateAll(rows=>rows.every(row=>Boolean(row.dataset.originPath)&&Boolean(row.dataset.phase))));
   check(fixture.id+'_step_numbers_are_inline_not_legacy_badges',await page.locator('#orientation-main .step-number').evaluateAll(rows=>rows.every(row=>{
-    const style=getComputedStyle(row);return style.display==='inline'&&style.backgroundColor==='rgba(0, 0, 0, 0)'&&style.borderRadius==='0px';
+    const style=getComputedStyle(row);return ['inline','block'].includes(style.display)&&style.backgroundColor==='rgba(0, 0, 0, 0)'&&style.borderRadius==='0px';
   })));
+  check(fixture.id+'_action_conditions_and_monitoring_have_distinct_surfaces',await page.locator('#orientation-main').evaluate(main=>{
+    const selectors=['.action-instructions','.step-conditions','.step-monitoring'];
+    const colors=selectors.map(selector=>[...main.querySelectorAll(selector)].map(row=>getComputedStyle(row).backgroundColor));
+    return colors[0].length>0&&colors.every(group=>group.every(color=>color!=='rgba(0, 0, 0, 0)'))&&
+      colors.every((group,index)=>group.every(color=>colors.every((other,otherIndex)=>otherIndex===index||!other.includes(color))));
+  }));
   check(fixture.id+'_no_internal_review_comments',!/ainda precisa ser conferida|Estes recursos não são apresentados como prontos|\bNOT_EXECUTED\b|\bGROUNDED_ANALYTICAL_APPLICATION\b/.test(practicalText));
   check(fixture.id+'_technical_foundations_not_in_practical',await page.locator('#orientation-main .step-grounding,#orientation-main .foundation-source').count()===0);
   check(fixture.id+'_no_hidden_confirmation',probe.records.slice(recordStart).filter(r=>r.request.operation==='update').every(r=>{
@@ -228,6 +239,12 @@ try{
     // The native details toggle schedules lazy foundation rendering. Observe
     // its completed DOM instead of racing that event on fast CI browsers.
     await page.locator('#orientation-foundations .foundation-source a[href^="http"]').first().waitFor({state:'visible',timeout:10000});
+    check(fixture.id+'_foundation_matches_numbered_orientations',await page.evaluate(()=>{
+      const headings=selector=>[...document.querySelectorAll(selector)].map(row=>[
+        row.querySelector('.orientation-number')?.textContent.trim(),row.querySelector('.orientation-title')?.textContent.trim()]);
+      const practical=headings('#orientation-main .situated-choice > h3'),technical=headings('#orientation-foundations .foundation-choice > h3');
+      return practical.length>0&&JSON.stringify(practical)===JSON.stringify(technical);
+    }));
     check(fixture.id+'_localized_source_links',await page.locator('.foundation-choice a[href^="#"]').count()>0&&await page.locator('.foundation-source a[href^="http"]').count()>0);
     check(fixture.id+'_source_anchors_resolve',await page.locator('#orientation-foundations a[href^="#"]').evaluateAll(links=>links.every(link=>Boolean(document.getElementById(link.hash.slice(1))))));
     check(fixture.id+'_sources_only_in_foundation',await page.locator('.foundation-source').count()===await page.locator('#orientation-foundations .foundation-source').count());
@@ -237,6 +254,23 @@ try{
     }
     if(fixture.id==='dictation_review_control'){
       check('dictation_exposes_a_real_relation',proposals(result).some(p=>(p.relations||[]).length>0));
+      check('dictation_sequential_routes_keep_continuous_step_numbers',await page.locator('#orientation-main .situated-choice').evaluateAll(articles=>{
+        const result=window.__articulationReadOnly.generated;
+        const sequential=articles.filter(article=>{
+          const path=article.querySelector('.action-instructions li')?.dataset.originPath||'';
+          const match=/^(choices|pending_candidates|partial_segments)\[(\d+)\]/.exec(path);
+          const choice=match&&result[match[1]]?.[Number(match[2])];
+          return choice?.composition_type==='CONNECTED_PATH'&&choice.steps.length>1&&choice.relations?.length>0&&
+            choice.relations.every(relation=>['DEPENDENT_SEQUENCE','SEQUENTIAL','SEQUENTIAL_REVIEW'].includes(relation.kind));
+        });
+        return sequential.length>0&&sequential.every(article=>{
+          const numbers=[...article.querySelectorAll('.step-number')].map(row=>Number(/Passo (\d+)/.exec(row.textContent)?.[1]));
+          return numbers.length>1&&numbers.every((number,index)=>number===index+1)&&
+            [...article.querySelectorAll('.action-instructions')].every(list=>Number(list.start)===Number(/Passo (\d+)/.exec(list.querySelector('.step-number')?.textContent)?.[1]));
+        });
+      }));
+      check('dictation_exposes_instruction_condition_and_check_regions',await page.locator('#orientation-main').evaluate(main=>
+        ['.action-instructions','.step-conditions','.step-monitoring'].every(selector=>main.querySelector(selector))));
       await page.locator('#read-orientation').focus();await page.keyboard.press('Enter');
       check('one_control_starts_speech',await page.locator('#read-orientation').innerText()==='Parar');
       const speech=await page.evaluate(()=>window.__speechControls.texts.at(-1));
@@ -271,10 +305,31 @@ try{
       await page.setViewportSize({width,height:900});
       check(fixture.id+'_reflow_'+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
       await page.evaluate(()=>document.documentElement.style.fontSize='125%');
-      check(fixture.id+'_step_numbers_inline_text125_'+width,await page.locator('#orientation-main .step-number').evaluateAll(rows=>rows.every(row=>getComputedStyle(row).display==='inline'&&getComputedStyle(row).backgroundColor==='rgba(0, 0, 0, 0)')));
+      check(fixture.id+'_step_numbers_not_badges_text125_'+width,await page.locator('#orientation-main .step-number').evaluateAll(rows=>rows.every(row=>['inline','block'].includes(getComputedStyle(row).display)&&getComputedStyle(row).backgroundColor==='rgba(0, 0, 0, 0)')));
       await page.evaluate(()=>document.documentElement.style.fontSize='200%');
       check(fixture.id+'_text200_'+width,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+      check(fixture.id+'_instruction_text_reflows_text200_'+width,await page.locator('#orientation-main').evaluate(main=>{
+        const walker=document.createTreeWalker(main,NodeFilter.SHOW_TEXT),range=document.createRange();let node;
+        while((node=walker.nextNode())){
+          if(!node.textContent.trim())continue;
+          range.selectNodeContents(node);
+          if([...range.getClientRects()].some(rect=>rect.width>0&&(rect.left< -1||rect.right>innerWidth+1)))return false;
+        }
+        return true;
+      }));
       await page.evaluate(()=>document.documentElement.style.fontSize='');
+      if(width===320){
+        check(fixture.id+'_regions_have_noncolor_boundaries_320',await page.locator('#orientation-main .situated-choice,#orientation-main .action-instructions,#orientation-main .step-conditions,#orientation-main .step-monitoring').evaluateAll(rows=>rows.length>0&&rows.every(row=>{
+          const style=getComputedStyle(row);
+          return ['Top','Right','Bottom','Left'].some(side=>parseFloat(style['border'+side+'Width'])>=1&&!['none','hidden'].includes(style['border'+side+'Style']));
+        })));
+        await page.emulateMedia({forcedColors:'active'});
+        check(fixture.id+'_regions_remain_distinct_in_forced_colors_320',await page.locator('#orientation-main .situated-choice,#orientation-main .action-instructions,#orientation-main .step-conditions,#orientation-main .step-monitoring').evaluateAll(rows=>rows.length>0&&rows.every(row=>{
+          const style=getComputedStyle(row);
+          return ['Top','Right','Bottom','Left'].some(side=>parseFloat(style['border'+side+'Width'])>=1&&!['none','hidden'].includes(style['border'+side+'Style']));
+        })));
+        await page.emulateMedia({forcedColors:'none'});
+      }
       if(width===320&&process.env.AMADO_BROWSER_SCREENSHOTS){
         await page.locator('#orientation-title').scrollIntoViewIfNeeded();
         await page.screenshot({path:path.join(process.env.AMADO_BROWSER_SCREENSHOTS,fixture.id+'-practical-320.png')});

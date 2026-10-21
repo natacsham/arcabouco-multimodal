@@ -61,7 +61,7 @@
   "frontend_sha256": {
     "index.html": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
     "app.js": "213854291fd072f463f110b18eb736b1e7842685c9ac76c668418f26fd7cb862",
-    "styles.css": "74afd7f756ad74ff18b70f7b0111ef0838be980b2df74e8ce58718543713f83b",
+    "styles.css": "ebb0865d1433fd33c663c3179812ed6ab358ab038c59d33c02b0aeb985e8920d",
     "worker.mjs": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
     "client.mjs": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
     "guiado.html": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
@@ -71,10 +71,10 @@
     "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
     "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
     "simple-flow.js": "e4d6aa459a79eab49c336d6b9f7e36836f9a47ea5afdf24c45ad6de9ac112eb8",
-    "simple-flow.css": "97092fef474b7f6087e61429edccf534f716d48cae15adc9ed6f9bc053917b79",
+    "simple-flow.css": "89488c28345b7b12c8b6dc08fff5cb8bc27b3fcf66cd3c1e79f8a982c992c206",
     "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
     "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
-    "situated-output.mjs": "bc2146c401c33fceba3b0caaac18feab7b2e8a20e78300a269ffebe5d405fa79",
+    "situated-output.mjs": "28fe637119ecc335d13cc0bbea36659aed9cb76ec058a1cb706536f0d93d4716",
     "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
     "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
   },

@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-21T13:30:39.914Z",
+  "checked_at": "2026-10-21T13:51:40.660Z",
   "checks": {
     "served_manifest_matches_build": true,
     "single_free_narrative_entry": true,
@@ -46,13 +46,13 @@
     "completo.html_situated_contract": true,
     "completo.html_actions_and_grounding": true,
     "completo.html_no_unhandled_review_controls": true,
-    "completo.html_inline_step_numbers": true,
+    "completo.html_step_numbers_without_legacy_badges": true,
     "completo.html_no_runtime_error": true,
     "completo.html_current_version_footer": true,
     "completo-guiado.html_situated_contract": true,
     "completo-guiado.html_actions_and_grounding": true,
     "completo-guiado.html_no_unhandled_review_controls": true,
-    "completo-guiado.html_inline_step_numbers": true,
+    "completo-guiado.html_step_numbers_without_legacy_badges": true,
     "completo-guiado.html_no_runtime_error": true,
     "completo-guiado.html_current_version_footer": true,
     "home_pilot_shows_current_foundation_without_dead_review_controls": true,
@@ -135,7 +135,7 @@
     "frontend_sha256": {
       "index.html": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
       "app.js": "213854291fd072f463f110b18eb736b1e7842685c9ac76c668418f26fd7cb862",
-      "styles.css": "74afd7f756ad74ff18b70f7b0111ef0838be980b2df74e8ce58718543713f83b",
+      "styles.css": "ebb0865d1433fd33c663c3179812ed6ab358ab038c59d33c02b0aeb985e8920d",
       "worker.mjs": "b65fca2030f6a940b78b002c0b63d056bbadaf7c5652ca5cdf30d664155d55fe",
       "client.mjs": "953cfed333f3c8391dadae82c6212955ce1064cb5e2cffa26ffafe0c1f5eff26",
       "guiado.html": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
@@ -145,10 +145,10 @@
       "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
       "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
       "simple-flow.js": "e4d6aa459a79eab49c336d6b9f7e36836f9a47ea5afdf24c45ad6de9ac112eb8",
-      "simple-flow.css": "97092fef474b7f6087e61429edccf534f716d48cae15adc9ed6f9bc053917b79",
+      "simple-flow.css": "89488c28345b7b12c8b6dc08fff5cb8bc27b3fcf66cd3c1e79f8a982c992c206",
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
-      "situated-output.mjs": "bc2146c401c33fceba3b0caaac18feab7b2e8a20e78300a269ffebe5d405fa79",
+      "situated-output.mjs": "28fe637119ecc335d13cc0bbea36659aed9cb76ec058a1cb706536f0d93d4716",
       "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
       "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
     },
@@ -194,9 +194,9 @@
   "static_query_allowlist": [
     "amado/styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes"
   ],
-  "test_sha256": "9db6c79b523ee311f64b46ee8c85324017618dd5b133d39e848899d307d7f85a",
+  "test_sha256": "8702225929b36b8c40bcef6fac51401c81480e651719f16c922a2adf9f3cddc6",
   "browser": "155.0.8059.40",
-  "canonical_result_sha256": "f149e8cc4c946b9d81780f58c387fff891b6405cfefa2c9911e84a3ca3b19093",
+  "canonical_result_sha256": "fc0d8204e389c7302fb401909d2f68bd960e44dd1795bce17e36b9cda94a0352",
   "result": {
     "contract": "AMADO_SITUATED_1",
     "status": "INSUFFICIENT",
@@ -250,21 +250,21 @@
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 14.079618687682288,
+        "ratio": 12.950210841606294,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 14.079618687682288,
+        "ratio": 12.950210841606294,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 14.079618687682288,
+        "ratio": 12.950210841606294,
         "minimum": 4.5
       },
       {
@@ -285,28 +285,28 @@
         "kind": "text",
         "element": "P",
         "class_name": "",
-        "ratio": 12.516661994305135,
+        "ratio": 13.199799600755398,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 12.516661994305135,
+        "ratio": 13.199799600755398,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 12.516661994305135,
+        "ratio": 13.199799600755398,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "P",
         "class_name": "step-monitoring",
-        "ratio": 14.079618687682288,
+        "ratio": 12.887474088501294,
         "minimum": 4.5
       },
       {
@@ -559,21 +559,21 @@
         "kind": "text",
         "element": "P",
         "class_name": "",
-        "ratio": 18.763901930292075,
+        "ratio": 21,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 18.763901930292075,
+        "ratio": 21,
         "minimum": 4.5
       },
       {
         "kind": "text",
         "element": "LI",
         "class_name": "",
-        "ratio": 18.763901930292075,
+        "ratio": 21,
         "minimum": 4.5
       },
       {
@@ -756,26 +756,26 @@
     "status": "INSUFFICIENT",
     "proposal_status": "CONDITIONAL",
     "operation_count": 1,
-    "canonical_sha256": "307043d3a100b2791031496c448aaaf5f14d5d07a638d9aef42229499ab3a627"
+    "canonical_sha256": "36454f34a216b628560b84d743a23a69357914e1fff9fcd4eaea6c71cd638aeb"
   },
   "narrative_cases": [
     {
       "id": "presentation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "f4e968e9de4ae44acb1451759c6b70b336a5268497643285851cf5121e2d0ae9"
+      "canonical_sha256": "c9aed506d7945ae46f30f919255469b9de01581cb572db8497d149fb7ed30d71"
     },
     {
       "id": "form",
       "parity": true,
       "proposal_status": "PARTIAL",
-      "canonical_sha256": "d26a94f2d494aae3b6452e7cedd7e682b3ab6f6ec35cad0b8b85c5c407297559"
+      "canonical_sha256": "26dce5aa9e82104a576fb0ada504e728b07ecd7e67f3c470240e2da452a4c1bf"
     },
     {
       "id": "dictation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "622f216226ef0fa0618313762b6f79583582e5e654904b360daa343d90172256"
+      "canonical_sha256": "d5fb2fda5b8ca17d242543af084a00c9e175ab3817a37d814123f2be6ae97c0f"
     }
   ],
   "passed": true
