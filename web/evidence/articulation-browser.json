@@ -139,7 +139,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "486a1d6df0201b739648422e3c1073ce82e484fea28656f5d4e56ac740ef6fa2",
+      "canonical_sha256": "39c98b995ac0e5efb5b31d3235dc9780877f62d373102f0fc60f4d0bfb8c1fba",
       "proposals": 1,
       "relations": 0,
       "analytical_applications": 1
@@ -150,7 +150,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "a9f041d975d1968cc8fc1f22b13ae63aff0f79af99ef8bdcb692254ccb929ea5",
+      "canonical_sha256": "7f0eedf6e7a2dd40cfbf198483806348433f37c8f5f1daa9d160abfb97db6f17",
       "proposals": 2,
       "relations": 2,
       "analytical_applications": 2
@@ -161,7 +161,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "6722c949a91c78590e0778760ed92102210dfa120ab6ab1f4d671934dbe83a2d",
+      "canonical_sha256": "6d487c5c98442084a57f37c647fcad7f4a9773da1de23b6c50399ca50dc52954",
       "proposals": 6,
       "relations": 2,
       "analytical_applications": 0
@@ -172,7 +172,7 @@
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
       "parity": true,
-      "canonical_sha256": "d4780eab07f2e50efab68bfc6d57a0be8423c74a132fb03b83ec847ca994deae",
+      "canonical_sha256": "a73648fe6cfeabaa9164fa4f8d7430365826cb3d58df43bf54ad8133533bbf0a",
       "proposals": 3,
       "relations": 0,
       "analytical_applications": 0
@@ -183,7 +183,7 @@
     "Three synthetic texts entered manually via visible controls; no claim of human relevance or learning outcomes.",
     "Speech output is mocked for start/stop controls; microphone accuracy and assistive-technology reading are not tested."
   ],
-  "checked_at": "2026-10-21T13:18:51.292Z",
+  "checked_at": "2026-10-21T13:30:26.387Z",
   "build": {
     "version": "1.5.0-rc2",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
@@ -303,7 +303,7 @@
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
-  "test_sha256": "f343765968f993f87b57cd801be8de73afce2b9bcfba25ada6c03c716021d522",
+  "test_sha256": "2e6b69f99a1d8ac76079eabd777fe42bd92732f2487c279819ddc578878933c5",
   "fixture_sha256": "df942e066de9245c2b6603f88bb5d5a7b6157659c6e6da12923d62728962fdae",
   "browser": "155.0.8059.40",
   "review_counterfactual": {

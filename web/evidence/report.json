@@ -2,7 +2,7 @@
   "version": "1.5.0-rc2",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.5.0-rc2-articulation",
-  "compiled_at_utc": "2026-10-21T13:20:57.757312+00:00",
+  "compiled_at_utc": "2026-10-21T13:32:27.167966+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -169,7 +169,7 @@
   "reports": {
     "technical-1.5-report.json": {
       "url": "technical-1.5-report.json",
-      "sha256": "7ca083d4eae0b982a25ce074244cc93963e65c738650e221df594394dc9e937d",
+      "sha256": "4a0ba08e335d67078410d805a1f8a6d4a94f3ec2b4c6dbc107bb89f83a3dddb8",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "reasoner-1.5-report.json": {
@@ -184,12 +184,12 @@
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "9a41be9772fdbbc11a3045de9be79e7d19475e88a56eedbcc265199e2b6c6dfa",
+      "sha256": "21f7264b662e1aa4269179d05afe8deefb7f317408124f47384fe55f0122d747",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "51f03de5557096999e5d43e3f5d9876f9f55f09500f43891443d107a86482c2a",
+      "sha256": "9b14580ef34cb56988e7f86e57c68e8bb153721ed6ea83eef02d21786b711fc6",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
@@ -199,7 +199,7 @@
     },
     "articulation-browser.json": {
       "url": "articulation-browser.json",
-      "sha256": "68d51fa369e96a73dab9ae5e354e01a9d19dce255318168eba02eb5c3b66962d",
+      "sha256": "88ce5be3194895f78b4eec5419fa4c6c5199295ea9e5e6ddeffa4e38a18ad86c",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     }
   }

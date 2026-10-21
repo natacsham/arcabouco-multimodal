@@ -225,6 +225,9 @@ try{
     const grounding=page.locator('#orientation-foundations > summary');
     await grounding.focus();await page.keyboard.press('Enter');
     check(fixture.id+'_keyboard_grounding',await grounding.evaluate(el=>el.parentElement.open));
+    // The native details toggle schedules lazy foundation rendering. Observe
+    // its completed DOM instead of racing that event on fast CI browsers.
+    await page.locator('#orientation-foundations .foundation-source a[href^="http"]').first().waitFor({state:'visible',timeout:10000});
     check(fixture.id+'_localized_source_links',await page.locator('.foundation-choice a[href^="#"]').count()>0&&await page.locator('.foundation-source a[href^="http"]').count()>0);
     check(fixture.id+'_source_anchors_resolve',await page.locator('#orientation-foundations a[href^="#"]').evaluateAll(links=>links.every(link=>Boolean(document.getElementById(link.hash.slice(1))))));
     check(fixture.id+'_sources_only_in_foundation',await page.locator('.foundation-source').count()===await page.locator('#orientation-foundations .foundation-source').count());

@@ -218,6 +218,7 @@ try{
   const grounding=page.locator('#orientation-foundations > summary');
   await grounding.focus();await page.keyboard.press('Enter');
   check('keyboard_opens_single_foundation_section',await grounding.evaluate(el=>el.parentElement.open)&&await grounding.innerText()==='Como chegamos a esta orientação');
+  await page.locator('#orientation-foundations .foundation-source a[href^="http"]').first().waitFor({state:'visible',timeout:10000});
   check('grounding_links_real_sources',await page.locator('#orientation-foundations .foundation-choice a[href^="#"]').count()>0&&await page.locator('#orientation-foundations .foundation-source a[href^="http"]').count()>0);
   check('source_anchors_resolve',await page.locator('#orientation-foundations a[href^="#"]').evaluateAll(links=>links.every(link=>Boolean(document.getElementById(link.hash.slice(1))))));
   check('no_raw_object_rendering',!(await page.locator('#orientation-main').innerText()).includes('[object Object]'));

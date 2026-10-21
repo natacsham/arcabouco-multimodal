@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-21T13:19:04.249Z",
+  "checked_at": "2026-10-21T13:30:39.914Z",
   "checks": {
     "served_manifest_matches_build": true,
     "single_free_narrative_entry": true,
@@ -194,9 +194,9 @@
   "static_query_allowlist": [
     "amado/styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes"
   ],
-  "test_sha256": "837143d2b016ddb6f080cd5e6199d4502d625448fd9aed8b9337dddd06d055d3",
+  "test_sha256": "9db6c79b523ee311f64b46ee8c85324017618dd5b133d39e848899d307d7f85a",
   "browser": "155.0.8059.40",
-  "canonical_result_sha256": "7b224ab80417714eba2c7ad51959f2c1a3544a14a85ef53027b69351149e57a8",
+  "canonical_result_sha256": "f149e8cc4c946b9d81780f58c387fff891b6405cfefa2c9911e84a3ca3b19093",
   "result": {
     "contract": "AMADO_SITUATED_1",
     "status": "INSUFFICIENT",
@@ -756,26 +756,26 @@
     "status": "INSUFFICIENT",
     "proposal_status": "CONDITIONAL",
     "operation_count": 1,
-    "canonical_sha256": "bf59619a552bb09dbdb75f11f99a0a6add6b2b6749212afb672ab991924eb4c3"
+    "canonical_sha256": "307043d3a100b2791031496c448aaaf5f14d5d07a638d9aef42229499ab3a627"
   },
   "narrative_cases": [
     {
       "id": "presentation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "3a9ebd552dbc8b720ded1da4d892f91df008a01d75efb22fb7ef30dc07c7c280"
+      "canonical_sha256": "f4e968e9de4ae44acb1451759c6b70b336a5268497643285851cf5121e2d0ae9"
     },
     {
       "id": "form",
       "parity": true,
       "proposal_status": "PARTIAL",
-      "canonical_sha256": "07d6ea8688ed9b1cedad3f7647a1d458338437aef17721b362e9ea58582eed73"
+      "canonical_sha256": "d26a94f2d494aae3b6452e7cedd7e682b3ab6f6ec35cad0b8b85c5c407297559"
     },
     {
       "id": "dictation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "2a167250af5492adb160db7c21447bbf828607ec3713fe15d1a4f467777be7e0"
+      "canonical_sha256": "622f216226ef0fa0618313762b6f79583582e5e654904b360daa343d90172256"
     }
   ],
   "passed": true

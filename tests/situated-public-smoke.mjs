@@ -142,6 +142,7 @@ try{
     const foundations=page.locator('#orientation-foundations > summary');
     check(view+'_single_foundation_section',await foundations.count()===1&&await foundations.innerText()==='Como chegamos a esta orientação'&&await foundations.evaluate(el=>!el.parentElement.open));
     await foundations.focus();await page.keyboard.press('Enter');
+    await page.locator('#orientation-foundations .foundation-source a[href^="http"]').first().waitFor({state:'visible',timeout:10000});
     check(view+'_rendered_action_grounding_links',await page.locator('#orientation-foundations .step-grounding').count()>0&&await page.locator('#orientation-foundations a[href^="http"]').count()>0);
     check(view+'_no_internal_comments_in_actions',!/ainda precisa ser conferida|Estes recursos não são apresentados como prontos/.test(await page.locator('#orientation-main').innerText()));
     check(view+'_no_automatic_speech',await page.evaluate(()=>window.__publicSituated.speaks===0));
