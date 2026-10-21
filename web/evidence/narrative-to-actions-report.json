@@ -1,0 +1,1502 @@
+{
+  "classification": "SYNTHETIC_SOFTWARE_CHECK_NOT_HUMAN_VALIDATION",
+  "cases_added_to_base": false,
+  "case_specific_rules_added": false,
+  "limits": [
+    "No learning or accessibility-in-use outcome was measured.",
+    "The three narratives are tests, not evaluations with participants.",
+    "Draft review does not demonstrate message submission."
+  ],
+  "cases": [
+    {
+      "id": "presentation",
+      "narrative": "Sou instrutora de um curso comunitário. Vou apresentar slides em uma sala e explicar as instruções dos exercícios. Algumas pessoas leem texto curto, mas não conseguem retomar as instruções quando são dadas somente pela fala. Temos computador, projetor e editor de texto. Posso preparar o material em partes e deixá-lo disponível para consulta.",
+      "decomposition": {
+        "participants": [
+          {
+            "id": "PART-CASO-01-D0DE3E",
+            "contexto_id": "CTX-CASO-7C3ABDF8BE",
+            "papel_id": "PAPEL-PESSOA-APOIADA",
+            "caracteristica_ids": [],
+            "tarefa_ids": [],
+            "modalidade_ids": [],
+            "recurso_operado_ids": [],
+            "objetivo_participacao": "",
+            "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO",
+            "label": "Pessoas apoiadas na interação (quantidade não informada)",
+            "grupo_rotulo": "pessoas",
+            "quantidade": null
+          },
+          {
+            "id": "PART-6C6D17083142",
+            "contexto_id": "CTX-CASO-7C3ABDF8BE",
+            "papel_id": "",
+            "label": "Quem apresenta",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "caracteristica_ids": [],
+            "tarefa_ids": [
+              "TAR-COMUNICAR-CONTEUDO-1545B38",
+              "TAR-COMUNICAR-E-EXPRESSAR"
+            ],
+            "modalidade_ids": [],
+            "recurso_operado_ids": [],
+            "objetivo_participacao": "",
+            "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+          }
+        ],
+        "situations": [
+          {
+            "id": "SIT-129D4439628A",
+            "label": "Apresentação e explicação coletiva",
+            "task_ids": [
+              "TAR-COMUNICAR-CONTEUDO-1545B38",
+              "TAR-COMUNICAR-E-EXPRESSAR"
+            ],
+            "participant_ids": [
+              "PART-6C6D17083142",
+              "PART-CASO-01-D0DE3E"
+            ],
+            "actor_ids": [
+              "PART-6C6D17083142"
+            ],
+            "recipient_ids": [
+              "PART-CASO-01-D0DE3E"
+            ],
+            "env_ids": [],
+            "resource_ids": [
+              "RED-APRESENTACAO"
+            ],
+            "resource_states": [],
+            "mode_ids": [
+              "MOD-FALA",
+              "MOD-TEXTO"
+            ],
+            "need_ids": [],
+            "barrier_ids": [],
+            "source_text": "Vou apresentar slides em uma sala e explicar as instruções dos exercícios.",
+            "state": "CONFIRMADO",
+            "kind": "presentation"
+          },
+          {
+            "id": "SIT-E428574416E1",
+            "label": "Realização de exercícios — meio não informado",
+            "task_ids": [],
+            "participant_ids": [
+              "PART-CASO-01-D0DE3E"
+            ],
+            "actor_ids": [
+              "PART-CASO-01-D0DE3E"
+            ],
+            "recipient_ids": [],
+            "env_ids": [],
+            "resource_ids": [],
+            "resource_states": [],
+            "mode_ids": [],
+            "need_ids": [],
+            "barrier_ids": [],
+            "source_text": "Vou apresentar slides em uma sala e explicar as instruções dos exercícios.",
+            "state": "CONFIRMADO",
+            "kind": "exercise"
+          }
+        ],
+        "raw": {
+          "tarefas": [
+            "TAR-COMUNICAR-E-EXPRESSAR",
+            "TAR-COMUNICAR-CONTEUDO-1545B38"
+          ],
+          "caracteristicas_pessoa": [],
+          "recursos_digitais": [
+            "RED-APRESENTACAO",
+            "RED-EDITOR-CONTEUDO"
+          ],
+          "barreiras": [],
+          "necessidades": [
+            "NEC-PRESERVAR-CONTEUDO-PARA-REVISAO"
+          ],
+          "ambientes": [],
+          "modalidades_disponiveis": [
+            "MOD-FALA",
+            "MOD-TEXTO"
+          ],
+          "recursos_disponiveis": [
+            "REC-COMPUTADOR-DATASHOW",
+            "REC-COMPUTADOR",
+            "REC-PROJETOR"
+          ],
+          "recursos_impedidos": [],
+          "recursos_propostos": [],
+          "funcoes_requeridas_ids": []
+        },
+        "questions": [
+          {
+            "field": "observation_scope",
+            "label": "A dificuldade já relatada — “Algumas pessoas leem texto curto, mas não conseguem retomar as instruções quando são dadas somente pela fala.” — refere-se a quem e a qual atividade?",
+            "participant_id": "",
+            "situation_id": "SIT-129D4439628A"
+          },
+          {
+            "field": "objetivo",
+            "label": "Ao comunicar ou expressar conhecimento, o que precisa ser possível fazer?",
+            "participant_id": null,
+            "situation_id": ""
+          }
+        ]
+      },
+      "narrative_result": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "NONE",
+        "coverage_scope": "DECLARED_FUNCTIONS_ONLY",
+        "covers_whole_reported_task": false,
+        "required_functions": [],
+        "choices": [],
+        "pending_candidates": [],
+        "partial_segments": [],
+        "pending_conditions": [],
+        "unavailable_conditions": [],
+        "gaps": [
+          {
+            "code": "UNMAPPED_TASK",
+            "type": "FUNCTION_GAP",
+            "id": "TAR-COMUNICAR-CONTEUDO-1545B38",
+            "label": "Comunicar conteúdo",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-6C6D17083142",
+            "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
+            "participant_label": "Quem apresenta",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "UNMAPPED_TASK",
+            "type": "FUNCTION_GAP",
+            "id": "TAR-COMUNICAR-E-EXPRESSAR",
+            "label": "Comunicar e expressar conhecimento",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-6C6D17083142",
+            "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
+            "participant_label": "Quem apresenta",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
+            "type": "FUNCTION_GAP",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-6C6D17083142",
+            "participant_label": "Quem apresenta",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
+            "type": "FUNCTION_GAP",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-CASO-01-D0DE3E",
+            "participant_label": "Pessoas apoiadas na interação (quantidade não informada)",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
+            "type": "CONTEXT_GAP",
+            "situation_id": "SIT-E428574416E1",
+            "participant_id": "PART-CASO-01-D0DE3E",
+            "participant_label": "Pessoas apoiadas na interação (quantidade não informada)",
+            "situation_label": "Realização de exercícios — meio não informado"
+          },
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [],
+        "input_issues": []
+      },
+      "synthetic_supplement": "COMPLEMENTO SINTÉTICO: priorizar a apresentação. A dificuldade de retomar instruções pertence às pessoas que acompanham a fala, não à instrutora. Não foram confirmados áudio gravado, vibração ou recurso para os exercícios.",
+      "confirmed_result": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "CONDITIONAL",
+        "coverage_scope": "DECLARED_FUNCTIONS_ONLY",
+        "covers_whole_reported_task": false,
+        "required_functions": [
+          "FUN-MANTER-INFORMACAO-RECUPERAVEL"
+        ],
+        "choices": [],
+        "pending_candidates": [
+          {
+            "operations": [
+              "OP-PAD-ORIENTACAO-AUDIO-RECUPERAVEL"
+            ],
+            "relations": [],
+            "covers_required_functions": true,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Manter a orientação sonora necessária recuperável e verificar como a pessoa pode solicitar sua repetição."
+            ]
+          },
+          {
+            "operations": [
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ],
+            "relations": [
+              "REL-PAD-RETORNO-HAPTICO-RUIDO-01"
+            ],
+            "covers_required_functions": true,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Examinar um sinal tátil para avisar sobre a orientação quando o áudio é prejudicado, mantendo o significado na mensagem recuperável."
+            ]
+          }
+        ],
+        "partial_segments": [],
+        "pending_conditions": [
+          {
+            "id": "OP-PAD-ORIENTACAO-AUDIO-RECUPERAVEL:operability",
+            "label": "A pessoa responsável consegue usar os recursos necessários nesta situação?",
+            "required_by": [
+              "OP-PAD-ORIENTACAO-AUDIO-RECUPERAVEL"
+            ]
+          },
+          {
+            "id": "condition-eae2be21970f1353",
+            "label": "A informação essencial e as condições de percepção, ação e mediação foram conferidas com esta pessoa?",
+            "required_by": [
+              "OP-PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ]
+          },
+          {
+            "id": "OP-PAD-RETORNO-HAPTICO-RUIDO:operability",
+            "label": "A pessoa responsável consegue usar os recursos necessários nesta situação?",
+            "required_by": [
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ]
+          },
+          {
+            "id": "OP-PAD-RETORNO-HAPTICO-RUIDO:recoverable_message",
+            "label": "A mesma orientação sonora continua disponível, e a pessoa consegue acionar sua repetição quando recebe o sinal tátil?",
+            "required_by": [
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ]
+          },
+          {
+            "id": "REL-PAD-RETORNO-HAPTICO-RUIDO-01:sufficiency",
+            "label": "Cada apresentação oferece uma parte necessária para entender ou realizar a mesma tarefa?",
+            "required_by": [
+              "REL-PAD-RETORNO-HAPTICO-RUIDO-01"
+            ]
+          },
+          {
+            "id": "REL-PAD-RETORNO-HAPTICO-RUIDO-01:temporal",
+            "label": "É possível perceber e usar essas apresentações no tempo necessário, sem perder informação?",
+            "required_by": [
+              "REL-PAD-RETORNO-HAPTICO-RUIDO-01"
+            ]
+          },
+          {
+            "id": "REC-SAIDA-AUDIO",
+            "label": "Saída de áudio operante",
+            "required_by": [
+              "OP-PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ]
+          },
+          {
+            "id": "REC-VIBRACAO",
+            "label": "Vibração ou retorno háptico",
+            "required_by": [
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ]
+          }
+        ],
+        "unavailable_conditions": [],
+        "gaps": [
+          {
+            "code": "UNMAPPED_TASK",
+            "type": "FUNCTION_GAP",
+            "id": "TAR-COMUNICAR-CONTEUDO-1545B38",
+            "label": "Comunicar conteúdo",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-6C6D17083142",
+            "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
+            "participant_label": "Quem apresenta",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "UNMAPPED_TASK",
+            "type": "FUNCTION_GAP",
+            "id": "TAR-COMUNICAR-E-EXPRESSAR",
+            "label": "Comunicar e expressar conhecimento",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-6C6D17083142",
+            "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
+            "participant_label": "Quem apresenta",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
+            "type": "FUNCTION_GAP",
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-6C6D17083142",
+            "participant_label": "Quem apresenta",
+            "situation_label": "Apresentação e explicação coletiva"
+          },
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-ORIENTACAO-AUDIO-RECUPERAVEL",
+              "OP-PAD-RETORNO-HAPTICO-RUIDO"
+            ],
+            "situation_id": "SIT-129D4439628A",
+            "participant_id": "PART-CASO-01-D0DE3E",
+            "participant_label": "Pessoas apoiadas na interação (quantidade não informada)",
+            "situation_label": "Apresentação e explicação coletiva"
+          }
+        ],
+        "input_issues": []
+      }
+    },
+    {
+      "id": "form",
+      "narrative": "Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler as instruções na tela, mas não consigo operar o mouse. Tenho computador e teclado. Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar.",
+      "decomposition": {
+        "participants": [
+          {
+            "id": "PART-E835A657C6C3",
+            "contexto_id": "CTX-CASO-37CC2A28BE",
+            "papel_id": "PAPEL-PESSOA-APOIADA",
+            "label": "Quem relata e realiza a atividade",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "caracteristica_ids": [],
+            "tarefa_ids": [
+              "TAR-REVISAR-E-CONFIRMAR"
+            ],
+            "modalidade_ids": [],
+            "recurso_operado_ids": [],
+            "objetivo_participacao": "",
+            "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+          }
+        ],
+        "situations": [
+          {
+            "id": "SIT-EFC0B73E5662",
+            "label": "Atividade: Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar.",
+            "task_ids": [
+              "TAR-REVISAR-E-CONFIRMAR"
+            ],
+            "participant_ids": [
+              "PART-E835A657C6C3"
+            ],
+            "actor_ids": [
+              "PART-E835A657C6C3"
+            ],
+            "recipient_ids": [],
+            "env_ids": [],
+            "resource_ids": [],
+            "resource_states": [],
+            "mode_ids": [],
+            "need_ids": [],
+            "barrier_ids": [],
+            "source_text": "Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar.",
+            "state": "CONFIRMADO",
+            "kind": "reported_activity_1"
+          },
+          {
+            "id": "SIT-5CB27EE1BEFE",
+            "label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a",
+            "task_ids": [
+              "TAR-OPERAR-SISTEMA"
+            ],
+            "participant_ids": [],
+            "actor_ids": [],
+            "recipient_ids": [],
+            "env_ids": [],
+            "resource_ids": [],
+            "resource_states": [],
+            "mode_ids": [],
+            "need_ids": [],
+            "barrier_ids": [],
+            "source_text": "Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler as instruções na tela, mas não consigo operar o mouse. Tenho computador e teclado. Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar.",
+            "state": "CONFIRMADO",
+            "kind": "reported_activity_2"
+          }
+        ],
+        "raw": {
+          "tarefas": [
+            "TAR-REVISAR-E-CONFIRMAR",
+            "TAR-OPERAR-SISTEMA"
+          ],
+          "caracteristicas_pessoa": [],
+          "recursos_digitais": [
+            "RED-FORMULARIO"
+          ],
+          "barreiras": [],
+          "necessidades": [
+            "NEC-ENTRADA-ALTERNATIVA"
+          ],
+          "ambientes": [],
+          "modalidades_disponiveis": [
+            "MOD-TECLADO"
+          ],
+          "recursos_disponiveis": [
+            "REC-COMPUTADOR",
+            "REC-TECLADO"
+          ],
+          "recursos_impedidos": [],
+          "recursos_propostos": [],
+          "funcoes_requeridas_ids": [
+            "FUN-CARACTERIZAR-CONDICOES",
+            "FUN-SELECIONAR-MODO-POR-CONDICAO"
+          ]
+        },
+        "questions": [
+          {
+            "field": "active_situation_id",
+            "label": "Qual parte você quer analisar primeiro?",
+            "participant_id": "",
+            "situation_id": ""
+          },
+          {
+            "field": "observation_scope",
+            "label": "A dificuldade já relatada — “Consigo usar o teclado e ler as instruções na tela, mas não consigo operar o mouse.” — refere-se a quem e a qual atividade?",
+            "participant_id": "",
+            "situation_id": "SIT-EFC0B73E5662"
+          },
+          {
+            "field": "recursos_disponiveis",
+            "label": "Quais equipamentos ou apoios estão disponíveis para usar formulário digital?",
+            "participant_id": null,
+            "situation_id": ""
+          }
+        ]
+      },
+      "narrative_result": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "NONE",
+        "coverage_scope": "DECLARED_FUNCTIONS_ONLY",
+        "covers_whole_reported_task": false,
+        "required_functions": [],
+        "choices": [],
+        "pending_candidates": [],
+        "partial_segments": [],
+        "pending_conditions": [],
+        "unavailable_conditions": [],
+        "gaps": [
+          {
+            "code": "REQUIRED_FUNCTION_SCOPE_UNASSIGNED",
+            "type": "CONTEXT_SCOPE_GAP",
+            "function_ids": [
+              "FUN-CARACTERIZAR-CONDICOES",
+              "FUN-SELECIONAR-MODO-POR-CONDICAO"
+            ],
+            "explanation": "A função foi requerida globalmente, mas não há atribuição documentada a uma pessoa e situação. Não foi replicada para todas as pessoas."
+          },
+          {
+            "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
+            "type": "FUNCTION_GAP",
+            "situation_id": "SIT-EFC0B73E5662",
+            "participant_id": "PART-E835A657C6C3",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar."
+          },
+          {
+            "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
+            "type": "FUNCTION_GAP",
+            "situation_id": "SIT-5CB27EE1BEFE",
+            "participant_id": "CTX-CASO-37CC2A28BE",
+            "participant_label": "CTX-CASO-37CC2A28BE",
+            "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
+          },
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [],
+        "input_issues": []
+      },
+      "synthetic_supplement": "COMPLEMENTO SINTÉTICO: a mesma pessoa preenche e revisa o mesmo formulário. Ela consegue operar o teclado e conferir o conteúdo visual necessário, mas ainda não foi verificado se todos os campos, erros e o envio são acessíveis. A confirmação é suficiente apenas para examinar a entrada e não confirma acessibilidade do formulário inteiro.",
+      "confirmed_result": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "PARTIAL",
+        "coverage_scope": "DECLARED_FUNCTIONS_ONLY",
+        "covers_whole_reported_task": false,
+        "required_functions": [
+          "FUN-SELECIONAR-MODO-POR-CONDICAO"
+        ],
+        "choices": [],
+        "pending_candidates": [],
+        "partial_segments": [
+          {
+            "operations": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Conferir a compatibilidade da forma de entrada com a ação, os movimentos e os recursos efetivamente disponíveis; manter revisão do que foi registrado."
+            ]
+          }
+        ],
+        "pending_conditions": [],
+        "unavailable_conditions": [],
+        "gaps": [
+          {
+            "code": "UNMAPPED_TASK",
+            "type": "FUNCTION_GAP",
+            "id": "TAR-OPERAR-SISTEMA",
+            "label": "Operar um sistema ou recurso",
+            "situation_id": "SIT-5CB27EE1BEFE",
+            "participant_id": "PART-E835A657C6C3",
+            "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
+          },
+          {
+            "code": "UNMAPPED_TASK",
+            "type": "FUNCTION_GAP",
+            "id": "TAR-REVISAR-E-CONFIRMAR",
+            "label": "Revisar e confirmar informação ou ação",
+            "situation_id": "SIT-5CB27EE1BEFE",
+            "participant_id": "PART-E835A657C6C3",
+            "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
+          },
+          {
+            "code": "UNMAPPED_NEED",
+            "type": "FUNCTION_GAP",
+            "id": "NEC-REVISAO-E-CONFIRMACAO",
+            "label": "Permitir revisar, repetir e confirmar conteúdo ou ação",
+            "situation_id": "SIT-5CB27EE1BEFE",
+            "participant_id": "PART-E835A657C6C3",
+            "explanation": "Esta necessidade foi informada, mas não possui uma derivação funcional autorizada nesta execução. Não é falta de resposta da pessoa.",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
+          },
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [],
+        "input_issues": []
+      }
+    },
+    {
+      "id": "dictation",
+      "narrative": "Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar. Consigo falar e ler o texto na tela, mas não consigo digitar por muito tempo. Tenho computador, microfone, reconhecimento de fala e editor de texto. O ambiente está silencioso. Posso corrigir palavras pelo teclado e confirmar a mensagem.",
+      "decomposition": {
+        "participants": [
+          {
+            "id": "PART-8FE917E6B312",
+            "contexto_id": "CTX-CASO-812090CA15",
+            "papel_id": "PAPEL-PESSOA-APOIADA",
+            "label": "Quem relata e realiza a atividade",
+            "grupo_rotulo": "",
+            "quantidade": 1,
+            "caracteristica_ids": [],
+            "tarefa_ids": [
+              "TAR-REVISAR-E-CONFIRMAR",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+            ],
+            "modalidade_ids": [],
+            "recurso_operado_ids": [],
+            "objetivo_participacao": "",
+            "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"
+          }
+        ],
+        "situations": [
+          {
+            "id": "SIT-4AF4C4C504C0",
+            "label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar.",
+            "task_ids": [
+              "TAR-REVISAR-E-CONFIRMAR",
+              "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+            ],
+            "participant_ids": [
+              "PART-8FE917E6B312"
+            ],
+            "actor_ids": [
+              "PART-8FE917E6B312"
+            ],
+            "recipient_ids": [],
+            "env_ids": [],
+            "resource_ids": [
+              "RED-EDITOR-CONTEUDO",
+              "REC-COMPUTADOR",
+              "REC-MICROFONE",
+              "REC-ENTRADA-VOZ",
+              "REC-TECLADO"
+            ],
+            "resource_states": [
+              {
+                "resource_id": "REC-COMPUTADOR",
+                "state": "DISPONIVEL_CONFIRMADO"
+              },
+              {
+                "resource_id": "REC-MICROFONE",
+                "state": "DISPONIVEL_CONFIRMADO"
+              },
+              {
+                "resource_id": "REC-ENTRADA-VOZ",
+                "state": "DISPONIVEL_CONFIRMADO"
+              },
+              {
+                "resource_id": "REC-TECLADO",
+                "state": "DISPONIVEL_CONFIRMADO"
+              }
+            ],
+            "mode_ids": [
+              "MOD-FALA",
+              "MOD-TECLADO",
+              "MOD-TEXTO",
+              "MOD-VOZ"
+            ],
+            "need_ids": [],
+            "barrier_ids": [],
+            "source_text": "Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar.",
+            "state": "CONFIRMADO",
+            "kind": "reported_activity_1"
+          }
+        ],
+        "raw": {
+          "tarefas": [
+            "TAR-REVISAR-E-CONFIRMAR",
+            "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
+          ],
+          "caracteristicas_pessoa": [],
+          "recursos_digitais": [
+            "RED-EDITOR-CONTEUDO"
+          ],
+          "barreiras": [],
+          "necessidades": [
+            "NEC-ENTRADA-ALTERNATIVA"
+          ],
+          "ambientes": [],
+          "modalidades_disponiveis": [
+            "MOD-FALA",
+            "MOD-TECLADO",
+            "MOD-TEXTO",
+            "MOD-VOZ"
+          ],
+          "recursos_disponiveis": [
+            "REC-ENTRADA-VOZ",
+            "REC-TECLADO",
+            "REC-COMPUTADOR",
+            "REC-MICROFONE"
+          ],
+          "recursos_impedidos": [],
+          "recursos_propostos": [],
+          "funcoes_requeridas_ids": []
+        },
+        "questions": []
+      },
+      "narrative_result": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "CONDITIONAL",
+        "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+        "covers_whole_reported_task": false,
+        "required_functions": [
+          "FUN-SELECIONAR-MODO-POR-CONDICAO",
+          "Expression",
+          "Review"
+        ],
+        "choices": [],
+        "pending_candidates": [
+          {
+            "operations": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Conferir a compatibilidade da forma de entrada com a ação, os movimentos e os recursos efetivamente disponíveis; manter revisão do que foi registrado."
+            ]
+          },
+          {
+            "operations": [
+              "CaptureKeyboard"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureSpeech"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável"
+            ]
+          },
+          {
+            "operations": [
+              "ReviewSpeech"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "ReviewText"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureKeyboard",
+              "ReviewSpeech"
+            ],
+            "relations": [
+              "ProductionThenReview"
+            ],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável",
+              "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureKeyboard",
+              "ReviewText"
+            ],
+            "relations": [
+              "ProductionThenReview"
+            ],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável",
+              "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureSpeech",
+              "ReviewSpeech"
+            ],
+            "relations": [
+              "ProductionThenReview"
+            ],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável",
+              "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureSpeech",
+              "ReviewText"
+            ],
+            "relations": [
+              "ProductionThenReview"
+            ],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável",
+              "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          }
+        ],
+        "partial_segments": [],
+        "pending_conditions": [
+          {
+            "id": "OP-PAD-COMUNICACAO-MULTIFORMATO:operability",
+            "label": "A pessoa responsável consegue usar os recursos necessários nesta situação?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          },
+          {
+            "id": "condition-eae2be21970f1353",
+            "label": "A informação essencial e as condições de percepção, ação e mediação foram conferidas com esta pessoa?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          },
+          {
+            "id": "SameEditableTextDraft",
+            "label": "A produção e a revisão se referem ao mesmo rascunho textual editável, que a pessoa pode conferir e corrigir antes de concluir?",
+            "required_by": [
+              "CaptureKeyboard",
+              "CaptureSpeech",
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "CanUseKeyboard",
+            "label": "A pessoa consegue operar a interface de teclado",
+            "required_by": [
+              "CaptureKeyboard"
+            ]
+          },
+          {
+            "id": "ContentAvailable",
+            "label": "Há conteúdo a expressar ou revisar",
+            "required_by": [
+              "CaptureKeyboard",
+              "CaptureSpeech",
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "LearningCommunicationContext",
+            "label": "A contribuição integra uma atividade de comunicação em contexto de aprendizagem",
+            "required_by": [
+              "CaptureKeyboard",
+              "CaptureSpeech",
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "KeyboardEffortAcceptable",
+            "label": "O esforço e o desempenho da entrada por teclado são aceitáveis nesta tarefa",
+            "required_by": [
+              "CaptureKeyboard"
+            ]
+          },
+          {
+            "id": "KeyboardCompatible",
+            "label": "A interface de teclado é compatível com o dispositivo e o sistema usados",
+            "required_by": [
+              "CaptureKeyboard"
+            ]
+          },
+          {
+            "id": "KeyboardFeedbackPerceptible",
+            "label": "A pessoa percebe o resultado da entrada por teclado",
+            "required_by": [
+              "CaptureKeyboard"
+            ]
+          },
+          {
+            "id": "CanUseSpeech",
+            "label": "A pessoa consegue e aceita usar fala nesta tarefa",
+            "required_by": [
+              "CaptureSpeech"
+            ]
+          },
+          {
+            "id": "SpeechInputUsable",
+            "label": "Reconhecimento de fala utilizável neste ambiente e idioma",
+            "required_by": [
+              "CaptureSpeech"
+            ]
+          },
+          {
+            "id": "SpeechEffortAcceptable",
+            "label": "O esforço e o desempenho da entrada por fala são aceitáveis nesta tarefa",
+            "required_by": [
+              "CaptureSpeech"
+            ]
+          },
+          {
+            "id": "SpeechCompatible",
+            "label": "A entrada por fala é compatível com o dispositivo e o sistema usados",
+            "required_by": [
+              "CaptureSpeech"
+            ]
+          },
+          {
+            "id": "SpeechFeedbackPerceptible",
+            "label": "A pessoa percebe o resultado do reconhecimento de fala",
+            "required_by": [
+              "CaptureSpeech"
+            ]
+          },
+          {
+            "id": "AudioUsable",
+            "label": "O áudio é utilizável no ambiente, com privacidade e percepção suficientes",
+            "required_by": [
+              "ReviewSpeech"
+            ]
+          },
+          {
+            "id": "CanControlPlayback",
+            "label": "A pessoa consegue pausar e repetir a leitura",
+            "required_by": [
+              "ReviewSpeech"
+            ]
+          },
+          {
+            "id": "CanCorrect",
+            "label": "Existe um meio operável para corrigir o rascunho",
+            "required_by": [
+              "ProductionThenReview",
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "CanReviewSpeech",
+            "label": "A pessoa consegue conferir o conteúdo por fala sintetizada",
+            "required_by": [
+              "ReviewSpeech"
+            ]
+          },
+          {
+            "id": "ControlsCompletion",
+            "label": "A pessoa controla quando concluir, sem envio automático",
+            "required_by": [
+              "ProductionThenReview",
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "CanVerifyMeaning",
+            "label": "A pessoa pode conferir o significado relevante do rascunho pela apresentação escolhida",
+            "required_by": [
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "CanReviewVisualText",
+            "label": "A pessoa consegue conferir o texto apresentado visualmente",
+            "required_by": [
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "EditableText",
+            "label": "Campo textual editável",
+            "required_by": [
+              "CaptureKeyboard",
+              "CaptureSpeech",
+              "ReviewSpeech",
+              "ReviewText"
+            ]
+          },
+          {
+            "id": "SpeechRecognition",
+            "label": "Reconhecimento de fala",
+            "required_by": [
+              "CaptureSpeech"
+            ]
+          },
+          {
+            "id": "AudioOutput",
+            "label": "Saída de áudio controlável",
+            "required_by": [
+              "ReviewSpeech"
+            ]
+          },
+          {
+            "id": "TextToSpeech",
+            "label": "Leitura em voz do texto",
+            "required_by": [
+              "ReviewSpeech"
+            ]
+          },
+          {
+            "id": "Display",
+            "label": "Apresentação visual legível",
+            "required_by": [
+              "ReviewText"
+            ]
+          }
+        ],
+        "unavailable_conditions": [],
+        "gaps": [
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+              "https://w3id.org/mado/experimental/v2#ReviewSpeech"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewSpeech"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewSpeech"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+              "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          },
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          }
+        ],
+        "input_issues": []
+      },
+      "synthetic_supplement": {
+        "description": "COMPLEMENTO SINTÉTICO: a mensagem ajuda colegas a aprender uma tarefa. A produção e a revisão usam o mesmo rascunho editável. A pessoa já testou o ditado neste editor, consegue conferir o texto reconhecido e corrigir palavras pelo teclado. O esforço da fala é aceitável; digitar a mensagem inteira não é. Ela decide quando concluir. Não há leitura em voz disponível. O teste cobre rascunho e revisão; não comprova envio ao grupo.",
+        "facts": {
+          "SameEditableTextDraft": true,
+          "ContentAvailable": true,
+          "LearningCommunicationContext": true,
+          "CanUseSpeech": true,
+          "SpeechInputUsable": true,
+          "SpeechEffortAcceptable": true,
+          "SpeechCompatible": true,
+          "SpeechFeedbackPerceptible": true,
+          "CanUseKeyboard": true,
+          "KeyboardEffortAcceptable": false,
+          "KeyboardCompatible": true,
+          "KeyboardFeedbackPerceptible": true,
+          "CanReviewVisualText": true,
+          "CanReviewSpeech": false,
+          "AudioUsable": false,
+          "CanControlPlayback": false,
+          "CanCorrect": true,
+          "ControlsCompletion": true,
+          "CanVerifyMeaning": true
+        },
+        "resources": {
+          "EditableText": true,
+          "Display": true,
+          "Microphone": true,
+          "SpeechRecognition": true,
+          "Keyboard": true,
+          "TextToSpeech": false,
+          "AudioOutput": false
+        }
+      },
+      "confirmed_result": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "CONDITIONAL",
+        "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+        "covers_whole_reported_task": false,
+        "required_functions": [
+          "FUN-SELECIONAR-MODO-POR-CONDICAO",
+          "Expression",
+          "Review"
+        ],
+        "choices": [],
+        "pending_candidates": [
+          {
+            "operations": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Conferir a compatibilidade da forma de entrada com a ação, os movimentos e os recursos efetivamente disponíveis; manter revisão do que foi registrado."
+            ]
+          }
+        ],
+        "partial_segments": [
+          {
+            "operations": [
+              "CaptureSpeech",
+              "ReviewText"
+            ],
+            "relations": [
+              "ProductionThenReview"
+            ],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável",
+              "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          }
+        ],
+        "pending_conditions": [
+          {
+            "id": "OP-PAD-COMUNICACAO-MULTIFORMATO:operability",
+            "label": "A pessoa responsável consegue usar os recursos necessários nesta situação?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          },
+          {
+            "id": "condition-eae2be21970f1353",
+            "label": "A informação essencial e as condições de percepção, ação e mediação foram conferidas com esta pessoa?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          }
+        ],
+        "unavailable_conditions": [
+          "KeyboardEffortAcceptable",
+          "AudioOutput",
+          "TextToSpeech",
+          "AudioUsable",
+          "CanControlPlayback",
+          "CanReviewSpeech"
+        ],
+        "gaps": [
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          }
+        ],
+        "input_issues": []
+      },
+      "grounding": [
+        {
+          "operation": "CaptureSpeech",
+          "knowledge": "KInput",
+          "criterion": "CriterionInput",
+          "articulation": "ArtInput",
+          "sources": [
+            {
+              "label": "Coutaz et al. (1995), CARE",
+              "url": "https://danielsalber.com/publications/interact1995.pdf",
+              "locator": "pp. 2–5, seções 3 e 4: equivalência, complementaridade e compatibilidade",
+              "review_status": "PRIMARY_CHECKED"
+            },
+            {
+              "label": "W3C Understanding WCAG 2.2, 2.1.1 Keyboard",
+              "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html",
+              "locator": "Success Criterion e Intent: funcionalidade operável por interface de teclado",
+              "review_status": "PRIMARY_CHECKED"
+            }
+          ]
+        },
+        {
+          "operation": "ReviewText",
+          "knowledge": "KReview",
+          "criterion": "CriterionReview",
+          "articulation": "ArtReview",
+          "sources": [
+            {
+              "label": "W3C Multimodal Interaction Requirements (2003), Note",
+              "url": "https://www.w3.org/TR/2003/NOTE-mmi-reqs-20030108/",
+              "locator": "Multimodal interactions; 1.6 Accessibility; 4.6 Independent input and output interfaces",
+              "review_status": "PRIMARY_CHECKED"
+            },
+            {
+              "label": "W3C Understanding WCAG 2.2, 3.3.6 Error Prevention (All), AAA",
+              "url": "https://www.w3.org/WAI/WCAG22/Understanding/error-prevention-all.html",
+              "locator": "Success Criterion e Intent: reversibilidade OU verificação/correção OU revisão/confirmação",
+              "review_status": "PRIMARY_CHECKED"
+            }
+          ]
+        }
+      ],
+      "recognition_removed": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "CONDITIONAL",
+        "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+        "covers_whole_reported_task": false,
+        "required_functions": [
+          "FUN-SELECIONAR-MODO-POR-CONDICAO",
+          "Expression",
+          "Review"
+        ],
+        "choices": [],
+        "pending_candidates": [
+          {
+            "operations": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Conferir a compatibilidade da forma de entrada com a ação, os movimentos e os recursos efetivamente disponíveis; manter revisão do que foi registrado."
+            ]
+          }
+        ],
+        "partial_segments": [
+          {
+            "operations": [
+              "ReviewText"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          }
+        ],
+        "pending_conditions": [
+          {
+            "id": "OP-PAD-COMUNICACAO-MULTIFORMATO:operability",
+            "label": "A pessoa responsável consegue usar os recursos necessários nesta situação?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          },
+          {
+            "id": "condition-eae2be21970f1353",
+            "label": "A informação essencial e as condições de percepção, ação e mediação foram conferidas com esta pessoa?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          }
+        ],
+        "unavailable_conditions": [
+          "KeyboardEffortAcceptable",
+          "SpeechRecognition",
+          "AudioOutput",
+          "TextToSpeech",
+          "AudioUsable",
+          "CanControlPlayback",
+          "CanReviewSpeech"
+        ],
+        "gaps": [
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [],
+        "input_issues": []
+      },
+      "relation_removed_in_memory": {
+        "status": "INSUFFICIENT",
+        "proposal_status": "CONDITIONAL",
+        "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+        "covers_whole_reported_task": false,
+        "required_functions": [
+          "FUN-SELECIONAR-MODO-POR-CONDICAO",
+          "Expression",
+          "Review"
+        ],
+        "choices": [],
+        "pending_candidates": [
+          {
+            "operations": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Conferir a compatibilidade da forma de entrada com a ação, os movimentos e os recursos efetivamente disponíveis; manter revisão do que foi registrado."
+            ]
+          }
+        ],
+        "partial_segments": [
+          {
+            "operations": [
+              "CaptureSpeech"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável"
+            ]
+          },
+          {
+            "operations": [
+              "ReviewText"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          }
+        ],
+        "pending_conditions": [
+          {
+            "id": "OP-PAD-COMUNICACAO-MULTIFORMATO:operability",
+            "label": "A pessoa responsável consegue usar os recursos necessários nesta situação?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          },
+          {
+            "id": "condition-eae2be21970f1353",
+            "label": "A informação essencial e as condições de percepção, ação e mediação foram conferidas com esta pessoa?",
+            "required_by": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO"
+            ]
+          }
+        ],
+        "unavailable_conditions": [
+          "KeyboardEffortAcceptable",
+          "AudioOutput",
+          "TextToSpeech",
+          "AudioUsable",
+          "CanControlPlayback",
+          "CanReviewSpeech"
+        ],
+        "gaps": [
+          {
+            "code": "NO_COMPLETE_SITUATED_COMPOSITION",
+            "type": "COVERAGE_GAP"
+          }
+        ],
+        "integration_gaps": [
+          {
+            "code": "NO_AUTHORIZED_RELATION",
+            "operation_ids": [
+              "OP-PAD-COMUNICACAO-MULTIFORMATO",
+              "https://w3id.org/mado/experimental/v2#CaptureSpeech",
+              "https://w3id.org/mado/experimental/v2#ReviewText"
+            ],
+            "situation_id": "SIT-4AF4C4C504C0",
+            "participant_id": "PART-8FE917E6B312",
+            "participant_label": "Quem relata e realiza a atividade",
+            "situation_label": "Atividade: Quero escrever uma mensagem para um grupo de trabalho por ditado e revisar o texto antes de enviar."
+          }
+        ],
+        "input_issues": []
+      }
+    }
+  ],
+  "passed": true,
+  "tests": {
+    "count": 7,
+    "failures": 0,
+    "errors": 0,
+    "output": "test_explanation_keeps_actual_sources_and_prior_articulations (__main__.main.<locals>.ReportChecks.test_explanation_keeps_actual_sources_and_prior_articulations) ... ok\ntest_first_person_actor_and_coherent_draft_episode (__main__.main.<locals>.ReportChecks.test_first_person_actor_and_coherent_draft_episode) ... ok\ntest_form_does_not_claim_whole_task_is_solved (__main__.main.<locals>.ReportChecks.test_form_does_not_claim_whole_task_is_solved) ... ok\ntest_no_feedback_resource_invented_from_correcting_errors (__main__.main.<locals>.ReportChecks.test_no_feedback_resource_invented_from_correcting_errors) ... ok\ntest_presentation_retains_observation_without_inventing_noise_or_haptics (__main__.main.<locals>.ReportChecks.test_presentation_retains_observation_without_inventing_noise_or_haptics) ... ok\ntest_relation_is_required_to_compose_not_to_list_operations (__main__.main.<locals>.ReportChecks.test_relation_is_required_to_compose_not_to_list_operations) ... ok\ntest_resource_removal_changes_the_composition (__main__.main.<locals>.ReportChecks.test_resource_removal_changes_the_composition) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.000s\n\nOK\n"
+  },
+  "executed_at_utc": "2026-10-21T09:05:52.383889+00:00",
+  "sha256": {
+    "engine.py": "cd39c268c40434631d21bc511fc3572f818b5cd137208b1912e79a63ba958099",
+    "situated_context.py": "34dd110c771ab74681ca2a2846cd1e5d18e973cdce73885e517fab85f0184c88",
+    "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
+    "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
+    "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
+    "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
+    "data/knowledge-base.json": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+    "tests/test_narrative_to_actions.py": "74ac01040c2c24570ffe3bee452d76657da7093154654378c421e6bea864cfcc"
+  }
+}

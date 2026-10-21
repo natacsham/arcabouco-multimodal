@@ -2,12 +2,12 @@
   "version": "1.5.0-rc1",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
   "instrument": "AMADO",
-  "executor_version": "AMADO-web-1.5.0-rc1-situated1",
+  "executor_version": "AMADO-web-1.5.0-rc1-intake1",
   "public_projection": true,
   "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-  "core_sha256": "d3b7cb928b3dfa03e43c553cef5a6bbb67a0c38d0c929e007a70477252da60aa",
+  "core_sha256": "cd39c268c40434631d21bc511fc3572f818b5cd137208b1912e79a63ba958099",
   "bridge_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
-  "base_zip_sha256": "689137f8ef8b16b10d31a69970b6a8c693834d64b697a092bacf215121fde7c6",
+  "base_zip_sha256": "3051438c7a2519b7022ad9c280b94f60786270d432afb286dba071744da04baa",
   "pyodide_version": "314.0.7",
   "runtime": {
     "pyodide-lock.json": {
@@ -49,7 +49,7 @@
     "implementation": "ResearchComposer",
     "case_storage": false,
     "files": {
-      "experimental/v2/composer.py": "d70bcd746d788eb06ebe1da2d810226f7ae419c5910982441140522bc5f1bbc0",
+      "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
       "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
       "experimental/v2/schema.ttl": "2fe223106c18014d4a19db2f6337a8adb5ad783911c2da276e7d8e107a6ceeba",
       "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
@@ -74,7 +74,7 @@
     "simple-flow.css": "e84ca46ea5c3e4dc44a2dbaf6e154349f0a25fd587af66cbdf6dd22985eaad6d",
     "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
     "intake.mjs": "974b86aeef27dcd5f0d889cd533a4e37fe0700593c8a207550f26120d88d65a4",
-    "situated-output.mjs": "b0cbea62966eb59a45c6820a7d6ac9cf22eb3af799b35472868793221021206e",
+    "situated-output.mjs": "1cc83e350ccaf4b4f4ce7b7711a28310f5a67004d8a8f3f4979c89b4960b8a26",
     "completo.html": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
     "completo-guiado.html": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6"
   },
@@ -94,7 +94,7 @@
   },
   "files": {
     "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
-    "situated_context.py": "15dc9966b7620a2d35efa2185d8cc6946c0bc7992d149178969105b89fbb8e86",
+    "situated_context.py": "34dd110c771ab74681ca2a2846cd1e5d18e973cdce73885e517fab85f0184c88",
     "data/knowledge-base.json": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
     "data/interface-vocabulary.json": "bed2124ac9798fbef8f56a73a90775a241a5fc27cf88a965f4370f1feba6b0b5",
     "ontology/mado-combined.ttl": "a1598943c6698c67f679e5299c73e0c1465da47d3044e227393b5659c5a87f85",
@@ -108,7 +108,7 @@
     "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
     "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
     "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9",
-    "experimental/v2/composer.py": "d70bcd746d788eb06ebe1da2d810226f7ae419c5910982441140522bc5f1bbc0",
+    "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
     "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
     "experimental/v2/schema.ttl": "2fe223106c18014d4a19db2f6337a8adb5ad783911c2da276e7d8e107a6ceeba",
     "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",

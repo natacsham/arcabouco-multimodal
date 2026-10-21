@@ -12,6 +12,7 @@ import copy
 import hashlib
 import itertools
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -859,6 +860,10 @@ class _SituatedRun:
     SITUATION_FIELDS = {"task_ids": "tarefas", "env_ids": "ambientes", "mode_ids": "modalidades_disponiveis",
                         "need_ids": "necessidades", "barrier_ids": "barreiras"}
     RELATIONS = {"SEQUENTIAL", "SEQUENTIAL_REVIEW", "ALTERNATIVE", "COMPLEMENTARITY", "REDUNDANCY"}
+    # Identity bridges, not affordance inference. A computer is not a legible
+    # display, voice control is not dictation, and a microphone is not ASR.
+    RESOURCE_ALIASES = {"REC-MICROFONE": "Microphone", "REC-TECLADO": "Keyboard",
+                        "REC-TTS": "TextToSpeech"}
 
     def __init__(self, composer, context, engine=None, progress=None):
         self.composer, self.engine, self.progress = composer, engine, progress
@@ -943,10 +948,29 @@ class _SituatedRun:
                 for x in self.composer._values(node, V2.requiresFact)]
 
     def rdf_alias(self, identifier, entity_type):
+        if entity_type == V2.Resource:
+            local = str(identifier).removeprefix(str(MADO))
+            identifier = self.RESOURCE_ALIASES.get(local, identifier)
         node = self.composer._resolve(identifier, entity_type)
         if node is None and entity_type == V2.ContextFact and identifier in getattr(self.composer, "bindings", {}).get("facts", {}):
             return str(V2[identifier])
         return str(node) if node is not None else identifier
+
+    def fact_alias(self, identifier):
+        resource = self.rdf_alias(identifier, V2.Resource)
+        if self.composer._resolve(resource, V2.Resource) is not None:
+            return resource
+        return self.rdf_alias(identifier, V2.ContextFact)
+
+    def assign_fact(self, unit, identifier, value):
+        key = self.fact_alias(identifier)
+        if value is not None and type(value) is not bool:
+            self.result["input_issues"].append({"code": "INVALID_FACT_VALUE", "id": key})
+        elif key in unit["facts"] and unit["facts"][key] is not value:
+            self.result["input_issues"].append({"code": "CONFLICTING_SITUATED_FACT", "id": key,
+                "situation_id": unit["situation_id"], "participant_id": unit["participant_id"]})
+        else:
+            unit["facts"][key] = value
 
     def label(self, identifier):
         row = self.index["context_elements"].get(identifier, {})
@@ -1059,16 +1083,9 @@ class _SituatedRun:
                                 concept = self.composer._resolve(key, V2.ContextFact)
                                 if concept is None or self.composer._text(concept, V2.scope) != "context":
                                     continue
-                            if value is not None and type(value) is not bool:
-                                self.result["input_issues"].append({"code": "INVALID_FACT_VALUE", "id": key})
-                            elif key in unit["facts"] and unit["facts"][key] is not value:
-                                self.result["input_issues"].append({"code": "CONFLICTING_FACT", "id": key, "situation_id": sid, "participant_id": pid})
-                            else:
-                                unit["facts"][key] = value
+                            self.assign_fact(unit, key, value)
                 # The legacy pilot maps are normalized into this same situated
                 # contract; they never invoke its old search procedure.
-                for key, value in list(unit["facts"].items()):
-                    unit["facts"][self.rdf_alias(key, V2.ContextFact)] = value
                 for key, value in (self.context.get("resources", {}) if not explicit else {}).items():
                     if value is not None and type(value) is not bool:
                         self.result["input_issues"].append({"code": "INVALID_RESOURCE_VALUE", "id": key})
@@ -1080,14 +1097,7 @@ class _SituatedRun:
                 for fact in situated_facts:
                     if fact.get("participant_id") == pid and fact.get("situation_id") == sid:
                         value = fact.get("value")
-                        if value is not None and type(value) is not bool:
-                            self.result["input_issues"].append({"code": "INVALID_SITUATED_FACT", "id": fact.get("fact_id")})
-                        else:
-                            key = fact["fact_id"]
-                            if key in unit["facts"] and unit["facts"][key] is not value:
-                                self.result["input_issues"].append({"code": "CONFLICTING_SITUATED_FACT", "id": key, "situation_id": sid, "participant_id": pid})
-                            else:
-                                unit["facts"][key] = value
+                        self.assign_fact(unit, fact["fact_id"], value)
                 for resource in situation.get("resource_states", []):
                     field = {"DISPONIVEL_CONFIRMADO": "recursos_disponiveis", "PROPOSTO_A_PREPARAR": "recursos_propostos", "IMPEDIDO": "recursos_impedidos"}.get(resource.get("state"))
                     if field and resource.get("resource_id"):
@@ -1097,7 +1107,8 @@ class _SituatedRun:
                     if value is not None and type(value) is not bool:
                         self.result["input_issues"].append({"code": "INVALID_PERSON_RESOURCE_VALUE", "id": key, "participant_id": pid})
                     elif value is False:
-                        unit["recursos_disponiveis"] = [r for r in unit["recursos_disponiveis"] if r != resource]
+                        unit["recursos_disponiveis"] = [r for r in unit["recursos_disponiveis"]
+                                                        if self.rdf_alias(r, V2.Resource) != resource]
                         unit["recursos_impedidos"].append(resource)
                     elif value is True:
                         unit["recursos_disponiveis"].append(resource)
@@ -1125,6 +1136,8 @@ class _SituatedRun:
                         unit["assertion_ids"].append(assertion.get("id"))
                 for field in set(self.FIELD_KINDS.values()):
                     unit[field] = sorted(set(unit[field]))
+                for field in ("recursos_disponiveis", "recursos_impedidos", "recursos_propostos"):
+                    unit[field] = sorted({self.rdf_alias(value, V2.Resource) for value in unit[field]})
                 unit["tarefas"] = [self.rdf_alias(t, V2.Task) for t in unit["tarefas"]]
                 # Participation in an episode is not execution of every task
                 # in it. Keep the task context separate from personal action.
@@ -1166,7 +1179,45 @@ class _SituatedRun:
                 return None, "CLAIM_SOURCE_EXCERPT_MISMATCH"
         return claim, None
 
+    def scoped_access_assertions(self, unit, matrix, group, group_id):
+        """Recheck existing matrix observations; never trust supplied functions."""
+        from situated_context import functional_signal_pattern, words
+        assertions = {a["id"]: a for a in self.context.get("assertions", [])
+            if isinstance(a, dict) and a.get("id") and a.get("kind") == "functional_observation"
+            and a.get("subject_id") == unit["participant_id"]
+            and a.get("situation_id") == unit["situation_id"]
+            and (a.get("state") == "CONFIRMADO"
+                 or a.get("state") == "RELATADO" and self.context.get("confirmed") is True)}
+        found = {}
+        expected_needs = set(group.get("requisito_ids", []))
+        for requirement in self.context.get("access_requirements", []):
+            if not isinstance(requirement, dict):
+                continue
+            if (requirement.get("matrix_id") != matrix["id"]
+                    or requirement.get("trigger_group_id", "") != group_id
+                    or requirement.get("participant_id") != unit["participant_id"]
+                    or unit["situation_id"] not in requirement.get("situation_ids", [])
+                    or requirement.get("status") != "DERIVADO_DA_BASE_PARA_CONFIRMACAO"
+                    or set(requirement.get("requirement_ids", [])) != expected_needs):
+                continue
+            for assertion_id in requirement.get("assertion_ids", []):
+                assertion = assertions.get(assertion_id)
+                if assertion is None:
+                    continue
+                text = words(assertion.get("value", ""))
+                for signal in group.get("sinais_relato", matrix.get("sinais_relato", [])):
+                    for match in re.finditer(functional_signal_pattern(signal), text):
+                        prefix = text[max(0, match.start() - 45):match.start()]
+                        negated = re.search(
+                            r"\b(?:nao (?:e|eh|sao|esta|estao|tem|tenho|temos|possui|ha|existe|existem)|sem|nenhum|nenhuma)\s*"
+                            r"(?:(?:um|uma|dois|duas|tres|quatro|qualquer|nenhum|nenhuma|\d+)\s+)?"
+                            r"(?:(?:alunos?|alunas?|estudantes?|pessoas?|usuarios?|usuarias?)\s+)?$", prefix)
+                        if not negated:
+                            found[assertion_id] = assertion
+        return list(found.values())
+
     def derive_functions(self, unit):
+        matched_needs, matched_tasks = set(), set()
         unit["unknown_requirements"] = set(unit["required_explicit"]) - set(self.index["context_elements"])
         for identifier in unit["required_explicit"]:
             if identifier not in self.index["context_elements"]:
@@ -1191,6 +1242,7 @@ class _SituatedRun:
                           "function_ids": [str(f) for f in self.composer._values(task, V2.requiresFunction)]}
             unit["task_refinements"].append(refinement)
             unit["tarefas"].append(str(task))
+            matched_tasks.update(required_tasks)
         for task in unit["tarefas"]:
             if (unit["task_participation"] == "RECIPIENT" or
                     len(unit["participant_ids"]) > 1 and task not in unit["executed_task_ids"]
@@ -1199,6 +1251,8 @@ class _SituatedRun:
             node = self.composer._resolve(task, V2.Task)
             if node is None:
                 continue
+            if self.composer._values(node, V2.requiresFunction):
+                matched_tasks.add(str(node))
             for function in self.composer._values(node, V2.requiresFunction):
                 if (function, RDF.type, V2.Function) not in self.composer.graph:
                     continue
@@ -1218,8 +1272,13 @@ class _SituatedRun:
         for matrix in self.base.get("functional_matrix", []):
             contract = matrix.get("inference_contract", {})
             groups = contract.get("trigger_groups") or [matrix]
-            for group in groups:
+            for group_index, group in enumerate(groups, 1):
+                group_id = (group.get("id", f"{matrix['id']}-G{group_index}")
+                            if contract.get("trigger_groups") else "")
+                observation_assertions = self.scoped_access_assertions(unit, matrix, group, group_id)
                 observed_needs = set(unit["necessidades"]) & set(group.get("requisito_ids", []))
+                if observation_assertions:
+                    observed_needs.update(group.get("requisito_ids", []))
                 observed_traits = set(unit["caracteristicas_pessoa"]) & set(group.get("caracteristica_ids", matrix.get("caracteristica_ids", [])))
                 if not observed_needs and not observed_traits:
                     continue
@@ -1236,6 +1295,8 @@ class _SituatedRun:
                         admitted.append(claim)
                 supported = {function for claim in admitted for function in claim.get("scope", {}).get("function_ids", claim.get("function_ids", []))}
                 functions = set(group.get("funcao_ids", matrix.get("funcao_ids", []))) or supported
+                if functions & supported:
+                    matched_needs.update(observed_needs)
                 for function in sorted(functions & supported):
                     if function not in self.index["context_elements"]:
                         continue
@@ -1243,7 +1304,9 @@ class _SituatedRun:
                     relevant_assertions = [a for a in self.context.get("assertions", []) if a.get("id") in unit["assertion_ids"]
                                            and (a.get("kind") == "need" and a.get("value") in observed_needs
                                                 or a.get("kind") == "characteristic" and a.get("value") in observed_traits)]
+                    relevant_assertions = list({a["id"]: a for a in relevant_assertions + observation_assertions}.values())
                     row["witnesses"].append({"matrix_id": matrix["id"], "need_ids": sorted(observed_needs),
+                        "trigger_group_id": group_id, "observation_bridge": bool(observation_assertions),
                         "matrix_label": matrix.get("rotulo", matrix.get("label", matrix["id"])),
                         "needs": [self.record(x) for x in sorted(observed_needs)],
                         "characteristic_ids": sorted(observed_traits), "characteristics": [self.record(x) for x in sorted(observed_traits)],
@@ -1268,6 +1331,25 @@ class _SituatedRun:
             requirement["check_ids"] = [row["id"]]
             self.result["required_functions"].append({**self.record(identifier), **requirement})
         unit["requirements"] = derived
+        actions = set(unit["executed_task_ids"])
+        if not actions and unit["task_participation"] != "RECIPIENT" and len(unit["participant_ids"]) <= 1:
+            actions = set(unit["tarefas"])
+        unmatched_tasks = actions - matched_tasks
+        # A functional witness may support an unknown single task, but it does
+        # not establish coverage of additional actions merely listed beside it.
+        task_gaps = unmatched_tasks if matched_tasks or len(actions) > 1 else set()
+        need_gaps = set(unit["necessidades"]) - matched_needs
+        unit["scope_gaps"] = []
+        for code, identifiers, explanation in (
+            ("UNMAPPED_TASK", task_gaps, "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação."),
+            ("UNMAPPED_NEED", need_gaps, "Esta necessidade foi informada, mas não possui uma derivação funcional autorizada nesta execução. Não é falta de resposta da pessoa."),
+        ):
+            for identifier in sorted(identifiers):
+                gap = {"code": code, "type": "FUNCTION_GAP", "id": identifier, "label": self.label(identifier),
+                       "situation_id": unit["situation_id"], "participant_id": unit["participant_id"], "explanation": explanation}
+                unit["scope_gaps"].append(gap)
+                self.result["gaps"].append(gap)
+        unit["coverage_scope"] = "REGISTERED_TASK_FUNCTIONS" if actions and not unmatched_tasks else "DECLARED_FUNCTIONS_ONLY"
         return derived
 
     def groundings(self, supports, unit, target):
@@ -1380,6 +1462,7 @@ class _SituatedRun:
         return row
 
     def resource_value(self, unit, identifier):
+        identifier = self.rdf_alias(identifier, V2.Resource)
         if identifier in unit["recursos_impedidos"]:
             if unit["facts"].get(identifier) is True:
                 self.check(unit, identifier, "RESOURCE_STATE_CONSISTENCY", "FAIL", "um recurso impedido não pode ser confirmado como disponível sem corrigir o conflito",
@@ -1447,16 +1530,16 @@ class _SituatedRun:
         operator_role = requirements.get("operator_role_id")
         if operator_role:
             operators = [p for p in participants if p.get("papel_id", p.get("role_id")) == operator_role]
-            operated = {resource for p in operators for resource in p.get("recurso_operado_ids", [])}
+            operated = {self.rdf_alias(resource, V2.Resource) for p in operators for resource in p.get("recurso_operado_ids", [])}
             necessary = requirements.get("all", [])
-            operation_ok = all(resource in operated for resource in necessary) and all(any(resource in operated for resource in group) for group in requirements.get("any", []))
+            operation_ok = all(self.rdf_alias(resource, V2.Resource) in operated for resource in necessary) and all(any(self.rdf_alias(resource, V2.Resource) in operated for resource in group) for group in requirements.get("any", []))
             explicit = unit["facts"].get(identifier + ":operability")
             value = explicit if identifier + ":operability" in unit["facts"] else True if operation_ok and operators else None
             self.condition(unit, identifier, identifier + ":operability", "fact", value,
                            "Confirmar que o responsável consegue operar os recursos nesta situação.")
         elif requirements.get("capability_check_required", True) and (requirements.get("all") or requirements.get("any")):
-            operated = set(unit["participant"].get("recurso_operado_ids", []))
-            operation_ok = all(resource in operated for resource in requirements.get("all", [])) and all(any(resource in operated for resource in group) for group in requirements.get("any", []))
+            operated = {self.rdf_alias(resource, V2.Resource) for resource in unit["participant"].get("recurso_operado_ids", [])}
+            operation_ok = all(self.rdf_alias(resource, V2.Resource) in operated for resource in requirements.get("all", [])) and all(any(self.rdf_alias(resource, V2.Resource) in operated for resource in group) for group in requirements.get("any", []))
             value = unit["facts"].get(identifier + ":operability") if identifier + ":operability" in unit["facts"] else True if operation_ok else None
             self.condition(unit, identifier, identifier + ":operability", "fact", value,
                            "A pessoa responsável consegue usar os recursos necessários nesta situação?")
@@ -1584,7 +1667,10 @@ class _SituatedRun:
                 "covered_functions": [self.record(f) for f in sorted(covered)],
                 "missing_functions": [self.record(f) for f in sorted((set(unit["requirements"]) - covered) | unit["unknown_requirements"])],
                 "covers_all_required_functions": complete, "conditions_satisfied": state == "PASS",
-                "ready_for_whole_task": complete and state == "PASS" and self.context.get("confirmed") is True,
+                "coverage_scope": unit["coverage_scope"], "scope_gaps": copy.deepcopy(unit["scope_gaps"]),
+                "ready_for_functional_scope": complete and state == "PASS" and self.context.get("confirmed") is True,
+                "ready_for_whole_task": complete and state == "PASS" and self.context.get("confirmed") is True
+                                        and unit["coverage_scope"] == "REGISTERED_TASK_FUNCTIONS",
                 "epistemic_status": "PROPOSED_NOT_EVALUATED", "check_ids": checks,
                 "explanation": {"actions": [step["action"] for step in steps], "why_combine": [row["explanation"] for row in relations],
                                 "text": "\n".join(step["action"] for step in steps),
@@ -1595,7 +1681,7 @@ class _SituatedRun:
     def compose_unit(self, unit):
         required = set(unit["requirements"])
         if not required:
-            self.result["gaps"].append({"code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT", "type": "KNOWLEDGE_OR_CONTEXT_GAP",
+            self.result["gaps"].append({"code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT", "type": "FUNCTION_GAP" if unit["necessidades"] or unit["tarefas"] else "CONTEXT_GAP",
                                         "situation_id": unit["situation_id"], "participant_id": unit["participant_id"]})
             return {"situation_id": unit["situation_id"], "participant_id": unit["participant_id"], "status": "INSUFFICIENT", "choices": [], "pending_candidates": [], "partial_segments": []}
         candidates, internal = [], {}
@@ -1628,6 +1714,12 @@ class _SituatedRun:
             self.result["function_coverage"].append(coverage)
             if not available:
                 self.result["missing_functions"].append(coverage)
+            represented = any(function in c.get("operation_contract", {}).get("function_ids", [])
+                              for c in self.base.get("decision_components", []) + self.rdf_components)
+            if not represented:
+                self.result["gaps"].append({"code": "NO_OPERATION_FOR_REQUIRED_FUNCTION", "type": "FUNCTION_GAP",
+                    "id": function, "label": self.label(function), "situation_id": unit["situation_id"], "participant_id": unit["participant_id"],
+                    "explanation": "A função é necessária, mas não há operação representada para atendê-la; mais perguntas não corrigem esta lacuna da base."})
         result = {"situation_id": unit["situation_id"], "participant_id": unit["participant_id"], "status": "INSUFFICIENT",
                   "choices": [], "pending_candidates": [], "partial_segments": []}
         edge_cache = {}
@@ -1702,17 +1794,34 @@ class _SituatedRun:
                     continue
                 by_id = {step["id"]: step for step in steps}
                 steps = tuple(by_id[key] for key in ordered)
-                complete = covered == required and not unit["unknown_requirements"]
+                complete = covered == required and not unit["unknown_requirements"] and not unit["scope_gaps"]
                 proposal = self.proposal(unit, steps, relations, covered, complete)
                 if not complete:
-                    if size == 1 and proposal["state"] == "PASS":
+                    # Keep an authorized connected sequence even when another
+                    # reported action/need remains unmapped. A scope gap must
+                    # not erase valid composition into isolated suggestions.
+                    target = "partial_segments" if proposal["state"] == "PASS" else "pending_candidates"
+                    step_ids = {step["id"] for step in steps}
+                    # A connected subsequence is useful even if a separate
+                    # function is uncovered. Keep inclusion-minimal supports,
+                    # with the same bounded output policy as full choices.
+                    keep_partial = not any(
+                        {step["id"] for step in old["steps"]} <= step_ids
+                        and {f["id"] for f in old["covered_functions"]} >= covered
+                        for old in result[target])
+                    if len(result[target]) >= MAX_CHOICES:
+                        self.result["partial_truncated" if target == "partial_segments" else "pending_truncated"] = True
+                        keep_partial = False
+                    if keep_partial and proposal["state"] == "PASS":
                         proposal.update(state="PARTIAL", ready_for_whole_task=False)
+                        result[target] = [old for old in result[target]
+                                          if not {step["id"] for step in old["steps"]} < step_ids]
                         result["partial_segments"].append(proposal)
-                    elif size == 1 and proposal["state"] == "PENDING":
+                    elif keep_partial and proposal["state"] == "PENDING":
                         proposal.update(ready_for_whole_task=False, scope="CONDITIONAL_OPERATION_NOT_WHOLE_TASK")
                         result["pending_candidates"].append(proposal)
                     continue
-                target = "choices" if proposal["ready_for_whole_task"] else "pending_candidates"
+                target = "choices" if proposal["ready_for_functional_scope"] else "pending_candidates"
                 if len(result[target]) >= MAX_CHOICES:
                     self.result["truncated" if target == "choices" else "pending_truncated"] = True
                     continue
@@ -1791,7 +1900,7 @@ class _SituatedRun:
                              reason="Esta informação altera a admissibilidade das operações e relações indicadas.")
             if condition["value"] is False:
                 self.result["unavailable_conditions"].append(condition)
-            elif any(fact.get("fact_id") == condition["id"] and fact.get("participant_id") == condition["participant_id"]
+            elif any(self.fact_alias(fact.get("fact_id")) == self.fact_alias(condition["id"]) and fact.get("participant_id") == condition["participant_id"]
                      and fact.get("situation_id") == condition["situation_id"] and fact.get("value") is None
                      for fact in self.context.get("situated_facts", [])):
                 condition["answered_unknown"] = True
@@ -1812,7 +1921,16 @@ class _SituatedRun:
         if not all_complete:
             self.result["gaps"].append({"code": "NO_COMPLETE_SITUATED_COMPOSITION", "type": "COVERAGE_GAP"})
         self.result["alternatives"] = self.result["choices"]
-        self.result["covers_all_participants"] = all_complete
+        deferred = self.result.get("deferred_situation_ids", [])
+        self.result["covers_selected_scope"] = all_complete
+        self.result["covers_all_participants"] = all_complete and not deferred
+        self.result["coverage_scope"] = "REGISTERED_TASK_FUNCTIONS" if units and all(u["coverage_scope"] == "REGISTERED_TASK_FUNCTIONS" for u in units) else "DECLARED_FUNCTIONS_ONLY"
+        self.result["covers_whole_reported_task"] = all_complete and not deferred and self.result["coverage_scope"] == "REGISTERED_TASK_FUNCTIONS"
+        self.result["coverage_explanation"] = ("Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso."
+            if self.result["coverage_scope"] == "REGISTERED_TASK_FUNCTIONS" else
+            "A cobertura refere-se às funções fundamentadas nesta execução, não à resolução integral de todas as ações do relato.")
+        if deferred:
+            self.result["coverage_explanation"] += f" A análise se limita à situação priorizada; {len(deferred)} situação(ões) ficou(aram) para depois."
         self.result["trajectory_evidence"] = {"base_sha256": getattr(self.composer, "base_sha256", None),
             "operationalization_status": "PROPOSED_NOT_EVALUATED", "legacy_statuses_preserved": True,
             "applications": [support for row in self.result["choices"] for step in row["steps"] for support in step["groundings"]],

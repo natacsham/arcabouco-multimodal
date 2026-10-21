@@ -24,6 +24,7 @@ O foco da pesquisa é a articulação desses conhecimentos: o que pode ser relac
 
 ## Comece por aqui
 
+- [Veja a correção do relato até a orientação e os três testes sintéticos](docs/relato-para-orientacao.md).
 - [Acompanhe a revisão 1.5 e um exemplo integral efetivamente executado](docs/revisao-situada-1.5.md).
 - [Entenda a MADO em linguagem simples](docs/entenda-mado.md).
 - [Acompanhe um exemplo real da base](docs/exemplo-rastreavel.md).
@@ -35,7 +36,7 @@ O foco da pesquisa é a articulação desses conhecimentos: o que pode ser relac
 - [Execute e reproduza as verificações](docs/reproduzir.md).
 - [Confira as licenças dos componentes de terceiros](THIRD_PARTY.md).
 
-Os endereços públicos reúnem [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). A candidata 1.5 foi publicada pelo [fluxo verificado do GitHub Pages](https://github.com/natacsham/arcabouco-multimodal/actions/runs/38351144785), no commit `c0ec3c400e0c32408e005daf03e2345029312401`. A [conferência pública](evidence/situated-public-smoke.json) passou em 33 verificações, com 38 arquivos da aplicação e quatro downloads correspondentes aos hashes locais. Os relatórios identificam versões, hashes, fluxos e limites; a publicação não equivale à avaliação humana da orientação.
+Os endereços públicos reúnem [**A pesquisa**](https://natacsham.github.io/arcabouco-multimodal/), [**Documentação técnica da MADO**](https://natacsham.github.io/arcabouco-multimodal/ontologia/) e [**Experimente o AMADO**](https://natacsham.github.io/arcabouco-multimodal/amado/). O [fluxo do GitHub Pages](https://github.com/natacsham/arcabouco-multimodal/actions/workflows/pages.yml) registra cada publicação. A [conferência pública](evidence/situated-public-smoke.json) identifica o commit esperado, os arquivos efetivamente servidos, seus hashes e os limites da verificação. Um relatório de revisão anterior não valida alterações posteriores; publicação e testes técnicos não equivalem à avaliação humana da orientação.
 
 Cada escolha pode ser examinada por duas leituras: **como seu conhecimento foi construído** e **por que ele foi empregado naquele caso**. Ambas usam os mesmos registros, distinguindo contribuição da fonte, operação de articulação, conhecimento, aplicação do critério e limite. Contribuição não detalhada permanece como lacuna, sem justificativa inventada. [Contrato da explicação pública](docs/explicacao-publica.md).
 

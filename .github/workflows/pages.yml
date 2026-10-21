@@ -25,6 +25,7 @@ jobs:
       - run: python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
       - run: python -B experimental/v2/verify.py
       - run: python -B experimental/v2/verify_situated.py --output experimental/v2/evidence/situated-report.json
+      - run: python -B scripts/check_narrative_to_actions.py --output evidence/narrative-to-actions-report.json
       - run: python scripts/check_bundle.py
       - run: node tests/intake.mjs
       - run: node tests/review-input.mjs

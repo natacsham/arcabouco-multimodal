@@ -1,8 +1,8 @@
 {
   "version": "1.5.0-rc1",
   "instrument": "AMADO",
-  "executor_version": "AMADO-web-1.5.0-rc1-situated1",
-  "compiled_at_utc": "2026-10-13T05:31:54.075928+00:00",
+  "executor_version": "AMADO-web-1.5.0-rc1-intake1",
+  "compiled_at_utc": "2026-10-21T09:25:14.527754+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -16,10 +16,11 @@
     "browser_current_execution": true,
     "browser_native_parity": true,
     "distribution_current": true,
-    "composition_rdf_reasoner": true
+    "composition_rdf_reasoner": true,
+    "three_narrative_regressions": true
   },
   "results": {
-    "unit_tests": 273,
+    "unit_tests": 301,
     "ontology_triples": 16925,
     "owl_2_dl": true,
     "hermit_consistency": true,
@@ -101,26 +102,29 @@
       "no_case_transmission": true,
       "no_javascript_errors": true,
       "native_bridge_worker_canonical_parity": true,
-      "conditional_native_worker_canonical_parity": true
+      "conditional_native_worker_canonical_parity": true,
+      "narrative_presentation_native_worker_parity": true,
+      "narrative_form_native_worker_parity": true,
+      "narrative_dictation_native_worker_parity": true
     },
     "public_smoke": {
-      "passed": true,
+      "passed": false,
       "checks": {
         "recognized_smoke": true,
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
         "exact_test": true,
-        "exact_manifest": true,
+        "exact_manifest": false,
         "version": true,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
-        "current_asset_bytes": true,
+        "current_asset_bytes": false,
         "current_base_inputs": true,
         "current_native_engine": true,
         "current_download_bytes": true
       },
-      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+      "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
       "checked_at": "2026-10-13T05:29:11.858Z",
       "expected_commit": "c0ec3c400e0c32408e005daf03e2345029312401",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
@@ -151,43 +155,42 @@
     "Verificações técnicas não comprovam utilidade, aprendizagem ou conformidade integral de acessibilidade."
   ],
   "historical_evidence_notice": "Somente os relatórios listados abaixo aprovam estes bytes. Arquivos anteriores conservam sua própria versão e seu alcance.",
-  "public_smoke_status": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
+  "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD",
   "reports": {
     "technical-1.5-report.json": {
       "url": "technical-1.5-report.json",
-      "sha256": "9651275f00bff508ac3c4a3f92db5a0cd46af2a5155cbd7733aa5068b258cdc6",
+      "sha256": "e953e54dbf974fb9c5110b189e7252033884796a819b1f82a99df06f8bf6f65d",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "reasoner-1.5-report.json": {
       "url": "reasoner-1.5-report.json",
       "sha256": "76ca653e46e69be7984a4e96b371d7ef4ec9801471d17840cfd57227335ff5ff",
-      "evidence_use": "CURRENT_BUILD_EXECUTION"
+      "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256"
     },
     "situated-report.json": {
       "url": "situated-report.json",
-      "sha256": "3514e24b7aa7901bdaed31134e2441ea0d6f87f3e1eff302ab9fbcb91098ca4f",
+      "sha256": "e60e36842f2878eedf3c97f27649c000e4907fa3746efa221eb33e8efcc7e928",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "4bc1fb753498933bc945f9343f5213275f2931a35b14e975ff7b7c5a9bce9605",
+      "sha256": "af91bb0283046ef006d8c20d17b3f6ef05714b9520f06637f10d9f3b4c5b09c5",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "e4c633dfb8689b83221270c12902ef4a1aeee0c25add814771ab71cc46cbf9ba",
+      "sha256": "1ac38d80a945599c4bba81563e5633bf5ae0f20a8077164f537c477e610f5504",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
       "url": "trajectory-reasoner-report.json",
       "sha256": "071b59194f1280920a955eb1a1f55108e421a2042afc9fa0546d370adf93eb36",
-      "evidence_use": "CURRENT_BUILD_EXECUTION"
+      "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256"
     },
-    "situated-public-smoke.json": {
-      "url": "situated-public-smoke.json",
-      "sha256": "3d4c152aacde6caaa4928f32c3cdcb442bfd7fbb12133201e948a357e2f795db",
-      "evidence_use": "VERIFIED_CURRENT_BUILD_SYNTHETIC_SMOKE",
-      "expected_commit": "c0ec3c400e0c32408e005daf03e2345029312401"
+    "narrative-to-actions-report.json": {
+      "url": "narrative-to-actions-report.json",
+      "sha256": "fa81235ddd66a54b0250644ad8fe36f4eb0d2751b4da51771ab27387e8ecc26f",
+      "evidence_use": "CURRENT_BUILD_EXECUTION"
     }
   }
 }

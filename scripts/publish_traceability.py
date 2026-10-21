@@ -295,6 +295,15 @@ def publish_situated(manifest):
              "distribution": "evidence/distribution-audit.json", "logical": "experimental/v2/evidence/trajectory-reasoner-report.json"}
     records = {key: read(name) for key, name in paths.items()}
     checks = situated_release_checks(manifest, **records)
+    if manifest.get("executor_version") == "AMADO-web-1.5.0-rc1-intake1":
+        narrative = read("evidence/narrative-to-actions-report.json")
+        checks["three_narrative_regressions"] = (narrative.get("passed") is True
+            and narrative.get("tests", {}).get("count") == 7
+            and bool(narrative.get("sha256"))
+            and all(_matches(name, digest) for name, digest in narrative["sha256"].items())
+            and all(records["browser"].get("checks", {}).get(f"narrative_{case}_native_worker_parity") is True
+                    for case in ("presentation", "form", "dictation")))
+        paths["narratives"] = "evidence/narrative-to-actions-report.json"
     if not all(checks.values()):
         raise SystemExit(json.dumps({"published": False, "version": manifest.get("version"), "checks": checks}))
     technical, reasoner = records["technical"], records["reasoner"]
@@ -322,7 +331,8 @@ def publish_situated(manifest):
     for key, name in paths.items():
         filename = Path(name).name
         (target / filename).write_bytes((ROOT / name).read_bytes())
-        summary["reports"][filename] = {"url": filename, "sha256": sha(name), "evidence_use": "CURRENT_BUILD_EXECUTION"}
+        summary["reports"][filename] = {"url": filename, "sha256": sha(name),
+            "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256" if key in {"reasoner", "logical"} else "CURRENT_BUILD_EXECUTION"}
     smoke_name = "evidence/situated-public-smoke.json"
     if (ROOT / smoke_name).is_file():
         smoke = read(smoke_name)

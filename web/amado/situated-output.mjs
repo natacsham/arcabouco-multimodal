@@ -5,6 +5,9 @@ const diagnosticLabels={NO_DOCUMENTED_FUNCTION_REQUIREMENT:'Ainda não há uma n
   INPUT_REQUIRES_CORRECTION:'Há informações ambíguas ou incompatíveis no entendimento do caso. Revise os pontos indicados.',
   NO_COMPLETE_SITUATED_COMPOSITION:'Os apoios apresentados não cobrem toda a atividade para todos os participantes. Confira o alcance de cada opção.',
   NO_AUTHORIZED_RELATION:'Há ações possíveis, mas a base ainda não fundamenta sua combinação para esta situação.',
+  UNMAPPED_TASK:'Esta ação foi informada, mas ainda não possui uma função operacional ligada à orientação.',
+  UNMAPPED_NEED:'Esta necessidade foi informada, mas ainda não possui uma função operacional ligada à orientação.',
+  NO_OPERATION_FOR_REQUIRED_FUNCTION:'A necessidade foi identificada, mas não há uma operação utilizável para atendê-la nas condições confirmadas.',
   CYCLIC_OPERATION_DEPENDENCY:'As ações dependem umas das outras sem um início executável.',
   CONDITION_OR_FOUNDATION_FAILED:'Uma condição necessária ou o fundamento desta operação não foi atendido.',
   SEARCH_LIMIT_REACHED:'A busca atingiu seu limite. Isso não significa que nenhuma solução seja possível.'};
@@ -95,11 +98,12 @@ export function situatedOutput(response) {
   const choices=[...items(response.choices).map(c=>[contextualize(c),'complete']),...items(response.partial_segments).map(c=>[contextualize(c),'partial']),...items(response.pending_candidates).map(c=>[contextualize(c),'pending'])];
   const seen=new Set();
   const rendered=choices.filter(([choice])=>{const key=JSON.stringify([choice.situation_id,choice.participant_id,items(choice.steps).map(s=>s.id),items(choice.relations).map(r=>r.id)]);if(seen.has(key))return false;seen.add(key);return true;});
-  const state={COMPLETE:'Percurso com condições conferidas',PARTIAL:'Apoio para parte do desafio',CONDITIONAL:'Possibilidades a confirmar',NONE:'Ainda sem uma operação fundamentada',UNCONFIRMED:'Confira o entendimento antes de gerar'}[response.proposal_status] || 'Confira o alcance desta orientação';
-  const scoped=row=>typeof row==='object'&&row?[row.participant_label,row.situation_label,text(row)].filter(Boolean).join(' — '):row;
+  const state={COMPLETE:response.covers_whole_reported_task===false?'Apoio às funções identificadas':'Percurso com condições conferidas',PARTIAL:'Apoio para parte do desafio',CONDITIONAL:'Possibilidades a confirmar',NONE:'Ainda sem uma operação fundamentada',UNCONFIRMED:'Confira o entendimento antes de gerar'}[response.proposal_status] || 'Confira o alcance desta orientação';
+  const scoped=row=>typeof row==='object'&&row?[row.participant_label,row.situation_label,
+    row.explanation?[row.label,row.explanation].filter(Boolean).join(': '):row.message || text(row)].filter(Boolean).join(' — '):row;
   const gaps=unique(items(response.gaps).map(scoped)), coverage=items(response.coverage || response.function_coverage).map(row=>typeof row==='object'?
     [row.participant_label,row.situation_label,text(row.function),{CAPABILITY_AVAILABLE:'há operação com condições conferidas',CONDITIONAL_CAPABILITY:'depende de condições a confirmar',NO_AVAILABLE_CAPABILITY:'ainda sem operação utilizável'}[row.state] || text(row)].filter(Boolean).join(' — '):row);
-  const html=(rendered.length?'<p>Examine uma possibilidade por vez. Ações independentes não precisam ser executadas em sequência.</p>'+rendered.map(([choice,kind],index)=>choiceHTML(choice,kind,index)).join(''):
+  const html=para(response.coverage_explanation)+(rendered.length?'<p>Examine uma possibilidade por vez. Ações independentes não precisam ser executadas em sequência.</p>'+rendered.map(([choice,kind],index)=>choiceHTML(choice,kind,index)).join(''):
     '<p>Não foi encontrada uma operação fundamentada para as condições confirmadas. Os motivos abaixo distinguem o que falta informar do que ainda falta representar na base.</p>')+
     (gaps.length?'<aside class="orientation-gaps"><h3>O que ficou sem cobertura</h3>'+list(gaps)+'</aside>':'');
   return {title:rendered.length?'O que você pode fazer':'O que falta para orientar este caso',state,html,

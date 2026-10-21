@@ -31,4 +31,11 @@ const scopedGaps=situatedOutput({gaps:[{code:'NO_DOCUMENTED_FUNCTION_REQUIREMENT
   {code:'NO_DOCUMENTED_FUNCTION_REQUIREMENT',participant_label:'Pessoa B',situation_label:'Consulta individual'}]});
 assert.match(scopedGaps.html,/Pessoa A — Consulta individual/);
 assert.match(scopedGaps.html,/Pessoa B — Consulta individual/);
+const bounded=situatedOutput({proposal_status:'COMPLETE',covers_whole_reported_task:false,
+  coverage_explanation:'O apoio cobre as funções confirmadas, não todas as ações do relato.',choices:[{steps:[step]}],
+  gaps:[{code:'UNMAPPED_TASK',label:'Enviar formulário',explanation:'Enviar o formulário ainda não tem operação representada.',participant_label:'Quem preenche'}]});
+assert.equal(bounded.state,'Apoio às funções identificadas');
+assert.match(bounded.html,/não todas as ações do relato/);
+assert.match(bounded.html,/Quem preenche — Enviar formulário: Enviar o formulário ainda não tem operação representada/);
+assert.doesNotMatch(bounded.html,/UNMAPPED_TASK/);
 console.log('PASS situated actions: actual modes, monitoring, grounds, gaps, conditionality, escaping and no invented relations.');

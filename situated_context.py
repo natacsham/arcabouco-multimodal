@@ -46,6 +46,127 @@ def words(value):
     return re.sub(r"[^a-z0-9]+", " ", folded(value)).strip()
 
 
+def negated_action(text, start):
+    return bool(re.search(r"\bnao\s+(?:(?:quero|quer|pretendo|preciso|precisa|vou|vai|devo|consigo|consegue|conseguem|pode|podem)\s+)?$",
+                          text[max(0, start - 45):start]))
+
+
+def completion_control(text, start, end):
+    """Deciding when to send is a condition, not a separate send task."""
+    return bool(re.search(r"\b(?:(?:decido|decide|decidem|controlo|controla|controlam|decidir|controlar)\s+(?:quando|se)|antes de)\s*$",
+                          text[max(0, start - 45):start]) or
+                text[start:end] == "controlar" and re.match(r"\s+quando\b", text[end:]))
+
+
+def functional_signal_pattern(signal):
+    # Grammatical inflection of an existing signal, not a new design claim.
+    choices = {"consegue": "(?:consigo|consegue|conseguem)",
+               "perde": "(?:perco|perde|perdem)", "precisa": "(?:preciso|precisa|precisam)"}
+    token = words(signal)
+    pattern = " ".join(choices.get(word, re.escape(word)) for word in token.split())
+    if token == "precisa retomar a explicacao":
+        pattern += (
+            r"|nao (?:consigo|consegue|conseguem) (?:retomar|recuperar) "
+            r"(?:a |as |o |os )?(?:instrucoes|instrucao|explicacao)"
+            r"|dificuldades? (?:de|para|em) (?:retomar|recuperar) "
+            r"(?:a |as |o |os )?(?:instrucoes|instrucao|explicacao)"
+        )
+    return r"\b(?:" + pattern + r")\b"
+
+
+def resource_occurrences(narrative, token):
+    """Read every explicit occurrence before projecting resource availability."""
+    result = []
+    for clause in re.split(r"[.!?;]", narrative):
+        local = words(clause)
+        for match in re.finditer(r"\b" + re.escape(token) + r"\b", local):
+            before, after = local[:match.start()], local[match.end():]
+            blocked = (re.search(r"\b(?:sem|nao (?:ha|tem|temos|tenho|esta disponivel))\s*(?:(?:um|uma|o|a)\s+)?$", before)
+                       or re.match(r"\s+(?:(?:esta|estao)\s+)?(?:indisponivel|indisponiveis|nao disponivel)\b", after))
+            available = (re.search(r"\b(?:tenho|temos|ha|tem|existe|existem)\b(?!\s+que\b)[^.!?]{0,75}$", before)
+                         or re.match(r"\s+(?:(?:esta|estao)\s+)?disponive(?:l|is)\b", after))
+            acquisition = re.search(r"\b(?:quero|pretendo|vou|preciso|podemos|poderia)\b.{0,35}\b(?:comprar|adquirir|providenciar)\b[^.!?]{0,60}$", before)
+            preparation = re.search(r"\b(?:quero|pretendo|vou|preciso|podemos|poderia)\b.{0,35}\b(?:preparar|criar|considerar|produzir)\s+(?:(?:um|uma|o|a)\s+)?$", before)
+            if acquisition and negated_action(before, acquisition.start()):
+                acquisition = None
+            if preparation and negated_action(before, preparation.start()):
+                preparation = None
+            if blocked:
+                result.append(("recursos_impedidos", clause.strip()))
+            elif acquisition or preparation:
+                result.append(("recursos_propostos", clause.strip()))
+            elif available and not re.search(r"\bnao\s+(?:tenho|temos|ha|tem|existe|existem)\b", before):
+                result.append(("recursos_disponiveis", clause.strip()))
+    return result
+
+
+# These are existing composer facts. A positive statement must cover the
+# entire fact: ability to speak alone does not establish acceptance of speech.
+REPORTED_FACT_PATTERNS = (
+    ("CanUseKeyboard", r"\b(?P<no>nao\s+)?(?:consigo|consegue|conseguem|posso|pode|podem)\s+(?:usar|operar|escrever (?:com|usando))\s+(?:o |um )?teclado\b"),
+    ("CanUseSpeech", r"\b(?P<no>nao\s+)?(?:consigo e aceito|consegue e aceita|conseguem e aceitam|posso e aceito|pode e aceita)\s+(?:falar|usar (?:a )?fala)\b"),
+    ("CanReviewVisualText", r"\b(?P<no>nao\s+)?(?:consigo|consegue|conseguem|posso|pode|podem)\s+(?:ler|conferir|revisar)\s+(?:o |um )?texto\s+(?:na tela|visualmente)\b"),
+    ("CanReviewSpeech", r"\b(?P<no>nao\s+)?(?:consigo|consegue|conseguem|posso|pode|podem)\s+conferir\s+(?:o )?(?:conteudo|texto)\s+(?:pela leitura em voz|ouvindo)\b"),
+    ("CanControlPlayback", r"\b(?P<no>nao\s+)?(?:consigo|consegue|conseguem)\s+pausar e repetir\s+(?:a )?leitura\b"),
+    ("CanCorrect", r"\b(?P<no>nao\s+)?(?:consigo|consegue|conseguem|posso|pode|podem)\s+(?:(?:usar|operar) (?:o )?teclado para )?corrigir\s+(?:o |um )?(?:rascunho|texto|erros)\b"),
+    ("ControlsCompletion", r"\b(?P<no>nao\s+)?(?:decido|decide|decidem|controlo|controla|controlam)\s+quando\s+(?:concluir|enviar)\b"),
+    ("ContentAvailable", r"\b(?P<no>nao\s+)?(?:tenho|temos|tem|ha)\s+(?:o |um )?conteudo\s+disponivel\b"),
+    ("CanVerifyMeaning", r"\b(?P<no>nao\s+)?(?:consigo|consegue|conseguem)\s+(?:verificar o significado|confirmar o sentido do texto)\b"),
+)
+
+
+def extract_reported_facts(context, people, narrative):
+    """Project explicit, uniquely owned testimony; do not verify it for the user."""
+    role_patterns = {
+        "PAPEL-PROFESSORA": r"\b(?:professor(?:a)?|docente)\b",
+        "PAPEL-MEDIADOR": r"\bmediador[ao]?\b",
+        "PAPEL-ESTUDANTE": r"\b(?:alunos?|alunas?|estudantes?)\b",
+        "PAPEL-PESSOA-APOIADA": r"\b(?:pessoa|usuario|usuaria)\b",
+    }
+    self_id = context.get("requester_participation_id")
+    collected = {}
+    for clause in re.split(r"(?<=[.!?;])\s+|\s+mas\s+", narrative, flags=re.I):
+        local = words(clause)
+        if re.search(r"\b(?:nao sei|nao e (?:verdade|certo|garantido) que|talvez|acho que|sera que|alguns|algumas|parte d[ao]s?|um dos)\b", local):
+            continue
+        roles = {role for role, pattern in role_patterns.items() if re.search(pattern, local)}
+        explicit_self = bool(re.search(r"\b(?:eu|consigo|posso|decido|controlo|tenho|aceito)\b", local))
+        if explicit_self and roles:
+            # Do not attach a first-person ability to another person mentioned
+            # in the same clause. This needs clarification, not role precedence.
+            continue
+        owners = ([p for p in people if p["id"] == self_id] if explicit_self and not roles else
+                  [p for p in people if p.get("papel_id") in roles] if len(roles) == 1 else
+                  people[:] if not roles and not explicit_self and len(people) == 1 else [])
+        if len(owners) != 1:
+            continue
+        person = owners[0]
+        situations = [s for s in context.get("situations", []) if person["id"] in s.get("participant_ids", [])
+                      and s.get("task_ids")]
+        local_situations = [s for s in situations if words(clause) in words(s.get("source_text", ""))]
+        if len(local_situations) == 1:
+            situations = local_situations
+        if len(situations) != 1:
+            continue
+        sid = situations[0]["id"]
+        for fact, pattern in REPORTED_FACT_PATTERNS:
+            for match in re.finditer(pattern, local):
+                # An assertion in quoted/reported speech or a hypothetical
+                # request is not evidence of this participant's own capacity.
+                if re.search(r"\b(?:se|caso|diz que|disse que|pergunta se)\s+(?:(?:eu|ele|ela)\s+)?$", local[:match.start()]):
+                    continue
+                key = (person["id"], sid, "https://w3id.org/mado/experimental/v2#" + fact)
+                collected.setdefault(key, []).append((not bool(match.group("no")), clause.strip()))
+    for (pid, sid, fact_id), occurrences in collected.items():
+        values = {value for value, _ in occurrences}
+        conflict = len(values) > 1
+        source = " / ".join(dict.fromkeys(source for _, source in occurrences))
+        row = _assert(context, pid, sid, "functional_fact", {"fact_id": fact_id,
+                      "value": None if conflict else next(iter(values))}, source,
+                      "CONFLITO" if conflict else "RELATADO")
+        _project(context, people, row)
+
+
 def uid(prefix, *values):
     return prefix + hashlib.sha256("|".join(map(str, values)).encode()).hexdigest()[:12].upper()
 
@@ -135,24 +256,27 @@ def build(context, people, narrative, concepts, evidence, prior=None):
         matches = [clause for clause in source_clauses if words(token) in words(clause)]
         return matches[0] if len(matches) == 1 else narrative
     # An intended acquisition/adaptation is not evidence of availability.
+    # A mention used as an instrument ("produzir mensagem por ditado") is
+    # different from producing/acquiring that instrument.
     for item in evidence:
         if item.get("field") != "recursos_disponiveis":
             continue
         value, token = item.get("concept_id"), words(item.get("matched_text", ""))
-        for clause in re.split(r"[.!?;]", effective):
-            local = words(clause)
-            if not token or token not in local:
-                continue
-            before = local[:local.find(token)]
-            intended = re.search(r"\b(?:quero|pretendo|vou|preciso|podemos|poderia)\b.{0,40}\b(?:comprar|adquirir|providenciar|preparar|criar|considerar|produzir)\b", before)
-            unavailable = re.search(r"\b(?:sem|nao (?:ha|tem|temos|tenho|esta disponivel))\s*$", before)
-            if intended or unavailable:
-                context["recursos_disponiveis"] = [r for r in context.get("recursos_disponiveis", []) if r != value]
-                target = "recursos_propostos" if intended else "recursos_impedidos"
-                if value not in context.setdefault(target, []):
-                    context[target].append(value)
-                item.update(field=target, matched_text=clause.strip())
-                break
+        occurrences = resource_occurrences(effective, token) if token else []
+        states = {field for field, _ in occurrences}
+        if not states:
+            continue
+        conflict = "recursos_disponiveis" in states and "recursos_impedidos" in states
+        target = ("recursos_disponiveis" if conflict or "recursos_disponiveis" in states else
+                  "recursos_impedidos" if "recursos_impedidos" in states else "recursos_propostos")
+        for field in ("recursos_disponiveis", "recursos_impedidos", "recursos_propostos"):
+            context[field] = [r for r in context.get(field, []) if r != value]
+        # Conflicting testimony remains editable and blocks confirmation.
+        context[target].append(value)
+        source = " / ".join(dict.fromkeys(clause for field, clause in occurrences if conflict or field == target))
+        item.update(field=target, matched_text=source)
+        if conflict:
+            item["status"] = "CONFLITO_A_CONFIRMAR"
     previous_revision = (prior or {}).get("revision", 0)
     context.update(fresh_contract())
     context["revision"] = previous_revision + 1
@@ -222,6 +346,7 @@ def build(context, people, narrative, concepts, evidence, prior=None):
         person = _person(context, "PAPEL-PESSOA-APOIADA", "Quem relata e realiza a atividade", "self")
         people.append(person)
         receivers = [person]
+        context["requester_participation_id"] = person["id"]
     if group:
         receivers = [group, *[p for p in receivers if p.get("parent_group_id") == group["id"]]]
 
@@ -359,8 +484,13 @@ def build(context, people, narrative, concepts, evidence, prior=None):
                 receivers[0]["caracteristica_ids"].append(value)
             else:
                 sid = ""  # No implicit broadcast of a personal characteristic.
-        state = "INFERIDO_PARA_CONFIRMACAO" if "INFERIDO" in item.get("status", "") else "RELATADO"
+        state = ("CONFLITO" if item.get("status") == "CONFLITO_A_CONFIRMAR" else
+                 "INFERIDO_PARA_CONFIRMACAO" if "INFERIDO" in item.get("status", "") else "RELATADO")
         _assert(context, subject, sid, kind, value, item.get("matched_text", narrative), state)
+        if state == "CONFLITO":
+            # Do not pass the contradictory resource through legacy arrays.
+            context[item["field"]] = [v for v in context[item["field"]] if v != value]
+            continue
         if scoped and kind in SITUATION_FIELDS and value not in scoped[SITUATION_FIELDS[kind]]:
             scoped[SITUATION_FIELDS[kind]].append(value)
         if scoped and kind in RESOURCE_STATES:
@@ -380,6 +510,7 @@ def build(context, people, narrative, concepts, evidence, prior=None):
         subject = receivers[0]["id"] if len(receivers) == 1 else context["id"]
         _assert(context, subject, single["id"] if single else "", "functional_observation", clause.strip(), clause.strip())
     context["unmapped_text"] = [narrative]
+    extract_reported_facts(context, people, effective)
     return effective
 
 

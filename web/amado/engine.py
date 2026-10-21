@@ -30,7 +30,7 @@ DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
 VERSION = "1.5.0-rc1"
-UI_VERSION = "AMADO-web-1.5.0-rc1-situated1"
+UI_VERSION = "AMADO-web-1.5.0-rc1-intake1"
 REQUESTER_RELATIONS = {
     "self": "Sou eu quem realizará a atividade",
     "support": "Apoio quem realizará a atividade",
@@ -607,10 +607,18 @@ class DecisionEngine:
             )
             for alias in aliases:
                 token = normalize_text(alias)
+                if identifier == "REC-FEEDBACK-ACESSIVEL" and token in {"erro", "confirmacao"}:
+                    # An error to correct is not evidence of feedback supplied
+                    # by the interface. Keep the explicit feedback/status names.
+                    continue
                 if field == "ambientes" and token in {"turma", "professor", "professora", "aluno", "estudante", "aula"}:
                     # A participant or group does not establish the location.
                     continue
-                if len(token) >= 4 and token in normalized:
+                matches = list(re.finditer(r"\b" + re.escape(token) + r"\b", normalized)) if len(token) >= 4 else []
+                if field == "tarefas":
+                    matches = [match for match in matches
+                               if not situated_context.negated_action(normalized, match.start())]
+                if matches:
                     detected[field].append(identifier)
                     evidence.append(
                         {
@@ -659,7 +667,7 @@ class DecisionEngine:
                 "TAR-COMUNICAR-CONTEUDO-1545B38",
             ),
             (
-                "\\b(criar|produzir|construir|preparar).{0,40}\\b(recurso|conteudo|apresentacao|pagina|video|jogo)\\b",
+                "\\b(criar|produzir|construir|preparar|escrever|redigir|ditar).{0,40}\\b(recurso|conteudo|apresentacao|pagina|video|jogo|texto|mensagem|resposta|rascunho)\\b",
                 "tarefas",
                 "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
             ),
@@ -769,7 +777,19 @@ class DecisionEngine:
             ),
         ]
         for pattern, field, identifier in cues:
-            match = re.search(pattern, normalized)
+            matches = re.finditer(pattern, normalized)
+            match = next((candidate for candidate in matches
+                          if field != "tarefas" or (
+                              not situated_context.negated_action(normalized, candidate.start())
+                              and not (identifier == "TAR-OPERAR-SISTEMA" and
+                                       situated_context.completion_control(normalized, candidate.start(), candidate.end())))), None)
+            if (match and field == "necessidades"
+                    and identifier == "NEC-ENTRADA-ALTERNATIVA"
+                    and re.search(
+                        r"\b(?:consigo|consegue|conseguem|posso|pode|podem)\s+$",
+                        normalized[max(0, match.start() - 30):match.start()])
+                    and not situated_context.negated_action(normalized, match.start())):
+                match = None
             if (
                 match
                 and identifier in self.concepts
@@ -857,6 +877,19 @@ class DecisionEngine:
             ]
         if not re.search(r"\b(?:revisar|revisao|confirmar|confirmacao|corrigir)\b", normalized):
             detected["tarefas"] = [value for value in detected["tarefas"] if value != "TAR-REVISAR-E-CONFIRMAR"]
+        if "TAR-REVISAR-E-CONFIRMAR" in detected["tarefas"]:
+            duplicate = [
+                item for item in evidence
+                if item.get("field") == "necessidades"
+                and item.get("concept_id") == "NEC-REVISAO-E-CONFIRMACAO"
+                and normalize_text(item.get("matched_text")) in {"revisar", "confirmar"}
+            ]
+            if duplicate:
+                evidence = [item for item in evidence if item not in duplicate]
+                detected["necessidades"] = [
+                    value for value in detected["necessidades"]
+                    if value != "NEC-REVISAO-E-CONFIRMACAO"
+                ]
         for field, identifiers in detected.items():
             context[field] = unique(identifiers)
         context["descricao_do_contexto"] = narrative
@@ -969,10 +1002,11 @@ class DecisionEngine:
             ("seek_guidance", r"\b(?:o que (?:eu )?posso|quero|preciso)\s+(?:falar|dizer|orientar|conversar)\b.{0,65}\b(?:professor|professora|docente|mediador|mediadora|responsavel)\b"),
             ("prepare", r"\b(?:eu (?:vou|preciso|quero)|quero|preciso)\s+(?:preparar|adaptar|ajustar)\b.{0,35}\b(?:material|conteudo|recurso|apresentacao)\b"),
             ("support", r"\b(?:eu apoio|pessoa que (?:eu )?apoio|quero (?:ajudar|apoiar)|preciso (?:ajudar|apoiar))\b"),
-            ("self", r"\b(?:para (?:meu uso|mim)|sou eu quem (?:vai|precisa)|eu mesmo preciso|eu mesma preciso|eu (?:preciso|quero|vou) (?:acessar|usar|utilizar|preencher|enviar|ler|consultar|navegar|operar))\b"),
+            ("self", r"\b(?:para (?:meu uso|mim)|sou eu quem (?:vai|precisa)|eu mesmo preciso|eu mesma preciso|(?:eu )?(?:preciso|quero|vou) (?:acessar|usar|utilizar|preencher|enviar|ler|consultar|navegar|operar|produzir|escrever|redigir|ditar|revisar|corrigir))\b"),
         )
         for relation, pattern in requester_cues:
-            match = re.search(pattern, normalized)
+            match = next((candidate for candidate in re.finditer(pattern, normalized)
+                          if not situated_context.negated_action(normalized, candidate.start())), None)
             if match:
                 context["requester_relation"] = relation
                 context["requester_relation_status"] = "IDENTIFICADO_PARA_CONFIRMACAO"
@@ -1258,9 +1292,9 @@ class DecisionEngine:
                 token = normalize_text(signal)
                 if not token:
                     continue
-                for match in re.finditer(r"\b" + re.escape(token) + r"\b", text):
+                for match in re.finditer(situated_context.functional_signal_pattern(token), text):
                     if any(a.get("kind") == "functional_observation" and a.get("state") in situated_context.ACTIVE_STATES
-                           and re.search(r"\b" + re.escape(token) + r"\b", normalize_text(a.get("value", "")))
+                           and re.search(situated_context.functional_signal_pattern(token), normalize_text(a.get("value", "")))
                            for a in context.get("assertions", [])):
                         continue
                     candidates = [row for row in people if row.get("reported_condition")
@@ -1277,7 +1311,7 @@ class DecisionEngine:
                     token = normalize_text(signal)
                     if not token:
                         continue
-                    for match in re.finditer(r"\b" + re.escape(token) + r"\b", observation):
+                    for match in re.finditer(situated_context.functional_signal_pattern(token), observation):
                         person = next((row for row in people if row["id"] == assertion["subject_id"]), None)
                         key = (person["id"] if person else "", assertion.get("situation_id", ""))
                         record = observed.setdefault(key, {"person": person, "positive": [], "negative": [], "assertion_ids": []})

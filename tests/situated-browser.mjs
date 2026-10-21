@@ -276,6 +276,52 @@ try{
   check('no_javascript_errors',report.errors.length===0);
   check('native_bridge_worker_canonical_parity',initialParity);
   check('conditional_native_worker_canonical_parity',conditionalParity);
+  // Reuse the three disclosed synthetic fixtures, not bespoke browser answers.
+  const replayCases=JSON.parse(execFileSync(process.env.AMADO_PYTHON||'python',['-B','-W','ignore','-c',
+    "import sys,json;sys.path.insert(0,'tests');from test_narrative_to_actions import export_replays;print(json.dumps(export_replays(),ensure_ascii=True))"],
+    {cwd:root,encoding:'utf8',maxBuffer:64*1024*1024}));
+  report.narrative_cases=[];
+  for(const replayCase of replayCases){
+    const workerResult=await page.evaluate(async records=>{
+      const {request}=await import('./client.mjs');
+      const mapping=new Map();
+      const replace=(value,ids)=>{
+        if(typeof value==='string'){
+          for(const [old,newId] of [...ids].sort((a,b)=>b[0].length-a[0].length))value=value.split(old).join(newId);
+          return value;
+        }
+        if(Array.isArray(value))return value.map(v=>replace(v,ids));
+        if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([k,v])=>[replace(k,ids),replace(v,ids)]));
+        return value;
+      };
+      let last;
+      for(const record of records){
+        const call=replace(record.request,mapping);
+        last=await request(call.operation,{payload:call.payload});
+        const old=record.response.current||record.response,current=last.current||last;
+        if(old.context&&current.context){
+          mapping.set(old.context.id,current.context.id);
+          const groups=[[old.participations||[],current.participations||[]],
+            ...['situations','assertions'].map(key=>[old.context[key]||[],current.context[key]||[]])];
+          for(const [left,right] of groups){
+            if(left.length!==right.length)throw Error('Native/worker decomposition differs');
+            left.forEach((value,i)=>mapping.set(value.id,right[i].id));
+          }
+          for(const oldQuestion of old.questions||[]){
+            const target=replace(oldQuestion,mapping);
+            const found=(current.questions||[]).filter(q=>['field','situation_id','participant_id'].every(key=>(q[key]||'')===(target[key]||'')));
+            if(found.length===1)mapping.set(oldQuestion.id,found[0].id);
+          }
+        }
+      }
+      return replace(last,new Map([...mapping].map(([a,b])=>[b,a])));
+    },replayCase.records);
+    const nativeResult=replayCase.records.at(-1).response;
+    const equal=JSON.stringify(canonical(workerResult))===JSON.stringify(canonical(nativeResult));
+    check('narrative_'+replayCase.id+'_native_worker_parity',equal);
+    report.narrative_cases.push({id:replayCase.id,parity:equal,proposal_status:workerResult.proposal_status,
+      canonical_sha256:sha(JSON.stringify(canonical(workerResult)))});
+  }
   report.passed=true;
 }catch(error){
   report.passed=false;report.failure=String(error.stack||error).replaceAll(root,'<PROJECT>').replaceAll(root.replaceAll('\\','/'),'<PROJECT>')

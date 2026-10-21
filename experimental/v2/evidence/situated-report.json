@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0.0-alpha3",
-  "checked_at_utc": "2026-10-13T05:14:11.955376+00:00",
+  "checked_at_utc": "2026-10-21T09:05:54.845052+00:00",
   "evidence_kind": "SYNTHETIC_EXECUTION_NOT_EMPIRICAL_VALIDATION",
   "scope": "A mesma busca situada consome operações dos PAD e uma projeção das capacidades RDF já registradas; não existe inferência por nome do cenário.",
   "limits": [
@@ -405,8 +405,8 @@
     "ontology/main.ttl": "a5fbc203f725ec8991145073533170def64a81f6958b11fb94c027590b14443b",
     "ontology/mado-combined.ttl": "a1598943c6698c67f679e5299c73e0c1465da47d3044e227393b5659c5a87f85",
     "shapes/main.shacl.ttl": "31b9e7e9b45d6e21719158d24cc65fa048afa03e293dfb68277337116ef685ed",
-    "engine.py": "d3b7cb928b3dfa03e43c553cef5a6bbb67a0c38d0c929e007a70477252da60aa",
-    "experimental/v2/composer.py": "d70bcd746d788eb06ebe1da2d810226f7ae419c5910982441140522bc5f1bbc0",
+    "engine.py": "cd39c268c40434631d21bc511fc3572f818b5cd137208b1912e79a63ba958099",
+    "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
     "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
     "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
     "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
@@ -420,8 +420,8 @@
     "ontology/main.ttl": "a5fbc203f725ec8991145073533170def64a81f6958b11fb94c027590b14443b",
     "ontology/mado-combined.ttl": "a1598943c6698c67f679e5299c73e0c1465da47d3044e227393b5659c5a87f85",
     "shapes/main.shacl.ttl": "31b9e7e9b45d6e21719158d24cc65fa048afa03e293dfb68277337116ef685ed",
-    "engine.py": "d3b7cb928b3dfa03e43c553cef5a6bbb67a0c38d0c929e007a70477252da60aa",
-    "experimental/v2/composer.py": "d70bcd746d788eb06ebe1da2d810226f7ae419c5910982441140522bc5f1bbc0",
+    "engine.py": "cd39c268c40434631d21bc511fc3572f818b5cd137208b1912e79a63ba958099",
+    "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
     "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
     "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
     "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
@@ -437,7 +437,7 @@
     "errors": 0,
     "skipped": 0,
     "success": true,
-    "log": "test_attributed_main_actions_refine_only_with_same_draft_condition (test_situated_composition.ExistingResearchContractTests.test_attributed_main_actions_refine_only_with_same_draft_condition) ... ok\ntest_catalogue_contracts_are_all_visible_but_not_all_recommended (test_situated_composition.ExistingResearchContractTests.test_catalogue_contracts_are_all_visible_but_not_all_recommended) ... ok\ntest_existing_rdf_recombines_in_same_general_engine (test_situated_composition.ExistingResearchContractTests.test_existing_rdf_recombines_in_same_general_engine) ... ok\ntest_meaning_verification_perturbation_changes_actual_choice (test_situated_composition.ExistingResearchContractTests.test_meaning_verification_perturbation_changes_actual_choice) ... ok\ntest_no_implicit_main_function_equivalence (test_situated_composition.ExistingResearchContractTests.test_no_implicit_main_function_equivalence) ... ok\ntest_two_people_recombine_without_borrowing_abilities (test_situated_composition.ExistingResearchContractTests.test_two_people_recombine_without_borrowing_abilities) ... ok\ntest_bounded_search_discloses_interruption (test_situated_composition.SituatedGraphTests.test_bounded_search_discloses_interruption) ... ok\ntest_context_level_need_is_not_assigned_to_every_person (test_situated_composition.SituatedGraphTests.test_context_level_need_is_not_assigned_to_every_person) ... ok\ntest_declared_care_relations_check_sufficiency_temporality_and_access (test_situated_composition.SituatedGraphTests.test_declared_care_relations_check_sufficiency_temporality_and_access) ... ok\ntest_deferred_requirement_does_not_block_active_scope (test_situated_composition.SituatedGraphTests.test_deferred_requirement_does_not_block_active_scope) ... ok\ntest_direct_normative_pair_must_use_its_actual_excerpt (test_situated_composition.SituatedGraphTests.test_direct_normative_pair_must_use_its_actual_excerpt) ... ok\ntest_explicit_inability_overrides_general_operated_resource (test_situated_composition.SituatedGraphTests.test_explicit_inability_overrides_general_operated_resource) ... ok\ntest_impeded_resource_cannot_be_enabled_by_conflicting_generic_fact (test_situated_composition.SituatedGraphTests.test_impeded_resource_cannot_be_enabled_by_conflicting_generic_fact) ... ok\ntest_labels_and_subject_text_never_route_operations (test_situated_composition.SituatedGraphTests.test_labels_and_subject_text_never_route_operations) ... ok\ntest_malformed_fact_fails_closed (test_situated_composition.SituatedGraphTests.test_malformed_fact_fails_closed) ... ok\ntest_pending_foundation_never_becomes_context_question (test_situated_composition.SituatedGraphTests.test_pending_foundation_never_becomes_context_question) ... ok\ntest_rdf_task_does_not_require_recipient_to_perform_actor_actions (test_situated_composition.SituatedGraphTests.test_rdf_task_does_not_require_recipient_to_perform_actor_actions) ... ok\ntest_relation_cannot_borrow_a_claim_about_another_function (test_situated_composition.SituatedGraphTests.test_relation_cannot_borrow_a_claim_about_another_function) ... ok\ntest_required_functions_precede_selection_and_new_context_recombines (test_situated_composition.SituatedGraphTests.test_required_functions_precede_selection_and_new_context_recombines) ... ok\ntest_resource_mention_is_not_availability_and_episodes_do_not_borrow (test_situated_composition.SituatedGraphTests.test_resource_mention_is_not_availability_and_episodes_do_not_borrow) ... ok\ntest_returned_claims_do_not_expose_mutable_shared_catalogue (test_situated_composition.SituatedGraphTests.test_returned_claims_do_not_expose_mutable_shared_catalogue) ... ok\ntest_same_types_without_registered_edge_do_not_compose (test_situated_composition.SituatedGraphTests.test_same_types_without_registered_edge_do_not_compose) ... ok\ntest_scoped_unknown_answer_not_repeated_and_other_person_not_authorized (test_situated_composition.SituatedGraphTests.test_scoped_unknown_answer_not_repeated_and_other_person_not_authorized) ... ok\ntest_unknown_relation_is_conditional_false_relation_blocks (test_situated_composition.SituatedGraphTests.test_unknown_relation_is_conditional_false_relation_blocks) ... ok\ntest_unknown_requirement_is_not_silently_satisfied (test_situated_composition.SituatedGraphTests.test_unknown_requirement_is_not_silently_satisfied) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 1.267s\n\nOK\n"
+    "log": "test_attributed_main_actions_refine_only_with_same_draft_condition (test_situated_composition.ExistingResearchContractTests.test_attributed_main_actions_refine_only_with_same_draft_condition) ... ok\ntest_catalogue_contracts_are_all_visible_but_not_all_recommended (test_situated_composition.ExistingResearchContractTests.test_catalogue_contracts_are_all_visible_but_not_all_recommended) ... ok\ntest_existing_rdf_recombines_in_same_general_engine (test_situated_composition.ExistingResearchContractTests.test_existing_rdf_recombines_in_same_general_engine) ... ok\ntest_meaning_verification_perturbation_changes_actual_choice (test_situated_composition.ExistingResearchContractTests.test_meaning_verification_perturbation_changes_actual_choice) ... ok\ntest_no_implicit_main_function_equivalence (test_situated_composition.ExistingResearchContractTests.test_no_implicit_main_function_equivalence) ... ok\ntest_two_people_recombine_without_borrowing_abilities (test_situated_composition.ExistingResearchContractTests.test_two_people_recombine_without_borrowing_abilities) ... ok\ntest_bounded_search_discloses_interruption (test_situated_composition.SituatedGraphTests.test_bounded_search_discloses_interruption) ... ok\ntest_context_level_need_is_not_assigned_to_every_person (test_situated_composition.SituatedGraphTests.test_context_level_need_is_not_assigned_to_every_person) ... ok\ntest_declared_care_relations_check_sufficiency_temporality_and_access (test_situated_composition.SituatedGraphTests.test_declared_care_relations_check_sufficiency_temporality_and_access) ... ok\ntest_deferred_requirement_does_not_block_active_scope (test_situated_composition.SituatedGraphTests.test_deferred_requirement_does_not_block_active_scope) ... ok\ntest_direct_normative_pair_must_use_its_actual_excerpt (test_situated_composition.SituatedGraphTests.test_direct_normative_pair_must_use_its_actual_excerpt) ... ok\ntest_explicit_inability_overrides_general_operated_resource (test_situated_composition.SituatedGraphTests.test_explicit_inability_overrides_general_operated_resource) ... ok\ntest_impeded_resource_cannot_be_enabled_by_conflicting_generic_fact (test_situated_composition.SituatedGraphTests.test_impeded_resource_cannot_be_enabled_by_conflicting_generic_fact) ... ok\ntest_labels_and_subject_text_never_route_operations (test_situated_composition.SituatedGraphTests.test_labels_and_subject_text_never_route_operations) ... ok\ntest_malformed_fact_fails_closed (test_situated_composition.SituatedGraphTests.test_malformed_fact_fails_closed) ... ok\ntest_pending_foundation_never_becomes_context_question (test_situated_composition.SituatedGraphTests.test_pending_foundation_never_becomes_context_question) ... ok\ntest_rdf_task_does_not_require_recipient_to_perform_actor_actions (test_situated_composition.SituatedGraphTests.test_rdf_task_does_not_require_recipient_to_perform_actor_actions) ... ok\ntest_relation_cannot_borrow_a_claim_about_another_function (test_situated_composition.SituatedGraphTests.test_relation_cannot_borrow_a_claim_about_another_function) ... ok\ntest_required_functions_precede_selection_and_new_context_recombines (test_situated_composition.SituatedGraphTests.test_required_functions_precede_selection_and_new_context_recombines) ... ok\ntest_resource_mention_is_not_availability_and_episodes_do_not_borrow (test_situated_composition.SituatedGraphTests.test_resource_mention_is_not_availability_and_episodes_do_not_borrow) ... ok\ntest_returned_claims_do_not_expose_mutable_shared_catalogue (test_situated_composition.SituatedGraphTests.test_returned_claims_do_not_expose_mutable_shared_catalogue) ... ok\ntest_same_types_without_registered_edge_do_not_compose (test_situated_composition.SituatedGraphTests.test_same_types_without_registered_edge_do_not_compose) ... ok\ntest_scoped_unknown_answer_not_repeated_and_other_person_not_authorized (test_situated_composition.SituatedGraphTests.test_scoped_unknown_answer_not_repeated_and_other_person_not_authorized) ... ok\ntest_unknown_relation_is_conditional_false_relation_blocks (test_situated_composition.SituatedGraphTests.test_unknown_relation_is_conditional_false_relation_blocks) ... ok\ntest_unknown_requirement_is_not_silently_satisfied (test_situated_composition.SituatedGraphTests.test_unknown_requirement_is_not_silently_satisfied) ... ok\n\n----------------------------------------------------------------------\nRan 25 tests in 0.962s\n\nOK\n"
   },
   "summaries": {
     "articulated": {
@@ -5998,6 +5998,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -7905,6 +7908,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -9912,6 +9918,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -11819,6 +11828,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -12536,6 +12548,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -13131,6 +13146,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -13762,6 +13780,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -14278,6 +14299,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -22734,6 +22758,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": true,
               "ready_for_whole_task": true,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -23436,6 +23463,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -24031,6 +24061,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -25885,6 +25918,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": true,
               "ready_for_whole_task": true,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -26596,6 +26632,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -27112,6 +27151,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -33994,7 +34036,11 @@
         }
       ],
       "unassigned_scope_requirements": [],
+      "covers_selected_scope": true,
       "covers_all_participants": true,
+      "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+      "covers_whole_reported_task": true,
+      "coverage_explanation": "Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso.",
       "trajectory_evidence": {
         "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
         "operationalization_status": "PROPOSED_NOT_EVALUATED",
@@ -37087,6 +37133,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -37682,6 +37731,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -39610,6 +39662,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -40304,6 +40359,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -48103,6 +48161,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": true,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -48806,6 +48867,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -49401,6 +49465,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -50043,6 +50110,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -56728,7 +56798,11 @@
         }
       ],
       "unassigned_scope_requirements": [],
+      "covers_selected_scope": false,
       "covers_all_participants": false,
+      "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+      "covers_whole_reported_task": false,
+      "coverage_explanation": "Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso.",
       "trajectory_evidence": {
         "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
         "operationalization_status": "PROPOSED_NOT_EVALUATED",
@@ -58854,6 +58928,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": false,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -60695,6 +60772,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": false,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -61411,6 +61491,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -62006,6 +62089,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -63934,6 +64020,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -64628,6 +64717,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -73167,6 +73259,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": true,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -73870,6 +73965,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -74465,6 +74563,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -74991,6 +75092,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": false,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -76832,6 +76936,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": false,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -77542,6 +77649,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -84429,7 +84539,11 @@
         }
       ],
       "unassigned_scope_requirements": [],
+      "covers_selected_scope": false,
       "covers_all_participants": false,
+      "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+      "covers_whole_reported_task": false,
+      "coverage_explanation": "Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso.",
       "trajectory_evidence": {
         "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
         "operationalization_status": "PROPOSED_NOT_EVALUATED",
@@ -87484,6 +87598,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -88079,6 +88196,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -88672,6 +88792,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -89188,6 +89311,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -94608,6 +94734,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -95203,6 +95332,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -95807,6 +95939,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -96323,6 +96458,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -102801,7 +102939,11 @@
         }
       ],
       "unassigned_scope_requirements": [],
+      "covers_selected_scope": false,
       "covers_all_participants": false,
+      "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+      "covers_whole_reported_task": false,
+      "coverage_explanation": "Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso.",
       "trajectory_evidence": {
         "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
         "operationalization_status": "PROPOSED_NOT_EVALUATED",
@@ -104641,6 +104783,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -105274,6 +105419,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -105790,6 +105938,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -111221,6 +111372,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -111865,6 +112019,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -112381,6 +112538,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -119044,7 +119204,11 @@
         }
       ],
       "unassigned_scope_requirements": [],
+      "covers_selected_scope": false,
       "covers_all_participants": false,
+      "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+      "covers_whole_reported_task": false,
+      "coverage_explanation": "Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso.",
       "trajectory_evidence": {
         "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
         "operationalization_status": "PROPOSED_NOT_EVALUATED",
@@ -121992,6 +122156,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -124053,6 +124220,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -126214,6 +126384,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -128275,6 +128448,9 @@
           "missing_functions": [],
           "covers_all_required_functions": true,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": true,
           "ready_for_whole_task": true,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -129033,6 +129209,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -129668,6 +129847,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -130339,6 +130521,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -130895,6 +131080,9 @@
           ],
           "covers_all_required_functions": false,
           "conditions_satisfied": true,
+          "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+          "scope_gaps": [],
+          "ready_for_functional_scope": false,
           "ready_for_whole_task": false,
           "epistemic_status": "PROPOSED_NOT_EVALUATED",
           "check_ids": [
@@ -140264,6 +140452,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": true,
               "ready_for_whole_task": true,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -141007,6 +141198,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -141642,6 +141836,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -143649,6 +143846,9 @@
               "missing_functions": [],
               "covers_all_required_functions": true,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": true,
               "ready_for_whole_task": true,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -144401,6 +144601,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -144957,6 +145160,9 @@
               ],
               "covers_all_required_functions": false,
               "conditions_satisfied": true,
+              "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+              "scope_gaps": [],
+              "ready_for_functional_scope": false,
               "ready_for_whole_task": false,
               "epistemic_status": "PROPOSED_NOT_EVALUATED",
               "check_ids": [
@@ -152174,7 +152380,11 @@
         }
       ],
       "unassigned_scope_requirements": [],
+      "covers_selected_scope": true,
       "covers_all_participants": true,
+      "coverage_scope": "REGISTERED_TASK_FUNCTIONS",
+      "covers_whole_reported_task": true,
+      "coverage_explanation": "Cobertura das funções registradas para as tarefas confirmadas; não comprova êxito em uso.",
       "trajectory_evidence": {
         "base_sha256": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
         "operationalization_status": "PROPOSED_NOT_EVALUATED",
