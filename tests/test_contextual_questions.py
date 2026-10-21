@@ -72,10 +72,14 @@ class ContextualQuestionTests(unittest.TestCase):
             self.assertEqual(current["context"]["access_requirements"], [])
             # Negation excludes the blind/deaf participants, not the classroom
             # group explicitly mentioned outside the negated phrase.
-            self.assertEqual({person["papel_id"] for person in current["participations"]}, expected_roles)
+            # "Quero adaptar" explicitly reports a requester/preparer; the
+            # negation concerns recipients, not this separate responsibility.
+            self.assertEqual({person["papel_id"] for person in current["participations"]},
+                             expected_roles | {"PAPEL-RESPONSAVEL-ADAPTACAO"})
             self.assertFalse(any(person.get("reported_condition") for person in current["participations"]))
             self.assertTrue(all(person.get("grupo_rotulo") == "turma" and person["quantidade"] is None
-                                for person in current["participations"]))
+                                for person in current["participations"]
+                                if person["papel_id"] != "PAPEL-RESPONSAVEL-ADAPTACAO"))
             self.assertEqual(set(current["context"]["raw"]["necessidades"]), expected_needs)
 
     def test_negation_of_equipment_does_not_negate_the_person_in_another_clause(self):

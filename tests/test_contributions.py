@@ -134,7 +134,8 @@ class ContributionTests(unittest.TestCase):
         builder.validate_contributions(self.kb)
         pilot = [c for c in self.kb["contributions"] if c["knowledge_id"] in ("K38", "K43")]
         self.assertTrue(pilot)
-        self.assertTrue(all(c["verification_status"] == "CONFERIDA_NO_REGISTRO" for c in pilot))
+        self.assertTrue(all(c["verification_status"] in {"CONFERIDA_NO_REGISTRO", "CONFERIDA_NO_DOCUMENTO"}
+                            for c in pilot))
 
     def test_json_rejects_independent_source_and_duplicate_id(self):
         data = synthetic_data()

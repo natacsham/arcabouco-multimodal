@@ -23,7 +23,7 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE / "tests"))
 
 from rdflib.compare import to_isomorphic  # noqa: E402
-from rdflib import Graph, Literal, RDF  # noqa: E402
+from rdflib import Graph, Literal, RDF, OWL, URIRef  # noqa: E402
 from pyshacl import validate  # noqa: E402
 from composer import V2, MADO  # noqa: E402
 from trajectory import ResearchComposer, build_trajectory_graph  # noqa: E402
@@ -64,10 +64,6 @@ def summary(result):
                                        for row in evidence.get("pending_records", [])],
         "partial_trajectory_records": [{"collection": row["collection"], "id": row["id"], "sha256": row["sha256"], "usage": row["usage"]}
                                        for row in evidence.get("partial_records", [])],
-        "partial_trajectory_records": [{"collection": row["collection"], "id": row["id"], "sha256": row["sha256"],
-                                        "usage": row["usage"]} for row in evidence.get("partial_records", [])],
-        "pending_trajectory_records": [{"collection": row["collection"], "id": row["id"], "sha256": row["sha256"],
-                                        "usage": row["usage"]} for row in evidence.get("pending_records", [])],
         "base_sha256": evidence.get("base_sha256"),
         "bindings_sha256": evidence.get("bindings_sha256"),
         "gaps": result["gaps"], "limits": result.get("limits", []),
@@ -177,6 +173,7 @@ def main(argv=None):
     preserved = before == after and code_hashes == code_after
     report = {
         "artifact": "MADO V2 — ponte experimental para conhecimentos da trajetória",
+        "version": str(first_graph.value(URIRef('https://w3id.org/mado/experimental/v2'), OWL.versionInfo)),
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "tool": {"python": platform.python_version(), "command": "python -B experimental/v2/verify_trajectory.py"},
         "evidence_type": "synthetic_only",

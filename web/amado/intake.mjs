@@ -194,6 +194,21 @@ export const requesterOptions = [
 
 // This editor changes the existing context; it does not interpret a second
 // narrative or merge unchecked options back into the previous selection.
+export function reviewContext(current, response) {
+  const updated=copy(current), c=updated.context || {};
+  const rows=c.situated_facts ||= [];
+  const key=row=>[row.participant_id || '',row.situation_id || '',row.fact_id || row.id].join('|');
+  const known=new Set(rows.map(key));
+  for(const row of [...(response?.facts_to_confirm || []),...(response?.resources_to_confirm || [])]) {
+    // Preparation and post-production checks are not questions about resources
+    // that already exist. Only actual contextual gaps become editable fields.
+    if(['production','verification'].includes(row.phase) || known.has(key(row)))continue;
+    rows.push({participant_id:row.participant_id,situation_id:row.situation_id,
+      fact_id:row.fact_id || row.id,label:row.label,value:null,source_text:''});
+    known.add(key(row));
+  }
+  return updated;
+}
 export function legacyEditor(current, catalog) {
   const c=current.context || {}, raw=c.raw || {};
   const rows=[{key:'requester_relation',field:'requester_relation',label:'Como você participa deste desafio?',type:'single',
@@ -252,7 +267,8 @@ export function legacyRevision(current,catalog,values) {
     if(row.type==='remove')continue;
     let value=values[row.key];
     if(row.field==='situated_fact') {
-      (payload.situated_facts ||= []).push({...row.fact,value:value==='true'?true:value==='false'?false:null});
+      (payload.situated_facts ||= []).push({...row.fact,value:value==='true'?true:value==='false'?false:null,
+        source_text:row.label+' — '+(value==='true'?'Sim':value==='false'?'Não':'Ainda não sei')});
       continue;
     }
     if(row.assertion_id) {
@@ -320,14 +336,14 @@ export function usedSourceRecords(response) {
     const choices=[...(local.choices || []).map(choice=>({choice,state:'selected'})),
       ...(local.pending_candidates || []).map(choice=>({choice,state:'conditional'})),...(local.partial_segments || []).map(choice=>({choice,state:'partial'}))];
     for(const {choice,state} of choices) {
-      const grounds=[...(choice.steps || []).flatMap(step=>step.groundings || []),...(choice.relations || []).map(row=>row.grounding).filter(Boolean)];
+      const grounds=[...(choice.steps || []).flatMap(step=>step.groundings || []),...(choice.relations || []).flatMap(row=>row.groundings || (row.grounding?[row.grounding]:[]))];
       for(const grounding of grounds) {
         const criterion=grounding.criterion || {};
-        const contributions=grounding.articulation?.contributions || [];
+        const contributions=grounding.contributions || grounding.construction?.contributions || grounding.articulation?.contributions || [];
         for(const row of [...contributions,...(grounding.sources || []),...(criterion.source?[{source:criterion.source,locator:criterion.locator,statement:criterion.justification,status:criterion.status}]:[])]) {
           const source=row.source || row;
           records.push({id:row.id || row.excerpt_id || grounding.id,sourceId:source.id,title:source.label || source.title || source.id || '',
-            url:row.document_url || source.url || '',location:row.locator || '',statement:row.statement || row.support_scope || '',status:row.review_status || row.status || 'PENDENTE',componentId:choice.id,criterionId:criterion.id,applicationState:state});
+            url:row.document_url || source.url || '',location:row.locator || row.excerpt?.locator || source.locator || '',statement:row.statement || row.support_scope || '',status:row.review_status || row.status || source.review_status || 'PENDENTE',componentId:choice.id,criterionId:criterion.id,applicationState:state});
         }
       }
     }

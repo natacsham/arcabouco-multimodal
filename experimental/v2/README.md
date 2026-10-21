@@ -1,8 +1,8 @@
 # MADO V2 — composição fundamentada de formas de interação
 
-**Versão experimental `2.0.0-alpha2`.** Este diretório contém o módulo de composição integrado ao AMADO do `arcabouco-multimodal`. Não é outro repositório ou site. A base anterior, seus casos e a versão da tese não são substituídos. Origem preservada: commit `73013190f26cf8806e7f647dbb3fa36a8c07a3c3`. O primeiro piloto (`alpha1`) permanece no histórico.
+**Versão experimental `2.0.0-alpha4`, integrada à MADO `1.5.0-rc2`.** Este diretório contém o módulo de composição do AMADO no `arcabouco-multimodal`. Não é outro repositório ou site. O repositório MADO e a versão da tese não são substituídos. Origem do piloto preservada: commit `73013190f26cf8806e7f647dbb3fa36a8c07a3c3`; estado anterior desta revisão: `c8b94d3`. Os pilotos anteriores permanecem no histórico.
 
-A `alpha2` acrescenta uma ponte com **os registros reais da pesquisa** e separa proposta completa, condicional e parcial. [Veja o que cada conhecimento acrescenta e onde está a base consultada](docs/reutilizacao-da-trajetoria.md).
+A ponte introduzida na `alpha2` relaciona **os registros reais da pesquisa** e separa proposta completa, condicional e parcial. Na `alpha4`, aplicações analíticas delimitadas também autorizam operações e relações: são conferidas premissas, contribuições, critérios, alvos autorizados e condições por participante e situação. [O README principal descreve o contrato atual e a base consultada](../../README.md). O documento [Reutilização da trajetória](docs/reutilizacao-da-trajetoria.md) conserva o recorte do piloto original.
 
 ## O que mudou
 
@@ -17,7 +17,7 @@ Em vez de selecionar somente configurações completas previamente redigidas, es
 
 Não há lista de pares completos como “teclado + leitura em voz” no motor ou na base. Esse percurso resulta da composição. Existem, entretanto, operações unitárias, condições, tipos de conteúdo e uma regra de sequência previamente modelados. O sistema não inventa capacidades nem interpreta automaticamente uma nova diretriz.
 
-O recorte é **produzir e revisar uma contribuição digital** ou **revisar texto já disponível**. Não é ainda uma substituição integral do AMADO nem um mecanismo para qualquer tarefa.
+O piloto RDF cobre **produzir e revisar uma contribuição digital** ou **revisar texto já disponível**. A composição situada emprega também os contratos da base curada, incluindo organização, retomada e alternativas de acesso a conteúdo audiovisual, no escopo efetivamente fundamentado. Recurso disponível, material a preparar e conferência posterior são separados. Apoios independentes podem permanecer úteis sem formar uma sequência; não são chamados automaticamente de combinação multimodal. A cobertura continua delimitada, não universal.
 
 ## Experimento central: conhecimento muda o que pode ser composto
 
@@ -42,7 +42,7 @@ Esse é um teste de **extensibilidade por conhecimento e recombinação de capac
 - **Coordenação:** a revisão depende do controle de pausa, correção e conclusão. Uma etapa não pode simplesmente entregar informação a outra sem conferir suas condições.
 - **Fundamentação:** cada capacidade liga-se a um critério, um conhecimento e uma articulação específicos; cada contribuição documental leva a um trecho localizado e sua fonte.
 
-Captura seguida de revisão **não é automaticamente complementaridade CARE**. Aqui se representa uma sequência funcional fundamentada; não se modelam ainda fusão, sincronização temporal ou redundância. A interpretação teórica e seus limites estão em [Fundamentação](docs/fundamentacao.md).
+Captura seguida de revisão **não é automaticamente complementaridade CARE**. As relações funcionais registradas distinguem sequência dependente, alternativa, complementaridade e redundância, sem deduzi-las da presença de duas mídias. Isso não implementa fusão de sinais ou sincronização temporal de dispositivos, nem comprova benefício empírico. A interpretação do piloto e seus limites estão em [Fundamentação](docs/fundamentacao.md).
 
 ## Executar
 

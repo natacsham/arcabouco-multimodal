@@ -204,9 +204,14 @@ class TrajectoryTests(unittest.TestCase):
                 self.assert_not_ready(result)
                 self.assertEqual(bool(result["pending_candidates"]), value is None)
 
-    def test_16_no_generalization_outside_registered_learning_communication_scope(self):
+    def test_16_historical_learning_context_does_not_gate_functional_reuse(self):
         case = trajectory_context()
         case["facts"]["LearningCommunicationContext"] = False
+        result = ResearchComposer().compose(case)
+        self.assertEqual(signatures(result), {("CaptureKeyboard", "ReviewSpeech")})
+        # Removing the historical setting does not remove the independently
+        # required review/control condition.
+        case["facts"]["CanVerifyMeaning"] = False
         self.assert_not_ready(ResearchComposer().compose(case))
 
     def test_17_existing_content_review_does_not_require_creating_content_again(self):

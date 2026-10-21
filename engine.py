@@ -29,8 +29,8 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.5.0-rc1"
-UI_VERSION = "AMADO-web-1.5.0-rc1-intake1"
+VERSION = "1.5.0-rc2"
+UI_VERSION = "AMADO-web-1.5.0-rc2-articulation"
 REQUESTER_RELATIONS = {
     "self": "Sou eu quem realizará a atividade",
     "support": "Apoio quem realizará a atividade",
@@ -667,7 +667,7 @@ class DecisionEngine:
                 "TAR-COMUNICAR-CONTEUDO-1545B38",
             ),
             (
-                "\\b(criar|produzir|construir|preparar|escrever|redigir|ditar).{0,40}\\b(recurso|conteudo|apresentacao|pagina|video|jogo|texto|mensagem|resposta|rascunho)\\b",
+                "\\b(criar|produzir|construir|preparar|escrever|redigir|ditar).{0,40}\\b(recurso|conteudo|apresentacao|pagina|video|jogo|texto|mensagem|resposta|rascunho|registro|relatorio|documento)\\b",
                 "tarefas",
                 "TAR-PRODUZIR-CONTEUDO-MULTIMODAL",
             ),
@@ -690,6 +690,16 @@ class DecisionEngine:
                 "\\b(operar|controlar|acionar|preencher|enviar)\\b",
                 "tarefas",
                 "TAR-OPERAR-SISTEMA",
+            ),
+            (
+                "\\b(consultar|buscar|pesquisar|selecionar|reservar)\\b.{0,45}\\b(catalogo digital|sistema|aplicativo|plataforma|servico digital)\\b",
+                "tarefas",
+                "TAR-OPERAR-SISTEMA",
+            ),
+            (
+                "\\b(consulta individual|consultar depois|rever o material|rever o conteudo)\\b",
+                "tarefas",
+                "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
             ),
             (
                 "\\b(conteudo educacional|pagina|site|web)\\b",
@@ -915,7 +925,7 @@ class DecisionEngine:
             ("PAPEL-ESTUDANTE", "\\b(estudantes?|alunos?|alunas?)\\b"),
             ("PAPEL-PROFESSORA", "\\b(professor(?:a|es|as)?|docentes?)\\b"),
             ("PAPEL-TURMA", "\\b(turma|colegas)\\b"),
-            ("PAPEL-PESSOA-APOIADA", "\\b(pessoas?|usuarios?|usuarias?)\\b"),
+            ("PAPEL-PESSOA-APOIADA", "\\b(pessoas?|usuarios?|usuarias?|participantes?|adultos?|adultas?)\\b"),
             ("PAPEL-MEDIADOR", "\\b(mediador(?:a|es|as)?|facilitador(?:a|es|as)?)\\b"),
             (
                 "PAPEL-RESPONSAVEL-ADAPTACAO",
@@ -925,6 +935,7 @@ class DecisionEngine:
         for role_id, pattern in role_cues:
             role_matches = [match for match in re.finditer(pattern, normalized)
                             if not self._negated_access_signal(normalized, match.start())
+                            and not re.search(r"\bsem (?:outras? |outros? )?$", normalized[max(0, match.start() - 25):match.start()])
                             and not re.search(r"\bnao (?:sou|somos)\s+$", normalized[max(0, match.start() - 25):match.start()])]
             if role_matches:
                 plural = next((match for match in role_matches
@@ -1000,7 +1011,7 @@ class DecisionEngine:
         # for confirmation, not abilities or authorization to adapt a resource.
         requester_cues = (
             ("seek_guidance", r"\b(?:o que (?:eu )?posso|quero|preciso)\s+(?:falar|dizer|orientar|conversar)\b.{0,65}\b(?:professor|professora|docente|mediador|mediadora|responsavel)\b"),
-            ("prepare", r"\b(?:eu (?:vou|preciso|quero)|quero|preciso)\s+(?:preparar|adaptar|ajustar)\b.{0,35}\b(?:material|conteudo|recurso|apresentacao)\b"),
+            ("prepare", r"\b(?:eu (?:vou|preciso|quero|posso)|quero|preciso|posso)\s+(?:preparar|adaptar|ajustar|editar)\b.{0,50}\b(?:material|conteudo|recurso|apresentacao|instrucoes|texto|video)\b"),
             ("support", r"\b(?:eu apoio|pessoa que (?:eu )?apoio|quero (?:ajudar|apoiar)|preciso (?:ajudar|apoiar))\b"),
             ("self", r"\b(?:para (?:meu uso|mim)|sou eu quem (?:vai|precisa)|eu mesmo preciso|eu mesma preciso|(?:eu )?(?:preciso|quero|vou) (?:acessar|usar|utilizar|preencher|enviar|ler|consultar|navegar|operar|produzir|escrever|redigir|ditar|revisar|corrigir))\b"),
         )
@@ -1014,6 +1025,21 @@ class DecisionEngine:
                                  "label": REQUESTER_RELATIONS[relation], "matched_text": match.group(0),
                                  "status": "IDENTIFICADO_PARA_CONFIRMACAO"})
                 break
+        # Identify who speaks only from an explicit self-description. The
+        # profession is not a substitute for who uses or prepares the resource.
+        self_role_patterns = {
+            "PAPEL-MEDIADOR": r"\bsou (?:mediador[ao]?|facilitador[ao]?)\b",
+            "PAPEL-PROFESSORA": r"\bsou (?:professor[ao]?|docente)\b",
+        }
+        for role_id, pattern in self_role_patterns.items():
+            if re.search(pattern, normalized):
+                matches = [p for p in roles if p.get("papel_id") == role_id]
+                if len(matches) == 1:
+                    context["requester_participation_id"] = matches[0]["id"]
+        if context.get("requester_relation") == "prepare" and not context.get("requester_participation_id"):
+            person = situated_context._person(context, "PAPEL-RESPONSAVEL-ADAPTACAO", "Quem relata e prepara o material", "requester-preparer")
+            roles.append(person)
+            context["requester_participation_id"] = person["id"]
         situated_context.build(context, roles, narrative, self.concepts, evidence, previous_situated)
         self.current["participations"] = roles
         self.derive_access_requirements(effective_narrative)
@@ -1303,8 +1329,29 @@ class DecisionEngine:
                     key = (person["id"] if person else "", "")
                     record = observed.setdefault(key, {"person": person, "positive": [], "negative": []})
                     record["negative" if self._negated_access_signal(text, match.start()) else "positive"].append(match.group(0))
+                    if person and not self._negated_access_signal(text, match.start()):
+                        condition = next((a for a in context.get("assertions", [])
+                                          if a.get("subject_id") == person["id"] and a.get("kind") == "reported_condition"
+                                          and a.get("state") in situated_context.ACTIVE_STATES
+                                          and re.search(situated_context.functional_signal_pattern(token), normalize_text(a.get("value", "")))), None)
+                        if condition is not None:
+                            record.setdefault("assertion_ids", []).append(condition["id"])
+                        else:
+                            scopes = [s for s in context.get("situations", []) if person["id"] in s.get("participant_ids", [])]
+                            scope = next((s for s in scopes if s["id"] == context.get("active_situation_id")), scopes[0] if len(scopes) == 1 else None)
+                            if scope:
+                                clauses = [part.strip() for part in re.split(r"(?<=[.!?;])\s+", narrative)
+                                           if re.search(situated_context.functional_signal_pattern(token), normalize_text(part))]
+                                source = clauses[0] if len(clauses) == 1 else match.group(0)
+                                assertion = situated_context._assert(context, person["id"], scope["id"], "functional_observation", source, source)
+                                record.setdefault("assertion_ids", []).append(assertion["id"])
             for assertion in context.get("assertions", []):
-                if assertion.get("kind") != "functional_observation" or assertion.get("state") not in situated_context.ACTIVE_STATES:
+                allowed_kinds = {"functional_observation"}
+                if inference_contract.get("trigger_kind") == "FUNCTIONAL_OBSERVATION_OR_REPORTED_ACCESS_CONDITION":
+                    allowed_kinds.add("reported_condition")
+                if assertion.get("kind") not in allowed_kinds or assertion.get("state") not in situated_context.ACTIVE_STATES:
+                    continue
+                if any(assertion["id"] in record.get("assertion_ids", []) for record in observed.values()):
                     continue
                 observation = normalize_text(assertion.get("value", ""))
                 for signal in matrix.get("sinais_relato", []):
@@ -1483,7 +1530,9 @@ class DecisionEngine:
         if not str(context.get("objetivo", "")).strip():
             add("objetivo", f"Ao {activity[:1].lower() + activity[1:]}, o que precisa ser possível fazer?",
                 "O objetivo informado ajuda a conferir se a orientação responde ao desafio.", type="text", priority=5)
-        if not context.get("barreiras") and not context.get("necessidades"):
+        known_observation = any(a.get("kind") == "functional_observation" and a.get("state") in situated_context.ACTIVE_STATES
+                                for a in context.get("assertions", []))
+        if not context.get("barreiras") and not context.get("necessidades") and not known_observation:
             activity_target = materials[0][:1].lower() + materials[0][1:] if materials else activity[:1].lower() + activity[1:]
             add("barreira_ou_necessidade", f"Que dificuldade de acesso ou uso aparece ao lidar com {activity_target}?",
                 "A dificuldade seleciona os apoios pertinentes; não é uma avaliação da pessoa.", required=True, priority=10)
@@ -1515,6 +1564,8 @@ class DecisionEngine:
         missing_roles = unique(identifier for component in routes for identifier in component.get("required_role_ids", [])
                                if identifier not in role_ids and identifier not in {
                                    "PAPEL-PROFESSORA", "PAPEL-ESTUDANTE", "PAPEL-COLEGAS", "PAPEL-TURMA"})
+        if any(s.get("preparation_actor_ids") for s in context.get("situations", [])):
+            missing_roles = [role for role in missing_roles if role != "PAPEL-RESPONSAVEL-ADAPTACAO"]
         if missing_roles:
             add("participantes", f"Quem pode preparar ou ajustar o material para {activity[:1].lower() + activity[1:]}?",
                 "Essa resposta define quem realiza a adaptação; o cargo não comprova disponibilidade ou capacidade.",
@@ -1542,7 +1593,10 @@ class DecisionEngine:
                                or matrix_ids & set(row["access_requirement_matrix_ids"])]
             modes = unique(identifier for component in personal_routes
                            for identifier in component.get("requires_all", {}).get("modalidades_disponiveis", []))
-            if modes and not person.get("modalidade_ids"):
+            known_access = any(f.get("participant_id") == person["id"] and f.get("value") is True
+                               and f.get("fact_id", "").rsplit("#", 1)[-1] in {"CanReadText", "UsesScreenReader", "AudioUsable", "CanReviewVisualText"}
+                               for f in context.get("situated_facts", []))
+            if modes and not person.get("modalidade_ids") and not known_access:
                 add("modalidades_disponiveis", "Quais destas formas a pessoa já usa para acompanhar ou realizar essa atividade?",
                     "A necessidade de acesso é recuperada da base; a forma efetivamente utilizada depende da pessoa e do contexto.",
                     options=modes, participant=person, answer_field="modalidade_ids", priority=30)

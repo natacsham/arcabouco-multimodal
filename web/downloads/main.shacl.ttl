@@ -7,9 +7,16 @@ mado:AfirmacaoOperacionalShape a sh:NodeShape ;
   sh:targetClass mado:AfirmacaoOperacionalDocumentada ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path mado:enunciado ; sh:minCount 1 ; sh:maxCount 1 ] ;
-  sh:property [ sh:path mado:afirmacaoDoConhecimento ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
-  sh:property [ sh:path mado:elegibilidadeOperacional ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "DOCUMENTED_OPERATIONAL_CLAIM" "PROPOSED_OPERATIONALIZATION" "NOT_ELIGIBLE" ) ] ;
-  sh:property [ sh:path mado:estadoDaAfirmacao ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "SUPPORTED_IN_RECORDED_SCOPE" "PROPOSED_OPERATIONALIZATION" "PENDING" ) ] ;
+  sh:property [ sh:path mado:elegibilidadeOperacional ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:estadoDaAfirmacao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:or (
+    [ sh:property [ sh:path mado:afirmacaoDoConhecimento ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+      sh:property [ sh:path mado:elegibilidadeOperacional ; sh:in ( "DOCUMENTED_OPERATIONAL_CLAIM" "PROPOSED_OPERATIONALIZATION" "NOT_ELIGIBLE" ) ] ;
+      sh:property [ sh:path mado:estadoDaAfirmacao ; sh:in ( "SUPPORTED_IN_RECORDED_SCOPE" "PROPOSED_OPERATIONALIZATION" "PENDING" ) ] ]
+    [ sh:property [ sh:path mado:aplicacaoDaArticulacao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ArticulacaoDocumentada ] ;
+      sh:property [ sh:path mado:elegibilidadeOperacional ; sh:hasValue "GROUNDED_ANALYTICAL_APPLICATION" ] ;
+      sh:property [ sh:path mado:estadoDaAfirmacao ; sh:hasValue "SCOPED_ANALYTICAL_SYNTHESIS" ] ]
+  ) ;
   sh:property [ sh:path mado:limiteDaAfirmacao ; sh:minCount 1 ] ;
   sh:sparql [
     sh:message "Afirmação operacional elegível exige estado compatível e suporte localizado no conhecimento exato."@pt-BR ;
@@ -458,5 +465,52 @@ mado:AplicacaoComContribuicaoShape a sh:NodeShape ;
           || NOT EXISTS { $this mado:conhecimentoDaAplicacao ?k }
           || NOT EXISTS { ?cfg mado:configuracaoMobilizaArticulacao ?art . ?art mado:habilitadaParaDecisao true })
       }
+    """
+  ] .
+
+# Apenas aplicações analíticas explícitas são alvo: relações históricas não
+# passam a autorizações operacionais por compartilharem uma fonte ou função.
+mado:AplicacaoAnaliticaOperacionalShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:aplicacaoDaArticulacao ;
+  sh:class mado:AfirmacaoOperacionalDocumentada ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:aplicacaoDaArticulacao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ArticulacaoDocumentada ] ;
+  sh:property [ sh:path mado:elegibilidadeOperacional ; sh:hasValue "GROUNDED_ANALYTICAL_APPLICATION" ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:premissaOperacional ; sh:minCount 1 ; sh:class mado:AfirmacaoOperacionalDocumentada ] ;
+  sh:property [ sh:path mado:operacaoDaAplicacaoAnalitica ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path mado:enunciado ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ] ;
+  sh:property [ sh:path mado:autorizaOperacao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:condicaoDaAplicacaoAnalitica ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:limiteDaAfirmacao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:efeitoEmpiricoAutorizado ; sh:hasValue false ; sh:maxCount 1 ] ;
+  sh:sparql [
+    sh:message "Aplicação analítica exige premissas documentalmente elegíveis, sem usar candidatos como autorização."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?premissa WHERE {
+        $this mado:premissaOperacional ?premissa .
+        FILTER NOT EXISTS { ?premissa mado:elegibilidadeOperacional "DOCUMENTED_OPERATIONAL_CLAIM" }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Origem do critério da aplicação deve apontar a um trecho de suas premissas exatas."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?origem WHERE {
+        $this mado:origemDaAplicacaoAnalitica ?origem .
+        FILTER NOT EXISTS {
+          $this mado:premissaOperacional ?premissa .
+          ?premissa mado:trechoDaAfirmacao ?trecho .
+          ?origem mado:origemSustentadaPorTrecho ?trecho .
+        }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Aplicações analíticas não podem se autorizar por dependência circular."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE { $this mado:dependeDeAplicacaoAnalitica+ $this . }
     """
   ] .

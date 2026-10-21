@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "base_version": "1.5.0-rc1",
+  "base_version": "1.5.0-rc2",
   "source_collections_sha256": {
     "sources": "7d7872f80d630f02e93e9977175ed01f96cfe424582d0e5f056e6a7cada45854",
     "references": "1fef90b4c4f4242dea8ed9068010885d036e84d31fb3f3763d002473e3c9552f",
     "reference_audit": "0d36e3af19beb00790ced8360f1db493bf6aedb514e10c8b9d4b3bb5904cb63c",
-    "excerpts": "1c19f23fd3d93a49afd6fbb322870e0408f0a8cea08aea925f69fc8524d6eb17",
-    "contributions": "b534f2c9b0ab9ca1a7145b5d4ce773471b0e977e7e30d9bf226d308d4a567539"
+    "excerpts": "8fdd4d95e7fdf5bed18035506c564013f047714cfe1debaaab9012308bd49a44",
+    "contributions": "ea079ffc9424788872842d9fc953e29a6b12509436a4c52058ab1c1c02356da4"
   },
   "summary": {
     "sources": 19,
@@ -2106,6 +2106,30 @@
           "knowledge_id": "K42",
           "contribution_role": "ESTRUTURA_PERCEPTIVEL",
           "verification_status": "CONFERIDA_NO_DOCUMENTO"
+        },
+        {
+          "id": "C-K42-WCAG-0001",
+          "excerpt_id": "TD-ORI-0001",
+          "articulation_id": "ART-REF-03",
+          "knowledge_id": "K42",
+          "contribution_role": "FINALIDADE_DA_ALTERNATIVA_TEXTUAL",
+          "verification_status": "CONFERIDA_NO_DOCUMENTO"
+        },
+        {
+          "id": "C-K42-WCAG-0148",
+          "excerpt_id": "TD-ORI-0148",
+          "articulation_id": "ART-REF-03",
+          "knowledge_id": "K42",
+          "contribution_role": "ACESSO_A_PARCELA_SONORA",
+          "verification_status": "CONFERIDA_NO_DOCUMENTO"
+        },
+        {
+          "id": "C-K42-WCAG-0090",
+          "excerpt_id": "TD-ORI-0090",
+          "articulation_id": "ART-REF-03",
+          "knowledge_id": "K42",
+          "contribution_role": "ACESSO_A_PARCELA_VISUAL",
+          "verification_status": "CONFERIDA_NO_DOCUMENTO"
         }
       ],
       "excerpt_review_stats": {
@@ -2114,7 +2138,7 @@
           "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3": 89
         },
         "contributions_by_verification_status": {
-          "CONFERIDA_NO_DOCUMENTO": 1
+          "CONFERIDA_NO_DOCUMENTO": 4
         }
       }
     },
@@ -5255,13 +5279,24 @@
           "document_review_date": null
         }
       ],
-      "contributions": [],
+      "contributions": [
+        {
+          "id": "C-K38-MMI-NAV",
+          "excerpt_id": "TD-ORI-0012",
+          "articulation_id": "ART-TRF-04",
+          "knowledge_id": "K38",
+          "contribution_role": "COORDENACAO_DO_FLUXO",
+          "verification_status": "CONFERIDA_NO_DOCUMENTO"
+        }
+      ],
       "excerpt_review_stats": {
         "total": 59,
         "by_curation_status": {
           "CONFERIDO_NO_DOCUMENTO_INTEGRAL_RC3": 59
         },
-        "contributions_by_verification_status": {}
+        "contributions_by_verification_status": {
+          "CONFERIDA_NO_DOCUMENTO": 1
+        }
       }
     },
     {

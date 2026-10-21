@@ -1,13 +1,13 @@
 {
-  "version": "1.5.0-rc1",
+  "version": "1.5.0-rc2",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
   "instrument": "AMADO",
-  "executor_version": "AMADO-web-1.5.0-rc1-intake1",
+  "executor_version": "AMADO-web-1.5.0-rc2-articulation",
   "public_projection": true,
   "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-  "core_sha256": "cd39c268c40434631d21bc511fc3572f818b5cd137208b1912e79a63ba958099",
+  "core_sha256": "b71640c7e1481a9a0adcd6d35914395e47df2f052e9ff839bdea9f0857d36d21",
   "bridge_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
-  "base_zip_sha256": "3051438c7a2519b7022ad9c280b94f60786270d432afb286dba071744da04baa",
+  "base_zip_sha256": "ec0cf032acc3eec54f512306a79ecee914c5266ba75b64e2081be8ce73609238",
   "pyodide_version": "314.0.7",
   "runtime": {
     "pyodide-lock.json": {
@@ -45,16 +45,16 @@
   "case_history": false,
   "llm": false,
   "composition": {
-    "version": "2.0.0-alpha3",
+    "version": "2.0.0-alpha4",
     "implementation": "ResearchComposer",
     "case_storage": false,
     "files": {
-      "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
+      "experimental/v2/composer.py": "8a4d1dec8af41cd36a59614a5370c799d876424c74856c004cc8c34ee956685a",
       "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-      "experimental/v2/schema.ttl": "2fe223106c18014d4a19db2f6337a8adb5ad783911c2da276e7d8e107a6ceeba",
+      "experimental/v2/schema.ttl": "ad4574d124b6e2f2747092fdd0dff171568aed90a3dfc1c29ca4c750a862e0ba",
       "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
       "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-      "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
+      "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
@@ -70,17 +70,17 @@
     "views.css": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
     "composition.js": "8e2eee039cee8bb217ebd4b591dc120b0e830e4f74b0fe68d2043c63ed8868b5",
     "composition.css": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
-    "simple-flow.js": "65be5758fb5c6de778dd7989084e24ab5788a1c51efd6947e9b5ad78820a5ec9",
-    "simple-flow.css": "e84ca46ea5c3e4dc44a2dbaf6e154349f0a25fd587af66cbdf6dd22985eaad6d",
+    "simple-flow.js": "3f40ad805e43f7b4b3b0db3de8ef179759f4af277bbb2262d6772fb9fa46911c",
+    "simple-flow.css": "1f02c79520a8054d4bda5f8e48030fd7734500425e6530a2cc99063e499e18c3",
     "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
-    "intake.mjs": "974b86aeef27dcd5f0d889cd533a4e37fe0700593c8a207550f26120d88d65a4",
-    "situated-output.mjs": "1cc83e350ccaf4b4f4ce7b7711a28310f5a67004d8a8f3f4979c89b4960b8a26",
+    "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
+    "situated-output.mjs": "9adaff9db3dc0c9cf164db2655b81dd64eb720484a4f3044223215ba5c24f5cc",
     "completo.html": "385a6191265f99fef39240a15f62af0ed6905f3f88b6b6b2a94b441f17bf837a",
     "completo-guiado.html": "ed0358c9a06ae1819929fbfeed25f2409f4b6ecb60646f72253f02b4a3450cc6"
   },
   "site_assets_sha256": {
     "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
-    "ontologia/index.html": "b11c58aab2affc48367beafdaf23f635dba0fdd9bc8ce9e257e40797aed326ac",
+    "ontologia/index.html": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
     "site.css": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
     "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
     "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
@@ -90,14 +90,14 @@
     "explanation-pilot.js": "3a803382df9d22dbefba3ce6e027c477f82a20c56a20e119012f9d0dc245d455",
     "assets/explanation-pilot.json": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
     "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
-    "assets/source-catalog.json": "63a686128e225c1bcefbb7525da3c1f7ce2cb5ed381976a93f0aee7de697b1d1"
+    "assets/source-catalog.json": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7"
   },
   "files": {
     "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
-    "situated_context.py": "34dd110c771ab74681ca2a2846cd1e5d18e973cdce73885e517fab85f0184c88",
-    "data/knowledge-base.json": "e71fab33b2345836a75867e33d8c9bcda5f17543febfef464758db0f0b855d9d",
+    "situated_context.py": "c7898c5e59d71d95197c002424205d31e138c610fc2f2ef35ed579c258797376",
+    "data/knowledge-base.json": "4c4d1ecd736c1eeb566e945deb729168fbad42ec4330ed3d6e40f84d858bca44",
     "data/interface-vocabulary.json": "bed2124ac9798fbef8f56a73a90775a241a5fc27cf88a965f4370f1feba6b0b5",
-    "ontology/mado-combined.ttl": "a1598943c6698c67f679e5299c73e0c1465da47d3044e227393b5659c5a87f85",
+    "ontology/mado-combined.ttl": "e1181f411c0a1695dd0a495e6886b3abb3cfbaa6331e56281128af32e72294b3",
     "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
     "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
     "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -108,12 +108,12 @@
     "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
     "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
     "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9",
-    "experimental/v2/composer.py": "a5f76b640b2cf06989f2023f8550a2a1139825c3a7b7908b9e1a111a52c61205",
+    "experimental/v2/composer.py": "8a4d1dec8af41cd36a59614a5370c799d876424c74856c004cc8c34ee956685a",
     "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-    "experimental/v2/schema.ttl": "2fe223106c18014d4a19db2f6337a8adb5ad783911c2da276e7d8e107a6ceeba",
+    "experimental/v2/schema.ttl": "ad4574d124b6e2f2747092fdd0dff171568aed90a3dfc1c29ca4c750a862e0ba",
     "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
     "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-    "experimental/v2/trajectory-bindings.json": "4a50dfa88ab11a52961bb4cb6e93273335eea1aab5e76026080c9ab3a27576f4",
+    "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
     "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
   }
 }

@@ -4,7 +4,7 @@
 
 O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão desta revisão: MADO 1.5.0-rc1 / compositor 2.0.0-alpha3 — candidata.** O estado anterior permanece no commit `ebfcb75ab3a584128cc804270e73851db1d5e837`; a implementação foi iniciada na branch `feat/amado-situated-composition`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
+**Versão desta revisão: MADO 1.5.0-rc2 / compositor 2.0.0-alpha4 — candidata.** O estado anterior permanece no commit `c8b94d3c344cbe6922078c8b28b8bb5821b92e67`; a implementação desta revisão utiliza a branch `feat/articulation-operational-rc2`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
 
 **Este é o projeto em desenvolvimento.** Base, representação, motor e interface continuam em `arcabouco-multimodal`. As versões da base e do compositor são distintas para identificar exatamente o que foi executado. Não foi criada outra matriz de conhecimento.
 
@@ -55,6 +55,34 @@ A orientação precisa dizer **qual função cada modo cumpre, como os modos se 
 O modelo diferencia modo de interação, recurso digital, dispositivo e responsável. Um smartphone não é uma modalidade; vídeo pode reunir representações visuais e sonoras; participação de diferentes pessoas não substitui a explicação da relação entre os modos.
 
 ## Como funciona, sem LLM
+
+### O que mudou na articulação operacional
+
+Uma relação histórica entre artigos não autoriza uma recomendação. Nesta revisão, uma **aplicação analítica delimitada** liga afirmações e contribuições conferidas a uma operação ou relação específica. O motor verifica essa autorização durante a consulta. Retirar uma premissa indispensável impede as aplicações dependentes, mesmo que a bibliografia continue cadastrada.
+
+O caminho está na mesma base `data/knowledge-base.json`, sem outra matriz:
+
+| Registro existente | O que o programa verifica |
+| --- | --- |
+| `knowledge[].operation_claims` | Afirmação documental elegível, fonte e trecho correspondente; não aprovação do conhecimento inteiro. |
+| `contributions` | O que o trecho contribui, para qual conhecimento e com qual estado de conferência. |
+| `articulations[].operational_applications` | Premissas, operação analítica, compreensão resultante, critérios, operações/relações autorizadas, condições e limites. |
+| `decision_components[].operation_contract` | Funções, entrada/saída, ação, recursos, participantes e representações utilizáveis. |
+| `execution_evidence` | Verificações efetivamente feitas para a pessoa e a situação, incluindo falhas e pendências. |
+
+**Exemplo da base:** `APP-ART-TRF-04-ORGANIZAR-RETOMAR` relaciona organização perceptível do conteúdo e navegação/retomada. As premissas delimitadas de `K38` e `K43` autorizam preparar instruções consultáveis, não apenas citar fontes ao lado desse conselho. A organização se apoia na informação e nas relações representadas; a retomada exige conservar e tornar localizável a etapa necessária. A aplicação precisa de leitura utilizável pelo destinatário e de um responsável que possa preparar o material. O texto resultante ainda deve ser produzido e conferido. Essa rota textual, sozinha, **não é classificada como combinação multimodal**.
+
+Nas adaptações de mídia, o motor seleciona a rota de cada participante: informações sonoras podem demandar legendas, enquanto informações visuais não expressas na fala podem demandar descrição. A existência de um leitor de tela não confirma, por si, compreensão de gráficos nem acesso a áudio. Os registros mantêm a informação que cada alternativa deve preservar e a conferência ainda necessária. Em produção/revisão, a ligação é uma **sequência dependente sobre o mesmo rascunho**, não complementaridade presumida pela presença de fala e texto.
+
+O compositor separa três fases: **pré-condição**, **material a preparar** e **verificação antes do uso**. Não exige que um resultado proposto já exista, nem apresenta o resultado futuro como pronto. Sem testemunho do tipo de ação ou informação exigido pelo contrato, uma função nominal semelhante não basta para recuperar uma operação.
+
+### Como testar esta revisão
+
+Os três relatos completos estão somente em `tests/fixtures/articulation_transfer_cases.json`. Não são opções da interface e não entram no pacote do navegador. Copie um relato no campo **Qual é o seu desafio de hoje?**, confira o entendimento, responda apenas ao que souber e gere a orientação. A relevância é julgada pela pessoa que examina a saída; o teste não a declara automaticamente.
+
+Os testes comparam relato e contexto estruturado equivalente, retirada de recursos, alteração de acesso e retirada de fundamento. Os efeitos são classificados separadamente: combinação/alternativa acrescentada, restrição descoberta ou somente fundamentação ampliada. Não existe resposta textual esperada por tema.
+
+Para reproduzir: `python -B -m unittest discover -s tests -p 'test_articulation_*.py'`, `python -B -m unittest discover -s tests -p 'test_operational_articulation_rc2.py'` e, após regenerar o pacote, `node tests/articulation-browser.mjs`. O último usa os controles visíveis, inclusive confirmação e revisão, sem fornecer fatos escondidos ao motor. Os demais testes, OWL/SHACL/consultas e a comparação local/navegador continuam necessários; este ensaio não os substitui.
 
 ### Onde estão as fontes e como entram na decisão
 
@@ -214,7 +242,7 @@ Consistência lógica, integridade dos dados, respostas às consultas, comportam
 
 Referência simples sugerida:
 
-> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.5.0-rc1 (candidata). Repositório do projeto.
+> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.5.0-rc2 (candidata). Repositório do projeto.
 
 Não há DOI exigido para consultar ou compreender este trabalho. Referências bibliográficas, autores de terceiros e perspectivas participantes conservam sua própria atribuição.
 

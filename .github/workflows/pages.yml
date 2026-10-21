@@ -18,6 +18,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - run: python -m pip install -r requirements.txt
       - run: python scripts/build_traceability_rdf.py --check
       - run: python -B scripts/source_catalog.py --check --check-projection web/assets/source-catalog.json
@@ -33,6 +36,12 @@ jobs:
       - run: node tests/result-presentation.mjs
       - run: node tests/situated-output.mjs
       - run: node tests/source-path.mjs
+      - run: npm install --no-save --package-lock=false playwright
+      - run: npx playwright install --with-deps chromium
+      - run: python -B -m unittest discover -s tests -p 'test_articulation_*.py'
+      - run: node tests/articulation-browser.mjs
+        env:
+          AMADO_BROWSER_EVIDENCE: evidence/articulation-browser.json
       - run: python -B tests/publish-gates.py
       - run: python scripts/audit_distribution.py
       - run: python scripts/publish_traceability.py

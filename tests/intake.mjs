@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, questionRound, detectCompositionTask, compositionDraft, compositionQuestions, compositionSummary} from '../web/amado/intake.mjs';
+import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, questionRound, detectCompositionTask, compositionDraft, compositionQuestions, compositionSummary,reviewContext,legacyEditor,legacyRevision} from '../web/amado/intake.mjs';
 
 const item = (id, label = id) => ({id, label, curated: true});
 const catalog = {concepts: {TAREFA: [item('T1', 'Ler uma página')], BARREIRA: [item('B1', 'Imagem sem descrição')],
@@ -232,4 +232,15 @@ assert(scopedQuestions.every(row=>row.participant_id==='B'));
 assert(scopedQuestions.every(row=>row.id.endsWith(':B')));
 assert(!scopedQuestions.some(row=>row.concept_id==='CanReviewVisualText'),'Global visual ability must not overwrite individual negative condition');
 assert(compositionSummary(scopedDraft,groupComposition).filter(row=>row.label==='Participante').length===2);
+const reviewOriginal=structuredClone(current);
+const editable=reviewContext(current,{facts_to_confirm:[{id:'AudioUsable',fact_id:'AudioUsable',label:'É possível ouvir neste ambiente?',participant_id:'PART1',situation_id:'S1'},
+  {id:'VerifyText',label:'Conferir o texto depois de preparar',phase:'verification'}]});
+assert.deepEqual(current,reviewOriginal,'Opening the editor must not change the confirmed case');
+assert.equal(editable.context.situated_facts.length,1,'Only contextual gaps become editable, not later verification');
+const pendingEditorRow=legacyEditor(editable,catalog).find(row=>row.field==='situated_fact');
+assert.equal(pendingEditorRow.value,'unknown');
+const completedReview=legacyRevision(editable,catalog,{[pendingEditorRow.key]:'false'});
+assert.equal(completedReview.situated_facts[0].value,false);
+assert.match(completedReview.situated_facts[0].source_text,/Não$/);
+assert.equal(reviewContext(editable,{facts_to_confirm:editable.context.situated_facts}).context.situated_facts.length,1);
 console.log('Intake: verified missing-field questions, immutable updates, participant preservation, explicit extraction, negation and viable-route questions.');

@@ -45,14 +45,18 @@ class IntakeContextRepairTests(unittest.TestCase):
         self.assertIn("PAPEL-PESSOA-APOIADA", roles)
         self.assertNotIn("PAPEL-PROFESSORA", roles)
         self.assertEqual(current["context"]["requester_relation"], "support")
-        self.assertEqual(current["context"]["requester_participation_id"], "")
+        # Explicit "Sou mediadora" identifies who narrates, not what help is
+        # requested. Intention and profession remain separate above.
+        mediator = next(p for p in current["participations"] if p["papel_id"] == "PAPEL-MEDIADOR")
+        self.assertEqual(current["context"]["requester_participation_id"], mediator["id"])
 
     def test_requester_intention_is_not_replaced_by_profession(self):
         current = self.analyze("Sou mediadora. A pessoa que apoio vai dar aula. O que posso falar com o professor para ele fazer?")
         self.assertEqual(current["context"]["requester_relation"], "seek_guidance")
         self.assertIn("PAPEL-MEDIADOR", {person["papel_id"] for person in current["participations"]})
         self.assertIn("PAPEL-PROFESSORA", {person["papel_id"] for person in current["participations"]})
-        self.assertEqual(current["context"]["requester_participation_id"], "")
+        mediator = next(p for p in current["participations"] if p["papel_id"] == "PAPEL-MEDIADOR")
+        self.assertEqual(current["context"]["requester_participation_id"], mediator["id"])
         self.engine.start_free_context()
         current = self.analyze("Sou mediadora. Uma pessoa precisa preencher um formulário digital.")
         self.assertEqual(current["context"]["requester_relation"], "")

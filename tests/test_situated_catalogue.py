@@ -159,7 +159,9 @@ class SituatedCatalogueTests(unittest.TestCase):
     def test_relationship_cannot_restore_a_discarded_claim_criterion_pair(self):
         data = copy.deepcopy(self.data)
         op = next(p['operation_contract'] for p in data['decision_components'] if p['id'] == 'PAD-VIDEO-PROCESSO')
-        op['relations'][0]['claim_support'][1].update(criterion_id='CA05', origin_ids=['ORI-0090'])
+        variant=next(v for v in op['operation_variants'] if v['id'].endswith('-CAPTIONS'))
+        support=next(s for s in variant['relations'][0]['claim_support'] if s['claim_id']=='CLM-K42-TD-ORI-0148')
+        support.update(criterion_id='CA05', origin_ids=['ORI-0090'])
         with self.assertRaisesRegex(ValueError, 'Normative claim/origin'):
             builder.validate_operational_contracts(data)
 
@@ -168,11 +170,13 @@ class SituatedCatalogueTests(unittest.TestCase):
         composer = Composer([])
         composer.base = self.data
         oid, rid = 'OP-PAD-RETORNO-HAPTICO-RUIDO', 'REL-PAD-RETORNO-HAPTICO-RUIDO-01'
-        context = {'id':'SYN-HAPTIC-AUDIT','confirmed':True,'tarefas':['TASK-NEW'],
+        context = {'id':'SYN-HAPTIC-AUDIT','confirmed':True,'tarefas':['TAR-ACOMPANHAR-ORIENTACAO-317CD64'],
+            'modalidades_disponiveis':['MOD-AUDIO'],
+            'barreiras':['BAR-AUDIO-PODE-PERDER-EFETIVIDADE-COM-RUIDO-04E2CCE'],
             'funcoes_requeridas_ids':['FUN-FEEDBACK-PERCEPTIVEL','FUN-MANTER-INFORMACAO-RECUPERAVEL'],
             'participations':[{'id':'p','papel_id':'PAPEL-PESSOA-APOIADA','recurso_operado_ids':['REC-VIBRACAO','REC-SAIDA-AUDIO']}],
             'recursos_disponiveis':['REC-VIBRACAO'],'recursos_impedidos':['REC-SAIDA-AUDIO'],
-            'facts':{oid+':conditions':True,rid+':sufficiency':True,rid+':temporal':True}}
+            'facts':{'AudioUsable':True,oid+':conditions':True,rid+':sufficiency':True,rid+':temporal':True}}
         def operation():
             result = composer.compose_context(context)
             return next(row for row in result['capability_evaluations'] if row['id'] == oid), result
@@ -181,12 +185,17 @@ class SituatedCatalogueTests(unittest.TestCase):
         context['recursos_impedidos'] = []
         context['recursos_disponiveis'].append('REC-SAIDA-AUDIO')
         row, result = operation()
-        self.assertEqual(row['state'], 'PENDING')
-        self.assertTrue(any(f['id'] == oid+':recoverable_message' for f in result['facts_to_confirm']))
+        def recovery_state(evaluation):
+            return next(c['state'] for c in evaluation['phase_conditions'] if c['id']==oid+':recoverable_message')
+        self.assertEqual(recovery_state(row), 'PENDING')
         context['facts'][oid+':recoverable_message'] = False
-        self.assertEqual(operation()[0]['state'], 'FAIL')
+        self.assertEqual(recovery_state(operation()[0]), 'FAIL')
         context['facts'][oid+':recoverable_message'] = True
-        self.assertEqual(operation()[0]['state'], 'PASS')
+        row,result=operation()
+        self.assertEqual(recovery_state(row), 'PASS')
+        # These independent checks do not authorize the historical haptic
+        # relationship, which still lacks a scoped analytical application.
+        self.assertFalse(any(step['id']==oid for choice in result['choices'] for step in choice['steps']))
 
     def test_legacy_criterion_bundles_are_not_used_as_whole_k_support(self):
         ops = {p['id']: p['operation_contract'] for p in self.data['decision_components'] if p.get('active_in_rc4')}

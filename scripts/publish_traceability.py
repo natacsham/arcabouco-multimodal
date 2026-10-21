@@ -261,7 +261,8 @@ def situated_release_checks(manifest, technical, reasoner, situated, browser, di
                 *[f"queries/CQ-{i:03d}.rq" for i in range(1, 11)]}
     checks = browser.get("checks") or {}
     return {
-        "version": manifest.get("version") == "1.5.0-rc1" and manifest.get("composition", {}).get("version") == "2.0.0-alpha3",
+        "version": {"1.5.0-rc1": "2.0.0-alpha3", "1.5.0-rc2": "2.0.0-alpha4"}.get(manifest.get("version")) == manifest.get("composition", {}).get("version")
+            and manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2"},
         "current_package": preserved_components({"build": manifest}, manifest)["passed"],
         "technical_passed": technical.get("passed") is True,
         "technical_inputs_current": required <= set(technical_inputs) and all(_matches(n, h) for n, h in technical_inputs.items()),
@@ -295,6 +296,15 @@ def publish_situated(manifest):
              "distribution": "evidence/distribution-audit.json", "logical": "experimental/v2/evidence/trajectory-reasoner-report.json"}
     records = {key: read(name) for key, name in paths.items()}
     checks = situated_release_checks(manifest, **records)
+    if manifest.get("version") == "1.5.0-rc2":
+        articulation = read("evidence/articulation-browser.json")
+        paths["articulation"] = "evidence/articulation-browser.json"
+        checks["articulation_ui_execution"] = (articulation.get("type") == "SYNTHETIC_ARTICULATION_UI_NOT_HUMAN_EVALUATION"
+            and articulation.get("passed") is True and not articulation.get("errors")
+            and bool(articulation.get("checks")) and all(articulation["checks"].values())
+            and articulation.get("build") == manifest
+            and _matches("tests/articulation-browser.mjs", articulation.get("test_sha256"))
+            and _matches("tests/fixtures/articulation_transfer_cases.json", articulation.get("fixture_sha256")))
     if manifest.get("executor_version") == "AMADO-web-1.5.0-rc1-intake1":
         narrative = read("evidence/narrative-to-actions-report.json")
         checks["three_narrative_regressions"] = (narrative.get("passed") is True
@@ -350,7 +360,7 @@ def publish_situated(manifest):
 
 def main():
     manifest = read("web/amado/manifest.json")
-    if manifest.get("version") == "1.5.0-rc1":
+    if manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2"}:
         return publish_situated(manifest)
     technical = read("evidence/technical-report.json")
     reasoner = read("evidence/reasoner-report.json")

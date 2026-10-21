@@ -182,30 +182,154 @@ def validate_operational_contracts(data):
             continue
         if op['id'] != 'OP-' + row['id']:
             raise ValueError('Operation attached to wrong pattern: ' + row['id'])
+    for op in iter_operation_contracts(data):
         if not set(op['function_ids'] + op['representation_ids']) <= concepts:
-            raise ValueError('Undefined operation concept: ' + row['id'])
+            raise ValueError('Undefined operation concept: ' + op['id'])
         supports = op['claim_support'] + [support for relation in op.get('relations', [])
                                           for support in relation.get('claim_support', [])]
         for support in supports:
             pair = claims.get(support['claim_id'])
             if not pair or pair[0] != support['knowledge_id']:
-                raise ValueError('Wrong operation/knowledge claim: ' + row['id'])
+                raise ValueError('Wrong operation/knowledge claim: ' + op['id'])
             if pair[1]['eligibility'] != 'DOCUMENTED_OPERATIONAL_CLAIM':
-                raise ValueError('Pending claim cannot authorize operation: ' + row['id'])
+                raise ValueError('Pending claim cannot authorize operation: ' + op['id'])
             criterion = support.get('criterion_id')
+            if not criterion and support.get('origin_ids'):
+                raise ValueError('Orphan criterion/origin reference: ' + op['id'])
             if criterion and (not support.get('origin_ids') or any(
                     origins.get(oid, {}).get('criterio_id') != criterion for oid in support['origin_ids'])):
-                raise ValueError('Wrong exact criterion/origin pair: ' + row['id'])
+                raise ValueError('Wrong exact criterion/origin pair: ' + op['id'])
             review = support.get('semantic_pair_review', {})
-            if review.get('scope') == 'DIRECT_NORMATIVE_CLAUSE' and any(
+            direct_norm = (review.get('scope') == 'DIRECT_NORMATIVE_CLAUSE'
+                           or set(pair[1].get('source_ids',[])) == {'FN-WCAG'})
+            if direct_norm and any(
                     origins.get(oid, {}).get('trecho_id') not in pair[1]['excerpt_ids']
                     for oid in support.get('origin_ids', [])):
-                raise ValueError('Normative claim/origin excerpt mismatch: ' + row['id'])
+                raise ValueError('Normative claim/origin excerpt mismatch: ' + op['id'])
+    validate_analytical_applications(data, claims)
     return claims
+
+
+def iter_operation_contracts(data):
+    """Yield declared parents and their explicitly identified variants."""
+    for row in data.get('decision_components', []):
+        parent = row.get('operation_contract')
+        if not parent:
+            continue
+        yield parent
+        for variant in parent.get('operation_variants', []):
+            if variant.get('parent_operation_id') != parent['id']:
+                raise ValueError('Wrong variant parent: ' + variant.get('id', '?'))
+            merged = dict(parent, **variant)
+            merged.pop('operation_variants', None)
+            yield merged
+
+
+def validate_analytical_applications(data, claims):
+    """Analytical support is exact, scoped and dependency checked, not a score.
+
+    A historic articulation is not an executable permission. Every operational
+    application must independently identify its premises, result and targets.
+    """
+    arts = {r['id']: r for r in data.get('articulations', [])}
+    contributions = {r['id']: r for r in data.get('contributions', [])}
+    origins = {r['id']: r for r in data.get('criterion_origins', [])}
+    excerpts = {r['id']: r for r in data.get('excerpts', [])}
+    concepts = {r['id'] for r in data.get('context_elements', [])}
+    operations = {r['id']: r for r in iter_operation_contracts(data)}
+    relations = {r['id']: r for op in operations.values() for r in op.get('relations', [])}
+    apps = {}
+    for art in arts.values():
+        for app in art.get('operational_applications', []):
+            aid = app['id']
+            if aid in apps:
+                raise ValueError('Duplicate analytical application: ' + aid)
+            apps[aid] = app
+            if app.get('status') != 'GROUNDED_ANALYTICAL_APPLICATION':
+                raise ValueError('Unknown analytical application status: ' + aid)
+            if app.get('empirical_effect_authorized') is not False:
+                raise ValueError('Analytical application cannot assert empirical effect: ' + aid)
+            for field in ['premises', 'analytical_operation', 'result', 'function_ids', 'limits',
+                          'authorized_operation_ids', 'conditions']:
+                if not app.get(field):
+                    raise ValueError('Incomplete analytical application ' + aid + ': ' + field)
+            if not set(app['function_ids']) <= concepts:
+                raise ValueError('Unknown analytical function: ' + aid)
+            premise_excerpts = set()
+            for premise in app['premises']:
+                pair = claims.get(premise.get('claim_id'))
+                if (not pair or pair[0] != premise.get('knowledge_id')
+                        or pair[1].get('eligibility') != 'DOCUMENTED_OPERATIONAL_CLAIM'):
+                    raise ValueError('Unusable analytical premise: ' + aid)
+                claim = pair[1]
+                premise_excerpts.update(claim.get('excerpt_ids', []))
+                if not premise.get('contribution_ids'):
+                    raise ValueError('Analytical premise lacks a localized contribution: ' + aid + '/' + premise['claim_id'])
+                for cid in premise.get('contribution_ids', []):
+                    c = contributions.get(cid, {})
+                    if (cid not in claim.get('contribution_ids', [])
+                            or c.get('knowledge_id') != premise['knowledge_id']
+                            or c.get('excerpt_id') not in claim.get('excerpt_ids', [])
+                            or c.get('verification_status') not in STATES - {'PENDENTE'}
+                            or c.get('articulation_id') not in arts):
+                        raise ValueError('Unusable analytical contribution: ' + aid + '/' + cid)
+            for support in app.get('criterion_support', []):
+                if not support.get('origin_ids'):
+                    raise ValueError('Analytical criterion lacks origin: ' + aid)
+                for oid in support['origin_ids']:
+                    origin = origins.get(oid, {})
+                    if (origin.get('criterio_id') != support['criterion_id']
+                            or origin.get('trecho_id') not in premise_excerpts
+                            or origin.get('trecho_id') not in excerpts):
+                        raise ValueError('Analytical criterion not supported by exact premise: ' + aid + '/' + oid)
+            if not set(app['authorized_operation_ids']) <= set(operations):
+                raise ValueError('Unknown authorized operation: ' + aid)
+            if not set(app.get('authorized_relation_ids', [])) <= set(relations):
+                raise ValueError('Unknown authorized relation: ' + aid)
+    for op in operations.values():
+        for phase in op.get('condition_phases', []):
+            if not phase.get('id') or not phase.get('label') or phase.get('phase') not in {'precondition','production','verification'}:
+                raise ValueError('Invalid condition phase: ' + op['id'])
+        for record, target_field in [(op, 'authorized_operation_ids')] + [
+                (rel, 'authorized_relation_ids') for rel in op.get('relations', [])]:
+            for aid in record.get('analytical_application_ids', []):
+                if aid not in apps or record['id'] not in apps[aid][target_field]:
+                    raise ValueError('Analytical application does not authorize target: ' + record['id'])
+        for relation in op.get('relations', []):
+            if not relation.get('analytical_application_ids') or relation.get('scope')!='WITHIN_OPERATION':
+                continue
+            meaning=relation.get('meaning_unit')
+            available={row['representation_id'] for row in op.get('input_requirements',[])+op.get('output_spec',[])
+                       if row.get('meaning_unit')==meaning}
+            if (not meaning or not set(relation.get('from_representation_ids',[])) <= available
+                    or not set(relation.get('to_representation_ids',[])) <= available):
+                raise ValueError('Analytical relation inconsistent with information specifications: '+relation['id'])
+            if op.get('selected_representation_ids') and not set(relation.get('to_representation_ids',[])) <= set(op['selected_representation_ids']):
+                raise ValueError('Analytical relation delivers an unselected representation: '+relation['id'])
+        for field in ('output_resource_ids', 'recipient_resource_ids', 'selected_representation_ids'):
+            if not set(op.get(field, [])) <= concepts:
+                raise ValueError('Unknown selected output/resource: ' + op['id'] + '/' + field)
+    def visit(aid, stack, seen):
+        if aid in stack:
+            raise ValueError('Circular analytical authorization: ' + aid)
+        if aid in seen:
+            return
+        if aid not in apps:
+            raise ValueError('Unknown analytical dependency: ' + aid)
+        for dependency in apps[aid].get('depends_on_application_ids', []):
+            visit(dependency, stack | {aid}, seen)
+        seen.add(aid)
+    seen = set()
+    for aid in apps:
+        visit(aid, set(), seen)
+    return apps
 
 
 def project_operational_contracts(graph, data):
     """Project the same scoped claims; do not rewrite historical K review states."""
+    for old in list(graph.subjects(M.contratoOperacionalSerializado, None)):
+        graph.remove((old, M.contratoOperacionalSerializado, None))
+        graph.remove((old, M.fundamentadaPorAplicacaoAnalitica, None))
     for old in list(graph.subjects(RDF.type, M.AfirmacaoOperacionalDocumentada)):
         graph.remove((old, None, None))
         graph.remove((None, None, old))
@@ -228,14 +352,52 @@ def project_operational_contracts(graph, data):
             for limit in claim['limits']:
                 graph.add((node, M.limiteDaAfirmacao, Literal(limit, lang='pt-BR')))
             graph.add((node, M.originalReconferidoNaMigracao, Literal(False)))
+    # Analytical applications reuse the operational assertion class. Their
+    # epistemic kind is explicit and never changes historical K review states.
+    for art in data.get('articulations', []):
+        for app in art.get('operational_applications', []):
+            node = M[app['id']]
+            graph.add((node, RDF.type, M.AfirmacaoOperacionalDocumentada))
+            graph.add((node, M.identificador, Literal(app['id'])))
+            graph.add((node, M.enunciado, Literal(app['result'], lang='pt-BR')))
+            graph.add((node, M.aplicacaoDaArticulacao, M[art['id']]))
+            graph.add((node, M.elegibilidadeOperacional, Literal(app['status'])))
+            graph.add((node, M.estadoDaAfirmacao, Literal('SCOPED_ANALYTICAL_SYNTHESIS')))
+            graph.add((node, M.estatutoEpistemicoDaAfirmacao, Literal('SYNTESE_ANALITICA_FUNDAMENTADA')))
+            graph.add((node, M.operacaoDaAplicacaoAnalitica, Literal(app['analytical_operation'], lang='pt-BR')))
+            graph.add((node, M.efeitoEmpiricoAutorizado, Literal(False)))
+            for premise in app['premises']:
+                graph.add((node, M.premissaOperacional, M[premise['claim_id']]))
+                for cid in premise.get('contribution_ids', []):
+                    graph.add((node, M.contribuicaoDaAfirmacao, M[cid]))
+            for pair in app.get('criterion_support', []):
+                for oid in pair['origin_ids']:
+                    graph.add((node, M.origemDaAplicacaoAnalitica, M[oid]))
+            for field, prop in [('authorized_operation_ids', M.autorizaOperacao),
+                                ('authorized_relation_ids', M.autorizaRelacaoOperacional),
+                                ('function_ids', M.funcaoDaAfirmacao),
+                                ('depends_on_application_ids', M.dependeDeAplicacaoAnalitica)]:
+                for value in app.get(field, []):
+                    graph.add((node, prop, M[value]))
+            for field, prop in [('conditions', M.condicaoDaAplicacaoAnalitica), ('limits', M.limiteDaAfirmacao)]:
+                for value in app[field]:
+                    graph.add((node, prop, Literal(value, lang='pt-BR')))
+    for op in iter_operation_contracts(data):
+        node = M[op['id']]
+        graph.set((node, M.contratoOperacionalSerializado,
+                   Literal(json.dumps(op, ensure_ascii=False, sort_keys=True))))
+        for aid in op.get('analytical_application_ids', []):
+            graph.add((node, M.fundamentadaPorAplicacaoAnalitica, M[aid]))
     for concept in data.get('context_elements', []):
+        node = M[concept['id']]
+        # Curated public labels must also update pre-existing RDF concepts;
+        # semantic annotations below are only required for newer concepts.
+        graph.set((node, SKOS.prefLabel, Literal(concept['rotulo'], lang='pt-BR')))
         if not (concept.get('interaction_semantics') or concept.get('assertion_semantics')
                 or concept.get('status') == 'REQUISITO_ANALITICO_1_5'):
             continue
-        node = M[concept['id']]
         graph.add((node, RDF.type, SKOS.Concept))
         graph.set((node, M.identificador, Literal(concept['id'])))
-        graph.set((node, SKOS.prefLabel, Literal(concept['rotulo'], lang='pt-BR')))
         graph.add((node, SKOS.inScheme, URIRef('https://w3id.org/mado/scheme/' + concept['tipo'])))
         graph.set((node, M.statusDoRegistro, Literal(concept['status'])))
         for field, prop in [('interaction_semantics', M.tipoSemanticoDeInteracao),

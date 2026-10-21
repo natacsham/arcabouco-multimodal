@@ -111,10 +111,14 @@ html[data-contrast="high"] .simple-view .simple-status,html[data-contrast="high"
 .source-state {font-size:.9375rem}
 .situated-choice > summary {font-size:1.125rem;line-height:1.5;cursor:pointer;padding:.25rem;overflow-wrap:anywhere}
 .situated-choice > summary:focus-visible {outline:2px solid var(--focus);outline-offset:3px}
+.situated-choice .choice-context {display:block;margin-top:.35rem;font-size:.9375rem;font-weight:400}
 .situated-action {margin:1rem 0;padding:.25rem 0 1rem;border-bottom:1px solid var(--border)}
 .situated-action:last-child {border-bottom:0}
 .step-grounding {padding:.5rem 0}
 .step-grounding h5 {font-size:1rem;margin:.75rem 0 .25rem}
+.step-preparation,.step-verification {margin:.75rem 0;padding:.25rem 0 .25rem .75rem;border-left:3px solid var(--border)}
+.step-preparation p,.step-verification p {margin:.3rem 0}
+.analytical-scope,.independent-supports {font-size:.9375rem}
 .situated-choice li,.situated-choice p {overflow-wrap:anywhere}
 #generation-stages {margin:.5rem 0;padding-left:1.5rem}
 #generation-stages li {margin:.4rem 0}

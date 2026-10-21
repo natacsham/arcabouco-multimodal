@@ -38,4 +38,39 @@ assert.equal(bounded.state,'Apoio às funções identificadas');
 assert.match(bounded.html,/não todas as ações do relato/);
 assert.match(bounded.html,/Quem preenche — Enviar formulário: Enviar o formulário ainda não tem operação representada/);
 assert.doesNotMatch(bounded.html,/UNMAPPED_TASK/);
+const phases=situatedOutput({proposal_status:'CONDITIONAL',pending_candidates:[{composition_type:'INDEPENDENT_SUPPORTS',steps:[{...step,
+  selected_representation_ids:['Text'],representation_selection_status:'SELECTED_VARIANT',
+  phase_conditions:[{id:'prepare-text',label:'Preparar a descrição textual',phase:'production',state:'PENDING'},
+    {id:'can-edit',label:'Há como editar este material',phase:'precondition',state:'PENDING'},
+    {id:'verify',label:'Conferir a sequência de leitura com a pessoa',phase:'verification',state:'NOT_EXECUTED'}],
+  groundings:[{application_kind:'GROUNDED_ANALYTICAL_APPLICATION',analytical_application_id:'ANA-1',
+    authorized_application:'Organizar a instrução mantendo sua informação essencial.',
+    construction:{operation:'Relacionar acesso não visual e representação equivalente.',added_understanding:'O conteúdo pode ser recuperado em outra forma de acesso.',
+      contributions:[{statement:'Contribuição efetivamente utilizada',source:{title:'Fonte conhecida',url:'https://www.w3.org/example'},locator:'Seção conferida'}]}}]}],relations:[]}]});
+assert.match(phases.html,/O que esta ação propõe preparar/);
+assert.match(phases.html,/não são apresentados como prontos/);
+assert.match(phases.html,/Depois de preparar, confira antes de utilizar/);
+assert.match(phases.html,/Como as contribuições foram articuladas/);
+assert.match(phases.html,/Organizar a instrução mantendo/);
+assert.match(phases.html,/Não há uma sequência obrigatória/);
+assert.doesNotMatch(phases.html,/→/);
+assert.doesNotMatch(phases.foundationHTML,/→/);
+assert.match(phases.foundationHTML,/Contribuição efetivamente utilizada/);
+const relation=situatedOutput({choices:[{steps:[step],relations:[{kind:'DEPENDENT_SEQUENCE',explanation:'O rascunho produzido é a entrada da revisão.',
+  groundings:[{application_kind:'GROUNDED_ANALYTICAL_APPLICATION',construction:{operation:'Relacionar produção e revisão.',added_understanding:'A revisão conserva o mesmo rascunho.'}}]}]}]});
+assert.match(relation.html,/Por que esta relação pode ser utilizada/);
+assert.match(relation.html,/A revisão conserva o mesmo rascunho/);
+const relationPhases=situatedOutput({choices:[{steps:[step],relations:[{kind:'DEPENDENT_SEQUENCE',explanation:'Revisar o mesmo rascunho.',check_ids:['REL-CHECK'],
+  phase_conditions:[{id:'VerifyDraft',label:'Conferir se o rascunho mantém a intenção',phase:'verification',state:'NOT_EXECUTED'}],grounding:{justification:'Síntese registrada.'}}]}],
+  execution_evidence:[{id:'REL-CHECK',state:'NOT_EXECUTED',explanation:'A revisão do rascunho ainda não foi observada.'}]});
+assert.match(relationPhases.html,/Depois de preparar, confira antes de utilizar/);
+assert.match(relationPhases.html,/A revisão do rascunho ainda não foi observada.*Não verificada/);
+assert.equal((relationPhases.foundationHTML.match(/Síntese registrada/g)||[]).length,1,'Technical presentation must not duplicate the same relation ground');
+const ranked=situatedOutput({partial_segments:[{label:'Apoio independente limitado',steps:[step],covered_functions:['one']}],
+  pending_candidates:[{label:'Produzir e revisar',steps:[{...step,id:'OP-B'}],covered_functions:['one','two']}]});
+assert(ranked.html.indexOf('Produzir e revisar')<ranked.html.indexOf('Apoio independente limitado'));
+assert.match(ranked.html,/Confirme as condições/,'Ordering must not promote a conditional proposal to ready');
+const personSummary=situatedOutput({choices:[{participant_label:'Participante A',situation_label:'Consulta individual',steps:[step]}]});
+assert.match(personSummary.html,/<summary>Revisar o conteúdo <span class="choice-context">Participante A · Consulta individual<\/span><\/summary>/,
+  'The person and situation must be identifiable before expanding a repeated action title');
 console.log('PASS situated actions: actual modes, monitoring, grounds, gaps, conditionality, escaping and no invented relations.');

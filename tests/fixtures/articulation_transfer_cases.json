@@ -1,0 +1,17 @@
+[
+  {
+    "id": "catalogue_sequence",
+    "synthetic": true,
+    "narrative": "Sou bibliotecária e vou ensinar um grupo de adultos a consultar um catálogo digital e reservar um livro. Algumas pessoas conseguem ler instruções curtas e usar o computador, mas perdem a sequência quando eu explico vários passos somente pela fala. A atividade será presencial, com demonstração no projetor e prática no computador de cada pessoa. Posso preparar instruções escritas e imagens das telas. Quero priorizar a consulta individual: encontrar o livro, conferir a disponibilidade e reservar, permitindo retomar um passo sem recomeçar tudo."
+  },
+  {
+    "id": "recorded_content_access",
+    "synthetic": true,
+    "narrative": "Sou mediadora de uma oficina online sobre direitos do consumidor. Quero disponibilizar uma explicação gravada com gráficos e exemplos para consulta individual. Uma participante é cega, usa leitor de tela e consegue ouvir áudio. Outra é surda, lê português e acompanha informações escritas; ela não utiliza Libras. Ambas usam computador e teclado. Posso editar o vídeo, preparar texto e acrescentar descrição das informações visuais. Quero que ambas compreendam os mesmos exemplos e possam rever o material no seu ritmo."
+  },
+  {
+    "id": "dictation_review_control",
+    "synthetic": true,
+    "narrative": "Preciso escrever um registro de atendimento no computador e revisar antes de enviar. Consigo falar e ler a tela, mas digitar textos longos causa fadiga nas mãos. Consigo usar o teclado para pequenas correções. O editor oferece reconhecimento de fala pelo microfone e mostra o texto reconhecido, que posso corrigir antes de concluir. Estou numa sala silenciosa, sem outras pessoas ouvindo, e posso controlar quando começar, parar e confirmar o registro."
+  }
+]

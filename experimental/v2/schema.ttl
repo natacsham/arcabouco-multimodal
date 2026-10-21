@@ -5,8 +5,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://w3id.org/mado/experimental/v2> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/experimental/2.0.0-alpha3> ;
-  owl:versionInfo "2.0.0-alpha3" ;
+  owl:versionIRI <https://w3id.org/mado/experimental/2.0.0-alpha4> ;
+  owl:versionInfo "2.0.0-alpha4" ;
   rdfs:label "MADO V2 — piloto de composição fundamentada"@pt ;
   rdfs:comment "Namespace experimental do compositor delimitado, reutilizado pela geração situada da MADO 1.5. Preserva o piloto e suas fontes sem substituir a ontologia principal nem afirmar validação humana. Namespace proposto; não pressupõe registro de resolução pública."@pt .
 

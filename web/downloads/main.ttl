@@ -9,8 +9,8 @@
 skos:broader a owl:ObjectProperty .
 
 <https://w3id.org/mado> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/1.5.0-rc1> ;
-  owl:versionInfo "1.5.0-rc1" ;
+  owl:versionIRI <https://w3id.org/mado/1.5.0-rc2> ;
+  owl:versionInfo "1.5.0-rc2" ;
   owl:priorVersion <https://w3id.org/mado/1.4.0-rc3> ;
   dcterms:creator "Natacsha Ordones Raposo de Melo" ;
   rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
@@ -308,3 +308,26 @@ mado:derivadaDaCondicao a owl:ObjectProperty ; rdfs:domain mado:FuncaoRequeridaS
 mado:episodioDoContexto a owl:ObjectProperty ; rdfs:domain mado:ContextoDeInteracaoDigital ; rdfs:range mado:ContextoDeInteracaoDigital .
 mado:tipoSemanticoDeInteracao a owl:AnnotationProperty ; rdfs:label "tipo semântico da forma de interação"@pt-BR .
 mado:tipoDeAfirmacaoContextual a owl:AnnotationProperty ; rdfs:label "tipo da afirmação contextual"@pt-BR .
+
+# RC2: qualificar a aplicação analítica sem promover a articulação histórica.
+# A classe de afirmação operacional é reutilizada; elegibilidade é conferida
+# por SHACL e pelo executor, não inferida da existência de um indivíduo OWL.
+mado:aplicacaoDaArticulacao a owl:ObjectProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:ArticulacaoDocumentada .
+mado:premissaOperacional a owl:ObjectProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:AfirmacaoOperacionalDocumentada .
+mado:origemDaAplicacaoAnalitica a owl:ObjectProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:RelacaoDeOrigemDoCriterio .
+mado:autorizaOperacao a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada .
+mado:autorizaRelacaoOperacional a owl:ObjectProperty ; rdfs:domain mado:AfirmacaoOperacionalDocumentada .
+mado:dependeDeAplicacaoAnalitica a owl:ObjectProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range mado:AfirmacaoOperacionalDocumentada .
+mado:fundamentadaPorAplicacaoAnalitica a owl:ObjectProperty ; rdfs:range mado:AfirmacaoOperacionalDocumentada .
+mado:operacaoDaAplicacaoAnalitica a owl:DatatypeProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range rdf:langString .
+mado:condicaoDaAplicacaoAnalitica a owl:DatatypeProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range rdf:langString .
+mado:efeitoEmpiricoAutorizado a owl:DatatypeProperty ;
+  rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range xsd:boolean .
+mado:contratoOperacionalSerializado a owl:DatatypeProperty ; rdfs:range xsd:string ;
+  rdfs:comment "Projeção reproduzível do contrato curado; não executa o contrato nem representa uma decisão tomada."@pt-BR .

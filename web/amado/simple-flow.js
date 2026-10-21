@@ -4,7 +4,7 @@ import {setupDictation} from './voice.js';
 import {situatedOutput} from './situated-output.mjs';
 import {legacyQuestions, legacyAnswer, legacySummary, accessRequirementSummary, participantName,
   compositionDraft, compositionQuestions, compositionSummary, questionRound,legacyEditor,legacyRevision,
-  compositionEditor,compositionRevision,usedSourceRecords} from './intake.mjs';
+  compositionEditor,compositionRevision,usedSourceRecords,reviewContext} from './intake.mjs';
 
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -16,7 +16,7 @@ const list = values => {
 let catalog, compositionCatalog, current, mode = 'legacy', draft, result, busy = false, epoch = 0;
 let questions = [], refinementQuestions = [], answered = new Set(), handled = new Set(), exampleNarrative = null, exampleId = null, speechText = '', organizedNarrative = null;
 let roundAnswered = 0, clarificationRound = 1;
-let editorRows=[], editorReturn='case-review', reading=false;
+let editorRows=[], editorReturn='case-review', editorContext=null, reading=false;
 // One control changes state instead of exposing separate start/stop actions.
 $('#stop-reading').hidden=true;
 $('#read-orientation').textContent='Ouvir';
@@ -279,7 +279,8 @@ function edit() {
   if(!(mode==='legacy'?current:draft)){editNarrative();return;}
   editorReturn=['case-understanding','case-questions','case-review','orientation-result'].find(id=>!$('#'+id).hidden) || 'case-review';
   voice.clear();status('');$('#flow-error').textContent='';$('#editor-error').textContent='';
-  editorRows=mode==='legacy'?legacyEditor(current,catalog):compositionEditor(draft,compositionCatalog);
+  editorContext=mode==='legacy'?reviewContext(current,result):null;
+  editorRows=mode==='legacy'?legacyEditor(editorContext,catalog):compositionEditor(draft,compositionCatalog);
   const groups=[...new Set(editorRows.map(row=>row.group))];
   $('#editor-fields').innerHTML=groups.map(group=>'<section class="revision-group"><h3>'+esc(group)+'</h3>'+editorRows.map((row,index)=>row.group===group?editorField(row,index):'').join('')+'</section>').join('');
   if(mode==='legacy')$('#editor-fields').innerHTML+='<details class="revision-options"><summary>Adicionar uma pessoa ou responsável que ainda não aparece</summary><label for="revision-new-role">Papel nesta atividade</label><select id="revision-new-role"><option value="">Não adicionar</option>'+(catalog.concepts.PAPEL_NO_CONTEXTO || []).map(row=>'<option value="'+esc(row.id)+'">'+esc(row.label)+'</option>').join('')+'</select><label for="revision-new-label">Como identificar esta pessoa ou grupo (opcional)</label><input id="revision-new-label" maxlength="200"></details>';
@@ -300,7 +301,7 @@ $('#editor-form').addEventListener('submit',event=>{
     const values={};
     for(const row of editorRows){const field=[...$('#editor-fields').querySelectorAll('[data-revision]')].find(item=>item.dataset.revision===row.key);values[row.key]=row.type==='multi'?[...field.querySelectorAll('input:checked')].map(input=>input.value):row.type==='remove'?field.checked:field.value;}
     if(mode==='legacy'){
-      const payload=legacyRevision(current,catalog,values),role=$('#revision-new-role')?.value;
+      const payload=legacyRevision(editorContext,catalog,values),role=$('#revision-new-role')?.value;
       if(role)payload.participations.push({papel_id:role,label:$('#revision-new-label').value.trim(),caracteristica_ids:[],tarefa_ids:[],modalidade_ids:[],recurso_operado_ids:[]});
       current=await request('update',{payload});
     }else draft=compositionRevision(draft,compositionCatalog,values);

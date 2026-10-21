@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "vendor"))
 sys.path.insert(0, str(HERE))
-from rdflib import Graph, Literal, Namespace, RDF
+from rdflib import Graph, Literal, Namespace, RDF, OWL, URIRef
 from pyshacl import validate
 from composer import Composer
 
@@ -76,7 +76,8 @@ def main():
     before = {str(p.relative_to(ROOT)).replace("\\", "/"): digest(p) for p in protected if p.is_file()}
     base, extended = Composer(BASE), Composer([*BASE, EXT])
     shapes = Graph().parse(HERE / "shapes.ttl", format="turtle")
-    report = {"version": "2.0.0-alpha2", "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+    version = str(base.graph.value(URIRef('https://w3id.org/mado/experimental/v2'), OWL.versionInfo))
+    report = {"version": version, "checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
               "shacl": {}, "queries": {}, "negative_shacl": {}}
     checks = []
@@ -175,7 +176,7 @@ def main():
     write_json(output / "verification.json", report)
     manifest_files = sorted(p for p in HERE.rglob("*") if p.is_file()
                             and "__pycache__" not in p.parts and p.name != "manifest.json")
-    write_json(output / "manifest.json", {"version": "2.0.0-alpha3", "files": {
+    write_json(output / "manifest.json", {"version": version, "files": {
         p.relative_to(HERE).as_posix(): digest(p) for p in manifest_files}})
     print(json.dumps({"passed": report["passed"], "unit_tests": result.testsRun,
                       "shacl": {k: v["conforms"] for k, v in report["shacl"].items()},

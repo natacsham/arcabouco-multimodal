@@ -48,14 +48,19 @@ class CompositionBridgeTests(unittest.TestCase):
         from rdflib import RDF, RDFS
         from experimental.v2.composer import V2
         catalog = bridge.dispatch({"operation": "catalog_composition"})
-        self.assertEqual(catalog["version"], "2.0.0-alpha3")
+        self.assertEqual(catalog["version"], "2.0.0-alpha4")
         for group, entity_type in (("facts", V2.ContextFact), ("resources", V2.Resource)):
             self.assertEqual({row["iri"] for row in catalog[group]},
                              {str(node) for node in self.composer.graph.subjects(RDF.type, entity_type)})
             for row in catalog[group]:
                 self.assertIsNone(row["default"])
                 self.assertEqual(row["label"], str(self.composer.graph.value(V2[row["id"]], RDFS.label)))
-                self.assertTrue(row["used_by"])
+                if row["id"] == "LearningCommunicationContext":
+                    # Historical origin remains queryable but must not gate
+                    # production/review outside an educational setting.
+                    self.assertEqual(row["used_by"], [])
+                else:
+                    self.assertTrue(row["used_by"])
         self.assertEqual(catalog["synthetic_example"]["kind"], "SYNTHETIC")
         self.assertEqual(catalog["synthetic_example"]["context"], self.example)
         self.assertEqual(catalog["labels"][str(V2.TextDraft)], "Rascunho textual editável")
