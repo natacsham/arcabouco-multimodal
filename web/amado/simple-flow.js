@@ -527,7 +527,7 @@ $('#generate-orientation').addEventListener('click',() => {
         help:row.reason,options:[{id:'true',label:'Sim'},{id:'false',label:'Não'},{id:'unknown',label:'Ainda não sei'}]})):[];
     }
     $('#complete-information').hidden = !unanswered().length;
-    $('#complete-information').textContent = 'Refinar esta orientação (opcional)';
+    $('#complete-information').textContent = result.intake_status==='NEEDS_CLARIFICATION' ? 'Esclarecer estas informações' : 'Refinar esta orientação (opcional)';
     $('#orientation-foundation-body').replaceChildren();
     $('#orientation-case-body').innerHTML = para($('#case-narrative').value)+fieldsHTML(summaryRows())+requirementsHTML();
     $('#orientation-foundations').open=false;
@@ -535,7 +535,8 @@ $('#generate-orientation').addEventListener('click',() => {
     $('#reading-message').textContent = ''; status(''); screen('orientation-result','orientation-title');
     // Read the visible layout: hidden containers do not retain paragraph breaks in innerText.
     speechText = $('#orientation-main').innerText;
-    generationStage({stage:'presentation',state:'completed',message:'Orientação apresentada com as fontes e condições registradas nesta execução.'});
+    generationStage({stage:'presentation',state:'completed',message:['NEEDS_CLARIFICATION','CONTEXT_UNKNOWN','COVERAGE_LIMIT'].includes(result.intake_status)?
+      'Análise concluída sem orientação. Confira o motivo e o próximo passo.':'Orientação apresentada com as fontes e condições registradas nesta execução.'});
   },'Relacionando seu caso aos conhecimentos da base…',true);
 });
 $('#complete-information').addEventListener('click',() => {

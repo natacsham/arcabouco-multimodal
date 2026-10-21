@@ -163,6 +163,20 @@ O [exemplo integral explicado](docs/revisao-situada-1.5.md) apresenta fontes com
 
 O ditado é opcional. Quando o navegador não oferece processamento local disponível, uma confirmação informa que a voz pode ser enviada ao serviço de transcrição do navegador. O AMADO recebe o texto e não grava áudio. A organização anterior da interface continua em `amado/completo.html` e `amado/completo-guiado.html`, utilizando a mesma versão atual dos motores. A versão anterior completa permanece no histórico do repositório.
 
+### Correção do entendimento de aulas remotas
+
+Instrumento `AMADO-web-1.5.0-rc2-remote-intake1`, desenvolvido a partir do commit preservado `1ff173c1fb9bb5f02febe11091b2b6b5723dec14`. A base MADO, as afirmações documentais e os contratos de composição não foram alterados nesta correção.
+
+- O relato distingue o total da turma, o subgrupo com TEA informado, quem conduz a explicação e familiares propostos como apoio. Diagnóstico não preenche habilidade de leitura, percepção, expressão ou dificuldade cognitiva.
+- “Ministrar conteúdo” identifica uma ação; o tema da aula não seleciona uma resposta. Ensino remoto é uma condição registrada na situação, não evidência de computador, internet disponível ou AVA específico.
+- A primeira rodada pergunta pelo acompanhamento/resposta dos estudantes e pelo material pretendido. As perguntas não dependem da existência de um cenário pronto; respostas desconhecidas não são repetidas nem confirmadas automaticamente.
+- Sem orientação selecionada, `next_questions` apresenta os esclarecimentos reais ainda disponíveis; `unresolved_answers` conserva respostas desconhecidas para revisão, sem reabrir perguntas automaticamente. `intake_status` distingue esclarecimento disponível, contexto ainda desconhecido e limite desta consulta à base, sem prometer que mais respostas necessariamente resolverão uma lacuna operacional. Apoios parciais continuam visíveis.
+- A menção genérica a celular identifica o dispositivo, não confirma orientação por áudio e vibração. Os sinônimos da interface deixaram de reunir indevidamente essas condições.
+
+**Limite conferido:** reconhecer uma aula remota não autoriza gerar um plano didático completo. Quando uma dificuldade de sequência/retomada é explicitamente relatada, a operação existente de instruções consultáveis pode ser recuperada, com condições individuais e recursos a conferir. Isso não comprova uma combinação multimodal ou cobertura integral da aula. A orientação pedagógica elaborada na conversa não foi incorporada como resposta pronta.
+
+Verificação reproduzível: `python -B -m unittest discover -s tests -p 'test_remote_*.py'` e `node tests/remote-browser.mjs`. Complementos usados para testar o percurso são identificados como sintéticos, separados do relato original, e não entram no pacote do navegador. A revisão também mantém a regressão dos casos anteriores.
+
 ## Registros históricos preservados
 
 Os blocos abaixo documentam etapas anteriores. Foram mantidos para rastrear decisões e limitações, mas não descrevem o contrato nem a situação de entrega da candidata 1.5.

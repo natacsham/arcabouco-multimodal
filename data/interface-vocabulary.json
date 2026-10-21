@@ -306,8 +306,8 @@
     "REC-SMARTPHONE-AUDIO-HAPTICO": {
       "label": "Celular com orientação por áudio e vibração",
       "aliases": [
-        "smartphone",
-        "celular",
+        "smartphone com áudio e vibração",
+        "celular com áudio e vibração",
         "áudio e vibração"
       ],
       "category_label": "Outros recursos disponíveis",

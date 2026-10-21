@@ -330,6 +330,85 @@ def _person(context, role, label, suffix):
             "objetivo_participacao": "", "status_evidencia": "IDENTIFICADO_PARA_CONFIRMACAO"}
 
 
+def reported_autism_groups(context, people, narrative, group):
+    """Keep a diagnosis as testimony, never as an access/communication ability."""
+    text = folded(narrative)
+    pattern = (r"\b(?:(?P<count>\d+|um|uma|dois|duas|tres|quatro|alguns|algumas)\s+)?"
+               r"(?:alunos?|alunas?|estudantes?|pessoas?)\s+"
+               r"(?:(?:dessa|desta|da)\s+turma\s+)?"
+               r"(?:com|(?:que\s+)?(?:tem|têm|possuem))\s+"
+               r"(?P<condition>transtorno\s+do\s+espectro\s+autista|autismo|tea)\b")
+    quantities = {"um": 1, "uma": 1, "dois": 2, "duas": 2, "tres": 3, "quatro": 4}
+    for match in re.finditer(pattern, text):
+        before = text[max(text.rfind(".", 0, match.start()) + 1, match.start() - 60):match.start()]
+        if re.search(r"\b(?:nao|talvez|suspeit\w*|nao sei se)\b", before):
+            continue
+        condition = narrative[match.start("condition"):match.end("condition")]
+        count = match.group("count")
+        quantity = int(count) if count and count.isdigit() else quantities.get(count)
+        role = "PAPEL-ESTUDANTE" if re.search(r"\b(?:alunos?|alunas?|estudantes?)\b", match.group()) else "PAPEL-PESSOA-APOIADA"
+        person = _person(context, role, f"{quantity if quantity is not None else 'Alguns'} estudantes: TEA informado" if role == "PAPEL-ESTUDANTE"
+                         else "Pessoas: TEA informado", "reported-autism-" + str(match.start()))
+        person.update(quantidade=quantity, group_scope="SUBGROUP" if group else "REPORTED_GROUP",
+                      reported_condition={"text": condition, "start": match.start("condition"), "end": match.end("condition")})
+        people.append(person)
+        source = narrative[match.start():match.end()]
+        if group:
+            person["parent_group_id"] = group["id"]
+            _assert(context, person["id"], "", "group_membership", group["id"], source)
+        if quantity is not None:
+            _assert(context, person["id"], "", "group_count", quantity, source)
+        _assert(context, person["id"], "", "reported_condition", condition, source,
+                source_start=match.start(), source_end=match.end())
+
+
+def reported_family_support(context, people, narrative):
+    """A proposed family mediator is not a confirmed preparer or teacher."""
+    text = folded(narrative)
+    for clause in re.finditer(r"[^.!?;]+", text):
+        local = clause.group()
+        family = re.search(r"\b(?:pais|maes|mae|pai|familiares|familia)\b", local)
+        if not family or not re.search(r"\b(?:apoi\w*|mediador\w*|mediar|ajud\w*)\b", local):
+            continue
+        if re.search(r"\b(?:sem|nao (?:ha|tenho|temos|teremos))\s+(?:o )?apoio\b|\bnao\s+(?:podem|conseguem|vao)\s+(?:apoiar|ajudar)\b", local):
+            continue
+        existing = [p for p in people if p.get("papel_id") == "PAPEL-MEDIADOR"]
+        self_id = context.get("requester_participation_id")
+        person = existing[0] if len(existing) == 1 and existing[0]["id"] != self_id else None
+        if person is None:
+            person = _person(context, "PAPEL-MEDIADOR", "Familiares no apoio à atividade", "family-support")
+            people.append(person)
+        proposed = bool(re.search(r"\b(?:vou precisar|precisarei|preciso|por exemplo|possam|poderiam|talvez)\b", local))
+        raw_source = narrative[clause.start():clause.end()]
+        source = raw_source.strip()
+        source_start = clause.start() + len(raw_source) - len(raw_source.lstrip())
+        person.update(label="Familiares — apoio a confirmar" if proposed else "Familiares no apoio à atividade",
+                      grupo_rotulo=narrative[clause.start() + family.start():clause.start() + family.end()],
+                      quantidade=None, participation_status="PROPOSTO" if proposed else "RELATADO",
+                      apoio_informado=source, objetivo_participacao=source)
+        _assert(context, person["id"], "", "participation", "PAPEL-MEDIADOR", source,
+                "INFERIDO_PARA_CONFIRMACAO" if proposed else "RELATADO",
+                participation_status=person["participation_status"],
+                source_start=source_start, source_end=source_start + len(source))
+        break
+
+
+def instructional_delivery(narrative):
+    """Remote is a delivery condition, not proof of an AVA/device/connection."""
+    text = folded(narrative)
+    rows = []
+    for match in re.finditer(r"\b(?:remot[ao]s?|online|a distancia|presencia(?:l|is))\b", text):
+        boundary = max(text.rfind(mark, 0, match.start()) for mark in ".,;!?") + 1
+        before = text[max(boundary, match.start() - 55):match.start()]
+        before = re.split(r"\bmas\b", before)[-1]
+        if re.search(r"\b(?:nao|sem|talvez)\b", before):
+            continue
+        mode = "IN_PERSON" if match.group().startswith("presencia") else "REMOTE"
+        rows.append({"value": mode, "source_text": narrative[match.start():match.end()],
+                     "source_start": match.start(), "source_end": match.end()})
+    return rows
+
+
 def enrich_operational_observations(context, people, narrative, concepts):
     """Project literal preparation, ownership and application affordances.
 
@@ -485,9 +564,9 @@ def build(context, people, narrative, concepts, evidence, prior=None):
         person["tarefa_ids"] = []
         person["modalidade_ids"] = []
         person["caracteristica_ids"] = []
-    total = re.search(r"\b(?P<count>\d+|vinte)\s+(?:alunos|alunas|estudantes)\b", text)
+    total = re.search(r"\bturma\s+(?:de |com )?(?P<count>\d+|vinte)\b(?!\s*(?:[ºª]\s*)?(?:ano|serie)\b)", text)
     if not total:
-        total = re.search(r"\bturma\s+(?:de |com )?(?P<count>\d+|vinte)\b", text)
+        total = re.search(r"\b(?P<count>\d+|vinte)\s+(?:alunos|alunas|estudantes)\b", text)
     group = None
     if total:
         count = 20 if total.group("count") == "vinte" else int(total.group("count"))
@@ -507,6 +586,8 @@ def build(context, people, narrative, concepts, evidence, prior=None):
                 if person is not group and person.get("reported_condition"):
                     person["parent_group_id"] = group["id"]
                     _assert(context, person["id"], "", "group_membership", group["id"], narrative)
+    reported_autism_groups(context, people, effective, group)
+    reported_family_support(context, people, effective)
     cognitive = re.search(r"\b(?:deficiencia\s+|dificuldades?\s+|problemas?\s+)?cognitiv[ao]s?\b", text)
     if cognitive:
         subgroup = bool(re.search(r"\b(alguns|algumas|parte d[ao]s?|dentro deles|entre (?:eles|elas|os alunos))\b", text))
@@ -526,7 +607,9 @@ def build(context, people, narrative, concepts, evidence, prior=None):
                               correction["source_text"], "RETIRADO_POR_CORRECAO")
             condition["supersedes"] = retired["id"]
     # Keep all declared roles, but an unnamed presenter has an unknown role.
-    presentation = re.search(r"\b(apresent(?:ar|o|a|arei)|explic(?:ar|o|a|arei)|ensin(?:ar|o)|dar aula)\b", text)
+    presentation = next((match for match in re.finditer(
+        r"\b(apresent(?:ar|o|a|arei)|explic(?:ar|o|a|arei)|ensin(?:ar|o)|ministr(?:ar|o|a|arei)|dar aula)\b|\bconteudo a ser ministrado\b", text)
+        if not negated_action(text, match.start())), None)
     visual = re.search(r"\b(slides?|apresentacao)\b", text)
     access = re.search(r"\b(acess(?:ar|am|a|o)|consult(?:ar|am|a)|acompanhar|ler)\b.{0,55}\b(material|conteudo|arquivo|slides?|apresentacao)\b|\bconsulta individual\b", text)
     own_computer = re.search(r"\b(?:cada (?:um|aluno|estudante)|(?:seus|proprios?) computadores|computadores (?:proprios|deles)|cada qual)\b.{0,80}\b(?:computador|material|acessa|acessar|acompanhar)\b", text)
@@ -550,8 +633,9 @@ def build(context, people, narrative, concepts, evidence, prior=None):
         receivers = [group, *[p for p in receivers if p.get("parent_group_id") == group["id"]]]
 
     def situation(key, label, task_ids, participants, source):
-        actors = [presenter] if key == "presentation" else (participants if task_ids or key == "exercise" else [])
-        recipients = [p for p in participants if p is not presenter] if key == "presentation" else []
+        instruction = key in {"presentation", "instruction"}
+        actors = [presenter] if instruction and presenter else (participants if task_ids or key == "exercise" else [])
+        recipients = [p for p in participants if p is not presenter] if instruction else []
         row = {"id": uid("SIT-", context["id"], key), "label": label,
                "task_ids": [t for t in task_ids if t in concepts],
                "participant_ids": list(dict.fromkeys(p["id"] for p in participants)),
@@ -561,7 +645,7 @@ def build(context, people, narrative, concepts, evidence, prior=None):
                "state": "RELATADO", "kind": key}
         context["situations"].append(row)
         for person in participants:
-            if key == "presentation" and person is not presenter:
+            if instruction and person is not presenter:
                 continue
             for task in row["task_ids"]:
                 if task not in person["tarefa_ids"]:
@@ -587,6 +671,14 @@ def build(context, people, narrative, concepts, evidence, prior=None):
             _assert(context, presenter["id"], row["id"], "digital_resource", resource, narrative)
         for mode in row["mode_ids"]:
             _assert(context, presenter["id"], row["id"], "modality", mode, narrative, "INFERIDO_PARA_CONFIRMACAO")
+    elif presentation and presenter and receivers and "TAR-COMUNICAR-CONTEUDO-1545B38" in context.get("tarefas", []):
+        # A teaching action identifies the responsible speaker and recipients;
+        # it does not establish a slide, speech ability, access route or device.
+        row = situation("instruction", "Explicação do conteúdo para a turma", ["TAR-COMUNICAR-CONTEUDO-1545B38"],
+                        [presenter, *receivers], source_clause(presentation.group()))
+        helpers = [p for p in people if p.get("papel_id") == "PAPEL-MEDIADOR" and p.get("apoio_informado")]
+        row["support_participant_ids"] = [p["id"] for p in helpers]
+        row["participant_ids"] = list(dict.fromkeys([*row["participant_ids"], *row["support_participant_ids"]]))
     if access or (presentation and visual and own_computer):
         source = source_clause(access.group(0) if access else own_computer.group(0))
         access_task = ("TAR-OPERAR-SISTEMA" if "TAR-OPERAR-SISTEMA" in context.get("tarefas", [])
@@ -666,8 +758,20 @@ def build(context, people, narrative, concepts, evidence, prior=None):
         context["tarefas"] = list(dict.fromkeys(t for s in context["situations"] for t in s["task_ids"]))
     if len(context["situations"]) == 1:
         context["active_situation_id"] = context["situations"][0]["id"]
+    deliveries = instructional_delivery(effective)
+    for delivery in deliveries:
+        scoped = context["situations"][0] if len(context["situations"]) == 1 else next(
+            (s for s in context["situations"] if s["kind"] in {"instruction", "presentation"}), None)
+        sid = scoped["id"] if scoped else ""
+        if scoped:
+            modes = list(dict.fromkeys([*scoped.get("delivery_modes", []), delivery["value"]]))
+            scoped.update(delivery_modes=modes, delivery_mode=modes[0] if len(modes) == 1 else "MIXED")
+        _assert(context, context["id"], sid, "activity", "Ensino remoto" if delivery["value"] == "REMOTE" else "Atividade presencial",
+                delivery["source_text"], delivery_mode=delivery["value"],
+                source_start=delivery["source_start"], source_end=delivery["source_end"])
     for person in people:
-        _assert(context, person["id"], "", "participation", person.get("papel_id", ""), narrative)
+        if not any(a["subject_id"] == person["id"] and a["kind"] == "participation" and a["state"] in ACTIVE_STATES for a in context["assertions"]):
+            _assert(context, person["id"], "", "participation", person.get("papel_id", ""), narrative)
         if person.get("reported_condition") and not any(a["subject_id"] == person["id"] and a["kind"] == "reported_condition" for a in context["assertions"]):
             _assert(context, person["id"], "", "reported_condition", person["reported_condition"]["text"], narrative)
     reverse_fields = {value: key for key, value in FIELDS.items()}
@@ -778,7 +882,9 @@ def questions(context, people, legacy):
         add("active_situation_id", "Qual parte você quer analisar primeiro?",
             "A prioridade organiza a análise; as outras atividades continuam registradas.", -30, type="single",
             options=[{"id": s["id"], "label": s["label"]} for s in priority_options])
-    if situations and not context.get("recursos_digitais") and not any(s.get("resource_ids") for s in situations):
+    remote_instruction = any(s.get("kind") == "instruction" and s.get("delivery_mode") in {"REMOTE", "MIXED"}
+                             for s in ([active] if active else situations[:1]))
+    if situations and not remote_instruction and not context.get("recursos_digitais") and not any(s.get("resource_ids") for s in situations):
         if not any(a["kind"] == "digital_use" and a["state"] in ACTIVE_STATES for a in context.get("assertions", [])):
             add("digital_use", "Há algum material ou recurso digital nessa atividade?",
                 "Distingue uso atual, possibilidade a considerar e uma restrição ao uso de recursos digitais.", -15,
@@ -807,12 +913,24 @@ def questions(context, people, legacy):
             derived = any(r.get("participant_id") == person["id"] and r.get("status") != "CONFLITO_A_CONFIRMAR"
                           for r in context.get("access_requirements", []))
             if not known and not derived:
-                add("functional_observation", f"Em {situation['label'].lower()}, o que essas pessoas precisam conseguir fazer e ainda encontram dificuldade?",
+                count = person.get("quantidade")
+                recipient = "esse estudante" if count == 1 else (f"esses {count} estudantes" if count else "os estudantes mencionados")
+                setting = "nas aulas remotas" if situation.get("delivery_mode") == "REMOTE" else "durante a explicação e as atividades"
+                question = (f"Como {recipient} acompanham e respondem {setting}? Em que momento precisam de apoio?"
+                            if situation["kind"] == "instruction" else
+                            f"Em {situation['label'].lower()}, o que essas pessoas precisam conseguir fazer e ainda encontram dificuldade?")
+                if situation["kind"] == "instruction" and count == 1:
+                    question = question.replace("acompanham e respondem", "acompanha e responde").replace("precisam de apoio", "precisa de apoio")
+                add("functional_observation", question,
                     "A condição relatada não informa, sozinha, que apoio muda a participação nessa atividade.", -5,
                     situation=situation, participant=person, type="text")
     answers = {a["question_id"] for a in context.get("question_answers", []) if a.get("state") in {"ANSWERED", "UNKNOWN"}}
     for question in legacy:
         q = copy.deepcopy(question)
+        if q["field"] == "barreira_ou_necessidade" and any(row["field"] in {"functional_observation", "observation_scope"} for row in rows):
+            # The scoped question already asks for the functional difficulty;
+            # do not ask the same thing again without the participant/context.
+            continue
         if q["field"] == "tarefas" and context.get("tarefas"):
             # Lack of a canned pattern does not change the narrated activity.
             continue
@@ -940,6 +1058,16 @@ def _project(context, people, assertion, remove=False):
         person["quantidade"] = None if remove else value
     if person and kind == "participation":
         person["papel_id"] = "" if remove else value
+    if situation and kind == "activity" and assertion.get("delivery_mode"):
+        modes = list(dict.fromkeys(a["delivery_mode"] for a in context["assertions"]
+                     if a.get("kind") == "activity" and a.get("delivery_mode")
+                     and a.get("situation_id") == situation["id"] and a["state"] in ACTIVE_STATES
+                     and not (remove and a["id"] == assertion["id"])))
+        if modes:
+            situation.update(delivery_modes=modes, delivery_mode=modes[0] if len(modes) == 1 else "MIXED")
+        else:
+            situation.pop("delivery_mode", None)
+            situation.pop("delivery_modes", None)
     if kind == "activity" and assertion.get("activity_phase") == "PREPARATION":
         refresh_preparation_participation(context, people)
     if kind == "objective" and assertion["subject_id"] == context["id"]:

@@ -503,12 +503,13 @@ function renderDecision(result) {
     $('#practical-title').textContent=output.title;
     $('#practical-headline').textContent='';
     $('#shared-explanation').innerHTML=output.html;
-    $('#orientation').textContent='A orientação é composta a partir das operações e dos fundamentos conferidos para este caso.';
+    const empty=['NEEDS_CLARIFICATION','CONTEXT_UNKNOWN','COVERAGE_LIMIT'].includes(result.intake_status);
+    $('#orientation').textContent=empty?'A análise não produziu uma orientação. Confira os motivos e limites registrados.':'A orientação é composta a partir das operações e dos fundamentos conferidos para este caso.';
     $('#rationale').innerHTML=output.detailHTML;
     $('#criteria').innerHTML=output.foundationHTML;
     for(const id of ['knowledge','rejected','technical-summary']) $('#'+id).textContent='';
     $('#missing-box').hidden=true;
-    $('#limit').textContent='Os apoios parciais e as condições estão identificados junto às ações. Não há garantia de resultado educacional.';
+    $('#limit').textContent=empty?'A ausência de orientação nesta consulta não demonstra que não existam apoios possíveis.':'Os apoios parciais e as condições estão identificados junto às ações. Não há garantia de resultado educacional.';
     $('#orientation-details').open=false;
     $('#decision-title').focus();
     return;

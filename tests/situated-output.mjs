@@ -140,4 +140,47 @@ for(const href of hrefs)assert(phases.foundationHTML.includes('id="'+href+'"'),'
 const frozen=structuredClone(phaseResponse);Object.freeze(frozen);
 assert.doesNotThrow(()=>situatedOutput(frozen));
 assert.deepEqual(phaseResponse,structuredClone(phaseResponse));
+// Empty results must distinguish clarification from executable coverage limits.
+// The renderer displays only questions supplied by the engine, never invents advice.
+const clarificationResponse={proposal_status:'NONE',intake_status:'NEEDS_CLARIFICATION',choices:[],pending_candidates:[],partial_segments:[],
+  next_questions:[{id:'q1',question:'Como as crianças acompanham a explicação nesta aula remota?'},
+    {id:'q2',question:'Que apoio os familiares conseguem oferecer?'},{id:'q3',label:'Que recurso pode ser utilizado em casa?'},
+    {id:'q4',question:'Uma quarta pergunta não pertence a esta rodada.'}],
+  gaps:[{code:'NO_OPERATION_FOR_REQUIRED_FUNCTION',participant_label:'Turma',situation_label:'Aula remota'}]};
+const beforeClarification=structuredClone(clarificationResponse),clarification=situatedOutput(clarificationResponse);
+assert.equal(clarification.title,'Antes de gerar a orientação');
+assert.equal(clarification.state,'Há detalhes do caso a esclarecer');
+assert.match(clarification.html,/Como as crianças acompanham/);
+assert.match(clarification.html,/Que apoio os familiares/);
+assert.match(clarification.html,/Que recurso pode/);
+assert.match(clarification.html,/não garante que a base/);
+assert.match(clarification.html,/data-origin-path="next_questions\[0\]"/);
+assert.match(clarification.html,/data-edit-case>Revisar informações/);
+assert.doesNotMatch(clarification.html,/quarta pergunta|orientation-step|Passo 1|NO_OPERATION/);
+assert.match(clarification.foundationHTML,/não há uma operação utilizável/,'Existing base gaps remain available and are not blamed on the user');
+assert.deepEqual(clarification.actionProjection,[]);
+assert.deepEqual(clarificationResponse,beforeClarification);
+const readOnlyClarification=situatedOutput(clarificationResponse,{reviewEnabled:false});
+assert.doesNotMatch(readOnlyClarification.html,/data-edit-case/);
+assert.match(readOnlyClarification.html,/Como as crianças acompanham/);
+const coverageLimit=situatedOutput({...clarificationResponse,intake_status:'COVERAGE_LIMIT',next_questions:[]});
+assert.equal(coverageLimit.state,'Limite da base para este caso');
+assert.match(coverageLimit.html,/não uma conclusão de que não existam apoios possíveis/);
+assert.doesNotMatch(coverageLimit.html,/Complete|Como as crianças acompanham|Passo 1/);
+assert.match(coverageLimit.foundationHTML,/Turma — Aula remota/);
+const unresolved=situatedOutput({...clarificationResponse,intake_status:'CONTEXT_UNKNOWN',next_questions:[],
+  unresolved_answers:clarificationResponse.next_questions});
+assert.equal(unresolved.state,'Há informações ainda desconhecidas');
+assert.match(unresolved.html,/não foram tratados como informações confirmadas/);
+assert.match(unresolved.html,/Não é preciso repetir as respostas agora/);
+assert.match(unresolved.html,/data-origin-path="unresolved_answers\[0\]"/);
+assert.match(unresolved.html,/Como as crianças acompanham/);
+assert.doesNotMatch(unresolved.html,/Limite da base|quarta pergunta|orientation-step/);
+assert.match(unresolved.foundationHTML,/não há uma operação utilizável/);
+const escapedQuestions=situatedOutput({...clarificationResponse,next_questions:[{question:'<img src=x onerror=x>'},{question:'<img src=x onerror=x>'}]});
+assert.doesNotMatch(escapedQuestions.html,/<img/);
+assert.equal((escapedQuestions.html.match(/&lt;img/g)||[]).length,1);
+const nonEmptyContract=situatedOutput({...phaseResponse,intake_status:'NEEDS_CLARIFICATION',next_questions:clarificationResponse.next_questions});
+assert.equal(nonEmptyContract.html,phases.html,'Contextual questions must not replace useful conditional actions');
+assert.equal(nonEmptyContract.foundationHTML,phases.foundationHTML);
 console.log('PASS situated presentation: two readings, open practical steps, exact origins, roles, conditionality, deduplicated premises, preserved alternatives and immutable decisions.');

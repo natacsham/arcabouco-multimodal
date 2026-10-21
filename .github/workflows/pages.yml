@@ -39,6 +39,8 @@ jobs:
       - run: npm install --no-save --package-lock=false playwright
       - run: npx playwright install --with-deps chromium
       - run: python -B -m unittest discover -s tests -p 'test_articulation_*.py'
+      - run: python -B -m unittest discover -s tests -p 'test_remote_*.py'
+      - run: node tests/remote-browser.mjs
       - run: node tests/articulation-browser.mjs
         env:
           AMADO_BROWSER_EVIDENCE: evidence/articulation-browser.json

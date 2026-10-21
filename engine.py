@@ -30,7 +30,7 @@ DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
 VERSION = "1.5.0-rc2"
-UI_VERSION = "AMADO-web-1.5.0-rc2-articulation"
+UI_VERSION = "AMADO-web-1.5.0-rc2-remote-intake1"
 REQUESTER_RELATIONS = {
     "self": "Sou eu quem realizará a atividade",
     "support": "Apoio quem realizará a atividade",
@@ -662,7 +662,7 @@ class DecisionEngine:
                 "TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL",
             ),
             (
-                "\\b(ensinar|explicar|apresentar|passar).{0,45}\\b(assunto|conteudo|tema|material)\\b",
+                "\\b(ensinar|explicar|apresentar|passar|ministrar).{0,45}\\b(assunto|conteudo|tema|material|aula|aulas)\\b|\\bconteudo a ser ministrado\\b",
                 "tarefas",
                 "TAR-COMUNICAR-CONTEUDO-1545B38",
             ),
@@ -1028,8 +1028,8 @@ class DecisionEngine:
         # Identify who speaks only from an explicit self-description. The
         # profession is not a substitute for who uses or prepares the resource.
         self_role_patterns = {
-            "PAPEL-MEDIADOR": r"\bsou (?:mediador[ao]?|facilitador[ao]?)\b",
-            "PAPEL-PROFESSORA": r"\bsou (?:professor[ao]?|docente)\b",
+            "PAPEL-MEDIADOR": r"\bsou (?:(?:um|uma) )?(?:mediador[ao]?|facilitador[ao]?)\b",
+            "PAPEL-PROFESSORA": r"\bsou (?:(?:um|uma) )?(?:professor[ao]?|docente)\b",
         }
         for role_id, pattern in self_role_patterns.items():
             if re.search(pattern, normalized):
@@ -1520,7 +1520,8 @@ class DecisionEngine:
                 questions[-1].update(type="single", concept_ids=[identifier for identifier, _ in task_choices],
                                      options=[{"id": identifier, "label": label} for identifier, label in task_choices])
             return questions
-        if not self._task_components(context):
+        instructional = next((s for s in context.get("situations", []) if s.get("kind") == "instruction"), None)
+        if not self._task_components(context) and not instructional:
             options = self._operational_task_options(context)
             if options:
                 add("tarefas", "No desafio que você descreveu, o que precisa ficar acessível?",
@@ -1537,6 +1538,11 @@ class DecisionEngine:
             add("barreira_ou_necessidade", f"Que dificuldade de acesso ou uso aparece ao lidar com {activity_target}?",
                 "A dificuldade seleciona os apoios pertinentes; não é uma avaliação da pessoa.", required=True, priority=10)
         if not routes:
+            if instructional and not context.get("recursos_digitais"):
+                add("recursos_digitais", "Na explicação para a turma, que material digital você pretende usar ou preparar?",
+                    "Isso esclarece o formato pretendido; não confirma que equipamentos, conexão ou material já estejam disponíveis.",
+                    options=[identifier for identifier in ("RED-APRESENTACAO", "RED-AUDIO", "RED-VIDEO", "RED-PAGINA-WEB", "RED-MENSAGENS") if identifier in self.concepts],
+                    priority=15)
             return questions
         # A relevant physical/online environment is clarified before equipment,
         # not asked again merely because a pattern supplies more location IDs.
@@ -3338,6 +3344,22 @@ class DecisionEngine:
         result["result_contract"] = "AMADO_SITUATED_1"
         result["base_version"] = VERSION
         result["case_storage"] = False
+        # Follow-up is the actual intake state, not a new justification or a
+        # promise that more user input can repair absent operational knowledge.
+        has_support = any(result.get(key) for key in ("choices", "pending_candidates", "partial_segments"))
+        result["next_questions"] = copy.deepcopy(self.missing_questions()[:3]) if not has_support else []
+        manifest = context.get("question_manifest", {})
+        result["unresolved_answers"] = [
+            copy.deepcopy(manifest[answer["question_id"]])
+            for answer in context.get("question_answers", [])
+            if answer.get("state") == "UNKNOWN" and answer.get("question_id") in manifest
+        ] if not has_support else []
+        result["intake_status"] = (
+            "UNCONFIRMED" if not context["confirmed"] else
+            "SUPPORT_AVAILABLE" if has_support else
+            "NEEDS_CLARIFICATION" if result["next_questions"] else
+            "CONTEXT_UNKNOWN" if result["unresolved_answers"] else "COVERAGE_LIMIT"
+        )
         return result
 
     def generate(self, progress=None):

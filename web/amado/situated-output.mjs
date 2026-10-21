@@ -216,6 +216,30 @@ function foundation(rendered,executionChecks,response,coverage) {
     '<h3>Possibilidades excluídas</h3>'+list(unique(response.exclusions))+'<h3>Verificações executadas</h3>'+checksHTML(executionChecks)+'</details>';
 }
 function checksHTML(checks){return list(unique(items(checks)).map(check=>(check.explanation||check.message||check.predicate||check.kind||check.id)+' — '+(states[check.state||check.outcome]||check.state||check.outcome||'Não verificada')));}
+function emptyRecovery(response,reviewEnabled) {
+  if(!['NEEDS_CLARIFICATION','CONTEXT_UNKNOWN','COVERAGE_LIMIT'].includes(response.intake_status))return null;
+  const unknown=response.intake_status==='CONTEXT_UNKNOWN';
+  const field=unknown?'unresolved_answers':'next_questions';
+  const questions=[],seen=new Set();
+  items(response[field]).forEach((row,index)=>{
+    const question=typeof row==='string'?row:row?.question||row?.label;
+    if(!question||seen.has(question)||questions.length===3)return;
+    seen.add(question);questions.push({question,index});
+  });
+  const clarification=response.intake_status==='NEEDS_CLARIFICATION'||unknown;
+  const state=unknown?'Há informações ainda desconhecidas':clarification?'Há detalhes do caso a esclarecer':'Limite da base para este caso';
+  const title=clarification?'Antes de gerar a orientação':'Ainda não há orientação para este caso';
+  const html='<section class="orientation-recovery"><h3>'+esc(unknown?'O que continua em aberto':clarification?'O que precisamos esclarecer':'O que aconteceu')+'</h3>'+
+    para(unknown?'Você indicou que ainda não sabe estes detalhes. Eles continuam em aberto; não foram tratados como informações confirmadas.':
+      clarification?'Ainda não foi possível compor uma orientação. Estes detalhes podem direcionar a análise:':
+      'O AMADO não encontrou uma ação fundamentada utilizável nas condições registradas. Isso é um limite desta consulta, não uma conclusão de que não existam apoios possíveis.')+
+    (clarification&&questions.length?'<ul>'+questions.map(row=>'<li'+originAttr(field+'['+row.index+']')+'>'+esc(row.question)+'</li>').join('')+'</ul>':'')+
+    para(unknown?'Não é preciso repetir as respostas agora. Se obtiver essas informações, use “Revisar informações”. Isso permite uma nova análise, mas não garante uma orientação aplicável.':
+      clarification?'Completar essas informações permite uma nova análise, mas não garante que a base tenha uma orientação aplicável.':
+      'Se o entendimento do relato estiver incorreto, revise as informações. Os motivos e limites identificados estão em “Como chegamos a esta orientação”.')+
+    (reviewEnabled?'<button type="button" class="secondary" data-edit-case>Revisar informações</button>':'')+'</section>';
+  return {title,state,html};
+}
 /** No selected operation, representation, relationship or epistemic state is changed. */
 export function situatedOutput(response,{reviewEnabled=true}={}) {
   const executionChecks=Array.isArray(response.execution_evidence)?response.execution_evidence:items(response.execution_evidence?.checks);
@@ -231,8 +255,10 @@ export function situatedOutput(response,{reviewEnabled=true}={}) {
   const gaps=unique(items(response.gaps).map(scoped)),coverage=items(response.coverage||response.function_coverage).map(row=>typeof row==='object'?
     [row.participant_label,row.situation_label,text(row.function),{CAPABILITY_AVAILABLE:'há operação com condições conferidas',CONDITIONAL_CAPABILITY:'depende de condições a confirmar',NO_AVAILABLE_CAPABILITY:'ainda sem operação utilizável'}[row.state]||text(row)].filter(Boolean).join(' — '):row);
   const projections=[];
-  const html=(rendered.length?rendered.map(({choice,kind,path},index)=>practicalChoice(choice,kind,index,path,projections,reviewEnabled)).join(''):
+  const recovery=rendered.length?null:emptyRecovery(response,reviewEnabled);
+  const html=recovery?recovery.html:(rendered.length?rendered.map(({choice,kind,path},index)=>practicalChoice(choice,kind,index,path,projections,reviewEnabled)).join(''):
     '<p>Não foi encontrada uma ação fundamentada para as condições confirmadas. Confira abaixo se falta uma informação do caso ou um apoio representado na base.</p>')+
     para(response.coverage_explanation)+(gaps.length?'<aside class="orientation-gaps"><h3>O que ficou sem cobertura</h3>'+list(gaps)+'</aside>':'');
-  return {title:'O que fazer',state,html,detailHTML:'',foundationHTML:foundation(rendered,executionChecks,response,coverage),actionProjection:projections};
+  const recoveryDetails=recovery?'<section class="foundation-coverage"><h3>Motivos e limites desta consulta</h3>'+para(response.coverage_explanation)+list(gaps)+'</section>':'';
+  return {title:recovery?.title||'O que fazer',state:recovery?.state||state,html,detailHTML:'',foundationHTML:recoveryDetails+foundation(rendered,executionChecks,response,coverage),actionProjection:projections};
 }
