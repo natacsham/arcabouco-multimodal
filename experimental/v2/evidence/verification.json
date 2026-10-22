@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0-alpha4",
-  "checked_at_utc": "2026-10-21T12:01:35.706696+00:00",
+  "version": "2.0.0-alpha5",
+  "checked_at_utc": "2026-10-22T00:00:02.094697+00:00",
   "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
   "shacl": {
     "base": {
@@ -531,7 +531,7 @@
     }
   },
   "experimental_design": {
-    "composer_sha256": "8a4d1dec8af41cd36a59614a5370c799d876424c74856c004cc8c34ee956685a",
+    "composer_sha256": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
     "added": "Conhecimento KAudioReview, sua articulação, contribuições localizadas e aplicação exata à capacidade já declarada.",
     "unchanged": [
       "motor",
@@ -627,10 +627,10 @@
     "skipped": 0
   },
   "preserved_files": {
-    "data/knowledge-base.json": "4c4d1ecd736c1eeb566e945deb729168fbad42ec4330ed3d6e40f84d858bca44",
-    "engine.py": "b71640c7e1481a9a0adcd6d35914395e47df2f052e9ff839bdea9f0857d36d21",
-    "ontology/mado-combined.ttl": "e1181f411c0a1695dd0a495e6886b3abb3cfbaa6331e56281128af32e72294b3",
-    "ontology/main.ttl": "bb5fe9be2f9be4f0def1ac96e18401c9c0320532b055f2b1fc49fe2da031a2d5",
+    "data/knowledge-base.json": "68f6996e5ba8e8d7fdabb597599a2aec6089670ac69f20b2605fab90403ec2b6",
+    "engine.py": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
+    "ontology/mado-combined.ttl": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
+    "ontology/main.ttl": "ea5aa859532fb2fdc71f8336ed1e8f50092c4c6eca194cc9f48bedcf45ba2c8b",
     "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
     "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
     "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
@@ -649,7 +649,7 @@
     "matches_current_graph": true,
     "profile_passed": true,
     "consistency_passed": true,
-    "checked_at_utc": "2026-10-21T11:51:24.821247+00:00"
+    "checked_at_utc": "2026-10-21T23:43:42.462838+00:00"
   },
   "passed": true
 }

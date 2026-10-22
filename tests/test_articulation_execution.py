@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from engine import DecisionEngine
-from experimental.v2.composer import V2
+from experimental.v2.composer import V2, _SituatedRun
 from experimental.v2.trajectory import ResearchComposer
 from rdflib import RDF
 
@@ -175,11 +175,66 @@ class ArticulationExecutionTests(unittest.TestCase):
         deaf = person_with_condition(context, "surda")
         self.assertIn(DESCRIPTION, offered_ids(result, blind))
         self.assertIn(CAPTIONS, offered_ids(result, deaf))
+        self.assertNotIn(CAPTIONS, offered_ids(result, blind),
+                         "A visual access requirement does not establish a need to replace the video's sound.")
+        self.assertNotIn(DESCRIPTION, offered_ids(result, deaf),
+                         "A sound access requirement does not establish a need to replace the video's visuals.")
         for plan in plans(result):
             if plan.get("participant_id") == blind:
                 for step in plan["steps"]:
                     if step["id"] == DESCRIPTION:
                         self.assertNotIn("MOD-TEXTO", step["selected_representation_ids"])
+
+    def test_visual_requirement_foundation_removal_does_not_authorize_sound_replacement(self):
+        context, _ = self.runs["recorded_content_access"]
+        composer = ResearchComposer(legacy_projection=False)
+        matrix = next(row for row in composer.base["functional_matrix"] if row["id"] == "MF-01")
+        withdrawn = set(matrix["inference_contract"]["claim_ids"])
+        self.assertEqual(withdrawn, {"CLM-K42-TD-ORI-0001", "CLM-K10-SCOPED-1"})
+        for knowledge in composer.base["knowledge"]:
+            for claim in knowledge.get("operation_claims", []):
+                if claim["id"] in withdrawn:
+                    claim["status"] = "PENDING"
+
+        run = _SituatedRun(composer, copy.deepcopy(context))
+        units = run.normalize()
+        for unit in units:
+            run.derive_functions(unit)
+        blind, deaf = person_with_condition(context, "cega"), person_with_condition(context, "surda")
+        by_person = {unit["participant_id"]: unit for unit in units}
+        self.assertEqual(by_person[blind]["required_information_components"], [])
+        self.assertEqual(by_person[deaf]["required_information_components"], ["SONORO"])
+
+        changed = composer.compose_context(copy.deepcopy(context))
+        self.assertNotIn(DESCRIPTION, offered_ids(changed, blind))
+        self.assertNotIn(CAPTIONS, offered_ids(changed, blind))
+        self.assertIn(CAPTIONS, offered_ids(changed, deaf))
+        self.assertNotIn(DESCRIPTION, offered_ids(changed, deaf))
+
+    def test_generic_equivalent_access_needs_do_not_identify_an_information_channel(self):
+        # Synthetic structured mechanism test, not an addition to the public
+        # narratives: known output abilities do not identify the affected input.
+        context = {
+            "id": "synthetic-unspecified-video-access", "confirmed": True,
+            "participations": [{"id": "recipient", "papel_id": "PAPEL-PESSOA-APOIADA",
+                                "facts": {"CanReadText": True, "AudioUsable": True}}],
+            "tarefas": ["TAR-ACESSAR-COMPREENDER-CONTEUDO-DIGITAL"],
+            "necessidades": ["NEC-ACESSO-EQUIVALENTE", "NEC-ALTERNATIVA-FUNCIONAL-EQUIVALENTE",
+                             "NEC-ALTERNATIVAS-DE-ACESSO-AO-RECURSO"],
+            "modalidades_disponiveis": ["MOD-VIDEO", "MOD-TEXTO", "MOD-AUDIO"],
+            "recursos_digitais": ["RED-VIDEO"],
+            "recursos_disponiveis": ["REC-EDITOR-VIDEO", "REC-REPRODUTOR-VIDEO", "REC-SAIDA-AUDIO"],
+        }
+        composer = ResearchComposer(legacy_projection=False)
+        run = _SituatedRun(composer, context)
+        units = run.normalize()
+        self.assertEqual(len(units), 1)
+        run.derive_functions(units[0])
+        self.assertTrue(units[0]["requirements"], "Generic access needs remain represented.")
+        self.assertEqual(units[0]["required_information_components"], [])
+        result = composer.compose_context(context)
+        self.assertNotIn(CAPTIONS, offered_ids(result))
+        self.assertNotIn(DESCRIPTION, offered_ids(result))
 
     def test_audio_loss_removes_blind_audio_route_not_other_participants_written_route(self):
         original_context, original = self.runs["recorded_content_access"]

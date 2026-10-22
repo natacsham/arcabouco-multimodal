@@ -29,8 +29,8 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.5.0-rc2"
-UI_VERSION = "AMADO-web-1.5.0-rc2-remote-intake1"
+VERSION = "1.5.0-rc3"
+UI_VERSION = "AMADO-web-1.5.0-rc3-structural1"
 REQUESTER_RELATIONS = {
     "self": "Sou eu quem realizará a atividade",
     "support": "Apoio quem realizará a atividade",

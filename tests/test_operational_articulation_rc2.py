@@ -159,9 +159,39 @@ class OperationalArticulationRC2Tests(unittest.TestCase):
 
     def test_text_organization_does_not_claim_multimodal_relation(self):
         op=next(r for r in iter_operation_contracts(self.data) if r['id']=='OP-PAD-ORGANIZAR-CONTEUDO-PERSISTENTE')
-        self.assertEqual([],op['relations'])
+        self.assertFalse(any(r.get('scope') == 'WITHIN_OPERATION' for r in op['relations']))
+        self.assertTrue(all(r['kind'] == 'SEQUENTIAL' for r in op['relations']))
         self.assertIn('FUN-MANTER-INFORMACAO-RECUPERAVEL',op['function_ids'])
         self.assertTrue(op['analytical_application_ids'])
+
+    def test_retrieval_requirement_has_its_own_analytical_authorization(self):
+        matrix=next(r for r in self.data['functional_matrix'] if r['id']=='MF-04')
+        group=matrix['inference_contract']['trigger_groups'][1]
+        self.assertEqual([],group['claim_ids'])
+        self.assertEqual(['APP-ART-TRF-04-ORGANIZAR-RETOMAR'],group['analytical_application_ids'])
+        data=copy.deepcopy(self.data)
+        app=next(a for r in data['articulations'] for a in r.get('operational_applications',[])
+                 if a['id']=='APP-ART-TRF-04-ORGANIZAR-RETOMAR')
+        app['authorized_requirement_ids']=[]
+        with self.assertRaisesRegex(ValueError,'does not authorize requirement'):
+            validate_operational_contracts(data)
+
+    def test_relation_only_application_does_not_authorize_either_operation(self):
+        app=next(a for r in self.data['articulations'] for a in r.get('operational_applications',[])
+                 if a['id']=='APP-ART-TRF-04-DESCREVER-ORGANIZAR')
+        self.assertEqual([],app['authorized_operation_ids'])
+        self.assertEqual(['REL-ART-TRF-04-DESCREVER-ORGANIZAR'],app['authorized_relation_ids'])
+        self.assertFalse(app['empirical_effect_authorized'])
+
+    def test_dependency_cannot_join_unrelated_information_or_participants(self):
+        for field in ('meaning_unit','binding'):
+            data=copy.deepcopy(self.data)
+            op=next(r['operation_contract'] for r in data['decision_components']
+                    if r['id']=='PAD-ORGANIZAR-CONTEUDO-PERSISTENTE')
+            relation=op['relations'][0]
+            relation[field]='UNRELATED_INFORMATION' if field=='meaning_unit' else {'same_subject':False}
+            with self.assertRaisesRegex(ValueError,'Analytical dependency'):
+                validate_operational_contracts(data)
 
     def test_historical_learning_context_no_longer_runtime_requirement(self):
         b=json.loads((ROOT/'experimental/v2/trajectory-bindings.json').read_text(encoding='utf-8'))
@@ -199,6 +229,24 @@ class OperationalArticulationRC2Tests(unittest.TestCase):
         self.assertIn((app,M.premissaOperacional,M['CLM-K38-MMI-NAV']),graph)
         self.assertIn((app,M.autorizaOperacao,M['OP-PAD-ORGANIZAR-CONTEUDO-PERSISTENTE']),graph)
         self.assertNotIn((app,M.premissaOperacional,M['CLM-K38-LEGACY']),graph)
+        self.assertIn((app,M.autorizaDerivacaoDeRequisito,M['MF-04']),graph)
+        self.assertIn((M['MF-04'],M.fundamentadaPorAplicacaoAnalitica,app),graph)
+        relation_app=M['APP-ART-TRF-04-DESCREVER-ORGANIZAR']
+        self.assertIn((relation_app,M.autorizaRelacaoOperacional,M['REL-ART-TRF-04-DESCREVER-ORGANIZAR']),graph)
+        self.assertFalse(list(graph.objects(relation_app,M.autorizaOperacao)))
+
+    def test_information_component_shape_applies_only_to_present_requirements(self):
+        from rdflib import RDF, Literal
+        from rdflib.namespace import SKOS
+        from pyshacl import validate
+        shapes=Graph().parse(ROOT/'shapes/main.shacl.ttl',format='turtle')
+        graph=Graph()
+        self.assertTrue(validate(graph,shacl_graph=shapes)[0])
+        graph.add((M['MF-01'],RDF.type,SKOS.Concept))
+        self.assertFalse(validate(graph,shacl_graph=shapes)[0])
+        graph.add((M['MF-01'],M.contratoOperacionalSerializado,
+                   Literal(json.dumps({'required_information_components':['VISUAL']}))))
+        self.assertTrue(validate(graph,shacl_graph=shapes)[0])
 
 
 if __name__=='__main__':

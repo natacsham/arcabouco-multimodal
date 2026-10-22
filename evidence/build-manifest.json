@@ -1,13 +1,13 @@
 {
-  "version": "1.5.0-rc2",
+  "version": "1.5.0-rc3",
   "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
   "instrument": "AMADO",
-  "executor_version": "AMADO-web-1.5.0-rc2-remote-intake1",
+  "executor_version": "AMADO-web-1.5.0-rc3-structural1",
   "public_projection": true,
   "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-  "core_sha256": "e4978fbb843dd19200c8107787c13ac50abd081cda190f90cc3ce8fec2462fc7",
+  "core_sha256": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
   "bridge_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
-  "base_zip_sha256": "67411f0821770059d4d1994cd12eed4a98a16dcb0da3e00553b179e85ff7b0b1",
+  "base_zip_sha256": "c88b26194a9860a492f94e770747b255fb7faa4d622a190958dea1eae96ea405",
   "pyodide_version": "314.0.7",
   "runtime": {
     "pyodide-lock.json": {
@@ -45,13 +45,13 @@
   "case_history": false,
   "llm": false,
   "composition": {
-    "version": "2.0.0-alpha4",
+    "version": "2.0.0-alpha5",
     "implementation": "ResearchComposer",
     "case_storage": false,
     "files": {
-      "experimental/v2/composer.py": "8a4d1dec8af41cd36a59614a5370c799d876424c74856c004cc8c34ee956685a",
+      "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
       "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-      "experimental/v2/schema.ttl": "ad4574d124b6e2f2747092fdd0dff171568aed90a3dfc1c29ca4c750a862e0ba",
+      "experimental/v2/schema.ttl": "cdae5b02adc021797a2729fbd307abf9eabcfc5dcfdaf22fc719eaffd96056c2",
       "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
       "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
       "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
@@ -75,8 +75,8 @@
     "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
     "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
     "situated-output.mjs": "34d37b71334294f21e1c762246c4757b7b63c7384c177a9a9b8a05451e607710",
-    "completo.html": "344efaf3c408f2ba3ff61f833050499336e5b3cecf15c462c581dc1257822257",
-    "completo-guiado.html": "1599303f01dafadb65e715707cd1c027af7ce46641caf1a48125410a3a8325da"
+    "completo.html": "bcac4fb42bef462814fe30a520821d87c02e9f4f9119efdf06bde5bcc30460ff",
+    "completo-guiado.html": "50468ea6262439aadddc0c732a230af50feb45d5b1aea5b63d8e0590c0d912a5"
   },
   "site_assets_sha256": {
     "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
@@ -90,14 +90,14 @@
     "explanation-pilot.js": "9e8ae2760bac3388b3434a297b1cc0ac2b35c47ae43aaed6170492ea78716c91",
     "assets/explanation-pilot.json": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
     "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
-    "assets/source-catalog.json": "55308c84293b7cd8afe7ce68a148f71f3a8dbe2b5b9e967b721b5b6af4391af7"
+    "assets/source-catalog.json": "ed95231d1c7088bdaac6bf9a5a80dd1c3a38e2831a11d9fcef1c31f89eb32c1a"
   },
   "files": {
     "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
     "situated_context.py": "5515929ed9ad5edb8fcaa1222e3df348917093d16c0fa688fe8de619e1c159c4",
-    "data/knowledge-base.json": "4c4d1ecd736c1eeb566e945deb729168fbad42ec4330ed3d6e40f84d858bca44",
+    "data/knowledge-base.json": "68f6996e5ba8e8d7fdabb597599a2aec6089670ac69f20b2605fab90403ec2b6",
     "data/interface-vocabulary.json": "37b0d7b64e81c283103983e0d3e053ed4a83200fe37414092b67b014424fff13",
-    "ontology/mado-combined.ttl": "e1181f411c0a1695dd0a495e6886b3abb3cfbaa6331e56281128af32e72294b3",
+    "ontology/mado-combined.ttl": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
     "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
     "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
     "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -108,9 +108,9 @@
     "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
     "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
     "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9",
-    "experimental/v2/composer.py": "8a4d1dec8af41cd36a59614a5370c799d876424c74856c004cc8c34ee956685a",
+    "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
     "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-    "experimental/v2/schema.ttl": "ad4574d124b6e2f2747092fdd0dff171568aed90a3dfc1c29ca4c750a862e0ba",
+    "experimental/v2/schema.ttl": "cdae5b02adc021797a2729fbd307abf9eabcfc5dcfdaf22fc719eaffd96056c2",
     "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
     "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
     "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",

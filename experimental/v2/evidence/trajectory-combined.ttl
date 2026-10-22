@@ -675,5 +675,5 @@
 <https://w3id.org/mado/experimental/v2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
 <https://w3id.org/mado/experimental/v2> <http://www.w3.org/2000/01/rdf-schema#comment> "Namespace experimental do compositor delimitado, reutilizado pela geração situada da MADO 1.5. Preserva o piloto e suas fontes sem substituir a ontologia principal nem afirmar validação humana. Namespace proposto; não pressupõe registro de resolução pública."@pt .
 <https://w3id.org/mado/experimental/v2> <http://www.w3.org/2000/01/rdf-schema#label> "MADO V2 — piloto de composição fundamentada"@pt .
-<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/mado/experimental/2.0.0-alpha4> .
-<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionInfo> "2.0.0-alpha4" .
+<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionIRI> <https://w3id.org/mado/experimental/2.0.0-alpha5> .
+<https://w3id.org/mado/experimental/v2> <http://www.w3.org/2002/07/owl#versionInfo> "2.0.0-alpha5" .

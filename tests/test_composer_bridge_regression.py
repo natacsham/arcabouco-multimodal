@@ -167,11 +167,18 @@ class FunctionalObservationBridgeTests(unittest.TestCase):
         rows = self.functions(context)
         self.assertIn("FUN-MANTER-INFORMACAO-RECUPERAVEL", {r["id"] for r in rows})
         self.assertNotIn("FUN-ORGANIZAR-CONTEUDO", {r["id"] for r in rows})
+        requirement = next(row for row in rows if row["id"] == "FUN-MANTER-INFORMACAO-RECUPERAVEL")
+        self.assertIn("APP-ART-TRF-04-ORGANIZAR-RETOMAR", requirement["claim_ids"])
         composer = ResearchComposer(legacy_projection=False)
-        knowledge = next(k for k in composer.base["knowledge"] if k["id"] == "K40")
-        for claim in knowledge.get("operation_claims", knowledge.get("claims", [])):
-            if claim.get("id") == "CLM-K40-C-K40-01":
-                claim["status"] = "PENDING"
+        application = next(app for articulation in composer.base["articulations"]
+                           for app in articulation.get("operational_applications", [])
+                           if app["id"] == "APP-ART-TRF-04-ORGANIZAR-RETOMAR")
+        # Retomada is now supported by this delimited analytical application,
+        # not by K40's historical audio/mobility claim. Withdraw a real premise.
+        self.assertIn("CLM-K38-MMI-NAV", {premise["claim_id"] for premise in application["premises"]})
+        knowledge = next(k for k in composer.base["knowledge"] if k["id"] == "K38")
+        claim = next(claim for claim in knowledge["operation_claims"] if claim["id"] == "CLM-K38-MMI-NAV")
+        claim["status"] = "PENDING"
         self.assertNotIn("FUN-MANTER-INFORMACAO-RECUPERAVEL", {r["id"] for r in self.functions(context, composer)})
 
 

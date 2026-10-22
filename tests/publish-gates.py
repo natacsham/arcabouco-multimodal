@@ -355,6 +355,37 @@ class PublicationGateTests(unittest.TestCase):
         self.assertFalse(checks['situated_frozen_inputs'])
         self.assertFalse(checks['distribution_current'])
 
+    def structural_records(self):
+        records=self.situated_records()
+        self.manifest.update(version='1.5.0-rc3', composition={'version':'2.0.0-alpha5'})
+        records['browser']['build']=copy.deepcopy(self.manifest)
+        for name in ('tests/test_structural_composition.py','tests/test_operational_articulation_rc2.py'):
+            self.write(name,'synthetic '+name)
+            digest=gate.sha(name)
+            records['technical']['source_sha256'][name]=digest
+            records['situated']['source_hashes_before'][name]=digest
+            records['situated']['source_hashes_after'][name]=digest
+            records['distribution']['distribution_sha256'][name]=digest
+        return records
+
+    def test_structural_release_requires_both_exact_regression_files(self):
+        records=self.structural_records()
+        self.assertTrue(all(gate.situated_release_checks(self.manifest,**records).values()))
+        for name in ('tests/test_structural_composition.py','tests/test_operational_articulation_rc2.py'):
+            with self.subTest(name=name):
+                changed=copy.deepcopy(records)
+                changed['technical']['source_sha256'].pop(name)
+                self.assertFalse(gate.situated_release_checks(self.manifest,**changed)['technical_inputs_current'])
+                original=(self.root/name).read_bytes()
+                self.write(name,'changed after verification')
+                self.assertFalse(gate.situated_release_checks(self.manifest,**records)['technical_inputs_current'])
+                (self.root/name).write_bytes(original)
+
+    def test_structural_release_cannot_reuse_old_composer_version(self):
+        records=self.structural_records()
+        self.manifest['composition']['version']='2.0.0-alpha4'
+        self.assertFalse(gate.situated_release_checks(self.manifest,**records)['version'])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "base_version": "1.5.0-rc2",
+  "base_version": "1.5.0-rc3",
   "source_collections_sha256": {
     "sources": "7d7872f80d630f02e93e9977175ed01f96cfe424582d0e5f056e6a7cada45854",
     "references": "1fef90b4c4f4242dea8ed9068010885d036e84d31fb3f3763d002473e3c9552f",

@@ -874,7 +874,7 @@ class _SituatedRun:
         self.checks = _Checks()
         self.conditions = []
         self.result = {
-            "schema_version": "2.0.0-alpha4", "composition_kind": "SITUATED_OPERATION_GRAPH",
+            "schema_version": "2.0.0-alpha5", "composition_kind": "SITUATED_OPERATION_GRAPH",
             "status": "INSUFFICIENT", "proposal_status": "NONE", "context_id": self.context.get("id"),
             "choices": [], "alternatives": [], "pending_candidates": [], "partial_segments": [],
             "exclusions": [], "gaps": [], "input_issues": [], "function_coverage": [], "missing_functions": [],
@@ -1190,7 +1190,8 @@ class _SituatedRun:
                 return None, "CLAIM_SOURCE_EXCERPT_MISMATCH"
         return claim, None
 
-    def analytical_groundings(self, identifiers, unit, target, parent_target=None, relation=False, trail=()):
+    def analytical_groundings(self, identifiers, unit, target, parent_target=None, relation=False, trail=(),
+                              requirement=False, as_premise=False):
         """Authorize a delimited analytical application, never a whole legacy K.
 
         This evaluates the curated premises at each run. Merely adding a source,
@@ -1209,9 +1210,13 @@ class _SituatedRun:
                     or app.get("empirical_effect_authorized") is not False
                     or not all(app.get(k) for k in ("premises", "analytical_operation", "result", "limits", "function_ids"))):
                 reason = "ANALYTICAL_APPLICATION_PENDING_OR_INCOMPLETE"
-            allowed = app.get("authorized_relation_ids" if relation else "authorized_operation_ids", [])
-            if not reason and target not in allowed and parent_target not in allowed:
+            allowed = app.get("authorized_requirement_ids" if requirement else
+                              "authorized_relation_ids" if relation else "authorized_operation_ids", [])
+            if not reason and not as_premise and target not in allowed and parent_target not in allowed:
                 reason = "ANALYTICAL_APPLICATION_TARGET_MISMATCH"
+            if not reason and as_premise and not any(app.get(k) for k in (
+                    "authorized_operation_ids", "authorized_relation_ids", "authorized_requirement_ids")):
+                reason = "ANALYTICAL_PREMISE_WITHOUT_DELIMITED_SCOPE"
             for premise in app.get("premises", []) if not reason else []:
                 claim, error = self.claim(premise.get("knowledge_id"), premise.get("claim_id"))
                 if error:
@@ -1267,12 +1272,15 @@ class _SituatedRun:
             dependencies = []
             if not reason and app.get("depends_on_application_ids"):
                 dependencies, failed = self.analytical_groundings(app["depends_on_application_ids"], unit, target,
-                    parent_target, relation, trail + (identifier,))
+                    parent_target, relation, trail + (identifier,), as_premise=True)
                 if failed:
                     reason = "ANALYTICAL_DEPENDENCY_FAILED"
             check = self.check(unit, identifier, "ANALYTICAL_APPLICATION", "FAIL" if reason else "PASS",
                 "premissas conferidas, operação analítica, critério e aplicação delimitada",
-                {"articulation_id": art.get("id"), "target": target, "premises": premise_records, "reason": reason},
+                {"articulation_id": art.get("id"), "target": target, "premises": premise_records, "reason": reason,
+                 "use": "SYNTHESIS_PREMISE_ONLY" if as_premise else "AUTHORIZED_TARGET",
+                 "authorized_targets": {k: app.get(k, []) for k in (
+                     "authorized_operation_ids", "authorized_relation_ids", "authorized_requirement_ids")}},
                 "A síntese é registrada antes da consulta; esta execução verifica seu emprego, não descobre uma conclusão científica.")
             if reason:
                 rejected.append({"id": identifier, "reason": reason, "use": "AUDIT_ONLY", "check_ids": [check["id"]]})
@@ -1283,6 +1291,7 @@ class _SituatedRun:
             criterion = criterion_support[0]["criterion_id"]
             admitted.append({"id": identifier, "analytical_application_id": identifier,
                 "application_kind": "GROUNDED_ANALYTICAL_APPLICATION", "claim_id": identifier,
+                "use": "SYNTHESIS_PREMISE_ONLY" if as_premise else "AUTHORIZED_TARGET",
                 "claim": {"id": identifier, "statement": app["result"], "function_ids": app["function_ids"],
                           "foundation_status": "GROUNDED_ANALYTICAL_APPLICATION"},
                 "knowledge": {"id": art.get("conhecimento_resultante_id", art["id"]), "label": app["result"]},
@@ -1340,6 +1349,7 @@ class _SituatedRun:
 
     def derive_functions(self, unit):
         matched_needs, matched_tasks = set(), set()
+        unit["required_information_components"] = []
         unit["unknown_requirements"] = set(unit["required_explicit"]) - set(self.index["context_elements"])
         for identifier in unit["required_explicit"]:
             if identifier not in self.index["context_elements"]:
@@ -1416,9 +1426,22 @@ class _SituatedRun:
                     else:
                         admitted.append(claim)
                 supported = {function for claim in admitted for function in claim.get("scope", {}).get("function_ids", claim.get("function_ids", []))}
+                analytical, _ = self.analytical_groundings(
+                    group.get("analytical_application_ids", contract.get("analytical_application_ids", [])),
+                    unit, matrix["id"], requirement=True)
+                if contract.get("eligibility") != "DOCUMENTED_OPERATIONAL_CLAIM":
+                    analytical = []
+                supported.update(function for support in analytical for function in support["claim"]["function_ids"])
                 functions = set(group.get("funcao_ids", matrix.get("funcao_ids", []))) or supported
                 if functions & supported:
                     matched_needs.update(observed_needs)
+                # Generic needs (e.g. equivalent access) can overlap across
+                # matrix rows. Only a rechecked situated observation or specific
+                # functional characteristic identifies the affected information.
+                components = (group.get("required_information_components", contract.get("required_information_components", []))
+                              if observation_assertions or observed_traits else [])
+                if functions & supported:
+                    unit["required_information_components"] = sorted(set(unit["required_information_components"]) | set(components))
                 for function in sorted(functions & supported):
                     if function not in self.index["context_elements"]:
                         continue
@@ -1428,6 +1451,7 @@ class _SituatedRun:
                                                 or a.get("kind") == "characteristic" and a.get("value") in observed_traits)]
                     relevant_assertions = list({a["id"]: a for a in relevant_assertions + observation_assertions}.values())
                     row["witnesses"].append({"matrix_id": matrix["id"], "need_ids": sorted(observed_needs),
+                        "required_information_components": list(components),
                         "trigger_group_id": group_id, "observation_bridge": bool(observation_assertions),
                         "matrix_label": matrix.get("rotulo", matrix.get("label", matrix["id"])),
                         "needs": [self.record(x) for x in sorted(observed_needs)],
@@ -1438,6 +1462,10 @@ class _SituatedRun:
                                         "subject_id": a.get("subject_id"), "situation_id": a.get("situation_id")}
                                        for a in relevant_assertions]})
                     row["claim_ids"].extend(claim["id"] for claim in admitted if function in claim.get("scope", {}).get("function_ids", claim.get("function_ids", [])))
+                    row.setdefault("analytical_groundings", []).extend(
+                        support for support in analytical if function in support["claim"]["function_ids"])
+                    row["claim_ids"].extend(support["id"] for support in analytical
+                                            if function in support["claim"]["function_ids"])
         for identifier, requirement in sorted(derived.items()):
             registered_task = requirement["origin"] in {"REGISTERED_TASK_REFINEMENT", "REGISTERED_TASK_FUNCTION_REQUIREMENT"}
             requirement["task_ids"] = (sorted({w["task_id"] for w in requirement["witnesses"] if w.get("task_id")})
@@ -1678,7 +1706,9 @@ class _SituatedRun:
         contract = component.get("operation_contract", {})
         identifier = contract.get("id", component["id"])
         functions = contract.get("function_ids", [])
-        if not set(functions) & set(unit["requirements"]):
+        direct = bool(set(functions) & set(unit["requirements"]))
+        dependency = unit.get("operation_dependencies", {}).get(identifier, [])
+        if not direct and not dependency:
             return None
         roles = contract.get("role_requirements", {})
         subject_roles = roles.get("subject_role_ids", [])
@@ -1688,8 +1718,8 @@ class _SituatedRun:
         start = len(self.checks.history)
         scope = contract.get("transfer_scope", {})
         scoped_tasks = scope.get("task_ids", [])
-        transfer_ok = bool(set(functions) & set(unit["requirements"])) and scope.get("allow_new_task_with_functional_witness") is True
-        task_ok = self.intersects(unit["tarefas"], scoped_tasks) if scoped_tasks else transfer_ok
+        transfer_ok = (direct or bool(dependency)) and scope.get("allow_new_task_with_functional_witness") is True
+        task_ok = bool(scoped_tasks and self.intersects(unit["tarefas"], scoped_tasks)) or transfer_ok
         self.check(unit, identifier, "OPERATION_TASK_SCOPE", "PASS" if task_ok else "FAIL", scoped_tasks, unit["tarefas"],
                    "Transferência usa função previamente requerida e o escopo publicado; não reconhece assunto pelo nome.")
         applicability = contract.get("applicability_witness")
@@ -1781,6 +1811,7 @@ class _SituatedRun:
             condition_id = "condition-" + _json_hash(contract["conditions"])[:16]
             self.condition(unit, identifier, condition_id, "fact", unit["facts"].get(condition_id, unit["facts"].get(identifier + ":conditions")),
                            "A informação essencial e as condições de percepção, ação e mediação foram conferidas com esta pessoa?")
+        absent_input_checks = set()
         if scope.get("requires_existing_representation"):
             input_witness = scope.get("input_context_witness", {})
             aliases = {"modalidades": "modalidades_disponiveis", "representation_ids": "modalidades_disponiveis",
@@ -1795,6 +1826,11 @@ class _SituatedRun:
                 input_value = True
             self.condition(unit, identifier, identifier + ":input_available", "fact", input_value,
                            "A representação de entrada já está disponível ou foi escolhida para esta tarefa?")
+            if input_value is False:
+                absent_input_checks.add(self.checks.history[-1]["id"])
+                self.check(unit, identifier, "INPUT_REQUIRES_PROVISION", "PENDING",
+                           "entrada existente ou saída vinculada de uma operação anterior", False,
+                           "A entrada não existe atualmente. A ação isolada não está pronta; um percurso fundamentado pode prepará-la.")
         typed = (bool(contract.get("input_requirements")) and bool(contract.get("output_spec"))
                  and all(isinstance(item, dict) and item.get("representation_id") and item.get("meaning_unit")
                          for item in contract.get("input_requirements", []) + contract.get("output_spec", [])))
@@ -1803,7 +1839,7 @@ class _SituatedRun:
         self.check(unit, identifier, "SCOPED_ACTION_PRESENT", "PASS" if isinstance(contract.get("action"), str) and contract["action"].strip() else "FAIL",
                    "ação delimitada no contrato curado", contract.get("action"), "O texto histórico do padrão não substitui uma ação autorizada.")
         checks = self.checks.history[start:]
-        state = _worst([row["state"] for row in checks if row["kind"] != "EXACT_CLAIM_GROUNDING"
+        state = _worst([row["state"] for row in checks if row["kind"] != "EXACT_CLAIM_GROUNDING" and row["id"] not in absent_input_checks
                         and row.get("phase", "precondition") == "precondition"])
         witness_checks = [check for f in functions if f in unit["requirements"] for check in unit["requirements"][f]["check_ids"]]
         return {"id": identifier, "component_id": component["id"], "label": component.get("label", identifier),
@@ -1831,6 +1867,10 @@ class _SituatedRun:
                 "limits": contract.get("limits", []), "limitation": component.get("limit", ""),
                 "groundings": supports, "rejected_groundings": rejected,
                 "function_derivation": [copy.deepcopy(unit["requirements"][f]) for f in functions if f in unit["requirements"]],
+                "selection_role": "DIRECT_REQUIREMENT" if direct else "INSTRUMENTAL_PREDECESSOR",
+                "dependency_derivation": copy.deepcopy(dependency),
+                "input_availability_required": bool(scope.get("requires_existing_representation")),
+                "input_provision_check_ids": [row["id"] for row in checks if row["kind"] == "INPUT_REQUIRES_PROVISION"],
                 "input_requirements": contract.get("input_requirements", []), "output_spec": contract.get("output_spec", []),
                 "relation_contracts": contract.get("relations", []),
                 "check_ids": witness_checks + [row["id"] for row in checks if row["kind"] != "EXACT_CLAIM_GROUNDING" or row["state"] == "PASS"],
@@ -1838,6 +1878,102 @@ class _SituatedRun:
                 "participant_label": unit["participant_label"], "situation_label": unit["situation_label"],
                 "task_participation": unit["task_participation"], "executed_task_ids": unit["executed_task_ids"],
                 "epistemic_status": "PROPOSED_NOT_EVALUATED"}
+
+    @staticmethod
+    def relation_endpoints_match(rule, left, right):
+        for field, operation in (("from_operation_ids", left), ("to_operation_ids", right)):
+            if rule.get(field) and not {operation["id"], operation.get("parent_operation_id")} & set(rule[field]):
+                return False
+        return (bool(set(rule.get("from_function_ids", [])) & set(left.get("function_ids", [])))
+                and bool(set(rule.get("to_function_ids", [])) & set(right.get("function_ids", []))))
+
+    @classmethod
+    def dependency_shape(cls, rule, left, right):
+        """Structural discovery only; each eventual edge still needs its foundation.
+
+        Do not turn the functions offered by a predecessor into user requirements.
+        A named function alone is not a licence to join unrelated information.
+        """
+        if (rule.get("scope") not in {"BETWEEN_OPERATIONS", "BOTH"}
+                or rule.get("kind") not in {"SEQUENTIAL", "SEQUENTIAL_REVIEW"}
+                or not cls.relation_endpoints_match(rule, left, right)):
+            return False
+        meaning = rule.get("meaning_unit")
+        before, after = set(rule.get("from_representation_ids", [])), set(rule.get("to_representation_ids", []))
+        return bool(meaning and before and after and before <= {
+            item.get("representation_id") for item in left.get("output_spec", []) if item.get("meaning_unit") == meaning
+        } and after <= {
+            item.get("representation_id") for item in right.get("input_requirements", []) if item.get("meaning_unit") == meaning
+        })
+
+    def discover_predecessors(self, expanded, unit):
+        contracts = {c["operation_contract"]["id"]: c["operation_contract"] for c in expanded
+                     if c.get("active_in_rc4", c.get("active_in_rc3")) and c.get("operation_contract")}
+        relevant = {key for key, c in contracts.items() if set(c.get("function_ids", [])) & set(unit["requirements"])}
+        dependencies = {}
+        changed = True
+        while changed:
+            changed = False
+            for left_id, left in contracts.items():
+                for right_id in sorted(relevant):
+                    if left_id == right_id:
+                        continue
+                    right = contracts[right_id]
+                    for rule in left.get("relations", []) + right.get("relations", []):
+                        if not self.dependency_shape(rule, left, right):
+                            continue
+                        witness = {"relation_id": rule["id"], "supplies_operation_id": right_id,
+                                   "meaning_unit": rule["meaning_unit"],
+                                   "status": "CANDIDATE_DEPENDENCY_REQUIRES_EXECUTION_CHECKS"}
+                        if witness not in dependencies.setdefault(left_id, []):
+                            dependencies[left_id].append(witness)
+                        if left_id not in relevant:
+                            relevant.add(left_id)
+                            changed = True
+        unit["operation_dependencies"] = dependencies
+
+    def bind_prepared_inputs(self, unit, steps, relations):
+        """Bind proposed outputs inside this plan, never mutate contextual facts."""
+        bound = {step["id"]: copy.deepcopy(step) for step in steps}
+        checks = {row["id"]: row for row in self.checks.rows}
+        for original in steps:  # Already ordered by the selected dependency edges.
+            step = bound[original["id"]]
+            missing = [row for row in step.get("phase_conditions", [])
+                       if row["id"] == step["id"] + ":input_available" and row["state"] in {"PENDING", "FAIL"}]
+            if not missing:
+                continue
+            for relation in relations:
+                if (relation["to_capability"] != step["id"] or relation.get("internal_to_operation")
+                        or relation["kind"] not in {"SEQUENTIAL", "SEQUENTIAL_REVIEW"} or relation["state"] == "FAIL"):
+                    continue
+                producer = bound[relation["from_capability"]]
+                produced = {(item["representation_id"], item["meaning_unit"]) for item in producer["output_spec"]}
+                inputs = step["input_requirements"]
+                # ANY_IN_GROUP is an explicitly declared input alternative. In
+                # all other cases every required input must be provided.
+                necessary = [item for item in inputs if item.get("required", True)]
+                alternatives = [item for item in necessary if item.get("operator") == "ANY_IN_GROUP"]
+                all_inputs = [item for item in necessary if item.get("operator") != "ANY_IN_GROUP"]
+                matches = lambda item: (item["representation_id"], item["meaning_unit"]) in produced
+                if not necessary or not all(matches(item) for item in all_inputs) or (alternatives and not any(matches(item) for item in alternatives)):
+                    continue
+                state = _worst([producer["state"], relation["state"]])
+                binding = {"from_operation_id": producer["id"], "relation_id": relation["id"],
+                           "meaning_unit": relation["meaning_unit"], "state": state,
+                           "availability": "PROPOSED_OUTPUT_OF_PREVIOUS_STEP_NOT_EXISTING_RESOURCE"}
+                check = self.check(unit, step["id"], "INPUT_FROM_AUTHORIZED_PREDECESSOR", state,
+                                   step["input_requirements"], binding,
+                                   "A entrada será produzida pela etapa anterior deste percurso; não foi declarada existente no relato.")
+                replaced = {cid for condition in missing for cid in condition["check_ids"]}
+                replaced.update(step.get("input_provision_check_ids", []))
+                step["check_ids"] = [cid for cid in step["check_ids"] if cid not in replaced] + [check["id"]]
+                step["phase_conditions"] = [condition for condition in step["phase_conditions"] if condition not in missing]
+                step["input_bindings"] = [binding]
+                checks[check["id"]] = check
+                step["state"] = _worst([checks[cid]["state"] for cid in step["check_ids"] if cid in checks
+                                         and checks[cid].get("phase", "precondition") == "precondition"])
+                break
+        return tuple(bound[step["id"]] for step in steps)
 
     def relation(self, rule, left, right, unit, internal=False):
         identifier = rule.get("id", "unidentified-relation")
@@ -1856,8 +1992,12 @@ class _SituatedRun:
             # The input may be the inaccessible original being adapted. The
             # delivered route, however, must be the recipient's selected route.
             types_ok = types_ok and to_modes <= selected
-        functions_ok = bool(set(rule.get("from_function_ids", [])) & set(left["function_ids"]) and
-                            set(rule.get("to_function_ids", [])) & set(right["function_ids"]))
+        functions_ok = self.relation_endpoints_match(rule, left, right)
+        binding_scope = rule.get("binding", {})
+        if binding_scope.get("same_subject"):
+            functions_ok = functions_ok and left["participant_id"] == right["participant_id"]
+        if binding_scope.get("same_situation"):
+            functions_ok = functions_ok and left["situation_id"] == right["situation_id"]
         semantic_ok = kind in self.RELATIONS and bool(rule.get("preserves")) and bool(rule.get("sufficiency"))
         if kind in {"ALTERNATIVE", "REDUNDANCY", "COMPLEMENTARITY"}:
             semantic_ok = semantic_ok and len(from_modes | to_modes) >= 2
@@ -1957,6 +2097,7 @@ class _SituatedRun:
             return {"situation_id": unit["situation_id"], "participant_id": unit["participant_id"], "status": "INSUFFICIENT", "choices": [], "pending_candidates": [], "partial_segments": []}
         candidates, internal = [], {}
         expanded = [variant for component in self.base.get("decision_components", []) + self.rdf_components for variant in self.variants(component)]
+        self.discover_predecessors(expanded, unit)
         for component in sorted(expanded, key=lambda row: row.get("operation_contract", {}).get("id", row["id"])):
             if not component.get("active_in_rc4", component.get("active_in_rc3")) or not component.get("operation_contract"):
                 continue
@@ -1975,24 +2116,10 @@ class _SituatedRun:
                                                   "situation_id": unit["situation_id"], "reason": "CONDITION_OR_FOUNDATION_FAILED", "check_ids": operation["check_ids"]})
             else:
                 candidates.append(operation)
-        # Choose usable recipient routes before minimizing software/resource
-        # questions. Unknown ability is not preferred to explicitly usable audio
-        # simply because the latter names one more technical resource.
-        route_minima = {}
-        for operation in candidates:
-            key = operation.get("variant_group_id")
-            if key:
-                route_minima[key] = min(route_minima.get(key, float("inf")), operation["unconfirmed_access_conditions"])
-        preferred = []
-        for operation in candidates:
-            key = operation.get("variant_group_id")
-            if key and operation["unconfirmed_access_conditions"] > route_minima[key]:
-                self.result["exclusions"].append({"kind": "alternative_not_selected", "id": operation["id"],
-                    "participant_id": unit["participant_id"], "situation_id": unit["situation_id"],
-                    "reason": "EQUIVALENT_FUNCTION_WITH_MORE_UNKNOWN_ACCESS_CONDITIONS", "check_ids": operation["check_ids"]})
-            else:
-                preferred.append(operation)
-        candidates = preferred
+        # Keep conditional variants until their complete paths are evaluated.
+        # A known access route can require an unavailable input, while another
+        # route can prepare its own input through an authorized predecessor.
+        # Access certainty alone is not a dominance proof.
         for function in sorted(required):
             available = [row["id"] for row in candidates if function in row["function_ids"] and row["state"] == "PASS"]
             pending = [row["id"] for row in candidates if function in row["function_ids"] and row["state"] == "PENDING"]
@@ -2012,6 +2139,18 @@ class _SituatedRun:
                     "explanation": "A função é necessária, mas não há operação representada para atendê-la; mais perguntas não corrigem esta lacuna da base."})
         result = {"situation_id": unit["situation_id"], "participant_id": unit["participant_id"], "status": "INSUFFICIENT",
                   "choices": [], "pending_candidates": [], "partial_segments": []}
+        def pending_obligations(proposal):
+            identifiers = set(proposal["check_ids"])
+            return {row["id"] for row in self.checks.rows if row["id"] in identifiers
+                    and row["state"] == "PENDING" and row.get("phase", "precondition") == "precondition"
+                    and row["kind"] != "INPUT_FROM_AUTHORIZED_PREDECESSOR"}
+
+        def dominates(old, proposal):
+            # A shorter route with an unavailable/unknown input does not
+            # dominate a route that can prepare it under different conditions.
+            return ({step["id"] for step in old["steps"]} <= {step["id"] for step in proposal["steps"]}
+                    and {f["id"] for f in old["covered_functions"]} >= {f["id"] for f in proposal["covered_functions"]}
+                    and pending_obligations(old) <= pending_obligations(proposal))
         edge_cache = {}
         def edges(left, right):
             key = (left["id"], right["id"])
@@ -2020,8 +2159,7 @@ class _SituatedRun:
                 for owner in (left, right):
                     for rule in owner["relation_contracts"]:
                         if (rule.get("scope", "WITHIN_OPERATION") in {"BETWEEN_OPERATIONS", "BOTH"}
-                                and set(rule.get("from_function_ids", [])) & set(left["function_ids"])
-                                and set(rule.get("to_function_ids", [])) & set(right["function_ids"])
+                                and self.relation_endpoints_match(rule, left, right)
                                 and rule.get("kind") != "ALTERNATIVE"):
                             relation = self.relation(rule, left, right, unit)
                             self.result["relation_evaluations"].append(relation)
@@ -2044,6 +2182,8 @@ class _SituatedRun:
                 if len(variant_groups) != len(set(variant_groups)):
                     continue
                 covered = set().union(*(set(step["function_ids"]) for step in steps)) & required
+                if not covered:
+                    continue
                 relations = [row for step in steps for row in internal[step["id"]]]
                 connectors = []
                 for left in steps:
@@ -2053,30 +2193,28 @@ class _SituatedRun:
                         connecting = edges(left, right)
                         if connecting:
                             connectors.append(sorted(connecting, key=lambda row: (row["state"] != "PASS", row["id"]))[0])
-                reached = {steps[0]["id"]}
-                changed = True
-                while changed:
-                    changed = False
-                    for relation in connectors:
-                        pair = {relation["from_capability"], relation["to_capability"]}
-                        if pair & reached and not pair <= reached:
-                            relations.append(relation)
-                            reached.update(pair)
-                            changed = True
-                independent = len(reached) != len(steps) and all(step.get("independent_support_allowed") for step in steps)
-                if len(reached) != len(steps) and not independent:
+                # Select an explained forest. Optional unselected edges must
+                # neither create hidden dependencies nor obscure a satisfied path.
+                groups = {step["id"]: {step["id"]} for step in steps}
+                selected_edges = []
+                for relation in sorted(connectors, key=lambda row: (row["state"] != "PASS", row["id"], row["from_capability"], row["to_capability"])):
+                    left, right = relation["from_capability"], relation["to_capability"]
+                    if groups[left] == groups[right]:
+                        continue
+                    joined = groups[left] | groups[right]
+                    for key in joined:
+                        groups[key] = joined
+                    selected_edges.append(relation)
+                connected = len(groups[steps[0]["id"]]) == len(steps)
+                independent = not connected and all(step.get("independent_support_allowed") for step in steps)
+                if not connected and not independent:
                     if covered == required:
                         self.result["integration_gaps"].append({"code": "NO_AUTHORIZED_RELATION", "operation_ids": [step["id"] for step in steps],
                             "situation_id": unit["situation_id"], "participant_id": unit["participant_id"]})
                     continue
-                if independent:
-                    # Preserve real links inside separate connected components;
-                    # do not manufacture links between independent supports.
-                    present = {(r["id"], r["from_capability"], r["to_capability"]) for r in relations}
-                    relations.extend(r for r in connectors
-                                     if (r["id"], r["from_capability"], r["to_capability"]) not in present)
+                relations.extend(selected_edges)
                 dependencies = {step["id"]: set() for step in steps}
-                for relation in connectors:
+                for relation in selected_edges:
                     if relation["kind"] in {"SEQUENTIAL", "SEQUENTIAL_REVIEW"}:
                         dependencies[relation["to_capability"]].add(relation["from_capability"])
                 ordered = []
@@ -2094,6 +2232,7 @@ class _SituatedRun:
                     continue
                 by_id = {step["id"]: step for step in steps}
                 steps = tuple(by_id[key] for key in ordered)
+                steps = self.bind_prepared_inputs(unit, steps, relations)
                 complete = covered == required and not unit["unknown_requirements"] and not unit["scope_gaps"]
                 proposal = self.proposal(unit, steps, relations, covered, complete, independent=independent)
                 if not complete:
@@ -2105,13 +2244,7 @@ class _SituatedRun:
                     # A connected subsequence is useful even if a separate
                     # function is uncovered. Keep inclusion-minimal supports,
                     # with the same bounded output policy as full choices.
-                    keep_partial = not any(
-                        {step["id"] for step in old["steps"]} <= step_ids
-                        and {f["id"] for f in old["covered_functions"]} >= covered
-                        for old in result[target])
-                    if len(result[target]) >= MAX_CHOICES:
-                        self.result["partial_truncated" if target == "partial_segments" else "pending_truncated"] = True
-                        keep_partial = False
+                    keep_partial = not any(dominates(old, proposal) for old in result[target])
                     if keep_partial and proposal["state"] == "PASS":
                         proposal.update(state="PARTIAL", ready_for_whole_task=False)
                         result[target] = [old for old in result[target]
@@ -2122,13 +2255,10 @@ class _SituatedRun:
                         result["pending_candidates"].append(proposal)
                     continue
                 target = "choices" if proposal["ready_for_functional_scope"] else "pending_candidates"
-                if len(result[target]) >= MAX_CHOICES:
-                    self.result["truncated" if target == "choices" else "pending_truncated"] = True
-                    continue
                 # Only inclusion-minimal complete choices; no extra modality is
                 # suggested simply because it happens to be available.
                 step_ids = {step["id"] for step in steps}
-                if any(old["covers_all_required_functions"] and {step["id"] for step in old["steps"]} <= step_ids for old in result[target]):
+                if any(old["covers_all_required_functions"] and dominates(old, proposal) for old in result[target]):
                     continue
                 result[target].append(proposal)
         if result["choices"]:
@@ -2138,9 +2268,18 @@ class _SituatedRun:
         def rank(proposal):
             checks = {row["id"]: row for row in self.checks.rows}
             pending = sum(checks[cid]["state"] == "PENDING" for cid in proposal["check_ids"] if cid in checks)
-            return (-len(proposal["covered_functions"]), pending, len(proposal["steps"]), proposal["id"])
+            missing_inputs = sum(condition["id"].endswith(":input_available")
+                                 and condition["state"] != "PASS"
+                                 for step in proposal["steps"] for condition in step.get("phase_conditions", []))
+            unknown_access = sum(step.get("unconfirmed_access_conditions", 0) for step in proposal["steps"])
+            return (-len(proposal["covered_functions"]), missing_inputs, unknown_access,
+                    pending, len(proposal["steps"]), proposal["id"])
         for group in ("choices", "pending_candidates", "partial_segments"):
             result[group].sort(key=rank)
+            if len(result[group]) > MAX_CHOICES:
+                self.result[{"choices": "truncated", "pending_candidates": "pending_truncated",
+                             "partial_segments": "partial_truncated"}[group]] = True
+                result[group] = result[group][:MAX_CHOICES]
         return result
 
     def run(self):
@@ -2177,6 +2316,21 @@ class _SituatedRun:
         for unit, row in zip(units, unit_results):
             row.update(participant_label=unit["participant_label"], situation_label=unit["situation_label"])
         self.result["situation_results"] = unit_results
+        # Coverage is a property of the executable paths, not merely of the
+        # standalone candidates evaluated before information was connected.
+        for coverage in self.result["function_coverage"]:
+            row = next(r for r in unit_results if r["participant_id"] == coverage["participant_id"]
+                       and r["situation_id"] == coverage["situation_id"])
+            function = coverage["function"]["id"]
+            proposals = [p for field in ("choices", "partial_segments", "pending_candidates") for p in row[field]
+                         if function in {f["id"] for f in p["covered_functions"]}]
+            available = [p for p in proposals if p["state"] in {"PASS", "PARTIAL"}]
+            coverage["standalone_state"] = coverage["state"]
+            coverage["supported_path_ids"] = [p["id"] for p in available]
+            coverage["conditional_path_ids"] = [p["id"] for p in proposals if p["state"] == "PENDING"]
+            coverage["state"] = ("CAPABILITY_AVAILABLE" if available else "CONDITIONAL_CAPABILITY" if proposals
+                                 else "NO_AVAILABLE_CAPABILITY")
+        self.result["missing_functions"] = [row for row in self.result["function_coverage"] if row["state"] != "CAPABILITY_AVAILABLE"]
         all_complete = bool(unit_results) and not unassigned and all(row["status"] == "COMPOSED" for row in unit_results)
         for row in unit_results:
             self.result["pending_candidates"].extend(row["pending_candidates"])
@@ -2189,6 +2343,13 @@ class _SituatedRun:
                     self.result["partial_segments"].append(choice)
         viable = {step["id"] for row in self.result["pending_candidates"] + self.result["partial_segments"] + self.result["choices"] for step in row["steps"]}
         viable |= {relation["id"] for row in self.result["pending_candidates"] + self.result["partial_segments"] + self.result["choices"] for relation in row["relations"]}
+        offered = self.result["choices"] + self.result["partial_segments"] + self.result["pending_candidates"]
+        effective = [p for p in offered if p["state"] != "PENDING" or not any(
+            other["state"] in {"PASS", "PARTIAL"}
+            and (other["participant_id"], other["situation_id"]) == (p["participant_id"], p["situation_id"])
+            and {f["id"] for f in other["covered_functions"]} >= {f["id"] for f in p["covered_functions"]}
+            for other in offered)]
+        active_check_ids = {cid for p in effective for cid in p["check_ids"]}
         merged_conditions = {}
         for condition in self.conditions:
             key = (condition["id"], condition["participant_id"], condition["situation_id"], condition["value"], condition.get("phase", "precondition"))
@@ -2203,6 +2364,16 @@ class _SituatedRun:
                              candidate_ids=list(condition["required_by"]),
                              field="situated_facts", values=[None, True, False],
                              reason="Esta informação altera a admissibilidade das operações e relações indicadas.")
+            if not active_check_ids.intersection(condition["check_ids"]):
+                condition["use"] = "DIAGNOSTIC_NOT_REQUIRED_BY_SELECTED_PATH"
+                # A failed alternative still explains an exclusion. Do not ask
+                # about it, but retain the known inability/impediment. An absent
+                # input is different: an authorized preceding step may prepare it.
+                target = ("unavailable_conditions" if condition["value"] is False
+                          and not condition["id"].endswith(":input_available")
+                          else "other_condition_diagnostics")
+                self.result[target].append(condition)
+                continue
             if condition.get("phase", "precondition") != "precondition":
                 if any(target in viable for target in condition["required_by"]):
                     self.result["application_conditions"].append(condition)

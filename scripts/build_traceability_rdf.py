@@ -170,6 +170,11 @@ def validate_operational_contracts(data):
             continue
         if any(ref not in claims for ref in contract['claim_ids']):
             raise ValueError('Unknown matrix claim: ' + row['id'])
+        if 'required_information_components' in contract:
+            components = contract['required_information_components']
+            if (not isinstance(components, list) or not components
+                    or not set(components) <= {'VISUAL', 'SONORO'}):
+                raise ValueError('Invalid required information component: ' + row['id'])
         for field in ('modos_que_podem_apoiar', 'modos_com_risco', 'requisito_ids', 'funcao_ids'):
             if not set(row.get(field, [])) <= concepts:
                 raise ValueError('Undefined matrix concept: ' + row['id'])
@@ -185,6 +190,13 @@ def validate_operational_contracts(data):
     for op in iter_operation_contracts(data):
         if not set(op['function_ids'] + op['representation_ids']) <= concepts:
             raise ValueError('Undefined operation concept: ' + op['id'])
+        witness = op.get('applicability_witness', {})
+        for condition in witness.get('all', []) + witness.get('any', []):
+            if condition.get('field') == 'required_information_components':
+                components = condition.get('ids')
+                if (not isinstance(components, list) or not components
+                        or not set(components) <= {'VISUAL', 'SONORO'}):
+                    raise ValueError('Invalid operation information component: ' + op['id'])
         supports = op['claim_support'] + [support for relation in op.get('relations', [])
                                           for support in relation.get('claim_support', [])]
         for support in supports:
@@ -238,6 +250,7 @@ def validate_analytical_applications(data, claims):
     concepts = {r['id'] for r in data.get('context_elements', [])}
     operations = {r['id']: r for r in iter_operation_contracts(data)}
     relations = {r['id']: r for op in operations.values() for r in op.get('relations', [])}
+    requirements = {r['id']: r for r in data.get('functional_matrix', [])}
     apps = {}
     for art in arts.values():
         for app in art.get('operational_applications', []):
@@ -249,10 +262,12 @@ def validate_analytical_applications(data, claims):
                 raise ValueError('Unknown analytical application status: ' + aid)
             if app.get('empirical_effect_authorized') is not False:
                 raise ValueError('Analytical application cannot assert empirical effect: ' + aid)
-            for field in ['premises', 'analytical_operation', 'result', 'function_ids', 'limits',
-                          'authorized_operation_ids', 'conditions']:
+            for field in ['premises', 'analytical_operation', 'result', 'function_ids', 'limits', 'conditions']:
                 if not app.get(field):
                     raise ValueError('Incomplete analytical application ' + aid + ': ' + field)
+            if not any(app.get(field) for field in ('authorized_operation_ids',
+                                                    'authorized_relation_ids', 'authorized_requirement_ids')):
+                raise ValueError('Analytical application has no authorized target: ' + aid)
             if not set(app['function_ids']) <= concepts:
                 raise ValueError('Unknown analytical function: ' + aid)
             premise_excerpts = set()
@@ -282,10 +297,20 @@ def validate_analytical_applications(data, claims):
                             or origin.get('trecho_id') not in premise_excerpts
                             or origin.get('trecho_id') not in excerpts):
                         raise ValueError('Analytical criterion not supported by exact premise: ' + aid + '/' + oid)
-            if not set(app['authorized_operation_ids']) <= set(operations):
+            if not set(app.get('authorized_operation_ids', [])) <= set(operations):
                 raise ValueError('Unknown authorized operation: ' + aid)
             if not set(app.get('authorized_relation_ids', [])) <= set(relations):
                 raise ValueError('Unknown authorized relation: ' + aid)
+            if not set(app.get('authorized_requirement_ids', [])) <= set(requirements):
+                raise ValueError('Unknown authorized requirement: ' + aid)
+    for matrix in requirements.values():
+        contract = matrix.get('inference_contract', {})
+        for group in [contract, *contract.get('trigger_groups', [])]:
+            for aid in group.get('analytical_application_ids', []):
+                if aid not in apps or matrix['id'] not in apps[aid].get('authorized_requirement_ids', []):
+                    raise ValueError('Analytical application does not authorize requirement: ' + matrix['id'])
+                if not set(group.get('funcao_ids', matrix.get('funcao_ids', []))) & set(apps[aid]['function_ids']):
+                    raise ValueError('Analytical requirement lacks function scope: ' + matrix['id'])
     for op in operations.values():
         for phase in op.get('condition_phases', []):
             if not phase.get('id') or not phase.get('label') or phase.get('phase') not in {'precondition','production','verification'}:
@@ -296,6 +321,19 @@ def validate_analytical_applications(data, claims):
                 if aid not in apps or record['id'] not in apps[aid][target_field]:
                     raise ValueError('Analytical application does not authorize target: ' + record['id'])
         for relation in op.get('relations', []):
+            if relation.get('analytical_application_ids') and relation.get('scope') == 'BETWEEN_OPERATIONS':
+                binding = relation.get('binding', {})
+                if not all(binding.get(key) is True for key in ('same_subject', 'same_situation', 'same_information_unit')):
+                    raise ValueError('Analytical dependency lacks situated binding: ' + relation['id'])
+                for endpoint, spec_field, mode_field in [('from_operation_ids', 'output_spec', 'from_representation_ids'),
+                                                        ('to_operation_ids', 'input_requirements', 'to_representation_ids')]:
+                    if not relation.get(endpoint) or not set(relation[endpoint]) <= set(operations):
+                        raise ValueError('Analytical dependency has unknown endpoint: ' + relation['id'])
+                    for oid in relation[endpoint]:
+                        available = {row['representation_id'] for row in operations[oid].get(spec_field, [])
+                                     if row.get('meaning_unit') == relation.get('meaning_unit')}
+                        if not set(relation.get(mode_field, [])) or not set(relation[mode_field]) <= available:
+                            raise ValueError('Analytical dependency changes information contract: ' + relation['id'])
             if not relation.get('analytical_application_ids') or relation.get('scope')!='WITHIN_OPERATION':
                 continue
             meaning=relation.get('meaning_unit')
@@ -375,6 +413,7 @@ def project_operational_contracts(graph, data):
                     graph.add((node, M.origemDaAplicacaoAnalitica, M[oid]))
             for field, prop in [('authorized_operation_ids', M.autorizaOperacao),
                                 ('authorized_relation_ids', M.autorizaRelacaoOperacional),
+                                ('authorized_requirement_ids', M.autorizaDerivacaoDeRequisito),
                                 ('function_ids', M.funcaoDaAfirmacao),
                                 ('depends_on_application_ids', M.dependeDeAplicacaoAnalitica)]:
                 for value in app.get(field, []):
@@ -388,6 +427,19 @@ def project_operational_contracts(graph, data):
                    Literal(json.dumps(op, ensure_ascii=False, sort_keys=True))))
         for aid in op.get('analytical_application_ids', []):
             graph.add((node, M.fundamentadaPorAplicacaoAnalitica, M[aid]))
+    for matrix in data.get('functional_matrix', []):
+        contract = matrix.get('inference_contract')
+        if not contract:
+            continue
+        node = M[matrix['id']]
+        graph.add((node, RDF.type, SKOS.Concept))
+        graph.set((node, M.identificador, Literal(matrix['id'])))
+        graph.set((node, SKOS.prefLabel, Literal(matrix['descricao_simples'], lang='pt-BR')))
+        graph.set((node, M.contratoOperacionalSerializado,
+                   Literal(json.dumps(contract, ensure_ascii=False, sort_keys=True))))
+        for group in [contract, *contract.get('trigger_groups', [])]:
+            for aid in group.get('analytical_application_ids', []):
+                graph.add((node, M.fundamentadaPorAplicacaoAnalitica, M[aid]))
     for concept in data.get('context_elements', []):
         node = M[concept['id']]
         # Curated public labels must also update pre-existing RDF concepts;

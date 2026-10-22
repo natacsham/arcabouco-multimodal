@@ -1,10 +1,12 @@
 project: Arcabouco Multimodal
-version: 1.5.0-rc1
+version: 1.5.0-rc3
 instrument: AMADO
-instrument_revision: AMADO-web-1.5.0-rc1-intake1
+instrument_revision: AMADO-web-1.5.0-rc3-structural1
+composer_revision: 2.0.0-alpha5
+revision_baseline_commit: 557add720be50872d1b97fcb7247a81f19f95145
 author: Natacsha Ordones Raposo de Melo
 research: Arcabouço Multimodal para Acessibilidade Digital
-purpose: Permitir examinar a contribuição documental para a articulação do conhecimento e as verificações efetivas de seu emprego em decisões existentes.
+purpose: Empregar articulações delimitadas em operações e relações reutilizáveis por função; tornar examináveis as contribuições documentais e as condições efetivamente verificadas.
 status: release-candidate
 previous_frozen_version: MADO 1.2.0-RC4 / tese V21
 core_classes:
@@ -25,7 +27,7 @@ previous_auxiliary_element: ContribuicaoNaArticulacao
 formalization: OWL 2 DL
 integrity: SHACL
 retrieval: SPARQL
-composition: Deterministic situated functions with scoped documentary claims and explicit curated operations
+composition: Deterministic situated functions with scoped documentary claims and analytical authorization of requirements operations and dependent relations
 public_runtime: Pyodide 314.0.7 in isolated browser worker
 storage: Current case in RAM only; no case history or evaluation collection
 license: No open reuse license granted to original research material

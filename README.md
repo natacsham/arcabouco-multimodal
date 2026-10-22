@@ -4,11 +4,21 @@
 
 O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão desta revisão: MADO 1.5.0-rc2 / compositor 2.0.0-alpha4 — candidata.** O estado anterior permanece no commit `c8b94d3c344cbe6922078c8b28b8bb5821b92e67`; a implementação desta revisão utiliza a branch `feat/articulation-operational-rc2`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
+**Versão desta revisão: MADO 1.5.0-rc3 / compositor 2.0.0-alpha5 — candidata.** O estado anterior permanece no commit `557add720be50872d1b97fcb7247a81f19f95145`; esta implementação utiliza a branch `fix/structural-knowledge-composition`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
 
 **Este é o projeto em desenvolvimento.** Base, representação, motor e interface continuam em `arcabouco-multimodal`. As versões da base e do compositor são distintas para identificar exatamente o que foi executado. Não foi criada outra matriz de conhecimento.
 
 No AMADO, conte seu desafio por texto ou ditado, confira o entendimento e responda a até três esclarecimentos por rodada. Os exemplos e os relatos livres passam pelo mesmo contrato de contexto e pelo compositor situado. O assunto da aula e palavras como “turma” não escolhem outro motor. A interpretação é determinística e limitada: correções, informação não reconhecida e condições ainda desconhecidas permanecem visíveis. Refinamentos posteriores são opcionais.
+
+### Correção estrutural desta revisão
+
+A RC3 altera a utilização do conhecimento, **não a tela nem os três relatos de teste**. A autorização de transferência funcional deixa de ser bloqueada pelo nome da tarefa histórica. O compositor pode considerar uma operação anterior necessária para produzir a entrada de outra, sem converter a função oferecida por essa operação em necessidade informada pelo usuário.
+
+Na base existente, a necessidade de retomada passa a usar a síntese analítica delimitada de organização e consulta, em vez de tomar orientação auditiva em mobilidade como fundamento genérico. Uma ligação explícita permite **descrever informação visual → organizar essa mesma descrição para consulta**, com identidade de conteúdo, destinatário e situação; apenas compartilhar o tipo “texto” não autoriza a combinação.
+
+As alternativas de vídeo distinguem a informação a tornar acessível: legendas representam informação sonora; audiodescrição representa informação visual relevante. Uma necessidade genérica de acesso não autoriza automaticamente as duas adaptações para todas as pessoas.
+
+Na versão anterior, os três relatos produziam **1, 2 e 6 possibilidades condicionais**. Essas contagens são referência para comparação, não meta de qualidade nem resultado presumido desta revisão. O ganho procurado é a composição da sequência reutilizável e sua sensibilidade à retirada do fundamento. Alternativas só são comparadas depois de verificar seus percursos; uma operação não é descartada antes de examinar a combinação que pode viabilizar. Os testes em `tests/test_structural_composition.py` conferem dependências, transferência, impedimentos, retirada da relação e separação de participantes. A conferência dos fundamentos está em `tests/test_operational_articulation_rc2.py`. Não há resposta por assunto, nova extração integral das fontes, cobertura universal ou validação humana implícita nesses testes.
 
 ## Qual problema esta pesquisa enfrenta?
 
@@ -62,7 +72,7 @@ O resultado do AMADO apresenta **O que fazer**, com ações e passos abertos, qu
 
 As possibilidades recebem os títulos **Orientação 1, 2, 3…**, repetidos na fundamentação para facilitar a consulta. Dentro de um percurso com relações sequenciais explícitas, a contagem dos passos continua entre as operações. A numeração das orientações não significa que seja necessário realizar todas. Ações, condições antes da aplicação e acompanhamento têm áreas visualmente distintas, identificadas também por títulos e bordas.
 
-Esta revisão de apresentação parte do commit `b6cefb8` e não altera a base, a ontologia nem o compositor. Os passos vêm das ações e fases registradas na execução; não acrescentam modalidades, responsáveis presumidos ou novas relações. Alternativas e apoios independentes não são transformados em etapas obrigatórias de um mesmo percurso. As decisões permanecem comparáveis à versão anterior, preservada no histórico.
+A revisão anterior de apresentação partiu do commit `b6cefb8` e não alterou a base, a ontologia nem o compositor. Os passos vêm das ações e fases registradas na execução; não acrescentam modalidades, responsáveis presumidos ou novas relações. Alternativas e apoios independentes não são transformados em etapas obrigatórias de um mesmo percurso. A RC3 preserva essa apresentação e altera separadamente o mecanismo descrito acima.
 
 ### O que mudou na articulação operacional
 
@@ -74,7 +84,7 @@ O caminho está na mesma base `data/knowledge-base.json`, sem outra matriz:
 | --- | --- |
 | `knowledge[].operation_claims` | Afirmação documental elegível, fonte e trecho correspondente; não aprovação do conhecimento inteiro. |
 | `contributions` | O que o trecho contribui, para qual conhecimento e com qual estado de conferência. |
-| `articulations[].operational_applications` | Premissas, operação analítica, compreensão resultante, critérios, operações/relações autorizadas, condições e limites. |
+| `articulations[].operational_applications` | Premissas, operação analítica, compreensão resultante, critérios e autorizações distintas para requisito, operação ou relação; condições e limites. |
 | `decision_components[].operation_contract` | Funções, entrada/saída, ação, recursos, participantes e representações utilizáveis. |
 | `execution_evidence` | Verificações efetivamente feitas para a pessoa e a situação, incluindo falhas e pendências. |
 
@@ -90,7 +100,7 @@ Os três relatos completos estão somente em `tests/fixtures/articulation_transf
 
 Os testes comparam relato e contexto estruturado equivalente, retirada de recursos, alteração de acesso e retirada de fundamento. Os efeitos são classificados separadamente: combinação/alternativa acrescentada, restrição descoberta ou somente fundamentação ampliada. Não existe resposta textual esperada por tema.
 
-Para reproduzir: `python -B -m unittest discover -s tests -p 'test_articulation_*.py'`, `python -B -m unittest discover -s tests -p 'test_operational_articulation_rc2.py'` e, após regenerar o pacote, `node tests/articulation-browser.mjs`. O último usa os controles visíveis, inclusive confirmação e revisão, sem fornecer fatos escondidos ao motor. Os demais testes, OWL/SHACL/consultas e a comparação local/navegador continuam necessários; este ensaio não os substitui.
+Para reproduzir: `python -B -m unittest discover -s tests -p 'test_articulation_*.py'`, `python -B -m unittest discover -s tests -p 'test_operational_articulation_rc2.py'`, `python -B -m unittest discover -s tests -p 'test_structural_composition.py'` e, após regenerar o pacote, `node tests/articulation-browser.mjs`. O último usa os controles visíveis, inclusive confirmação e revisão, sem fornecer fatos escondidos ao motor. Os demais testes, OWL/SHACL/consultas e a comparação local/navegador continuam necessários; este ensaio não os substitui.
 
 ### Onde estão as fontes e como entram na decisão
 
@@ -264,7 +274,7 @@ Consistência lógica, integridade dos dados, respostas às consultas, comportam
 
 Referência simples sugerida:
 
-> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.5.0-rc2 (candidata). Repositório do projeto.
+> MELO, Natacsha Ordones Raposo de. Arcabouço Multimodal para Acessibilidade Digital: representação MADO e instrumento AMADO. Versão 1.5.0-rc3 (candidata). Repositório do projeto.
 
 Não há DOI exigido para consultar ou compreender este trabalho. Referências bibliográficas, autores de terceiros e perspectivas participantes conservam sua própria atribuição.
 

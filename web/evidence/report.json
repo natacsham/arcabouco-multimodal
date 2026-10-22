@@ -1,8 +1,8 @@
 {
-  "version": "1.5.0-rc2",
+  "version": "1.5.0-rc3",
   "instrument": "AMADO",
-  "executor_version": "AMADO-web-1.5.0-rc2-articulation",
-  "compiled_at_utc": "2026-10-21T13:53:27.949409+00:00",
+  "executor_version": "AMADO-web-1.5.0-rc3-structural1",
+  "compiled_at_utc": "2026-10-22T00:00:36.301475+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -20,8 +20,8 @@
     "articulation_ui_execution": true
   },
   "results": {
-    "unit_tests": 353,
-    "ontology_triples": 17220,
+    "unit_tests": 401,
+    "ontology_triples": 17304,
     "owl_2_dl": true,
     "hermit_consistency": true,
     "shacl": {
@@ -42,7 +42,7 @@
       "CQ-010": 0
     },
     "situated_composition": {
-      "version": "2.0.0-alpha4",
+      "version": "2.0.0-alpha5",
       "delta": {
         "complete_choices_with_relation": 2,
         "complete_choices_without_relation": 0,
@@ -124,23 +124,23 @@
         "completed_and_passed": true,
         "nonempty_successful_checks": true,
         "no_errors": true,
-        "exact_test": false,
+        "exact_test": true,
         "exact_manifest": false,
-        "version": true,
+        "version": false,
         "deployment_commit_recorded": true,
         "all_consumed_assets_recorded": true,
         "current_asset_bytes": false,
         "current_base_inputs": true,
         "current_native_engine": true,
-        "current_download_bytes": true
+        "current_download_bytes": false
       },
       "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-21T13:38:18.298Z",
-      "expected_commit": "123d6c70ca525782a933c1d841dbe1ff7c026414",
+      "checked_at": "2026-10-21T14:33:33.387Z",
+      "expected_commit": "315091cd53c7ac42f02249d3399b41ddc2883b0c",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
-      "test_sha256": "5a8a74badfaa5610136742515d9fc36f059718512bd3ac1c1cb2ef55704b908f",
-      "public_manifest_sha256": "fe2d15011bfb3a4afe8e1b532b5981ae31834c54a46ea223bab42efc7ff29212",
-      "check_count": 47,
+      "test_sha256": "0012d14f67f659cfc18a1731b9163e3ec280b20bf8202ee79c48a42688e42eca",
+      "public_manifest_sha256": "1547855765b6abd295c39928df8ceb5a8c78d61f6ce8265d7593702e09c9d5c5",
+      "check_count": 51,
       "asset_count": 38,
       "scope": "Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana.",
       "limits": [
@@ -169,37 +169,37 @@
   "reports": {
     "technical-1.5-report.json": {
       "url": "technical-1.5-report.json",
-      "sha256": "4a0ba08e335d67078410d805a1f8a6d4a94f3ec2b4c6dbc107bb89f83a3dddb8",
+      "sha256": "a6b1f2fc85f486c7fc10c0660b613bac17da41116afdf7ca9f7c8ebf6fa88f6e",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "reasoner-1.5-report.json": {
       "url": "reasoner-1.5-report.json",
-      "sha256": "90cc97c6f194cd0421ec4264ed505fed8fd9bf64eaec8415d28ccc8d5a0510e3",
+      "sha256": "cb000e92aa7e2d6cb429c13a87ca572fad00a0ade2c5bc63c41812ce109b5ffb",
       "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256"
     },
     "situated-report.json": {
       "url": "situated-report.json",
-      "sha256": "486d1369aa549eb523c87994f6bff1d512add9501c902baa78069f2e671d8b91",
+      "sha256": "eb7a24f8711efe59a743cd668c04d867b66c757ae92c3bc6e6dae2bf9600beac",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "33a28b6d768104303446f4b95b425414d4be087c32d4bd7e7a30f862412f1d75",
+      "sha256": "e391013d3ea7457550bb0e380264ffa452a7f9dee253290813f77e507e776888",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "4474e4dff0095fdf8506c125c1cf5dcfae61e51a31f570ccd158acd98c5264cd",
+      "sha256": "2ce9ca87fb6dc9f84622f914da401609f5ed6e518a58f9526961f1bf80220c26",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
       "url": "trajectory-reasoner-report.json",
-      "sha256": "c1029a57ea3a948a52664d99279407977c525d91c35f2c114f08c8a289049d3f",
+      "sha256": "b39fee77cfecabea1cb95e34f88111a9fc5b12cd6e54191f0c99fa83eb6e6670",
       "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256"
     },
     "articulation-browser.json": {
       "url": "articulation-browser.json",
-      "sha256": "97fb94c36531fcbbd0b295d3dc989129ae86039cccfe195b8dece1a059d55028",
+      "sha256": "5ecca05d72f66715367647c3368f0805c9e5d43ccda3f71b39fb99c7029e127e",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     }
   }

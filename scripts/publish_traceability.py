@@ -259,10 +259,13 @@ def situated_release_checks(manifest, technical, reasoner, situated, browser, di
                 "experimental/v2/trajectory.py", "experimental/v2/trajectory-bindings.json", "web/amado/bridge.py",
                 "tests/test_situated_intake.py", "tests/test_situated_composition.py", "tests/test_situated_catalogue.py",
                 *[f"queries/CQ-{i:03d}.rq" for i in range(1, 11)]}
+    if manifest.get("version") == "1.5.0-rc3":
+        required.update({"tests/test_structural_composition.py", "tests/test_operational_articulation_rc2.py"})
     checks = browser.get("checks") or {}
     return {
-        "version": {"1.5.0-rc1": "2.0.0-alpha3", "1.5.0-rc2": "2.0.0-alpha4"}.get(manifest.get("version")) == manifest.get("composition", {}).get("version")
-            and manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2"},
+        "version": {"1.5.0-rc1": "2.0.0-alpha3", "1.5.0-rc2": "2.0.0-alpha4",
+                    "1.5.0-rc3": "2.0.0-alpha5"}.get(manifest.get("version")) == manifest.get("composition", {}).get("version")
+            and manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2", "1.5.0-rc3"},
         "current_package": preserved_components({"build": manifest}, manifest)["passed"],
         "technical_passed": technical.get("passed") is True,
         "technical_inputs_current": required <= set(technical_inputs) and all(_matches(n, h) for n, h in technical_inputs.items()),
@@ -296,7 +299,7 @@ def publish_situated(manifest):
              "distribution": "evidence/distribution-audit.json", "logical": "experimental/v2/evidence/trajectory-reasoner-report.json"}
     records = {key: read(name) for key, name in paths.items()}
     checks = situated_release_checks(manifest, **records)
-    if manifest.get("version") == "1.5.0-rc2":
+    if manifest.get("version") in {"1.5.0-rc2", "1.5.0-rc3"}:
         articulation = read("evidence/articulation-browser.json")
         paths["articulation"] = "evidence/articulation-browser.json"
         checks["articulation_ui_execution"] = (articulation.get("type") == "SYNTHETIC_ARTICULATION_UI_NOT_HUMAN_EVALUATION"
@@ -360,7 +363,7 @@ def publish_situated(manifest):
 
 def main():
     manifest = read("web/amado/manifest.json")
-    if manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2"}:
+    if manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2", "1.5.0-rc3"}:
         return publish_situated(manifest)
     technical = read("evidence/technical-report.json")
     reasoner = read("evidence/reasoner-report.json")

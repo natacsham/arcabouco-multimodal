@@ -48,7 +48,7 @@ class CompositionBridgeTests(unittest.TestCase):
         from rdflib import RDF, RDFS
         from experimental.v2.composer import V2
         catalog = bridge.dispatch({"operation": "catalog_composition"})
-        self.assertEqual(catalog["version"], "2.0.0-alpha4")
+        self.assertEqual(catalog["version"], "2.0.0-alpha5")
         for group, entity_type in (("facts", V2.ContextFact), ("resources", V2.Resource)):
             self.assertEqual({row["iri"] for row in catalog[group]},
                              {str(node) for node in self.composer.graph.subjects(RDF.type, entity_type)})

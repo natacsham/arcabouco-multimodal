@@ -1,6 +1,7 @@
 @prefix mado: <https://w3id.org/mado#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 # PENDING and PROPOSED are legitimate documentary states, never implicit support.
 mado:AfirmacaoOperacionalShape a sh:NodeShape ;
@@ -479,7 +480,11 @@ mado:AplicacaoAnaliticaOperacionalShape a sh:NodeShape ;
   sh:property [ sh:path mado:premissaOperacional ; sh:minCount 1 ; sh:class mado:AfirmacaoOperacionalDocumentada ] ;
   sh:property [ sh:path mado:operacaoDaAplicacaoAnalitica ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ] ;
   sh:property [ sh:path mado:enunciado ; sh:minCount 1 ; sh:maxCount 1 ; sh:minLength 1 ] ;
-  sh:property [ sh:path mado:autorizaOperacao ; sh:minCount 1 ] ;
+  sh:or (
+    [ sh:property [ sh:path mado:autorizaOperacao ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path mado:autorizaRelacaoOperacional ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path mado:autorizaDerivacaoDeRequisito ; sh:minCount 1 ] ]
+  ) ;
   sh:property [ sh:path mado:condicaoDaAplicacaoAnalitica ; sh:minCount 1 ] ;
   sh:property [ sh:path mado:limiteDaAfirmacao ; sh:minCount 1 ] ;
   sh:property [ sh:path mado:efeitoEmpiricoAutorizado ; sh:hasValue false ; sh:maxCount 1 ] ;
@@ -514,3 +519,33 @@ mado:AplicacaoAnaliticaOperacionalShape a sh:NodeShape ;
       SELECT $this WHERE { $this mado:dependeDeAplicacaoAnalitica+ $this . }
     """
   ] .
+
+mado:DerivacaoAnaliticaDeRequisitoShape a sh:NodeShape ;
+  sh:targetObjectsOf mado:autorizaDerivacaoDeRequisito ;
+  sh:class skos:Concept ;
+  sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:contratoOperacionalSerializado ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:sparql [
+    sh:message "O requisito derivado deve conservar seu vínculo à aplicação analítica que o autoriza."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this ?aplicacao WHERE {
+        ?aplicacao mado:autorizaDerivacaoDeRequisito $this .
+        FILTER NOT EXISTS { $this mado:fundamentadaPorAplicacaoAnalitica ?aplicacao }
+      }
+    """
+  ] .
+
+# O contrato continua sendo projetado integralmente em JSON. Esta qualificação
+# delimita qual informação precisa de alternativa, sem inferir capacidade.
+mado:ComponenteInformacionalDoRequisitoShape a sh:NodeShape ;
+  sh:targetClass skos:Concept ;
+  sh:or (
+    [ sh:not [ sh:in (mado:MF-01 mado:MF-11) ] ]
+    [ sh:property [
+      sh:path mado:contratoOperacionalSerializado ;
+      sh:minCount 1 ; sh:maxCount 1 ;
+      sh:pattern '"required_information_components"\\s*:\\s*\\[\\s*"(VISUAL|SONORO)"' ;
+      sh:message "O requisito de acesso visual ou sonoro deve conservar o componente informacional delimitado no contrato."@pt-BR
+    ] ]
+  ) .

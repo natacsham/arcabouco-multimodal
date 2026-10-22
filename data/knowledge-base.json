@@ -392,11 +392,11 @@
     }
   ],
   "metadata": {
-    "title": "Base pública do Arcabouço Multimodal — articulação operacional 1.5.0-rc2",
-    "version": "1.5.0-rc2",
+    "title": "Base pública do Arcabouço Multimodal — articulação operacional 1.5.0-rc3",
+    "version": "1.5.0-rc3",
     "generated_at": "2026-10-21",
     "note": "Projeção pública posterior à tese; texto original dos trechos não redistribuído.",
-    "migration_note": "RC2: aplicações analíticas delimitadas, alternativas por destinatário e fases de preparação. Estados anteriores e candidatos preservados. Consulta pontual às seções MMI/WCAG, não releitura dos artigos.",
+    "migration_note": "RC3: derivação analítica de requisito e composição delimitada entre operações existentes. Estados documentais e candidatos preservados; não houve nova leitura dos documentos originais nesta revisão. A consulta pontual MMI/WCAG pertence à revisão RC2 anterior.",
     "execution_scope": "TRANSFERENCIA_SITUADA_COM_REFERENCIAS_E_CONFIGURACAO_RASTREAVEL_SEM_LLM",
     "central_boundary": "A MADO apoia a construção e o acompanhamento de uma decisão situada. Recursos não confirmados podem permanecer condicionais; recursos explicitamente impedidos são excluídos. A saída não demonstra eficácia pedagógica nem generalização universal.",
     "decision_component_count": 32,
@@ -407,8 +407,8 @@
     "active_decision_pattern_count": 11,
     "criterion_origin_count": 416,
     "resource_state_model": "DISPONIVEL_CONFIRMADO|PROPOSTO_A_PREPARAR|NAO_CONFIRMADO|IMPEDIDO",
-    "interface_version": "AMADO-web-1.5.0-rc2",
-    "derived_from_version": "1.5.0-rc1",
+    "interface_version": "AMADO-web-1.5.0-rc3",
+    "derived_from_version": "1.5.0-rc2",
     "public_projection": true,
     "context_contract": {
       "runtime_schema_version": "1.0",
@@ -35171,7 +35171,7 @@
       "maturity_status": "CONFIGURACAO_MATURA_RC4",
       "active_in_rc4": true,
       "operation_contract": {
-        "schema_version": "1.5.0-rc2",
+        "schema_version": "1.5.0-rc3",
         "id": "OP-PAD-ORGANIZAR-CONTEUDO-PERSISTENTE",
         "function_ids": [
           "FUN-ORGANIZAR-CONTEUDO",
@@ -35340,7 +35340,49 @@
           "Esta síntese de projeto não demonstra memória, compreensão ou aprendizagem melhores e não exige imagens.",
           "Organização textual isolada não é apresentada como combinação multimodal."
         ],
-        "relations": [],
+        "relations": [
+          {
+            "id": "REL-ART-TRF-04-DESCREVER-ORGANIZAR",
+            "scope": "BETWEEN_OPERATIONS",
+            "kind": "SEQUENTIAL",
+            "from_operation_ids": [
+              "OP-PAD-REPRESENTACAO-VISUAL-EXPLICADA-TEXT_VISUAL",
+              "OP-PAD-CONTEUDO-WEB-EQUIVALENTE-TEXT_VISUAL"
+            ],
+            "to_operation_ids": [
+              "OP-PAD-ORGANIZAR-CONTEUDO-PERSISTENTE"
+            ],
+            "from_function_ids": [
+              "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS"
+            ],
+            "to_function_ids": [
+              "FUN-ORGANIZAR-CONTEUDO",
+              "FUN-MANTER-INFORMACAO-RECUPERAVEL"
+            ],
+            "from_representation_ids": [
+              "MOD-TEXTO"
+            ],
+            "to_representation_ids": [
+              "MOD-TEXTO"
+            ],
+            "meaning_unit": "INFORMACAO_ESSENCIAL_DA_TAREFA",
+            "binding": {
+              "same_subject": true,
+              "same_situation": true,
+              "same_information_unit": true
+            },
+            "preserves": "A descrição textual produzida da informação visual é a entrada a organizar e disponibilizar para retomada pelo mesmo destinatário, na mesma situação. Não basta que dois textos tenham o mesmo tipo.",
+            "sufficiency": "REQUIRES_SITUATED_CONFIRMATION",
+            "temporal": "SEQUENTIAL",
+            "verification_phase": "verification",
+            "claim_support": [],
+            "analytical_application_ids": [
+              "APP-ART-TRF-04-DESCREVER-ORGANIZAR"
+            ],
+            "requires_analytical_authorization": true,
+            "explanation": "Primeiro, representar em texto a informação visual necessária; depois, organizar essa mesma descrição para consulta e retomada. A passagem entre representações ocorre na descrição, enquanto a ligação entre as ações é sequencial, não complementaridade automática."
+          }
+        ],
         "integration_gaps": [],
         "claim_support_audit": {
           "status": "HISTORICAL_BINDINGS_NOT_OPERATIONAL_SUPPORT",
@@ -37576,6 +37618,14 @@
               "APP-ART-TRF-02-CAPTIONS"
             ],
             "applicability_witness": {
+              "all": [
+                {
+                  "field": "required_information_components",
+                  "ids": [
+                    "SONORO"
+                  ]
+                }
+              ],
               "any": [
                 {
                   "field": "recursos_digitais",
@@ -37835,6 +37885,14 @@
               "APP-ART-TRF-02-AUDIO_DESCRIPTION"
             ],
             "applicability_witness": {
+              "all": [
+                {
+                  "field": "required_information_components",
+                  "ids": [
+                    "VISUAL"
+                  ]
+                }
+              ],
               "any": [
                 {
                   "field": "recursos_digitais",
@@ -43312,6 +43370,74 @@
       ],
       "operational_applications": [
         {
+          "id": "APP-ART-TRF-04-DESCREVER-ORGANIZAR",
+          "status": "GROUNDED_ANALYTICAL_APPLICATION",
+          "premises": [
+            {
+              "knowledge_id": "K38",
+              "claim_id": "CLM-K38-C-K38-01",
+              "contribution_ids": ["C-K38-01"]
+            },
+            {
+              "knowledge_id": "K38",
+              "claim_id": "CLM-K38-C-K38-02",
+              "contribution_ids": ["C-K38-02"]
+            },
+            {
+              "knowledge_id": "K43",
+              "claim_id": "CLM-K43-C-K43-02",
+              "contribution_ids": ["C-K43-02"]
+            },
+            {
+              "knowledge_id": "K42",
+              "claim_id": "CLM-K42-TD-ORI-0001",
+              "contribution_ids": ["C-K42-WCAG-0001"]
+            },
+            {
+              "knowledge_id": "K42",
+              "claim_id": "CLM-K42-C-K42-02",
+              "contribution_ids": ["C-K42-02"]
+            },
+            {
+              "knowledge_id": "K38",
+              "claim_id": "CLM-K38-MMI-NAV",
+              "contribution_ids": ["C-K38-MMI-NAV"]
+            }
+          ],
+          "criterion_support": [
+            {"criterion_id": "CA01", "origin_ids": ["ORI-0001"]},
+            {"criterion_id": "CA02", "origin_ids": ["ORI-0012", "ORI-0014"]}
+          ],
+          "analytical_operation": "Relacionar a preservação da finalidade do conteúdo visual à organização entre formatos e ao fluxo de navegação: a descrição produzida pode alimentar a organização da mesma informação para retomada. Delimitar o vínculo por destinatário, situação e unidade informacional, sem supor que coocorrência de texto ou de funções autorize a sequência.",
+          "result": "Quando a informação visual relevante precisa de descrição e de consulta organizada, a saída textual da descrição pode ser organizada e mantida localizável. Cada operação conserva seu fundamento próprio; a síntese autoriza apenas sua ligação sobre a mesma informação.",
+          "authorized_operation_ids": [],
+          "authorized_relation_ids": ["REL-ART-TRF-04-DESCREVER-ORGANIZAR"],
+          "function_ids": [
+            "FUN-PRESERVAR-SIGNIFICADO-ENTRE-MODOS",
+            "FUN-ORGANIZAR-CONTEUDO",
+            "FUN-MANTER-INFORMACAO-RECUPERAVEL"
+          ],
+          "conditions": [
+            "A informação visual e a necessidade de organização ou retomada pertencem à mesma situação e ao mesmo destinatário.",
+            "A saída textual produzida na primeira operação é a entrada da segunda; acesso e recursos de cada operação continuam sendo verificados separadamente.",
+            "Depois de preparar, conferir se a descrição preserva a informação necessária e se pode ser localizada para retomada."
+          ],
+          "limits": [
+            "Síntese analítica de projeto sobre registros existentes; não é afirmação literal das fontes nem resultado de avaliação humana.",
+            "A relação entre as operações é sequencial. Não demonstra complementaridade CARE, aprendizagem ou equivalência semântica automática.",
+            "Não autoriza adicionar imagens, exigir leitura, ligar conteúdos diferentes ou transferir condições entre participantes."
+          ],
+          "depends_on_application_ids": [],
+          "empirical_effect_authorized": false,
+          "review": {
+            "date": "2026-10-21",
+            "scope": "EXISTING_SCOPED_CONTRIBUTIONS_ANALYTICAL_COMPOSITION",
+            "human_evaluation": false,
+            "whole_historical_claim_promoted": false,
+            "note": "Recombinação delimitada das contribuições já localizadas e dos contratos de descrição e organização. Nenhum documento original foi relido nesta alteração; a conferência preserva os estados documentais anteriores."
+          }
+        },
+        {
           "id": "APP-ART-TRF-04-ORGANIZAR-RETOMAR",
           "status": "GROUNDED_ANALYTICAL_APPLICATION",
           "premises": [
@@ -43357,6 +43483,9 @@
           "result": "Uma versão organizada e consultável pode dar apoio à retomada de uma sequência sem depender exclusivamente de sua apresentação anterior.",
           "authorized_operation_ids": [
             "OP-PAD-ORGANIZAR-CONTEUDO-PERSISTENTE"
+          ],
+          "authorized_requirement_ids": [
+            "MF-04"
           ],
           "authorized_relation_ids": [],
           "function_ids": [
@@ -44215,6 +44344,9 @@
           "CLM-K42-TD-ORI-0001",
           "CLM-K10-SCOPED-1"
         ],
+        "required_information_components": [
+          "VISUAL"
+        ],
         "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
         "subject_scope": "SITUATED_SUBJECT",
         "requires_confirmation": true,
@@ -44526,19 +44658,22 @@
       ],
       "knowledge_ids": [
         "K43",
-        "K40"
+        "K38",
+        "K42"
       ],
       "funcao_ids": [
         "FUN-ORGANIZAR-CONTEUDO",
         "FUN-MANTER-INFORMACAO-RECUPERAVEL"
       ],
       "inference_contract": {
-        "schema_version": "1.5.0-rc1",
+        "schema_version": "1.5.0-rc3",
         "kind": "DESIGN_REQUIREMENT_ONLY",
         "trigger_kind": "FUNCTIONAL_OBSERVATION",
         "claim_ids": [
-          "CLM-K43-C-K43-02",
-          "CLM-K40-C-K40-01"
+          "CLM-K43-C-K43-02"
+        ],
+        "analytical_application_ids": [
+          "APP-ART-TRF-04-ORGANIZAR-RETOMAR"
         ],
         "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
         "subject_scope": "SITUATED_SUBJECT",
@@ -44555,7 +44690,7 @@
           "F07"
         ],
         "pending_items": [],
-        "inference_limit": "Requisito de projeto a confirmar nesta tarefa; não atribui diagnóstico, habilidade, preferência ou eficácia.",
+        "inference_limit": "Organização decorre da parcela documental; retomada de instruções decorre da aplicação analítica delimitada. Não transfere orientação auditiva em mobilidade para toda sequência nem atribui habilidade ou eficácia.",
         "support": [
           {
             "source_id": "F06",
@@ -44563,15 +44698,6 @@
             "support_scope": "A descrição preservada de Lidiane alerta que a multiplicidade de formatos pode competir pela atenção e precisa de organização.",
             "review_status": "CONFERIDA_NO_REGISTRO",
             "locator": "Personas Multimodais_ Hábitos digitais e acessibilidade.pdf · 7",
-            "document_url": null,
-            "original_document_rechecked_in_this_migration": false
-          },
-          {
-            "source_id": "F01",
-            "excerpt_id": "TD-EV02",
-            "support_scope": "O registro de mobilidade identifica uma interrupção quando a pessoa precisava recuperar a última informação de orientação.",
-            "review_status": "CONFERIDA_NO_REGISTRO",
-            "locator": "MUM'14 - p180-raposo.pdf · 6",
             "document_url": null,
             "original_document_rechecked_in_this_migration": false
           }
@@ -44604,8 +44730,9 @@
             "funcao_ids": [
               "FUN-MANTER-INFORMACAO-RECUPERAVEL"
             ],
-            "claim_ids": [
-              "CLM-K40-C-K40-01"
+            "claim_ids": [],
+            "analytical_application_ids": [
+              "APP-ART-TRF-04-ORGANIZAR-RETOMAR"
             ]
           }
         ]
@@ -45471,6 +45598,9 @@
         "trigger_kind": "FUNCTIONAL_OBSERVATION_OR_REPORTED_ACCESS_CONDITION",
         "claim_ids": [
           "CLM-K42-TD-ORI-0148"
+        ],
+        "required_information_components": [
+          "SONORO"
         ],
         "eligibility": "DOCUMENTED_OPERATIONAL_CLAIM",
         "subject_scope": "SITUATED_SUBJECT",
