@@ -25,6 +25,21 @@ jobs:
       - run: python scripts/build_traceability_rdf.py --check
       - run: python -B scripts/source_catalog.py --check --check-projection web/assets/source-catalog.json
       - run: python scripts/verify_public.py --jobs 4 --report evidence/technical-1.6-report.json --reasoner-report evidence/reasoner-1.6-report.json
+      - name: Show verification failure details
+        if: failure()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('evidence/technical-1.6-report.json')
+          if path.exists():
+              report = json.loads(path.read_text(encoding='utf-8'))
+              for name, check in report.get('checks', {}).items():
+                  if not check.get('passed'):
+                      details = {key: value for key, value in check.items()
+                                 if key not in {'output', 'findings'}}
+                      print(name, json.dumps(details, ensure_ascii=False, indent=2))
+          PY
       - run: python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
       - run: python -B experimental/v2/verify.py
       - run: python -B experimental/v2/verify_situated.py --output experimental/v2/evidence/situated-report.json

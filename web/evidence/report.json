@@ -2,7 +2,7 @@
   "version": "1.6.0-rc1",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.6.0-rc1-semantic1",
-  "compiled_at_utc": "2026-10-25T22:13:26.678316+00:00",
+  "compiled_at_utc": "2026-10-25T22:24:27.935231+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -193,7 +193,7 @@
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "f031b54ee4373c98047ee3c5163988c5a6664945d1adf267d37b57c37ee73d4d",
+      "sha256": "4b007ddef64cf7b61da33401b34ac5ae7eed02eab9635298bd956d511dad9339",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
