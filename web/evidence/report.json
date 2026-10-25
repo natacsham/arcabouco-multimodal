@@ -2,7 +2,7 @@
   "version": "1.6.0-rc1",
   "instrument": "AMADO",
   "executor_version": "AMADO-web-1.6.0-rc1-semantic1",
-  "compiled_at_utc": "2026-10-25T22:24:27.935231+00:00",
+  "compiled_at_utc": "2026-10-25T22:49:17.137300+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -24,7 +24,7 @@
     "articulation_ui_execution": true
   },
   "results": {
-    "unit_tests": 468,
+    "unit_tests": 471,
     "ontology_triples": 116633,
     "owl_2_dl": true,
     "hermit_consistency": true,
@@ -173,7 +173,7 @@
   "reports": {
     "technical-1.6-report.json": {
       "url": "technical-1.6-report.json",
-      "sha256": "f8c92374bf506f916af7be2e94e5f5150106e8dc87b3015ef4e3c37575be87d5",
+      "sha256": "88bc0b39bd2bfadfc6870548d0472c62cca7ab928fe96cda4bda619895596222",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "reasoner-1.6-report.json": {
@@ -187,7 +187,7 @@
       "source_report": "experimental/v2/evidence/situated-report.json",
       "source_sha256": "397bca0bc3e837c749caebfe9f685e8a97eac1f219cc8f5797e10c95a633fb87",
       "projection": "PUBLIC_TECHNICAL_SUMMARY_WITHOUT_TEST_CASE_CONTENT",
-      "evidence_use": "CURRENT_BUILD_EXECUTION_SUMMARY"
+      "evidence_use": "CURRENT_BUILD_EXECUTION_PUBLIC_SUMMARY"
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
@@ -196,7 +196,7 @@
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "4b007ddef64cf7b61da33401b34ac5ae7eed02eab9635298bd956d511dad9339",
+      "sha256": "6b444740b3d47c3418dc5d5ba9f63fb16f6594709afacfe6daca6549d6f8c8c5",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {

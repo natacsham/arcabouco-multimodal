@@ -1,9 +1,9 @@
 {
   "type": "SYNTHETIC_SITUATED_PUBLIC_SMOKE_NOT_PARTICIPANT_SESSION",
   "url": "https://natacsham.github.io/arcabouco-multimodal/",
-  "checked_at": "2026-10-22T00:11:31.729Z",
+  "checked_at": "2026-10-25T22:53:56.786Z",
   "test_sha256": "0012d14f67f659cfc18a1731b9163e3ec280b20bf8202ee79c48a42688e42eca",
-  "expected_commit": "eb0e80b9849125d3d21f66beb6d7e342039e2e1e",
+  "expected_commit": "468f53a69517077aa96d29d10f8724128db41fc9",
   "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
   "checks": {
     "public_manifest_http_200": true,
@@ -83,12 +83,6 @@
       "served_sha256": "0508975ba17480064ce704db19052bf0943847806cc9056905ab8554d27df16e",
       "passed": true
     },
-    "amado/guiado.html": {
-      "bytes": 9815,
-      "expected_sha256": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
-      "served_sha256": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
-      "passed": true
-    },
     "amado/guided.css": {
       "bytes": 9177,
       "expected_sha256": "26e11a67e8fb11b1ac45ae0142b9ffad71fb2e33533e1407f48e80bbd07d04bb",
@@ -107,10 +101,10 @@
       "served_sha256": "ff04d3872b756c94e42a777c818e97336a0efc0d417b7536524c825254bbe853",
       "passed": true
     },
-    "amado/views.css": {
-      "bytes": 971,
-      "expected_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
-      "served_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+    "amado/guiado.html": {
+      "bytes": 9815,
+      "expected_sha256": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
+      "served_sha256": "727c1c67563f7d4520e6add3f24aa2a1a485856cc1b7a6de13a3e1111368985a",
       "passed": true
     },
     "amado/composition.js": {
@@ -125,22 +119,28 @@
       "served_sha256": "befb434dfa5790954102ad09d0cc802fb9f44ca7e4d2ae318e4f0623ed919425",
       "passed": true
     },
+    "amado/views.css": {
+      "bytes": 971,
+      "expected_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+      "served_sha256": "70000b61e3ae2e404f6e778966706eee1a4258b1a7f6da85ba3c7d1036c56564",
+      "passed": true
+    },
     "amado/simple-flow.js": {
       "bytes": 49964,
       "expected_sha256": "8e679000368e88f1d336ee6ecdfb4db3a1ed716036eaa53bec086839e5ba7553",
       "served_sha256": "8e679000368e88f1d336ee6ecdfb4db3a1ed716036eaa53bec086839e5ba7553",
       "passed": true
     },
-    "amado/simple-flow.css": {
-      "bytes": 13198,
-      "expected_sha256": "89488c28345b7b12c8b6dc08fff5cb8bc27b3fcf66cd3c1e79f8a982c992c206",
-      "served_sha256": "89488c28345b7b12c8b6dc08fff5cb8bc27b3fcf66cd3c1e79f8a982c992c206",
-      "passed": true
-    },
     "amado/voice.js": {
       "bytes": 5702,
       "expected_sha256": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "served_sha256": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
+      "passed": true
+    },
+    "amado/simple-flow.css": {
+      "bytes": 13198,
+      "expected_sha256": "89488c28345b7b12c8b6dc08fff5cb8bc27b3fcf66cd3c1e79f8a982c992c206",
+      "served_sha256": "89488c28345b7b12c8b6dc08fff5cb8bc27b3fcf66cd3c1e79f8a982c992c206",
       "passed": true
     },
     "amado/intake.mjs": {
@@ -155,28 +155,40 @@
       "served_sha256": "34d37b71334294f21e1c762246c4757b7b63c7384c177a9a9b8a05451e607710",
       "passed": true
     },
+    "ontologia/index.html": {
+      "bytes": 22768,
+      "expected_sha256": "4f72c26ae6a6fc32e1e362a64af062ee9bca46d7ea33b70392392980a70b1ab5",
+      "served_sha256": "4f72c26ae6a6fc32e1e362a64af062ee9bca46d7ea33b70392392980a70b1ab5",
+      "passed": true
+    },
     "index.html": {
       "bytes": 13261,
       "expected_sha256": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
       "served_sha256": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
       "passed": true
     },
-    "amado/completo-guiado.html": {
-      "bytes": 23752,
-      "expected_sha256": "50468ea6262439aadddc0c732a230af50feb45d5b1aea5b63d8e0590c0d912a5",
-      "served_sha256": "50468ea6262439aadddc0c732a230af50feb45d5b1aea5b63d8e0590c0d912a5",
-      "passed": true
-    },
-    "ontologia/index.html": {
-      "bytes": 22768,
-      "expected_sha256": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
-      "served_sha256": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
-      "passed": true
-    },
     "amado/completo.html": {
       "bytes": 22429,
-      "expected_sha256": "bcac4fb42bef462814fe30a520821d87c02e9f4f9119efdf06bde5bcc30460ff",
-      "served_sha256": "bcac4fb42bef462814fe30a520821d87c02e9f4f9119efdf06bde5bcc30460ff",
+      "expected_sha256": "a88bda21bc081ab1eb0c3fbfea3ca06e29ca68bb2685f5b62a534b6d1c700bc0",
+      "served_sha256": "a88bda21bc081ab1eb0c3fbfea3ca06e29ca68bb2685f5b62a534b6d1c700bc0",
+      "passed": true
+    },
+    "amado/completo-guiado.html": {
+      "bytes": 23752,
+      "expected_sha256": "c0db6c8ae98924db8b6c48c20867501d54066e145b8ca63cd17b704a908db5e1",
+      "served_sha256": "c0db6c8ae98924db8b6c48c20867501d54066e145b8ca63cd17b704a908db5e1",
+      "passed": true
+    },
+    "site.css": {
+      "bytes": 17995,
+      "expected_sha256": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
+      "served_sha256": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
+      "passed": true
+    },
+    "shell.css": {
+      "bytes": 3982,
+      "expected_sha256": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
+      "served_sha256": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "passed": true
     },
     "sitemap.xml": {
@@ -189,18 +201,6 @@
       "bytes": 1998,
       "expected_sha256": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
       "served_sha256": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
-      "passed": true
-    },
-    "shell.css": {
-      "bytes": 3982,
-      "expected_sha256": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
-      "served_sha256": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
-      "passed": true
-    },
-    "site.css": {
-      "bytes": 17995,
-      "expected_sha256": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
-      "served_sha256": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
       "passed": true
     },
     "explanation.css": {
@@ -222,9 +222,9 @@
       "passed": true
     },
     "assets/explanation-pilot.json": {
-      "bytes": 730266,
-      "expected_sha256": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
-      "served_sha256": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
+      "bytes": 2467271,
+      "expected_sha256": "a38470b4b685529824999823149679d8990978f81ba26bda001db1c713ff4d18",
+      "served_sha256": "a38470b4b685529824999823149679d8990978f81ba26bda001db1c713ff4d18",
       "passed": true
     },
     "source-path.js": {
@@ -233,16 +233,16 @@
       "served_sha256": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
       "passed": true
     },
-    "assets/source-catalog.json": {
-      "bytes": 365824,
-      "expected_sha256": "ed95231d1c7088bdaac6bf9a5a80dd1c3a38e2831a11d9fcef1c31f89eb32c1a",
-      "served_sha256": "ed95231d1c7088bdaac6bf9a5a80dd1c3a38e2831a11d9fcef1c31f89eb32c1a",
-      "passed": true
-    },
     "amado/runtime/pyodide-lock.json": {
       "bytes": 119077,
       "expected_sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
       "served_sha256": "5dc2fc119108bc148c7457dc86e7675b5c87e1cafd420b9c34c1eaef7b36c010",
+      "passed": true
+    },
+    "assets/source-catalog.json": {
+      "bytes": 367665,
+      "expected_sha256": "2d4bd04b0cd5625056a959e31c4eb38035eb0c9ceda800497181494e4166b60c",
+      "served_sha256": "2d4bd04b0cd5625056a959e31c4eb38035eb0c9ceda800497181494e4166b60c",
       "passed": true
     },
     "amado/runtime/pyodide.asm.mjs": {
@@ -258,9 +258,9 @@
       "passed": true
     },
     "amado/engine.py": {
-      "bytes": 232894,
-      "expected_sha256": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
-      "served_sha256": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
+      "bytes": 234345,
+      "expected_sha256": "17555c653768d275cf36bc2a3b39b3d1dd989dd85996c275f1e545130b198045",
+      "served_sha256": "17555c653768d275cf36bc2a3b39b3d1dd989dd85996c275f1e545130b198045",
       "passed": true
     },
     "amado/runtime/python_stdlib.zip": {
@@ -276,41 +276,41 @@
       "passed": true
     },
     "amado/bridge.py": {
-      "bytes": 11487,
-      "expected_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
-      "served_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
+      "bytes": 11898,
+      "expected_sha256": "3ee7cd6f8ff33e95ab73b27237aa3244261b9a06d46016d5c5e2b6fb8a1385b0",
+      "served_sha256": "3ee7cd6f8ff33e95ab73b27237aa3244261b9a06d46016d5c5e2b6fb8a1385b0",
       "passed": true
     },
     "amado/assets/base.zip": {
-      "bytes": 1326751,
-      "expected_sha256": "c88b26194a9860a492f94e770747b255fb7faa4d622a190958dea1eae96ea405",
-      "served_sha256": "c88b26194a9860a492f94e770747b255fb7faa4d622a190958dea1eae96ea405",
+      "bytes": 2559333,
+      "expected_sha256": "c5eca83417b235f897dbca79a743d027711fd519e2c733ec08e3f7941111868d",
+      "served_sha256": "c5eca83417b235f897dbca79a743d027711fd519e2c733ec08e3f7941111868d",
       "passed": true
     }
   },
   "download_assets": {
     "downloads/mado-public.ttl": {
-      "bytes": 2574603,
-      "expected_sha256": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
-      "served_sha256": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
+      "bytes": 17873700,
+      "expected_sha256": "b8b08a71e5987d0a73f09e9a4f2bad0105629b4ed25a913e4ad3d76361d9874d",
+      "served_sha256": "b8b08a71e5987d0a73f09e9a4f2bad0105629b4ed25a913e4ad3d76361d9874d",
       "passed": true
     },
     "downloads/mado.owl": {
-      "bytes": 2020317,
-      "expected_sha256": "1a8a6fbf2df4ef26a58de665537beb1f19a08b95681e5c23806c3c7b4d17dc22",
-      "served_sha256": "1a8a6fbf2df4ef26a58de665537beb1f19a08b95681e5c23806c3c7b4d17dc22",
+      "bytes": 11771090,
+      "expected_sha256": "052fed05a40338d63a9d46b80ec6287e1d4cdb2f0f46307755444bc2fafcf05d",
+      "served_sha256": "052fed05a40338d63a9d46b80ec6287e1d4cdb2f0f46307755444bc2fafcf05d",
       "passed": true
     },
     "downloads/main.ttl": {
-      "bytes": 38477,
-      "expected_sha256": "ea5aa859532fb2fdc71f8336ed1e8f50092c4c6eca194cc9f48bedcf45ba2c8b",
-      "served_sha256": "ea5aa859532fb2fdc71f8336ed1e8f50092c4c6eca194cc9f48bedcf45ba2c8b",
+      "bytes": 42113,
+      "expected_sha256": "3dd0cf2b1d10e9c36cc40f6f092f9613120b17e440f2f5aec224a2e32abb5e9c",
+      "served_sha256": "3dd0cf2b1d10e9c36cc40f6f092f9613120b17e440f2f5aec224a2e32abb5e9c",
       "passed": true
     },
     "downloads/main.shacl.ttl": {
-      "bytes": 30041,
-      "expected_sha256": "791b8c93cf8229b3dc0f9d26d3495e9d9cf45c70deef5392e0f7fb29373c77ad",
-      "served_sha256": "791b8c93cf8229b3dc0f9d26d3495e9d9cf45c70deef5392e0f7fb29373c77ad",
+      "bytes": 47285,
+      "expected_sha256": "58bc465b0b3bb934b7485467a663820ff95477f3c3c1873a9a96d2ca6685a826",
+      "served_sha256": "58bc465b0b3bb934b7485467a663820ff95477f3c3c1873a9a96d2ca6685a826",
       "passed": true
     }
   },
@@ -325,13 +325,13 @@
       "contract": "AMADO_SITUATED_1",
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
-      "operations": 1
+      "operations": 3
     },
     "guiado.html": {
       "contract": "AMADO_SITUATED_1",
       "status": "INSUFFICIENT",
       "proposal_status": "CONDITIONAL",
-      "operations": 1
+      "operations": 3
     }
   },
   "errors": [],
@@ -348,19 +348,19 @@
     "Speech is mocked to prevent audio; microphone accuracy and real screen readers are not tested.",
     "This smoke does not replace the local regression or native/worker canonical parity checks."
   ],
-  "browser": "155.0.8059.40",
-  "public_manifest_sha256": "8b9ae42eba9eda63c234777013cea3580442f88221a3c867713bd7dd55c02450",
-  "version": "1.5.0-rc3",
+  "browser": "156.0.4314.42",
+  "public_manifest_sha256": "8d9f26cfb160dd43e0ffab95b6f90d4a84d58b6731fd0af19d7ce17da7c65df9",
+  "version": "1.6.0-rc1",
   "build": {
-    "version": "1.5.0-rc3",
+    "version": "1.6.0-rc1",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
-    "executor_version": "AMADO-web-1.5.0-rc3-structural1",
+    "executor_version": "AMADO-web-1.6.0-rc1-semantic1",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
-    "bridge_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
-    "base_zip_sha256": "c88b26194a9860a492f94e770747b255fb7faa4d622a190958dea1eae96ea405",
+    "core_sha256": "17555c653768d275cf36bc2a3b39b3d1dd989dd85996c275f1e545130b198045",
+    "bridge_sha256": "3ee7cd6f8ff33e95ab73b27237aa3244261b9a06d46016d5c5e2b6fb8a1385b0",
+    "base_zip_sha256": "c5eca83417b235f897dbca79a743d027711fd519e2c733ec08e3f7941111868d",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -398,16 +398,12 @@
     "case_history": false,
     "llm": false,
     "composition": {
-      "version": "2.0.0-alpha5",
+      "version": "2.0.0-alpha6",
       "implementation": "ResearchComposer",
       "case_storage": false,
       "files": {
-        "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
-        "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-        "experimental/v2/schema.ttl": "cdae5b02adc021797a2729fbd307abf9eabcfc5dcfdaf22fc719eaffd96056c2",
-        "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-        "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-        "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
+        "experimental/v2/composer.py": "6d7f6b23935e0608534b5842597c2482805620910d1a149c4260773820f1259a",
+        "experimental/v2/trajectory.py": "3a871eb063047f6086dfffed5a06ef804ed22a99945a225040433d78748b9fff",
         "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
       }
     },
@@ -428,12 +424,12 @@
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
       "situated-output.mjs": "34d37b71334294f21e1c762246c4757b7b63c7384c177a9a9b8a05451e607710",
-      "completo.html": "bcac4fb42bef462814fe30a520821d87c02e9f4f9119efdf06bde5bcc30460ff",
-      "completo-guiado.html": "50468ea6262439aadddc0c732a230af50feb45d5b1aea5b63d8e0590c0d912a5"
+      "completo.html": "a88bda21bc081ab1eb0c3fbfea3ca06e29ca68bb2685f5b62a534b6d1c700bc0",
+      "completo-guiado.html": "c0db6c8ae98924db8b6c48c20867501d54066e145b8ca63cd17b704a908db5e1"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
-      "ontologia/index.html": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
+      "ontologia/index.html": "4f72c26ae6a6fc32e1e362a64af062ee9bca46d7ea33b70392392980a70b1ab5",
       "site.css": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
@@ -441,16 +437,18 @@
       "explanation.js": "99ed5c901099216983a26bbd3a4afa92de2993f3810982081bdcca1147f6d57c",
       "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
       "explanation-pilot.js": "9e8ae2760bac3388b3434a297b1cc0ac2b35c47ae43aaed6170492ea78716c91",
-      "assets/explanation-pilot.json": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
+      "assets/explanation-pilot.json": "a38470b4b685529824999823149679d8990978f81ba26bda001db1c713ff4d18",
       "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
-      "assets/source-catalog.json": "ed95231d1c7088bdaac6bf9a5a80dd1c3a38e2831a11d9fcef1c31f89eb32c1a"
+      "assets/source-catalog.json": "2d4bd04b0cd5625056a959e31c4eb38035eb0c9ceda800497181494e4166b60c"
     },
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
       "situated_context.py": "5515929ed9ad5edb8fcaa1222e3df348917093d16c0fa688fe8de619e1c159c4",
-      "data/knowledge-base.json": "68f6996e5ba8e8d7fdabb597599a2aec6089670ac69f20b2605fab90403ec2b6",
+      "semantic_catalogue.py": "b59b461e369351d34d783c6f90fba8e7b72b250c2b800d9693d03c57d0f3818f",
+      "semantic_execution.py": "57147695aec6e2a0baf80419d40548e1eba12d56fb02618c4dc4d0d404cfb2af",
+      "shapes/execution.shacl.ttl": "7832dd89f77c1a8f15b41af9c2f68b5e5746bb0bd191503f51cb43abc8c671bf",
       "data/interface-vocabulary.json": "37b0d7b64e81c283103983e0d3e053ed4a83200fe37414092b67b014424fff13",
-      "ontology/mado-combined.ttl": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
+      "ontology/mado-combined.ttl": "b8b08a71e5987d0a73f09e9a4f2bad0105629b4ed25a913e4ad3d76361d9874d",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -461,12 +459,18 @@
       "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
       "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
       "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9",
-      "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
-      "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-      "experimental/v2/schema.ttl": "cdae5b02adc021797a2729fbd307abf9eabcfc5dcfdaf22fc719eaffd96056c2",
-      "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-      "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-      "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
+      "queries/EXEC-CQ-001.rq": "b673f7465c6c029988bf61596206d55e8d0eb8bc636ef34471e2bedfe0a004cd",
+      "queries/EXEC-CQ-002.rq": "8dc979674f8a502fae4d7a383d8ef9a0c709693cb0d731e185d2faf170122a47",
+      "queries/EXEC-CQ-003.rq": "92449607729e185be802613c0cf87be235624013e763bd424dd5abb852ddb542",
+      "queries/EXEC-CQ-004.rq": "1417b9fcfd2da54e6623ad8c29bf8911b1630bbe47c14a662b2d2bfdc1bf6d07",
+      "queries/EXEC-CQ-005.rq": "648dcc92519e96fe77765f2b50460a5566ed02becd1a563865391e1af643dc78",
+      "queries/EXEC-CQ-006.rq": "0f838f073631b718f7f1a8463605c9316e247d71e904e47a2498a26083303bd4",
+      "queries/EXEC-CQ-007.rq": "f5268f3683d05cfc091ab786c0cc1142c77f98372471cd9048ee074ca571e933",
+      "queries/EXEC-CQ-008.rq": "ca3304db5845042d7ccb8a9c42ea519aa1bc95d990ae5b202e69ef32701a51df",
+      "queries/EXEC-CQ-009.rq": "2255bd4acbfae65c734b0973752b356140ce00953d24987b4ce9d9b3547490b8",
+      "queries/EXEC-CQ-010.rq": "20aa1e7b202dacb3f0f9aea05f6bb6de6bb774562acaaf0a6f604ccd30185f1c",
+      "experimental/v2/composer.py": "6d7f6b23935e0608534b5842597c2482805620910d1a149c4260773820f1259a",
+      "experimental/v2/trajectory.py": "3a871eb063047f6086dfffed5a06ef804ed22a99945a225040433d78748b9fff",
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   }
