@@ -13,6 +13,27 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def check_test_isolation():
+    """Held-out narratives belong to tests, including after evidence export."""
+    cases = json.loads((ROOT / "tests/fixtures/articulation_transfer_cases.json").read_text(encoding="utf-8"))
+    forbidden = [(case["id"], case["narrative"]) for case in cases]
+    paths = [ROOT / "data/knowledge-base.json"]
+    paths.extend(path for path in (ROOT / "web").rglob("*")
+                 if path.suffix in {".html", ".js", ".mjs", ".py", ".json", ".ttl", ".owl"})
+    for path in paths:
+        payload = path.read_text(encoding="utf-8", errors="replace")
+        for identifier, narrative in forbidden:
+            assert identifier not in payload and narrative not in payload, (
+                "Held-out test content in public file: " + path.relative_to(ROOT).as_posix())
+    with zipfile.ZipFile(APP / "assets/base.zip") as bundle:
+        for name in bundle.namelist():
+            assert not name.startswith("tests/") and "articulation_transfer_cases" not in name, name
+            payload = bundle.read(name).decode("utf-8", errors="replace")
+            for identifier, narrative in forbidden:
+                assert identifier not in payload and narrative not in payload, (
+                    "Held-out test content in runtime bundle: " + name)
+
+
 def main():
     m = json.loads((APP / "manifest.json").read_text(encoding="utf-8"))
     assert sha(ROOT / "engine.py") == sha(APP / "engine.py") == m["core_sha256"]
@@ -35,6 +56,7 @@ def main():
             path = (ROOT / name).resolve()
             assert path.is_relative_to(ROOT), name
             assert hashlib.sha256(bundle.read(name)).hexdigest() == sha(path), name
+    check_test_isolation()
     print(json.dumps({"passed": True, "version": m["version"], "bundle_sha256": m["base_zip_sha256"], "policy": "Deploy the exact tested artifact, not a platform-specific rebuild."}))
 
 

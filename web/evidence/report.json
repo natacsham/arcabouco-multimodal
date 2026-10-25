@@ -183,8 +183,11 @@
     },
     "situated-report.json": {
       "url": "situated-report.json",
-      "sha256": "397bca0bc3e837c749caebfe9f685e8a97eac1f219cc8f5797e10c95a633fb87",
-      "evidence_use": "CURRENT_BUILD_EXECUTION"
+      "sha256": "f5eba462f4289b1432e76b969128d0d40defc257091210b37ca170a5cf5ee0e7",
+      "source_report": "experimental/v2/evidence/situated-report.json",
+      "source_sha256": "397bca0bc3e837c749caebfe9f685e8a97eac1f219cc8f5797e10c95a633fb87",
+      "projection": "PUBLIC_TECHNICAL_SUMMARY_WITHOUT_TEST_CASE_CONTENT",
+      "evidence_use": "CURRENT_BUILD_EXECUTION_SUMMARY"
     },
     "situated-browser.json": {
       "url": "situated-browser.json",

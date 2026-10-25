@@ -38,6 +38,11 @@ jobs:
                   if not check.get('passed'):
                       details = {key: value for key, value in check.items()
                                  if key not in {'output', 'findings'}}
+                      for group in ('failures', 'errors'):
+                          for item in details.get(group, []):
+                              trace = item.get('traceback', '')
+                              if len(trace) > 6000:
+                                  item['traceback'] = trace[:4500] + '\n... truncated ...\n' + trace[-1000:]
                       print(name, json.dumps(details, ensure_ascii=False, indent=2))
           PY
       - run: python -B experimental/v2/verify_trajectory.py --output experimental/v2/evidence/trajectory-report.json
@@ -63,6 +68,7 @@ jobs:
       - run: python -B tests/publish-gates.py
       - run: python scripts/audit_distribution.py
       - run: python scripts/publish_traceability.py
+      - run: python scripts/check_bundle.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

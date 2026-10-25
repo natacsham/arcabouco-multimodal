@@ -38,6 +38,61 @@ def sha(name):
     return hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
 
 
+def public_situated_report(report, source_path, source_sha256):
+    """Publish verification outcomes, never the held-out inputs or their IDs.
+
+    The complete technical report remains untouched in the repository. This
+    allowlisted projection is not another test execution or a copy of that file.
+    """
+    public = {key: report[key] for key in (
+        "schema_version", "base_version", "checked_at_utc", "evidence_kind",
+        "scope", "limits", "source_files_unchanged", "input_context_unchanged",
+        "source_hashes_before", "source_hashes_after") if key in report}
+    public["tests"] = {key: report.get("tests", {}).get(key)
+                       for key in ("count", "failures", "errors", "skipped", "success")}
+    public["delta"] = {key: report.get("delta", {}).get(key) for key in (
+        "complete_choices_with_relation", "complete_choices_without_relation",
+        "complete_choices_without_articulation_operation",
+        "second_person_blocked_complete_choices", "first_person_sequence_preserved")}
+    public["execution_checks"] = []
+    for index, item in enumerate(report.get("execution_cases", {}).values(), 1):
+        execution = item.get("execution", {})
+        public["execution_checks"].append({
+            "check_number": index,
+            "execution_shacl_conforms": item.get("execution_shacl_conforms"),
+            "query_row_counts": item.get("query_row_counts", {}),
+            "execution": {key: execution[key] for key in (
+                "contract_version", "graph_sha256", "base_sha256", "triples",
+                "case_storage", "observed_outcome", "counts", "query_ids") if key in execution},
+        })
+    public["projection"] = {
+        "kind": "PUBLIC_TECHNICAL_SUMMARY_WITHOUT_TEST_CASE_CONTENT",
+        "source_report": source_path, "source_sha256": source_sha256,
+        "omitted": ["fixtures", "case_identifiers", "test_log", "summaries", "results"],
+        "notice": "Resumo derivado do relatório técnico integral preservado no repositório. Não contém relatos, identificadores dos casos reservados ou decisões desses casos; não representa nova execução.",
+    }
+    return public
+
+
+def write_public_situated_summary(source_name, destination):
+    """Write only a derived summary; do not approve or rewrite release gates."""
+    source_path = (ROOT / source_name).resolve()
+    destination = Path(destination).resolve()
+    if not source_path.is_relative_to(ROOT) or not destination.is_relative_to(ROOT):
+        raise ValueError("Evidence summaries must remain inside this project.")
+    if destination == source_path:
+        raise ValueError("The complete technical report must remain unchanged.")
+    original = source_path.read_bytes()
+    source_digest = hashlib.sha256(original).hexdigest()
+    projection = public_situated_report(json.loads(original), source_name, source_digest)
+    published = (json.dumps(projection, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_bytes(published)
+    return {"url": destination.name, "sha256": hashlib.sha256(published).hexdigest(),
+            "source_report": source_name, "source_sha256": source_digest,
+            "projection": projection["projection"]["kind"]}
+
+
 def _matches(name, digest):
     return bool(digest) and (ROOT / name).is_file() and sha(name) == digest
 
@@ -380,6 +435,12 @@ def publish_situated(manifest):
     }
     for key, name in paths.items():
         filename = Path(name).name
+        if key == "situated":
+            summary["reports"][filename] = {
+                **write_public_situated_summary(name, target / filename),
+                "evidence_use": "CURRENT_BUILD_EXECUTION_PUBLIC_SUMMARY",
+            }
+            continue
         (target / filename).write_bytes((ROOT / name).read_bytes())
         summary["reports"][filename] = {"url": filename, "sha256": sha(name),
             "evidence_use": ("VERIFIED_CURRENT_ONTOLOGY_SHA256" if manifest.get("version") == "1.6.0-rc1"
