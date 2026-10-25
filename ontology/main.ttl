@@ -9,9 +9,9 @@
 skos:broader a owl:ObjectProperty .
 
 <https://w3id.org/mado> a owl:Ontology ;
-  owl:versionIRI <https://w3id.org/mado/1.5.0-rc3> ;
-  owl:versionInfo "1.5.0-rc3" ;
-  owl:priorVersion <https://w3id.org/mado/1.5.0-rc2> ;
+  owl:versionIRI <https://w3id.org/mado/1.6.0-rc1> ;
+  owl:versionInfo "1.6.0-rc1" ;
+  owl:priorVersion <https://w3id.org/mado/1.5.0-rc3> ;
   dcterms:creator "Natacsha Ordones Raposo de Melo" ;
   rdfs:label "MADO — Ontologia do Arcabouço Multimodal para Acessibilidade Digital"@pt-BR ;
   rdfs:comment "Representa a articulação rastreável entre fontes, conhecimento multimodal articulado, critérios, características situadas da pessoa, contextos, decisões e resultados. Não possui classe de deficiência e não automatiza julgamento situado."@pt-BR .
@@ -334,3 +334,44 @@ mado:efeitoEmpiricoAutorizado a owl:DatatypeProperty ;
   rdfs:domain mado:AfirmacaoOperacionalDocumentada ; rdfs:range xsd:boolean .
 mado:contratoOperacionalSerializado a owl:DatatypeProperty ; rdfs:range xsd:string ;
   rdfs:comment "Projeção reproduzível do contrato curado; não executa o contrato nem representa uma decisão tomada."@pt-BR .
+
+# O catálogo operacional é RDF tipado. Os seis conceitos centrais permanecem.
+# Operação é uma possibilidade reutilizável; configuração é seu emprego situado.
+mado:OperacaoDeInteracao a owl:Class ;
+  rdfs:label "Operação de interação reutilizável"@pt-BR ;
+  rdfs:comment "Contrato curado com funções, entradas, saídas e requisitos. Sua existência não prova aplicabilidade a uma pessoa ou tarefa."@pt-BR .
+mado:RelacaoOperacional a owl:Class ;
+  rdfs:label "Relação operacional documentada"@pt-BR ;
+  rdfs:comment "Ligação interna ou entre operações, com escopo, temporalidade, informação preservada e fundamento próprios. Sequência não implica complementaridade."@pt-BR .
+mado:SuporteOperacional a owl:Class ;
+  rdfs:label "Suporte exato de um contrato operacional"@pt-BR ;
+  rdfs:comment "Associa uma parcela de conhecimento a um critério e suas origens quando tal associação está documentada. Não substitui AplicacaoDeCriterio situada."@pt-BR .
+mado:RequisitoOperacional a owl:Class ;
+  rdfs:label "Requisito de uma operação"@pt-BR ;
+  rdfs:comment "Entrada, saída ou condição com escopo e fase próprios. Preserva grupos todos/algum, sem transformar desconhecimento em ausência."@pt-BR .
+mado:DerivacaoDeRequisito a owl:Class ;
+  rdfs:label "Contrato de derivação de requisito"@pt-BR ;
+  rdfs:comment "Relaciona observações funcionais a requisitos situados sob parcelas documentadas e limites explícitos; não infere capacidade por diagnóstico."@pt-BR .
+mado:PapelInformacionalNaRelacao a owl:Class ;
+  rdfs:label "Papel informacional de uma modalidade na relação"@pt-BR ;
+  rdfs:comment "Delimita a parcela de informação, sua função e suficiência declarada para um objetivo, com suporte próprio. Suficiência declarada não é resultado observado."@pt-BR .
+mado:RefinamentoDeTarefaSituada a owl:Class ;
+  rdfs:label "Refinamento de uma tarefa situada"@pt-BR ;
+  rdfs:comment "Refinamento técnico condicional que exige ações, fatos e participantes delimitados. Não afirma equivalência entre uma tarefa ampla e uma tarefa específica."@pt-BR .
+mado:papeisInformacionaisDaRelacao a owl:ObjectProperty ; rdfs:range mado:PapelInformacionalNaRelacao .
+mado:parcelaInformacionalDoPapel a owl:ObjectProperty .
+mado:funcaoDoPapelInformacional a owl:ObjectProperty .
+mado:informacaoRequeridaPelaRelacao a owl:ObjectProperty .
+mado:possuiContratoDeOperacao a owl:ObjectProperty ; rdfs:range mado:OperacaoDeInteracao .
+mado:possuiVarianteOperacional a owl:ObjectProperty ; rdfs:range mado:OperacaoDeInteracao .
+mado:operacaoBaseDaVariante a owl:ObjectProperty ; rdfs:domain mado:OperacaoDeInteracao ; rdfs:range mado:OperacaoDeInteracao .
+mado:relacoesDoContrato a owl:ObjectProperty ; rdfs:range mado:RelacaoOperacional .
+mado:suportesDoContrato a owl:ObjectProperty ; rdfs:range mado:SuporteOperacional .
+mado:conhecimentoDoSuporteOperacional a owl:ObjectProperty ; rdfs:range mado:ConhecimentoMultimodalArticulado .
+mado:parcelaDoSuporteOperacional a owl:ObjectProperty ; rdfs:range mado:AfirmacaoOperacionalDocumentada .
+mado:criterioDoSuporteOperacional a owl:ObjectProperty ; rdfs:range mado:CriterioDeDecisaoMultimodal .
+mado:origensDoSuporteOperacional a owl:ObjectProperty ; rdfs:range mado:RelacaoDeOrigemDoCriterio .
+mado:fonteDoSuporteOperacional a owl:ObjectProperty ; rdfs:range mado:Fonte .
+mado:trechoDoSuporteOperacional a owl:ObjectProperty ; rdfs:range mado:TrechoDocumental .
+mado:operacoesDeOrigemDaRelacao a owl:ObjectProperty ; rdfs:range mado:OperacaoDeInteracao .
+mado:operacoesDeDestinoDaRelacao a owl:ObjectProperty ; rdfs:range mado:OperacaoDeInteracao .

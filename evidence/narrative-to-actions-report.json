@@ -14,8 +14,8 @@
       "decomposition": {
         "participants": [
           {
-            "id": "PART-CASO-01-E024C9",
-            "contexto_id": "CTX-CASO-83F501D50F",
+            "id": "PART-CASO-01-99DC98",
+            "contexto_id": "CTX-CASO-0C47B5E148",
             "papel_id": "PAPEL-PESSOA-APOIADA",
             "caracteristica_ids": [],
             "tarefa_ids": [],
@@ -28,8 +28,8 @@
             "quantidade": null
           },
           {
-            "id": "PART-E6E31D4E7E80",
-            "contexto_id": "CTX-CASO-83F501D50F",
+            "id": "PART-7B581A1DD383",
+            "contexto_id": "CTX-CASO-0C47B5E148",
             "papel_id": "PAPEL-RESPONSAVEL-ADAPTACAO",
             "label": "Quem relata e prepara o material",
             "grupo_rotulo": "",
@@ -47,21 +47,21 @@
         ],
         "situations": [
           {
-            "id": "SIT-BE9ECA034190",
+            "id": "SIT-77F33D0A9A60",
             "label": "Apresentação e explicação coletiva",
             "task_ids": [
               "TAR-COMUNICAR-CONTEUDO-1545B38",
               "TAR-COMUNICAR-E-EXPRESSAR"
             ],
             "participant_ids": [
-              "PART-E6E31D4E7E80",
-              "PART-CASO-01-E024C9"
+              "PART-7B581A1DD383",
+              "PART-CASO-01-99DC98"
             ],
             "actor_ids": [
-              "PART-E6E31D4E7E80"
+              "PART-7B581A1DD383"
             ],
             "recipient_ids": [
-              "PART-CASO-01-E024C9"
+              "PART-CASO-01-99DC98"
             ],
             "env_ids": [],
             "resource_ids": [
@@ -79,14 +79,14 @@
             "kind": "presentation"
           },
           {
-            "id": "SIT-95C911C9F06B",
+            "id": "SIT-74DEEAA3411F",
             "label": "Realização de exercícios — meio não informado",
             "task_ids": [],
             "participant_ids": [
-              "PART-CASO-01-E024C9"
+              "PART-CASO-01-99DC98"
             ],
             "actor_ids": [
-              "PART-CASO-01-E024C9"
+              "PART-CASO-01-99DC98"
             ],
             "recipient_ids": [],
             "env_ids": [],
@@ -133,7 +133,7 @@
             "field": "observation_scope",
             "label": "A dificuldade já relatada — “Algumas pessoas leem texto curto, mas não conseguem retomar as instruções quando são dadas somente pela fala.” — refere-se a quem e a qual atividade?",
             "participant_id": "",
-            "situation_id": "SIT-BE9ECA034190"
+            "situation_id": "SIT-77F33D0A9A60"
           },
           {
             "field": "objetivo",
@@ -160,8 +160,8 @@
             "type": "FUNCTION_GAP",
             "id": "TAR-COMUNICAR-CONTEUDO-1545B38",
             "label": "Comunicar conteúdo",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-E6E31D4E7E80",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-7B581A1DD383",
             "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
             "participant_label": "Quem relata e prepara o material",
             "situation_label": "Apresentação e explicação coletiva"
@@ -171,8 +171,8 @@
             "type": "FUNCTION_GAP",
             "id": "TAR-COMUNICAR-E-EXPRESSAR",
             "label": "Comunicar e expressar conhecimento",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-E6E31D4E7E80",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-7B581A1DD383",
             "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
             "participant_label": "Quem relata e prepara o material",
             "situation_label": "Apresentação e explicação coletiva"
@@ -180,24 +180,24 @@
           {
             "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
             "type": "FUNCTION_GAP",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-E6E31D4E7E80",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-7B581A1DD383",
             "participant_label": "Quem relata e prepara o material",
             "situation_label": "Apresentação e explicação coletiva"
           },
           {
             "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
             "type": "FUNCTION_GAP",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-CASO-01-E024C9",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-CASO-01-99DC98",
             "participant_label": "Pessoas apoiadas na interação (quantidade não informada)",
             "situation_label": "Apresentação e explicação coletiva"
           },
           {
             "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
             "type": "CONTEXT_GAP",
-            "situation_id": "SIT-95C911C9F06B",
-            "participant_id": "PART-CASO-01-E024C9",
+            "situation_id": "SIT-74DEEAA3411F",
+            "participant_id": "PART-CASO-01-99DC98",
             "participant_label": "Pessoas apoiadas na interação (quantidade não informada)",
             "situation_label": "Realização de exercícios — meio não informado"
           },
@@ -269,8 +269,8 @@
             "type": "FUNCTION_GAP",
             "id": "TAR-COMUNICAR-CONTEUDO-1545B38",
             "label": "Comunicar conteúdo",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-E6E31D4E7E80",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-7B581A1DD383",
             "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
             "participant_label": "Quem relata e prepara o material",
             "situation_label": "Apresentação e explicação coletiva"
@@ -280,8 +280,8 @@
             "type": "FUNCTION_GAP",
             "id": "TAR-COMUNICAR-E-EXPRESSAR",
             "label": "Comunicar e expressar conhecimento",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-E6E31D4E7E80",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-7B581A1DD383",
             "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
             "participant_label": "Quem relata e prepara o material",
             "situation_label": "Apresentação e explicação coletiva"
@@ -289,8 +289,8 @@
           {
             "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
             "type": "FUNCTION_GAP",
-            "situation_id": "SIT-BE9ECA034190",
-            "participant_id": "PART-E6E31D4E7E80",
+            "situation_id": "SIT-77F33D0A9A60",
+            "participant_id": "PART-7B581A1DD383",
             "participant_label": "Quem relata e prepara o material",
             "situation_label": "Apresentação e explicação coletiva"
           },
@@ -309,8 +309,8 @@
       "decomposition": {
         "participants": [
           {
-            "id": "PART-7C1786EE8E5E",
-            "contexto_id": "CTX-CASO-33DFBB0138",
+            "id": "PART-95BCBCBDB98B",
+            "contexto_id": "CTX-CASO-AB1A7C79B8",
             "papel_id": "PAPEL-PESSOA-APOIADA",
             "label": "Quem relata e realiza a atividade",
             "grupo_rotulo": "",
@@ -327,16 +327,16 @@
         ],
         "situations": [
           {
-            "id": "SIT-3BD1FF35BA06",
+            "id": "SIT-FDF2343F72F4",
             "label": "Atividade: Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar.",
             "task_ids": [
               "TAR-REVISAR-E-CONFIRMAR"
             ],
             "participant_ids": [
-              "PART-7C1786EE8E5E"
+              "PART-95BCBCBDB98B"
             ],
             "actor_ids": [
-              "PART-7C1786EE8E5E"
+              "PART-95BCBCBDB98B"
             ],
             "recipient_ids": [],
             "env_ids": [],
@@ -350,7 +350,7 @@
             "kind": "reported_activity_1"
           },
           {
-            "id": "SIT-0483A5CA7736",
+            "id": "SIT-719738AFAB56",
             "label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a",
             "task_ids": [
               "TAR-OPERAR-SISTEMA"
@@ -408,7 +408,7 @@
             "field": "observation_scope",
             "label": "A dificuldade já relatada — “Consigo usar o teclado e ler as instruções na tela, mas não consigo operar o mouse.” — refere-se a quem e a qual atividade?",
             "participant_id": "",
-            "situation_id": "SIT-3BD1FF35BA06"
+            "situation_id": "SIT-FDF2343F72F4"
           },
           {
             "field": "recursos_disponiveis",
@@ -442,17 +442,17 @@
           {
             "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
             "type": "FUNCTION_GAP",
-            "situation_id": "SIT-3BD1FF35BA06",
-            "participant_id": "PART-7C1786EE8E5E",
+            "situation_id": "SIT-FDF2343F72F4",
+            "participant_id": "PART-95BCBCBDB98B",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Atividade: Quero preencher os campos, corrigir erros e conferir as respostas antes de enviar."
           },
           {
             "code": "NO_DOCUMENTED_FUNCTION_REQUIREMENT",
             "type": "FUNCTION_GAP",
-            "situation_id": "SIT-0483A5CA7736",
-            "participant_id": "CTX-CASO-33DFBB0138",
-            "participant_label": "CTX-CASO-33DFBB0138",
+            "situation_id": "SIT-719738AFAB56",
+            "participant_id": "CTX-CASO-AB1A7C79B8",
+            "participant_label": "CTX-CASO-AB1A7C79B8",
             "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
           },
           {
@@ -495,8 +495,8 @@
             "type": "FUNCTION_GAP",
             "id": "TAR-OPERAR-SISTEMA",
             "label": "Operar um sistema ou recurso",
-            "situation_id": "SIT-0483A5CA7736",
-            "participant_id": "PART-7C1786EE8E5E",
+            "situation_id": "SIT-719738AFAB56",
+            "participant_id": "PART-95BCBCBDB98B",
             "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
@@ -506,8 +506,8 @@
             "type": "FUNCTION_GAP",
             "id": "TAR-REVISAR-E-CONFIRMAR",
             "label": "Revisar e confirmar informação ou ação",
-            "situation_id": "SIT-0483A5CA7736",
-            "participant_id": "PART-7C1786EE8E5E",
+            "situation_id": "SIT-719738AFAB56",
+            "participant_id": "PART-95BCBCBDB98B",
             "explanation": "Esta ação foi informada, mas não possui um vínculo documentado com as funções compostas. O apoio disponível não cobre automaticamente essa ação.",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
@@ -517,8 +517,8 @@
             "type": "FUNCTION_GAP",
             "id": "NEC-REVISAO-E-CONFIRMACAO",
             "label": "Permitir revisar, repetir e confirmar conteúdo ou ação",
-            "situation_id": "SIT-0483A5CA7736",
-            "participant_id": "PART-7C1786EE8E5E",
+            "situation_id": "SIT-719738AFAB56",
+            "participant_id": "PART-95BCBCBDB98B",
             "explanation": "Esta necessidade foi informada, mas não possui uma derivação funcional autorizada nesta execução. Não é falta de resposta da pessoa.",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Atividade: Preciso preencher e enviar um formulário digital para uma associação. Consigo usar o teclado e ler a"
@@ -538,8 +538,8 @@
       "decomposition": {
         "participants": [
           {
-            "id": "PART-ACF248C67019",
-            "contexto_id": "CTX-CASO-63A38B3C97",
+            "id": "PART-E86AD1637869",
+            "contexto_id": "CTX-CASO-1D469A7D3D",
             "papel_id": "PAPEL-PESSOA-APOIADA",
             "label": "Quem relata e realiza a atividade",
             "grupo_rotulo": "",
@@ -561,17 +561,17 @@
         ],
         "situations": [
           {
-            "id": "SIT-CA6B3B11F6B5",
+            "id": "SIT-A431066CB7FB",
             "label": "Produzir e revisar o mesmo conteúdo",
             "task_ids": [
               "TAR-REVISAR-E-CONFIRMAR",
               "TAR-PRODUZIR-CONTEUDO-MULTIMODAL"
             ],
             "participant_ids": [
-              "PART-ACF248C67019"
+              "PART-E86AD1637869"
             ],
             "actor_ids": [
-              "PART-ACF248C67019"
+              "PART-E86AD1637869"
             ],
             "recipient_ids": [],
             "env_ids": [],
@@ -682,21 +682,6 @@
           },
           {
             "operations": [
-              "CaptureKeyboard",
-              "ReviewSpeech"
-            ],
-            "relations": [
-              "ProductionThenReview"
-            ],
-            "covers_required_functions": false,
-            "ready_for_whole_task": false,
-            "actions": [
-              "Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável",
-              "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir"
-            ]
-          },
-          {
-            "operations": [
               "CaptureSpeech",
               "ReviewSpeech"
             ],
@@ -707,6 +692,21 @@
             "ready_for_whole_task": false,
             "actions": [
               "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável",
+              "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureKeyboard",
+              "ReviewSpeech"
+            ],
+            "relations": [
+              "ProductionThenReview"
+            ],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por uma interface de teclado operável, mantendo um rascunho editável",
               "Ler o rascunho em voz, com pausa e repetição sob controle da pessoa, permitindo correção antes de concluir"
             ]
           },
@@ -907,7 +907,7 @@
           },
           {
             "id": "EditableText",
-            "label": "Campo textual editável",
+            "label": "https://w3id.org/mado/experimental/v2#EditableText",
             "required_by": [
               "CaptureKeyboard",
               "CaptureSpeech",
@@ -917,21 +917,21 @@
           },
           {
             "id": "AudioOutput",
-            "label": "Saída de áudio controlável",
+            "label": "https://w3id.org/mado/experimental/v2#AudioOutput",
             "required_by": [
               "ReviewSpeech"
             ]
           },
           {
             "id": "TextToSpeech",
-            "label": "Leitura em voz do texto",
+            "label": "https://w3id.org/mado/experimental/v2#TextToSpeech",
             "required_by": [
               "ReviewSpeech"
             ]
           },
           {
             "id": "Display",
-            "label": "Apresentação visual legível",
+            "label": "https://w3id.org/mado/experimental/v2#Display",
             "required_by": [
               "ReviewText"
             ]
@@ -952,8 +952,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
               "https://w3id.org/mado/experimental/v2#ReviewSpeech"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -964,8 +964,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureKeyboard",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -976,8 +976,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewSpeech"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -988,8 +988,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -1001,8 +1001,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewSpeech"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -1014,8 +1014,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -1027,8 +1027,8 @@
               "https://w3id.org/mado/experimental/v2#ReviewSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -1040,8 +1040,8 @@
               "https://w3id.org/mado/experimental/v2#ReviewSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           },
@@ -1054,8 +1054,8 @@
               "https://w3id.org/mado/experimental/v2#ReviewSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           }
@@ -1167,8 +1167,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           }
@@ -1308,17 +1308,6 @@
         "partial_segments": [
           {
             "operations": [
-              "CaptureSpeech"
-            ],
-            "relations": [],
-            "covers_required_functions": false,
-            "ready_for_whole_task": false,
-            "actions": [
-              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável"
-            ]
-          },
-          {
-            "operations": [
               "ReviewText"
             ],
             "relations": [],
@@ -1326,6 +1315,17 @@
             "ready_for_whole_task": false,
             "actions": [
               "Apresentar o rascunho em texto legível para a pessoa conferir e corrigir antes de concluir"
+            ]
+          },
+          {
+            "operations": [
+              "CaptureSpeech"
+            ],
+            "relations": [],
+            "covers_required_functions": false,
+            "ready_for_whole_task": false,
+            "actions": [
+              "Registrar a contribuição por fala, mantendo o texto reconhecido como rascunho editável"
             ]
           }
         ],
@@ -1360,8 +1360,8 @@
               "https://w3id.org/mado/experimental/v2#CaptureSpeech",
               "https://w3id.org/mado/experimental/v2#ReviewText"
             ],
-            "situation_id": "SIT-CA6B3B11F6B5",
-            "participant_id": "PART-ACF248C67019",
+            "situation_id": "SIT-A431066CB7FB",
+            "participant_id": "PART-E86AD1637869",
             "participant_label": "Quem relata e realiza a atividade",
             "situation_label": "Produzir e revisar o mesmo conteúdo"
           }
@@ -1377,15 +1377,15 @@
     "errors": 0,
     "output": "test_explanation_keeps_actual_sources_and_prior_articulations (__main__.main.<locals>.ReportChecks.test_explanation_keeps_actual_sources_and_prior_articulations) ... ok\ntest_first_person_actor_and_coherent_draft_episode (__main__.main.<locals>.ReportChecks.test_first_person_actor_and_coherent_draft_episode) ... ok\ntest_form_does_not_claim_whole_task_is_solved (__main__.main.<locals>.ReportChecks.test_form_does_not_claim_whole_task_is_solved) ... ok\ntest_no_feedback_resource_invented_from_correcting_errors (__main__.main.<locals>.ReportChecks.test_no_feedback_resource_invented_from_correcting_errors) ... ok\ntest_presentation_retains_observation_without_inventing_noise_or_haptics (__main__.main.<locals>.ReportChecks.test_presentation_retains_observation_without_inventing_noise_or_haptics) ... ok\ntest_relation_is_required_to_compose_not_to_list_operations (__main__.main.<locals>.ReportChecks.test_relation_is_required_to_compose_not_to_list_operations) ... ok\ntest_resource_removal_changes_the_composition (__main__.main.<locals>.ReportChecks.test_resource_removal_changes_the_composition) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.000s\n\nOK\n"
   },
-  "executed_at_utc": "2026-10-21T23:48:43.564739+00:00",
+  "executed_at_utc": "2026-10-25T21:38:19.676387+00:00",
   "sha256": {
-    "engine.py": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
+    "engine.py": "17555c653768d275cf36bc2a3b39b3d1dd989dd85996c275f1e545130b198045",
     "situated_context.py": "5515929ed9ad5edb8fcaa1222e3df348917093d16c0fa688fe8de619e1c159c4",
-    "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
-    "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
+    "experimental/v2/composer.py": "6d7f6b23935e0608534b5842597c2482805620910d1a149c4260773820f1259a",
+    "experimental/v2/trajectory.py": "3a871eb063047f6086dfffed5a06ef804ed22a99945a225040433d78748b9fff",
     "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-    "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
-    "data/knowledge-base.json": "68f6996e5ba8e8d7fdabb597599a2aec6089670ac69f20b2605fab90403ec2b6",
-    "tests/test_narrative_to_actions.py": "74ac01040c2c24570ffe3bee452d76657da7093154654378c421e6bea864cfcc"
+    "experimental/v2/trajectory-bindings.json": "7bba4c169107c06de2abeb44bf64c4f7c6d5cac3a86163b3d781adb24cf0e68b",
+    "data/knowledge-base.json": "be789ee4b1cb18ecf2cd93b45848fc29853a086486adf23a5f253234e3cbfcca",
+    "tests/test_narrative_to_actions.py": "d0b1b25ce776a77fb0bdcd048f86fe93a0bbb421472b5f351645446cf9c00167"
   }
 }

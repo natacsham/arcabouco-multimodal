@@ -4,13 +4,90 @@
 
 O **Arcabouço Multimodal para Acessibilidade Digital** organiza a articulação e o emprego de conhecimentos para apoiar decisões de interação. A **MADO (Multimodal Accessibility Decision Ontology)** representa esses conhecimentos, suas relações, critérios e condições. O **AMADO** é o instrumento que consulta a base e apresenta orientações com fundamentação rastreável.
 
-**Versão desta revisão: MADO 1.5.0-rc3 / compositor 2.0.0-alpha5 — candidata.** O estado anterior permanece no commit `557add720be50872d1b97fcb7247a81f19f95145`; esta implementação utiliza a branch `fix/structural-knowledge-composition`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
+**Versão desta revisão: MADO 1.6.0-rc1 / compositor 2.0.0-alpha6 — candidata.** O estado anterior permanece no commit `285de388dedd9ff7d6938e35c0bff4eb0fad9c75`; esta implementação utiliza a branch `feat/semantic-articulation-1.6`. Este repositório não modifica o repositório MADO nem a versão da tese. As avaliações anteriores não validam automaticamente esta revisão.
 
 **Este é o projeto em desenvolvimento.** Base, representação, motor e interface continuam em `arcabouco-multimodal`. As versões da base e do compositor são distintas para identificar exatamente o que foi executado. Não foi criada outra matriz de conhecimento.
 
 No AMADO, conte seu desafio por texto ou ditado, confira o entendimento e responda a até três esclarecimentos por rodada. Os exemplos e os relatos livres passam pelo mesmo contrato de contexto e pelo compositor situado. O assunto da aula e palavras como “turma” não escolhem outro motor. A interpretação é determinística e limitada: correções, informação não reconhecida e condições ainda desconhecidas permanecem visíveis. Refinamentos posteriores são opcionais.
 
-### Correção estrutural desta revisão
+## Representação e execução na versão 1.6
+
+**Articulação** é a construção analítica de uma compreensão a partir de contribuições delimitadas. **Combinação multimodal** é uma aplicação possível dessa compreensão. **Execução** é a verificação de sua pertinência para determinada pessoa, tarefa e ambiente. Uma articulação também pode fundamentar uma alternativa, uma condição ou uma restrição, sem acrescentar uma combinação.
+
+```mermaid
+flowchart TD
+  F[Fontes e trechos localizados] --> C[Contribuições delimitadas]
+  C --> A[Articulação analítica registrada]
+  A --> K[Compreensão, condições e limites]
+  K --> O[Operações e relações autorizadas]
+  O --> RDF[Base RDF publicada]
+  R[Relato confirmado] --> CT[Participantes, tarefas e situações]
+  CT --> V[Recuperação e verificação das aplicações]
+  RDF --> V
+  V --> E[Grafo temporário da execução]
+  E --> P[Orientação prática e fundamentação]
+```
+
+### Onde está a base
+
+| Arquivo ou coleção | Função |
+|---|---|
+| `data/knowledge-base.json` | Fonte de edição curada, incluindo fontes, extrações, conhecimentos, contribuições, articulações, critérios e contratos. |
+| `sources`, `excerpts`, `contributions` | Identificação documental, localização e contribuição delimitada; o estado indica o que foi conferido. |
+| `knowledge`, `articulations` | Compreensões, premissas, operação analítica, aplicações autorizadas e limites. |
+| `references` | Bibliografia; sua presença não significa extração nem autorização operacional. |
+| `functional_matrix`, `decision_components` | Derivações de funções e operações reutilizáveis, não respostas completas por assunto. |
+| `pilot_catalogue` | Quatro operações e declarações do piloto integradas ao contrato comum. |
+| `ontology/main.ttl` | Esquema das seis classes centrais e elementos auxiliares. |
+| `ontology/mado-combined.ttl` | **Fonte operacional comum:** RDF gerado e consultado pelo motor. |
+| `semantic_catalogue.py` | Projeta registros e lê relações tipadas do RDF. |
+| `semantic_execution.py` | Representa a execução e suas verificações num grafo temporário. |
+
+Os 45 conhecimentos, 17 articulações, 30 contribuições anteriores, onze entradas funcionais e contratos existentes receberam `semantic_curation`: destinação, motivo, escopo e preservação do enunciado histórico. Uma contribuição localizada de CARE foi acrescentada para delimitar a relação háptico–áudio, que continua dependente de condições situadas. As 156 referências bibliográficas permanecem distintas das extrações. Conferência no registro preservado não é apresentada como nova leitura integral do original.
+
+### Passo a passo real
+
+1. O relato é decomposto em participantes, ações, dificuldades, capacidades, recursos e situações. Ambiguidades e trechos não interpretados continuam corrigíveis. Diagnóstico não preenche capacidades desconhecidas; o assunto não seleciona uma resposta pronta.
+2. Requisitos fundamentados derivam funções necessárias. O motor recupera afirmações e articulações do RDF e confere premissas, contribuições, critérios, autorização e escopo.
+3. As operações são avaliadas por participante e situação. Material a preparar é distinto de recurso já disponível e de verificação posterior.
+4. Relações exigem vínculo informacional, função dos modos e condições de acesso. Compartilhar “texto” ou um nome de função não basta para conectar duas ações. Sequência não é automaticamente complementaridade; simultaneidade não é automaticamente redundância.
+5. A seleção considera cobertura e contribuição informacional, pendências e operações dispensáveis. Conserva apoios independentes sem inventar sequência entre eles.
+6. Orientação e fundamentação derivam da mesma execução. As condições têm quatro estados: satisfeita, não satisfeita, pendente e não executada.
+
+**O atendimento não abre normas ou artigos na internet.** Consulta uma versão preparada da base, com localizações e links. O JSON é usado na curadoria e geração do RDF, sem um segundo caminho decisório no navegador. O pacote público não inclui a base JSON nem os arquivos operacionais separados do piloto. Estes permanecem no repositório para reprodução histórica.
+
+Python avalia condições e realiza busca determinística. OWL representa conceitos e relações; SPARQL consulta registros; SHACL verifica restrições. O reasoner não interpreta livremente o relato nem escreve a orientação.
+
+### Exemplo: organizar informação para retomada
+
+A aplicação `APP-ART-TRF-04-ORGANIZAR-RETOMAR` relaciona contribuições localizadas das Personas Marcia e Lidiane, W3C MMI e WCAG 1.3.1. Elas tratam, no escopo registrado, de organização, competição entre formatos, navegação e preservação de estrutura e relações.
+
+A operação analítica fundamenta informação organizada, consultável e localizável para permitir a retomada de uma etapa. A síntese autoriza `OP-PAD-ORGANIZAR-CONTEUDO-PERSISTENTE` quando a necessidade e as condições correspondem ao caso. Seus registros contêm premissas, operação intelectual, compreensão resultante, autorização e limites. No RDF, retirar `mado:autorizaOperacao` afeta a seleção; retirar uma premissa indispensável não pode produzir uma síntese silenciosamente enfraquecida.
+
+Isso não significa que qualquer texto seja acessível ou que texto e imagem devam sempre ser combinados. Se somente texto foi selecionado, a saída é um apoio textual. Uma relação complementar exige contribuição própria de cada modo, necessidade conjunta e condições verificadas, conforme o escopo de [CARE](https://danielsalber.com/publications/interact1995.pdf). A classificação não comprova benefício humano.
+
+### Como conferir e alterar
+
+- Edite os registros existentes em `data/knowledge-base.json`, preservando fontes, localizações, escopo e estados. Uma interpretação pendente não autoriza orientação.
+- Para cada aplicação, explicite premissas cumulativas, operação intelectual, resultado, consequência autorizada e limites. Para relações, informe a parcela de informação e a função de cada modo, suficiência isolada ou conjunta, coordenação e controle.
+- Gere o RDF com `python -B scripts/build_traceability_rdf.py`; confira determinismo com `--check`.
+- Execute `python -B -m unittest discover -s tests`, as verificações OWL 2 DL/HermiT, SHACL, consultas e navegador. O relatório do reasoner precisa corresponder ao hash da ontologia atual.
+- Gere o pacote com `python scripts/build_web.py`, confira com `python scripts/check_bundle.py` e publique os mesmos bytes testados.
+
+As operações públicas mantêm `AMADO_SITUATED_1`. `semantic_trace` identifica o grafo temporário; `inspect_execution` permite consultar resumo, dez consultas ou Turtle em memória. Limpar ou revisar o contexto invalida a execução anterior. Orientação produzida não é registrada como resultado observado.
+
+As consultas históricas `queries/CQ-*.rq` permanecem preservadas. `queries/EXEC-CQ-*.rq` examinam contexto, requisitos, escolhas, premissas, critérios, relações, pendências e limites da nova execução, sem interpretar contratos JSON serializados.
+
+Os três relatos estão exclusivamente em `tests/fixtures/articulation_transfer_cases.json`. Não são opções da interface, regras por assunto nem parte do pacote de atendimento. A verificação compara narrativa e contexto estruturado, operações isoladas e articuladas, retirada de fundamentos e mudanças de condições. A relevância prática continua sujeita à avaliação humana.
+
+Resultados técnicos e hashes estão nos testes, evidências automatizadas e [fluxo de publicação](https://github.com/natacsham/arcabouco-multimodal/actions/workflows/pages.yml). Teste descrito não significa teste aprovado. Não se alegam compreensão irrestrita, eficácia educacional ou cobertura universal. Lacuna da base não é pergunta para o usuário; busca interrompida não significa inexistência de solução.
+
+A interface atual foi mantida, com **O que fazer** e **Como chegamos a esta orientação**. Não há LLM, cadastro, histórico de casos ou consulta online das normas durante o atendimento. [Direitos e privacidade](docs/direitos-e-privacidade.md) · [Licenças das dependências](THIRD_PARTY.md).
+
+<details>
+<summary>Histórico das revisões anteriores — arquitetura e evidências da versão indicada em cada registro</summary>
+
+### Correção estrutural da revisão 1.5
 
 A RC3 altera a utilização do conhecimento, **não a tela nem os três relatos de teste**. A autorização de transferência funcional deixa de ser bloqueada pelo nome da tarefa histórica. O compositor pode considerar uma operação anterior necessária para produzir a entrada de outra, sem converter a função oferecida por essa operação em necessidade informada pelo usuário.
 
@@ -283,3 +360,5 @@ Não há DOI exigido para consultar ou compreender este trabalho. Referências b
 Não foi concedida licença aberta de reutilização nesta etapa. A disponibilização permite examinar a pesquisa; não deve ser interpretada como licença MIT, autorização geral para redistribuir os materiais ou transferência de direitos de terceiros. Dependências mantêm suas próprias licenças. [Condições e materiais omitidos](docs/direitos-e-privacidade.md).
 
 [Consulte os componentes de terceiros e suas licenças](THIRD_PARTY.md), incluindo o runtime Pyodide, Python e os pacotes distribuídos.
+
+</details>

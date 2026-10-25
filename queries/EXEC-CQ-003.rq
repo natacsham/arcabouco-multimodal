@@ -1,0 +1,21 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+PREFIX mado: <https://w3id.org/mado#>
+PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+SELECT DISTINCT ?suporte ?aplicacaoAnalitica ?articulacao ?operacaoIntelectual ?compreensao ?premissa ?contribuicao ?trecho ?fonte WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?suporte a ex:SourceSupport ; ex:forExecution ?execucao ; ex:analyticalApplication ?aplicacaoAnalitica ; ex:usesArticulation ?articulacao .
+ OPTIONAL { { ?aplicacaoAnalitica mado:operacaoDaAplicacaoAnalitica ?operacaoIntelectual }
+            UNION { ?articulacao v2:operation ?operacaoIntelectual } }
+ OPTIONAL { { ?aplicacaoAnalitica mado:enunciado ?compreensao }
+            UNION { ?articulacao v2:addedUnderstanding ?compreensao } }
+ OPTIONAL {
+   { ?suporte ex:hasPremise ?usoPremissa . ?usoPremissa ex:usesAssertion ?premissa .
+     OPTIONAL { ?usoPremissa ex:usesContribution ?contribuicao .
+       OPTIONAL { ?contribuicao (mado:contribuicaoDoTrecho|v2:excerpt) ?trecho . ?trecho mado:trechoDeFonte ?fonte }
+     }
+   }
+   UNION { ?suporte ex:usesContribution ?contribuicao .
+     OPTIONAL { ?contribuicao (mado:contribuicaoDoTrecho|v2:excerpt) ?trecho . ?trecho mado:trechoDeFonte ?fonte }
+   }
+ }
+} ORDER BY ?suporte ?premissa ?contribuicao

@@ -1,7 +1,212 @@
+@prefix ex: <https://w3id.org/mado/execution#> .
 @prefix mado: <https://w3id.org/mado#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix cat: <https://w3id.org/mado/catalogue#> .
+
+# Proveniência migrada do piloto: suas próprias parcelas e estados documentais
+# são verificados, sem inventar revisão/revisor/data do protocolo MADO anterior.
+@prefix v2: <https://w3id.org/mado/experimental/v2#> .
+@prefix mado: <https://w3id.org/mado#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+v2:TaskShape a sh:NodeShape ; sh:targetClass v2:Task ;
+  sh:property [ sh:path v2:requiresFunction ; sh:minCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:inputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:outputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:sparql [ sh:message "Funções da tarefa precisam ter ordens distintas." ; sh:select """
+    PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+    SELECT $this WHERE { $this v2:requiresFunction ?a, ?b .
+      ?a v2:order ?n . ?b v2:order ?n . FILTER (?a != ?b) }
+  """ ] .
+v2:FunctionShape a sh:NodeShape ; sh:targetClass v2:Function ;
+  sh:property [ sh:path v2:order ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+# An ungrounded capability is a documented candidate, not a malformed graph.
+# The compositor must exclude it; the extension test relies on that boundary.
+v2:CapabilityShape a sh:NodeShape ; sh:targetClass v2:Capability ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:provides ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:mode ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Mode ] ;
+  sh:property [ sh:path v2:inputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:outputType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:requiresResource ; sh:minCount 1 ; sh:class v2:Resource ] ;
+  sh:property [ sh:path v2:requiresFact ; sh:minCount 1 ; sh:class v2:ContextFact ] ;
+  sh:property [ sh:path v2:action ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:limitation ; sh:minCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+
+v2:SourceShape a sh:NodeShape ; sh:targetSubjectsOf v2:url ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:url ; sh:minCount 1 ; sh:datatype xsd:string ; sh:pattern "^https://" ] .
+v2:ExcerptShape a sh:NodeShape ; sh:targetObjectsOf v2:excerpt ;
+  sh:property [ sh:path mado:trechoDeFonte ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path mado:localizacaoDocumental ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+v2:ContributionShape a sh:NodeShape ; sh:targetClass v2:Contribution ;
+  sh:property [ sh:path v2:inArticulation ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:ArticulationSupport ] ;
+  sh:property [ sh:path v2:excerpt ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:TrechoDocumental ] ;
+  sh:property [ sh:path v2:statement ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("PRIMARY_CHECKED" "LEGACY_RECORD_ONLY" "PENDING") ] .
+cat:ConhecimentoDoPilotoShape a sh:NodeShape ; sh:targetObjectsOf v2:knowledge ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:epistemicStatus ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ("DESIGN_SYNTHESIS_NOT_EMPIRICAL" "PARTIAL_LEGACY" "PENDING") ] ;
+  sh:sparql [ sh:message "A síntese do piloto precisa de articulação, contribuição, trecho e fonte localizados; não substitui a curadoria documental nativa."@pt-BR ;
+    sh:select """
+      PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        FILTER NOT EXISTS {
+          ?art a v2:ArticulationSupport ; v2:produces $this .
+          ?c a v2:Contribution ; v2:inArticulation ?art ; v2:excerpt ?td .
+          ?td mado:trechoDeFonte ?source ; mado:localizacaoDocumental ?location .
+        }
+      }
+    """
+  ] .
+v2:ArticulationShape a sh:NodeShape ; sh:targetClass v2:ArticulationSupport ;
+  sh:property [ sh:path v2:produces ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path v2:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("CURATED_FOR_PILOT" "PENDING") ] ;
+  sh:property [ sh:path v2:operation ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:addedUnderstanding ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:sparql [ sh:message "Articulação habilitada precisa de contribuição primária conferida, não só registro legado." ; sh:select """
+    PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+    SELECT $this WHERE {
+      $this v2:status "CURATED_FOR_PILOT" .
+      FILTER NOT EXISTS { ?c a v2:Contribution ; v2:inArticulation $this ; v2:status "PRIMARY_CHECKED" }
+    }
+  """ ] .
+v2:CriterionShape a sh:NodeShape ; sh:targetObjectsOf v2:criterion ;
+  sh:property [ sh:path rdfs:label ; sh:minCount 1 ] ;
+  sh:property [ sh:path v2:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+  sh:property [ sh:path v2:locator ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] ;
+  sh:property [ sh:path v2:justification ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+
+v2:SupportShape a sh:NodeShape ; sh:targetClass v2:GroundingApplication, v2:RelationRule ;
+  sh:property [ sh:path v2:knowledge ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
+  sh:property [ sh:path v2:criterion ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:CriterioDeDecisaoMultimodal ] ;
+  sh:property [ sh:path v2:articulation ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:ArticulationSupport ] ;
+  sh:property [ sh:path v2:status ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("CURATED_FOR_PILOT" "PENDING") ] ;
+  sh:sparql [ sh:message "O conhecimento do vínculo deve ser o produzido pela articulação indicada." ; sh:select """
+    PREFIX v2: <https://w3id.org/mado/experimental/v2#>
+    SELECT $this WHERE { $this v2:knowledge ?k ; v2:articulation ?a .
+      FILTER NOT EXISTS { ?a v2:produces ?k } }
+  """ ] .
+v2:GroundingShape a sh:NodeShape ; sh:targetClass v2:GroundingApplication ;
+  sh:property [ sh:path v2:capability ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Capability ] ;
+  sh:property [ sh:path v2:justification ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+v2:RelationShape a sh:NodeShape ; sh:targetClass v2:RelationRule ;
+  sh:property [ sh:path v2:fromFunction ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:toFunction ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Function ] ;
+  sh:property [ sh:path v2:sharedType ; sh:minCount 1 ; sh:maxCount 1 ; sh:class v2:Representation ] ;
+  sh:property [ sh:path v2:relationKind ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path v2:requiresFact ; sh:minCount 1 ; sh:class v2:ContextFact ] ;
+  sh:property [ sh:path v2:explanation ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ] .
+
+# 1.6: the executable catalogue is inspected through actual semantic edges.
+# Conditions and supports may be pending; syntax cannot approve their content.
+mado:OperacaoDoCatalogoShape a sh:NodeShape ;
+  sh:targetClass mado:OperacaoDeInteracao ;
+  sh:or (
+    [ sh:property [ sh:path mado:funcoesDoContrato ; sh:minCount 1 ] ;
+      sh:property [ sh:path mado:suportesDoContrato ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path mado:operacaoBaseDaVariante ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:OperacaoDeInteracao ] ]
+  ) ;
+  sh:property [ sh:path mado:relacoesDoContrato ; sh:class mado:RelacaoOperacional ] ;
+  sh:property [ sh:path mado:suportesDoContrato ; sh:class mado:SuporteOperacional ] ;
+  sh:sparql [
+    sh:message "A aplicação indicada deve autorizar esta operação, sem autorização herdada de outro alvo."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:aplicacoesAutorizadorasDoContrato ?app .
+        FILTER NOT EXISTS { ?app mado:autorizaOperacao $this }
+      }
+    """
+  ] .
+
+mado:PremissasDoCatalogoShape a sh:NodeShape ;
+  sh:targetSubjectsOf mado:premissasEstruturadasDaAplicacao ;
+  sh:sparql [
+    sh:message "As premissas cumulativas estruturadas e as arestas premissaOperacional devem coincidir; retirar uma não reduz silenciosamente a obrigação."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        { $this mado:premissasEstruturadasDaAplicacao ?p . ?p mado:parcelaDoSuporteOperacional ?claim .
+          FILTER NOT EXISTS { $this mado:premissaOperacional ?claim } }
+        UNION
+        { $this mado:premissaOperacional ?claim .
+          FILTER NOT EXISTS { $this mado:premissasEstruturadasDaAplicacao/mado:parcelaDoSuporteOperacional ?claim } }
+      }
+    """
+  ] .
+
+mado:SuporteDoCatalogoShape a sh:NodeShape ;
+  sh:targetClass mado:SuporteOperacional ;
+  sh:or (
+    [ sh:property [ sh:path mado:conhecimentoDoSuporteOperacional ; sh:minCount 1 ; sh:maxCount 1 ] ;
+      sh:property [ sh:path mado:parcelaDoSuporteOperacional ; sh:minCount 1 ; sh:maxCount 1 ] ]
+    [ sh:property [ sh:path mado:fundamentoRdfDoContrato ; sh:minCount 1 ; sh:maxCount 1 ] ]
+  ) ;
+  sh:sparql [
+    sh:message "O suporte deve preservar a ligação exata entre parcela e conhecimento, sem produto cartesiano entre critérios e fontes."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:conhecimentoDoSuporteOperacional ?k ; mado:parcelaDoSuporteOperacional ?claim .
+        FILTER NOT EXISTS { ?claim mado:afirmacaoDoConhecimento ?k }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "Uma origem usada pelo suporte deve pertencer ao critério indicado e possuir trecho documental."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:criterioDoSuporteOperacional ?criterion .
+        FILTER(NOT EXISTS { $this mado:origensDoSuporteOperacional ?origin }
+          || EXISTS { $this mado:origensDoSuporteOperacional ?o .
+              FILTER NOT EXISTS { ?criterion mado:possuiOrigem ?o . ?o mado:origemSustentadaPorTrecho ?t } })
+      }
+    """
+  ] .
+
+mado:RelacaoDoCatalogoShape a sh:NodeShape ;
+  sh:targetClass mado:RelacaoOperacional ;
+  sh:property [ sh:path cat:field-kind ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ("SEQUENTIAL" "SEQUENTIAL_REVIEW" "ALTERNATIVE" "COMPLEMENTARITY" "REDUNDANCY") ] ;
+  sh:property [ sh:path (mado:escopoEstruturadoDoContrato cat:literal) ; sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ("WITHIN_OPERATION" "BETWEEN_OPERATIONS") ] ;
+  sh:property [ sh:path mado:funcoesDeOrigemDaRelacao ; sh:minCount 1 ] ;
+  sh:property [ sh:path mado:funcoesDeDestinoDaRelacao ; sh:minCount 1 ] ;
+  sh:or (
+    [ sh:property [ sh:path mado:suportesDoContrato ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path mado:aplicacoesAutorizadorasDoContrato ; sh:minCount 1 ] ]
+  ) ;
+  sh:sparql [
+    sh:message "A aplicação indicada deve autorizar esta relação operacional específica."@pt-BR ;
+    sh:select """
+      PREFIX mado: <https://w3id.org/mado#>
+      SELECT $this WHERE {
+        $this mado:aplicacoesAutorizadorasDoContrato ?app .
+        FILTER NOT EXISTS { ?app mado:autorizaRelacaoOperacional $this }
+      }
+    """
+  ] .
+
+mado:PapelInformacionalDoCatalogoShape a sh:NodeShape ;
+  sh:targetClass mado:PapelInformacionalNaRelacao ;
+  sh:property [ sh:path mado:representacaoDoRequisito ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:funcaoDoPapelInformacional ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path mado:parcelaInformacionalDoPapel ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:or (
+    [ sh:property [ sh:path (mado:suficienciaIsoladaParaObjetivo cat:literal) ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ]
+    [ sh:property [ sh:path cat:order-alone_sufficient_for_goal ; sh:hasValue cat:NullValue ] ;
+      sh:property [ sh:path mado:suficienciaIsoladaParaObjetivo ; sh:maxCount 0 ] ]
+  ) ;
+  sh:property [ sh:path mado:parcelasDaDerivacao ; sh:minCount 1 ] .
 
 # PENDING and PROPOSED are legitimate documentary states, never implicit support.
 mado:AfirmacaoOperacionalShape a sh:NodeShape ;
@@ -47,6 +252,14 @@ mado:AfirmacaoOperacionalShape a sh:NodeShape ;
 
 mado:FuncaoRequeridaSituadaShape a sh:NodeShape ;
   sh:targetClass mado:FuncaoRequeridaSituada ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:FuncaoRequeridaSituadaShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:RequirementContractShape ]
+  ) .
+
+mado:FuncaoRequeridaSituadaShapeLegacy a sh:NodeShape ;
   sh:property [ sh:path mado:noContexto ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
   sh:property [ sh:path mado:paraTarefa ; sh:minCount 1 ] ;
   sh:property [ sh:path mado:requerFuncao ; sh:minCount 1 ; sh:maxCount 1 ] ;
@@ -65,6 +278,9 @@ mado:FuncaoRequeridaSituadaShape a sh:NodeShape ;
 
 mado:ConhecimentoShape a sh:NodeShape ;
   sh:targetClass mado:ConhecimentoMultimodalArticulado ;
+  sh:or ( [ sh:node mado:ConhecimentoCuradoShape ] [ sh:node cat:ConhecimentoDoPilotoShape ] ) .
+
+mado:ConhecimentoCuradoShape a sh:NodeShape ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path mado:enunciado ; sh:minCount 1 ] ;
   sh:property [ sh:path mado:derivadoDe ; sh:minCount 1 ; sh:class mado:Fonte ] ;
@@ -74,6 +290,14 @@ mado:ConhecimentoShape a sh:NodeShape ;
 
 mado:ContextoShape a sh:NodeShape ;
   sh:targetClass mado:ContextoDeInteracaoDigital ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:ContextoShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:ContextContractShape ]
+  ) .
+
+mado:ContextoShapeLegacy a sh:NodeShape ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path mado:descricaoDoContexto ; sh:minCount 1 ] ;
   sh:property [ sh:path mado:descritoSobPerspectiva ; sh:minCount 1 ; sh:class mado:Perspectiva ] ;
@@ -99,6 +323,14 @@ mado:ContextoNovoShape a sh:NodeShape ;
 
 mado:ParticipacaoNoContextoShape a sh:NodeShape ;
   sh:targetClass mado:ParticipacaoNoContexto ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:ParticipacaoNoContextoShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:ParticipationContractShape ]
+  ) .
+
+mado:ParticipacaoNoContextoShapeLegacy a sh:NodeShape ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path mado:participacaoEmContexto ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
   sh:property [ sh:path mado:temPapelNoContexto ; sh:minCount 1 ; sh:maxCount 1 ] ;
@@ -107,6 +339,14 @@ mado:ParticipacaoNoContextoShape a sh:NodeShape ;
 mado:DecisaoMinimaShape a sh:NodeShape ;
   sh:targetClass mado:DecisaoDeAcessibilidadeMultimodal ;
   sh:targetSubjectsOf mado:statusDecisao ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:DecisaoMinimaShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:DecisionContractShape ]
+  ) .
+
+mado:DecisaoMinimaShapeLegacy a sh:NodeShape ;
   sh:class mado:DecisaoDeAcessibilidadeMultimodal ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path mado:enunciado ; sh:minCount 1 ] ;
@@ -129,6 +369,14 @@ mado:DecisaoMinimaShape a sh:NodeShape ;
 mado:DecisaoCandidataShape a sh:NodeShape ;
   sh:targetClass mado:DecisaoDeAcessibilidadeMultimodal ;
   sh:targetSubjectsOf mado:statusDecisao ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:DecisaoCandidataShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:DecisionContractShape ]
+  ) .
+
+mado:DecisaoCandidataShapeLegacy a sh:NodeShape ;
   sh:sparql [
     a sh:SPARQLConstraint ;
     sh:message "Decisão candidata deve aplicar ao menos um critério principal; decisões históricas reconstruídas são exceção documentada."@pt-BR ;
@@ -190,6 +438,14 @@ mado:DecisaoCandidataShape a sh:NodeShape ;
 
 mado:DecisaoSuspensaShape a sh:NodeShape ;
   sh:targetClass mado:DecisaoDeAcessibilidadeMultimodal ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:DecisaoSuspensaShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:DecisionContractShape ]
+  ) .
+
+mado:DecisaoSuspensaShapeLegacy a sh:NodeShape ;
   sh:sparql [
     sh:message "A suspensão deve explicar a insuficiência e não apresentar configurações como orientação autorizada."@pt-BR ;
     sh:select """
@@ -220,9 +476,16 @@ mado:TrechoDocumentalShape a sh:NodeShape ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:xone (
     [ sh:property [ sh:path mado:conteudoDoTrecho ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ;
-      sh:not [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ] ] ]
+      sh:not [ sh:or (
+        [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ] ]
+        [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "PARAFRASE_PROPRIA_SEM_TRECHO_LITERAL" ] ]
+      ) ] ]
     [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "TEXTO_NAO_REDISTRIBUIDO" ; sh:maxCount 1 ] ;
       sh:property [ sh:path mado:conteudoDoTrecho ; sh:maxCount 0 ] ;
+      sh:property [ sh:path mado:localizacaoDocumental ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ]
+    [ sh:property [ sh:path mado:estadoDePublicacaoDoTrecho ; sh:hasValue "PARAFRASE_PROPRIA_SEM_TRECHO_LITERAL" ; sh:maxCount 1 ] ;
+      sh:property [ sh:path mado:conteudoDoTrecho ; sh:maxCount 0 ] ;
+      sh:property [ sh:path mado:parafraseDocumental ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ;
       sh:property [ sh:path mado:localizacaoDocumental ; sh:minCount 1 ; sh:minLength 1 ; sh:pattern "\\S" ] ]
   ) ;
   sh:property [ sh:path mado:trechoDeFonte ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] .
@@ -249,6 +512,14 @@ mado:QualidadeCriterioShape a sh:NodeShape ;
 mado:ConfiguracaoModalShape a sh:NodeShape ;
   sh:targetClass mado:ConfiguracaoModalDaDecisao ;
   sh:targetObjectsOf mado:possuiConfiguracaoModal ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:ConfiguracaoModalShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:ConfigurationShape ]
+  ) .
+
+mado:ConfiguracaoModalShapeLegacy a sh:NodeShape ;
   sh:class mado:ConfiguracaoModalDaDecisao ;
   sh:property [ sh:path mado:identificador ; sh:minCount 1 ; sh:maxCount 1 ] ;
   sh:property [ sh:path mado:configuracaoDeDecisao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:DecisaoDeAcessibilidadeMultimodal ] ;
@@ -261,6 +532,14 @@ mado:ConfiguracaoModalShape a sh:NodeShape ;
 mado:ConfiguracaoMaduraShape a sh:NodeShape ;
   sh:targetClass mado:ConfiguracaoModalDaDecisao ;
   sh:targetObjectsOf mado:possuiConfiguracaoModal ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:ConfiguracaoMaduraShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:ConfigurationShape ]
+  ) .
+
+mado:ConfiguracaoMaduraShapeLegacy a sh:NodeShape ;
   sh:property [ sh:path mado:configuracaoConsideraCondicao ; sh:minCount 1 ] ;
   sh:property [ sh:path mado:configuracaoSustentadaPorConhecimento ; sh:minCount 1 ; sh:class mado:ConhecimentoMultimodalArticulado ] ;
   sh:property [ sh:path mado:configuracaoAplicaCriterio ; sh:minCount 1 ; sh:class mado:CriterioDeDecisaoMultimodal ] ;
@@ -324,6 +603,14 @@ mado:AplicacaoDeCriterioShape a sh:NodeShape ;
   sh:targetClass mado:AplicacaoDeCriterio ;
   sh:targetObjectsOf mado:possuiAplicacaoDeCriterio ;
   sh:targetSubjectsOf mado:aplicacaoNaConfiguracao, mado:criterioAplicado, mado:conhecimentoDaAplicacao, mado:origemDaAplicacao, mado:justificativaDaAplicacao ;
+  sh:or (
+    [ sh:not [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ] ] ; sh:node mado:AplicacaoDeCriterioShapeLegacy ]
+    [ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+        sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] ;
+      sh:node ex:CriterionApplicationShape ]
+  ) .
+
+mado:AplicacaoDeCriterioShapeLegacy a sh:NodeShape ;
   sh:class mado:AplicacaoDeCriterio ;
   sh:property [ sh:path mado:aplicacaoNaConfiguracao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConfiguracaoModalDaDecisao ] ;
   sh:property [ sh:path mado:criterioAplicado ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:CriterioDeDecisaoMultimodal ] ;

@@ -1,0 +1,10 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+SELECT DISTINCT ?verificacao ?identificador ?tipo ?estado ?etapa ?explicacao ?participante ?situacao WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?execucao ex:hasCheck ?verificacao .
+ ?verificacao ex:identifier ?identificador ; ex:state ?estado ; ex:kind ?tipo .
+ OPTIONAL { ?verificacao ex:stage ?etapa }
+ OPTIONAL { ?verificacao ex:explanation ?explicacao }
+ OPTIONAL { ?verificacao ex:participant ?participante }
+ OPTIONAL { ?verificacao ex:situation ?situacao }
+} ORDER BY ?identificador

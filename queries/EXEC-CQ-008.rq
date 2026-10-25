@@ -1,0 +1,15 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+SELECT DISTINCT ?registro ?tipo ?motivo ?explicacao ?participante ?situacao WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ { ?execucao ex:hasGap ?registro . ?registro ex:kind ?tipo .
+   OPTIONAL { ?registro ex:status ?motivo }
+   OPTIONAL { ?registro ex:explanation ?explicacao }
+ } UNION {
+   ?registro a ex:ConditionEvaluation ; ex:forExecution ?execucao ; ex:state ?motivo .
+   FILTER(?motivo IN ("PENDING", "FAIL", "NOT_EXECUTED"))
+   BIND("application_condition" AS ?tipo)
+   OPTIONAL { ?registro <http://www.w3.org/2000/01/rdf-schema#label> ?explicacao }
+ }
+ OPTIONAL { ?registro ex:participant ?participante }
+ OPTIONAL { ?registro ex:situation ?situacao }
+} ORDER BY ?tipo ?registro

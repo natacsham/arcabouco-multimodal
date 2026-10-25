@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0-alpha5",
-  "checked_at_utc": "2026-10-22T00:00:02.094697+00:00",
+  "version": "2.0.0-alpha6",
+  "checked_at_utc": "2026-10-25T21:33:07.158833+00:00",
   "scope": "Synthetic pilot; no participant session, UI replacement or empirical effectiveness claim.",
   "shacl": {
     "base": {
@@ -531,7 +531,7 @@
     }
   },
   "experimental_design": {
-    "composer_sha256": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
+    "composer_sha256": "6d7f6b23935e0608534b5842597c2482805620910d1a149c4260773820f1259a",
     "added": "Conhecimento KAudioReview, sua articulação, contribuições localizadas e aplicação exata à capacidade já declarada.",
     "unchanged": [
       "motor",
@@ -627,10 +627,10 @@
     "skipped": 0
   },
   "preserved_files": {
-    "data/knowledge-base.json": "68f6996e5ba8e8d7fdabb597599a2aec6089670ac69f20b2605fab90403ec2b6",
-    "engine.py": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
-    "ontology/mado-combined.ttl": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
-    "ontology/main.ttl": "ea5aa859532fb2fdc71f8336ed1e8f50092c4c6eca194cc9f48bedcf45ba2c8b",
+    "data/knowledge-base.json": "be789ee4b1cb18ecf2cd93b45848fc29853a086486adf23a5f253234e3cbfcca",
+    "engine.py": "17555c653768d275cf36bc2a3b39b3d1dd989dd85996c275f1e545130b198045",
+    "ontology/mado-combined.ttl": "b8b08a71e5987d0a73f09e9a4f2bad0105629b4ed25a913e4ad3d76361d9874d",
+    "ontology/main.ttl": "3dd0cf2b1d10e9c36cc40f6f092f9613120b17e440f2f5aec224a2e32abb5e9c",
     "queries/AUD-001.rq": "ef048aa60f269939a804e3b83657efa24f364f7056a2e7bf7f483aa86010e3ea",
     "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
     "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
@@ -641,7 +641,17 @@
     "queries/CQ-007.rq": "42e0d8133025883e1f669b861421c2a066d3b36c56cc8d8b85f240595fb21692",
     "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
     "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
-    "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9"
+    "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9",
+    "queries/EXEC-CQ-001.rq": "b673f7465c6c029988bf61596206d55e8d0eb8bc636ef34471e2bedfe0a004cd",
+    "queries/EXEC-CQ-002.rq": "8dc979674f8a502fae4d7a383d8ef9a0c709693cb0d731e185d2faf170122a47",
+    "queries/EXEC-CQ-003.rq": "92449607729e185be802613c0cf87be235624013e763bd424dd5abb852ddb542",
+    "queries/EXEC-CQ-004.rq": "1417b9fcfd2da54e6623ad8c29bf8911b1630bbe47c14a662b2d2bfdc1bf6d07",
+    "queries/EXEC-CQ-005.rq": "648dcc92519e96fe77765f2b50460a5566ed02becd1a563865391e1af643dc78",
+    "queries/EXEC-CQ-006.rq": "0f838f073631b718f7f1a8463605c9316e247d71e904e47a2498a26083303bd4",
+    "queries/EXEC-CQ-007.rq": "f5268f3683d05cfc091ab786c0cc1142c77f98372471cd9048ee074ca571e933",
+    "queries/EXEC-CQ-008.rq": "ca3304db5845042d7ccb8a9c42ea519aa1bc95d990ae5b202e69ef32701a51df",
+    "queries/EXEC-CQ-009.rq": "2255bd4acbfae65c734b0973752b356140ce00953d24987b4ce9d9b3547490b8",
+    "queries/EXEC-CQ-010.rq": "20aa1e7b202dacb3f0f9aea05f6bb6de6bb774562acaaf0a6f604ccd30185f1c"
   },
   "preserved_files_unchanged": true,
   "reasoner": {
@@ -649,7 +659,7 @@
     "matches_current_graph": true,
     "profile_passed": true,
     "consistency_passed": true,
-    "checked_at_utc": "2026-10-21T23:43:42.462838+00:00"
+    "checked_at_utc": "2026-10-25T21:29:46.020516+00:00"
   },
   "passed": true
 }

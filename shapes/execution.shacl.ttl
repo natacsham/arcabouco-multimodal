@@ -1,0 +1,171 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <https://w3id.org/mado/execution#> .
+@prefix mado: <https://w3id.org/mado#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Main shapes dispatch to these explicit execution contracts when an entity is
+# owned by a typed execution. The historical branch retains its constraints.
+# Validation uses both shape graphs over the complete base + execution graph.
+ex:ExecutionOwnedShape a sh:NodeShape ;
+ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ;
+   sh:node [ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ] ] .
+
+ex:ContextContractShape a sh:NodeShape ; sh:targetObjectsOf ex:context, ex:situation ;
+ sh:node ex:ExecutionOwnedShape ; sh:class mado:ContextoDeInteracaoDigital ;
+ sh:property [ sh:path ex:identifier ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:sparql [ sh:message "O contexto deve ser raiz ou situação explicitamente ligada à raiz da sua execução."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this WHERE { $this ex:forExecution ?run .
+     FILTER NOT EXISTS { ?run ex:context $this }
+     FILTER NOT EXISTS { ?run ex:context ?root . $this mado:episodioDoContexto ?root }
+   }""" ] ;
+ sh:sparql [ sh:message "Um recurso não pode estar disponível e impedido no mesmo contexto."@pt-BR ;
+   sh:select """PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this ?resource WHERE { $this mado:temRecursoDisponivel ?resource ; mado:temRecursoImpedido ?resource }""" ] .
+
+ex:ParticipationContractShape a sh:NodeShape ; sh:targetObjectsOf ex:participant, ex:responsibleParticipant ;
+ sh:node ex:ExecutionOwnedShape ; sh:class mado:ParticipacaoNoContexto ;
+ sh:property [ sh:path ex:identifier ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path mado:participacaoEmContexto ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] .
+
+ex:DecisionContractShape a sh:NodeShape ; sh:targetObjectsOf ex:decision ;
+ sh:node ex:ExecutionOwnedShape ; sh:class mado:DecisaoDeAcessibilidadeMultimodal ;
+ sh:property [ sh:path ex:identifier ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path mado:statusDecisao ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("COMPOSED" "INSUFFICIENT" "UNCONFIRMED" "CONDITIONAL") ] ;
+ sh:property [ sh:path mado:respondeA ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+ sh:property [ sh:path ex:epistemicStatus ; sh:hasValue "COMPUTED_DESIGN_PROPOSAL_NOT_OBSERVED_OUTCOME" ] ;
+ sh:property [ sh:path ex:isObservedResult ; sh:hasValue false ; sh:maxCount 1 ] ;
+ sh:sparql [ sh:message "A decisão deve ser a decisão declarada pela execução que contém seu contexto."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this WHERE { $this ex:forExecution ?run ; mado:respondeA ?context .
+     FILTER NOT EXISTS { ?run ex:decision $this ; ex:context ?context }
+   }""" ] ;
+ sh:sparql [ sh:message "Uma decisão composta exige uma proposta com configuração e fundamento da execução."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this WHERE { $this mado:statusDecisao "COMPOSED" ; ex:forExecution ?run .
+     FILTER NOT EXISTS { ?run ex:hasProposal ?p . ?p ex:hasConfiguration ?cfg .
+       ?cfg mado:configuracaoDeDecisao $this ; ex:hasSupport ?support . ?support ex:usesAssertion ?claim }
+   }""" ] .
+
+ex:RequirementContractShape a sh:NodeShape ; sh:targetSubjectsOf ex:derivationOrigin ;
+ sh:node ex:ExecutionOwnedShape ; sh:class mado:FuncaoRequeridaSituada ;
+ sh:property [ sh:path mado:noContexto ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+ sh:property [ sh:path mado:requerFuncao ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+ sh:property [ sh:path ex:derivationOrigin ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path mado:paraParticipacao ; sh:maxCount 1 ; sh:class mado:ParticipacaoNoContexto ] .
+ex:ExecutionShape a sh:NodeShape ; sh:targetClass ex:Execution ;
+ sh:property [ sh:path ex:decision ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:DecisaoDeAcessibilidadeMultimodal ] ;
+ sh:property [ sh:path ex:context ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+ sh:property [ sh:path ex:contractVersion ; sh:hasValue "MADO_EXECUTION_GRAPH_1" ] ;
+ sh:property [ sh:path ex:baseHash ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[0-9a-f]{64}$" ] ;
+ sh:property [ sh:path ex:contextHash ; sh:minCount 1 ; sh:maxCount 1 ; sh:pattern "^[0-9a-f]{64}$" ] ;
+ sh:sparql [ sh:message "Uma execução não pode ser apresentada como resultado observado."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this WHERE { ?node ex:forExecution $this .
+     { ?node a mado:Resultado } UNION { ?node ex:isObservedResult true }
+   }""" ] .
+
+ex:CheckShape a sh:NodeShape ; sh:targetClass ex:Check ;
+ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ] ;
+ sh:property [ sh:path ex:identifier ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path ex:kind ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path ex:state ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("PASS" "FAIL" "PENDING" "NOT_EXECUTED") ] .
+
+ex:CheckedEntityShape a sh:NodeShape ; sh:targetSubjectsOf ex:hasCheck ;
+ sh:property [ sh:path ex:hasCheck ; sh:class ex:Check ] ;
+ sh:property [ sh:path (ex:hasCheck ex:forExecution) ; sh:equals ex:forExecution ;
+   sh:message "A verificação deve pertencer à mesma execução do elemento."@pt-BR ] .
+
+ex:OperationShape a sh:NodeShape ; sh:targetClass ex:OperationEvaluation ;
+ sh:property [ sh:path ex:operation ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+ sh:property [ sh:path ex:forExecution ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:Execution ] ;
+ sh:property [ sh:path ex:situation ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ContextoDeInteracaoDigital ] ;
+ sh:property [ sh:path ex:state ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("PASS" "FAIL" "PENDING" "NOT_EXECUTED") ] .
+
+ex:ProposalShape a sh:NodeShape ; sh:targetClass ex:Proposal ;
+ sh:property [ sh:path ex:selectionState ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("choices" "pending_candidates" "partial_segments") ] ;
+ sh:property [ sh:path ex:hasOperation ; sh:minCount 1 ; sh:class ex:OperationEvaluation ] ;
+ sh:sparql [ sh:message "Uma proposta não pode usar a operação de outra participação ou situação."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   SELECT $this ?operation WHERE { $this ex:hasOperation ?operation ; ex:situation ?situation .
+    { FILTER NOT EXISTS { ?operation ex:situation ?situation } }
+    UNION { $this ex:participant ?participant . FILTER NOT EXISTS { ?operation ex:participant ?participant } }
+   }""" ] .
+
+ex:RelationShape a sh:NodeShape ; sh:targetClass ex:RelationApplication ;
+ sh:property [ sh:path ex:relation ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+ sh:property [ sh:path ex:state ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("PASS" "FAIL" "PENDING" "NOT_EXECUTED") ] ;
+ sh:property [ sh:path ex:fromOperation ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path ex:toOperation ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+ex:ModalInformationRoleShape a sh:NodeShape ; sh:targetClass ex:ModalInformationRole ;
+ sh:property [ sh:path ex:representation ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+ sh:property [ sh:path ex:informationComponent ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path ex:aloneSufficient ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .
+
+ex:RelationInformationBindingShape a sh:NodeShape ; sh:targetObjectsOf ex:hasInformationBinding ;
+ sh:property [ sh:path ex:informationUnit ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+ sh:property [ sh:path ex:bindingOrigin ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("REPORTED_IDENTITY" "PROPOSED_SHARED_INFORMATION") ] ;
+ sh:property [ sh:path ex:semanticPreservationObserved ; sh:minCount 1 ; sh:maxCount 1 ; sh:hasValue false ] .
+
+ex:TemporalContractShape a sh:NodeShape ; sh:targetClass ex:TemporalContract ;
+ sh:property [ sh:path ex:organization ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path ex:verificationRequired ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .
+
+ex:ScopedEntityShape a sh:NodeShape ; sh:targetSubjectsOf ex:participant ;
+ sh:property [ sh:path ex:participant ; sh:maxCount 1 ; sh:class mado:ParticipacaoNoContexto ] ;
+ sh:property [ sh:path (ex:participant mado:participacaoEmContexto) ; sh:equals ex:situation ;
+   sh:message "A participação deve pertencer à situação do registro."@pt-BR ] .
+
+ex:ConfigurationShape a sh:NodeShape ; sh:targetObjectsOf ex:hasConfiguration ;
+ sh:node ex:ExecutionOwnedShape ; sh:class mado:ConfiguracaoModalDaDecisao ;
+ sh:property [ sh:path mado:configuraModalidade ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path mado:configuracaoDeDecisao ; sh:minCount 1 ; sh:maxCount 1 ] ;
+ sh:property [ sh:path ex:selectionState ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("choices" "pending_candidates" "partial_segments") ] ;
+ sh:property [ sh:path mado:significadoFuncional ; sh:minCount 1 ; sh:minLength 1 ] ;
+ sh:property [ sh:path ex:hasOperation ; sh:minCount 1 ; sh:maxCount 1 ; sh:class ex:OperationEvaluation ] ;
+ sh:property [ sh:path ex:hasSupport ; sh:minCount 1 ; sh:class ex:SourceSupport ] ;
+ sh:property [ sh:path ex:hasCheck ; sh:minCount 1 ; sh:class ex:Check ] ;
+ sh:sparql [ sh:message "A configuração deve estar na mesma execução e situação de sua operação, e na decisão que a contém."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this WHERE { $this ex:forExecution ?run ; ex:situation ?s ; ex:hasOperation ?op ; mado:configuracaoDeDecisao ?d .
+     FILTER NOT EXISTS { ?op ex:forExecution ?run ; ex:situation ?s . ?d ex:forExecution ?run ; mado:possuiConfiguracaoModal $this }
+   }""" ] .
+
+ex:CriterionApplicationShape a sh:NodeShape ; sh:targetObjectsOf ex:hasCriterionApplication ;
+ sh:node ex:ExecutionOwnedShape ; sh:class mado:AplicacaoDeCriterio ;
+ sh:property [ sh:path mado:aplicacaoNaConfiguracao ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:ConfiguracaoModalDaDecisao ] ;
+ sh:property [ sh:path mado:criterioAplicado ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:class mado:CriterioDeDecisaoMultimodal ] ;
+ sh:property [ sh:path ex:usesAssertion ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+ sh:property [ sh:path mado:justificativaDaAplicacao ; sh:minCount 1 ; sh:minLength 1 ] ;
+ sh:or (
+   [ sh:property [ sh:path mado:origemDaAplicacao ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ]
+   [ sh:property [ sh:path ex:source ; sh:minCount 1 ; sh:nodeKind sh:IRI ] ;
+     sh:property [ sh:path ex:locator ; sh:minCount 1 ; sh:minLength 1 ] ]
+ ) ;
+ sh:sparql [ sh:message "A aplicação precisa estar contida na configuração exata que declara."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this WHERE { $this mado:aplicacaoNaConfiguracao ?cfg ; ex:forExecution ?run .
+      FILTER NOT EXISTS { ?cfg mado:possuiAplicacaoDeCriterio $this ; ex:hasCriterionApplication $this ; ex:forExecution ?run }
+   }""" ] ;
+ sh:sparql [ sh:message "A origem declarada pertence a outro critério."@pt-BR ;
+   sh:select """PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this ?origin WHERE { $this mado:criterioAplicado ?criterion ; mado:origemDaAplicacao ?origin .
+     ?other mado:possuiOrigem ?origin . FILTER(?other != ?criterion)
+   }""" ] .
+
+ex:LocalizedExecutionSourceShape a sh:NodeShape ; sh:targetSubjectsOf ex:source ;
+ sh:property [ sh:path ex:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:class mado:Fonte ] ;
+ sh:property [ sh:path ex:excerpt ; sh:maxCount 1 ; sh:class mado:TrechoDocumental ] ;
+ sh:sparql [ sh:message "O trecho utilizado precisa pertencer à fonte específica deste suporte."@pt-BR ;
+   sh:select """PREFIX ex: <https://w3id.org/mado/execution#>
+   PREFIX mado: <https://w3id.org/mado#>
+   SELECT $this ?excerpt WHERE { $this ex:source ?source ; ex:excerpt ?excerpt .
+     FILTER NOT EXISTS { ?excerpt mado:trechoDeFonte ?source }
+   }""" ] .

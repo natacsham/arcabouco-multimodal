@@ -10,13 +10,18 @@ No visitor session, narrative, decision text or runtime RDF is written to disk.
 """
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import redirect_stderr, redirect_stdout
 from datetime import datetime, timezone
 import hashlib
 import io
 import json
 from pathlib import Path
 import platform
+import os
+import subprocess
 import sys
+import tempfile
 import time
 import traceback
 import unittest
@@ -63,6 +68,7 @@ def source_hashes():
         ("data", "*.json"),
         ("tests", "test_*.py"),
         ("scripts", "verify_*.py"),
+        ("scripts", "migrate_*.py"),
     ):
         files.update((ROOT / folder).glob(pattern))
     # The situated path is public runtime, not merely an optional experiment.
@@ -75,10 +81,16 @@ def source_hashes():
     return {relative(path): sha256(path) for path in sorted(files)}
 
 
-def run_unit_tests():
+def _run_test_suite(pattern="test_*.py", capture_console=False):
     stream = io.StringIO()
-    suite = unittest.TestLoader().discover(str(ROOT / "tests"), pattern="test_*.py")
-    result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+    def execute():
+        suite = unittest.TestLoader().discover(str(ROOT / "tests"), pattern=pattern)
+        return unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+    if capture_console:
+        with redirect_stdout(stream), redirect_stderr(stream):
+            result = execute()
+    else:
+        result = execute()
     return {
         "passed": result.wasSuccessful() and result.testsRun > 0,
         "discovery": "tests/test_*.py",
@@ -90,6 +102,54 @@ def run_unit_tests():
         "unexpected_successes": len(result.unexpectedSuccesses),
         "output": stream.getvalue(),
     }
+
+
+def _run_test_file(path):
+    """A fresh interpreter per file prevents cross-worker module/state leaks."""
+    command = [sys.executable, "-B", str(Path(__file__).resolve()), "--_test-file", path.name]
+    environment = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1")
+    try:
+        process = subprocess.run(command, cwd=ROOT, env=environment, capture_output=True,
+                                 text=True, encoding="utf-8", errors="replace", check=False)
+        record = json.loads(process.stdout)
+        for key in ("passed", "tests_run", "failures", "errors", "skipped",
+                    "expected_failures", "unexpected_successes", "output"):
+            if key not in record:
+                raise ValueError(f"Worker result has no {key}")
+        if process.returncode not in (0, 1) or (process.returncode == 0) != bool(record["passed"]):
+            raise ValueError(f"Worker exit {process.returncode} disagrees with its result")
+        if process.stderr:
+            record["output"] += "\nWorker stderr:\n" + process.stderr
+        return record
+    except Exception:
+        detail = traceback.format_exc()
+        if "process" in locals():
+            detail += "\nWorker stdout:\n" + process.stdout + "\nWorker stderr:\n" + process.stderr
+        return {"passed": False, "tests_run": 0, "failures": [],
+                "errors": [{"test": path.name, "traceback": detail}], "skipped": [],
+                "expected_failures": 0, "unexpected_successes": 0, "output": detail}
+
+
+def run_unit_tests(jobs=1, pattern="test_*.py"):
+    if jobs == 1:
+        return _run_test_suite(pattern)
+    files = sorted((ROOT / "tests").glob(pattern))
+    # executor.map preserves filename order in the report, regardless of finish order.
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        records = list(pool.map(_run_test_file, files))
+    report = {"passed": bool(records) and all(row["passed"] for row in records),
+              "discovery": "tests/" + pattern, "jobs": jobs,
+              "isolation": "ONE_PYTHON_SUBPROCESS_PER_TEST_FILE",
+              "files_run": len(files)}
+    for key in ("tests_run", "expected_failures", "unexpected_successes"):
+        report[key] = sum(row[key] for row in records)
+    for key in ("failures", "errors", "skipped"):
+        report[key] = [entry for row in records for entry in row[key]]
+    report["output"] = "\n".join(f"=== {path.name} ===\n{row['output']}"
+                                 for path, row in zip(files, records))
+    report["per_file"] = [{"file": path.name, "passed": row["passed"],
+                           "tests_run": row["tests_run"]} for path, row in zip(files, records)]
+    return report
 
 
 def validate_graph(graph, shapes):
@@ -197,7 +257,24 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", default="evidence/technical-report.json")
     parser.add_argument("--reasoner-report", default="evidence/reasoner-report.json")
+    parser.add_argument("--jobs", type=int, default=1,
+                        help="Run unittest files in N isolated Python processes (default: serial).")
+    parser.add_argument("--_test-file", help=argparse.SUPPRESS)
     args = parser.parse_args()
+    if args.jobs < 1:
+        parser.error("--jobs must be at least 1.")
+    if args._test_file is not None:
+        name = args._test_file
+        path = ROOT / "tests" / name
+        if Path(name).name != name or not name.startswith("test_") or not name.endswith(".py") or not path.is_file():
+            parser.error("The worker requires an existing tests/test_*.py filename.")
+        temporary = ROOT / "tmp" / "verification-workers"
+        temporary.mkdir(parents=True, exist_ok=True)
+        tempfile.tempdir = str(temporary)
+        warnings.filterwarnings("ignore", category=DeprecationWarning)
+        record = _run_test_suite(name, capture_console=True)
+        print(json.dumps(record, ensure_ascii=False))
+        return 0 if record["passed"] else 1
     report_path = (ROOT / args.report).resolve()
     reasoner_path = (ROOT / args.reasoner_report).resolve()
     if not report_path.is_relative_to(ROOT) or not reasoner_path.is_relative_to(ROOT):
@@ -229,7 +306,7 @@ def main():
         report["checks"][name] = record
         print(f"{name}: {'PASS' if record.get('passed') else 'FAIL'}", flush=True)
 
-    check("unittest", run_unit_tests)
+    check("unittest", lambda: run_unit_tests(args.jobs))
     combined_path = ROOT / "ontology" / "mado-combined.ttl"
     try:
         import pyshacl

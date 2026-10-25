@@ -1,8 +1,8 @@
 {
-  "version": "1.5.0-rc3",
+  "version": "1.6.0-rc1",
   "instrument": "AMADO",
-  "executor_version": "AMADO-web-1.5.0-rc3-structural1",
-  "compiled_at_utc": "2026-10-22T00:00:36.301475+00:00",
+  "executor_version": "AMADO-web-1.6.0-rc1-semantic1",
+  "compiled_at_utc": "2026-10-25T22:13:26.678316+00:00",
   "status": "TECHNICALLY_CHECKED_RELEASE_CANDIDATE",
   "checks": {
     "version": true,
@@ -17,11 +17,15 @@
     "browser_native_parity": true,
     "distribution_current": true,
     "composition_rdf_reasoner": true,
+    "semantic_execution_packaged": true,
+    "semantic_execution_frozen": true,
+    "semantic_execution_distributed": true,
+    "semantic_execution_cases": true,
     "articulation_ui_execution": true
   },
   "results": {
-    "unit_tests": 401,
-    "ontology_triples": 17304,
+    "unit_tests": 468,
+    "ontology_triples": 116633,
     "owl_2_dl": true,
     "hermit_consistency": true,
     "shacl": {
@@ -38,11 +42,11 @@
       "CQ-006": 7,
       "CQ-007": 7,
       "CQ-008": 4,
-      "CQ-009": 190,
+      "CQ-009": 192,
       "CQ-010": 0
     },
     "situated_composition": {
-      "version": "2.0.0-alpha5",
+      "version": "2.0.0-alpha6",
       "delta": {
         "complete_choices_with_relation": 2,
         "complete_choices_without_relation": 0,
@@ -51,7 +55,7 @@
         "second_person_blocked_complete_choices": 0,
         "first_person_sequence_preserved": true
       },
-      "tests": 25
+      "tests": 52
     },
     "browser_checks": {
       "served_manifest_matches_build": true,
@@ -135,11 +139,11 @@
         "current_download_bytes": false
       },
       "evidence_use": "NOT_VERIFIED_CURRENT_BUILD",
-      "checked_at": "2026-10-21T14:33:33.387Z",
-      "expected_commit": "315091cd53c7ac42f02249d3399b41ddc2883b0c",
+      "checked_at": "2026-10-22T00:11:31.729Z",
+      "expected_commit": "eb0e80b9849125d3d21f66beb6d7e342039e2e1e",
       "commit_observation": "Expected deployment commit from the publisher or local checkout; serving identity is verified independently by content hashes.",
       "test_sha256": "0012d14f67f659cfc18a1731b9163e3ec280b20bf8202ee79c48a42688e42eca",
-      "public_manifest_sha256": "1547855765b6abd295c39928df8ceb5a8c78d61f6ce8265d7593702e09c9d5c5",
+      "public_manifest_sha256": "8b9ae42eba9eda63c234777013cea3580442f88221a3c867713bd7dd55c02450",
       "check_count": 51,
       "asset_count": 38,
       "scope": "Smoke público sintético do contrato situado, limitado às verificações registradas; não substitui a regressão local nem avaliação humana.",
@@ -167,39 +171,39 @@
   "historical_evidence_notice": "Somente os relatórios listados abaixo aprovam estes bytes. Arquivos anteriores conservam sua própria versão e seu alcance.",
   "public_smoke_status": "NOT_VERIFIED_CURRENT_BUILD",
   "reports": {
-    "technical-1.5-report.json": {
-      "url": "technical-1.5-report.json",
-      "sha256": "a6b1f2fc85f486c7fc10c0660b613bac17da41116afdf7ca9f7c8ebf6fa88f6e",
+    "technical-1.6-report.json": {
+      "url": "technical-1.6-report.json",
+      "sha256": "f8c92374bf506f916af7be2e94e5f5150106e8dc87b3015ef4e3c37575be87d5",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
-    "reasoner-1.5-report.json": {
-      "url": "reasoner-1.5-report.json",
-      "sha256": "cb000e92aa7e2d6cb429c13a87ca572fad00a0ade2c5bc63c41812ce109b5ffb",
-      "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256"
+    "reasoner-1.6-report.json": {
+      "url": "reasoner-1.6-report.json",
+      "sha256": "8ceb3ed36f7f4f584c3eb90b5fd3260b27480bada64b85807464384f7d9f31e5",
+      "evidence_use": "VERIFIED_CURRENT_ONTOLOGY_SHA256"
     },
     "situated-report.json": {
       "url": "situated-report.json",
-      "sha256": "eb7a24f8711efe59a743cd668c04d867b66c757ae92c3bc6e6dae2bf9600beac",
+      "sha256": "397bca0bc3e837c749caebfe9f685e8a97eac1f219cc8f5797e10c95a633fb87",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "situated-browser.json": {
       "url": "situated-browser.json",
-      "sha256": "e391013d3ea7457550bb0e380264ffa452a7f9dee253290813f77e507e776888",
+      "sha256": "f23c1c28dd53638b98d09f3f6ca5e2bd07f79ae7d4d650e49ce805abe38a23f8",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "distribution-audit.json": {
       "url": "distribution-audit.json",
-      "sha256": "2ce9ca87fb6dc9f84622f914da401609f5ed6e518a58f9526961f1bf80220c26",
+      "sha256": "f031b54ee4373c98047ee3c5163988c5a6664945d1adf267d37b57c37ee73d4d",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     },
     "trajectory-reasoner-report.json": {
       "url": "trajectory-reasoner-report.json",
-      "sha256": "b39fee77cfecabea1cb95e34f88111a9fc5b12cd6e54191f0c99fa83eb6e6670",
-      "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256"
+      "sha256": "351e9c1c02f8f08b7c6f990f3cf651bf6018e369edb66fb87cc22326a222b4d7",
+      "evidence_use": "VERIFIED_CURRENT_ONTOLOGY_SHA256"
     },
     "articulation-browser.json": {
       "url": "articulation-browser.json",
-      "sha256": "5ecca05d72f66715367647c3368f0805c9e5d43ccda3f71b39fb99c7029e127e",
+      "sha256": "caeddcda1de8c7a128d2f4e2a252fc8a523ba22e889b583856e4f53aad59f567",
       "evidence_use": "CURRENT_BUILD_EXECUTION"
     }
   }

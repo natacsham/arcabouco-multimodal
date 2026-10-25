@@ -48,7 +48,7 @@ class CompositionBridgeTests(unittest.TestCase):
         from rdflib import RDF, RDFS
         from experimental.v2.composer import V2
         catalog = bridge.dispatch({"operation": "catalog_composition"})
-        self.assertEqual(catalog["version"], "2.0.0-alpha5")
+        self.assertEqual(catalog["version"], "2.0.0-alpha6")
         for group, entity_type in (("facts", V2.ContextFact), ("resources", V2.Resource)):
             self.assertEqual({row["iri"] for row in catalog[group]},
                              {str(node) for node in self.composer.graph.subjects(RDF.type, entity_type)})
@@ -68,12 +68,17 @@ class CompositionBridgeTests(unittest.TestCase):
 
     def test_composes_without_legacy_case_and_matches_direct_execution(self):
         from engine import VERSION
+        from semantic_execution import project_execution, semantic_execution_summary
+        from rdflib.compare import isomorphic
         expected = self.composer.compose_context(self.context, engine=self.legacy)
+        expected_graph = project_execution(expected, self.context, self.composer.graph)
+        expected["semantic_trace"] = semantic_execution_summary(expected_graph)
         expected.update(result_contract="AMADO_SITUATED_1", base_version=VERSION, case_storage=False)
         expected["fingerprints"] = {Path(name).relative_to(ROOT).as_posix(): value
                                     for name, value in expected["fingerprints"].items()}
         actual = self.compose()
         self.assertEqual(actual, expected)
+        self.assertTrue(isomorphic(self.legacy._last_execution_graph, expected_graph))
         self.assertEqual(actual["proposal_status"], "COMPLETE")
         self.assertIsNone(self.legacy.current)
         self.assertEqual([step["id"].split("#")[-1] for step in actual["choices"][0]["steps"]],
@@ -147,8 +152,7 @@ class CompositionBridgeTests(unittest.TestCase):
         self.assertEqual(json.loads(bridge.dispatch_json(request)), json.loads(json.dumps(self.compose())))
 
     def test_runtime_allowlist_has_only_required_public_files(self):
-        expected = {"composer.py", "trajectory.py", "schema.ttl", "base.ttl",
-                    "audio-review.ttl", "trajectory-bindings.json", "learning-contribution.json"}
+        expected = {"composer.py", "trajectory.py", "learning-contribution.json"}
         paths = [Path(name) for name in build_web.COMPOSITION_FILES]
         self.assertEqual({path.name for path in paths}, expected)
         self.assertTrue(all((ROOT / path).is_file() for path in paths))

@@ -131,7 +131,11 @@ for record in records:
 print(json.dumps(replace(last,{v:k for k,v in mapping.items()}),ensure_ascii=True))
 `;
 const canonical=value=>{
-  if(typeof value==='string')return value.replace(/\b(?:check|proposal|occurrence|question)-[0-9a-f]{16,64}\b/g,match=>match.split('-')[0]+'-<volatile>');
+  // Only hashes derived from per-session IDs differ; semantic fields remain.
+  if(value?.contract_version==='MADO_EXECUTION_GRAPH_1'){
+    const {graph_sha256,...stable}=value;value=stable;
+  }
+  if(typeof value==='string')return value.replace(/\b(?:check|proposal|occurrence|question|information)-[0-9a-f]{16,64}\b/g,match=>match.split('-')[0]+'-<volatile>').replace(/(https:\/\/w3id\.org\/mado\/execution\/)[0-9a-f]{64}(#)/g,'$1<execution>$2');
   if(Array.isArray(value))return value.map(canonical);
   if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().filter(key=>!['created_at','generated_at','checked_at','context_sha256'].includes(key)).map(key=>[key,canonical(value[key])]));
   return value;

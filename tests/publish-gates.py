@@ -386,6 +386,80 @@ class PublicationGateTests(unittest.TestCase):
         self.manifest['composition']['version']='2.0.0-alpha4'
         self.assertFalse(gate.situated_release_checks(self.manifest,**records)['version'])
 
+    def semantic_records(self):
+        records=self.structural_records()
+        self.manifest.update(version='1.6.0-rc1', composition={'version':'2.0.0-alpha6'})
+        for name in gate.SEMANTIC_EXECUTION_INPUTS | gate.SEMANTIC_REVIEW_INPUTS:
+            self.write(name,'synthetic semantic '+name)
+            digest=gate.sha(name)
+            records['technical']['source_sha256'][name]=digest
+            records['situated']['source_hashes_before'][name]=digest
+            records['situated']['source_hashes_after'][name]=digest
+            records['distribution']['distribution_sha256'][name]=digest
+            if name in gate.SEMANTIC_EXECUTION_INPUTS:
+                self.manifest['files'][name]=digest
+        records['browser']['build']=copy.deepcopy(self.manifest)
+        records['situated']['execution_cases']={f'synthetic-{i}':{
+            'execution':{'synthetic':True},'execution_shacl_conforms':True,
+            'query_row_counts':{f'EXEC-CQ-{q:03d}':0 for q in range(1,11)}} for i in range(3)}
+        return records
+
+    def test_semantic_release_requires_new_version_pair_and_report_paths(self):
+        records=self.semantic_records()
+        self.assertTrue(all(gate.situated_release_checks(self.manifest,**records).values()))
+        paths=gate.situated_report_paths('1.6.0-rc1')
+        self.assertEqual('evidence/technical-1.6-report.json',paths['technical'])
+        self.assertEqual('evidence/reasoner-1.6-report.json',paths['reasoner'])
+        self.assertEqual('evidence/technical-1.5-report.json',gate.situated_report_paths('1.5.0-rc3')['technical'])
+        self.manifest['composition']['version']='2.0.0-alpha5'
+        self.assertFalse(gate.situated_release_checks(self.manifest,**records)['version'])
+
+    def test_semantic_runtime_shapes_and_queries_must_be_packaged_frozen_and_distributed(self):
+        records=self.semantic_records()
+        for name in gate.SEMANTIC_EXECUTION_INPUTS:
+            with self.subTest(name=name):
+                changed=copy.deepcopy(records)
+                changed['technical']['source_sha256'].pop(name)
+                self.assertFalse(gate.situated_release_checks(self.manifest,**changed)['technical_inputs_current'])
+                changed=copy.deepcopy(records)
+                changed['situated']['source_hashes_before'].pop(name)
+                self.assertFalse(gate.situated_release_checks(self.manifest,**changed)['semantic_execution_frozen'])
+                changed=copy.deepcopy(records)
+                changed['distribution']['distribution_sha256'].pop(name)
+                self.assertFalse(gate.situated_release_checks(self.manifest,**changed)['semantic_execution_distributed'])
+                manifest=copy.deepcopy(self.manifest)
+                manifest['files'].pop(name)
+                self.assertFalse(gate.situated_release_checks(manifest,**records)['semantic_execution_packaged'])
+
+    def test_semantic_review_files_and_stale_runtime_bytes_fail_closed(self):
+        records=self.semantic_records()
+        for name in gate.SEMANTIC_REVIEW_INPUTS:
+            with self.subTest(name=name):
+                changed=copy.deepcopy(records)
+                changed['technical']['source_sha256'].pop(name)
+                self.assertFalse(gate.situated_release_checks(self.manifest,**changed)['technical_inputs_current'])
+        self.write('semantic_execution.py','changed after verification')
+        checks=gate.situated_release_checks(self.manifest,**records)
+        self.assertFalse(checks['technical_inputs_current'])
+        self.assertFalse(checks['situated_frozen_inputs'])
+        self.assertFalse(checks['distribution_current'])
+
+    def test_semantic_execution_requires_three_conforming_cases_and_ten_queries(self):
+        records=self.semantic_records()
+        for mode in ('missing_case','failed_shape','missing_query','negative_count'):
+            with self.subTest(mode=mode):
+                changed=copy.deepcopy(records)
+                cases=changed['situated']['execution_cases']
+                if mode=='missing_case':
+                    cases.pop(next(iter(cases)))
+                elif mode=='failed_shape':
+                    next(iter(cases.values()))['execution_shacl_conforms']=False
+                elif mode=='missing_query':
+                    next(iter(cases.values()))['query_row_counts'].pop('EXEC-CQ-010')
+                else:
+                    next(iter(cases.values()))['query_row_counts']['EXEC-CQ-010']=-1
+                self.assertFalse(gate.situated_release_checks(self.manifest,**changed)['semantic_execution_cases'])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

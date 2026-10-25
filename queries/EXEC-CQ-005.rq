@@ -1,0 +1,7 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+SELECT DISTINCT ?proposta ?situacao ?participante ?limite WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?execucao ex:hasProposal ?proposta .
+ ?proposta ex:situation ?situacao ; ex:limit ?limite .
+ OPTIONAL { ?proposta ex:participant ?participante }
+} ORDER BY ?proposta ?limite

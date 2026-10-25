@@ -1,6 +1,6 @@
 {
   "type": "SYNTHETIC_SITUATED_FLOW_NOT_PARTICIPANT_SESSION",
-  "checked_at": "2026-10-21T23:47:58.822Z",
+  "checked_at": "2026-10-25T21:35:33.783Z",
   "checks": {
     "served_manifest_matches_build": true,
     "single_free_narrative_entry": true,
@@ -73,15 +73,15 @@
     "NVDA, VoiceOver and TalkBack not executed. Computed contrast and keyboard smoke do not prove WCAG conformance."
   ],
   "build": {
-    "version": "1.5.0-rc3",
+    "version": "1.6.0-rc1",
     "origin_commit": "d660b773ed08038a7a543205575a16fc22d2c1c2",
     "instrument": "AMADO",
-    "executor_version": "AMADO-web-1.5.0-rc3-structural1",
+    "executor_version": "AMADO-web-1.6.0-rc1-semantic1",
     "public_projection": true,
     "thesis_reference": "V21 / MADO 1.2.0-RC4 (preservada, não substituída)",
-    "core_sha256": "41e3efd97a376248d3de03af8fc8bfdec9f60aa05e1e5435a856190a61aa4983",
-    "bridge_sha256": "8327466f412ce590e9daf65c9d3e1dc17fcb0ba08faf037a118c50d110e22e6b",
-    "base_zip_sha256": "c88b26194a9860a492f94e770747b255fb7faa4d622a190958dea1eae96ea405",
+    "core_sha256": "17555c653768d275cf36bc2a3b39b3d1dd989dd85996c275f1e545130b198045",
+    "bridge_sha256": "3ee7cd6f8ff33e95ab73b27237aa3244261b9a06d46016d5c5e2b6fb8a1385b0",
+    "base_zip_sha256": "c5eca83417b235f897dbca79a743d027711fd519e2c733ec08e3f7941111868d",
     "pyodide_version": "314.0.7",
     "runtime": {
       "pyodide-lock.json": {
@@ -119,16 +119,12 @@
     "case_history": false,
     "llm": false,
     "composition": {
-      "version": "2.0.0-alpha5",
+      "version": "2.0.0-alpha6",
       "implementation": "ResearchComposer",
       "case_storage": false,
       "files": {
-        "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
-        "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-        "experimental/v2/schema.ttl": "cdae5b02adc021797a2729fbd307abf9eabcfc5dcfdaf22fc719eaffd96056c2",
-        "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-        "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-        "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
+        "experimental/v2/composer.py": "6d7f6b23935e0608534b5842597c2482805620910d1a149c4260773820f1259a",
+        "experimental/v2/trajectory.py": "3a871eb063047f6086dfffed5a06ef804ed22a99945a225040433d78748b9fff",
         "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
       }
     },
@@ -149,12 +145,12 @@
       "voice.js": "202d8fdfd014c9bcd877d4277690bbd0e594075310904d14e89e3920a1f3a8eb",
       "intake.mjs": "5ee9e7e0d903fb26dc3721703c626260461d90242d6dac68858fd20ba2d4671f",
       "situated-output.mjs": "34d37b71334294f21e1c762246c4757b7b63c7384c177a9a9b8a05451e607710",
-      "completo.html": "bcac4fb42bef462814fe30a520821d87c02e9f4f9119efdf06bde5bcc30460ff",
-      "completo-guiado.html": "50468ea6262439aadddc0c732a230af50feb45d5b1aea5b63d8e0590c0d912a5"
+      "completo.html": "a88bda21bc081ab1eb0c3fbfea3ca06e29ca68bb2685f5b62a534b6d1c700bc0",
+      "completo-guiado.html": "c0db6c8ae98924db8b6c48c20867501d54066e145b8ca63cd17b704a908db5e1"
     },
     "site_assets_sha256": {
       "index.html": "a1cc8039690033580c9b1a07c530c6ee8dad2559944d8fc8d3208f93f80dc7ca",
-      "ontologia/index.html": "8da67980695f306b5af77495bf60810894a3d0abd84ac55a1ebeecfdb32f8a4e",
+      "ontologia/index.html": "4f72c26ae6a6fc32e1e362a64af062ee9bca46d7ea33b70392392980a70b1ab5",
       "site.css": "82b8c2016e3eeb46be4f24456e9e3afc0d0708f726fc63315aee5949a1427a27",
       "shell.css": "be68f18e8db1d40a9ec71b7d7a43f88621b97fb9863882cbfea19fe4bb866f62",
       "site.js": "453199b0e1b68cbbb4972392fa19fccfcde30b2800a21476aa03d45e43335773",
@@ -162,16 +158,18 @@
       "explanation.js": "99ed5c901099216983a26bbd3a4afa92de2993f3810982081bdcca1147f6d57c",
       "explanation.css": "ac93adcf7dbf69f1de4ca22a735188ef5cbb49444978b48b566b6b9b46c5fda9",
       "explanation-pilot.js": "9e8ae2760bac3388b3434a297b1cc0ac2b35c47ae43aaed6170492ea78716c91",
-      "assets/explanation-pilot.json": "e56ec756fc1c41dfbff920a5074cff2a295021004384371b4ff33b71dc9f603d",
+      "assets/explanation-pilot.json": "a38470b4b685529824999823149679d8990978f81ba26bda001db1c713ff4d18",
       "source-path.js": "e7c72c45828e5cd5ea10ab9709bafab3a7b051274cbbfae81f789298ce7548ce",
-      "assets/source-catalog.json": "ed95231d1c7088bdaac6bf9a5a80dd1c3a38e2831a11d9fcef1c31f89eb32c1a"
+      "assets/source-catalog.json": "2d4bd04b0cd5625056a959e31c4eb38035eb0c9ceda800497181494e4166b60c"
     },
     "files": {
       "execution_trace.py": "bd293372f3ceb26a11bea33e81a09a73aa203831e658ff23e63260ebbe0a2222",
       "situated_context.py": "5515929ed9ad5edb8fcaa1222e3df348917093d16c0fa688fe8de619e1c159c4",
-      "data/knowledge-base.json": "68f6996e5ba8e8d7fdabb597599a2aec6089670ac69f20b2605fab90403ec2b6",
+      "semantic_catalogue.py": "b59b461e369351d34d783c6f90fba8e7b72b250c2b800d9693d03c57d0f3818f",
+      "semantic_execution.py": "57147695aec6e2a0baf80419d40548e1eba12d56fb02618c4dc4d0d404cfb2af",
+      "shapes/execution.shacl.ttl": "7832dd89f77c1a8f15b41af9c2f68b5e5746bb0bd191503f51cb43abc8c671bf",
       "data/interface-vocabulary.json": "37b0d7b64e81c283103983e0d3e053ed4a83200fe37414092b67b014424fff13",
-      "ontology/mado-combined.ttl": "f1ba539468beefa000fb275dbfd14f81e40028aef819d9b65a81888df5455b65",
+      "ontology/mado-combined.ttl": "b8b08a71e5987d0a73f09e9a4f2bad0105629b4ed25a913e4ad3d76361d9874d",
       "queries/CQ-001.rq": "a6b424c7e9b68c3aa77e047d8ab8a13a2cb4b0801b48ca076a5dc5681fd57b9f",
       "queries/CQ-002.rq": "9567e44d0cb36f29a9626332c0aa58cca5a190487deeaf4f1b3d2aaf70534da3",
       "queries/CQ-003.rq": "e4f14bd10b3c8c389a592e6056e0a1fbc3b36e953f18f2aa5bb8c1c98472bf8a",
@@ -182,21 +180,27 @@
       "queries/CQ-008.rq": "bbeeb1f09f1092326ba3f4a9a85d413ec6b461ff386484dc136b296e9e90503a",
       "queries/CQ-009.rq": "9823c0d9f6ea5a2b938449f5cb487b2e950dc496652b44ad3dbb25c0c35c5475",
       "queries/CQ-010.rq": "0cffed3fb625aa8b637c5bba1f1b766263c67e94a657c35015b70e993911a7e9",
-      "experimental/v2/composer.py": "c637af9cf2d81dd9d3a68ef114cd9feb3439ded044a898750b946705c9e444f1",
-      "experimental/v2/trajectory.py": "4aa5f2312eaa56df643378f7986cefdd623c8d955e156452160362adf330ab49",
-      "experimental/v2/schema.ttl": "cdae5b02adc021797a2729fbd307abf9eabcfc5dcfdaf22fc719eaffd96056c2",
-      "experimental/v2/base.ttl": "ce45649e23f2f95e6665dfcfac6a11dd385b0b4d90d11b263d11c549d7a2b26b",
-      "experimental/v2/extensions/audio-review.ttl": "a328a90a498ed84fe8fb642621182ac7b7eb3a767f820471f73cd45c49bf6e27",
-      "experimental/v2/trajectory-bindings.json": "af33eb3cfccf93b17dc9bcac79f5806a22ae54844264f0406ee219f1b2f132a7",
+      "queries/EXEC-CQ-001.rq": "b673f7465c6c029988bf61596206d55e8d0eb8bc636ef34471e2bedfe0a004cd",
+      "queries/EXEC-CQ-002.rq": "8dc979674f8a502fae4d7a383d8ef9a0c709693cb0d731e185d2faf170122a47",
+      "queries/EXEC-CQ-003.rq": "92449607729e185be802613c0cf87be235624013e763bd424dd5abb852ddb542",
+      "queries/EXEC-CQ-004.rq": "1417b9fcfd2da54e6623ad8c29bf8911b1630bbe47c14a662b2d2bfdc1bf6d07",
+      "queries/EXEC-CQ-005.rq": "648dcc92519e96fe77765f2b50460a5566ed02becd1a563865391e1af643dc78",
+      "queries/EXEC-CQ-006.rq": "0f838f073631b718f7f1a8463605c9316e247d71e904e47a2498a26083303bd4",
+      "queries/EXEC-CQ-007.rq": "f5268f3683d05cfc091ab786c0cc1142c77f98372471cd9048ee074ca571e933",
+      "queries/EXEC-CQ-008.rq": "ca3304db5845042d7ccb8a9c42ea519aa1bc95d990ae5b202e69ef32701a51df",
+      "queries/EXEC-CQ-009.rq": "2255bd4acbfae65c734b0973752b356140ce00953d24987b4ce9d9b3547490b8",
+      "queries/EXEC-CQ-010.rq": "20aa1e7b202dacb3f0f9aea05f6bb6de6bb774562acaaf0a6f604ccd30185f1c",
+      "experimental/v2/composer.py": "6d7f6b23935e0608534b5842597c2482805620910d1a149c4260773820f1259a",
+      "experimental/v2/trajectory.py": "3a871eb063047f6086dfffed5a06ef804ed22a99945a225040433d78748b9fff",
       "experimental/v2/examples/learning-contribution.json": "272928c9e09bd42a668bd049e6a07590817ac9e3ba8451043e60e42498d46d71"
     }
   },
   "static_query_allowlist": [
     "amado/styles.css?v=1.2.0-rc4-ui3-demo-fix2-conexoes"
   ],
-  "test_sha256": "4fe1884bd138b4426d3fb228e79ca4183ad949606eb5258380c34935136c9295",
-  "browser": "155.0.8059.40",
-  "canonical_result_sha256": "eb92c42f75b03b85f7cd82968d0ae5882e92913bbbc4fb4de05044498d805d29",
+  "test_sha256": "8a3ee77701801c637f147292ae7cf6cb6e2cb02098e6d14470b92344e2bf055a",
+  "browser": "156.0.4314.42",
+  "canonical_result_sha256": "7f28be14e6a3aa878addc879e43adc3f1e957cf5710ebb544f12baa181eb55ca",
   "result": {
     "contract": "AMADO_SITUATED_1",
     "status": "INSUFFICIENT",
@@ -335,6 +339,314 @@
         "element": "LI",
         "class_name": "",
         "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "choice-context",
+        "ratio": 11.83683129207257,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-conditional",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H4",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-responsible",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-beneficiary",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.950210841606294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.950210841606294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-modes",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-purpose",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 13.199799600755398,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 13.199799600755398,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 13.199799600755398,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-monitoring",
+        "ratio": 12.887474088501294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H4",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-responsible",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-beneficiary",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.950210841606294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.950210841606294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.950210841606294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-modes",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-purpose",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 13.199799600755398,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 13.199799600755398,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 13.199799600755398,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-monitoring",
+        "ratio": 12.887474088501294,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 14.079618687682288,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 12.516661994305135,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 12.516661994305135,
         "minimum": 4.5
       },
       {
@@ -635,6 +947,314 @@
       {
         "kind": "text",
         "element": "P",
+        "class_name": "choice-context",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-conditional",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H4",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-responsible",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-beneficiary",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-modes",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-purpose",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-monitoring",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "H4",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-responsible",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-beneficiary",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-modes",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-purpose",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "step-monitoring",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 18.763901930292075,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "LI",
+        "class_name": "",
+        "ratio": 21,
+        "minimum": 4.5
+      },
+      {
+        "kind": "text",
+        "element": "P",
         "class_name": "",
         "ratio": 21,
         "minimum": 4.5
@@ -755,27 +1375,27 @@
   "conditional_result": {
     "status": "INSUFFICIENT",
     "proposal_status": "CONDITIONAL",
-    "operation_count": 1,
-    "canonical_sha256": "da399527442d82288493b0dd06f52a4323fd63fea355c62e031adf0d6a07234b"
+    "operation_count": 3,
+    "canonical_sha256": "88eb20492254eddc647fe92b0a73a6d862350882965b13f54a69a9fca076b635"
   },
   "narrative_cases": [
     {
       "id": "presentation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "fde5e21d861187c0f8f5b8e64f1912224eea19f1e510d1957ed56a742b5c2678"
+      "canonical_sha256": "9f494fa5edcb1f962d0a2b3a6e84374938c4652e9f2fea517b955cf43ee46baf"
     },
     {
       "id": "form",
       "parity": true,
       "proposal_status": "PARTIAL",
-      "canonical_sha256": "6e47ca7f98498780cabaf598363a588428419f238f233b1c9076508ed11c04cc"
+      "canonical_sha256": "ab99d8e90b7476c8f64b5e2192c862a57ae1d52c76c381cb071ad54e91ff0bf6"
     },
     {
       "id": "dictation",
       "parity": true,
       "proposal_status": "CONDITIONAL",
-      "canonical_sha256": "8b7e2e5e99bb8a58dbf037763f88b41c548b76a1c624db974348c323b4c86f88"
+      "canonical_sha256": "fdabf2dbd4add2ce993d9216ccfb264d250cc1144ba4dee77989912841b89b8c"
     }
   ],
   "passed": true

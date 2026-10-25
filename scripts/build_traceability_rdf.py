@@ -15,10 +15,13 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(ROOT / "vendor"))
+sys.path.insert(0, str(ROOT))
 from rdflib import BNode, Graph, Literal, Namespace, OWL, RDF, RDFS, URIRef, XSD
 from rdflib.namespace import SKOS
 from urllib.parse import urlsplit
 from rdflib.compare import to_canonical_graph
+from semantic_catalogue import project_semantic_catalogue
+from semantic_execution import execution_schema_graph
 
 M = Namespace("https://w3id.org/mado#")
 DCT = Namespace("http://purl.org/dc/terms/")
@@ -88,9 +91,20 @@ def project_documentary_metadata(graph, data):
     Uses only existing records. No original is fetched, no quotation restored,
     and no bibliographic reference is promoted to operational knowledge.
     """
-    for collection in ("sources", "references", "excerpts", "criterion_origins"):
+    for collection in ("sources", "references", "excerpts", "criteria", "criterion_origins"):
         for row in data.get(collection, []):
             node = M[row["id"]]
+            if collection == "criteria":
+                graph.add((node, RDF.type, M.CriterioDeDecisaoMultimodal))
+                replace_values(graph, node, M.identificador, [Literal(row["id"])])
+            elif collection == "criterion_origins":
+                graph.add((node, RDF.type, M.RelacaoDeOrigemDoCriterio))
+                replace_values(graph, node, M.identificador, [Literal(row["id"])])
+                if row.get("criterio_id"):
+                    graph.add((M[row["criterio_id"]], M.possuiOrigem, node))
+                for key, predicate in (("fonte_id", M.origemEmFonte), ("trecho_id", M.origemSustentadaPorTrecho)):
+                    if row.get(key):
+                        replace_values(graph, node, predicate, [M[row[key]]])
             url = row.get("document_url") or row.get("url")
             replace_values(graph, node, RDFS.seeAlso,
                            [URIRef(url)] if url and urlsplit(url).scheme in {"http", "https"}
@@ -110,6 +124,19 @@ def project_documentary_metadata(graph, data):
             if row.get("localizacao_publica"):
                 replace_values(graph, node, M.localizacaoDocumental,
                                [Literal(row["localizacao_publica"])])
+            if collection == "excerpts":
+                graph.add((node, RDF.type, M.TrechoDocumental))
+                replace_values(graph, node, M.identificador, [Literal(row["id"])])
+                if row.get("fonte_id"):
+                    replace_values(graph, node, M.trechoDeFonte, [M[row["fonte_id"]]])
+                if row.get("estado_publicacao") == "PARAFRASE_PROPRIA_SEM_TRECHO_LITERAL":
+                    if not row.get("document_paraphrase") or not row.get("localizacao_publica"):
+                        raise ValueError("Paráfrase exige formulação e localização: " + row["id"])
+                    replace_values(graph, node, M.estadoDePublicacaoDoTrecho,
+                                   [Literal("PARAFRASE_PROPRIA_SEM_TRECHO_LITERAL")])
+                    # The paraphrase above remains explicitly an annotation;
+                    # it must never be published as a recovered literal quote.
+                    graph.remove((node, M.conteudoDoTrecho, None))
             if collection == "references":
                 replace_values(graph, node, DCT.bibliographicCitation,
                                [Literal(row["referencia_exata"])] if row.get("referencia_exata") else [])
@@ -528,6 +555,21 @@ def build_graph(base, tbox, data):
         graph.add((node, M.dataDaConferencia, Literal(row["review_date"])))
 
     project_operational_contracts(graph, data)
+    project_semantic_catalogue(graph, data)
+    execution_schema = execution_schema_graph()
+    for subject in set(execution_schema.subjects()):
+        if str(subject).startswith("https://w3id.org/mado/execution#"):
+            graph.remove((subject, None, None))
+    graph += execution_schema
+    # Pilot excerpts already have exact source and location links. Publish
+    # identifiers and an explicit non-redistribution state, never a fabricated
+    # quotation or a date/reviewer that the pilot did not record.
+    for node in list(graph.subjects(RDF.type, M.TrechoDocumental)):
+        if str(node).startswith("https://w3id.org/mado/experimental/v2#"):
+            replace_values(graph, node, M.identificador, [Literal(str(node).split("#")[-1])])
+            if not list(graph.objects(node, M.conteudoDoTrecho)):
+                replace_values(graph, node, M.estadoDePublicacaoDoTrecho,
+                               [Literal("TEXTO_NAO_REDISTRIBUIDO")])
 
     # Static example applications are projected by the same exact K/ART pair;
     # there is no global attribution of every contribution to every criterion.

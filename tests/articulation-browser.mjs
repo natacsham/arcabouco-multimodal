@@ -138,7 +138,13 @@ for record in records:
 print(json.dumps(replace(last,{v:k for k,v in mapping.items()}),ensure_ascii=True))
 `;
 const canonical=value=>{
-  if(typeof value==='string')return value.replace(/\b(?:check|proposal|occurrence|question)-[0-9a-f]{16,64}\b/g,match=>match.split('-')[0]+'-<volatile>');
+  // Execution and information identities are hashes of session-scoped IDs.
+  // Compare their structure/counts/base hash while retaining every actual
+  // operation, condition, information role, source and relation below.
+  if(value?.contract_version==='MADO_EXECUTION_GRAPH_1'){
+    const {graph_sha256,...stable}=value;value=stable;
+  }
+  if(typeof value==='string')return value.replace(/\b(?:check|proposal|occurrence|question|information)-[0-9a-f]{16,64}\b/g,match=>match.split('-')[0]+'-<volatile>').replace(/(https:\/\/w3id\.org\/mado\/execution\/)[0-9a-f]{64}(#)/g,'$1<execution>$2');
   if(Array.isArray(value))return value.map(canonical);
   if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().filter(key=>!['created_at','generated_at','checked_at','context_sha256'].includes(key)).map(key=>[key,canonical(value[key])]));
   return value;
@@ -211,6 +217,13 @@ async function generate(page,fixture){
   const native=JSON.parse(execFileSync(process.env.AMADO_PYTHON||'python',['-B','-W','ignore','-c',nativeReplay],{
     cwd:root,encoding:'utf8',input:JSON.stringify(probe.records),maxBuffer:64*1024*1024}));
   const parity=JSON.stringify(canonical(result))===JSON.stringify(canonical(native));
+  if(!parity){
+    const paths=[];
+    const diff=(a,b,p='')=>{if(JSON.stringify(a)===JSON.stringify(b)||paths.length>=12)return;
+      if(a&&b&&typeof a==='object'&&typeof b==='object')for(const k of new Set([...Object.keys(a),...Object.keys(b)]))diff(a[k],b[k],p+'.'+k);
+      else paths.push({path:p,browser:a,native:b});};
+    diff(canonical(result),canonical(native));report.parity_differences=paths;
+  }
   check(fixture.id+'_native_browser_parity',parity);
   report.cases.push({id:publicCaseId(fixture.id),questions:questions.length,status:result.status,proposal_status:result.proposal_status,
     parity,canonical_sha256:sha(JSON.stringify(canonical(result))),

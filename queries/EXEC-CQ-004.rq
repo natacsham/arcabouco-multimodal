@@ -1,0 +1,14 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+PREFIX mado: <https://w3id.org/mado#>
+SELECT DISTINCT ?configuracao ?aplicacao ?criterio ?conhecimento ?afirmacao ?origem ?fonte ?trecho ?localizacao ?justificativa WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?configuracao ex:forExecution ?execucao ; mado:possuiAplicacaoDeCriterio ?aplicacao .
+ ?aplicacao mado:aplicacaoNaConfiguracao ?configuracao ; mado:criterioAplicado ?criterio .
+ OPTIONAL { ?aplicacao mado:conhecimentoDaAplicacao ?conhecimento }
+ OPTIONAL { ?aplicacao ex:usesAssertion ?afirmacao }
+ OPTIONAL { ?aplicacao mado:origemDaAplicacao ?origem .
+   OPTIONAL { ?origem mado:origemEmFonte ?fonte ; mado:origemSustentadaPorTrecho ?trecho }
+ }
+ OPTIONAL { ?aplicacao ex:source ?fonte ; ex:locator ?localizacao }
+ OPTIONAL { ?aplicacao mado:justificativaDaAplicacao ?justificativa }
+} ORDER BY ?configuracao ?aplicacao ?origem

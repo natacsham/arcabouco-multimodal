@@ -58,6 +58,22 @@ class StructuralCompositionTests(unittest.TestCase):
                         "A published functional-transfer permission must work outside the source task.")
         self.assertEqual({row["function_id"] for row in result["required_functions"]}, {"F-B"})
 
+    def test_information_identity_is_required_between_producer_and_consumer(self):
+        self.require_prepared_input()
+        initial = self.compose()
+        evaluations = {row["id"]: row for row in initial["capability_evaluations"]}
+        self.context["information_bindings"] = [
+            {"operation_id": identifier, "participant_id": evaluations[identifier]["participant_id"],
+             "situation_id": evaluations[identifier]["situation_id"], "information_unit_id": "same-draft"}
+            for identifier in ("OP-A", "OP-B")]
+        linked = self.compose()
+        self.assertTrue(any(operation_ids(plan) == ["OP-A", "OP-B"] for plan in offered(linked)))
+        self.context["information_bindings"][1]["information_unit_id"] = "another-draft"
+        broken = self.compose()
+        self.assertFalse(any(operation_ids(plan) == ["OP-A", "OP-B"] for plan in offered(broken)))
+        self.assertTrue(any(check["kind"] == "INFORMATION_IDENTITY" and check["state"] == "FAIL"
+                            for check in broken["execution_evidence"]))
+
     def test_explicitly_task_bound_operation_remains_outside_new_task(self):
         contract = self.composer.base["decision_components"][1]["operation_contract"]
         contract["transfer_scope"].update(task_ids=["HISTORICAL-TASK"],

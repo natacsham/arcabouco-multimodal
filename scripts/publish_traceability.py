@@ -15,6 +15,19 @@ FULL_VIEW_TESTS = {
     "SYNTHETIC_TECHNICAL_BROWSER_CHECK": "tests/traceability-browser.mjs",
     "SYNTHETIC_COMPOSITION_BROWSER_NOT_HUMAN_EVALUATION": "tests/composition-browser.mjs",
 }
+SITUATED_VERSIONS = {
+    "1.5.0-rc1": "2.0.0-alpha3", "1.5.0-rc2": "2.0.0-alpha4",
+    "1.5.0-rc3": "2.0.0-alpha5", "1.6.0-rc1": "2.0.0-alpha6",
+}
+SEMANTIC_EXECUTION_INPUTS = frozenset({
+    "semantic_catalogue.py", "semantic_execution.py", "shapes/execution.shacl.ttl",
+    *[f"queries/EXEC-CQ-{i:03d}.rq" for i in range(1, 11)],
+})
+SEMANTIC_REVIEW_INPUTS = frozenset({
+    "tests/test_semantic_curation.py", "tests/test_semantic_execution.py",
+    "tests/test_modal_information_runtime.py",
+    "scripts/migrate_semantic_curation.py", "scripts/migrate_pilot_semantics.py",
+})
 
 
 def read(name):
@@ -259,13 +272,14 @@ def situated_release_checks(manifest, technical, reasoner, situated, browser, di
                 "experimental/v2/trajectory.py", "experimental/v2/trajectory-bindings.json", "web/amado/bridge.py",
                 "tests/test_situated_intake.py", "tests/test_situated_composition.py", "tests/test_situated_catalogue.py",
                 *[f"queries/CQ-{i:03d}.rq" for i in range(1, 11)]}
-    if manifest.get("version") == "1.5.0-rc3":
+    if manifest.get("version") in {"1.5.0-rc3", "1.6.0-rc1"}:
         required.update({"tests/test_structural_composition.py", "tests/test_operational_articulation_rc2.py"})
+    if manifest.get("version") == "1.6.0-rc1":
+        required.update(SEMANTIC_EXECUTION_INPUTS | SEMANTIC_REVIEW_INPUTS)
     checks = browser.get("checks") or {}
-    return {
-        "version": {"1.5.0-rc1": "2.0.0-alpha3", "1.5.0-rc2": "2.0.0-alpha4",
-                    "1.5.0-rc3": "2.0.0-alpha5"}.get(manifest.get("version")) == manifest.get("composition", {}).get("version")
-            and manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2", "1.5.0-rc3"},
+    result = {
+        "version": SITUATED_VERSIONS.get(manifest.get("version")) == manifest.get("composition", {}).get("version")
+            and manifest.get("version") in SITUATED_VERSIONS,
         "current_package": preserved_components({"build": manifest}, manifest)["passed"],
         "technical_passed": technical.get("passed") is True,
         "technical_inputs_current": required <= set(technical_inputs) and all(_matches(n, h) for n, h in technical_inputs.items()),
@@ -291,15 +305,38 @@ def situated_release_checks(manifest, technical, reasoner, situated, browser, di
             and logical.get("consistency_passed") is True
             and _matches("experimental/v2/evidence/trajectory-combined.ttl", logical.get("input_sha256")),
     }
+    if manifest.get("version") == "1.6.0-rc1":
+        # Tests cannot approve modules omitted from the package or frozen inputs.
+        execution_cases = situated.get("execution_cases") or {}
+        execution_queries = {f"EXEC-CQ-{i:03d}" for i in range(1, 11)}
+        result.update({
+            "semantic_execution_packaged": SEMANTIC_EXECUTION_INPUTS <= set(manifest.get("files") or {}),
+            "semantic_execution_frozen": SEMANTIC_EXECUTION_INPUTS <= set(frozen),
+            "semantic_execution_distributed": SEMANTIC_EXECUTION_INPUTS <= set(distribution.get("distribution_sha256") or {}),
+            "semantic_execution_cases": len(execution_cases) >= 3 and all(
+                item.get("execution_shacl_conforms") is True
+                and bool(item.get("execution"))
+                and set(item.get("query_row_counts") or {}) == execution_queries
+                and all(isinstance(count, int) and not isinstance(count, bool) and count >= 0
+                        for count in item["query_row_counts"].values())
+                for item in execution_cases.values()),
+        })
+    return result
+
+
+def situated_report_paths(version):
+    """Never use a historical 1.5 technical/reasoner report as a 1.6 release."""
+    series = "1.6" if version == "1.6.0-rc1" else "1.5"
+    return {"technical": f"evidence/technical-{series}-report.json", "reasoner": f"evidence/reasoner-{series}-report.json",
+            "situated": "experimental/v2/evidence/situated-report.json", "browser": "evidence/situated-browser.json",
+            "distribution": "evidence/distribution-audit.json", "logical": "experimental/v2/evidence/trajectory-reasoner-report.json"}
 
 
 def publish_situated(manifest):
-    paths = {"technical": "evidence/technical-1.5-report.json", "reasoner": "evidence/reasoner-1.5-report.json",
-             "situated": "experimental/v2/evidence/situated-report.json", "browser": "evidence/situated-browser.json",
-             "distribution": "evidence/distribution-audit.json", "logical": "experimental/v2/evidence/trajectory-reasoner-report.json"}
+    paths = situated_report_paths(manifest.get("version"))
     records = {key: read(name) for key, name in paths.items()}
     checks = situated_release_checks(manifest, **records)
-    if manifest.get("version") in {"1.5.0-rc2", "1.5.0-rc3"}:
+    if manifest.get("version") in {"1.5.0-rc2", "1.5.0-rc3", "1.6.0-rc1"}:
         articulation = read("evidence/articulation-browser.json")
         paths["articulation"] = "evidence/articulation-browser.json"
         checks["articulation_ui_execution"] = (articulation.get("type") == "SYNTHETIC_ARTICULATION_UI_NOT_HUMAN_EVALUATION"
@@ -345,7 +382,8 @@ def publish_situated(manifest):
         filename = Path(name).name
         (target / filename).write_bytes((ROOT / name).read_bytes())
         summary["reports"][filename] = {"url": filename, "sha256": sha(name),
-            "evidence_use": "REUSED_IDENTICAL_ONTOLOGY_SHA256" if key in {"reasoner", "logical"} else "CURRENT_BUILD_EXECUTION"}
+            "evidence_use": ("VERIFIED_CURRENT_ONTOLOGY_SHA256" if manifest.get("version") == "1.6.0-rc1"
+                             else "REUSED_IDENTICAL_ONTOLOGY_SHA256") if key in {"reasoner", "logical"} else "CURRENT_BUILD_EXECUTION"}
     smoke_name = "evidence/situated-public-smoke.json"
     if (ROOT / smoke_name).is_file():
         smoke = read(smoke_name)
@@ -363,7 +401,7 @@ def publish_situated(manifest):
 
 def main():
     manifest = read("web/amado/manifest.json")
-    if manifest.get("version") in {"1.5.0-rc1", "1.5.0-rc2", "1.5.0-rc3"}:
+    if manifest.get("version") in SITUATED_VERSIONS:
         return publish_situated(manifest)
     technical = read("evidence/technical-report.json")
     reasoner = read("evidence/reasoner-report.json")

@@ -123,9 +123,9 @@
   },
   "records": {
     "knowledge": {
-      "K28": "c4542ad6e906e2115743eb82c1d6ccfd7e2b5a82f27bfa276d71d0298ba53184",
-      "K29": "32aca65898367e89ced053ca578f20f4f7bb702df0d823b66279634504271b98",
-      "K41": "df18deb81c259e692e580938647f9cd735c4479a85daac2d503ac37ab144ff2c"
+      "K28": "3a86fb73b598411639c8ff36421af8e033f727702442e491fabfcf34abfe2802",
+      "K29": "784dbfb3df1d8b153d5a139bcc9fd27a1185cfa17e66eb69ee1b3d06c3bb70d7",
+      "K41": "3b54723fcad875450877276ed254b29fcc0aabe4d87b949cdff95ca9a7dbd64d"
     },
     "sources": {
       "F01": "4156fa0647620ab531274498839d6436cb35c83e90842ce1ac05a0ecb640ab14",
@@ -141,8 +141,8 @@
       "TD-ORI-0238": "81b15de4d2e08915f169484cd495bfd4bcbf36be292777f5b631891ec5d34b4a"
     },
     "contributions": {
-      "C-K41-01": "bd5f1440af90b37ae9e2dce72add8d7f1789ac69245b6c10299fbf8461a9366a",
-      "C-K41-02": "d0dbe54da713571944cdeb9df0916714db44d5e600d45fd2fadbef808d0e2a4f"
+      "C-K41-01": "c8f2c0606cdc28817a05b3b30b2c9b371ffe8e3b6841377becfdac4a0f922d7f",
+      "C-K41-02": "3846052b256c339de940cd621d7e9b2d16fa8b488d9d1a139e3fc8d7ffb18f45"
     },
     "criteria": {
       "CA38": "404e90232edaa58d020cf9e7cf42f11fdd3820fc83263160dcfb2c9002da31d2"
@@ -426,5 +426,50 @@
     "criterion_origins": {
       "ORI-0238": "8c911b546cfa56ce957061bcbd252803d1ed38133f1504217318949e64724c07"
     }
+  },
+  "semantic_curation_rc1": {
+    "date": "2026-10-25",
+    "version": "1.6.0-rc1",
+    "record_changes": [
+      {
+        "collection": "knowledge",
+        "record_id": "K28",
+        "previous_sha256": "c4542ad6e906e2115743eb82c1d6ccfd7e2b5a82f27bfa276d71d0298ba53184",
+        "current_sha256": "3a86fb73b598411639c8ff36421af8e033f727702442e491fabfcf34abfe2802",
+        "difference": "ADDITION_OF_SEMANTIC_CURATION_METADATA_ONLY"
+      },
+      {
+        "collection": "knowledge",
+        "record_id": "K29",
+        "previous_sha256": "32aca65898367e89ced053ca578f20f4f7bb702df0d823b66279634504271b98",
+        "current_sha256": "784dbfb3df1d8b153d5a139bcc9fd27a1185cfa17e66eb69ee1b3d06c3bb70d7",
+        "difference": "ADDITION_OF_SEMANTIC_CURATION_METADATA_ONLY"
+      },
+      {
+        "collection": "knowledge",
+        "record_id": "K41",
+        "previous_sha256": "df18deb81c259e692e580938647f9cd735c4479a85daac2d503ac37ab144ff2c",
+        "current_sha256": "3b54723fcad875450877276ed254b29fcc0aabe4d87b949cdff95ca9a7dbd64d",
+        "difference": "ADDITION_OF_SEMANTIC_CURATION_METADATA_ONLY"
+      },
+      {
+        "collection": "contributions",
+        "record_id": "C-K41-01",
+        "previous_sha256": "bd5f1440af90b37ae9e2dce72add8d7f1789ac69245b6c10299fbf8461a9366a",
+        "current_sha256": "c8f2c0606cdc28817a05b3b30b2c9b371ffe8e3b6841377becfdac4a0f922d7f",
+        "difference": "ADDITION_OF_SEMANTIC_CURATION_METADATA_ONLY"
+      },
+      {
+        "collection": "contributions",
+        "record_id": "C-K41-02",
+        "previous_sha256": "d0dbe54da713571944cdeb9df0916714db44d5e600d45fd2fadbef808d0e2a4f",
+        "current_sha256": "3846052b256c339de940cd621d7e9b2d16fa8b488d9d1a139e3fc8d7ffb18f45",
+        "difference": "ADDITION_OF_SEMANTIC_CURATION_METADATA_ONLY"
+      }
+    ],
+    "reason": "Apenas metadados de curadoria adicionados aos registros vinculados. A retirada desse campo reproduz exatamente o hash anterior. Nao altera o conteudo documental nem a autorizacao dos contratos.",
+    "legacy_records_promoted": false,
+    "new_human_approval": false,
+    "scope_revision_rc2_preserved": true
   }
 }

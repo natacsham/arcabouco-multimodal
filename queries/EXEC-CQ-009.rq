@@ -1,0 +1,15 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+PREFIX mado: <https://w3id.org/mado#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?suporte ?afirmacao ?conhecimento ?elegibilidade ?fonte ?nome ?trecho ?localizacao ?endereco ?estadoDocumental WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?suporte a ex:SourceSupport ; ex:forExecution ?execucao ; ex:usesAssertion ?afirmacao .
+ OPTIONAL { ?suporte ex:knowledgeReference ?conhecimento }
+ OPTIONAL { ?afirmacao mado:elegibilidadeOperacional ?elegibilidade }
+ OPTIONAL { ?suporte ex:hasSupport ?par . ?par ex:source ?fonte ; ex:excerpt ?trecho .
+   OPTIONAL { ?par rdfs:label ?nome }
+   OPTIONAL { ?par ex:locator ?localizacao }
+   OPTIONAL { ?par ex:sourceUrl ?endereco }
+   OPTIONAL { ?par ex:documentaryState ?estadoDocumental }
+ }
+} ORDER BY ?suporte ?fonte ?trecho

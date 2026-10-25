@@ -21,7 +21,7 @@ def composition_engine():
     global COMPOSER
     if COMPOSER is None:
         from experimental.v2.trajectory import ResearchComposer
-        COMPOSER = ResearchComposer()
+        COMPOSER = ResearchComposer.from_public_graph(ENGINE.graph)
     return COMPOSER
 
 
@@ -67,7 +67,7 @@ def composition_catalog():
                         "scope": str(graph.value(node, V2.scope) or "person") if name == "facts" else "resource"}
                        for node in sorted(set(graph.subjects(RDF.type, entity_type)), key=str)]
     example = json.loads((Path(HERE) / "examples" / "learning-contribution.json").read_text(encoding="utf-8"))
-    return {"version": str(next(graph.objects(None, OWL.versionInfo), "")), "tasks": tasks,
+    return {"version": "2.0.0-alpha6", "tasks": tasks,
             **fields, "capabilities": capabilities, "relations": relations,
             "labels": {str(node): str(label) for node, label in sorted(graph.subject_objects(RDFS.label), key=lambda pair: str(pair[0]))},
             "values": [None, True, False], "case_storage": False,
@@ -129,6 +129,9 @@ def compose_context(payload, progress=None):
     # The typed legacy example is an input adapter, not a second decision path.
     # The same situated enumerator consumes existing RDF operation contracts.
     result = composition_engine().compose_context(context, engine=ENGINE, progress=progress)
+    from semantic_execution import project_execution, semantic_execution_summary
+    ENGINE._last_execution_graph = project_execution(result, context, composition_engine().graph)
+    result["semantic_trace"] = semantic_execution_summary(ENGINE._last_execution_graph)
     from engine import VERSION
     result.update(result_contract="AMADO_SITUATED_1", base_version=VERSION, case_storage=False)
     # File hashes are identical in native and browser execution; host paths are
@@ -174,6 +177,8 @@ def dispatch(request, progress=None):
     if operation == "clear":
         ENGINE.clear()
         return {"cleared": True}
+    if operation == "inspect_execution":
+        return ENGINE.inspect_execution(payload.get("format", "summary"), query_ids=payload.get("query_ids"))
     if ENGINE.current is None:
         raise ValueError("Carregue um exemplo ou informe um caso antes de continuar.")
     if operation == "update":

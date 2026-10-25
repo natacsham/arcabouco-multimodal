@@ -1,13 +1,15 @@
-"""Read-only, fail-closed bridge from the research JSON to the V2 composer.
+"""Common RDF runtime plus preserved authoring/historical adapters.
 
-The bindings are proposed assisted operationalizations, not a fresh reading of
-the publications. No legacy status, original base or public motor is modified.
+Production uses from_public_graph exclusively. The legacy constructor remains
+for reproducible tests and migration; it is not bundled as a second catalogue.
+Analytical support is not an empirical validation or an author approval.
 """
 from __future__ import annotations
 
 import copy
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +19,11 @@ except ImportError:
     from composer import Composer, MADO, V2, ROOT, _json_hash
 from rdflib import Graph, Literal, RDF, RDFS, URIRef
 from rdflib.namespace import OWL
+
+# Direct historical verification scripts start with experimental/v2 on sys.path;
+# common runtime modules remain rooted in this same project, never another base.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_BASE = ROOT / "data" / "knowledge-base.json"
@@ -43,6 +50,37 @@ def _required_text(record: dict, key: str) -> str:
 
 class ResearchComposer(Composer):
     """Same compose API as Composer, with real-record projection and evidence."""
+
+    @classmethod
+    def from_public_graph(cls, graph=None):
+        """Production entry: one published semantic graph, no JSON fallback.
+
+        The older constructor below is retained for historical reproduction
+        and authoring migrations. It is not used by either public operation.
+        """
+        from semantic_catalogue import read_semantic_catalogue
+        instance = cls.__new__(cls)
+        Composer.__init__(instance, [])
+        if graph is None:
+            path = ROOT / "ontology/mado-combined.ttl"
+            with path.open("rb") as handle:
+                instance.graph.parse(file=handle, format="turtle")
+            instance.fingerprints[str(path)] = hashlib.sha256(path.read_bytes()).hexdigest()
+        else:
+            instance.graph = graph
+        instance.base = read_semantic_catalogue(instance.graph)
+        instance.bindings = instance.base.get("pilot_catalogue", {}).get("bindings", {})
+        instance.contracts = instance.bindings.get("contracts", {})
+        instance.base_sha256 = _json_hash(instance.base)
+        instance.bindings_sha256 = _json_hash(instance.bindings)
+        instance.legacy_projection = False
+        instance.semantic_runtime = True
+        instance.include_audio = True
+        instance.records = {}
+        instance.application_records = {}
+        instance.situated_graph = instance.graph
+        instance.projected_graph_sha256 = instance._graph_hash()
+        return instance
 
     def __init__(self, base_path: Path | str | None = None,
                  bindings_path: Path | str | None = None,
@@ -79,9 +117,8 @@ class ResearchComposer(Composer):
         self.projected_graph_sha256 = self._graph_hash()
 
     def _graph_hash(self) -> str:
-        return hashlib.sha256("\n".join(sorted(
-            " ".join(term.n3() for term in triple) for triple in self.graph
-        )).encode()).hexdigest()
+        from semantic_execution import canonical_graph_hash
+        return canonical_graph_hash(self.graph)
 
     def _validate_records(self) -> None:
         if (self.bindings.get("version") != "trajectory-pilot-1"
@@ -412,5 +449,5 @@ def build_trajectory_graph(base_path: Path | str | None = None,
 
 def compose_context(context: dict[str, Any], engine=None, progress=None) -> dict[str, Any]:
     """Public situated contract; legacy bindings cannot gate unrelated claims."""
-    composer = ResearchComposer(legacy_projection=False)
+    composer = ResearchComposer.from_public_graph(getattr(engine, "graph", None))
     return composer.compose_context(context, engine=engine, progress=progress)

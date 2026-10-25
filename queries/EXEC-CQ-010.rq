@@ -1,0 +1,10 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+PREFIX mado: <https://w3id.org/mado#>
+SELECT DISTINCT ?requisito ?contexto ?participacao ?tarefa ?funcao ?condicao WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?requisito a mado:FuncaoRequeridaSituada ; ex:forExecution ?execucao ;
+   mado:noContexto ?contexto ; mado:requerFuncao ?funcao .
+ OPTIONAL { ?requisito mado:paraParticipacao ?participacao }
+ OPTIONAL { ?requisito mado:paraTarefa ?tarefa }
+ OPTIONAL { ?requisito mado:derivadaDaCondicao ?condicao }
+} ORDER BY ?contexto ?participacao ?tarefa ?funcao

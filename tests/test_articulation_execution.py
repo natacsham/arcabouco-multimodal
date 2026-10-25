@@ -23,6 +23,7 @@ from engine import DecisionEngine
 from experimental.v2.composer import V2, _SituatedRun
 from experimental.v2.trajectory import ResearchComposer
 from rdflib import RDF
+from semantic_catalogue import EDGES
 
 CASES = {row["id"]: row for row in json.loads(
     (ROOT / "tests/fixtures/articulation_transfer_cases.json").read_text(encoding="utf-8"))}
@@ -298,9 +299,11 @@ class ArticulationExecutionTests(unittest.TestCase):
         self.assertIn(DESCRIPTION, offered_ids(changed, blind))
 
     def test_removing_sequence_relation_preserves_independent_operations(self):
-        def remove_sequence(composer):
-            composer.graph.remove((V2.ProductionThenReview, RDF.type, V2.RelationRule))
-        changed = self.direct("dictation_review_control", remove_sequence)
+        # Withdraw the operational relation from the shared RDF catalogue.
+        # Historical pilot type removal is no longer a production ablation.
+        composer = ResearchComposer.from_public_graph()
+        composer.graph.remove((None, EDGES["relations"], V2.ProductionThenReview))
+        changed = composer.compose_context(copy.deepcopy(self.runs["dictation_review_control"][0]))
         offered = offered_ids(changed)
         self.assertIn(str(V2.CaptureSpeech), offered)
         self.assertIn(str(V2.ReviewText), offered)

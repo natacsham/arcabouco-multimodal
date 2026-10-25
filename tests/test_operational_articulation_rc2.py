@@ -208,6 +208,16 @@ class OperationalArticulationRC2Tests(unittest.TestCase):
                 self.assertEqual(expected,hashlib.sha256(encoded.encode('utf-8')).hexdigest())
         self.assertEqual({'knowledge/K28','knowledge/K29','knowledge/K41'},
                          set(b['scope_revision_rc2']['record_hashes_refreshed']))
+        review=b.get('semantic_curation_rc1')
+        if review:
+            self.assertFalse(review['legacy_records_promoted'])
+            self.assertFalse(review['new_human_approval'])
+            for change in review['record_changes']:
+                row=next(r for r in self.data[change['collection']] if r['id']==change['record_id'])
+                stripped={k:v for k,v in row.items() if k!='semantic_curation'}
+                encoded=json.dumps(stripped,sort_keys=True,ensure_ascii=False,separators=(',',':'))
+                self.assertEqual(change['previous_sha256'],hashlib.sha256(encoded.encode('utf-8')).hexdigest())
+                self.assertEqual(change['current_sha256'],b['records'][change['collection']][change['record_id']])
 
     def test_scoped_witnesses_prevent_generic_audio_and_authorship_transfer(self):
         ops={r['id']:r for r in iter_operation_contracts(self.data)}
@@ -219,7 +229,17 @@ class OperationalArticulationRC2Tests(unittest.TestCase):
         haptic=ops['OP-PAD-RETORNO-HAPTICO-RUIDO']
         self.assertFalse(haptic['independent_support_allowed'])
         self.assertTrue(haptic['relations'][0]['requires_analytical_authorization'])
-        self.assertFalse(haptic['relations'][0].get('analytical_application_ids'))
+        # RC1 1.6 adds an exact CARE-backed design application. Historical scope
+        # and situated preconditions still block unrelated or unsupported use.
+        self.assertEqual(['APP-ART-REF-02-HAPTIC-AUDIO'],haptic['relations'][0].get('analytical_application_ids'))
+        self.assertEqual({'MOD-HAPTICO','MOD-AUDIO'},set(haptic['selected_representation_ids']))
+        facts={f['id'] for f in haptic['requires_facts']}
+        self.assertTrue({'AudioUsable',haptic['id']+':recoverable_message',
+                         haptic['id']+':tactile_notice_needed',haptic['id']+':same_event_binding'} <= facts)
+        app=next(a for art in self.data['articulations'] for a in art.get('operational_applications',[])
+                 if a['id']=='APP-ART-REF-02-HAPTIC-AUDIO')
+        self.assertIn('CLM-K40-CARE-COMPLEMENTARITY',{p['claim_id'] for p in app['premises']})
+        self.assertFalse(app['empirical_effect_authorized'])
         self.assertTrue(ops['OP-PAD-EXPRESSAO-AUTORAL-FALA-AUDIO']['applicability_witness']['any'])
 
     def test_rdf_projection_preserves_exact_analytical_premises(self):

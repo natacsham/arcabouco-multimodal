@@ -1,0 +1,12 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+SELECT DISTINCT ?proposta ?grupo ?estado ?aplicavel ?operacao ?acao ?representacao ?funcao ?situacao ?participante WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?execucao ex:hasProposal ?proposta .
+ ?proposta ex:selectionState ?grupo ; ex:state ?estado ; ex:hasOperation ?uso .
+ ?uso ex:operation ?operacao ; ex:situation ?situacao .
+ OPTIONAL { ?proposta ex:readyForApplication ?aplicavel }
+ OPTIONAL { ?uso ex:action ?acao }
+ OPTIONAL { ?uso ex:representation ?representacao }
+ OPTIONAL { ?uso ex:function ?funcao }
+ OPTIONAL { ?uso ex:participant ?participante }
+} ORDER BY ?proposta ?operacao ?representacao

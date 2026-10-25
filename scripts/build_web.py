@@ -13,10 +13,6 @@ APP = WEB / "amado"
 COMPOSITION_FILES = (
     "experimental/v2/composer.py",
     "experimental/v2/trajectory.py",
-    "experimental/v2/schema.ttl",
-    "experimental/v2/base.ttl",
-    "experimental/v2/extensions/audio-review.ttl",
-    "experimental/v2/trajectory-bindings.json",
     "experimental/v2/examples/learning-contribution.json",
 )
 
@@ -39,10 +35,12 @@ def build():
     paths = [
         ROOT / "execution_trace.py",
         ROOT / "situated_context.py",
-        ROOT / "data/knowledge-base.json",
+        ROOT / "semantic_catalogue.py",
+        ROOT / "semantic_execution.py",
+        ROOT / "shapes/execution.shacl.ttl",
         ROOT / "data/interface-vocabulary.json",
         ROOT / "ontology/mado-combined.ttl",
-    ] + sorted((ROOT / "queries").glob("CQ-*.rq"))
+    ] + sorted((ROOT / "queries").glob("CQ-*.rq")) + sorted((ROOT / "queries").glob("EXEC-CQ-*.rq"))
     # Explicit public allowlist: no reports, private records or runtime cases.
     # Preserve this directory structure: the composer resolves its base from it.
     paths += [ROOT / name for name in COMPOSITION_FILES]
@@ -75,6 +73,7 @@ def build():
         ("ontology/mado-combined.ttl", "mado-public.ttl"),
         ("ontology/mado.owl", "mado.owl"),
         ("shapes/main.shacl.ttl", "main.shacl.ttl"),
+        ("shapes/execution.shacl.ttl", "execution.shacl.ttl"),
     ]:
         shutil.copyfile(ROOT / source, downloads / dest)
     runtime = {

@@ -847,9 +847,9 @@ class Composer:
 class _SituatedRun:
     """Run-local evaluator for the existing, qualified research operations.
 
-    The JSON contracts are part of the research base, not a second catalogue of
-    answers. They qualify existing components and source claims. This evaluator
-    checks a finite operation graph; it neither writes claims nor invents edges.
+    Production reads the typed semantic catalogue. Explicit historical/test
+    fixtures are compiled to that same representation before evaluation.
+    This evaluator neither writes claims nor invents edges.
     """
 
     FIELD_KINDS = {"task": "tarefas", "characteristic": "caracteristicas_pessoa",
@@ -868,13 +868,32 @@ class _SituatedRun:
     def __init__(self, composer, context, engine=None, progress=None):
         self.composer, self.engine, self.progress = composer, engine, progress
         self.context = copy.deepcopy(context) if isinstance(context, dict) else {}
-        self.base = copy.deepcopy(getattr(composer, "base", {}))
+        from semantic_catalogue import project_semantic_catalogue, read_semantic_catalogue
+        from semantic_execution import canonical_graph_hash
+        if getattr(composer, "semantic_runtime", False):
+            self.base = read_semantic_catalogue(composer.graph)
+            self.rdf_components = []
+        else:
+            # Compatibility fixture compiler, never the public runtime path.
+            # Existing tests can still supply a tiny, explicitly curated base.
+            source = copy.deepcopy(getattr(composer, "base", {}))
+            self.base = source
+            self.index = {"context_elements": {}}
+            legacy_components = [] if source.get("pilot_catalogue") else self.project_rdf_operations()
+            source.setdefault("decision_components", []).extend(legacy_components)
+            fixture_graph = Graph()
+            fixture_graph += composer.graph
+            project_semantic_catalogue(fixture_graph, source)
+            self.base = read_semantic_catalogue(fixture_graph)
+            self.rdf_components = []
+        self.base.setdefault("decision_components", []).extend(
+            copy.deepcopy(self.base.get("pilot_catalogue", {}).get("components", [])))
         self.index = {name: {row["id"]: row for row in self.base.get(name, []) if isinstance(row, dict) and "id" in row}
                       for name in ("knowledge", "sources", "excerpts", "criteria", "criterion_origins", "context_elements", "contributions", "articulations")}
         self.checks = _Checks()
         self.conditions = []
         self.result = {
-            "schema_version": "2.0.0-alpha5", "composition_kind": "SITUATED_OPERATION_GRAPH",
+            "schema_version": "2.0.0-alpha6", "composition_kind": "SITUATED_OPERATION_GRAPH",
             "status": "INSUFFICIENT", "proposal_status": "NONE", "context_id": self.context.get("id"),
             "choices": [], "alternatives": [], "pending_candidates": [], "partial_segments": [],
             "exclusions": [], "gaps": [], "input_issues": [], "function_coverage": [], "missing_functions": [],
@@ -883,7 +902,7 @@ class _SituatedRun:
             "other_condition_diagnostics": [], "application_conditions": [], "claim_audit": [], "participant_results": [], "situation_results": [],
             "execution_evidence": self.checks.rows, "fingerprints": dict(composer.fingerprints),
             "execution_inputs": {"context_sha256": _json_hash(self.context), "catalogue_sha256": _json_hash(self.base),
-                                 "rdf_graph_sha256": _json_hash(sorted(" ".join(term.n3() for term in triple) for triple in composer.graph))},
+                                 "rdf_graph_sha256": canonical_graph_hash(composer.graph)},
             "search": {"complete": {"examined": 0, "limit": MAX_COMBINATIONS_PER_PHASE, "truncated": False}},
             "maximum_choices": MAX_CHOICES, "truncated": False, "pending_truncated": False, "partial_truncated": False,
             "scope": "Composição situada limitada às funções, operações, relações e alegações documentadas na base.",
@@ -894,7 +913,6 @@ class _SituatedRun:
         if not isinstance(context, dict):
             self.result["input_issues"].append({"code": "CONTEXT_NOT_OBJECT"})
         self.people = {}
-        self.rdf_components = self.project_rdf_operations()
         self.analytical_index = {}
         for articulation in self.base.get("articulations", []):
             for application in articulation.get("operational_applications", []):
@@ -1294,7 +1312,11 @@ class _SituatedRun:
                 "use": "SYNTHESIS_PREMISE_ONLY" if as_premise else "AUTHORIZED_TARGET",
                 "claim": {"id": identifier, "statement": app["result"], "function_ids": app["function_ids"],
                           "foundation_status": "GROUNDED_ANALYTICAL_APPLICATION"},
-                "knowledge": {"id": art.get("conhecimento_resultante_id", art["id"]), "label": app["result"]},
+                "knowledge": {"id": art.get("conhecimento_resultante_ids", [identifier])[0]
+                              if len(art.get("conhecimento_resultante_ids", [])) == 1 else identifier,
+                              "label": app["result"],
+                              "kind": "KNOWLEDGE" if len(art.get("conhecimento_resultante_ids", [])) == 1 else "ANALYTICAL_APPLICATION"},
+                "resulting_knowledge_ids": list(art.get("conhecimento_resultante_ids", [])),
                 "criterion": {"id": criterion, "label": self.index["criteria"][criterion].get("enunciado", criterion)},
                 "criterion_applications": [{**copy.deepcopy(s), "criterion": {
                     "id": s["criterion_id"], "label": self.index["criteria"][s["criterion_id"]].get("enunciado", s["criterion_id"])},
@@ -1992,6 +2014,8 @@ class _SituatedRun:
             # The input may be the inaccessible original being adapted. The
             # delivered route, however, must be the recipient's selected route.
             types_ok = types_ok and to_modes <= selected
+            if kind in {"COMPLEMENTARITY", "REDUNDANCY"}:
+                types_ok = types_ok and (from_modes | to_modes) <= selected
         functions_ok = self.relation_endpoints_match(rule, left, right)
         binding_scope = rule.get("binding", {})
         if binding_scope.get("same_subject"):
@@ -2026,6 +2050,51 @@ class _SituatedRun:
         self.check(unit, identifier, "RELATION_FUNCTION_SUPPORT", "PASS" if required_functions and required_functions <= supported_functions else "FAIL",
                    sorted(required_functions), sorted(supported_functions),
                    "Alegações sobre outra função não autorizam esta ligação, ainda que tenham fonte e critério válidos.")
+        information_roles = copy.deepcopy(rule.get("information_roles", []))
+        required_information = set(rule.get("required_information", []))
+        if information_roles or required_information:
+            available_claims = {support["claim_id"] for support in supports}
+            available_claims.update(p["claim_id"] for support in supports
+                                    for p in support.get("construction", {}).get("premises", []))
+            represented_information = {role.get("information_component") for role in information_roles}
+            roles_ok = bool(information_roles and required_information
+                            and required_information <= represented_information)
+            roles_ok = roles_ok and all(
+                role.get("representation_id") in from_modes | to_modes
+                and role.get("function_id") in required_functions
+                and role.get("role") and role.get("claim_ids")
+                and set(role["claim_ids"]) <= available_claims
+                for role in information_roles)
+            if kind == "COMPLEMENTARITY":
+                roles_ok = roles_ok and all(role.get("alone_sufficient_for_goal") is False
+                                           for role in information_roles)
+                roles_ok = roles_ok and len(represented_information) >= 2
+            if kind == "REDUNDANCY":
+                roles_ok = roles_ok and all(role.get("alone_sufficient_for_goal") is True
+                                           for role in information_roles)
+            self.check(unit, identifier, "MODAL_INFORMATION_CONTRIBUTION", "PASS" if roles_ok else "FAIL",
+                       {"required_information": sorted(required_information), "kind": kind},
+                       {"roles": information_roles, "admitted_claims": sorted(available_claims)},
+                       "Cada contribuição modal deve ter conteúdo, função e fundamento admitido; a simples contagem de modos não autoriza combinação.")
+        # Identity is scoped to the occurrence, not inferred from a shared type
+        # such as TEXT. A new design binding is explicitly proposed, not observed.
+        declared_bindings = {binding["operation_id"]: binding["information_unit_id"]
+                             for binding in self.context.get("information_bindings", [])
+                             if binding.get("participant_id") == unit["participant_id"]
+                             and binding.get("situation_id") == unit["situation_id"]
+                             and binding.get("operation_id") and binding.get("information_unit_id")}
+        left_identity, right_identity = declared_bindings.get(left["id"]), declared_bindings.get(right["id"])
+        identity_ok = not (left_identity and right_identity and left_identity != right_identity)
+        binding = {"information_unit_id": left_identity or right_identity or "information-" + _json_hash(
+                       [self.context.get("id"), unit["situation_id"], unit["participant_id"], meaning])[:20],
+                   "participant_id": unit["participant_id"], "situation_id": unit["situation_id"],
+                   "origin": "REPORTED_IDENTITY" if left_identity and right_identity else "PROPOSED_SHARED_INFORMATION",
+                   "semantic_preservation_observed": False}
+        if binding_scope.get("same_information_unit") or kind in {"SEQUENTIAL", "SEQUENTIAL_REVIEW", "COMPLEMENTARITY", "REDUNDANCY"}:
+            self.check(unit, identifier, "INFORMATION_IDENTITY", "PASS" if identity_ok else "FAIL",
+                       "mesma unidade informacional nesta aplicação",
+                       {"left": left_identity, "right": right_identity, "binding": binding},
+                       "Identidades declaradas distintas impedem a ligação; uma identidade proposta não comprova preservação do significado.")
         sufficiency = rule.get("sufficiency")
         if sufficiency == "REQUIRES_SITUATED_CONFIRMATION":
             questions = {
@@ -2056,6 +2125,10 @@ class _SituatedRun:
                                                                and row.get("phase", "precondition") == "precondition"]),
                 "from_capability": left["id"], "to_capability": right["id"], "internal_to_operation": internal,
                 "meaning_unit": meaning, "preserves": rule.get("preserves"), "sufficiency": sufficiency, "temporal": temporal,
+                "information_roles": information_roles, "required_information": sorted(required_information),
+                "information_binding": binding, "goal": rule.get("goal", ""),
+                "joint_sufficiency_scope": rule.get("joint_sufficiency_scope", ""),
+                "temporal_contract": copy.deepcopy(rule.get("temporal_contract", {})),
                 "phase_conditions": [{"id": row["expected"]["value"]["id"], "label": row["explanation"], "phase": row["phase"],
                                       "state": row["state"], "check_ids": [row["id"]]} for row in rows if row.get("phase")],
                 "explanation": rule.get("explanation") or str(rule.get("preserves", "")),
@@ -2070,7 +2143,12 @@ class _SituatedRun:
         signature = [unit["situation_id"], unit["participant_id"], [step["id"] for step in steps], [row["id"] for row in relations]]
         later_checks = [condition for item in list(steps) + list(relations) for condition in item.get("phase_conditions", [])
                         if condition["phase"] != "precondition" and condition["state"] != "PASS"]
+        information_coverage = sorted({
+            (relation.get("meaning_unit", ""), role["information_component"], role["function_id"])
+            for relation in relations if relation["state"] != "FAIL"
+            for role in relation.get("information_roles", [])})
         return {"id": "proposal-" + _json_hash(signature)[:20], "state": state, "steps": list(steps), "relations": list(relations),
+                "information_coverage": [list(item) for item in information_coverage],
                 "composition_type": "INDEPENDENT_SUPPORTS" if independent else "CONNECTED_PATH" if len(steps) > 1 else "SINGLE_OPERATION",
                 "application_conditions": later_checks, "ready_for_application": state == "PASS" and not later_checks,
                 "participant_id": unit["participant_id"], "situation_id": unit["situation_id"],
@@ -2150,6 +2228,8 @@ class _SituatedRun:
             # dominate a route that can prepare it under different conditions.
             return ({step["id"] for step in old["steps"]} <= {step["id"] for step in proposal["steps"]}
                     and {f["id"] for f in old["covered_functions"]} >= {f["id"] for f in proposal["covered_functions"]}
+                    and {tuple(item) for item in old.get("information_coverage", [])} >=
+                        {tuple(item) for item in proposal.get("information_coverage", [])}
                     and pending_obligations(old) <= pending_obligations(proposal))
         edge_cache = {}
         def edges(left, right):
@@ -2348,6 +2428,8 @@ class _SituatedRun:
             other["state"] in {"PASS", "PARTIAL"}
             and (other["participant_id"], other["situation_id"]) == (p["participant_id"], p["situation_id"])
             and {f["id"] for f in other["covered_functions"]} >= {f["id"] for f in p["covered_functions"]}
+            and {tuple(item) for item in other.get("information_coverage", [])} >=
+                {tuple(item) for item in p.get("information_coverage", [])}
             for other in offered)]
         active_check_ids = {cid for p in effective for cid in p["check_ids"]}
         merged_conditions = {}

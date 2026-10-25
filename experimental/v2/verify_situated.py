@@ -22,6 +22,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 
 from experimental.v2.trajectory import ResearchComposer
 from experimental.v2.composer import V2
+from semantic_catalogue import EDGES
 from rdflib import RDF
 import test_situated_composition as checks
 
@@ -65,9 +66,16 @@ def build_report():
                  ROOT / "ontology/main.ttl", ROOT / "ontology/mado-combined.ttl", ROOT / "shapes/main.shacl.ttl",
                  ROOT / "engine.py", HERE / "composer.py", HERE / "trajectory.py", HERE / "trajectory-bindings.json",
                  HERE / "base.ttl", HERE / "schema.ttl", HERE / "extensions/audio-review.ttl", Path(checks.__file__).resolve()]
+    protected += [ROOT / path for path in ("situated_context.py", "web/amado/bridge.py", "semantic_catalogue.py",
+        "semantic_execution.py", "shapes/execution.shacl.ttl", "tests/test_situated_intake.py", "tests/test_situated_catalogue.py",
+        "tests/test_structural_composition.py", "tests/test_operational_articulation_rc2.py", "tests/test_semantic_catalogue.py",
+        "tests/test_semantic_curation.py", "tests/test_semantic_execution.py", "tests/test_modal_information_runtime.py", "scripts/migrate_semantic_curation.py",
+        "scripts/migrate_pilot_semantics.py", "scripts/build_traceability_rdf.py",
+        "tests/fixtures/articulation_transfer_cases.json", "experimental/v2/verify_situated.py")]
+    protected += [ROOT / "queries" / f"{prefix}-{i:03d}.rq" for prefix in ("CQ", "EXEC-CQ") for i in range(1, 11)]
     before = {p.relative_to(ROOT).as_posix(): sha(p) for p in protected}
     context = checks.collaborative_unknown_context()
-    composer = ResearchComposer(legacy_projection=False)
+    composer = ResearchComposer.from_public_graph()
     original_context = copy.deepcopy(context)
     complete = composer.compose_context(context)
     changed = copy.deepcopy(context)
@@ -76,10 +84,10 @@ def build_report():
     unknown_context = copy.deepcopy(context)
     unknown_context["participations"][1]["facts"]["AudioUsable"] = None
     unknown = composer.compose_context(unknown_context)
-    isolated_composer = ResearchComposer(legacy_projection=False)
-    isolated_composer.graph.remove((V2.ProductionThenReview, RDF.type, V2.RelationRule))
+    isolated_composer = ResearchComposer.from_public_graph()
+    isolated_composer.graph.remove((None, EDGES["relations"], V2.ProductionThenReview))
     isolated = isolated_composer.compose_context(context)
-    no_articulation_composer = ResearchComposer(legacy_projection=False)
+    no_articulation_composer = ResearchComposer.from_public_graph()
     no_articulation_composer.graph.remove((V2.ArtReview, V2.operation, None))
     no_articulation = no_articulation_composer.compose_context(context)
     main_actions = copy.deepcopy(context)
@@ -89,15 +97,18 @@ def build_report():
         participant["facts"]["SameEditableTextDraft"] = True
     refined = composer.compose_context(main_actions)
     stream = io.StringIO()
-    test_result = unittest.TextTestRunner(stream=stream, verbosity=2).run(unittest.defaultTestLoader.loadTestsFromModule(checks))
+    import test_semantic_execution as execution_checks
+    suite = unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromModule(checks),
+                               unittest.defaultTestLoader.loadTestsFromModule(execution_checks)])
+    test_result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
     after = {p.relative_to(ROOT).as_posix(): sha(p) for p in protected}
     results = {"articulated": complete, "audio_blocked_for_second_person": blocked,
                "audio_unknown_for_second_person": unknown, "without_relation_in_memory_only": isolated,
                "without_articulation_operation_in_memory_only": no_articulation,
                "attributed_main_actions_refined": refined}
-    return {"schema_version": "2.0.0-alpha3", "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+    return {"schema_version": "2.0.0-alpha6", "base_version": "1.6.0-rc1", "checked_at_utc": datetime.now(timezone.utc).isoformat(),
             "evidence_kind": "SYNTHETIC_EXECUTION_NOT_EMPIRICAL_VALIDATION",
-            "scope": "A mesma busca situada consome operações dos PAD e uma projeção das capacidades RDF já registradas; não existe inferência por nome do cenário.",
+            "scope": "A busca situada consome o catálogo semântico comum publicado em RDF. A retirada da relação modifica o grafo em memória; nenhuma consulta usa o JSON de autoria como alternativa.",
             "limits": ["As duas sequências individuais não comprovam coordenação ou entendimento compartilhado entre as pessoas.",
                        "A ligação produzir/conferir o mesmo rascunho é delimitada ao contrato RDF; não autoriza arestas arbitrárias entre PADs.",
                        "A condição contextual não substitui curadoria de fontes e os testes não representam avaliação humana."],
@@ -106,6 +117,7 @@ def build_report():
             "source_files_unchanged": before == after, "input_context_unchanged": context == original_context,
             "tests": {"count": test_result.testsRun, "failures": len(test_result.failures), "errors": len(test_result.errors),
                       "skipped": len(test_result.skipped), "success": test_result.wasSuccessful(), "log": stream.getvalue()},
+            "execution_cases": execution_checks.RealExecutionProjectionTests.case_evidence,
             "summaries": {name: brief(result) for name, result in results.items()}, "results": results,
             "delta": {"complete_choices_with_relation": len(complete["choices"]), "complete_choices_without_relation": len(isolated["choices"]),
                       "complete_choices_without_articulation_operation": len(no_articulation["choices"]),

@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT))
 from engine import DecisionEngine
 from experimental.v2.composer import V2
 from experimental.v2.trajectory import ResearchComposer
-from rdflib import RDF
+from semantic_catalogue import EDGES
 
 
 NARRATIVES = {
@@ -300,8 +300,8 @@ def build_report():
                 "source_text": "CONTRAFACTUAL SINTÉTICO: reconhecimento de fala indisponível."}],
                 "mapping_confirmed": True})
             entry["recognition_removed"] = brief(engine.generate_situated())
-            isolated = ResearchComposer(legacy_projection=False)
-            isolated.graph.remove((V2.ProductionThenReview, RDF.type, V2.RelationRule))
+            isolated = ResearchComposer.from_public_graph()
+            isolated.graph.remove((None, EDGES["relations"], V2.ProductionThenReview))
             entry["relation_removed_in_memory"] = brief(isolated.compose_context(saved_context, engine=engine))
         report["cases"].append(entry)
     return report

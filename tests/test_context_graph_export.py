@@ -51,11 +51,26 @@ class ContextGraphExportTests(unittest.TestCase):
         self.assertFalse(list(graph.objects(self.episode, MADO.descritoSobPerspectiva)))
         conforms, report, _ = validate(graph, shacl_graph=self.shapes, inference="none", allow_warnings=True)
         self.assertFalse(conforms)
+        # The common shape now dispatches between historical and execution
+        # contracts. SHACL reports the failed disjunction at its public shape;
+        # examine the unchanged historical branch as well to retain the exact
+        # missing-property regression, rather than accepting any violation.
         self.assertTrue(any(
             report.value(result, SH.focusNode) == self.episode
-            and report.value(result, SH.resultPath) == MADO.descritoSobPerspectiva
-            and report.value(result, SH.sourceConstraintComponent) == SH.MinCountConstraintComponent
+            and report.value(result, SH.sourceShape) == MADO.ContextoShape
+            and report.value(result, SH.sourceConstraintComponent) == SH.OrConstraintComponent
             for result in report.subjects(RDF.type, SH.ValidationResult)
+        ))
+        legacy_conforms, legacy_report, _ = validate(
+            graph, shacl_graph=self.shapes, inference="none", allow_warnings=True,
+            focus_nodes=[self.episode], use_shapes=[MADO.ContextoShapeLegacy],
+        )
+        self.assertFalse(legacy_conforms)
+        self.assertTrue(any(
+            legacy_report.value(result, SH.focusNode) == self.episode
+            and legacy_report.value(result, SH.resultPath) == MADO.descritoSobPerspectiva
+            and legacy_report.value(result, SH.sourceConstraintComponent) == SH.MinCountConstraintComponent
+            for result in legacy_report.subjects(RDF.type, SH.ValidationResult)
         ))
 
     def test_legacy_runtime_decision_export_conforms_with_episode(self):

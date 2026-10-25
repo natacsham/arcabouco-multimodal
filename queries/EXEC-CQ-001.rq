@@ -1,0 +1,12 @@
+PREFIX ex: <https://w3id.org/mado/execution#>
+PREFIX mado: <https://w3id.org/mado#>
+SELECT DISTINCT ?contexto ?confirmado ?participacao ?episodio ?afirmacao ?tipo ?estado ?trecho WHERE {
+ VALUES ?execucao { <urn:mado:current-execution> }
+ ?execucao ex:context ?contexto .
+ OPTIONAL { ?contexto ex:confirmed ?confirmado }
+ OPTIONAL { ?contexto ex:hasAssertion ?afirmacao .
+   ?afirmacao ex:kind ?tipo ; ex:state ?estado ; ex:situation ?episodio .
+   OPTIONAL { ?afirmacao ex:participant ?participacao }
+   OPTIONAL { ?afirmacao ex:sourceText ?trecho }
+ }
+} ORDER BY ?episodio ?participacao ?afirmacao

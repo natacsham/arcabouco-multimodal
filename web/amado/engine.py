@@ -29,8 +29,8 @@ ONTOLOGY = ROOT / "ontology" / "mado-combined.ttl"
 DATA_JSON = ROOT / "data" / "knowledge-base.json"
 UI_VOCAB_JSON = ROOT / "data" / "interface-vocabulary.json"
 QUERY_DIR = ROOT / "queries"
-VERSION = "1.5.0-rc3"
-UI_VERSION = "AMADO-web-1.5.0-rc3-structural1"
+VERSION = "1.6.0-rc1"
+UI_VERSION = "AMADO-web-1.6.0-rc1-semantic1"
 REQUESTER_RELATIONS = {
     "self": "Sou eu quem realizará a atividade",
     "support": "Apoio quem realizará a atividade",
@@ -199,7 +199,8 @@ class DecisionEngine:
         self.graph = Graph()
         with ONTOLOGY.open("rb") as handle:
             self.graph.parse(file=handle, format="turtle")
-        self.data = json.loads(DATA_JSON.read_text(encoding="utf-8"))
+        from semantic_catalogue import read_semantic_catalogue
+        self.data = read_semantic_catalogue(self.graph)
         self.ui_vocab = json.loads(UI_VOCAB_JSON.read_text(encoding="utf-8"))
         self.queries = {
             path.stem: path.read_text(encoding="utf-8")
@@ -234,6 +235,7 @@ class DecisionEngine:
             if row.get("active_in_rc4", row.get("active_in_rc3"))
         ]
         self.current = None
+        self._last_execution_graph = None
         self._evidence = None
         self._record_checks = False
         self._dialogue_route_ids = None
@@ -446,6 +448,7 @@ class DecisionEngine:
         }
 
     def start_context(self, template_id):
+        self._last_execution_graph = None
         if template_id not in self.contexts:
             raise ValueError("Cenário não localizado na base.")
         self._evidence = None
@@ -482,6 +485,7 @@ class DecisionEngine:
         return self.current_payload()
 
     def _invalidate_result(self):
+        self._last_execution_graph = None
         self._evidence = None
         self._record_checks = False
         self._dialogue_route_ids = None
@@ -489,7 +493,22 @@ class DecisionEngine:
 
     def clear(self):
         """Discard the current case, not a history entry; no filesystem writes."""
+        self._last_execution_graph = None
         return self.start_free_context()
+
+    def inspect_execution(self, format="summary", query_ids=None):
+        """Read the last run in RAM; never append it to the knowledge base."""
+        if self._last_execution_graph is None:
+            raise ValueError("Gere uma orientação para conferir sua execução.")
+        from semantic_execution import semantic_execution_summary, query_execution
+        if format == "summary":
+            return semantic_execution_summary(self._last_execution_graph)
+        if format == "queries":
+            return query_execution(self._last_execution_graph, self.graph, query_ids=query_ids)
+        if format == "turtle":
+            return {"format": "text/turtle", "content": self._last_execution_graph.serialize(format="turtle"),
+                    "case_storage": False}
+        raise ValueError("Formato de consulta não reconhecido.")
 
     def current_payload(self):
         last_result = copy.deepcopy(self.current.get("last_result"))
@@ -517,6 +536,7 @@ class DecisionEngine:
         return self.current_payload()
 
     def start_free_context(self):
+        self._last_execution_graph = None
         self.start_context("CTX-TESTE-RC2-DIAGNOSTICO-ISOLADO")
         self.current["scenario_mode"] = "free_narrative"
         context = self.current["context"]
@@ -3325,7 +3345,7 @@ class DecisionEngine:
         result["de_para"] = result["explanation"]["de_para"]
 
     def generate_situated(self, progress=None):
-        """Public 1.5 route for examples and narratives, with no topic dispatch.
+        """Public semantic route for examples and narratives, with no topic dispatch.
 
         ``generate`` below remains a compatibility audit of the former pattern
         selector; it is not the public recommendation path in this revision.
@@ -3337,6 +3357,9 @@ class DecisionEngine:
         context["participations"] = copy.deepcopy(self.current.get("participations", []))
         context["confirmed"] = self.current.get("mapping_confirmed") is True
         result = compose_context(context, engine=self, progress=progress)
+        from semantic_execution import project_execution, semantic_execution_summary
+        self._last_execution_graph = project_execution(result, context, self.graph)
+        result["semantic_trace"] = semantic_execution_summary(self._last_execution_graph)
         result["fingerprints"] = {
             Path(name).relative_to(ROOT).as_posix() if Path(name).is_absolute() and Path(name).is_relative_to(ROOT) else name: digest
             for name, digest in result.get("fingerprints", {}).items()
@@ -3360,6 +3383,7 @@ class DecisionEngine:
             "NEEDS_CLARIFICATION" if result["next_questions"] else
             "CONTEXT_UNKNOWN" if result["unresolved_answers"] else "COVERAGE_LIMIT"
         )
+        self.current["last_result"] = copy.deepcopy(result)
         return result
 
     def generate(self, progress=None):
